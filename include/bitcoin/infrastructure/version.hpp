@@ -26,9 +26,9 @@
 #define LIBBITCOIN_INFRASTRUCTURE_VERSION "0.11.0"
 
 #ifdef BITPRIM_BUILD_NUMBER
-#define BITPRIM_CORE_VERSION BITPRIM_BUILD_NUMBER
+#define BITPRIM_INFRASTRUCTURE_VERSION BITPRIM_BUILD_NUMBER
 #else
-#define BITPRIM_CORE_VERSION "v0.0.0"
+#define BITPRIM_INFRASTRUCTURE_VERSION "v0.0.0"
 #endif
 
 // #pragma message("LIBBITCOIN_VERSION")
@@ -36,9 +36,9 @@
 // #pragma message("BITPRIM_BUILD_NUMBER")
 // #pragma message(BITPRIM_BUILD_NUMBER)
 
-namespace libbitcoin {
+namespace libbitcoin { namespace infrastructure {
 char const* version();
-} /*namespace libbitcoin*/
+}} /*namespace libbitcoin::infrastructure*/
  
 
-#endif
+#endif // LIBBITCOIN_INFRASTRUCTURE_VERSION_HPP_

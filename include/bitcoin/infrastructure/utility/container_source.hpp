@@ -24,8 +24,8 @@
 #include <cstdint>
 #include <boost/iostreams/stream.hpp>
 #include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/math/limits.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
+#include <bitcoin/infrastructure/utility/limits.hpp>
 
 namespace libbitcoin {
 

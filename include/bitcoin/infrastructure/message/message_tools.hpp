@@ -16,14 +16,18 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef LIBBITCOIN_INFRASTRUCTURE_MESSAGE_TOOLS_HPP_
+#define LIBBITCOIN_INFRASTRUCTURE_MESSAGE_TOOLS_HPP_
 
-#include <bitcoin/infrastructure/version.hpp>
+#include <cstddef>
+#include <cstdint>
 
-namespace libbitcoin { namespace infrastructure {
+#include <bitcoin/infrastructure/define.hpp>
 
-char const* version() {
-    return BITPRIM_INFRASTRUCTURE_VERSION;
-}
+namespace libbitcoin { namespace message {
 
-}} /* namespace libbitcoin::infrastructure */
+BI_API size_t variable_uint_size(uint64_t value);
 
+}} // namespace libbitcoin::message
+
+#endif // LIBBITCOIN_INFRASTRUCTURE_MESSAGE_TOOLS_HPP_

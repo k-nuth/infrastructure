@@ -27,12 +27,14 @@
 #include <string>
 #include <boost/locale.hpp>
 #include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/math/limits.hpp>
+// #include <bitcoin/infrastructure/math/limits.hpp>
 #include <bitcoin/infrastructure/unicode/console_streambuf.hpp>
 #include <bitcoin/infrastructure/unicode/unicode_istream.hpp>
 #include <bitcoin/infrastructure/unicode/unicode_ostream.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
+#include <bitcoin/infrastructure/utility/limits.hpp>
+
 
 #ifdef _MSC_VER
     #include <fcntl.h>

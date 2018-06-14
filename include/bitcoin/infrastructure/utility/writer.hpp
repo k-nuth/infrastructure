@@ -23,7 +23,8 @@
 #include <cstdint>
 #include <string>
 #include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/math/hash.hpp>
+// #include <bitcoin/infrastructure/math/hash.hpp>
+#include <bitcoin/infrastructure/hash_define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
 namespace libbitcoin {
