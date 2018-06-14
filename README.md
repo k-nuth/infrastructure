@@ -2,6 +2,7 @@
 
 > Infrastructure functionality
 
+
 ## Installation
 
 A build requires boost and libsecp256k1. The [bitprim/secp256k1](https://github.com/bitprim/secp256k1) repository is forked from [bitcoin-infrastructure/secp256k1](https://github.com/bitcoin-infrastructure/secp256k1) in order to control for changes and to incorporate the necessary Visual Studio build. The original repository can be used directly but recent changes to the public interface may cause build breaks. The `--enable-module-recovery` switch is required.
