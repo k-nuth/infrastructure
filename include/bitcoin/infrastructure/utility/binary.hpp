@@ -26,13 +26,13 @@
 
 namespace libbitcoin {
 
-class BC_API binary
+class BI_API binary
 {
 public:
     typedef uint8_t block;
     typedef std::size_t size_type;
 
-    static BC_CONSTEXPR size_type bits_per_block = byte_bits;
+    static BI_CONSTEXPR size_type bits_per_block = byte_bits;
     static size_type blocks_size(size_type bit_size);
     static bool is_base2(const std::string& text);
 

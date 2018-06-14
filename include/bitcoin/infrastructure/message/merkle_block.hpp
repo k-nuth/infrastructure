@@ -32,7 +32,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API merkle_block
+class BI_API merkle_block
 {
 public:
     typedef std::vector<merkle_block> list;

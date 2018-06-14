@@ -35,7 +35,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API block
+class BI_API block
   : public chain::block
 {
 public:

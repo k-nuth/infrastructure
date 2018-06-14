@@ -30,7 +30,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API alert
+class BI_API alert
 {
 public:
     typedef std::shared_ptr<alert> ptr;

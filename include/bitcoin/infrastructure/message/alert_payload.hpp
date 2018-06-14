@@ -30,7 +30,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API alert_payload
+class BI_API alert_payload
 {
 public:
     static alert_payload factory_from_data(uint32_t version,

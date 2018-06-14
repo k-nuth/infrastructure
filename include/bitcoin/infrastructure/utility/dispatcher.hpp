@@ -53,7 +53,7 @@ namespace libbitcoin {
 
 /// This  class is thread safe.
 /// If the ios service is stopped jobs will not be dispatched.
-class BC_API dispatcher
+class BI_API dispatcher
   : noncopyable
 {
 public:

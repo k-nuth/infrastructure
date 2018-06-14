@@ -34,7 +34,7 @@
 namespace libbitcoin {
 namespace log {
 
-class BC_API statsd_source
+class BI_API statsd_source
   : public boost::log::sources::basic_composite_logger<char, statsd_source,
         boost::log::sources::multi_thread_model<boost::log::aux::light_rw_mutex>,
         boost::log::sources::features<features::metric, features::counter,
@@ -45,32 +45,32 @@ class BC_API statsd_source
 
 BOOST_LOG_INLINE_GLOBAL_LOGGER_DEFAULT(stats, statsd_source);
 
-#define BC_STATS_SIMPLE(name, sequence) \
+#define BI_STATS_SIMPLE(name, sequence) \
     BOOST_LOG_WITH_PARAMS(bc::log::stats::get(), \
         (bc::log::keywords::metric = (name))sequence)
 
-#define BC_STATS_WITH_RATE(name, rate, sequence) \
+#define BI_STATS_WITH_RATE(name, rate, sequence) \
     BOOST_LOG_WITH_PARAMS(bc::log::stats::get(), \
         (bc::log::keywords::metric = (name)) \
         (bc::log::keywords::rate = (rate))sequence)
 
-#define BC_STATS_COUNTER(name, value) \
-    BC_STATS_SIMPLE(name, (bc::log::keywords::counter = (value)))
+#define BI_STATS_COUNTER(name, value) \
+    BI_STATS_SIMPLE(name, (bc::log::keywords::counter = (value)))
 
-#define BC_STATS_COUNTER_RATE(name, value, rate) \
-    BC_STATS_WITH_RATE(name, rate, (bc::log::keywords::counter = (value)))
+#define BI_STATS_COUNTER_RATE(name, value, rate) \
+    BI_STATS_WITH_RATE(name, rate, (bc::log::keywords::counter = (value)))
 
-#define BC_STATS_GAUGE(name, value) \
-    BC_STATS_SIMPLE(name, (bc::log::keywords::gauge = (value)))
+#define BI_STATS_GAUGE(name, value) \
+    BI_STATS_SIMPLE(name, (bc::log::keywords::gauge = (value)))
 
-#define BC_STATS_GAUGE_RATE(name, value, rate) \
-    BC_STATS_WITH_RATE(name, rate, (bc::log::keywords::gauge = (value)))
+#define BI_STATS_GAUGE_RATE(name, value, rate) \
+    BI_STATS_WITH_RATE(name, rate, (bc::log::keywords::gauge = (value)))
 
-#define BC_STATS_TIMER(name, value) \
-    BC_STATS_SIMPLE(name, (bc::log::keywords::timer = (value)))
+#define BI_STATS_TIMER(name, value) \
+    BI_STATS_SIMPLE(name, (bc::log::keywords::timer = (value)))
 
-#define BC_STATS_TIMER_RATE(name, value, rate) \
-    BC_STATS_WITH_RATE(name, rate, (bc::log::keywords::timer = (value)))
+#define BI_STATS_TIMER_RATE(name, value, rate) \
+    BI_STATS_WITH_RATE(name, rate, (bc::log::keywords::timer = (value)))
 
 } // namespace log
 } // namespace libbitcoin

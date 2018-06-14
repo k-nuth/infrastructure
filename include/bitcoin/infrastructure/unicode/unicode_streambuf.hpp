@@ -32,7 +32,7 @@ namespace libbitcoin {
  * However because of utf8-utf16 conversion ratios of up to 4:1 the effective
  * wide output buffering may be reduced to as much as 256 characters.
  */
-class BC_API unicode_streambuf
+class BI_API unicode_streambuf
     : public std::streambuf
 {
 public:

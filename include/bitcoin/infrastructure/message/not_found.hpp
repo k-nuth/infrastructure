@@ -33,7 +33,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API not_found
+class BI_API not_found
   : public inventory
 {
 public:

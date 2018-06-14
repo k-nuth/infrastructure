@@ -28,10 +28,10 @@ class error_category_impl
   : public std::error_category
 {
 public:
-    virtual const char* name() const BC_NOEXCEPT;
-    virtual std::string message(int ev) const BC_NOEXCEPT;
+    virtual const char* name() const BI_NOEXCEPT;
+    virtual std::string message(int ev) const BI_NOEXCEPT;
     virtual std::error_condition default_error_condition(int ev)
-        const BC_NOEXCEPT;
+        const BI_NOEXCEPT;
 };
 
 static const error_category_impl& get_error_category_instance()
@@ -40,12 +40,12 @@ static const error_category_impl& get_error_category_instance()
     return instance;
 }
 
-const char* error_category_impl::name() const BC_NOEXCEPT
+const char* error_category_impl::name() const BI_NOEXCEPT
 {
     return "bitcoin";
 }
 
-std::string error_category_impl::message(int ev) const BC_NOEXCEPT
+std::string error_category_impl::message(int ev) const BI_NOEXCEPT
 {
     static const std::unordered_map<int, std::string> messages =
     {
@@ -283,7 +283,7 @@ std::string error_category_impl::message(int ev) const BC_NOEXCEPT
 
 // We are not currently using this.
 std::error_condition error_category_impl::default_error_condition(int ev)
-    const BC_NOEXCEPT
+    const BI_NOEXCEPT
 {
     return std::error_condition(ev, *this);
 }

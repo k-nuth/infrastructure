@@ -29,7 +29,7 @@
 namespace libbitcoin {
 
 /// Writer interface.
-class BC_API writer
+class BI_API writer
 {
 public:
     /// Context.

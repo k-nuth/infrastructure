@@ -235,6 +235,6 @@ class BitprimCoreConan(ConanFile):
             self.cpp_info.libs.append("wsock32")
 
         if not self.is_shared:
-            self.cpp_info.defines.append("BC_STATIC")
+            self.cpp_info.defines.append("BI_STATIC")
 
 

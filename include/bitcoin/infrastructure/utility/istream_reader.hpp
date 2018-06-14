@@ -26,7 +26,7 @@
 
 namespace libbitcoin {
 
-class BC_API istream_reader
+class BI_API istream_reader
   : public reader
 {
 public:

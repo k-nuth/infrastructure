@@ -29,7 +29,7 @@ namespace libbitcoin {
 
 /// This class is not thread safe.
 /// Guard a resource againt concurrent use by another instance of this app.
-class BC_API interprocess_lock
+class BI_API interprocess_lock
 {
 public:
     typedef boost::filesystem::path path;

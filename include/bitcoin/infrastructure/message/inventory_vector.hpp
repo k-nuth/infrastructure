@@ -31,7 +31,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API inventory_vector
+class BI_API inventory_vector
 {
 public:
     typedef std::vector<inventory_vector> list;

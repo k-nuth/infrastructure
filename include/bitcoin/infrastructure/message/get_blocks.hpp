@@ -32,7 +32,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API get_blocks
+class BI_API get_blocks
 {
 public:
     typedef std::shared_ptr<get_blocks> ptr;

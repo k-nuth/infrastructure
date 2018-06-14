@@ -47,7 +47,7 @@ namespace libbitcoin {
 
 /// This  class is thread safe.
 /// boost asio class wrapper to enable work heap management.
-class BC_API work
+class BI_API work
   : noncopyable
 {
 public:

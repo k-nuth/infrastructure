@@ -27,7 +27,7 @@ namespace libbitcoin {
 
 /// This class is thread safe.
 /// Reserve exclusive access to a resource while this object is in scope.
-class BC_API scope_lock
+class BI_API scope_lock
 {
 public:
     typedef std::shared_ptr<scope_lock> ptr;

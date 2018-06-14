@@ -25,7 +25,7 @@
 
 namespace libbitcoin {
 
-class BC_API conditional_lock
+class BI_API conditional_lock
 {
 public:
     /// Conditional lock using specified mutex pointer.

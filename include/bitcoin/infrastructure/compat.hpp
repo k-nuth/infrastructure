@@ -25,18 +25,18 @@
 // CTP_Nov2013 implements noexcept but unfortunately VC12 and CTP_Nov2013
 // both identify as _MSC_VER = 1800, otherwise we could include CTP_Nov2013.
 #if defined(_MSC_VER) && (_MSC_VER <= 1800)
-    #define BC_NOEXCEPT _NOEXCEPT
-    #define BC_CONSTEXPR const
-    #define BC_CONSTFUNC inline
-    #define BC_CONSTCTOR
+    #define BI_NOEXCEPT _NOEXCEPT
+    #define BI_CONSTEXPR const
+    #define BI_CONSTFUNC inline
+    #define BI_CONSTCTOR
 #else
-    #define BC_NOEXCEPT noexcept
-    #define BC_CONSTEXPR constexpr
-    #define BC_CONSTFUNC constexpr
-    #define BC_CONSTCTOR constexpr
+    #define BI_NOEXCEPT noexcept
+    #define BI_CONSTEXPR constexpr
+    #define BI_CONSTFUNC constexpr
+    #define BI_CONSTCTOR constexpr
 #endif
 
-// TODO: prefix names with BC_
+// TODO: prefix names with BI_
 #ifdef _MSC_VER
     #define MIN_INT64 INT64_MIN
     #define MAX_INT64 INT64_MAX
@@ -46,7 +46,7 @@
     #define MAX_UINT32 UINT32_MAX
     #define MAX_UINT16 UINT16_MAX
     #define MAX_UINT8 UINT8_MAX
-    #define BC_MAX_SIZE SIZE_MAX
+    #define BI_MAX_SIZE SIZE_MAX
 #else
     #define MIN_INT64 std::numeric_limits<int64_t>::min()
     #define MAX_INT64 std::numeric_limits<int64_t>::max()
@@ -56,7 +56,7 @@
     #define MAX_UINT32 std::numeric_limits<uint32_t>::max()
     #define MAX_UINT16 std::numeric_limits<uint16_t>::max()
     #define MAX_UINT8 std::numeric_limits<uint8_t>::max()
-    #define BC_MAX_SIZE std::numeric_limits<size_t>::max()
+    #define BI_MAX_SIZE std::numeric_limits<size_t>::max()
 #endif
 
 #endif

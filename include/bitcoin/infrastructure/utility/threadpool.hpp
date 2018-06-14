@@ -35,7 +35,7 @@ namespace libbitcoin {
  * This class and the asio service it exposes are thread safe.
  * A collection of threads which can be passed operations through io_service.
  */
-class BC_API threadpool
+class BI_API threadpool
   : noncopyable
 {
 public:

@@ -29,7 +29,7 @@
 namespace libbitcoin {
 namespace log {
 
-class BC_API udp_client_sink
+class BI_API udp_client_sink
   : public boost::log::sinks::basic_formatted_sink_backend<char,
         boost::log::sinks::synchronized_feeding>
 {

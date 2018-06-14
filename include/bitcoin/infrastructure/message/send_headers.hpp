@@ -30,7 +30,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API send_headers
+class BI_API send_headers
 {
 public:
     typedef std::shared_ptr<send_headers> ptr;

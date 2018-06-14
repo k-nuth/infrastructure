@@ -28,7 +28,7 @@ namespace log {
 
 // modified from class extracted from boost/log/sinks/text_file_backend.*pp
 //! The functor formats the file counter into the file name
-class BC_API file_counter_formatter
+class BI_API file_counter_formatter
 {
 public:
     typedef boost::filesystem::path::string_type path_string_type;

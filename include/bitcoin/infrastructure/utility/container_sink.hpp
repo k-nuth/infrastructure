@@ -29,7 +29,7 @@ namespace libbitcoin {
 // modified from boost.iostreams example
 // boost.org/doc/libs/1_55_0/libs/iostreams/doc/tutorial/container_source.html
 template <typename Container, typename SinkType, typename CharType>
-class BC_API container_sink
+class BI_API container_sink
 {
 public:
     typedef CharType char_type;

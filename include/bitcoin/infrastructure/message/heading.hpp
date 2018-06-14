@@ -66,7 +66,7 @@ enum class message_type
     version
 };
 
-class BC_API heading
+class BI_API heading
 {
 public:
     static size_t maximum_size();

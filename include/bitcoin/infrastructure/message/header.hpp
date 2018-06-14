@@ -32,7 +32,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API header
+class BI_API header
   : public chain::header
 {
 public:

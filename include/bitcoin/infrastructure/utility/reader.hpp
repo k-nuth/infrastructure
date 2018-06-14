@@ -29,7 +29,7 @@
 namespace libbitcoin {
 
 /// Reader interface.
-class BC_API reader
+class BI_API reader
 {
 public:
     /// Context.

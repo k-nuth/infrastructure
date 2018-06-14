@@ -40,7 +40,7 @@ namespace libbitcoin {
 namespace log {
 
 // modified from class extracted from boost/log/sinks/text_file_backend.*pp
-class BC_API file_collector_repository;
+class BI_API file_collector_repository;
 
 //! The string type compatible with the universal path type
 typedef boost::filesystem::path::string_type path_string_type;
@@ -49,7 +49,7 @@ typedef boost::filesystem::path::string_type path_string_type;
 typedef boost::intrusive::list_base_hook<boost::intrusive::link_mode<
     boost::intrusive::safe_link>> file_collector_hook;
 
-class BC_API file_collector :
+class BI_API file_collector :
     public boost::log::sinks::file::collector,
     public file_collector_hook,
     public boost::enable_shared_from_this<file_collector>

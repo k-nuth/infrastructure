@@ -30,7 +30,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API reject
+class BI_API reject
 {
 public:
     enum class reason_code: uint8_t

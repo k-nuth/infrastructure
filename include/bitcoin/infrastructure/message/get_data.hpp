@@ -32,7 +32,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API get_data
+class BI_API get_data
   : public inventory
 {
 public:

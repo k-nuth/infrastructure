@@ -32,7 +32,7 @@
 namespace libbitcoin {
 
 /// A reference counting wrapper for closures placed on the asio work heap.
-class BC_API monitor
+class BI_API monitor
 {
 public:
     typedef std::atomic<size_t> count;

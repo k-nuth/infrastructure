@@ -30,7 +30,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API memory_pool
+class BI_API memory_pool
 {
 public:
     typedef std::shared_ptr<memory_pool> ptr;

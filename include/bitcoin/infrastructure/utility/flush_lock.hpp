@@ -28,7 +28,7 @@ namespace libbitcoin {
 
 /// This class is not thread safe.
 /// Guard a resource that may be corrupted due to an interrupted write.
-class BC_API flush_lock
+class BI_API flush_lock
 {
 public:
     typedef boost::filesystem::path path;

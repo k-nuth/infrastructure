@@ -29,7 +29,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API block_transactions
+class BI_API block_transactions
 {
 public:
     typedef std::shared_ptr<block_transactions> ptr;

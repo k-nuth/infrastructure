@@ -23,7 +23,7 @@
 
 namespace libbitcoin {
 
-class BC_API noncopyable
+class BI_API noncopyable
 {
 public:
     noncopyable(const noncopyable&) = delete;

@@ -41,15 +41,15 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source)
     return logger;
 }
 
-#define BC_LOG_SEVERITY(id, level) \
+#define BI_LOG_SEVERITY(id, level) \
     BOOST_LOG_CHANNEL_SEV(bc::log::source::get(), id, bc::log::severity::level)
 
-#define LOG_VERBOSE(module) BC_LOG_SEVERITY(module, verbose)
-#define LOG_DEBUG(module) BC_LOG_SEVERITY(module, debug)
-#define LOG_INFO(module) BC_LOG_SEVERITY(module, info)
-#define LOG_WARNING(module) BC_LOG_SEVERITY(module, warning)
-#define LOG_ERROR(module) BC_LOG_SEVERITY(module, error)
-#define LOG_FATAL(module) BC_LOG_SEVERITY(module, fatal)
+#define LOG_VERBOSE(module) BI_LOG_SEVERITY(module, verbose)
+#define LOG_DEBUG(module) BI_LOG_SEVERITY(module, debug)
+#define LOG_INFO(module) BI_LOG_SEVERITY(module, info)
+#define LOG_WARNING(module) BI_LOG_SEVERITY(module, warning)
+#define LOG_ERROR(module) BI_LOG_SEVERITY(module, error)
+#define LOG_FATAL(module) BI_LOG_SEVERITY(module, fatal)
 
 } // namespace log
 } // namespace libbitcoin

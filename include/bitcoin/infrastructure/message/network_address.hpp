@@ -32,7 +32,7 @@ namespace message {
 
 typedef byte_array<16> ip_address;
 
-class BC_API network_address
+class BI_API network_address
 {
 public:
     typedef std::vector<network_address> list;
@@ -48,8 +48,8 @@ public:
 
     network_address();
 
-    // BC_CONSTCTOR required for declaration of constexpr address types.
-    BC_CONSTCTOR network_address(uint32_t timestamp, uint64_t services,
+    // BI_CONSTCTOR required for declaration of constexpr address types.
+    BI_CONSTCTOR network_address(uint32_t timestamp, uint64_t services,
         const ip_address& ip, uint16_t port)
       : timestamp_(timestamp), services_(services), ip_(ip), port_(port)
     {
@@ -103,10 +103,10 @@ private:
 };
 
 // version::services::none
-BC_CONSTEXPR uint32_t no_services = 0;
-BC_CONSTEXPR uint32_t no_timestamp = 0;
-BC_CONSTEXPR uint16_t unspecified_ip_port = 0;
-BC_CONSTEXPR ip_address unspecified_ip_address
+BI_CONSTEXPR uint32_t no_services = 0;
+BI_CONSTEXPR uint32_t no_timestamp = 0;
+BI_CONSTEXPR uint16_t unspecified_ip_port = 0;
+BI_CONSTEXPR ip_address unspecified_ip_address
 {
     {
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -115,7 +115,7 @@ BC_CONSTEXPR ip_address unspecified_ip_address
 };
 
 // Defaults to full node services.
-BC_CONSTEXPR network_address unspecified_network_address
+BI_CONSTEXPR network_address unspecified_network_address
 {
     no_timestamp,
     no_services,

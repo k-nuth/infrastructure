@@ -33,7 +33,7 @@ typedef std::vector<std::string> string_list;
  * @param[in]  delimiter  The delimiter, defaults to " ".
  * @return                The resulting string.
  */
-BC_API std::string join(const string_list& words,
+BI_API std::string join(const string_list& words,
     const std::string& delimiter=" ");
 
 /**
@@ -44,7 +44,7 @@ BC_API std::string join(const string_list& words,
  * @param[in]  trim       Trim the sentence for whitespace, defaults to true.
  * @return                The list of resulting strings.
  */
-BC_API string_list split(const std::string& sentence,
+BI_API string_list split(const std::string& sentence,
     const std::string& delimiter=" ", bool trim=true);
 
 } // namespace libbitcoin

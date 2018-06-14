@@ -34,7 +34,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API transaction
+class BI_API transaction
   : public chain::transaction
 {
 public:

@@ -31,7 +31,7 @@
 namespace libbitcoin {
 
 /// This class is thread safe but the socket may not be used concurrently.
-class BC_API socket
+class BI_API socket
   : noncopyable
     /*, public track<socket>*/
 {

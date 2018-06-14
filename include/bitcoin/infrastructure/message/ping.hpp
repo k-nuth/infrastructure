@@ -31,7 +31,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API ping
+class BI_API ping
 {
 public:
     typedef std::shared_ptr<ping> ptr;

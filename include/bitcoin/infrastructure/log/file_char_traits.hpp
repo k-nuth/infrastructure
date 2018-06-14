@@ -26,7 +26,7 @@ namespace libbitcoin {
 namespace log {
 
 // modified from class extracted from boost/log/sinks/text_file_backend.*pp
-struct BC_API file_char_traits
+struct BI_API file_char_traits
 {
 //#ifdef _MSC_VER
 #ifdef BOOST_WINDOWS_API

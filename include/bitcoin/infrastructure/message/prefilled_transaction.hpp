@@ -30,7 +30,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API prefilled_transaction
+class BI_API prefilled_transaction
 {
 public:
     typedef std::vector<prefilled_transaction> list;

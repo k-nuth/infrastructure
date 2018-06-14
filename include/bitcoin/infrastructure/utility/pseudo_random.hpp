@@ -28,7 +28,7 @@
 
 namespace libbitcoin {
 
-class BC_API pseudo_random
+class BI_API pseudo_random
 {
   public:
     /**
@@ -89,20 +89,20 @@ class BC_API pseudo_random
  * Generate a pseudo random number within the domain.
  * @return  The 64 bit number.
  */
-BC_API uint64_t pseudo_random();
+BI_API uint64_t pseudo_random();
 
 /**
  * DEPRECATED
  * Generate a pseudo random number within [begin, end].
  * @return  The 64 bit number.
  */
-BC_API uint64_t pseudo_random(uint64_t begin, uint64_t end);
+BI_API uint64_t pseudo_random(uint64_t begin, uint64_t end);
 
 /**
  * DEPRECATED
  * Fill a buffer with randomness using the default random engine.
  */
-BC_API void pseudo_random_fill(data_chunk& out);
+BI_API void pseudo_random_fill(data_chunk& out);
 
 /**
  * DEPRECATED
@@ -112,7 +112,7 @@ BC_API void pseudo_random_fill(data_chunk& out);
  *                      portion of the maximum duration.
  * @return              The randomized duration.
  */
-BC_API asio::duration pseudo_randomize(const asio::duration& maximum,
+BI_API asio::duration pseudo_randomize(const asio::duration& maximum,
     uint8_t ratio=2);
 
 } // namespace libbitcoin

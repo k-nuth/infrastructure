@@ -90,9 +90,9 @@ std::ostream& cerr = cerr_stream();
 static std::string normal_form(const std::string& value, norm_type form)
 {
     auto backend = localization_backend_manager::global();
-    backend.select(BC_LOCALE_BACKEND);
+    backend.select(BI_LOCALE_BACKEND);
     const generator locale(backend);
-    return normalize(value, form, locale(BC_LOCALE_UTF8));
+    return normalize(value, form, locale(BI_LOCALE_UTF8));
 }
 
 // One time verifier of the localization backend manager. This is

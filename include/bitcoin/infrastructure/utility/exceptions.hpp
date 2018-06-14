@@ -24,7 +24,7 @@
 
 namespace libbitcoin {
 
-class BC_API end_of_stream
+class BI_API end_of_stream
   : std::exception
 {
 };

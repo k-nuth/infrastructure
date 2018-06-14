@@ -31,7 +31,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API pong
+class BI_API pong
 {
 public:
     typedef std::shared_ptr<pong> ptr;

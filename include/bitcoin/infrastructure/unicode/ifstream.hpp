@@ -29,7 +29,7 @@ namespace libbitcoin {
  * Use bc::ifstream in place of std::ifstream.
  * This provides utf8 to utf16 path translation for Windows.
  */
-class BC_API ifstream
+class BI_API ifstream
   : public std::ifstream
 {
 public:

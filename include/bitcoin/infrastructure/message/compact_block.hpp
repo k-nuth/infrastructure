@@ -31,7 +31,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API compact_block
+class BI_API compact_block
 {
 public:
     typedef std::shared_ptr<compact_block> ptr;

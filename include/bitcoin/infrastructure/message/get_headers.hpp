@@ -28,7 +28,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API get_headers
+class BI_API get_headers
   : public get_blocks
 {
 public:

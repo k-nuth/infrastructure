@@ -571,7 +571,7 @@ target_include_directories(bitprim-core PUBLIC
   $<INSTALL_INTERFACE:include>)
   
 if (NOT ENABLE_SHARED)
-    target_compile_definitions(bitprim-core PUBLIC -DBC_STATIC) #TODO(fernando): manage with Conan????
+    target_compile_definitions(bitprim-core PUBLIC -DBI_STATIC) #TODO(fernando): manage with Conan????
 endif()
 
 target_compile_definitions(bitprim-core PUBLIC -DBITPRIM_BUILD_NUMBER="\\"${BITPRIM_BUILD_NUMBER}\\"") #TODO(fernando): manage with Conan????

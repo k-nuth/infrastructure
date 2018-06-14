@@ -31,7 +31,7 @@ namespace libbitcoin {
 namespace message {
 
 // The checksum is ignored by the verack command.
-class BC_API verack
+class BI_API verack
 {
 public:
     typedef std::shared_ptr<verack> ptr;

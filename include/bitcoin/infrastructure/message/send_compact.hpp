@@ -30,7 +30,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API send_compact
+class BI_API send_compact
 {
 public:
     typedef std::shared_ptr<send_compact> ptr;

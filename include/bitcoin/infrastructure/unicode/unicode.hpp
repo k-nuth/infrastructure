@@ -35,7 +35,7 @@
 // Libbitcoin embraces the "utf8 everywhere" design: http://utf8everywhere.org
 // The objective is to use utf8 as the canonical string encoding, pushing
 // wchar_t translation to the edge (stdio, argv, O/S and external API calls).
-// The macro BC_USE_LIBBITCOIN_MAIN does most of the heavy lifting to ensure
+// The macro BI_USE_LIBBITCOIN_MAIN does most of the heavy lifting to ensure
 // that stdio and argv is configured for utf8. The 'to_utf' functions are
 // provided for API translations.
 
@@ -50,7 +50,7 @@
 
 // Regarding Unicode in console applications:
 //
-// BC_USE_LIBBITCOIN_MAIN should be declared prior to bc::main() in a console
+// BI_USE_LIBBITCOIN_MAIN should be declared prior to bc::main() in a console
 // application. This enables Unicode argument and environment processing in
 // Windows. This macro implements main() and forwards to bc::main(), which
 // should be implemented as if it was main() with the expectation that argv
@@ -73,15 +73,15 @@
 // static path object must be imbued with the utf8 locale or paths will be
 // incorrectly translated.
 
-#define BC_LOCALE_BACKEND "icu"
-#define BC_LOCALE_UTF8 "en_US.UTF8"
+#define BI_LOCALE_BACKEND "icu"
+#define BI_LOCALE_UTF8 "en_US.UTF8"
 
 #ifdef _MSC_VER
     #include <locale>
     #include <boost/filesystem.hpp>
     #include <boost/locale.hpp>
     #include <windows.h>
-    #define BC_USE_LIBBITCOIN_MAIN \
+    #define BI_USE_LIBBITCOIN_MAIN \
         namespace libbitcoin { \
         int main(int argc, char* argv[]); \
         } \
@@ -90,7 +90,7 @@
         { \
             using namespace libbitcoin; \
             boost::locale::generator locale; \
-            std::locale::global(locale(BC_LOCALE_UTF8)); \
+            std::locale::global(locale(BI_LOCALE_UTF8)); \
             boost::filesystem::path::imbue(std::locale()); \
             \
             auto variables = to_utf8(_wenviron); \
@@ -102,7 +102,7 @@
             return libbitcoin::main(argc, args); \
         }
 #else
-    #define BC_USE_LIBBITCOIN_MAIN \
+    #define BI_USE_LIBBITCOIN_MAIN \
         namespace libbitcoin { \
         int main(int argc, char* argv[]); \
         } \
@@ -138,7 +138,7 @@ extern std::ostream& cerr;
  * @param[in]  value  The value to normalize.
  * @return            The normalized value.
  */
-BC_API std::string to_normal_nfc_form(const std::string& value);
+BI_API std::string to_normal_nfc_form(const std::string& value);
 
 /**
  * Normalize a string value using nfkd normalization.
@@ -146,7 +146,7 @@ BC_API std::string to_normal_nfc_form(const std::string& value);
  * @param[in]  value  The value to normalize.
  * @return            The normalized value.
  */
-BC_API std::string to_normal_nfkd_form(const std::string& value);
+BI_API std::string to_normal_nfkd_form(const std::string& value);
 
 #endif
 
@@ -157,7 +157,7 @@ BC_API std::string to_normal_nfkd_form(const std::string& value);
  * @param[in]  environment  The wide environment variables vector.
  * @return                  A buffer holding the narrow version of environment.
  */
-BC_API data_chunk to_utf8(wchar_t* environment[]);
+BI_API data_chunk to_utf8(wchar_t* environment[]);
 
 /**
  * Convert wide argument vector to utf8 argument vector.
@@ -167,7 +167,7 @@ BC_API data_chunk to_utf8(wchar_t* environment[]);
  * @param[in]  argv  The wide command line arguments.
  * @return           A buffer holding the narrow version of argv.
  */
-BC_API data_chunk to_utf8(int argc, wchar_t* argv[]);
+BI_API data_chunk to_utf8(int argc, wchar_t* argv[]);
 
 /**
  * Convert a wide (presumed UTF16) array to wide (UTF8/char).
@@ -177,7 +177,7 @@ BC_API data_chunk to_utf8(int argc, wchar_t* argv[]);
  * @param[in]  in_chars   The number of 'in' wide characters to convert.
  * @return                The number of bytes converted.
  */
-BC_API size_t to_utf8(char out[], size_t out_bytes, const wchar_t in[],
+BI_API size_t to_utf8(char out[], size_t out_bytes, const wchar_t in[],
     size_t in_chars);
 
 /**
@@ -185,7 +185,7 @@ BC_API size_t to_utf8(char out[], size_t out_bytes, const wchar_t in[],
  * @param[in]  wide  The utf16 string to convert.
  * @return           The resulting utf8 string.
  */
-BC_API std::string to_utf8(const std::wstring& wide);
+BI_API std::string to_utf8(const std::wstring& wide);
 
 /**
  * Convert a narrow (presumed UTF8) array to wide (UTF16/wchar_t).
@@ -199,7 +199,7 @@ BC_API std::string to_utf8(const std::wstring& wide);
  * @param[in]  truncated  The number of 'in' bytes [0..3] that were truncated.
  * @return                The number of characters converted.
  */
-BC_API size_t to_utf16(wchar_t out[], size_t out_chars, const char in[],
+BI_API size_t to_utf16(wchar_t out[], size_t out_chars, const char in[],
     size_t in_bytes, uint8_t& truncated);
 
 /**
@@ -207,41 +207,41 @@ BC_API size_t to_utf16(wchar_t out[], size_t out_chars, const char in[],
  * @param[in]  narrow  The utf8 string to convert.
  * @return             The resulting utf16 string.
  */
-BC_API std::wstring to_utf16(const std::string& narrow);
+BI_API std::wstring to_utf16(const std::string& narrow);
 
 /**
  * Initialize windows to use UTF8 for stdio. This cannot be uninitialized and
  * once set bc stdio must be used in place of std stdio.
  */
-BC_API void set_utf8_stdio();
+BI_API void set_utf8_stdio();
 
 /**
  * Initialize windows to use UTF8 for stdin. This cannot be uninitialized and
  * once set bc::cin must be used in place of std::cin.
  */
-BC_API void set_utf8_stdin();
+BI_API void set_utf8_stdin();
 
 /**
  * Initialize windows to use UTF8 for stdout. This cannot be uninitialized and
  * once set bc::cout must be used in place of std::cout.
  */
-BC_API void set_utf8_stdout();
+BI_API void set_utf8_stdout();
 
 /**
  * Initialize windows to use UTF8 for stderr. This cannot be uninitialized and
  * once set bc::cerr must be used in place of std::cerr.
  */
-BC_API void set_utf8_stderr();
+BI_API void set_utf8_stderr();
 
 /**
  * Initialize windows to use binary for stdin. This cannot be uninitialized.
  */
-BC_API void set_binary_stdin();
+BI_API void set_binary_stdin();
 
 /**
  * Initialize windows to use binary for stdout. This cannot be uninitialized.
  */
-BC_API void set_binary_stdout();
+BI_API void set_binary_stdout();
 
 } // namespace libbitcoin
 

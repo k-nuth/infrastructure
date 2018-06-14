@@ -278,10 +278,10 @@ enum error_condition_t
 {
 };
 
-BC_API code make_error_code(error_code_t e);
-BC_API std::error_condition make_error_condition(error_condition_t e);
-BC_API error_code_t boost_to_error_code(const boost_code& ec);
-BC_API error_code_t posix_to_error_code(int ec);
+BI_API code make_error_code(error_code_t e);
+BI_API std::error_condition make_error_condition(error_condition_t e);
+BI_API error_code_t boost_to_error_code(const boost_code& ec);
+BI_API error_code_t posix_to_error_code(int ec);
 
 } // namespace error
 } // namespace libbitcoin

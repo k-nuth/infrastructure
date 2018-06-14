@@ -25,7 +25,7 @@
 
 namespace libbitcoin {
 
-struct BC_API color
+struct BI_API color
 {
     uint8_t red;
     uint8_t green;

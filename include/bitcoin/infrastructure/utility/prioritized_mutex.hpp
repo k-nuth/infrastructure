@@ -28,7 +28,7 @@ namespace libbitcoin {
 /// This class is thread safe.
 /// Encapsulation of prioritized locking conditions.
 /// This is unconcerned with thread priority and is instead explicit.
-class BC_API prioritized_mutex
+class BI_API prioritized_mutex
 {
 public:
     typedef std::shared_ptr<prioritized_mutex> ptr;

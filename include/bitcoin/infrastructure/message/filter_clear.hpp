@@ -30,7 +30,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API filter_clear
+class BI_API filter_clear
 {
 public:
     typedef std::shared_ptr<filter_clear> ptr;

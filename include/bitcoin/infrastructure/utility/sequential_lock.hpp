@@ -27,7 +27,7 @@ namespace libbitcoin {
 
 /// This class is thread safe.
 /// Encapsulation of sequential locking conditions.
-class BC_API sequential_lock
+class BI_API sequential_lock
 {
 public:
     typedef size_t handle;

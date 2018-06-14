@@ -35,7 +35,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API inventory
+class BI_API inventory
 {
 public:
     typedef std::shared_ptr<inventory> ptr;

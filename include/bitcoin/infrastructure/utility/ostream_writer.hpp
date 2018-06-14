@@ -25,7 +25,7 @@
 
 namespace libbitcoin {
 
-class BC_API ostream_writer
+class BI_API ostream_writer
   : public writer
 {
 public:

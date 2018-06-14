@@ -30,7 +30,7 @@
 namespace libbitcoin {
 namespace message {
 
-class BC_API address
+class BI_API address
 {
 public:
     typedef std::shared_ptr<address> ptr;

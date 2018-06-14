@@ -63,7 +63,7 @@ typedef boost::thread thread;
 
 typedef std::shared_ptr<socket> socket_ptr;
 
-BC_CONSTEXPR int max_connections = boost::asio::socket_base::max_connections;
+BI_CONSTEXPR int max_connections = boost::asio::socket_base::max_connections;
 
 } // namespace asio
 } // namespace libbitcoin

@@ -37,7 +37,7 @@ namespace libbitcoin {
  * This simplifies invocation, eliminates boost-specific error handling and
  * makes timer firing and cancellation conditions safer.
  */
-class BC_API deadline
+class BI_API deadline
   : public enable_shared_from_base<deadline>,
     noncopyable
     /*, track<deadline>*/
