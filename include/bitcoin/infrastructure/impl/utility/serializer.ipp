@@ -22,9 +22,9 @@
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
-#include <bitcoin/bitcoin/constants.hpp>
-#include <bitcoin/bitcoin/error.hpp>
-#include <bitcoin/bitcoin/utility/endian.hpp>
+#include <bitcoin/infrastructure/constants.hpp>
+#include <bitcoin/infrastructure/error.hpp>
+#include <bitcoin/infrastructure/utility/endian.hpp>
 
 namespace libbitcoin {
 

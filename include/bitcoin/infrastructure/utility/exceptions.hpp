@@ -20,7 +20,7 @@
 #define LIBBITCOIN_INFRASTRUCTURE_EXCEPTIONS_HPP
 
 #include <exception>
-#include <bitcoin/bitcoin/define.hpp>
+#include <bitcoin/infrastructure/define.hpp>
 
 namespace libbitcoin {
 

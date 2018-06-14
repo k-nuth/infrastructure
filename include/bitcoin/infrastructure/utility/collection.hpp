@@ -22,7 +22,7 @@
 #include <iterator>
 #include <iostream>
 #include <vector>
-#include <bitcoin/bitcoin/define.hpp>
+#include <bitcoin/infrastructure/define.hpp>
 
 /* NOTE: don't declare 'using namespace foo' in headers. */
 
@@ -115,6 +115,6 @@ std::ostream& operator<<(std::ostream& output, const std::vector<Type>& list);
 
 } // namespace std
 
-#include <bitcoin/bitcoin/impl/utility/collection.ipp>
+#include <bitcoin/infrastructure/impl/utility/collection.ipp>
 
 #endif

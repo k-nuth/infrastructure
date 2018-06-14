@@ -34,7 +34,7 @@
 #include <boost/thread/mutex.hpp>
 #endif // !defined(BOOST_LOG_NO_THREADS)
 
-#include <bitcoin/bitcoin/define.hpp>
+#include <bitcoin/infrastructure/define.hpp>
 
 namespace libbitcoin {
 namespace log {

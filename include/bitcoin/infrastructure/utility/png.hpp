@@ -21,10 +21,10 @@
 
 #include <cstdint>
 #include <istream>
-#include <bitcoin/bitcoin/compat.hpp>
-#include <bitcoin/bitcoin/define.hpp>
-#include <bitcoin/bitcoin/utility/color.hpp>
-#include <bitcoin/bitcoin/utility/data.hpp>
+#include <bitcoin/infrastructure/compat.hpp>
+#include <bitcoin/infrastructure/define.hpp>
+#include <bitcoin/infrastructure/utility/color.hpp>
+#include <bitcoin/infrastructure/utility/data.hpp>
 
 #ifdef WITH_PNG
 #include <png.h>

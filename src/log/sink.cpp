@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <bitcoin/bitcoin/log/sink.hpp>
+#include <bitcoin/infrastructure/log/sink.hpp>
 
 #include <map>
 #include <string>
@@ -27,11 +27,11 @@
 #include <boost/log/sinks.hpp>
 #include <boost/log/support/date_time.hpp>
 #include <boost/smart_ptr/make_shared.hpp>
-#include <bitcoin/bitcoin/constants.hpp>
-#include <bitcoin/bitcoin/log/attributes.hpp>
-#include <bitcoin/bitcoin/log/file_collector_repository.hpp>
-#include <bitcoin/bitcoin/log/severity.hpp>
-#include <bitcoin/bitcoin/unicode/ofstream.hpp>
+#include <bitcoin/infrastructure/constants.hpp>
+#include <bitcoin/infrastructure/log/attributes.hpp>
+#include <bitcoin/infrastructure/log/file_collector_repository.hpp>
+#include <bitcoin/infrastructure/log/severity.hpp>
+#include <bitcoin/infrastructure/unicode/ofstream.hpp>
 
 namespace libbitcoin {
 namespace log {

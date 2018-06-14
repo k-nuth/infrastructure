@@ -19,8 +19,8 @@
 #ifndef LIBBITCOIN_INFRASTRUCTURE_ISTREAM_READER_IPP
 #define LIBBITCOIN_INFRASTRUCTURE_ISTREAM_READER_IPP
 
-#include <bitcoin/bitcoin/utility/data.hpp>
-#include <bitcoin/bitcoin/utility/endian.hpp>
+#include <bitcoin/infrastructure/utility/data.hpp>
+#include <bitcoin/infrastructure/utility/endian.hpp>
 
 namespace libbitcoin {
 

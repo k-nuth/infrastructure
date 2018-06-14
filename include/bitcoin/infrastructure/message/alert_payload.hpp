@@ -21,11 +21,11 @@
 
 #include <istream>
 #include <string>
-#include <bitcoin/bitcoin/define.hpp>
-#include <bitcoin/bitcoin/math/elliptic_curve.hpp>
-#include <bitcoin/bitcoin/utility/data.hpp>
-#include <bitcoin/bitcoin/utility/reader.hpp>
-#include <bitcoin/bitcoin/utility/writer.hpp>
+#include <bitcoin/infrastructure/define.hpp>
+#include <bitcoin/infrastructure/math/elliptic_curve.hpp>
+#include <bitcoin/infrastructure/utility/data.hpp>
+#include <bitcoin/infrastructure/utility/reader.hpp>
+#include <bitcoin/infrastructure/utility/writer.hpp>
 
 namespace libbitcoin {
 namespace message {

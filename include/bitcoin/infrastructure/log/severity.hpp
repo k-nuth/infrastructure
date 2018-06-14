@@ -19,7 +19,7 @@
 #ifndef LIBBITCOIN_INFRASTRUCTURE_LOG_SEVERITY_HPP
 #define LIBBITCOIN_INFRASTRUCTURE_LOG_SEVERITY_HPP
 
-#include <bitcoin/bitcoin/define.hpp>
+#include <bitcoin/infrastructure/define.hpp>
 
 namespace libbitcoin {
 namespace log {

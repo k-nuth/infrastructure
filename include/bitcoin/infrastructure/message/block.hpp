@@ -23,13 +23,13 @@
 #include <cstddef>
 #include <istream>
 #include <memory>
-#include <bitcoin/bitcoin/chain/block.hpp>
-#include <bitcoin/bitcoin/chain/header.hpp>
-#include <bitcoin/bitcoin/chain/transaction.hpp>
-#include <bitcoin/bitcoin/define.hpp>
-#include <bitcoin/bitcoin/message/version.hpp>
-#include <bitcoin/bitcoin/utility/data.hpp>
-#include <bitcoin/bitcoin/utility/reader.hpp>
+#include <bitcoin/infrastructure/chain/block.hpp>
+#include <bitcoin/infrastructure/chain/header.hpp>
+#include <bitcoin/infrastructure/chain/transaction.hpp>
+#include <bitcoin/infrastructure/define.hpp>
+#include <bitcoin/infrastructure/message/version.hpp>
+#include <bitcoin/infrastructure/utility/data.hpp>
+#include <bitcoin/infrastructure/utility/reader.hpp>
 
 
 namespace libbitcoin {

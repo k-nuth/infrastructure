@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <bitcoin/bitcoin/utility/ostream_writer.hpp>
+#include <bitcoin/infrastructure/utility/ostream_writer.hpp>
 
 #include <algorithm>
 #include <iostream>
-#include <bitcoin/bitcoin/constants.hpp>
-#include <bitcoin/bitcoin/math/limits.hpp>
-#include <bitcoin/bitcoin/utility/endian.hpp>
-#include <bitcoin/bitcoin/utility/reader.hpp>
+#include <bitcoin/infrastructure/constants.hpp>
+#include <bitcoin/infrastructure/math/limits.hpp>
+#include <bitcoin/infrastructure/utility/endian.hpp>
+#include <bitcoin/infrastructure/utility/reader.hpp>
 
 namespace libbitcoin {
 

@@ -22,12 +22,12 @@
 #include <istream>
 #include <memory>
 #include <string>
-#include <bitcoin/bitcoin/define.hpp>
-#include <bitcoin/bitcoin/chain/block.hpp>
-#include <bitcoin/bitcoin/chain/header.hpp>
-#include <bitcoin/bitcoin/utility/data.hpp>
-#include <bitcoin/bitcoin/utility/reader.hpp>
-#include <bitcoin/bitcoin/utility/writer.hpp>
+#include <bitcoin/infrastructure/define.hpp>
+#include <bitcoin/infrastructure/chain/block.hpp>
+#include <bitcoin/infrastructure/chain/header.hpp>
+#include <bitcoin/infrastructure/utility/data.hpp>
+#include <bitcoin/infrastructure/utility/reader.hpp>
+#include <bitcoin/infrastructure/utility/writer.hpp>
 
 namespace libbitcoin {
 namespace message {

@@ -22,8 +22,8 @@
 #include <istream>
 #include <memory>
 #include <string>
-#include <bitcoin/bitcoin/math/hash.hpp>
-#include <bitcoin/bitcoin/message/get_blocks.hpp>
+#include <bitcoin/infrastructure/math/hash.hpp>
+#include <bitcoin/infrastructure/message/get_blocks.hpp>
 
 namespace libbitcoin {
 namespace message {

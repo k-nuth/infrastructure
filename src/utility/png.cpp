@@ -19,19 +19,19 @@
 
 #ifdef WITH_PNG
 
-#include <bitcoin/bitcoin/utility/png.hpp>
+#include <bitcoin/infrastructure/utility/png.hpp>
 
 #include <cstddef>
 #include <cstdint>
 #include <iostream>
 #include <stdexcept>
-#include <bitcoin/bitcoin/constants.hpp>
-#include <bitcoin/bitcoin/formats/base_16.hpp>
-#include <bitcoin/bitcoin/utility/color.hpp>
-#include <bitcoin/bitcoin/utility/container_sink.hpp>
-#include <bitcoin/bitcoin/utility/container_source.hpp>
-#include <bitcoin/bitcoin/utility/istream_reader.hpp>
-#include <bitcoin/bitcoin/utility/ostream_writer.hpp>
+#include <bitcoin/infrastructure/constants.hpp>
+#include <bitcoin/infrastructure/formats/base_16.hpp>
+#include <bitcoin/infrastructure/utility/color.hpp>
+#include <bitcoin/infrastructure/utility/container_sink.hpp>
+#include <bitcoin/infrastructure/utility/container_source.hpp>
+#include <bitcoin/infrastructure/utility/istream_reader.hpp>
+#include <bitcoin/infrastructure/utility/ostream_writer.hpp>
 
 namespace libbitcoin {
 

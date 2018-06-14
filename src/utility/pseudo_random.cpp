@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <bitcoin/bitcoin/utility/pseudo_random.hpp>
+#include <bitcoin/infrastructure/utility/pseudo_random.hpp>
 
 #include <chrono>
 #include <cstdint>
 #include <random>
 #include <boost/thread.hpp>
-#include <bitcoin/bitcoin/utility/asio.hpp>
-#include <bitcoin/bitcoin/utility/data.hpp>
-#include <bitcoin/bitcoin/utility/thread.hpp>
+#include <bitcoin/infrastructure/utility/asio.hpp>
+#include <bitcoin/infrastructure/utility/data.hpp>
+#include <bitcoin/infrastructure/utility/thread.hpp>
 
 namespace libbitcoin {
 

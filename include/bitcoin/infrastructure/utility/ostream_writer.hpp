@@ -20,8 +20,8 @@
 #define LIBBITCOIN_INFRASTRUCTURE_OSTREAM_WRITER_HPP
 
 #include <ostream>
-#include <bitcoin/bitcoin/error.hpp>
-#include <bitcoin/bitcoin/utility/writer.hpp>
+#include <bitcoin/infrastructure/error.hpp>
+#include <bitcoin/infrastructure/utility/writer.hpp>
 
 namespace libbitcoin {
 
@@ -91,6 +91,6 @@ private:
 
 } // namespace libbitcoin
 
-#include <bitcoin/bitcoin/impl/utility/ostream_writer.ipp>
+#include <bitcoin/infrastructure/impl/utility/ostream_writer.ipp>
 
 #endif

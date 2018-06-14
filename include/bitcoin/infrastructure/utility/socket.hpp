@@ -20,13 +20,13 @@
 #define LIBBITCOIN_INFRASTRUCTURE_SOCKET_HPP
 
 #include <memory>
-#include <bitcoin/bitcoin/config/authority.hpp>
-#include <bitcoin/bitcoin/define.hpp>
-#include <bitcoin/bitcoin/error.hpp>
-#include <bitcoin/bitcoin/utility/asio.hpp>
-#include <bitcoin/bitcoin/utility/noncopyable.hpp>
-#include <bitcoin/bitcoin/utility/thread.hpp>
-#include <bitcoin/bitcoin/utility/threadpool.hpp>
+#include <bitcoin/infrastructure/config/authority.hpp>
+#include <bitcoin/infrastructure/define.hpp>
+#include <bitcoin/infrastructure/error.hpp>
+#include <bitcoin/infrastructure/utility/asio.hpp>
+#include <bitcoin/infrastructure/utility/noncopyable.hpp>
+#include <bitcoin/infrastructure/utility/thread.hpp>
+#include <bitcoin/infrastructure/utility/threadpool.hpp>
 
 namespace libbitcoin {
 

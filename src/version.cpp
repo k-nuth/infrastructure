@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <bitcoin/bitcoin/version.hpp>
+#include <bitcoin/infrastructure/version.hpp>
 
 namespace libbitcoin {
 

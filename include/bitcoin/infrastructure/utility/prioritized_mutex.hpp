@@ -20,8 +20,8 @@
 #define LIBBITCOIN_INFRASTRUCTURE_PRIORITIZED_MUTEX_HPP
 
 #include <memory>
-#include <bitcoin/bitcoin/define.hpp>
-#include <bitcoin/bitcoin/utility/thread.hpp>
+#include <bitcoin/infrastructure/define.hpp>
+#include <bitcoin/infrastructure/utility/thread.hpp>
 
 namespace libbitcoin {
 

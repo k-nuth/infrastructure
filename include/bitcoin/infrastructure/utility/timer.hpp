@@ -23,8 +23,8 @@
 #include <cstddef>
 #include <ctime>
 #include <string>
-#include <bitcoin/bitcoin/compat.hpp>
-#include <bitcoin/bitcoin/utility/asio.hpp>
+#include <bitcoin/infrastructure/compat.hpp>
+#include <bitcoin/infrastructure/utility/asio.hpp>
 
 namespace libbitcoin {
 

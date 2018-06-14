@@ -22,11 +22,11 @@
 #include <cstddef>
 #include <cstdint>
 #include <string>
-#include <bitcoin/bitcoin/error.hpp>
-#include <bitcoin/bitcoin/math/hash.hpp>
-#include <bitcoin/bitcoin/utility/data.hpp>
-////#include <bitcoin/bitcoin/utility/noncopyable.hpp>
-#include <bitcoin/bitcoin/utility/writer.hpp>
+#include <bitcoin/infrastructure/error.hpp>
+#include <bitcoin/infrastructure/math/hash.hpp>
+#include <bitcoin/infrastructure/utility/data.hpp>
+////#include <bitcoin/infrastructure/utility/noncopyable.hpp>
+#include <bitcoin/infrastructure/utility/writer.hpp>
 
 namespace libbitcoin {
 
@@ -119,6 +119,6 @@ serializer<Iterator> make_unsafe_serializer(Iterator begin);
 
 } // namespace libbitcoin
 
-#include <bitcoin/bitcoin/impl/utility/serializer.ipp>
+#include <bitcoin/infrastructure/impl/utility/serializer.ipp>
 
 #endif

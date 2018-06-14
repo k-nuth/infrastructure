@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <bitcoin/bitcoin/utility/deadline.hpp>
+#include <bitcoin/infrastructure/utility/deadline.hpp>
 
 #include <functional>
-#include <bitcoin/bitcoin/error.hpp>
-#include <bitcoin/bitcoin/utility/asio.hpp>
-#include <bitcoin/bitcoin/utility/thread.hpp>
-#include <bitcoin/bitcoin/utility/threadpool.hpp>
+#include <bitcoin/infrastructure/error.hpp>
+#include <bitcoin/infrastructure/utility/asio.hpp>
+#include <bitcoin/infrastructure/utility/thread.hpp>
+#include <bitcoin/infrastructure/utility/threadpool.hpp>
 
 namespace libbitcoin {
 

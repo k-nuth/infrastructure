@@ -21,10 +21,10 @@
 
 #include <iostream>
 #include <boost/smart_ptr.hpp>
-#include <bitcoin/bitcoin/define.hpp>
-#include <bitcoin/bitcoin/log/rotable_file.hpp>
-#include <bitcoin/bitcoin/log/severity.hpp>
-#include <bitcoin/bitcoin/unicode/ofstream.hpp>
+#include <bitcoin/infrastructure/define.hpp>
+#include <bitcoin/infrastructure/log/rotable_file.hpp>
+#include <bitcoin/infrastructure/log/severity.hpp>
+#include <bitcoin/infrastructure/unicode/ofstream.hpp>
 
 namespace libbitcoin {
 namespace log {

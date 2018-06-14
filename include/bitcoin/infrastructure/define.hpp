@@ -19,7 +19,7 @@
 #ifndef LIBBITCOIN_INFRASTRUCTURE_DEFINE_HPP
 #define LIBBITCOIN_INFRASTRUCTURE_DEFINE_HPP
 
-#include <bitcoin/bitcoin/compat.hpp>
+#include <bitcoin/infrastructure/compat.hpp>
 // Create bc namespace alias.
 namespace libbitcoin {
 } // namespace libbitcoin

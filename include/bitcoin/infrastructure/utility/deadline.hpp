@@ -20,15 +20,15 @@
 #define LIBBITCOIN_INFRASTRUCTURE_DEADLINE_HPP
 
 #include <memory>
-#include <bitcoin/bitcoin/define.hpp>
-#include <bitcoin/bitcoin/error.hpp>
-#include <bitcoin/bitcoin/utility/asio.hpp>
-#include <bitcoin/bitcoin/utility/enable_shared_from_base.hpp>
-#include <bitcoin/bitcoin/utility/assert.hpp>
-#include <bitcoin/bitcoin/utility/noncopyable.hpp>
-#include <bitcoin/bitcoin/utility/thread.hpp>
-#include <bitcoin/bitcoin/utility/threadpool.hpp>
-////#include <bitcoin/bitcoin/utility/track.hpp>
+#include <bitcoin/infrastructure/define.hpp>
+#include <bitcoin/infrastructure/error.hpp>
+#include <bitcoin/infrastructure/utility/asio.hpp>
+#include <bitcoin/infrastructure/utility/enable_shared_from_base.hpp>
+#include <bitcoin/infrastructure/utility/assert.hpp>
+#include <bitcoin/infrastructure/utility/noncopyable.hpp>
+#include <bitcoin/infrastructure/utility/thread.hpp>
+#include <bitcoin/infrastructure/utility/threadpool.hpp>
+////#include <bitcoin/infrastructure/utility/track.hpp>
 
 namespace libbitcoin {
 

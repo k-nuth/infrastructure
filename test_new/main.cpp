@@ -20,9 +20,9 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 
-#include <bitcoin/bitcoin/multi_crypto_support.hpp>
-//#include <bitcoin/bitcoin/wallet/cashaddr.hpp>
-#include <bitcoin/bitcoin/wallet/payment_address.hpp>
+#include <bitcoin/infrastructure/multi_crypto_support.hpp>
+//#include <bitcoin/infrastructure/wallet/cashaddr.hpp>
+#include <bitcoin/infrastructure/wallet/payment_address.hpp>
 
 using namespace libbitcoin::wallet;
 using namespace std;

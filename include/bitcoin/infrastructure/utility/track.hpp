@@ -43,6 +43,6 @@ private:
     const std::string class_;
 };
 
-#include <bitcoin/bitcoin/impl/utility/track.ipp>
+#include <bitcoin/infrastructure/impl/utility/track.ipp>
 
 #endif

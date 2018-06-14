@@ -1,5 +1,6 @@
 /**
  * Copyright (c) 2017-2018 Bitprim Inc.
+ * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
  *
  * This file is part of Bitprim.
  *

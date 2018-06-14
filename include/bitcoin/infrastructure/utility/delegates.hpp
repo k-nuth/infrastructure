@@ -20,7 +20,7 @@
 #define LIBBITCOIN_INFRASTRUCTURE_DELEGATES_HPP
 
 #include <functional>
-#include <bitcoin/bitcoin/utility/work.hpp>
+#include <bitcoin/infrastructure/utility/work.hpp>
 
 namespace libbitcoin {
 namespace delegates {

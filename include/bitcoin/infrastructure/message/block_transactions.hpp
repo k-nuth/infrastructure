@@ -20,11 +20,11 @@
 #define LIBBITCOIN_INFRASTRUCTURE_MESSAGE_BLOCK_TRANSACTIONS_HPP
 
 #include <istream>
-#include <bitcoin/bitcoin/define.hpp>
-#include <bitcoin/bitcoin/chain/transaction.hpp>
-#include <bitcoin/bitcoin/utility/data.hpp>
-#include <bitcoin/bitcoin/utility/reader.hpp>
-#include <bitcoin/bitcoin/utility/writer.hpp>
+#include <bitcoin/infrastructure/define.hpp>
+#include <bitcoin/infrastructure/chain/transaction.hpp>
+#include <bitcoin/infrastructure/utility/data.hpp>
+#include <bitcoin/infrastructure/utility/reader.hpp>
+#include <bitcoin/infrastructure/utility/writer.hpp>
 
 namespace libbitcoin {
 namespace message {

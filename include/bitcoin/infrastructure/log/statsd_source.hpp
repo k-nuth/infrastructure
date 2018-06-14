@@ -24,12 +24,12 @@
 #include <boost/log/sources/features.hpp>
 #include <boost/log/sources/global_logger_storage.hpp>
 #include <boost/log/sources/threading_models.hpp>
-#include <bitcoin/bitcoin/define.hpp>
-#include <bitcoin/bitcoin/log/features/counter.hpp>
-#include <bitcoin/bitcoin/log/features/gauge.hpp>
-#include <bitcoin/bitcoin/log/features/metric.hpp>
-#include <bitcoin/bitcoin/log/features/rate.hpp>
-#include <bitcoin/bitcoin/log/features/timer.hpp>
+#include <bitcoin/infrastructure/define.hpp>
+#include <bitcoin/infrastructure/log/features/counter.hpp>
+#include <bitcoin/infrastructure/log/features/gauge.hpp>
+#include <bitcoin/infrastructure/log/features/metric.hpp>
+#include <bitcoin/infrastructure/log/features/rate.hpp>
+#include <bitcoin/infrastructure/log/features/timer.hpp>
 
 namespace libbitcoin {
 namespace log {

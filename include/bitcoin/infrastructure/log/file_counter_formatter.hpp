@@ -21,7 +21,7 @@
 #include <sstream>
 #include <boost/filesystem/path.hpp>
 
-#include <bitcoin/bitcoin/define.hpp>
+#include <bitcoin/infrastructure/define.hpp>
 
 namespace libbitcoin {
 namespace log {

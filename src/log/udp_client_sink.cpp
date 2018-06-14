@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <bitcoin/bitcoin/log/udp_client_sink.hpp>
+#include <bitcoin/infrastructure/log/udp_client_sink.hpp>
 
 #include <cstddef>
 #include <functional>
 #include <string>
 #include <boost/make_shared.hpp>
-#include <bitcoin/bitcoin/error.hpp>
+#include <bitcoin/infrastructure/error.hpp>
 
 namespace libbitcoin {
 namespace log {
