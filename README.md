@@ -4,7 +4,7 @@
 
 ## Installation
 
-A build requires boost and libsecp256k1. The [bitprim/secp256k1](https://github.com/bitprim/secp256k1) repository is forked from [bitcoin-core/secp256k1](https://github.com/bitcoin-core/secp256k1) in order to control for changes and to incorporate the necessary Visual Studio build. The original repository can be used directly but recent changes to the public interface may cause build breaks. The `--enable-module-recovery` switch is required.
+A build requires boost and libsecp256k1. The [bitprim/secp256k1](https://github.com/bitprim/secp256k1) repository is forked from [bitcoin-infrastructure/secp256k1](https://github.com/bitcoin-infrastructure/secp256k1) in order to control for changes and to incorporate the necessary Visual Studio build. The original repository can be used directly but recent changes to the public interface may cause build breaks. The `--enable-module-recovery` switch is required.
 
 Detailed instructions are provided below.
   * [Debian/Ubuntu](#debianubuntu)
@@ -13,7 +13,7 @@ Detailed instructions are provided below.
 
 ### Debian/Ubuntu
 
-Bitprim requires a C++11 compiler, currently minimum [GCC 4.8.0](https://gcc.gnu.org/projects/cxx0x.html) or Clang based on [LLVM 3.5](http://llvm.org/releases/3.5.0/docs/ReleaseNotes.html).
+Bitprim requires a C++14 compiler, currently minimum [GCC 5](https://gcc.gnu.org/projects/cxx0x.html) or Clang based on [LLVM 3.5](http://llvm.org/releases/3.5.0/docs/ReleaseNotes.html).
 
 To see your GCC version:
 ```sh
@@ -59,18 +59,18 @@ $ git clone https://github.com/bitprim/bitprim-infrastructure
 $ cd bitprim-infrastructure
 $ mkdir build
 $ cd build
-$ cmake .. -G "Unix Makefiles" -DWITH_TESTS=OFF -DWITH_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-std=c++11"
+$ cmake .. -G "Unix Makefiles" -DWITH_TESTS=OFF -DWITH_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-std=c++14"
 $ make
 $ sudo make install
 $ sudo ldconfig
 ```
-Bitprim-infrastructure is now installed in `/usr/local/`.
+bitprim-infrastructure is now installed in `/usr/local/`.
 
 ### Macintosh
 
 The OSX installation differs from Linux in the installation of the compiler and packaged dependencies. Bitprim supports both [Homebrew](http://brew.sh) and [MacPorts](https://www.macports.org) package managers. Both require Apple's [Xcode](https://developer.apple.com/xcode) command line tools. Neither requires Xcode as the tools may be installed independently.
 
-Bitprim compiles with Clang on OSX and requires C++11 support. Installation has been verified using Clang based on [LLVM 3.5](http://llvm.org/releases/3.5.0/docs/ReleaseNotes.html). This version or newer should be installed as part of the Xcode command line tools.
+Bitprim compiles with Clang on OSX and requires C++14 support. Installation has been verified using Clang based on [LLVM 3.5](http://llvm.org/releases/3.5.0/docs/ReleaseNotes.html). This version or newer should be installed as part of the Xcode command line tools.
 
 To see your Clang/LLVM  version:
 ```sh
@@ -108,7 +108,7 @@ $ git clone https://github.com/bitprim/bitprim-infrastructure
 $ cd bitprim-infrastructure
 $ mkdir build
 $ cd build
-$ cmake .. -DWITH_TESTS=OFF -DWITH_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-std=c++11"
+$ cmake .. -DWITH_TESTS=OFF -DWITH_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-std=c++14"
 $ make
 $ sudo make install
 ```
@@ -135,7 +135,7 @@ $ git clone https://github.com/bitprim/bitprim-infrastructure
 $ cd bitprim-infrastructure
 $ mkdir build
 $ cd build
-$ cmake .. -DWITH_TESTS=OFF -DWITH_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-std=c++11"
+$ cmake .. -DWITH_TESTS=OFF -DWITH_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-std=c++14"
 $ make
 $ sudo make install
 ```
@@ -157,6 +157,6 @@ TODO:Windows Install
 [eRuby]: http://en.wikipedia.org/wiki/ERuby
 [Hana.docs]: http://boostorg.github.io/hana
 [Hana.wiki]: https://github.com/boostorg/hana/wiki
-[Homebrew formula]: https://github.com/Homebrew/homebrew-core/blob/master/Formula/hana.rb
+[Homebrew formula]: https://github.com/Homebrew/homebrew-infrastructure/blob/master/Formula/hana.rb
 
 

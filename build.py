@@ -15,9 +15,12 @@ def get_version():
 def get_channel():
     return get_content('conan_channel')
 
+def get_user():
+    return get_content('conan_user')
+
 def get_conan_vars():
     login_username = os.getenv("CONAN_LOGIN_USERNAME", "bitprim-bintray")
-    username = os.getenv("CONAN_USERNAME", "bitprim")
+    username = os.getenv("CONAN_USERNAME", get_user())
     channel = os.getenv("CONAN_CHANNEL", get_channel())
     version = os.getenv("CONAN_VERSION", get_version())
     return login_username, username, channel, version
@@ -103,18 +106,7 @@ if __name__ == "__main__":
                 options["%s:with_tests" % name] = "True"
                 options["%s:with_examples" % name] = "True"
 
-            opts_bch = copy.deepcopy(options)
-            opts_btc = copy.deepcopy(options)
-            # opts_ltc = copy.deepcopy(options)
-
-            opts_bch["%s:currency" % name] = "BCH"
-            opts_btc["%s:currency" % name] = "BTC"
-            # opts_ltc["%s:currency" % name] = "LTC"
-
-            filtered_builds.append([settings, opts_bch, env_vars, build_requires])
-            filtered_builds.append([settings, opts_btc, env_vars, build_requires])
-            # filtered_builds.append([settings, opts_ltc, env_vars, build_requires])
-
+            filtered_builds.append([settings, options, env_vars, build_requires])
 
     builder.builds = filtered_builds
     builder.run()

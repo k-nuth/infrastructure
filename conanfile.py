@@ -36,16 +36,18 @@ def get_version():
 def get_channel():
     return get_content('conan_channel')
 
+def get_user():
+    return get_content('conan_user')
+
 def get_conan_req_version():
     return get_content('conan_req_version')
-
 
 class BitprimInfrastructureConan(ConanFile):
     name = "bitprim-infrastructure"
     version = get_version()
     license = "http://www.boost.org/users/license.html"
     url = "https://github.com/bitprim/bitprim-infrastructure"
-    description = "Bitcoin Cross-Platform C++ Development Toolkit"
+    description = "Multicrypto Cross-Platform C++ Development Toolkit"
     settings = "os", "compiler", "build_type", "arch"
 
     if conan_version < Version(get_conan_req_version()):
@@ -54,35 +56,25 @@ class BitprimInfrastructureConan(ConanFile):
     options = {"shared": [True, False],
                "fPIC": [True, False],
                "with_icu": [True, False],
-               "with_qrencode": [True, False],
+               "with_png": [True, False],
                "with_tests": [True, False],
                "with_examples": [True, False],
-            #    "currency": "ANY" #["BCH", "BTC", "LTC", ...]
-               "currency": ['BCH', 'BTC', 'LTC']
     }
-
-        # "with_litecoin": [True, False],
-    #    "with_png": [True, False],
 
     default_options = "shared=False", \
         "fPIC=True", \
         "with_icu=False", \
-        "with_qrencode=False", \
+        "with_png=False", \
         "with_tests=False", \
-        "with_examples=False", \
-        "currency=BCH"
-
-        # "with_litecoin=False", \
-        # "with_png=False", \
+        "with_examples=False"
 
     generators = "cmake"
-    exports = "conan_channel", "conan_version", "conan_req_version"
+    exports = "conan_channel", "conan_version", "conan_req_version", "conan_user"
     exports_sources = "src/*", "CMakeLists.txt", "cmake/*", "bitprim-infrastructureConfig.cmake.in", "bitprimbuildinfo.cmake", "include/*", "test/*", "examples/*"
     package_files = "build/lbitprim-infrastructure.a"
     build_policy = "missing"
 
-    requires = (("boost/1.66.0@bitprim/stable"),
-               ("secp256k1/0.3@bitprim/stable"))
+    requires = (("boost/1.66.0@bitprim/stable"))
 
     @property
     def msvc_mt_build(self):
@@ -103,18 +95,10 @@ class BitprimInfrastructureConan(ConanFile):
             return self.options.shared
 
     def requirements(self):
-        # if self.options.with_png:
-        #     self.requires("libpng/1.6.34@bitprim/stable")
-            
-        if self.options.currency == "LTC":
-             self.requires("OpenSSL/1.0.2l@conan/stable")
-            
-
-        if self.options.with_qrencode:
-            self.requires("libqrencode/4.0.0@bitprim/stable")
+        if self.options.with_png:
+            self.requires("libpng/1.6.34@bitprim/stable")
 
     def config_options(self):
-        self.output.info('def config_options(self):')
         if self.settings.compiler == "Visual Studio":
             self.options.remove("fPIC")
 
@@ -131,12 +115,12 @@ class BitprimInfrastructureConan(ConanFile):
                 self.info.settings.compiler.libcxx = "ANY"
 
     def build(self):
-        for dep in self.deps_cpp_info.deps:
-            # self.output.warn(self.deps_cpp_info["MyLib"].libdirs)
-            print(dep)
-            print(self.options[dep])
+        # for dep in self.deps_cpp_info.deps:
+        #     # self.output.warn(self.deps_cpp_info["MyLib"].libdirs)
+        #     print(dep)
+        #     print(self.options[dep])
 
-            # self.options["boost"]
+        #     # self.options["boost"]
 
         cmake = CMake(self)
         cmake.definitions["USE_CONAN"] = option_on_off(True)
@@ -150,20 +134,8 @@ class BitprimInfrastructureConan(ConanFile):
 
         cmake.definitions["WITH_TESTS"] = option_on_off(self.options.with_tests)
         cmake.definitions["WITH_EXAMPLES"] = option_on_off(self.options.with_examples)
-
-        # cmake.definitions["WITH_LITECOIN"] = option_on_off(self.options.with_litecoin)
-
-        # cmake.definitions["WITH_LTC"] = option_on_off(self.options.currency == 'LTC')
-        # cmake.definitions["WITH_BTC"] = option_on_off(self.options.currency == 'LTC')
-        # cmake.definitions["WITH_LITECOIN"] = option_on_off(self.options.currency == 'LTC')
-
-        cmake.definitions["CURRENCY"] = self.options.currency
-
         cmake.definitions["WITH_ICU"] = option_on_off(self.options.with_icu)
-        cmake.definitions["WITH_QRENCODE"] = option_on_off(self.options.with_qrencode)
-        # cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_png)
-        cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_qrencode)
-        
+        cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_png)
 
         if self.settings.compiler != "Visual Studio":
             # cmake.definitions["CONAN_CXX_FLAGS"] += " -Wno-deprecated-declarations"
@@ -172,12 +144,7 @@ class BitprimInfrastructureConan(ConanFile):
         if self.settings.compiler == "Visual Studio":
             cmake.definitions["CONAN_CXX_FLAGS"] = cmake.definitions.get("CONAN_CXX_FLAGS", "") + " /DBOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE"
 
-
-        # self.output.info("------------------------------------------------------")
-        # self.output.info(self.settings.compiler)
-        # self.output.info(self.settings.compiler.libcxx)
-        # self.output.info("------------------------------------------------------")
-
+        
         # if self.settings.compiler != "Visual Studio"
         if self.settings.compiler == "gcc":
             if float(str(self.settings.compiler.version)) >= 5:
@@ -236,5 +203,3 @@ class BitprimInfrastructureConan(ConanFile):
 
         if not self.is_shared:
             self.cpp_info.defines.append("BI_STATIC")
-
-

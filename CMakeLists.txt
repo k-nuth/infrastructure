@@ -45,9 +45,9 @@ project(bitprim-infrastructure
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-# Check for baseline language coverage in the compiler for the C++11 standard.
+# Check for baseline language coverage in the compiler for the C++14 standard.
 #------------------------------------------------------------------------------
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Process options.
@@ -98,44 +98,9 @@ if (WITH_PNG)
   add_definitions(-DWITH_PNG)
 endif()
 
-# Implement --with-litecoin.
-#------------------------------------------------------------------------------
-# option(WITH_LITECOIN "Compile with Litecoin support." OFF)
-# if (WITH_LITECOIN)
-#   add_definitions(-DWITH_LITECOIN)
-#   add_definitions(-DBITPRIM_LITECOIN)
-# endif()
-
-# Implement --with-qrencode and output ${qrencode}.
-#------------------------------------------------------------------------------
-option(WITH_QRENCODE "Compile with QREncode." OFF)
-if (WITH_QRENCODE)
-  add_definitions(-DWITH_QRENCODE)
-
-  if (NO_CONAN_AT_ALL)
-    message(FATAL_ERROR "WITH_QRENCODE not yet implemented")
-  endif (NO_CONAN_AT_ALL)
-endif()
-
 
 set(BITPRIM_BUILD_NUMBER "-" CACHE STRING "Specify the Bitprim Build Number.")
 # message(${BITPRIM_BUILD_NUMBER})
-
-set(CURRENCY "BCH" CACHE STRING "Specify the Cryptocurrency (BCH|BTC|LTC).")
-
-if (${CURRENCY} STREQUAL "BCH")
-  add_definitions(-DBITPRIM_CURRENCY_BCH)
-elseif (${CURRENCY} STREQUAL "BTC")
-  add_definitions(-DBITPRIM_CURRENCY_BTC)
-elseif (${CURRENCY} STREQUAL "LTC")
-  # add_definitions(-DWITH_LITECOIN)
-  # add_definitions(-DBITPRIM_LITECOIN)
-  add_definitions(-DBITPRIM_CURRENCY_LTC)
-else()
-  message(FATAL_ERROR "Invalid Cryptocurrency: ${CURRENCY}")
-endif()
-
-message(STATUS "Bitprim: Cryptocurrency: ${CURRENCY}")
 
 
 # message( STATUS "1 NO_CONAN_AT_ALL: " ${NO_CONAN_AT_ALL} )
@@ -236,21 +201,11 @@ if (WITH_PNG)
 endif()
 
 
-# Require OpenSSL
-#------------------------------------------------------------------------------
-# if (WITH_LITECOIN)
-if (${CURRENCY} STREQUAL "LTC")
-  find_package(OpenSSL 1.0.1 REQUIRED)  #TODO(fernando): manage with conan
-endif()
-
 # Require rt if on linux and output ${rt_LIBS}.
 #------------------------------------------------------------------------------
 
 # Require icu-i18n of at least version 51.2 and output ${icu_i18n_CPPFLAGS/LIBS/PKG}.
 #------------------------------------------------------------------------------
-
-# Require qrencode of at least version 3.4.4 and output ${qrencode_CPPFLAGS/LIBS/PKG}.
-
 
 
 if (NOT USE_CONAN)
@@ -346,130 +301,21 @@ if (ENABLE_SHARED)
 endif()
 
 set(bitprim_infrastructure_sources 
-        src/chain/block.cpp
-        src/chain/chain_state.cpp
-        src/chain/compact.cpp
-        src/chain/header.cpp
-        src/chain/input.cpp
-        src/chain/output.cpp
-        src/chain/output_point.cpp
-        src/chain/point.cpp
-        src/chain/point_iterator.cpp
-
-        src/chain/point_value.cpp
-        src/chain/points_value.cpp
-
-        src/chain/script.cpp
-        src/chain/transaction.cpp
-        src/chain/witness.cpp
-
-        src/machine/interpreter.cpp
-        src/machine/number.cpp
-        src/machine/opcode.cpp
-        src/machine/operation.cpp
-        src/machine/program.cpp
-
-        src/config/authority.cpp
-        src/config/base16.cpp
-        src/config/base2.cpp
-        src/config/base58.cpp
-        src/config/base64.cpp
-        src/config/checkpoint.cpp
-        src/config/directory.cpp
-        src/config/endpoint.cpp
-        src/config/hash160.cpp
-        src/config/hash256.cpp
-        src/config/parameter.cpp
-        src/config/parser.cpp
-        src/config/printer.cpp
-        src/config/sodium.cpp
 
         src/error.cpp
-        src/multi_crypto_support.cpp
+        # src/multi_crypto_support.cpp
         src/version.cpp
 
-        src/formats/base_10.cpp
-        src/formats/base_16.cpp
-        src/formats/base_58.cpp
-        src/formats/base_64.cpp
-        src/formats/base_85.cpp
 
         src/log/file_collector.cpp
         src/log/file_collector_repository.cpp
         src/log/file_counter_formatter.cpp
         src/log/sink.cpp
-        src/log/statsd_sink.cpp
+        # src/log/statsd_sink.cpp
         src/log/udp_client_sink.cpp
-
-        src/math/checksum.cpp
-        src/math/crypto.cpp
-        src/math/elliptic_curve.cpp
-        src/math/hash.cpp
-        src/math/secp256k1_initializer.cpp
-        src/math/secp256k1_initializer.hpp
-        src/math/sip_hash.cpp
-        src/math/stealth.cpp
-        src/math/external/aes256.h
-        src/math/external/crypto_scrypt.h
-        src/math/external/hmac_sha256.h
-        src/math/external/hmac_sha512.h
-        src/math/external/lax_der_parsing.h
-        src/math/external/pbkdf2_sha256.h
-        src/math/external/pkcs5_pbkdf2.h
-        src/math/external/ripemd160.h
-        src/math/external/scrypt.h
-        src/math/external/sha1.h
-        src/math/external/sha256.h
-        src/math/external/sha512.h
-        src/math/external/zeroize.h
-        src/math/external/aes256.c
-        src/math/external/crypto_scrypt.c
-        src/math/external/hmac_sha256.c
-        src/math/external/hmac_sha512.c
-        src/math/external/lax_der_parsing.c
-        src/math/external/pbkdf2_sha256.c
-        src/math/external/pkcs5_pbkdf2.c
-        src/math/external/ripemd160.c
-        src/math/external/sha1.c
-        src/math/external/sha256.c
-        src/math/external/sha512.c
-        src/math/external/zeroize.c
-
-        src/message/address.cpp
-        src/message/alert.cpp
-        src/message/alert_payload.cpp
-        src/message/block.cpp
-        src/message/block_transactions.cpp
-        src/message/compact_block.cpp
-        src/message/fee_filter.cpp
-        src/message/filter_add.cpp
-        src/message/filter_clear.cpp
-        src/message/filter_load.cpp
-        src/message/get_address.cpp
-        src/message/get_block_transactions.cpp
-        src/message/get_blocks.cpp
-        src/message/get_data.cpp
-        src/message/get_headers.cpp
-        src/message/header.cpp
-        src/message/headers.cpp
-        src/message/heading.cpp
-        src/message/inventory.cpp
-        src/message/inventory_vector.cpp
-        src/message/memory_pool.cpp
-        src/message/merkle_block.cpp
-        src/message/messages.cpp
-        src/message/network_address.cpp
-        src/message/not_found.cpp
-        src/message/ping.cpp
-        src/message/pong.cpp
-        src/message/prefilled_transaction.cpp
-        src/message/reject.cpp
-        src/message/send_compact.cpp
-        src/message/send_headers.cpp
-        src/message/transaction.cpp
-        src/message/verack.cpp
-        src/message/version.cpp
         
+        src/message/message_tools.cpp
+
         src/unicode/console_streambuf.cpp
         src/unicode/ifstream.cpp
         src/unicode/ofstream.cpp
@@ -491,64 +337,18 @@ set(bitprim_infrastructure_sources
         src/utility/png.cpp
         src/utility/prioritized_mutex.cpp
 
-        src/utility/pseudo_random.cpp
+        src/utility/random.cpp
         src/utility/scope_lock.cpp
         src/utility/sequencer.cpp
         src/utility/sequential_lock.cpp
-        src/utility/socket.cpp
+        # src/utility/socket.cpp
         src/utility/string.cpp
         src/utility/thread.cpp
         src/utility/threadpool.cpp
         src/utility/work.cpp
-
-        src/wallet/bitcoin_uri.cpp
-        
-
-        src/wallet/dictionary.cpp
-        src/wallet/ec_private.cpp
-        src/wallet/ec_public.cpp
-        src/wallet/ek_private.cpp
-        src/wallet/ek_public.cpp
-        src/wallet/ek_token.cpp
-        src/wallet/encrypted_keys.cpp
-        src/wallet/hd_private.cpp
-        src/wallet/hd_public.cpp
-        src/wallet/message.cpp
-        src/wallet/mini_keys.cpp
-        src/wallet/mnemonic.cpp
-        src/wallet/parse_encrypted_keys/parse_encrypted_key.hpp
-        src/wallet/parse_encrypted_keys/parse_encrypted_key.ipp
-        src/wallet/parse_encrypted_keys/parse_encrypted_prefix.hpp
-        src/wallet/parse_encrypted_keys/parse_encrypted_prefix.ipp
-        src/wallet/parse_encrypted_keys/parse_encrypted_private.cpp
-        src/wallet/parse_encrypted_keys/parse_encrypted_private.hpp
-        src/wallet/parse_encrypted_keys/parse_encrypted_public.cpp
-        src/wallet/parse_encrypted_keys/parse_encrypted_public.hpp
-        src/wallet/parse_encrypted_keys/parse_encrypted_token.cpp
-        src/wallet/parse_encrypted_keys/parse_encrypted_token.hpp
-        src/wallet/payment_address.cpp
-        
-        src/wallet/qrcode.cpp
-        src/wallet/select_outputs.cpp
-
-        src/wallet/select_outputs.cpp
-        src/wallet/stealth_address.cpp
-        src/wallet/stealth_receiver.cpp
-        src/wallet/stealth_sender.cpp
-        src/wallet/uri.cpp)
-
-if (${CURRENCY} STREQUAL "BCH")
-    set(bitprim_infrastructure_sources ${bitprim_infrastructure_sources}         
-      src/wallet/cashaddr.cpp)
-endif()
+      )
 
 
-# if (WITH_LITECOIN)
-if (${CURRENCY} STREQUAL "LTC")
-    set(bitprim_infrastructure_sources ${bitprim_infrastructure_sources}         
-      src/math/external/scrypt.cpp
-      src/math/external/scrypt-sse2.cpp)
-endif()
 
 add_library(bitprim-infrastructure ${MODE} ${bitprim_infrastructure_sources})
 
@@ -563,8 +363,6 @@ endif(ENABLE_POSITION_INDEPENDENT_CODE)
 
 #-fvisibility=default|internal|hidden|protected
 
-# add_library(bitprim-infrastructure ${MODE}
-#        src/wallet/uri.cpp)
 
 target_include_directories(bitprim-infrastructure PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -577,11 +375,6 @@ endif()
 target_compile_definitions(bitprim-infrastructure PUBLIC -DBITPRIM_BUILD_NUMBER="\\"${BITPRIM_BUILD_NUMBER}\\"") #TODO(fernando): manage with Conan????
 
 target_include_directories(bitprim-infrastructure SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
-
-# if (WITH_LITECOIN)
-if (${CURRENCY} STREQUAL "LTC")
-  target_include_directories(bitprim-infrastructure SYSTEM PUBLIC ${OPENSSL_INCLUDE_DIR})
-endif()
 
 if (NOT NO_CONAN_AT_ALL)
   target_link_libraries(bitprim-infrastructure PUBLIC ${CONAN_LIBS})
@@ -621,15 +414,6 @@ if (WITH_PNG)
     endif (NO_CONAN_AT_ALL)
 endif()
 
-# if (WITH_LITECOIN)
-if (${CURRENCY} STREQUAL "LTC")
-  target_link_libraries(bitprim-infrastructure PUBLIC ${OPENSSL_CRYPTO_LIBRARY})  #TODO(fernando): manage with Conan
-
-  # OPENSSL_CRYPTO_LIBRARY
-  # OPENSSL_SSL_LIBRARY
-  # OPENSSL_LIBRARIES
-endif()
-
 if (NOT USE_CONAN)
   target_link_libraries(bitprim-infrastructure PUBLIC secp256k1)
 endif()
@@ -648,81 +432,7 @@ endif()
 if (WITH_TESTS)
 
   add_executable(bitprim_infrastructure_test
-        test/chain/block.cpp
-        test/chain/header.cpp
-        test/chain/input.cpp
-        test/chain/output.cpp
-        test/chain/output_point.cpp
-        test/chain/point.cpp
-        test/chain/point_iterator.cpp
-        test/chain/satoshi_words.cpp
-        # test/chain/machine/opcode.cpp      #TODO: check the new test sources to be added after the Feb2017 merge
-        # test/chain/script/operation.cpp
-        # test/chain/script/script.cpp
-        # test/chain/script/script.hpp
-
-        test/chain/script.cpp
-
-        test/chain/transaction.cpp
-        test/config/authority.cpp
-        test/config/base58.cpp
-        test/config/checkpoint.cpp
-        test/config/endpoint.cpp
-        test/config/hash256.cpp
-        test/config/parameter.cpp
-        test/config/printer.cpp
-        test/formats/base_10.cpp
-        test/formats/base_16.cpp
-        test/formats/base_58.cpp
-        test/formats/base_64.cpp
-        test/formats/base_85.cpp
         test/main.cpp
-        # test/math/big_number.cpp
-        # test/math/big_number.hppcompact
-        test/math/checksum.cpp
-        test/math/elliptic_curve.cpp
-        test/math/hash.cpp
-        test/math/hash.hpp
-        # test/math/hash_number.cpp
-        test/math/limits.cpp
-        # test/math/script_number.cpp
-        # test/math/script_number.hpp
-        test/math/stealth.cpp
-        test/message/address.cpp
-        test/message/alert.cpp
-        test/message/alert_payload.cpp
-        # test/message/block_message.cpp
-        test/message/block.cpp
-        test/message/block_transactions.cpp
-        test/message/compact_block.cpp
-        test/message/fee_filter.cpp
-        test/message/filter_add.cpp
-        test/message/filter_clear.cpp
-        test/message/filter_load.cpp
-        test/message/get_address.cpp
-        test/message/get_block_transactions.cpp
-        test/message/get_blocks.cpp
-        test/message/get_data.cpp
-        test/message/get_headers.cpp
-        # test/message/header_message.cpp
-        test/message/headers.cpp
-        test/message/heading.cpp
-        test/message/inventory.cpp
-        test/message/inventory_vector.cpp
-        test/message/memory_pool.cpp
-        test/message/merkle_block.cpp
-        test/message/network_address.cpp
-        test/message/not_found.cpp
-        test/message/ping.cpp
-        test/message/pong.cpp
-        test/message/prefilled_transaction.cpp
-        test/message/reject.cpp
-        # test/message/send_compact_blocks.cpp
-        test/message/send_headers.cpp
-        # test/message/transaction_message.cpp
-        test/message/transaction.cpp
-        test/message/verack.cpp
-        test/message/version.cpp
         test/unicode/unicode.cpp
         test/unicode/unicode_istream.cpp
         test/unicode/unicode_ostream.cpp
@@ -731,55 +441,18 @@ if (WITH_TESTS)
         test/utility/data.cpp
         test/utility/endian.cpp
         test/utility/png.cpp
-        test/utility/pseudo_random.cpp
+        test/utility/random.cpp
         test/utility/serializer.cpp
         test/utility/stream.cpp
         test/utility/thread.cpp
         # test/utility/variable_uint_size.cpp
-        test/wallet/bitcoin_uri.cpp
-        test/wallet/ec_private.cpp
-        test/wallet/ec_public.cpp
-        test/wallet/encrypted_keys.cpp
-        test/wallet/hd_private.cpp
-        test/wallet/hd_public.cpp
-        test/wallet/message.cpp
-        test/wallet/mnemonic.cpp
-        test/wallet/mnemonic.hpp
-        test/wallet/payment_address.cpp
-        test/wallet/qrcode.cpp
-        test/wallet/stealth_address.cpp
-        test/wallet/uri.cpp
-        test/wallet/uri_reader.cpp)
+    )
 
 # Simplified Test Project for testing Packaging purposes
 
   # add_executable(bitprim_infrastructure_test
   # test/main.cpp
-  # # test/math/big_number.cpp
-  # # test/math/big_number.hppcompact
-  # test/math/checksum.cpp
-  # test/math/elliptic_curve.cpp
-  # test/math/hash.cpp
-  # test/math/hash.hpp
-  # # test/math/hash_number.cpp
-  # test/math/limits.cpp
-  # # test/math/script_number.cpp
-  # # test/math/script_number.hpp
-  # test/math/stealth.cpp
-  # test/wallet/bitcoin_uri.cpp
-  # test/wallet/ec_private.cpp
-  # test/wallet/ec_public.cpp
-  # test/wallet/encrypted_keys.cpp
-  # test/wallet/hd_private.cpp
-  # test/wallet/hd_public.cpp
-  # test/wallet/message.cpp
-  # test/wallet/mnemonic.cpp
-  # test/wallet/mnemonic.hpp
-  # test/wallet/payment_address.cpp
-  # test/wallet/qrcode.cpp
-  # test/wallet/stealth_address.cpp
-  # test/wallet/uri.cpp
-  # test/wallet/uri_reader.cpp)
+  # )
 
     target_link_libraries(bitprim_infrastructure_test PUBLIC bitprim-infrastructure)
 
@@ -787,92 +460,25 @@ _group_sources(bitprim_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
 
 #    TODO: Fer: chequear si hay nuevos tests en los makefiles (no Cmake)
   _add_tests(bitprim_infrastructure_test
-    address_tests
-    alert_payload_tests
-    alert_tests
-    authority_tests
-    base_10_tests
-    base_16_tests
-    base_58_tests
-    base_64_tests
-    base_85_tests
-    base58_tests
     binary_tests
-    bitcoin_uri_tests
-    chain_block_tests
-    message_block_tests
-    block_transactions_tests
-    checkpoint_tests
-    checksum_tests
     collection_tests
-    compact_block_tests
     data_tests
-    ec_private_tests
-    # ec_public_tests # no test cases
-    elliptic_curve_tests
-    encrypted_tests
+    # TODO: encrypted_tests ???
     endian_tests
-    endpoint_tests
-    fee_filter_tests
-    filter_add_tests
-    filter_clear_tests
-    filter_load_tests
-    get_address_tests
-    get_block_transactions_tests
-    get_blocks_tests
-    get_data_tests
-    get_headers_tests
-    # hash_number_tests
-    hash_tests
-    hd_private_tests
-    hd_public_tests
-    chain_header_tests
-    headers_tests
-    heading_tests
-    input_tests
-    inventory_tests
-    inventory_vector_tests
-    memory_pool_tests
-    merkle_block_tests
-    message_tests
-    mnemonic_tests
-    network_address_tests
-    not_found_tests
-    output_tests
-    parameter_tests
-    payment_address_tests
-    ping_tests
-    point_tests
-    pong_tests
-    prefilled_transaction_tests
-    printer_tests
-    pseudo_random_tests
-    reject_tests
-    # script_number_tests
-    script_tests
-    # send_compact_blocks_tests
-    send_headers_tests
+
+    # TODO: printer_tests ???
+
+    random_tests
     serializer_tests
-    stealth_address_tests
-    stealth_tests
     stream_tests
     thread_tests
-    chain_transaction_tests
-    message_transaction_tests
     unicode_istream_tests
     unicode_ostream_tests
     unicode_tests
-    uri_reader_tests
-    uri_tests
-    verack_tests
-    version_tests)
+    )
 
   if (WITH_PNG)
     _add_tests(bitprim_infrastructure_test png_tests)
-  endif()
-
-  if (WITH_QRENCODE)
-    _add_tests(bitprim_infrastructure_test qrcode_tests)
   endif()
 endif()
 
@@ -933,243 +539,113 @@ install(TARGETS bitprim-infrastructure EXPORT bitprim-infrastructure
 #)
 
 set(_bitprim_infrastructure_headers
-    bitcoin/bitcoin/multi_crypto_support.hpp
-    bitcoin/bitcoin/compat.h
-    bitcoin/bitcoin/compat.hpp
-    bitcoin/bitcoin/constants.hpp
-    bitcoin/bitcoin/define.hpp
-    bitcoin/bitcoin/error.hpp
-    bitcoin/bitcoin/handlers.hpp
-    bitcoin/bitcoin/version.hpp
+    # bitcoin/infrastructure/multi_crypto_support.hpp
+    bitcoin/infrastructure/compat.h
+    bitcoin/infrastructure/compat.hpp
+    bitcoin/infrastructure/constants.hpp
+    bitcoin/infrastructure/define.hpp
+    bitcoin/infrastructure/error.hpp
+    bitcoin/infrastructure/handlers.hpp
+    bitcoin/infrastructure/version.hpp
 
-    bitcoin/bitcoin/chain/block.hpp
-    bitcoin/bitcoin/chain/chain_state.hpp
-    bitcoin/bitcoin/chain/compact.hpp    
-    bitcoin/bitcoin/chain/header.hpp
-    bitcoin/bitcoin/chain/history.hpp
-    bitcoin/bitcoin/chain/input.hpp
-    bitcoin/bitcoin/chain/input_point.hpp
-    bitcoin/bitcoin/chain/output.hpp
-    bitcoin/bitcoin/chain/output_point.hpp
-    bitcoin/bitcoin/chain/point.hpp
+    bitcoin/infrastructure/impl/log/features/counter.ipp
+    bitcoin/infrastructure/impl/log/features/gauge.ipp
+    bitcoin/infrastructure/impl/log/features/metric.ipp
+    bitcoin/infrastructure/impl/log/features/rate.ipp
+    bitcoin/infrastructure/impl/log/features/timer.ipp
+
+
+    bitcoin/infrastructure/impl/utility/array_slice.ipp
+    bitcoin/infrastructure/impl/utility/collection.ipp
+    bitcoin/infrastructure/impl/utility/data.ipp
+    bitcoin/infrastructure/impl/utility/deserializer.ipp
+    bitcoin/infrastructure/impl/utility/endian.ipp
+    bitcoin/infrastructure/impl/utility/istream_reader.ipp
+    bitcoin/infrastructure/impl/utility/ostream_writer.ipp
+    bitcoin/infrastructure/impl/utility/pending.ipp    
+    bitcoin/infrastructure/impl/utility/resubscriber.ipp
+    bitcoin/infrastructure/impl/utility/serializer.ipp
+    bitcoin/infrastructure/impl/utility/subscriber.ipp
+    bitcoin/infrastructure/impl/utility/track.ipp
+
+    bitcoin/infrastructure/log/attributes.hpp
+    bitcoin/infrastructure/log/file_char_traits.hpp
+    bitcoin/infrastructure/log/file_collector.hpp
+    bitcoin/infrastructure/log/file_collector_repository.hpp
+    bitcoin/infrastructure/log/file_counter_formatter.hpp
+    bitcoin/infrastructure/log/rotable_file.hpp    
+    bitcoin/infrastructure/log/severity.hpp
+    bitcoin/infrastructure/log/sink.hpp
+    bitcoin/infrastructure/log/source.hpp
+    # bitcoin/infrastructure/log/statsd_sink.hpp
+    bitcoin/infrastructure/log/statsd_source.hpp
+    bitcoin/infrastructure/log/udp_client_sink.hpp
+
+    bitcoin/infrastructure/log/features/counter.hpp
+    bitcoin/infrastructure/log/features/gauge.hpp
+    bitcoin/infrastructure/log/features/metric.hpp
+    bitcoin/infrastructure/log/features/rate.hpp
+    bitcoin/infrastructure/log/features/timer.hpp
+
+    bitcoin/infrastructure/message/message_tools.hpp
+
+    bitcoin/infrastructure/unicode/console_streambuf.hpp
+    bitcoin/infrastructure/unicode/file_lock.hpp
+    bitcoin/infrastructure/unicode/ifstream.hpp
+    bitcoin/infrastructure/unicode/ofstream.hpp
+    bitcoin/infrastructure/unicode/unicode.hpp
+    bitcoin/infrastructure/unicode/unicode_istream.hpp
+    bitcoin/infrastructure/unicode/unicode_ostream.hpp
+    bitcoin/infrastructure/unicode/unicode_streambuf.hpp
+
+    bitcoin/infrastructure/utility/array_slice.hpp
+    bitcoin/infrastructure/utility/asio.hpp
+    bitcoin/infrastructure/utility/assert.hpp
+    bitcoin/infrastructure/utility/atomic.hpp
+    bitcoin/infrastructure/utility/binary.hpp
+    bitcoin/infrastructure/utility/collection.hpp
+    bitcoin/infrastructure/utility/color.hpp
+    bitcoin/infrastructure/utility/conditional_lock.hpp
+    bitcoin/infrastructure/utility/container_sink.hpp
+    bitcoin/infrastructure/utility/container_source.hpp
+    bitcoin/infrastructure/utility/data.hpp
+    bitcoin/infrastructure/utility/deadline.hpp
+    bitcoin/infrastructure/utility/decorator.hpp
+    bitcoin/infrastructure/utility/delegates.hpp
+    bitcoin/infrastructure/utility/deserializer.hpp
+    bitcoin/infrastructure/utility/dispatcher.hpp
+    bitcoin/infrastructure/utility/enable_shared_from_base.hpp
+    bitcoin/infrastructure/utility/endian.hpp
+    bitcoin/infrastructure/utility/exceptions.hpp
+    bitcoin/infrastructure/utility/flush_lock.hpp
+    bitcoin/infrastructure/utility/interprocess_lock.hpp
+    bitcoin/infrastructure/utility/istream_reader.hpp
+    bitcoin/infrastructure/utility/monitor.hpp
+    bitcoin/infrastructure/utility/noncopyable.hpp
+    bitcoin/infrastructure/utility/ostream_writer.hpp
+    bitcoin/infrastructure/utility/pending.hpp
+
+    bitcoin/infrastructure/utility/png.hpp
+    bitcoin/infrastructure/utility/prioritized_mutex.hpp
+
+    bitcoin/infrastructure/utility/random.hpp
+    bitcoin/infrastructure/utility/reader.hpp
+    bitcoin/infrastructure/utility/resubscriber.hpp
+    bitcoin/infrastructure/utility/scope_lock.hpp
+    bitcoin/infrastructure/utility/sequencer.hpp
+    bitcoin/infrastructure/utility/sequential_lock.hpp
+    bitcoin/infrastructure/utility/serializer.hpp
+    # bitcoin/infrastructure/utility/socket.hpp    
+    bitcoin/infrastructure/utility/string.hpp
+    bitcoin/infrastructure/utility/subscriber.hpp
+    bitcoin/infrastructure/utility/synchronizer.hpp
+    bitcoin/infrastructure/utility/thread.hpp
+    bitcoin/infrastructure/utility/threadpool.hpp
+    bitcoin/infrastructure/utility/timer.hpp
+    bitcoin/infrastructure/utility/track.hpp
+    bitcoin/infrastructure/utility/work.hpp
+    bitcoin/infrastructure/utility/writer.hpp
     
-    bitcoin/bitcoin/chain/point_iterator.hpp
-
-    bitcoin/bitcoin/chain/point_value.hpp
-    bitcoin/bitcoin/chain/points_value.hpp
-
-    bitcoin/bitcoin/chain/script.hpp
-    bitcoin/bitcoin/chain/stealth.hpp
-    bitcoin/bitcoin/chain/transaction.hpp
-    bitcoin/bitcoin/chain/witness.hpp
-
-    bitcoin/bitcoin/machine/interpreter.hpp
-    bitcoin/bitcoin/machine/number.hpp    
-    bitcoin/bitcoin/machine/opcode.hpp
-    bitcoin/bitcoin/machine/operation.hpp
-    bitcoin/bitcoin/machine/program.hpp
-    bitcoin/bitcoin/machine/rule_fork.hpp
-    bitcoin/bitcoin/machine/script_pattern.hpp
-    bitcoin/bitcoin/machine/sighash_algorithm.hpp
-    bitcoin/bitcoin/machine/script_version.hpp
-
-    bitcoin/bitcoin/config/authority.hpp
-    bitcoin/bitcoin/config/base16.hpp
-    bitcoin/bitcoin/config/base2.hpp
-    bitcoin/bitcoin/config/base58.hpp
-    bitcoin/bitcoin/config/base64.hpp
-    bitcoin/bitcoin/config/checkpoint.hpp
-    bitcoin/bitcoin/config/directory.hpp
-    bitcoin/bitcoin/config/endpoint.hpp
-    bitcoin/bitcoin/config/hash160.hpp
-    bitcoin/bitcoin/config/hash256.hpp
-    bitcoin/bitcoin/config/parameter.hpp
-    bitcoin/bitcoin/config/parser.hpp
-    bitcoin/bitcoin/config/printer.hpp
-    bitcoin/bitcoin/config/settings.hpp
-    bitcoin/bitcoin/config/sodium.hpp
-
-    bitcoin/bitcoin/formats/base_10.hpp
-    bitcoin/bitcoin/formats/base_16.hpp
-    bitcoin/bitcoin/formats/base_58.hpp
-    bitcoin/bitcoin/formats/base_64.hpp
-    bitcoin/bitcoin/formats/base_85.hpp
-
-    
-    bitcoin/bitcoin/impl/formats/base_16.ipp
-    bitcoin/bitcoin/impl/formats/base_58.ipp
-   
-    bitcoin/bitcoin/impl/math/checksum.ipp
-    bitcoin/bitcoin/impl/math/hash.ipp
-
-    bitcoin/bitcoin/impl/log/features/counter.ipp
-    bitcoin/bitcoin/impl/log/features/gauge.ipp
-    bitcoin/bitcoin/impl/log/features/metric.ipp
-    bitcoin/bitcoin/impl/log/features/rate.ipp
-    bitcoin/bitcoin/impl/log/features/timer.ipp
-
-    bitcoin/bitcoin/impl/machine/interpreter.ipp
-    bitcoin/bitcoin/impl/machine/number.ipp
-    bitcoin/bitcoin/impl/machine/operation.ipp
-    bitcoin/bitcoin/impl/machine/program.ipp
-
-    bitcoin/bitcoin/impl/utility/array_slice.ipp
-    bitcoin/bitcoin/impl/utility/collection.ipp
-    bitcoin/bitcoin/impl/utility/data.ipp
-    bitcoin/bitcoin/impl/utility/deserializer.ipp
-    bitcoin/bitcoin/impl/utility/endian.ipp
-    bitcoin/bitcoin/impl/utility/istream_reader.ipp
-    bitcoin/bitcoin/impl/utility/ostream_writer.ipp
-    bitcoin/bitcoin/impl/utility/pending.ipp    
-    bitcoin/bitcoin/impl/utility/resubscriber.ipp
-    bitcoin/bitcoin/impl/utility/serializer.ipp
-    bitcoin/bitcoin/impl/utility/subscriber.ipp
-    bitcoin/bitcoin/impl/utility/track.ipp
-
-    bitcoin/bitcoin/log/attributes.hpp
-    bitcoin/bitcoin/log/file_char_traits.hpp
-    bitcoin/bitcoin/log/file_collector.hpp
-    bitcoin/bitcoin/log/file_collector_repository.hpp
-    bitcoin/bitcoin/log/file_counter_formatter.hpp
-    bitcoin/bitcoin/log/rotable_file.hpp    
-    bitcoin/bitcoin/log/severity.hpp
-    bitcoin/bitcoin/log/sink.hpp
-    bitcoin/bitcoin/log/source.hpp
-    bitcoin/bitcoin/log/statsd_sink.hpp
-    bitcoin/bitcoin/log/statsd_source.hpp
-    bitcoin/bitcoin/log/udp_client_sink.hpp
-
-    bitcoin/bitcoin/log/features/counter.hpp
-    bitcoin/bitcoin/log/features/gauge.hpp
-    bitcoin/bitcoin/log/features/metric.hpp
-    bitcoin/bitcoin/log/features/rate.hpp
-    bitcoin/bitcoin/log/features/timer.hpp
-
-
-    bitcoin/bitcoin/math/checksum.hpp
-    bitcoin/bitcoin/math/crypto.hpp
-    bitcoin/bitcoin/math/elliptic_curve.hpp
-    bitcoin/bitcoin/math/hash.hpp
-    bitcoin/bitcoin/math/limits.hpp
-    bitcoin/bitcoin/math/stealth.hpp
-    bitcoin/bitcoin/math/uint256.hpp
-    
-    bitcoin/bitcoin/message/address.hpp
-    bitcoin/bitcoin/message/alert.hpp
-    bitcoin/bitcoin/message/alert_payload.hpp
-    bitcoin/bitcoin/message/block.hpp
-    bitcoin/bitcoin/message/block_transactions.hpp
-    bitcoin/bitcoin/message/compact_block.hpp
-    bitcoin/bitcoin/message/fee_filter.hpp
-    bitcoin/bitcoin/message/filter_add.hpp
-    bitcoin/bitcoin/message/filter_clear.hpp
-    bitcoin/bitcoin/message/filter_load.hpp
-    bitcoin/bitcoin/message/get_address.hpp
-    bitcoin/bitcoin/message/get_block_transactions.hpp
-    bitcoin/bitcoin/message/get_blocks.hpp
-    bitcoin/bitcoin/message/get_data.hpp
-    bitcoin/bitcoin/message/get_headers.hpp
-    bitcoin/bitcoin/message/header.hpp
-    bitcoin/bitcoin/message/headers.hpp
-    bitcoin/bitcoin/message/heading.hpp
-    bitcoin/bitcoin/message/inventory.hpp
-    bitcoin/bitcoin/message/inventory_vector.hpp
-    bitcoin/bitcoin/message/memory_pool.hpp
-    bitcoin/bitcoin/message/merkle_block.hpp
-    bitcoin/bitcoin/message/messages.hpp
-    bitcoin/bitcoin/message/network_address.hpp
-    bitcoin/bitcoin/message/not_found.hpp
-    bitcoin/bitcoin/message/ping.hpp
-    bitcoin/bitcoin/message/pong.hpp
-    bitcoin/bitcoin/message/prefilled_transaction.hpp
-    bitcoin/bitcoin/message/reject.hpp
-    bitcoin/bitcoin/message/send_compact.hpp
-    bitcoin/bitcoin/message/send_headers.hpp
-    bitcoin/bitcoin/message/transaction.hpp
-    bitcoin/bitcoin/message/verack.hpp
-    bitcoin/bitcoin/message/version.hpp
-
-    bitcoin/bitcoin/unicode/console_streambuf.hpp
-    bitcoin/bitcoin/unicode/file_lock.hpp
-    bitcoin/bitcoin/unicode/ifstream.hpp
-    bitcoin/bitcoin/unicode/ofstream.hpp
-    bitcoin/bitcoin/unicode/unicode.hpp
-    bitcoin/bitcoin/unicode/unicode_istream.hpp
-    bitcoin/bitcoin/unicode/unicode_ostream.hpp
-    bitcoin/bitcoin/unicode/unicode_streambuf.hpp
-
-    bitcoin/bitcoin/utility/array_slice.hpp
-    bitcoin/bitcoin/utility/asio.hpp
-    bitcoin/bitcoin/utility/assert.hpp
-    bitcoin/bitcoin/utility/atomic.hpp
-    bitcoin/bitcoin/utility/binary.hpp
-    bitcoin/bitcoin/utility/collection.hpp
-    bitcoin/bitcoin/utility/color.hpp
-    bitcoin/bitcoin/utility/conditional_lock.hpp
-    bitcoin/bitcoin/utility/container_sink.hpp
-    bitcoin/bitcoin/utility/container_source.hpp
-    bitcoin/bitcoin/utility/data.hpp
-    bitcoin/bitcoin/utility/deadline.hpp
-    bitcoin/bitcoin/utility/decorator.hpp
-    bitcoin/bitcoin/utility/delegates.hpp
-    bitcoin/bitcoin/utility/deserializer.hpp
-    bitcoin/bitcoin/utility/dispatcher.hpp
-    bitcoin/bitcoin/utility/enable_shared_from_base.hpp
-    bitcoin/bitcoin/utility/endian.hpp
-    bitcoin/bitcoin/utility/exceptions.hpp
-    bitcoin/bitcoin/utility/flush_lock.hpp
-    bitcoin/bitcoin/utility/interprocess_lock.hpp
-    bitcoin/bitcoin/utility/istream_reader.hpp
-    bitcoin/bitcoin/utility/monitor.hpp
-    bitcoin/bitcoin/utility/noncopyable.hpp
-    bitcoin/bitcoin/utility/ostream_writer.hpp
-    bitcoin/bitcoin/utility/pending.hpp
-
-    bitcoin/bitcoin/utility/png.hpp
-    bitcoin/bitcoin/utility/prioritized_mutex.hpp
-
-    bitcoin/bitcoin/utility/pseudo_random.hpp
-    bitcoin/bitcoin/utility/reader.hpp
-    bitcoin/bitcoin/utility/resubscriber.hpp
-    bitcoin/bitcoin/utility/scope_lock.hpp
-    bitcoin/bitcoin/utility/sequencer.hpp
-    bitcoin/bitcoin/utility/sequential_lock.hpp
-    bitcoin/bitcoin/utility/serializer.hpp
-    bitcoin/bitcoin/utility/socket.hpp    
-    bitcoin/bitcoin/utility/string.hpp
-    bitcoin/bitcoin/utility/subscriber.hpp
-    bitcoin/bitcoin/utility/synchronizer.hpp
-    bitcoin/bitcoin/utility/thread.hpp
-    bitcoin/bitcoin/utility/threadpool.hpp
-    bitcoin/bitcoin/utility/timer.hpp
-    bitcoin/bitcoin/utility/track.hpp
-    bitcoin/bitcoin/utility/work.hpp
-    bitcoin/bitcoin/utility/writer.hpp
-    
-    bitcoin/bitcoin/wallet/bitcoin_uri.hpp
-    
-    bitcoin/bitcoin/wallet/cashaddr.hpp
-
-    bitcoin/bitcoin/wallet/dictionary.hpp
-    bitcoin/bitcoin/wallet/ec_private.hpp
-    bitcoin/bitcoin/wallet/ec_public.hpp
-    bitcoin/bitcoin/wallet/ek_private.hpp
-    bitcoin/bitcoin/wallet/ek_public.hpp
-    bitcoin/bitcoin/wallet/ek_token.hpp
-    bitcoin/bitcoin/wallet/encrypted_keys.hpp
-    bitcoin/bitcoin/wallet/hd_private.hpp
-    bitcoin/bitcoin/wallet/hd_public.hpp
-    bitcoin/bitcoin/wallet/message.hpp
-    bitcoin/bitcoin/wallet/mini_keys.hpp
-    bitcoin/bitcoin/wallet/mnemonic.hpp
-    bitcoin/bitcoin/wallet/payment_address.hpp
-    bitcoin/bitcoin/wallet/qrcode.hpp
-    bitcoin/bitcoin/wallet/select_outputs.hpp
-    bitcoin/bitcoin/wallet/stealth_address.hpp
-    bitcoin/bitcoin/wallet/stealth_receiver.hpp
-    bitcoin/bitcoin/wallet/stealth_sender.hpp
-    bitcoin/bitcoin/wallet/uri.hpp
-    bitcoin/bitcoin/wallet/uri_reader.hpp
     bitcoin/bitcoin.hpp
     )
 
