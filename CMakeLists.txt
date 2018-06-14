@@ -19,9 +19,9 @@
 
 cmake_minimum_required(VERSION 3.4)
 
-# bitprim-core
+# bitprim-infrastructure
 #==============================================================================
-project(bitprim-core
+project(bitprim-infrastructure
   VERSION 0.11.0
   LANGUAGES CXX C)
 
@@ -338,14 +338,14 @@ endif()
 # Build
 #==============================================================================
 
-# src/bitprim-core.la => ${libdir}
+# src/bitprim-infrastructure.la => ${libdir}
 #------------------------------------------------------------------------------
 set(MODE STATIC)
 if (ENABLE_SHARED)
   set(MODE SHARED)
 endif()
 
-set(bitprim_core_sources 
+set(bitprim_infrastructure_sources 
         src/chain/block.cpp
         src/chain/chain_state.cpp
         src/chain/compact.cpp
@@ -538,62 +538,62 @@ set(bitprim_core_sources
         src/wallet/uri.cpp)
 
 if (${CURRENCY} STREQUAL "BCH")
-    set(bitprim_core_sources ${bitprim_core_sources}         
+    set(bitprim_infrastructure_sources ${bitprim_infrastructure_sources}         
       src/wallet/cashaddr.cpp)
 endif()
 
 
 # if (WITH_LITECOIN)
 if (${CURRENCY} STREQUAL "LTC")
-    set(bitprim_core_sources ${bitprim_core_sources}         
+    set(bitprim_infrastructure_sources ${bitprim_infrastructure_sources}         
       src/math/external/scrypt.cpp
       src/math/external/scrypt-sse2.cpp)
 endif()
 
-add_library(bitprim-core ${MODE} ${bitprim_core_sources})
+add_library(bitprim-infrastructure ${MODE} ${bitprim_infrastructure_sources})
 
 if (ENABLE_POSITION_INDEPENDENT_CODE)
-    set_property(TARGET bitprim-core PROPERTY POSITION_INDEPENDENT_CODE ON)
+    set_property(TARGET bitprim-infrastructure PROPERTY POSITION_INDEPENDENT_CODE ON)
 endif(ENABLE_POSITION_INDEPENDENT_CODE)
 
 
 
-#set_target_properties(bitprim-core PROPERTIES CXX_VISIBILITY_PRESET hidden)
-#set_target_properties(bitprim-core PROPERTIES CXX_VISIBILITY_PRESET internal)
+#set_target_properties(bitprim-infrastructure PROPERTIES CXX_VISIBILITY_PRESET hidden)
+#set_target_properties(bitprim-infrastructure PROPERTIES CXX_VISIBILITY_PRESET internal)
 
 #-fvisibility=default|internal|hidden|protected
 
-# add_library(bitprim-core ${MODE}
+# add_library(bitprim-infrastructure ${MODE}
 #        src/wallet/uri.cpp)
 
-target_include_directories(bitprim-core PUBLIC
+target_include_directories(bitprim-infrastructure PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
   
 if (NOT ENABLE_SHARED)
-    target_compile_definitions(bitprim-core PUBLIC -DBI_STATIC) #TODO(fernando): manage with Conan????
+    target_compile_definitions(bitprim-infrastructure PUBLIC -DBI_STATIC) #TODO(fernando): manage with Conan????
 endif()
 
-target_compile_definitions(bitprim-core PUBLIC -DBITPRIM_BUILD_NUMBER="\\"${BITPRIM_BUILD_NUMBER}\\"") #TODO(fernando): manage with Conan????
+target_compile_definitions(bitprim-infrastructure PUBLIC -DBITPRIM_BUILD_NUMBER="\\"${BITPRIM_BUILD_NUMBER}\\"") #TODO(fernando): manage with Conan????
 
-target_include_directories(bitprim-core SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(bitprim-infrastructure SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
 
 # if (WITH_LITECOIN)
 if (${CURRENCY} STREQUAL "LTC")
-  target_include_directories(bitprim-core SYSTEM PUBLIC ${OPENSSL_INCLUDE_DIR})
+  target_include_directories(bitprim-infrastructure SYSTEM PUBLIC ${OPENSSL_INCLUDE_DIR})
 endif()
 
 if (NOT NO_CONAN_AT_ALL)
-  target_link_libraries(bitprim-core PUBLIC ${CONAN_LIBS})
+  target_link_libraries(bitprim-infrastructure PUBLIC ${CONAN_LIBS})
 else()
   if (MSVC)
-    target_link_libraries(bitprim-core PUBLIC
+    target_link_libraries(bitprim-infrastructure PUBLIC
       ${Boost_ATOMIC_LIBRARY}
       ${Boost_LOG_SETUP_LIBRARY}
     )
   endif()
 
-  target_link_libraries(bitprim-core PUBLIC
+  target_link_libraries(bitprim-infrastructure PUBLIC
     ${Boost_CHRONO_LIBRARY}
     ${Boost_DATE_TIME_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}
@@ -607,23 +607,23 @@ else()
   )
 endif()
 
-target_link_libraries(bitprim-core PUBLIC ${CMAKE_THREAD_LIBS_INIT})  #TODO(fernando): manage with Conan????
+target_link_libraries(bitprim-infrastructure PUBLIC ${CMAKE_THREAD_LIBS_INIT})  #TODO(fernando): manage with Conan????
 
 # if (NO_CONAN_AT_ALL)
     if (MINGW) #(WIN32)
-        target_link_libraries(bitprim-core PUBLIC ws2_32 wsock32)
+        target_link_libraries(bitprim-infrastructure PUBLIC ws2_32 wsock32)
     endif()
 # endif()
 
 if (WITH_PNG)
     if (NO_CONAN_AT_ALL)
-        target_link_libraries(bitprim-core PUBLIC png)
+        target_link_libraries(bitprim-infrastructure PUBLIC png)
     endif (NO_CONAN_AT_ALL)
 endif()
 
 # if (WITH_LITECOIN)
 if (${CURRENCY} STREQUAL "LTC")
-  target_link_libraries(bitprim-core PUBLIC ${OPENSSL_CRYPTO_LIBRARY})  #TODO(fernando): manage with Conan
+  target_link_libraries(bitprim-infrastructure PUBLIC ${OPENSSL_CRYPTO_LIBRARY})  #TODO(fernando): manage with Conan
 
   # OPENSSL_CRYPTO_LIBRARY
   # OPENSSL_SSL_LIBRARY
@@ -631,10 +631,10 @@ if (${CURRENCY} STREQUAL "LTC")
 endif()
 
 if (NOT USE_CONAN)
-  target_link_libraries(bitprim-core PUBLIC secp256k1)
+  target_link_libraries(bitprim-infrastructure PUBLIC secp256k1)
 endif()
 
-_group_sources(bitprim-core "${CMAKE_CURRENT_LIST_DIR}")
+_group_sources(bitprim-infrastructure "${CMAKE_CURRENT_LIST_DIR}")
 
 # Tests
 #==============================================================================
@@ -643,11 +643,11 @@ if (WITH_TESTS OR WITH_TESTS_NEW)
   enable_testing()
 endif()
 
-# local: test/bitprim_core_test
+# local: test/bitprim_infrastructure_test
 #------------------------------------------------------------------------------
 if (WITH_TESTS)
 
-  add_executable(bitprim_core_test
+  add_executable(bitprim_infrastructure_test
         test/chain/block.cpp
         test/chain/header.cpp
         test/chain/input.cpp
@@ -753,7 +753,7 @@ if (WITH_TESTS)
 
 # Simplified Test Project for testing Packaging purposes
 
-  # add_executable(bitprim_core_test
+  # add_executable(bitprim_infrastructure_test
   # test/main.cpp
   # # test/math/big_number.cpp
   # # test/math/big_number.hppcompact
@@ -781,12 +781,12 @@ if (WITH_TESTS)
   # test/wallet/uri.cpp
   # test/wallet/uri_reader.cpp)
 
-    target_link_libraries(bitprim_core_test PUBLIC bitprim-core)
+    target_link_libraries(bitprim_infrastructure_test PUBLIC bitprim-infrastructure)
 
-_group_sources(bitprim_core_test "${CMAKE_CURRENT_LIST_DIR}/test")
+_group_sources(bitprim_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
 
 #    TODO: Fer: chequear si hay nuevos tests en los makefiles (no Cmake)
-  _add_tests(bitprim_core_test
+  _add_tests(bitprim_infrastructure_test
     address_tests
     alert_payload_tests
     alert_tests
@@ -868,11 +868,11 @@ _group_sources(bitprim_core_test "${CMAKE_CURRENT_LIST_DIR}/test")
     version_tests)
 
   if (WITH_PNG)
-    _add_tests(bitprim_core_test png_tests)
+    _add_tests(bitprim_infrastructure_test png_tests)
   endif()
 
   if (WITH_QRENCODE)
-    _add_tests(bitprim_core_test qrcode_tests)
+    _add_tests(bitprim_infrastructure_test qrcode_tests)
   endif()
 endif()
 
@@ -882,20 +882,20 @@ if (WITH_TESTS_NEW)
       COMMAND ${CMAKE_CTEST_COMMAND} -C Debug --output-on-failure -R "test.+"
       COMMENT "Build and run all the unit tests.")
 
-  add_executable(bitprim_core_test_new
+  add_executable(bitprim_infrastructure_test_new
           test_new/main.cpp
   )
 
-  target_link_libraries(bitprim_core_test_new PUBLIC bitprim-core)
+  target_link_libraries(bitprim_infrastructure_test_new PUBLIC bitprim-infrastructure)
 
-  # _group_sources(bitprim_core_test_new "${CMAKE_CURRENT_LIST_DIR}/test_new")
+  # _group_sources(bitprim_infrastructure_test_new "${CMAKE_CURRENT_LIST_DIR}/test_new")
 
-  add_test(NAME test.new_tests COMMAND bitprim_core_test_new)
+  add_test(NAME test.new_tests COMMAND bitprim_infrastructure_test_new)
 
   add_dependencies(testsfer test.new_tests)
 
 #    add_test(
-#            NAME test.core.new_tests
+#            NAME test.infrastructure.new_tests
 #            COMMAND ${target}
 #            --run_test=${_test_name}
 #            --show_progress=no
@@ -907,32 +907,32 @@ endif()
 
 # Examples
 #==============================================================================
-# local: examples/bitprim_core_examples
+# local: examples/bitprim_infrastructure_examples
 #------------------------------------------------------------------------------
 if (WITH_EXAMPLES)
-  add_executable(bitprim_core_examples
+  add_executable(bitprim_infrastructure_examples
     examples/main.cpp)
 
 
-  target_link_libraries(bitprim_core_examples PUBLIC bitprim-core)
+  target_link_libraries(bitprim_infrastructure_examples PUBLIC bitprim-infrastructure)
 
-  _group_sources(bitprim_core_examples "${CMAKE_CURRENT_LIST_DIR}/examples")
+  _group_sources(bitprim_infrastructure_examples "${CMAKE_CURRENT_LIST_DIR}/examples")
 endif()
 
 # Install
 #==============================================================================
-install(TARGETS bitprim-core EXPORT bitprim-core
+install(TARGETS bitprim-infrastructure EXPORT bitprim-infrastructure
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
     INCLUDES DESTINATION include
 )
 
-#install(EXPORT bitprim-coreTargets
+#install(EXPORT bitprim-infrastructureTargets
 #
 #)
 
-set(_bitprim_core_headers
+set(_bitprim_infrastructure_headers
     bitcoin/bitcoin/multi_crypto_support.hpp
     bitcoin/bitcoin/compat.h
     bitcoin/bitcoin/compat.hpp
@@ -1173,7 +1173,7 @@ set(_bitprim_core_headers
     bitcoin/bitcoin.hpp
     )
 
-foreach (_header ${_bitprim_core_headers})
+foreach (_header ${_bitprim_infrastructure_headers})
   get_filename_component(_directory "${_header}" DIRECTORY)
   install(FILES "include/${_header}" DESTINATION "include/${_directory}")
 endforeach()
@@ -1182,9 +1182,9 @@ endforeach()
 #==============================================================================
 include(CMakePackageConfigHelpers)
 
-export(EXPORT bitprim-core
-  FILE "${CMAKE_CURRENT_BINARY_DIR}/bitprim-coreTargets.cmake")
-export(PACKAGE bitprim-core)
+export(EXPORT bitprim-infrastructure
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/bitprim-infrastructureTargets.cmake")
+export(PACKAGE bitprim-infrastructure)
 
 if (UNIX)
   set(_config_package_location "lib/cmake")
@@ -1192,21 +1192,21 @@ elseif (WIN32)
   set(_config_package_location "cmake")
 endif()
 
-install(EXPORT bitprim-core
-  FILE bitprim-coreTargets.cmake
+install(EXPORT bitprim-infrastructure
+  FILE bitprim-infrastructureTargets.cmake
   DESTINATION ${_config_package_location})
 
-configure_file(bitprim-coreConfig.cmake.in
-  "${CMAKE_CURRENT_BINARY_DIR}/bitprim-coreConfig.cmake"
+configure_file(bitprim-infrastructureConfig.cmake.in
+  "${CMAKE_CURRENT_BINARY_DIR}/bitprim-infrastructureConfig.cmake"
   @ONLY)
 
 write_basic_package_version_file(
-  "${CMAKE_CURRENT_BINARY_DIR}/bitprim-coreConfigVersion.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/bitprim-infrastructureConfigVersion.cmake"
   VERSION ${PROJECT_VERSION}
   COMPATIBILITY AnyNewerVersion)
 
 install(
   FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/bitprim-coreConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/bitprim-coreConfigVersion.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/bitprim-infrastructureConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/bitprim-infrastructureConfigVersion.cmake"
   DESTINATION ${_config_package_location})

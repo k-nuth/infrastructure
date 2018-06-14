@@ -1,6 +1,6 @@
-# Bitprim Core <a target="_blank" href="http://semver.org">![Version][badge.version]</a> <a target="_blank" href="https://travis-ci.org/bitprim/bitprim-core">![Travis status][badge.Travis]</a> <a target="_blank" href="https://ci.appveyor.com/project/bitprim/bitprim-core">![Appveyor status][badge.Appveyor]</a> <a target="_blank" href="https://gitter.im/bitprim/Lobby">![Gitter Chat][badge.Gitter]</a>
+# Bitprim Infrastructure <a target="_blank" href="http://semver.org">![Version][badge.version]</a> <a target="_blank" href="https://travis-ci.org/bitprim/bitprim-infrastructure">![Travis status][badge.Travis]</a> <a target="_blank" href="https://ci.appveyor.com/project/bitprim/bitprim-infrastructure">![Appveyor status][badge.Appveyor]</a> <a target="_blank" href="https://gitter.im/bitprim/Lobby">![Gitter Chat][badge.Gitter]</a>
 
-> Core functionality
+> Infrastructure functionality
 
 ## Installation
 
@@ -53,10 +53,10 @@ $ sudo ln -s /usr/local/bin/cmake /usr/bin/cmake
 
 Next install [bitprim/secp256k1](https://github.com/bitprim/secp256k1)
 
-Finally, install bitprim-core:
+Finally, install bitprim-infrastructure:
 ```sh
-$ git clone https://github.com/bitprim/bitprim-core
-$ cd bitprim-core
+$ git clone https://github.com/bitprim/bitprim-infrastructure
+$ cd bitprim-infrastructure
 $ mkdir build
 $ cd build
 $ cmake .. -G "Unix Makefiles" -DWITH_TESTS=OFF -DWITH_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-std=c++11"
@@ -64,7 +64,7 @@ $ make
 $ sudo make install
 $ sudo ldconfig
 ```
-Bitprim-core is now installed in `/usr/local/`.
+Bitprim-infrastructure is now installed in `/usr/local/`.
 
 ### Macintosh
 
@@ -104,8 +104,8 @@ Next install [bitprim/secp256k1](https://github.com/bitprim/secp256k1)
 
 Finally install bitprim:
 ```sh
-$ git clone https://github.com/bitprim/bitprim-core
-$ cd bitprim-core
+$ git clone https://github.com/bitprim/bitprim-infrastructure
+$ cd bitprim-infrastructure
 $ mkdir build
 $ cd build
 $ cmake .. -DWITH_TESTS=OFF -DWITH_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-std=c++11"
@@ -131,8 +131,8 @@ Next install [bitprim/secp256k1](https://github.com/bitprim/secp256k1)
 
 Finally, install bitprim:
 ```sh
-$ git clone https://github.com/bitprim/bitprim-core
-$ cd bitprim-core
+$ git clone https://github.com/bitprim/bitprim-infrastructure
+$ cd bitprim-infrastructure
 $ mkdir build
 $ cd build
 $ cmake .. -DWITH_TESTS=OFF -DWITH_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-std=c++11"
@@ -147,10 +147,10 @@ TODO:Windows Install
 ```
 
 <!-- Links -->
-[badge.Appveyor]: https://ci.appveyor.com/api/projects/status/github/bitprim/bitprim-core?svg=true&branch=dev
+[badge.Appveyor]: https://ci.appveyor.com/api/projects/status/github/bitprim/bitprim-infrastructure?svg=true&branch=dev
 [badge.Gitter]: https://img.shields.io/badge/gitter-join%20chat-blue.svg
-[badge.Travis]: https://travis-ci.org/bitprim/bitprim-core.svg?branch=master
-[badge.version]: https://badge.fury.io/gh/bitprim%2Fbitprim-core.svg
+[badge.Travis]: https://travis-ci.org/bitprim/bitprim-infrastructure.svg?branch=master
+[badge.version]: https://badge.fury.io/gh/bitprim%2Fbitprim-infrastructure.svg
 
 [CMake]: http://www.cmake.org
 [Doxygen]: http://www.doxygen.org
