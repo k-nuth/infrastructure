@@ -21,7 +21,7 @@
 #include <stdexcept>
 #include <vector>
 #include <boost/test/unit_test.hpp>
-#include <bitcoin/bitcoin.hpp>
+#include <bitcoin/infrastructure.hpp>
 
 using namespace bc;
 

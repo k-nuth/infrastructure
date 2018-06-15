@@ -21,7 +21,7 @@
 
 #include <map>
 #include <vector>
-#include <bitcoin/bitcoin.hpp>
+#include <bitcoin/infrastructure.hpp>
 
 using namespace bc;
 

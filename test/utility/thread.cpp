@@ -19,7 +19,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <stdexcept>
-#include <bitcoin/bitcoin.hpp>
+#include <bitcoin/infrastructure.hpp>
 
 //#ifdef _MSC_VER
 #ifdef BOOST_WINDOWS_API

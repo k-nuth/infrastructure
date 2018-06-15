@@ -4,8 +4,8 @@
 //        GENERATED SOURCE CODE, DO NOT EDIT EXCEPT EXPERIMENTALLY
 //
 ///////////////////////////////////////////////////////////////////////////////
-#ifndef LIBBITCOIN_INFRASTRUCTURE_VERSION_HPP
-#define LIBBITCOIN_INFRASTRUCTURE_VERSION_HPP
+#ifndef LIBBITCOIN_INFRASTRUCTURE_VERSION_HPP_
+#define LIBBITCOIN_INFRASTRUCTURE_VERSION_HPP_
 
 /**
  * The semantic version of this repository as: [major].[minor].[patch]

@@ -441,11 +441,10 @@ if (WITH_TESTS)
         test/utility/data.cpp
         test/utility/endian.cpp
         test/utility/png.cpp
-        test/utility/random.cpp
+        test/utility/pseudo_random.cpp
         test/utility/serializer.cpp
         test/utility/stream.cpp
         test/utility/thread.cpp
-        # test/utility/variable_uint_size.cpp
     )
 
 # Simplified Test Project for testing Packaging purposes
@@ -468,7 +467,8 @@ _group_sources(bitprim_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
 
     # TODO: printer_tests ???
 
-    random_tests
+    # random_tests
+    pseudo_random_tests
     serializer_tests
     stream_tests
     thread_tests
