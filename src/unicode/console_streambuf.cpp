@@ -72,12 +72,12 @@ console_streambuf::console_streambuf(
 {
 }
 
+#ifdef _MSC_VER
 console_streambuf::~console_streambuf()
 {
-#ifdef _MSC_VER
     delete[] buffer_;
-#endif
 }
+#endif //_MSC_VER
 
 std::streamsize console_streambuf::xsgetn(wchar_t* buffer,
     std::streamsize size)

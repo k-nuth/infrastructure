@@ -49,10 +49,17 @@ binary::binary()
 {
 }
 
-binary::binary(const binary& other)
-  : blocks_(other.blocks_), final_block_excess_(other.final_block_excess_)
-{
-}
+// binary::binary(const binary& other)
+//   : blocks_(other.blocks_), final_block_excess_(other.final_block_excess_)
+// {
+// }
+
+// binary& binary::operator=(const binary& other)
+// {
+//     blocks_ = other.blocks_;
+//     final_block_excess_ = other.final_block_excess_;
+//     return *this;
+// }
 
 binary::binary(const std::string& bit_string)
   : binary()
@@ -266,13 +273,6 @@ bool binary::operator==(const binary& other) const
 bool binary::operator!=(const binary& other) const
 {
     return !(*this == other);
-}
-
-binary& binary::operator=(const binary& other)
-{
-    blocks_ = other.blocks_;
-    final_block_excess_ = other.final_block_excess_;
-    return *this;
 }
 
 std::istream& operator>>(std::istream& in, binary& to)

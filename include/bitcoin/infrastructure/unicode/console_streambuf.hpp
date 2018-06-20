@@ -50,7 +50,11 @@ protected:
     /**
      * Delete stream buffer.
      */
+#ifdef _MSC_VER
     virtual ~console_streambuf();
+#else
+    virtual ~console_streambuf() = default;
+#endif
 
     /**
      * Implement alternate console read.

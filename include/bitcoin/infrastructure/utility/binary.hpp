@@ -37,7 +37,10 @@ public:
     static bool is_base2(const std::string& text);
 
     binary();
-    binary(const binary& other);
+    // binary(const binary& other); //fernando: it is trivial
+
+    binary& operator=(const binary& other); //fernando: it is trivial
+
     binary(const std::string& bit_string);
     binary(size_type size, uint32_t number);
     binary(size_type size, data_slice blocks);
@@ -62,7 +65,6 @@ public:
     bool operator<(const binary& other) const;
     bool operator==(const binary& other) const;
     bool operator!=(const binary& other) const;
-    binary& operator=(const binary& other);
     friend std::istream& operator>>(std::istream& in, binary& to);
     friend std::ostream& operator<<(std::ostream& out, const binary& of);
 

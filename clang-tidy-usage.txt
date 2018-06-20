@@ -89,3 +89,5 @@ modernize-loop-convert:
 
 Chequear:
     /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,modernize-pass-by-value' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
+    /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,modernize-use-default-member-init' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/    
+    /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,modernize-use-emplace' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/

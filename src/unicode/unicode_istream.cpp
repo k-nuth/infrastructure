@@ -34,11 +34,11 @@ unicode_istream::unicode_istream(std::istream& narrow_stream,
 {
 }
 
+#ifdef _MSC_VER
 unicode_istream::~unicode_istream()
 {
-#ifdef _MSC_VER
     delete rdbuf();
-#endif
 }
+#endif
 
 } // namespace libbitcoin
