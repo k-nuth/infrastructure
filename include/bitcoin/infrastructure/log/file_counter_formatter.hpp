@@ -31,7 +31,7 @@ namespace log {
 class BI_API file_counter_formatter
 {
 public:
-    typedef boost::filesystem::path::string_type path_string_type;
+    using path_string_type = boost::filesystem::path::string_type;
 
 public:
     //! Initializing constructor

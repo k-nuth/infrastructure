@@ -30,7 +30,7 @@ namespace libbitcoin {
 class BI_API scope_lock
 {
 public:
-    typedef std::shared_ptr<scope_lock> ptr;
+    using ptr = std::shared_ptr<scope_lock>;
 
     /// Lock using the specified mutex reference.
     scope_lock(shared_mutex& mutex);

@@ -34,8 +34,8 @@ class sequencer
     /*, track<sequencer>*/
 {
 public:
-    typedef std::shared_ptr<sequencer> ptr;
-    typedef std::function<void()> action;
+    using ptr = std::shared_ptr<sequencer>;
+    using action = std::function<void ()>;
 
     sequencer(asio::service& service);
     virtual ~sequencer();

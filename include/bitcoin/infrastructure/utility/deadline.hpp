@@ -43,8 +43,8 @@ class BI_API deadline
     /*, track<deadline>*/
 {
 public:
-    typedef std::shared_ptr<deadline> ptr;
-    typedef std::function<void(const code&)> handler;
+    using ptr = std::shared_ptr<deadline>;
+    using handler = std::function<void (const code &)>;
 
     /**
      * Construct a deadline timer with a zero duration.

@@ -31,7 +31,7 @@ namespace libbitcoin {
 class BI_API prioritized_mutex
 {
 public:
-    typedef std::shared_ptr<prioritized_mutex> ptr;
+    using ptr = std::shared_ptr<prioritized_mutex>;
 
     prioritized_mutex(bool prioritize=true);
 

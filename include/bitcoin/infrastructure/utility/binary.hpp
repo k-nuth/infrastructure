@@ -29,8 +29,8 @@ namespace libbitcoin {
 class BI_API binary
 {
 public:
-    typedef uint8_t block;
-    typedef std::size_t size_type;
+    using block = uint8_t;
+    using size_type = std::size_t;
 
     static BI_CONSTEXPR size_type bits_per_block = byte_bits;
     static size_type blocks_size(size_type bit_size);

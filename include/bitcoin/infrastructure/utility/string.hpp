@@ -25,7 +25,7 @@
 
 namespace libbitcoin {
 
-typedef std::vector<std::string> string_list;
+using string_list = std::vector<std::string>;
 
 /**
  * Join a list of strings into a single string, in order.

@@ -43,12 +43,12 @@ struct byte_array_parts
 };
 
 // Define arbitrary byte storage types.
-typedef byte_array<1> one_byte;
-typedef array_slice<uint8_t> data_slice;
-typedef std::vector<uint8_t> data_chunk;
-typedef std::queue<data_chunk> data_queue;
-typedef std::vector<data_chunk> data_stack;
-typedef std::initializer_list<data_slice> loaf;
+using one_byte = byte_array<1>;
+using data_slice = array_slice<uint8_t>;
+using data_chunk = std::vector<uint8_t>;
+using data_queue = std::queue<data_chunk>;
+using data_stack = std::vector<data_chunk>;
+using loaf = std::initializer_list<data_slice>;
 
 /**
  * Create a single byte arrray with an initial value.

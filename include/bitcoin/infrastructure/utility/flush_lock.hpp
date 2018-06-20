@@ -31,7 +31,7 @@ namespace libbitcoin {
 class BI_API flush_lock
 {
 public:
-    typedef boost::filesystem::path path;
+    using path = boost::filesystem::path;
 
     flush_lock(const path& file);
 

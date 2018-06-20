@@ -127,7 +127,7 @@ public:
     }
 
 private:
-    typedef typename std::decay<Handler>::type decay_handler;
+    using decay_handler = typename std::decay<Handler>::type;
 
     decay_handler handler_;
     const std::string name_;

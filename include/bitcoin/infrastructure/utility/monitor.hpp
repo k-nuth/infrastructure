@@ -35,8 +35,8 @@ namespace libbitcoin {
 class BI_API monitor
 {
 public:
-    typedef std::atomic<size_t> count;
-    typedef std::shared_ptr<count> count_ptr;
+    using count = std::atomic<size_t>;
+    using count_ptr = std::shared_ptr<count>;
 
     monitor(count_ptr counter, std::string&& name);
     virtual ~monitor();

@@ -56,8 +56,8 @@ using namespace boost::posix_time;
     << CHANNEL_FORMATTER << " " \
     << MESSAGE_FORMATTER
 
-typedef synchronous_sink<text_file_backend> text_file_sink;
-typedef synchronous_sink<text_ostream_backend> text_stream_sink;
+using text_file_sink = synchronous_sink<text_file_backend>;
+using text_stream_sink = synchronous_sink<text_ostream_backend>;
 
 static const auto base_filter =
     has_attr(attributes::channel) &&

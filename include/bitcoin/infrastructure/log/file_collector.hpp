@@ -43,11 +43,10 @@ namespace log {
 class BI_API file_collector_repository;
 
 //! The string type compatible with the universal path type
-typedef boost::filesystem::path::string_type path_string_type;
+using path_string_type = boost::filesystem::path::string_type;
 
 //! Type of the hook used for sequencing file collectors
-typedef boost::intrusive::list_base_hook<boost::intrusive::link_mode<
-    boost::intrusive::safe_link>> file_collector_hook;
+using file_collector_hook = boost::intrusive::list_base_hook<boost::intrusive::link_mode<boost::intrusive::safe_link> >;
 
 class BI_API file_collector :
     public boost::log::sinks::file::collector,
@@ -86,7 +85,7 @@ private:
         boost::filesystem::path path;
     };
     //! A list of the stored files
-    typedef std::list<file_info> file_list;
+    using file_list = std::list<file_info>;
 
 private:
     //! Makes relative path absolute with respect to the base path

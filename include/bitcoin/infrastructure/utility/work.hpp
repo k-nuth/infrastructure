@@ -51,7 +51,7 @@ class BI_API work
   : noncopyable
 {
 public:
-    typedef std::shared_ptr<work> ptr;
+    using ptr = std::shared_ptr<work>;
 
     /// Create an instance.
     work(threadpool& pool, const std::string& name);

@@ -1,0 +1,45 @@
+export PATH=/usr/local/Cellar/llvm/6.0.0/bin/:$PATH
+
+mkdir build
+cd build
+
+conan install ..
+cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DUSE_CONAN=ON  -DENABLE_TESTS=OFF -DWITH_TESTS=OFF -DWITH_TOOLS=OFF -DCMAKE_BUILD_TYPE=Release
+
+/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py
+/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -header-filter='.*' 
+/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -header-filter='.*' -checks='-*,modernize-use-override'
+
+
+/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -header-filter='.*' -checks='*'
+
+
+No incluir:
+    llvm-header-guard
+    llvm-namespace-comment
+
+Aplicar:
+    modernize-avoid-bind
+    modernize-deprecated-headers
+    modernize-loop-convert
+    modernize-make-shared
+    modernize-make-unique
+    modernize-pass-by-value
+    modernize-raw-string-literal
+    modernize-redundant-void-arg
+    modernize-replace-auto-ptr
+    modernize-replace-random-shuffle
+    modernize-return-braced-init-list
+    modernize-shrink-to-fit
+    modernize-unary-static-assert
+    modernize-use-auto
+    modernize-use-bool-literals
+    modernize-use-default-member-init
+    modernize-use-emplace
+    modernize-use-equals-default
+    modernize-use-equals-delete
+    modernize-use-noexcept
+    modernize-use-nullptr
+    modernize-use-override
+    modernize-use-transparent-functors
+    modernize-use-using
