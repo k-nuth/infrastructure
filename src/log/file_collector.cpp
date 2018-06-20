@@ -70,7 +70,7 @@ inline void move_file(
 bool parse_counter_placeholder(path_string_type::const_iterator& it,
     path_string_type::const_iterator end, unsigned int& width)
 {
-    typedef qi::extract_uint<unsigned int, 10, 1, -1> width_extract;
+    using width_extract = qi::extract_uint<unsigned int, 10, 1, -1>;
 
     if (it == end)
         return false;
@@ -121,7 +121,7 @@ bool match_pattern(path_string_type const& file_name,
     path_string_type const& pattern,
     unsigned int& file_counter)
 {
-    typedef qi::extract_uint<unsigned int, 10, 1, -1> file_counter_extract;
+    using file_counter_extract = qi::extract_uint<unsigned int, 10, 1, -1>;
 
     struct local
     {

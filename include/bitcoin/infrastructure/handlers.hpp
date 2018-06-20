@@ -24,7 +24,7 @@
 
 namespace libbitcoin {
 
-    typedef std::function<void(const code&)> handle0;
+    using handle0 = std::function<void(const code&)>;
 
     template <typename Type>
     using handle1 = std::function<void(const code&, const Type&)>;

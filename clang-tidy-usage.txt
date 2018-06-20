@@ -44,25 +44,12 @@ Aplicar:
     modernize-use-transparent-functors
     modernize-use-using
 
-modernize-use-using:
-/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,modernize-use-using' -header-filter='.*' 
-/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,modernize-use-using' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
-/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,modernize-use-using' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/ -fix
+/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,modernize-*' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
 
 
-modernize-avoid-bind:
 /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,modernize-avoid-bind' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
-
-
-modernize-deprecated-headers:
 /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,modernize-deprecated-headers' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
-
-
-modernize-loop-convert:
 /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,modernize-loop-convert' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
-
-
-
 /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,modernize-make-shared' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
 /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,modernize-make-unique' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
 /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,modernize-raw-string-literal' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
