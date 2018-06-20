@@ -285,7 +285,7 @@ std::string error_category_impl::message(int ev) const BI_NOEXCEPT
 std::error_condition error_category_impl::default_error_condition(int ev)
     const BI_NOEXCEPT
 {
-    return std::error_condition(ev, *this);
+    return {ev, *this};
 }
 
 namespace libbitcoin {
@@ -293,12 +293,12 @@ namespace error {
 
     code make_error_code(error_code_t e)
     {
-        return code(e, get_error_category_instance());
+        return {e, get_error_category_instance()};
     }
 
     std::error_condition make_error_condition(error_condition_t e)
     {
-        return std::error_condition(e, get_error_category_instance());
+        return {e, get_error_category_instance()};
     }
 
     error_code_t boost_to_error_code(const boost_code& ec)

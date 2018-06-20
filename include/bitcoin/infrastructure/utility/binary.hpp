@@ -37,9 +37,8 @@ public:
     static bool is_base2(const std::string& text);
 
     binary();
-    // binary(const binary& other); //fernando: it is trivial
-
-    binary& operator=(const binary& other); //fernando: it is trivial
+    // binary(const binary& other);             //fernando: it is trivial
+    // binary& operator=(const binary& other);  //fernando: it is trivial
 
     binary(const std::string& bit_string);
     binary(size_type size, uint32_t number);
@@ -73,7 +72,7 @@ private:
         size_type original_offset, size_type intended_offset);
 
     data_chunk blocks_;
-    uint8_t final_block_excess_;
+    uint8_t final_block_excess_{0};
 };
 
 } // namespace libbitcoin
