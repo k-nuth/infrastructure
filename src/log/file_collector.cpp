@@ -318,7 +318,7 @@ void file_collector::store_file(filesystem::path const& src_path)
     uintmax_t free_space = min_free_space_ ?
         filesystem::space(storage_dir_).available : 0;
 
-    file_list::iterator it = files_.begin(), end = files_.end();
+    auto it = files_.begin(), end = files_.end();
     while (it != end &&
         (total_size_ + info.size > max_size_ || min_free_space_ > free_space || max_files_ <= files_.size()))
     {
