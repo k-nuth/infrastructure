@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef LIBBITCOIN_INFRASTRUCTURE_LOG_FEATURES_RATE_IPP
-#define LIBBITCOIN_INFRASTRUCTURE_LOG_FEATURES_RATE_IPP
+#ifndef BITPRIM_INFRASTRUCTURE_LOG_FEATURES_RATE_IPP
+#define BITPRIM_INFRASTRUCTURE_LOG_FEATURES_RATE_IPP
 
 #include <boost/log/attributes.hpp>
 #include <boost/scope_exit.hpp>

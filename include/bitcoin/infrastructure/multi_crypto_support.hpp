@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef LIBBITCOIN_INFRASTRUCTURE_MULTI_CRYPTO_SUPPORT_HPP_
-#define LIBBITCOIN_INFRASTRUCTURE_MULTI_CRYPTO_SUPPORT_HPP_
+#ifndef BITPRIM_INFRASTRUCTURE_MULTI_CRYPTO_SUPPORT_HPP_
+#define BITPRIM_INFRASTRUCTURE_MULTI_CRYPTO_SUPPORT_HPP_
 
 #include <string>
 #include <bitcoin/infrastructure/config/settings.hpp>

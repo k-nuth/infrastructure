@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef LIBBITCOIN_INFRASTRUCTURE_PRIORITIZED_MUTEX_HPP
-#define LIBBITCOIN_INFRASTRUCTURE_PRIORITIZED_MUTEX_HPP
+#ifndef BITPRIM_INFRASTRUCTURE_PRIORITIZED_MUTEX_HPP
+#define BITPRIM_INFRASTRUCTURE_PRIORITIZED_MUTEX_HPP
 
 #include <memory>
 #include <bitcoin/infrastructure/define.hpp>

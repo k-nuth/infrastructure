@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef LIBBITCOIN_INFRASTRUCTURE_LOG_STATSD_SINK_HPP
-#define LIBBITCOIN_INFRASTRUCTURE_LOG_STATSD_SINK_HPP
+#ifndef BITPRIM_INFRASTRUCTURE_LOG_STATSD_SINK_HPP
+#define BITPRIM_INFRASTRUCTURE_LOG_STATSD_SINK_HPP
 
 #include <boost/asio.hpp>
 #include <bitcoin/infrastructure/define.hpp>

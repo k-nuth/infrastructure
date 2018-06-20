@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef LIBBITCOIN_INFRASTRUCTURE_CONSOLE_STREAMBUF_HPP
-#define LIBBITCOIN_INFRASTRUCTURE_CONSOLE_STREAMBUF_HPP
+#ifndef BITPRIM_INFRASTRUCTURE_CONSOLE_STREAMBUF_HPP
+#define BITPRIM_INFRASTRUCTURE_CONSOLE_STREAMBUF_HPP
 
 #include <cstddef>
 #include <streambuf>

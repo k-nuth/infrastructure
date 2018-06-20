@@ -17,8 +17,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef LIBBITCOIN_INFRASTRUCTURE_COLLECTION_HPP
-#define LIBBITCOIN_INFRASTRUCTURE_COLLECTION_HPP
+#ifndef BITPRIM_INFRASTRUCTURE_COLLECTION_HPP
+#define BITPRIM_INFRASTRUCTURE_COLLECTION_HPP
 
 #include <iterator>
 #include <iostream>
