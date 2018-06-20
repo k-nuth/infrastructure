@@ -337,7 +337,8 @@ set(bitprim_infrastructure_sources
         src/utility/png.cpp
         src/utility/prioritized_mutex.cpp
 
-        src/utility/random.cpp
+        src/utility/pseudo_random.cpp
+        # src/utility/random.cpp
         src/utility/scope_lock.cpp
         src/utility/sequencer.cpp
         src/utility/sequential_lock.cpp
@@ -467,7 +468,8 @@ _group_sources(bitprim_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
 
     # TODO: printer_tests ???
 
-    random_tests
+    # random_tests
+    pseudo_random_tests
     serializer_tests
     stream_tests
     thread_tests
@@ -627,7 +629,8 @@ set(_bitprim_infrastructure_headers
     bitcoin/infrastructure/utility/png.hpp
     bitcoin/infrastructure/utility/prioritized_mutex.hpp
 
-    bitcoin/infrastructure/utility/random.hpp
+    bitcoin/infrastructure/utility/pseudo_random.hpp
+    # bitcoin/infrastructure/utility/random.hpp
     bitcoin/infrastructure/utility/reader.hpp
     bitcoin/infrastructure/utility/resubscriber.hpp
     bitcoin/infrastructure/utility/scope_lock.hpp

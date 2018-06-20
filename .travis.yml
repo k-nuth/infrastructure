@@ -46,8 +46,8 @@ matrix:
       # - <<: *linux
       #   env: CHECK_FORMATTING=true
    
-      - <<: *linux
-        env: PUSH_TO_REPOS=true
+      # - <<: *linux
+      #   env: PUSH_TO_REPOS=true
 
       - <<: *linux
         env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=lasote/conangcc8
@@ -77,9 +77,17 @@ matrix:
       - <<: *linux
         env: CONAN_CLANG_VERSIONS=3.9 CONAN_DOCKER_IMAGE=lasote/conanclang39
 
-      # - <<: *osx
-      #   osx_image: xcode9.1
-      #   env: CONAN_APPLE_CLANG_VERSIONS=9.1
+      - <<: *osx
+        osx_image: xcode9.3
+        env: CONAN_APPLE_CLANG_VERSIONS=9.3
+
+      - <<: *osx
+        osx_image: xcode9.2
+        env: CONAN_APPLE_CLANG_VERSIONS=9.2
+
+      - <<: *osx
+        osx_image: xcode9.1
+        env: CONAN_APPLE_CLANG_VERSIONS=9.1
 
       - <<: *osx
         osx_image: xcode9
