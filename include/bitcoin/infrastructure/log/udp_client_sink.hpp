@@ -47,7 +47,7 @@ protected:
     using message_ptr = boost::shared_ptr<std::string>;
 
     void send(const std::string& message);
-    void handle_send(const boost_code&, size_t, message_ptr payload);
+    void handle_send(const boost_code& /*unused*/, size_t /*unused*/, message_ptr payload);
 
 private:
     socket_ptr socket_;

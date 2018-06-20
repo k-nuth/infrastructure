@@ -55,7 +55,7 @@ void udp_client_sink::send(const std::string& message)
             this, _1, _2, payload));
 }
 
-void udp_client_sink::handle_send(const boost_code&, size_t,
+void udp_client_sink::handle_send(const boost_code& /*unused*/, size_t /*unused*/,
     message_ptr payload)
 {
     // This holds the message in scope until the send is completed.
