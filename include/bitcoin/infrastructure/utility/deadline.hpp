@@ -57,7 +57,7 @@ public:
      * @param[in]  pool      The thread pool used by the timer.
      * @param[in]  duration  The default time period from start to expiration.
      */
-    deadline(threadpool& pool, const asio::duration duration);
+    deadline(threadpool& pool, asio::duration duration);
 
     /**
      * Start or restart the timer.
@@ -74,7 +74,7 @@ public:
      * @param[in]  handle    Callback invoked upon expire or cancel.
      * @param[in]  duration  The time period from start to expiration.
      */
-    void start(handler handle, const asio::duration duration);
+    void start(handler handle, asio::duration duration);
 
     /**
      * Cancel the timer. The handler will be invoked.
