@@ -55,7 +55,7 @@ public:
     void prepend(const binary& prior);
     void shift_left(size_type distance);
     void shift_right(size_type distance);
-    binary substring(size_type first, size_type length=max_size_t) const;
+    binary substring(size_type start, size_type length=max_size_t) const;
 
     bool is_prefix_of(data_slice field) const;
     bool is_prefix_of(uint32_t field) const;
