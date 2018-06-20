@@ -61,7 +61,7 @@ public:
         size_t min_free_space,
         size_t max_files);
 
-    virtual ~file_collector();
+    ~file_collector() override;
 
     //! The function stores the specified file in the storage
     void store_file(boost::filesystem::path const& src_path) override;

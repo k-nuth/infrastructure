@@ -53,7 +53,7 @@ protected:
 #ifdef _MSC_VER
     virtual ~console_streambuf();
 #else
-    virtual ~console_streambuf() = default;
+    ~console_streambuf() override = default;
 #endif
 
     /**
@@ -61,12 +61,12 @@ protected:
      * @param[in]  buffer  Pointer to the buffer to fill with console reads.
      * @param[in]  size    The size of the buffer that may be populated.
      */
-    virtual std::streamsize xsgetn(wchar_t* buffer, std::streamsize size);
+    std::streamsize xsgetn(wchar_t* buffer, std::streamsize size) override;
 
     /**
      * Implement alternate console read.
      */
-    virtual std::wstreambuf::int_type underflow();
+    std::wstreambuf::int_type underflow() override;
 
 private:
     // The constructed buffer size.

@@ -48,7 +48,7 @@ public:
 #ifdef _MSC_VER
     virtual ~unicode_istream();
 #else
-    virtual ~unicode_istream() = default;
+    ~unicode_istream() override = default;
 #endif
 };
 

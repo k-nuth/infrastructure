@@ -28,10 +28,10 @@ class error_category_impl
   : public std::error_category
 {
 public:
-    virtual const char* name() const BI_NOEXCEPT;
-    virtual std::string message(int ev) const BI_NOEXCEPT;
-    virtual std::error_condition default_error_condition(int ev)
-        const BI_NOEXCEPT;
+    const char* name() const BI_NOEXCEPT override;
+    std::string message(int ev) const BI_NOEXCEPT override;
+    std::error_condition default_error_condition(int ev)
+        const BI_NOEXCEPT override;
 };
 
 static const error_category_impl& get_error_category_instance()

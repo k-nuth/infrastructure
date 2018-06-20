@@ -46,25 +46,25 @@ public:
     /**
      * Synchronize stream buffer.
      */
-    virtual ~unicode_streambuf();
+    ~unicode_streambuf() override;
 
 protected:
     /**
      * Implement underflow for support of input streams.
      */
-    virtual std::streambuf::int_type underflow();
+    std::streambuf::int_type underflow() override;
 
     /**
      * Implement overflow for support of output streams.
      * @param[in]  character  A single byte to be explicitly put.
      */
-    virtual std::streambuf::int_type overflow(
-        std::streambuf::int_type character);
+    std::streambuf::int_type overflow(
+        std::streambuf::int_type character) override;
 
     /**
      * Implement sync for support of output streams.
      */
-    virtual int sync();
+    int sync() override;
 
 private:
     // The constructed wide buffer size in number of characters.
