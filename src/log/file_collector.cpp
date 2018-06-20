@@ -375,7 +375,7 @@ uintmax_t file_collector::scan_for_files(
         }
         else
         {
-            counter = NULL;
+            counter = nullptr;
         }
 
         if (filesystem::exists(dir) && filesystem::is_directory(dir))
