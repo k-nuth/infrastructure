@@ -192,15 +192,15 @@ BI_API std::string to_utf8(const std::wstring& wide);
  * This is designed for buffering, where the narrow array may have been
  * truncated in the middle of a multiple byte character. The terminating
  * offset is returned in the 'unread' out parameter.
- * @param[in]  out        The converted wide array.
- * @param[in]  out_chars  The allocated number of wide characters in 'out'.
- * @param[in]  in         The narrow array to convert.
- * @param[in]  in_bytes   The number of 'in' bytes to convert.
- * @param[in]  truncated  The number of 'in' bytes [0..3] that were truncated.
- * @return                The number of characters converted.
+ * @param[in]  out            The converted wide array.
+ * @param[in]  out_chars      The allocated number of wide characters in 'out'.
+ * @param[in]  in             The narrow array to convert.
+ * @param[in]  in_bytes       The number of 'in' bytes to convert.
+ * @param[out] out_truncated  The number of 'in' bytes [0..3] that were truncated.
+ * @return                    The number of characters converted.
  */
 BI_API size_t to_utf16(wchar_t out[], size_t out_chars, const char in[],
-    size_t in_bytes, uint8_t& truncated);
+    size_t in_bytes, uint8_t& out_truncated);
 
 /**
  * Convert a narrow (presumed UTF8) string to wide (UTF16/wchar_t).

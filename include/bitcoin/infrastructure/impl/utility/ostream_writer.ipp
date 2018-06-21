@@ -53,6 +53,6 @@ void ostream_writer::write_little_endian(Integer value)
     write_forward<sizeof(Integer)>(bytes);
 }
 
-} // libbitcoin
+} // namespace libbitcoin
 
 #endif

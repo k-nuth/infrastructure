@@ -46,7 +46,7 @@ public:
      * Delete the unicode_streambuf that wraps wide_stream.
      */
 #ifdef _MSC_VER
-    virtual ~unicode_istream();
+    ~unicode_istream() override;
 #else
     ~unicode_istream() override = default;
 #endif

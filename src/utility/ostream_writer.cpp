@@ -200,7 +200,7 @@ void ostream_writer::write_string(const std::string& value)
 
 void ostream_writer::skip(size_t size)
 {
-    // TODO: verify.
+    // TODO(libbitcoin): verify.
     stream_.seekp(size, std::ios_base::cur);
 }
 

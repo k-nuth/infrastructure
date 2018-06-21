@@ -60,14 +60,14 @@ class file_lock
    //!Moves the ownership of "moved"'s file mapping object to *this.
    //!After the call, "moved" does not represent any file mapping object.
    //!Does not throw
-   file_lock(BOOST_RV_REF(file_lock) moved)
+   file_lock(file_lock&& moved) noexcept
       :  m_file_hnd(boost::interprocess::file_handle_t(boost::interprocess::ipcdetail::invalid_file()))
    {  this->swap(moved);   }
 
    //!Moves the ownership of "moved"'s file mapping to *this.
    //!After the call, "moved" does not represent any file mapping.
    //!Does not throw
-   file_lock &operator=(BOOST_RV_REF(file_lock) moved)
+   file_lock& operator=(file_lock&& moved) noexcept
    {
       file_lock tmp(boost::move(moved));
       this->swap(tmp);
