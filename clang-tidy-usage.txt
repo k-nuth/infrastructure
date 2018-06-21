@@ -413,6 +413,22 @@ Applied:
 /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,readability-inconsistent-declaration-parameter-name' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
 /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,readability-named-parameter' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
 /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,readability-avoid-const-params-in-decls' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
-
 /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,readability-else-after-return' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
+
+
+
+---------------------------------
+bugprone:
+---------------------------------
+
+/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,bugprone-*' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
+
+
+
+
+---------------------------------
+cert:
+---------------------------------
+
+/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,cert-*' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
 

@@ -36,6 +36,7 @@ class sequencer
 public:
     using ptr = std::shared_ptr<sequencer>;
     using action = std::function<void ()>;
+    using guard = std::lock_guard<shared_mutex>;
 
     sequencer(asio::service& service);
     virtual ~sequencer();

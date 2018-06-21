@@ -35,30 +35,77 @@ sequencer::~sequencer()
     BITCOIN_ASSERT_MSG(actions_.empty(), "sequencer not cleared");
 }
 
+// void sequencer::lock(action&& handler)
+// {
+//     auto post = false;
+
+//     // Critical Section
+//     ///////////////////////////////////////////////////////////////////////
+//     mutex_.lock();
+
+//     if (executing_)
+//     {
+//         actions_.push(std::move(handler));
+//     }
+//     else
+//     {
+//         post = true;
+//         executing_ = true;
+//     }
+
+//     mutex_.unlock();
+//     ///////////////////////////////////////////////////////////////////////
+
+//     if (post)
+//         service_.post(std::move(handler));
+// }
+
 void sequencer::lock(action&& handler)
 {
-    auto post = false;
-
     // Critical Section
     ///////////////////////////////////////////////////////////////////////
-    mutex_.lock();
+    {
+    guard lock(mutex_);
 
     if (executing_)
     {
         actions_.push(std::move(handler));
-    }
-    else
-    {
-        post = true;
-        executing_ = true;
+        return;
     }
 
-    mutex_.unlock();
+    executing_ = true;
+    } 
     ///////////////////////////////////////////////////////////////////////
 
-    if (post)
-        service_.post(std::move(handler));
+    service_.post(std::move(handler));
 }
+// void sequencer::unlock()
+// {
+//     action handler;
+
+//     // Critical Section
+//     ///////////////////////////////////////////////////////////////////////
+//     mutex_.lock();
+
+//     BITCOIN_ASSERT_MSG(executing_, "called unlock but sequence not locked");
+
+//     if (actions_.empty())
+//     {
+//         executing_ = false;
+//     }
+//     else
+//     {
+//         executing_ = true;
+//         std::swap(handler, actions_.front());
+//         actions_.pop();
+//     }
+
+//     mutex_.unlock();
+//     ///////////////////////////////////////////////////////////////////////
+
+//     if (handler)
+//         service_.post(std::move(handler));
+// }
 
 void sequencer::unlock()
 {
@@ -66,7 +113,8 @@ void sequencer::unlock()
 
     // Critical Section
     ///////////////////////////////////////////////////////////////////////
-    mutex_.lock();
+    {
+    guard lock(mutex_);
 
     BITCOIN_ASSERT_MSG(executing_, "called unlock but sequence not locked");
 
@@ -81,7 +129,7 @@ void sequencer::unlock()
         actions_.pop();
     }
 
-    mutex_.unlock();
+    }
     ///////////////////////////////////////////////////////////////////////
 
     if (handler)
