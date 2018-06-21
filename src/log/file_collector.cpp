@@ -313,7 +313,7 @@ void file_collector::store_file(filesystem::path const& src_path)
     BOOST_LOG_EXPR_IF_MT(boost::lock_guard<boost::mutex> lock(mutex_);)
 
     // Check if an old file should be erased
-    uintmax_t free_space = min_free_space_ ?
+    uintmax_t free_space = min_free_space_ != 0u ?
         filesystem::space(storage_dir_).available : 0;
 
     auto it = files_.begin(), end = files_.end();
@@ -328,7 +328,7 @@ void file_collector::store_file(filesystem::path const& src_path)
                 filesystem::remove(old_info.path);
                 // Free space has to be queried as it may not increase equally
                 // to the erased file size on compressed filesystems
-                if (min_free_space_)
+                if (min_free_space_ != 0u)
                     free_space = filesystem::space(storage_dir_).available;
                 total_size_ -= old_info.size;
                 files_.erase(it++);
@@ -380,7 +380,7 @@ uintmax_t file_collector::scan_for_files(
         {
             BOOST_LOG_EXPR_IF_MT(boost::lock_guard<boost::mutex> lock(mutex_);)
 
-            if (counter)
+            if (counter != nullptr)
                 *counter = 0;
 
             file_list files;
@@ -415,7 +415,7 @@ uintmax_t file_collector::scan_for_files(
                             files.push_back(info);
                             ++file_count;
 
-                            if (counter && file_number >= *counter)
+                            if (counter != nullptr && file_number >= *counter)
                                 *counter = file_number + 1;
                         }
                     }
