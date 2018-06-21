@@ -33,7 +33,7 @@ class BI_API flush_lock
 public:
     using path = boost::filesystem::path;
 
-    flush_lock(const path& file);
+    explicit flush_lock(const path& file);
 
     bool try_lock();
     bool lock_shared();

@@ -30,7 +30,7 @@ class BI_API istream_reader
   : public reader
 {
 public:
-    istream_reader(std::istream& stream);
+    explicit istream_reader(std::istream& stream);
 
     template <unsigned Size>
     byte_array<Size> read_forward();
@@ -45,7 +45,7 @@ public:
     Integer read_little_endian();
 
     /// Context.
-    operator bool() const override;
+    explicit operator bool() const override;
     bool operator!() const override;
     bool is_exhausted() const override;
     void invalidate() override;

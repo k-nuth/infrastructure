@@ -34,7 +34,7 @@ class BI_API reader
 {
 public:
     /// Context.
-    virtual operator bool() const = 0;
+    virtual explicit operator bool() const = 0;
     virtual bool operator!() const = 0;
     virtual bool is_exhausted() const = 0;
     virtual void invalidate() = 0;

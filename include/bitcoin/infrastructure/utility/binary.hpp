@@ -40,6 +40,7 @@ public:
     // binary(const binary& other);             //fernando: it is trivial
     // binary& operator=(const binary& other);  //fernando: it is trivial
 
+    explicit 
     binary(const std::string& bit_string);
     binary(size_type size, uint32_t number);
     binary(size_type size, data_slice blocks);
