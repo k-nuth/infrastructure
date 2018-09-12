@@ -19,11 +19,12 @@
 
 #include <bitcoin/infrastructure/version.hpp>
 
-namespace libbitcoin { namespace infrastructure {
+namespace libbitcoin { 
+namespace infrastructure {
 
 char const* version() {
     return BITPRIM_INFRASTRUCTURE_VERSION_1;
 }
 
-}} /* namespace libbitcoin::infrastructure */
-
+} /* namespace infrastructure */
+} /* namespace libbitcoin */
