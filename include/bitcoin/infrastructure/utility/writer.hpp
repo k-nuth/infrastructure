@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef LIBBITCOIN_INFRASTRUCTURE_WRITER_HPP
-#define LIBBITCOIN_INFRASTRUCTURE_WRITER_HPP
+#ifndef BITPRIM_INFRASTRUCTURE_WRITER_HPP
+#define BITPRIM_INFRASTRUCTURE_WRITER_HPP
 
 #include <cstddef>
 #include <cstdint>

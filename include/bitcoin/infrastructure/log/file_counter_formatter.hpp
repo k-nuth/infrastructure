@@ -15,8 +15,8 @@
 
 // Modification of boost implementation to alter log file rotation naming.
 
-#ifndef LIBBITCOIN_INFRASTRUCTURE_LOG_FILE_COUNTER_FORMATTER_HPP
-#define LIBBITCOIN_INFRASTRUCTURE_LOG_FILE_COUNTER_FORMATTER_HPP
+#ifndef BITPRIM_INFRASTRUCTURE_LOG_FILE_COUNTER_FORMATTER_HPP
+#define BITPRIM_INFRASTRUCTURE_LOG_FILE_COUNTER_FORMATTER_HPP
 
 #include <sstream>
 #include <boost/filesystem/path.hpp>

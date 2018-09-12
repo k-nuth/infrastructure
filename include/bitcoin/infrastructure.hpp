@@ -4,8 +4,8 @@
 //        GENERATED SOURCE CODE, DO NOT EDIT EXCEPT EXPERIMENTALLY
 //
 ///////////////////////////////////////////////////////////////////////////////
-#ifndef LIBBITCOIN_INFRASTRUCTURE_BITCOIN_HPP
-#define LIBBITCOIN_INFRASTRUCTURE_BITCOIN_HPP
+#ifndef BITPRIM_INFRASTRUCTURE_INFRASTRUCTURE_HPP_
+#define BITPRIM_INFRASTRUCTURE_INFRASTRUCTURE_HPP_
 
 /**
  * API Users: Include only this header. Direct use of other headers is fragile
@@ -21,7 +21,6 @@
 #include <bitcoin/infrastructure/error.hpp>
 #include <bitcoin/infrastructure/handlers.hpp>
 #include <bitcoin/infrastructure/version.hpp>
-
 #include <bitcoin/infrastructure/log/attributes.hpp>
 #include <bitcoin/infrastructure/log/file_char_traits.hpp>
 #include <bitcoin/infrastructure/log/file_collector.hpp>
@@ -39,9 +38,7 @@
 #include <bitcoin/infrastructure/log/features/metric.hpp>
 #include <bitcoin/infrastructure/log/features/rate.hpp>
 #include <bitcoin/infrastructure/log/features/timer.hpp>
-
 #include <bitcoin/infrastructure/message/message_tools.hpp>
-
 #include <bitcoin/infrastructure/unicode/console_streambuf.hpp>
 #include <bitcoin/infrastructure/unicode/file_lock.hpp>
 #include <bitcoin/infrastructure/unicode/ifstream.hpp>
@@ -96,4 +93,4 @@
 #include <bitcoin/infrastructure/utility/work.hpp>
 #include <bitcoin/infrastructure/utility/writer.hpp>
 
-#endif
+#endif /*BITPRIM_INFRASTRUCTURE_INFRASTRUCTURE_HPP_*/

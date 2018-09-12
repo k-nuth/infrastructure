@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef LIBBITCOIN_INFRASTRUCTURE_RESUBSCRIBER_IPP
-#define LIBBITCOIN_INFRASTRUCTURE_RESUBSCRIBER_IPP
+#ifndef BITPRIM_INFRASTRUCTURE_RESUBSCRIBER_IPP
+#define BITPRIM_INFRASTRUCTURE_RESUBSCRIBER_IPP
 
 #include <functional>
 #include <memory>
