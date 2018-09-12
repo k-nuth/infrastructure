@@ -16,98 +16,96 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+from conans import CMake
+from ci_utils import option_on_off, march_conan_manip, pass_march_to_compiler
+from ci_utils import BitprimConanFile
 
-import os
-from conans import ConanFile, CMake
-from conans import __version__ as conan_version
-from conans.model.version import Version
 
-def option_on_off(option):
-    return "ON" if option else "OFF"
 
-def get_content(file_name):
-    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), file_name)
-    with open(file_path, 'r') as f:
-        return f.read().replace('\n', '').replace('\r', '')
 
-def get_version():
-    return get_content('conan_version')
-
-def get_channel():
-    return get_content('conan_channel')
-
-def get_user():
-    return get_content('conan_user')
-
-def get_conan_req_version():
-    return get_content('conan_req_version')
-
-class BitprimInfrastructureConan(ConanFile):
+class BitprimInfrastructureConan(BitprimConanFile):
     name = "bitprim-infrastructure"
-    version = get_version()
+    # version = get_version()
     license = "http://www.boost.org/users/license.html"
     url = "https://github.com/bitprim/bitprim-infrastructure"
     description = "Multicrypto Cross-Platform C++ Development Toolkit"
     settings = "os", "compiler", "build_type", "arch"
 
-    if conan_version < Version(get_conan_req_version()):
-        raise Exception ("Conan version should be greater or equal than %s" % (get_conan_req_version(), ))
+    # if Version(conan_version) < Version(get_conan_req_version()):
+    #     raise Exception ("Conan version should be greater or equal than %s. Detected: %s." % (get_conan_req_version(), conan_version))
 
     options = {"shared": [True, False],
                "fPIC": [True, False],
                "with_icu": [True, False],
                "with_png": [True, False],
+               "with_qrencode": [True, False],
                "with_tests": [True, False],
                "with_examples": [True, False],
+               "microarchitecture": "ANY", #["x86_64", "haswell", "ivybridge", "sandybridge", "bulldozer", ...]
+               "fix_march": [True, False],
+               "verbose": [True, False]
     }
 
     default_options = "shared=False", \
         "fPIC=True", \
         "with_icu=False", \
         "with_png=False", \
+        "with_qrencode=False", \
         "with_tests=False", \
-        "with_examples=False"
+        "with_examples=False", \
+        "microarchitecture=_DUMMY_",  \
+        "fix_march=False", \
+        "verbose=False"
 
     generators = "cmake"
-    exports = "conan_channel", "conan_version", "conan_req_version", "conan_user"
-    exports_sources = "src/*", "CMakeLists.txt", "cmake/*", "bitprim-infrastructureConfig.cmake.in", "bitprimbuildinfo.cmake", "include/*", "test/*", "examples/*"
+    exports = "conan_*", "ci_utils/*"
+    exports_sources = "src/*", "CMakeLists.txt", "cmake/*", "bitprim-infrastructureConfig.cmake.in", "include/*", "test/*", "examples/*", "test_new/*"
     package_files = "build/lbitprim-infrastructure.a"
     build_policy = "missing"
 
-    requires = (("boost/1.66.0@bitprim/stable"))
-
-    @property
-    def msvc_mt_build(self):
-        return "MT" in str(self.settings.compiler.runtime)
-
-    @property
-    def fPIC_enabled(self):
-        if self.settings.compiler == "Visual Studio":
-            return False
-        else:
-            return self.options.fPIC
-
-    @property
-    def is_shared(self):
-        if self.options.shared and self.msvc_mt_build:
-            return False
-        else:
-            return self.options.shared
-
     def requirements(self):
+        self.requires("boost/1.66.0@bitprim/stable")
+        self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
+
+        # if self.options.with_png:
+        #     self.requires("libpng/1.6.34@bitprim/stable")
+            
+        # if self.options.with_qrencode:
+        #     self.requires("libqrencode/4.0.0@bitprim/stable")
+
         if self.options.with_png:
             self.requires("libpng/1.6.34@bitprim/stable")
 
+        if self.options.with_qrencode:
+            self.requires("libqrencode/4.0.0@bitprim/stable")
+
     def config_options(self):
+        if self.settings.arch != "x86_64":
+            self.output.info("microarchitecture is disabled for architectures other than x86_64, your architecture: %s" % (self.settings.arch,))
+            self.options.remove("microarchitecture")
+            self.options.remove("fix_march")
+
         if self.settings.compiler == "Visual Studio":
             self.options.remove("fPIC")
-
             if self.options.shared and self.msvc_mt_build:
                 self.options.remove("shared")
+
+
+    def configure(self):
+        if self.settings.arch == "x86_64" and self.options.microarchitecture == "_DUMMY_":
+            del self.options.fix_march
+            # self.options.remove("fix_march")
+            # raise Exception ("fix_march option is for using together with microarchitecture option.")
+
+        if self.settings.arch == "x86_64":
+            march_conan_manip(self)
+            self.options["*"].microarchitecture = self.options.microarchitecture
 
     def package_id(self):
         self.info.options.with_tests = "ANY"
         self.info.options.with_examples = "ANY"
+        self.info.options.verbose = "ANY"
+        self.info.options.fix_march = "ANY"
 
         #For Bitprim Packages libstdc++ and libstdc++11 are the same
         if self.settings.compiler == "gcc" or self.settings.compiler == "clang":
@@ -119,23 +117,25 @@ class BitprimInfrastructureConan(ConanFile):
         #     # self.output.warn(self.deps_cpp_info["MyLib"].libdirs)
         #     print(dep)
         #     print(self.options[dep])
-
         #     # self.options["boost"]
 
         cmake = CMake(self)
         cmake.definitions["USE_CONAN"] = option_on_off(True)
         cmake.definitions["NO_CONAN_AT_ALL"] = option_on_off(False)
-        
-        # cmake.definitions["CMAKE_VERBOSE_MAKEFILE"] = option_on_off(False)
-        cmake.verbose = True
-
+        cmake.verbose = self.options.verbose
         cmake.definitions["ENABLE_SHARED"] = option_on_off(self.is_shared)
         cmake.definitions["ENABLE_POSITION_INDEPENDENT_CODE"] = option_on_off(self.fPIC_enabled)
 
         cmake.definitions["WITH_TESTS"] = option_on_off(self.options.with_tests)
+        cmake.definitions["WITH_TESTS_NEW"] = option_on_off(self.options.with_tests)
         cmake.definitions["WITH_EXAMPLES"] = option_on_off(self.options.with_examples)
         cmake.definitions["WITH_ICU"] = option_on_off(self.options.with_icu)
+        # cmake.definitions["WITH_QRENCODE"] = option_on_off(self.options.with_qrencode)
+        # cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_qrencode)
+
+        cmake.definitions["WITH_QRENCODE"] = option_on_off(self.options.with_qrencode)
         cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_png)
+
 
         if self.settings.compiler != "Visual Studio":
             # cmake.definitions["CONAN_CXX_FLAGS"] += " -Wno-deprecated-declarations"
@@ -144,8 +144,9 @@ class BitprimInfrastructureConan(ConanFile):
         if self.settings.compiler == "Visual Studio":
             cmake.definitions["CONAN_CXX_FLAGS"] = cmake.definitions.get("CONAN_CXX_FLAGS", "") + " /DBOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE"
 
-        
-        # if self.settings.compiler != "Visual Studio"
+        cmake.definitions["MICROARCHITECTURE"] = self.options.microarchitecture
+        cmake.definitions["BITPRIM_PROJECT_VERSION"] = self.version
+
         if self.settings.compiler == "gcc":
             if float(str(self.settings.compiler.version)) >= 5:
                 cmake.definitions["NOT_USE_CPP11_ABI"] = option_on_off(False)
@@ -155,16 +156,8 @@ class BitprimInfrastructureConan(ConanFile):
             if str(self.settings.compiler.libcxx) == "libstdc++" or str(self.settings.compiler.libcxx) == "libstdc++11":
                 cmake.definitions["NOT_USE_CPP11_ABI"] = option_on_off(False)
 
-        # if self.settings.compiler == "clang":
-        #     self.output.info("compiler is clang")
+        pass_march_to_compiler(self, cmake)
 
-        # if str(self.settings.compiler.libcxx) == "libstdc++":
-        #     self.output.info("libcxx is libstdc++")
-
-        # if str(self.settings.compiler.libcxx) == "libstdc++11":
-        #     self.output.info("libcxx is libstdc++11")
-
-        cmake.definitions["BITPRIM_BUILD_NUMBER"] = os.getenv('BITPRIM_BUILD_NUMBER', '-')
         cmake.configure(source_dir=self.source_folder)
 
         # self.output.info("CONAN_CXX_FLAGS: %s" % (cmake.definitions["CONAN_CXX_FLAGS"], ))
@@ -172,7 +165,7 @@ class BitprimInfrastructureConan(ConanFile):
 
         cmake.build()
 
-        #TODO(fernando): Cmake Tests and Visual Studio doesn't work
+        #Note: Cmake Tests and Visual Studio doesn't work
         if self.options.with_tests:
             cmake.test()
             # cmake.test(target="tests")

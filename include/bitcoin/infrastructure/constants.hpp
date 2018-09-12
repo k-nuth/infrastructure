@@ -1,7 +1,7 @@
 /**
- * Copyright (c) 2017-2018 Bitprim Inc.
+ * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
  *
- * This file is part of Bitprim.
+ * This file is part of libbitcoin.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -64,7 +64,7 @@ BI_CONSTEXPR uint8_t byte_bits = 8;
 // BI_CONSTEXPR size_t max_counted_ops = 201;
 // BI_CONSTEXPR size_t max_stack_size = 1000;
 // BI_CONSTEXPR size_t max_script_size = 10000;
-// BI_CONSTEXPR size_t max_push_data_size = 520;
+BI_CONSTEXPR size_t max_push_data_size = 520;
 // BI_CONSTEXPR size_t max_script_public_keys = 20;
 // BI_CONSTEXPR size_t multisig_default_sigops = 20;
 // BI_CONSTEXPR size_t max_number_size = 4;

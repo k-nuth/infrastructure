@@ -21,6 +21,29 @@
 #include <bitcoin/infrastructure/error.hpp>
 #include <bitcoin/infrastructure/handlers.hpp>
 #include <bitcoin/infrastructure/version.hpp>
+
+#include <bitcoin/infrastructure/config/authority.hpp>
+#include <bitcoin/infrastructure/config/base16.hpp>
+#include <bitcoin/infrastructure/config/base2.hpp>
+#include <bitcoin/infrastructure/config/base58.hpp>
+#include <bitcoin/infrastructure/config/base64.hpp>
+#include <bitcoin/infrastructure/config/checkpoint.hpp>
+#include <bitcoin/infrastructure/config/directory.hpp>
+#include <bitcoin/infrastructure/config/endpoint.hpp>
+#include <bitcoin/infrastructure/config/hash160.hpp>
+#include <bitcoin/infrastructure/config/hash256.hpp>
+#include <bitcoin/infrastructure/config/parameter.hpp>
+#include <bitcoin/infrastructure/config/parser.hpp>
+#include <bitcoin/infrastructure/config/printer.hpp>
+#include <bitcoin/infrastructure/config/settings.hpp>
+#include <bitcoin/infrastructure/config/sodium.hpp>
+
+#include <bitcoin/infrastructure/formats/base_10.hpp>
+#include <bitcoin/infrastructure/formats/base_16.hpp>
+#include <bitcoin/infrastructure/formats/base_58.hpp>
+#include <bitcoin/infrastructure/formats/base_64.hpp>
+#include <bitcoin/infrastructure/formats/base_85.hpp>
+
 #include <bitcoin/infrastructure/log/attributes.hpp>
 #include <bitcoin/infrastructure/log/file_char_traits.hpp>
 #include <bitcoin/infrastructure/log/file_collector.hpp>
@@ -38,7 +61,28 @@
 #include <bitcoin/infrastructure/log/features/metric.hpp>
 #include <bitcoin/infrastructure/log/features/rate.hpp>
 #include <bitcoin/infrastructure/log/features/timer.hpp>
+
+// #include <bitcoin/infrastructure/machine/interpreter.hpp>
+#include <bitcoin/infrastructure/machine/number.hpp>
+#include <bitcoin/infrastructure/machine/opcode.hpp>
+// #include <bitcoin/infrastructure/machine/operation.hpp>
+// #include <bitcoin/infrastructure/machine/program.hpp>
+#include <bitcoin/infrastructure/machine/rule_fork.hpp>
+#include <bitcoin/infrastructure/machine/script_pattern.hpp>
+#include <bitcoin/infrastructure/machine/script_version.hpp>
+#include <bitcoin/infrastructure/machine/sighash_algorithm.hpp>
+
+#include <bitcoin/infrastructure/math/checksum.hpp>
+#include <bitcoin/infrastructure/math/crypto.hpp>
+#include <bitcoin/infrastructure/math/elliptic_curve.hpp>
+#include <bitcoin/infrastructure/math/hash.hpp>
+//#include <bitcoin/infrastructure/utility/limits.hpp>
+// #include <bitcoin/infrastructure/math/stealth.hpp>
+#include <bitcoin/infrastructure/math/uint256.hpp>
+
 #include <bitcoin/infrastructure/message/message_tools.hpp>
+#include <bitcoin/infrastructure/message/messages.hpp>
+
 #include <bitcoin/infrastructure/unicode/console_streambuf.hpp>
 #include <bitcoin/infrastructure/unicode/file_lock.hpp>
 #include <bitcoin/infrastructure/unicode/ifstream.hpp>
@@ -47,6 +91,7 @@
 #include <bitcoin/infrastructure/unicode/unicode_istream.hpp>
 #include <bitcoin/infrastructure/unicode/unicode_ostream.hpp>
 #include <bitcoin/infrastructure/unicode/unicode_streambuf.hpp>
+
 #include <bitcoin/infrastructure/utility/array_slice.hpp>
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
@@ -92,5 +137,28 @@
 #include <bitcoin/infrastructure/utility/track.hpp>
 #include <bitcoin/infrastructure/utility/work.hpp>
 #include <bitcoin/infrastructure/utility/writer.hpp>
+
+// #include <bitcoin/infrastructure/wallet/bitcoin_uri.hpp>
+#include <bitcoin/infrastructure/wallet/dictionary.hpp>
+// #include <bitcoin/infrastructure/wallet/ec_private.hpp>
+// #include <bitcoin/infrastructure/wallet/ec_public.hpp>
+// #include <bitcoin/infrastructure/wallet/ek_private.hpp>
+// #include <bitcoin/infrastructure/wallet/ek_public.hpp>
+// #include <bitcoin/infrastructure/wallet/ek_token.hpp>
+// #include <bitcoin/infrastructure/wallet/encrypted_keys.hpp>
+#include <bitcoin/infrastructure/wallet/hd_private.hpp>
+#include <bitcoin/infrastructure/wallet/hd_public.hpp>
+// #include <bitcoin/infrastructure/wallet/message.hpp>
+#include <bitcoin/infrastructure/wallet/mini_keys.hpp>
+#include <bitcoin/infrastructure/wallet/mnemonic.hpp>
+// #include <bitcoin/infrastructure/wallet/payment_address.hpp>
+#include <bitcoin/infrastructure/wallet/qrcode.hpp>
+// #include <bitcoin/infrastructure/wallet/select_outputs.hpp>
+// #include <bitcoin/infrastructure/wallet/stealth_address.hpp>
+// #include <bitcoin/infrastructure/wallet/stealth_receiver.hpp>
+// #include <bitcoin/infrastructure/wallet/stealth_sender.hpp>
+#include <bitcoin/infrastructure/wallet/uri.hpp>
+// #include <bitcoin/infrastructure/wallet/uri_reader.hpp>
+
 
 #endif /*BITPRIM_INFRASTRUCTURE_INFRASTRUCTURE_HPP_*/

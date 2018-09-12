@@ -9,4 +9,4 @@ set(BITPRIM_INFRASTRUCTURE_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
 include("${BITPRIM_INFRASTRUCTURE_CMAKE_DIR}/bitprim-infrastructureTargets.cmake")
 set(BITPRIM_INFRASTRUCTURE_LIBRARIES bitprim-infrastructure)
 
-find_package(secp256k1 0.0.01 REQUIRED)
+find_package(secp256k1 0 REQUIRED)

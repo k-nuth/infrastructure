@@ -22,7 +22,7 @@
 namespace libbitcoin { namespace infrastructure {
 
 char const* version() {
-    return BITPRIM_INFRASTRUCTURE_VERSION_1;
+    return BITPRIM_INFRASTRUCTURE_VERSION;
 }
 
 }} /* namespace libbitcoin::infrastructure */

@@ -498,11 +498,11 @@ DOCTEST_CLANG_SUPPRESS_WARNING("-Wc++98-compat-pedantic")
 // counts the number of elements in a C string
 #define DOCTEST_COUNTOF(x) (sizeof(x) / sizeof(x[0]))
 
-#ifndef DOCTEST_CONFIG_ASSERTION_PARAMETERS_BY_VALUE
+#ifndef DOCTEST_CONFIG_ASSERTION_PARAMETERS_BI_VALUE
 #define DOCTEST_REF_WRAP(x) x&
-#else // DOCTEST_CONFIG_ASSERTION_PARAMETERS_BY_VALUE
+#else // DOCTEST_CONFIG_ASSERTION_PARAMETERS_BI_VALUE
 #define DOCTEST_REF_WRAP(x) x
-#endif // DOCTEST_CONFIG_ASSERTION_PARAMETERS_BY_VALUE
+#endif // DOCTEST_CONFIG_ASSERTION_PARAMETERS_BI_VALUE
 
 // not using __APPLE__ because... this is how Catch does it
 #if defined(__MAC_OS_X_VERSION_MIN_REQUIRED)
@@ -4411,7 +4411,7 @@ namespace detail
             {EXCEPTION_ILLEGAL_INSTRUCTION, "SIGILL - Illegal instruction signal"},
             {EXCEPTION_STACK_OVERFLOW, "SIGSEGV - Stack overflow"},
             {EXCEPTION_ACCESS_VIOLATION, "SIGSEGV - Segmentation violation signal"},
-            {EXCEPTION_INT_DIVIDE_BY_ZERO, "Divide by zero error"},
+            {EXCEPTION_INT_DIVIDE_BI_ZERO, "Divide by zero error"},
     };
 
     struct FatalConditionHandler
