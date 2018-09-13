@@ -29,7 +29,7 @@ class BI_API ostream_writer
   : public writer
 {
 public:
-    ostream_writer(std::ostream& stream);
+    explicit ostream_writer(std::ostream& stream);
 
     template <unsigned Size>
     void write_forward(const byte_array<Size>& value);
@@ -44,7 +44,7 @@ public:
     void write_little_endian(Integer value);
 
     /// Context.
-    operator bool() const override;
+    explicit operator bool() const override;
     bool operator!() const override;
 
     /// Write hashes.

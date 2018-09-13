@@ -36,9 +36,13 @@
 // #pragma message("BITPRIM_BUILD_NUMBER")
 // #pragma message(BITPRIM_BUILD_NUMBER)
 
-namespace libbitcoin { namespace infrastructure {
+namespace libbitcoin { 
+namespace infrastructure {
+
 char const* version();
-}} /*namespace libbitcoin::infrastructure*/
+
+} /*namespace infrastructure*/
+} /*namespace libbitcoin*/
  
 
 #endif // BITPRIM_INFRASTRUCTURE_VERSION_HPP_

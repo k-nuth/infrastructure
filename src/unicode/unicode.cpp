@@ -131,7 +131,7 @@ std::string to_normal_nfkd_form(const std::string& value)
 data_chunk to_utf8(wchar_t* environment[])
 {
     int count;
-    for (count = 0; environment[count] != nullptr; count++);
+    for (count = 0; environment[count] != nullptr; count++);        //TODO(fernando): replace with std::count_if
     return to_utf8(count, environment);
 }
 
@@ -150,7 +150,7 @@ data_chunk to_utf8(int argc, wchar_t* argv[])
         payload_size += collection[arg].size() + 1;
     }
 
-    // TODO: unsafe multiplication.
+    // TODO(libbitcoin): unsafe multiplication.
     // Determine the index size.
     const auto index_size = safe_add(arg_count, size_t{1}) * sizeof(void*);
 
@@ -300,14 +300,14 @@ static uint8_t offset_to_terminal_utf8_character(const char text[], size_t size)
 
 // Convert utf8 char buffer to wchar_t buffer, with truncation handling.
 size_t to_utf16(wchar_t out[], size_t out_chars, const char in[],
-    size_t in_bytes, uint8_t& truncated)
+    size_t in_bytes, uint8_t& out_truncated)
 {
     BITCOIN_ASSERT(in != nullptr);
     BITCOIN_ASSERT(out != nullptr);
     BITCOIN_ASSERT(out_chars >= in_bytes);
 
     // Calculate a character break offset of 0..4 bytes.
-    truncated = offset_to_terminal_utf8_character(in, in_bytes);
+    out_truncated = offset_to_terminal_utf8_character(in, in_bytes);
 
     if (in_bytes == 0)
         return 0;
@@ -316,7 +316,7 @@ size_t to_utf16(wchar_t out[], size_t out_chars, const char in[],
 
     try
     {
-        const auto wide = to_utf16({ in, &in[in_bytes - truncated] });
+        const auto wide = to_utf16({ in, &in[in_bytes - out_truncated] });
         chars = wide.size();
 
         if (chars <= out_chars)

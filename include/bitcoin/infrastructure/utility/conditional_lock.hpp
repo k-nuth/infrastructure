@@ -29,7 +29,7 @@ class BI_API conditional_lock
 {
 public:
     /// Conditional lock using specified mutex pointer.
-    conditional_lock(std::shared_ptr<shared_mutex> mutex_ptr);
+    explicit conditional_lock(std::shared_ptr<shared_mutex> mutex_ptr);
 
     /// Unlock.
     virtual ~conditional_lock();

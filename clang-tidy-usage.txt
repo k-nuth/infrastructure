@@ -421,11 +421,72 @@ Applied:
 bugprone:
 ---------------------------------
 /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,bugprone-*' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
+/home/fernando/run-clang-tidy.py -checks='-*,bugprone-*' -header-filter=/home/fernando/dev/bitprim-infrastructure/include/
 
 ---------------------------------
 cert:
 ---------------------------------
 /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,cert-*' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
+/home/fernando/run-clang-tidy.py  -checks='-*,cert-*' -header-filter=/home/fernando/dev/bitprim-infrastructure/include/
+
+
+---------------------------------
+clang-analyzer:
+---------------------------------
+
+/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,clang-analyzer-*' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
+/home/fernando/run-clang-tidy.py  -checks='-*,clang-analyzer-*' -header-filter=/home/fernando/dev/bitprim-infrastructure/include/
+
+
+---------------------------------
+cppcoreguidelines:
+---------------------------------
+
+/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,cppcoreguidelines-*' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
+/home/fernando/run-clang-tidy.py  -checks='-*,cppcoreguidelines-*' -header-filter=/home/fernando/dev/bitprim-infrastructure/include/
+
+
+
+---------------------------------
+google:
+---------------------------------
+
+/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,google-*' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
+/home/fernando/run-clang-tidy.py  -checks='-*,google-*' -header-filter=/home/fernando/dev/bitprim-infrastructure/include/
+/home/fernando/run-clang-tidy.py  -checks='-*,google-*,-google-readability-braces-around-statements' -header-filter=/home/fernando/dev/bitprim-infrastructure/include/
+
+/home/fernando/run-clang-tidy.py  -checks='-*,google-runtime-references' -header-filter=/home/fernando/dev/bitprim-infrastructure/include/
+
+
+
+---------------------------------
+hicpp:
+---------------------------------
+
+/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,hicpp-*' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
+/home/fernando/run-clang-tidy.py  -checks='-*,hicpp-*' -header-filter=/home/fernando/dev/bitprim-infrastructure/include/
+
+/home/fernando/run-clang-tidy.py  -checks='-*,hicpp-*,-hicpp-braces-around-statements' -header-filter=/home/fernando/dev/bitprim-infrastructure/include/
+
+/home/fernando/run-clang-tidy.py  -checks='-*,hicpp-explicit-conversions' -header-filter=/home/fernando/dev/bitprim-infrastructure/include/
+
+
+
+
+---------------------------------
+llvm:
+---------------------------------
+
+/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,llvm-*' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
+/home/fernando/run-clang-tidy.py  -checks='-*,llvm-*' -header-filter=/home/fernando/dev/bitprim-infrastructure/include/
+
+
+/home/fernando/run-clang-tidy.py  -checks='-*,llvm-*,-llvm-header-guard' -header-filter=/home/fernando/dev/bitprim-infrastructure/include/
+
+
+/home/fernando/run-clang-tidy.py  -checks='-*,llvm-include-order' -header-filter=/home/fernando/dev/bitprim-infrastructure/include/
+
+
 
 
 ---------------------------------

@@ -45,7 +45,7 @@ public:
      * @param[in]   number_threads  Number of threads to spawn.
      * @param[in]   priority        Priority of threads to spawn.
      */
-     threadpool(size_t number_threads=0,
+     explicit threadpool(size_t number_threads=0,
         thread_priority priority=thread_priority::normal);
 
     virtual ~threadpool();

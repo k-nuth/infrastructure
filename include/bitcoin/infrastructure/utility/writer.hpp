@@ -34,7 +34,7 @@ class BI_API writer
 {
 public:
     /// Context.
-    virtual operator bool() const = 0;
+    virtual explicit operator bool() const = 0;
     virtual bool operator!() const = 0;
 
     /// Write hashes.

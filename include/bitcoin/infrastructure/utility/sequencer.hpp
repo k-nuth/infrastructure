@@ -38,7 +38,7 @@ public:
     using action = std::function<void ()>;
     using guard = std::lock_guard<shared_mutex>;
 
-    sequencer(asio::service& service);
+    explicit sequencer(asio::service& service);
     virtual ~sequencer();
 
     void lock(action&& handler);

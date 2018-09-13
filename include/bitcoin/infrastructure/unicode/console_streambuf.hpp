@@ -51,7 +51,7 @@ protected:
      * Delete stream buffer.
      */
 #ifdef _MSC_VER
-    virtual ~console_streambuf();
+    ~console_streambuf() override;
 #else
     ~console_streambuf() override = default;
 #endif

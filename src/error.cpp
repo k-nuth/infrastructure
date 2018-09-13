@@ -310,7 +310,7 @@ namespace error {
         // ASIO codes are unique on Windows but not on Linux.
         namespace asio_error = boost::asio::error;
 #endif
-        // TODO: use a static map (hash table)
+        // TODO(libbitcoin): use a static map (hash table)
         switch (ec.value())
         {
             // There should be no boost mapping to the shutdown sentinel.
@@ -433,7 +433,7 @@ namespace error {
 
     error_code_t posix_to_error_code(int ec)
     {
-        // TODO: expand mapping for database scenario.
+        // TODO(libbitcoin): expand mapping for database scenario.
         switch (ec)
         {
             // protocol codes (from zeromq)

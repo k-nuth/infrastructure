@@ -24,10 +24,12 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin { namespace message {
+namespace libbitcoin { 
+namespace message {
 
 BI_API size_t variable_uint_size(uint64_t value);
 
-}} // namespace libbitcoin::message
+} // namespace message
+} // namespace libbitcoin
 
 #endif // BITPRIM_INFRASTRUCTURE_MESSAGE_TOOLS_HPP_

@@ -36,7 +36,7 @@
     #define BI_CONSTCTOR constexpr
 #endif
 
-// TODO: prefix names with BI_
+// TODO(libbitcoin): prefix names with BI_
 #ifdef _MSC_VER
     #define MIN_INT64 INT64_MIN
     #define MAX_INT64 INT64_MAX
