@@ -420,15 +420,16 @@ Applied:
 ---------------------------------
 bugprone:
 ---------------------------------
-
 /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,bugprone-*' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
-
-
-
 
 ---------------------------------
 cert:
 ---------------------------------
-
 /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,cert-*' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
+
+
+---------------------------------
+clang-analyzer:
+---------------------------------
+/usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='-*,clang-analyzer-*' -header-filter=/Users/fernando/dev/bitprim-infrastructure/include/
 
