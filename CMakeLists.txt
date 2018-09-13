@@ -440,8 +440,18 @@ set(bitprim_infrastructure_sources_just_libbitcoin
         src/wallet/uri.cpp
       )
 
+# if (${CURRENCY} STREQUAL "LTC")
+#     set(bitprim_domain_sources_just_bitprim 
+#     ${bitprim_domain_sources_just_bitprim}         
+#     src/math/external/scrypt.cpp
+#     src/math/external/scrypt-sse2.cpp)
+# endif()
+  
+
 set(bitprim_infrastructure_sources_just_bitprim
-      src/wallet/cashaddr.cpp
+    # src/math/external/scrypt.cpp
+    # src/math/external/scrypt-sse2.cpp
+    src/wallet/cashaddr.cpp
 )
 
 if (NOT JUST_BITPRIM_SOURCES)

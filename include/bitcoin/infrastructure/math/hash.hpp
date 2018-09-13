@@ -129,8 +129,8 @@ BI_API hash_digest bitcoin_hash(data_slice data);
 
 //TODO(fernando): see what to do with Currency
 // #ifdef BITPRIM_CURRENCY_LTC
-// /// Generate a litecoin hash.
-// BI_API hash_digest litecoin_hash(data_slice data);
+/// Generate a litecoin hash.
+BI_API hash_digest litecoin_hash(data_slice data);
 // #endif //BITPRIM_CURRENCY_LTC
 
 /// Generate a bitcoin short hash.

@@ -45,7 +45,6 @@ hash_digest bitcoin_hash(data_slice data)
     return sha256_hash(sha256_hash(data));
 }
 
-//TODO(fernando): see what to do with Currency
 // #ifdef BITPRIM_CURRENCY_LTC
 // hash_digest litecoin_hash(data_slice data) {
 //     hash_digest hash;
