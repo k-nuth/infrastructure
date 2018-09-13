@@ -372,7 +372,7 @@ set(bitprim_infrastructure_sources_just_libbitcoin
         src/log/file_collector_repository.cpp
         src/log/file_counter_formatter.cpp
         src/log/sink.cpp
-        # src/log/statsd_sink.cpp
+        src/log/statsd_sink.cpp
         src/log/udp_client_sink.cpp
         
         src/message/message_tools.cpp
@@ -901,7 +901,7 @@ set(_bitprim_infrastructure_headers
     bitcoin/infrastructure/log/severity.hpp
     bitcoin/infrastructure/log/sink.hpp
     bitcoin/infrastructure/log/source.hpp
-    # bitcoin/infrastructure/log/statsd_sink.hpp
+    bitcoin/infrastructure/log/statsd_sink.hpp
     bitcoin/infrastructure/log/statsd_source.hpp
     bitcoin/infrastructure/log/udp_client_sink.hpp
 

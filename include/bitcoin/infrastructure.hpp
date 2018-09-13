@@ -53,7 +53,7 @@
 #include <bitcoin/infrastructure/log/severity.hpp>
 #include <bitcoin/infrastructure/log/sink.hpp>
 #include <bitcoin/infrastructure/log/source.hpp>
-// #include <bitcoin/infrastructure/log/statsd_sink.hpp>
+#include <bitcoin/infrastructure/log/statsd_sink.hpp>
 #include <bitcoin/infrastructure/log/statsd_source.hpp>
 #include <bitcoin/infrastructure/log/udp_client_sink.hpp>
 #include <bitcoin/infrastructure/log/features/counter.hpp>
@@ -76,8 +76,6 @@
 #include <bitcoin/infrastructure/math/crypto.hpp>
 #include <bitcoin/infrastructure/math/elliptic_curve.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>
-//#include <bitcoin/infrastructure/utility/limits.hpp>
-// #include <bitcoin/infrastructure/math/stealth.hpp>
 #include <bitcoin/infrastructure/math/uint256.hpp>
 
 #include <bitcoin/infrastructure/message/message_tools.hpp>
@@ -138,27 +136,13 @@
 #include <bitcoin/infrastructure/utility/work.hpp>
 #include <bitcoin/infrastructure/utility/writer.hpp>
 
-// #include <bitcoin/infrastructure/wallet/bitcoin_uri.hpp>
 #include <bitcoin/infrastructure/wallet/dictionary.hpp>
-// #include <bitcoin/infrastructure/wallet/ec_private.hpp>
-// #include <bitcoin/infrastructure/wallet/ec_public.hpp>
-// #include <bitcoin/infrastructure/wallet/ek_private.hpp>
-// #include <bitcoin/infrastructure/wallet/ek_public.hpp>
-// #include <bitcoin/infrastructure/wallet/ek_token.hpp>
-// #include <bitcoin/infrastructure/wallet/encrypted_keys.hpp>
 #include <bitcoin/infrastructure/wallet/hd_private.hpp>
 #include <bitcoin/infrastructure/wallet/hd_public.hpp>
 // #include <bitcoin/infrastructure/wallet/message.hpp>
 #include <bitcoin/infrastructure/wallet/mini_keys.hpp>
 #include <bitcoin/infrastructure/wallet/mnemonic.hpp>
-// #include <bitcoin/infrastructure/wallet/payment_address.hpp>
 #include <bitcoin/infrastructure/wallet/qrcode.hpp>
-// #include <bitcoin/infrastructure/wallet/select_outputs.hpp>
-// #include <bitcoin/infrastructure/wallet/stealth_address.hpp>
-// #include <bitcoin/infrastructure/wallet/stealth_receiver.hpp>
-// #include <bitcoin/infrastructure/wallet/stealth_sender.hpp>
 #include <bitcoin/infrastructure/wallet/uri.hpp>
-// #include <bitcoin/infrastructure/wallet/uri_reader.hpp>
-
 
 #endif /*BITPRIM_INFRASTRUCTURE_INFRASTRUCTURE_HPP_*/

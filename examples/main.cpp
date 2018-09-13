@@ -20,7 +20,7 @@
 #include <string>
 #include <bitcoin/infrastructure.hpp>
 
-BI_USE_LIBBITCOIN_MAIN
+BC_USE_LIBBITCOIN_MAIN
 
 int bc::main(int argc, char* argv[]) {
     return 0;
