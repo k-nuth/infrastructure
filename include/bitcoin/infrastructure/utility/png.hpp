@@ -34,19 +34,19 @@ namespace libbitcoin {
 class BI_API png
 {
 public:
-    static BI_CONSTEXPR uint32_t margin = 2;
-    static BI_CONSTEXPR uint32_t dots_per_inch = 72;
-    static BI_CONSTEXPR uint32_t inches_per_meter = (100.0 / 2.54);
+    static BC_CONSTEXPR uint32_t margin = 2;
+    static BC_CONSTEXPR uint32_t dots_per_inch = 72;
+    static BC_CONSTEXPR uint32_t inches_per_meter = (100.0 / 2.54);
 
     static const color get_default_foreground()
     {
-        static BI_CONSTEXPR color default_foreground{ 0, 0, 0, 255 };
+        static BC_CONSTEXPR color default_foreground{ 0, 0, 0, 255 };
         return default_foreground;
     }
 
     static const color get_default_background()
     {
-        static BI_CONSTEXPR color default_background{ 255, 255, 255, 255 };
+        static BC_CONSTEXPR color default_background{ 255, 255, 255, 255 };
         return default_background;
     }
 

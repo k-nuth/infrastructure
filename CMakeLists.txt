@@ -303,7 +303,6 @@ if (ENABLE_SHARED)
 endif()
 
 set(bitprim_infrastructure_sources_just_libbitcoin 
-
         # src/machine/interpreter.cpp
         src/machine/number.cpp
         src/machine/opcode.cpp
@@ -351,7 +350,7 @@ set(bitprim_infrastructure_sources_just_libbitcoin
         src/math/external/pbkdf2_sha256.h
         src/math/external/pkcs5_pbkdf2.h
         src/math/external/ripemd160.h
-        src/math/external/scrypt.h
+        # src/math/external/scrypt.h
         src/math/external/sha1.h
         src/math/external/sha256.h
         src/math/external/sha512.h
@@ -397,16 +396,13 @@ set(bitprim_infrastructure_sources_just_libbitcoin
         src/utility/istream_reader.cpp
         src/utility/monitor.cpp
         src/utility/ostream_writer.cpp
-        
         src/utility/png.cpp
         src/utility/prioritized_mutex.cpp
-
         src/utility/pseudo_random.cpp
-        # src/utility/random.cpp
         src/utility/scope_lock.cpp
         src/utility/sequencer.cpp
         src/utility/sequential_lock.cpp
-        # src/utility/socket.cpp
+        src/utility/socket.cpp
         src/utility/string.cpp
         src/utility/thread.cpp
         src/utility/threadpool.cpp
@@ -425,10 +421,10 @@ set(bitprim_infrastructure_sources_just_libbitcoin
         # src/wallet/message.cpp
         src/wallet/mini_keys.cpp
         src/wallet/mnemonic.cpp
-        src/wallet/parse_encrypted_keys/parse_encrypted_key.hpp
-        src/wallet/parse_encrypted_keys/parse_encrypted_key.ipp
-        src/wallet/parse_encrypted_keys/parse_encrypted_prefix.hpp
-        src/wallet/parse_encrypted_keys/parse_encrypted_prefix.ipp
+        # src/wallet/parse_encrypted_keys/parse_encrypted_key.hpp
+        # src/wallet/parse_encrypted_keys/parse_encrypted_key.ipp
+        # src/wallet/parse_encrypted_keys/parse_encrypted_prefix.hpp
+        # src/wallet/parse_encrypted_keys/parse_encrypted_prefix.ipp
         # src/wallet/parse_encrypted_keys/parse_encrypted_private.cpp
         # src/wallet/parse_encrypted_keys/parse_encrypted_private.hpp
         # src/wallet/parse_encrypted_keys/parse_encrypted_public.cpp
@@ -444,8 +440,8 @@ set(bitprim_infrastructure_sources_just_libbitcoin
         src/wallet/uri.cpp
       )
 
-
 set(bitprim_infrastructure_sources_just_bitprim
+      src/wallet/cashaddr.cpp
 )
 
 if (NOT JUST_BITPRIM_SOURCES)
@@ -586,6 +582,7 @@ if (WITH_TESTS)
         test/unicode/unicode.cpp
         test/unicode/unicode_istream.cpp
         test/unicode/unicode_ostream.cpp
+        
         test/utility/binary.cpp
         test/utility/collection.cpp
         test/utility/data.cpp
@@ -596,21 +593,12 @@ if (WITH_TESTS)
         test/utility/stream.cpp
         test/utility/thread.cpp
 
-        # test/wallet/bitcoin_uri.cpp
-        # test/wallet/ec_private.cpp
-        test/wallet/ec_public.cpp
-        # test/wallet/encrypted_keys.cpp
         test/wallet/hd_private.cpp
         test/wallet/hd_public.cpp
-        # test/wallet/message.cpp
         test/wallet/mnemonic.cpp
         test/wallet/mnemonic.hpp
-        # test/wallet/payment_address.cpp
         test/wallet/qrcode.cpp
-        # test/wallet/stealth_address.cpp
         test/wallet/uri.cpp
-        # test/wallet/uri_reader.cpp
-        # test/wallet/transaction_functions.cpp
     )
 
 
@@ -845,8 +833,8 @@ set(_bitprim_infrastructure_headers
     bitcoin/infrastructure/config/script.hpp
     bitcoin/infrastructure/config/ec_private.hpp
     bitcoin/infrastructure/config/endorsement.hpp
-    bitcoin/infrastructure/utility/string.hpp
-    bitcoin/infrastructure/impl/utility/string.ipp
+
+
 
     bitcoin/infrastructure/formats/base_10.hpp
     bitcoin/infrastructure/formats/base_16.hpp
@@ -887,10 +875,11 @@ set(_bitprim_infrastructure_headers
     bitcoin/infrastructure/impl/utility/endian.ipp
     bitcoin/infrastructure/impl/utility/istream_reader.ipp
     bitcoin/infrastructure/impl/utility/ostream_writer.ipp
-    bitcoin/infrastructure/impl/utility/pending.ipp    
+    bitcoin/infrastructure/impl/utility/pending.ipp
     bitcoin/infrastructure/impl/utility/resubscriber.ipp
     bitcoin/infrastructure/impl/utility/serializer.ipp
     bitcoin/infrastructure/impl/utility/subscriber.ipp
+    bitcoin/infrastructure/impl/utility/string.ipp
     bitcoin/infrastructure/impl/utility/track.ipp
 
     bitcoin/infrastructure/log/attributes.hpp
@@ -949,19 +938,16 @@ set(_bitprim_infrastructure_headers
     bitcoin/infrastructure/utility/noncopyable.hpp
     bitcoin/infrastructure/utility/ostream_writer.hpp
     bitcoin/infrastructure/utility/pending.hpp
-
     bitcoin/infrastructure/utility/png.hpp
     bitcoin/infrastructure/utility/prioritized_mutex.hpp
-
     bitcoin/infrastructure/utility/pseudo_random.hpp
-    # bitcoin/infrastructure/utility/random.hpp
     bitcoin/infrastructure/utility/reader.hpp
     bitcoin/infrastructure/utility/resubscriber.hpp
     bitcoin/infrastructure/utility/scope_lock.hpp
     bitcoin/infrastructure/utility/sequencer.hpp
     bitcoin/infrastructure/utility/sequential_lock.hpp
     bitcoin/infrastructure/utility/serializer.hpp
-    # bitcoin/infrastructure/utility/socket.hpp    
+    bitcoin/infrastructure/utility/socket.hpp    
     bitcoin/infrastructure/utility/string.hpp
     bitcoin/infrastructure/utility/subscriber.hpp
     bitcoin/infrastructure/utility/synchronizer.hpp

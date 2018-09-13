@@ -33,12 +33,12 @@
 namespace libbitcoin {
 
 // // Common bitcoin hash container sizes.
-// static BI_CONSTEXPR size_t hash_size = 32;
-// static BI_CONSTEXPR size_t half_hash_size = hash_size / 2;
-// static BI_CONSTEXPR size_t quarter_hash_size = half_hash_size / 2;
-// static BI_CONSTEXPR size_t long_hash_size = 2 * hash_size;
-// static BI_CONSTEXPR size_t short_hash_size = 20;
-// static BI_CONSTEXPR size_t mini_hash_size = 6;
+// static BC_CONSTEXPR size_t hash_size = 32;
+// static BC_CONSTEXPR size_t half_hash_size = hash_size / 2;
+// static BC_CONSTEXPR size_t quarter_hash_size = half_hash_size / 2;
+// static BC_CONSTEXPR size_t long_hash_size = 2 * hash_size;
+// static BC_CONSTEXPR size_t short_hash_size = 20;
+// static BC_CONSTEXPR size_t mini_hash_size = 6;
 
 // // Common bitcoin hash containers.
 // typedef byte_array<hash_size> hash_digest;
@@ -61,7 +61,7 @@ typedef boost::multiprecision::uint256_t uint256_t;
 
 // // Null-valued common bitcoin hashes.
 
-// BI_CONSTEXPR hash_digest null_hash
+// BC_CONSTEXPR hash_digest null_hash
 // {
 //     {
 //         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -69,21 +69,21 @@ typedef boost::multiprecision::uint256_t uint256_t;
 //     }
 // };
 
-BI_CONSTEXPR half_hash null_half_hash
+BC_CONSTEXPR half_hash null_half_hash
 {
     {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
     }
 };
 
-BI_CONSTEXPR quarter_hash null_quarter_hash
+BC_CONSTEXPR quarter_hash null_quarter_hash
 {
     {
         0, 0, 0, 0, 0, 0, 0, 0
     }
 };
 
-BI_CONSTEXPR long_hash null_long_hash
+BC_CONSTEXPR long_hash null_long_hash
 {
     {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -93,7 +93,7 @@ BI_CONSTEXPR long_hash null_long_hash
     }
 };
 
-BI_CONSTEXPR short_hash null_short_hash
+BC_CONSTEXPR short_hash null_short_hash
 {
     {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -102,7 +102,7 @@ BI_CONSTEXPR short_hash null_short_hash
 };
 
 
-BI_CONSTEXPR mini_hash null_mini_hash
+BC_CONSTEXPR mini_hash null_mini_hash
 {
     {
         0, 0, 0, 0, 0, 0
