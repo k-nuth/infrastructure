@@ -127,7 +127,7 @@
 #include <bitcoin/infrastructure/utility/sequencer.hpp>
 #include <bitcoin/infrastructure/utility/sequential_lock.hpp>
 #include <bitcoin/infrastructure/utility/serializer.hpp>
-// #include <bitcoin/infrastructure/utility/socket.hpp>
+#include <bitcoin/infrastructure/utility/socket.hpp>
 #include <bitcoin/infrastructure/utility/string.hpp>
 #include <bitcoin/infrastructure/utility/subscriber.hpp>
 #include <bitcoin/infrastructure/utility/synchronizer.hpp>
