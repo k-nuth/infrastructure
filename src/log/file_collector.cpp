@@ -231,9 +231,8 @@ bool match_pattern(path_string_type const& file_name, path_string_type const& pa
         } 
         return true;
         
-    } else {
-        return false;
-    }
+    } 
+    return false;
 }
 
 file_collector::file_collector(boost::shared_ptr<file_collector_repository> const& repo, filesystem::path const& target_dir,

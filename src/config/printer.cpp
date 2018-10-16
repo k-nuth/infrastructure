@@ -136,13 +136,17 @@ std::string format_row_name(const parameter& value) {
     if (value.get_position() != parameter::not_positional) {
         return (format(BI_PRINTER_TABLE_ARGUMENT_FORMAT) % boost::to_upper_copy(value.get_long_name())).str();
     } 
+    
     if (value.get_short_name() == parameter::no_short_name) {
         return (format(BI_PRINTER_TABLE_OPTION_LONG_FORMAT) % value.get_long_name()).str();
-    } else if (value.get_long_name().empty()) {
+    } 
+    
+    if (value.get_long_name().empty()) {
         return (format(BI_PRINTER_TABLE_OPTION_SHORT_FORMAT) % value.get_short_name()).str();
-    } else {
-        return (format(BI_PRINTER_TABLE_OPTION_FORMAT) % value.get_short_name() % value.get_long_name()).str();
-    }
+    } 
+    
+    return (format(BI_PRINTER_TABLE_OPTION_FORMAT) % value.get_short_name() % value.get_long_name()).str();
+    
 }
 
 // 100% component tested.

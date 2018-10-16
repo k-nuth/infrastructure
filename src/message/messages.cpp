@@ -24,19 +24,20 @@
 namespace libbitcoin {
 namespace message {
 
-size_t variable_uint_size(uint64_t value)
-{
+size_t variable_uint_size(uint64_t value) {
     if (value < 0xfd) {
         return 1;
-    } 
+    }
     
     if (value <= 0xffff) {
         return 3;
-    } else if (value <= 0xffffffff) {
-        return 5;
-    } else {
-        return 9;
     }
+    
+    if (value <= 0xffffffff) {
+        return 5;
+    }
+    
+    return 9;
 }
 
 } // namespace message
