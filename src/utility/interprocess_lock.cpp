@@ -56,7 +56,7 @@ interprocess_lock::~interprocess_lock()
 // This succeeds if no other process has exclusive or sharable ownership.
 bool interprocess_lock::lock()
 {
-    if (!create(file_)) {
+    if ( ! create(file_)) {
         return false;
 }
 
@@ -68,7 +68,7 @@ bool interprocess_lock::lock()
 // This may leave the lock file behind, which is not a problem.
 bool interprocess_lock::unlock()
 {
-    if (!lock_) {
+    if ( ! lock_) {
         return true;
 }
 

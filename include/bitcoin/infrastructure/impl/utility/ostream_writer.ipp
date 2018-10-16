@@ -29,7 +29,7 @@ void ostream_writer::write_forward(const byte_array<Size>& value)
 {
     auto const size = value.size();
     if (size > 0) {
-        stream_.write(reinterpret_cast<const char*>(value.data()), size);
+        stream_.write(reinterpret_cast<char const*>(value.data()), size);
 }
 }
 

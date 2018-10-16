@@ -94,7 +94,7 @@ printer::printer(const po::options_description& settings,
 static void enqueue_fragment(std::string& fragment,
     std::vector<std::string>& column)
 {
-    if (!fragment.empty()) {
+    if ( ! fragment.empty()) {
         column.push_back(fragment);
 }
 }
@@ -110,7 +110,7 @@ std::vector<std::string> printer::columnize(std::string const& paragraph,
 
     for (auto const& word: words)
     {
-        if (!fragment.empty() && (word.length() + fragment.length() < width))
+        if ( ! fragment.empty() && (word.length() + fragment.length() < width))
         {
             fragment += BI_SENTENCE_DELIMITER + word;
             continue;

@@ -35,14 +35,14 @@ BOOST_AUTO_TEST_CASE(hd_public__derive_public__invalid__false)
     BOOST_REQUIRE(decode_base16(seed, SHORT_SEED));
 
     const hd_private m(seed, hd_private::mainnet);
-    const hd_public m_pub = m;
+    hd_public const m_pub = m;
     BOOST_REQUIRE(!m_pub.derive_public(hd_first_hardened_key));
 }
 
 BOOST_AUTO_TEST_CASE(hd_public__encoded__round_trip__expected)
 {
     static auto const encoded = "xpub661MyMwAqRbcFtXgS5sYJABqqG9YLmC4Q1Rdap9gSE8NqtwybGhePY2gZ29ESFjqJoCu1Rupje8YtGqsefD265TMg7usUDFdp6W1EGMcet8";
-    const hd_public key(encoded);
+    hd_public const key(encoded);
     BOOST_REQUIRE_EQUAL(key.encoded(), encoded);
 }
 
@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(hd_public__derive_public__short_seed__expected)
     auto const m0h = m.derive_private(hd_first_hardened_key);
     auto const m0h1 = m0h.derive_private(1);
 
-    const hd_public m_pub = m;
+    hd_public const m_pub = m;
     auto const m0h_pub = m.derive_public(hd_first_hardened_key);
     auto const m0h1_pub = m0h_pub.derive_public(1);
     auto const m0h12h_pub = m0h1.derive_public(2 + hd_first_hardened_key);
@@ -80,7 +80,7 @@ BOOST_AUTO_TEST_CASE(hd_public__derive_public__long_seed__expected)
     auto const m0xH = m0.derive_private(2147483647 + hd_first_hardened_key);
     auto const m0xH1 = m0xH.derive_private(1);
 
-    const hd_public m_pub = m;
+    hd_public const m_pub = m;
     auto const m0_pub = m_pub.derive_public(0);
     auto const m0xH_pub = m0.derive_public(2147483647 + hd_first_hardened_key);
     auto const m0xH1_pub = m0xH_pub.derive_public(1);

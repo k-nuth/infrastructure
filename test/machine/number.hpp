@@ -86,7 +86,7 @@ struct number_compare
     bool ge;
 };
 
-const number_buffer number_adds[11][9][12] =
+number const_buffer number_adds[11][9][12] =
 {
     {
         {
@@ -1754,7 +1754,7 @@ const number_buffer number_adds[11][9][12] =
     ////},
 };
 
-const number_buffer number_negates[11][9][12] =
+number const_buffer number_negates[11][9][12] =
 {
     {
         {
@@ -3422,7 +3422,7 @@ const number_buffer number_negates[11][9][12] =
     ////},
 };
 
-const number_subtract number_subtracts[11][9][12] =
+number const_subtract number_subtracts[11][9][12] =
 {
     {
         {
@@ -5090,7 +5090,7 @@ const number_subtract number_subtracts[11][9][12] =
     ////},
 };
 
-const number_compare number_compares[11][9][12] =
+number const_compare number_compares[11][9][12] =
 {
     {
         {

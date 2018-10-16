@@ -84,27 +84,27 @@ static BC_CONSTEXPR ec_uncompressed null_uncompressed_point =
 
 /// Compute the sum a += G*b, where G is the curve's generator point.
 /// return false on failure (such as infinity or zero).
-BI_API bool ec_add(ec_compressed& point, const ec_secret& secret);
+BI_API bool ec_add(ec_compressed& point, ec_secret const& secret);
 
 /// Compute the sum a += G*b, where G is the curve's generator point.
 /// return false on failure (such as infinity or zero).
-BI_API bool ec_add(ec_uncompressed& point, const ec_secret& secret);
+BI_API bool ec_add(ec_uncompressed& point, ec_secret const& secret);
 
 /// Compute the sum a = (a + b) % n, where n is the curve order.
 /// return false on failure (such as a zero result).
-BI_API bool ec_add(ec_secret& left, const ec_secret& right);
+BI_API bool ec_add(ec_secret& left, ec_secret const& right);
 
 /// Compute the product point *= secret.
 /// return false on failure (such as infinity or zero).
-BI_API bool ec_multiply(ec_compressed& point, const ec_secret& secret);
+BI_API bool ec_multiply(ec_compressed& point, ec_secret const& secret);
 
 /// Compute the product point *= secret.
 /// return false on failure (such as infinity or zero).
-BI_API bool ec_multiply(ec_uncompressed& point, const ec_secret& secret);
+BI_API bool ec_multiply(ec_uncompressed& point, ec_secret const& secret);
 
 /// Compute the product a = (a * b) % n, where n is the curve order.
 /// return false on failure (such as a zero result).
-BI_API bool ec_multiply(ec_secret& left, const ec_secret& right);
+BI_API bool ec_multiply(ec_secret& left, ec_secret const& right);
 
 // Convert keys
 // ----------------------------------------------------------------------------
@@ -116,16 +116,16 @@ BI_API bool compress(ec_compressed& out, const ec_uncompressed& point);
 BI_API bool decompress(ec_uncompressed& out, const ec_compressed& point);
 
 /// Convert a secret to a compressed public point.
-BI_API bool secret_to_public(ec_compressed& out, const ec_secret& secret);
+BI_API bool secret_to_public(ec_compressed& out, ec_secret const& secret);
 
 /// Convert a secret parameter to an uncompressed public point.
-BI_API bool secret_to_public(ec_uncompressed& out, const ec_secret& secret);
+BI_API bool secret_to_public(ec_uncompressed& out, ec_secret const& secret);
 
 // Verify keys
 // ----------------------------------------------------------------------------
 
 /// Verify a secret.
-BI_API bool verify(const ec_secret& secret);
+BI_API bool verify(ec_secret const& secret);
 
 /// Verify a point.
 BI_API bool verify(const ec_compressed& point);
@@ -170,7 +170,7 @@ BI_API bool encode_signature(der_signature& out, const ec_signature& signature);
 // ----------------------------------------------------------------------------
 
 /// Create a deterministic ECDSA signature using a private key.
-BI_API bool sign(ec_signature& out, const ec_secret& secret,
+BI_API bool sign(ec_signature& out, ec_secret const& secret,
     hash_digest const& hash);
 
 /// Verify an EC signature using a compressed point.
@@ -190,7 +190,7 @@ BI_API bool verify_signature(data_slice point, hash_digest const& hash,
 
 /// Create a recoverable signature for use in message signing.
 BI_API bool sign_recoverable(recoverable_signature& out,
-    const ec_secret& secret, hash_digest const& hash);
+    ec_secret const& secret, hash_digest const& hash);
 
 /// Recover the compressed point from a recoverable message signature.
 BI_API bool recover_public(ec_compressed& out,

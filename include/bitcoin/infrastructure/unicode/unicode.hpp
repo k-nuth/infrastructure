@@ -200,7 +200,7 @@ BI_API std::string to_utf8(const std::wstring& wide);
  * @param[in]  truncated  The number of 'in' bytes [0..3] that were truncated.
  * @return                The number of characters converted.
  */
-BI_API size_t to_utf16(wchar_t out[], size_t out_chars, const char in[],
+BI_API size_t to_utf16(wchar_t out[], size_t out_chars, char const in[],
     size_t in_bytes, uint8_t& truncated);
 
 /**

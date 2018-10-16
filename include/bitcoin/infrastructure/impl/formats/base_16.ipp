@@ -25,7 +25,7 @@ namespace libbitcoin {
 
 // For template implementation only, do not call directly.
 BI_API bool decode_base16_private(uint8_t* out, size_t out_size,
-    const char* in);
+    char const* in);
 
 template <size_t Size>
 bool decode_base16(byte_array<Size>& out, std::string const &in)
@@ -35,7 +35,7 @@ bool decode_base16(byte_array<Size>& out, std::string const &in)
 }
 
     byte_array<Size> result;
-    if (!decode_base16_private(result.data(), result.size(), in.data())) {
+    if ( ! decode_base16_private(result.data(), result.size(), in.data())) {
         return false;
 }
 
@@ -44,7 +44,7 @@ bool decode_base16(byte_array<Size>& out, std::string const &in)
 }
 
 template <size_t Size>
-byte_array<(Size - 1) / 2> base16_literal(const char (&string)[Size])
+byte_array<(Size - 1) / 2> base16_literal(char const (&string)[Size])
 {
     byte_array<(Size - 1) / 2> out;
     DEBUG_ONLY(auto const success =) decode_base16_private(out.data(),

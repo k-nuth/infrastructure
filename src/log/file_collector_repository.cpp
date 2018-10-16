@@ -51,7 +51,7 @@ boost::shared_ptr<boost::log::sinks::file::collector> file_collector_repository:
     }
 }
 
-    if (!result)
+    if ( ! result)
     {
         result = boost::make_shared<file_collector>(
             file_collector_repository::get(),

@@ -72,8 +72,8 @@ public:
      * @param[out]  argument  The object to receive the read value.
      * @return                The input stream reference.
      */
-    friend std::istream& operator>>(std::istream& input,
-        hash160& argument);
+    friend 
+    std::istream& operator>>(std::istream& input, hash160& argument);
 
     /**
      * Overload stream out.
@@ -81,8 +81,8 @@ public:
      * @param[out]  argument  The object from which to obtain the value.
      * @return                The output stream reference.
      */
-    friend std::ostream& operator<<(std::ostream& output,
-        const hash160& argument);
+    friend 
+    std::ostream& operator<<(std::ostream& output, hash160 const& argument);
 
 private:
 

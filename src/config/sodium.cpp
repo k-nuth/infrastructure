@@ -32,55 +32,45 @@ namespace libbitcoin {
 namespace config {
 
 sodium::sodium()
-  : value_(null_hash)
-{
-}
+    : value_(null_hash)
+{}
 
-sodium::sodium(std::string const& base85)
-{
+sodium::sodium(std::string const& base85) {
     std::stringstream(base85) >> *this;
 }
 
 sodium::sodium(hash_digest const& value)
-  : value_(value)
-{
-}
+    : value_(value)
+{}
 
-sodium::sodium(const sodium& other)
-  : sodium(other.value_)
-{
-}
+sodium::sodium(sodium const& x)
+    : sodium(x.value_)
+{}
 
-sodium::operator hash_digest const&() const
-{
+sodium::operator hash_digest const&() const {
     return value_;
 }
 
-sodium::operator data_slice() const
-{
+sodium::operator data_slice() const {
     return value_;
 }
 
-sodium::operator bool const() const
-{
+sodium::operator bool const() const {
     return value_ != null_hash;
 }
 
-std::string sodium::to_string() const
-{
+std::string sodium::to_string() const {
     std::stringstream value;
     value << *this;
     return value.str();
 }
 
-std::istream& operator>>(std::istream& input, sodium& argument)
-{
+std::istream& operator>>(std::istream& input, sodium& argument) {
     std::string base85;
     input >> base85;
 
     data_chunk out_value;
-    if (!decode_base85(out_value, base85) || out_value.size() != hash_size)
-    {
+    if ( ! decode_base85(out_value, base85) || out_value.size() != hash_size) {
         using namespace boost::program_options;
         BOOST_THROW_EXCEPTION(invalid_option_value(base85));
     }
@@ -89,8 +79,7 @@ std::istream& operator>>(std::istream& input, sodium& argument)
     return input;
 }
 
-std::ostream& operator<<(std::ostream& output, const sodium& argument)
-{
+std::ostream& operator<<(std::ostream& output, const sodium& argument) {
     std::string decoded;
 
     // Z85 requires four byte alignment (hash_digest is 32).

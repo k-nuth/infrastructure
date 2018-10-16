@@ -32,45 +32,38 @@ namespace libbitcoin {
 namespace config {
 
 hash256::hash256()
-  : value_(null_hash)
-{
-}
+    : value_(null_hash)
+{}
 
 hash256::hash256(std::string const& hexcode)
-  : hash256()
+    : hash256()
 {
     std::stringstream(hexcode) >> *this;
 }
 
 hash256::hash256(hash_digest const& value)
-  : value_(value)
-{
-}
+    : value_(value)
+{}
 
-hash256::hash256(const hash256& other)
-  : hash256(other.value_)
-{
-}
+hash256::hash256(const hash256& x)
+    : hash256(x.value_)
+{}
 
-std::string hash256::to_string() const
-{
+std::string hash256::to_string() const {
     std::stringstream value;
     value << *this;
     return value.str();
 }
 
-hash256::operator hash_digest const&() const
-{
+hash256::operator hash_digest const&() const {
     return value_;
 }
 
-std::istream& operator>>(std::istream& input, hash256& argument)
-{
+std::istream& operator>>(std::istream& input, hash256& argument) {
     std::string hexcode;
     input >> hexcode;
 
-    if (!decode_hash(argument.value_, hexcode))
-    {
+    if ( ! decode_hash(argument.value_, hexcode)) {
         using namespace boost::program_options;
         BOOST_THROW_EXCEPTION(invalid_option_value(hexcode));
     }
@@ -78,8 +71,7 @@ std::istream& operator>>(std::istream& input, hash256& argument)
     return input;
 }
 
-std::ostream& operator<<(std::ostream& output, const hash256& argument)
-{
+std::ostream& operator<<(std::ostream& output, const hash256& argument) {
     output << encode_hash(argument.value_);
     return output;
 }

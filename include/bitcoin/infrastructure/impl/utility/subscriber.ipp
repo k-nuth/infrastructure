@@ -74,7 +74,7 @@ void subscriber<Args...>::stop()
     ///////////////////////////////////////////////////////////////////////////
     subscribe_mutex_.lock_upgrade();
 
-    if (!stopped_)
+    if ( ! stopped_)
     {
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         subscribe_mutex_.unlock_upgrade_and_lock();
@@ -95,7 +95,7 @@ void subscriber<Args...>::subscribe(handler&& notify, Args... stopped_args)
     ///////////////////////////////////////////////////////////////////////////
     subscribe_mutex_.lock_upgrade();
 
-    if (!stopped_)
+    if ( ! stopped_)
     {
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         subscribe_mutex_.unlock_upgrade_and_lock();

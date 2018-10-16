@@ -123,7 +123,7 @@ public:
      * Override the equality operator.
      * @param[in]  other  The other object with which to compare.
      */
-    bool operator==(checkpoint const& other) const;
+    bool operator==(checkpoint const& x) const;
 
     /**
      * Define stream in. Throws if input is invalid.

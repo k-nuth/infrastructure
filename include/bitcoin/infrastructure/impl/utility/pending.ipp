@@ -108,7 +108,7 @@ code pending<Element>::store(element_ptr element, finder match)
 
     auto const stopped = stopped_.load();
 
-    if (!stopped)
+    if ( ! stopped)
     {
         if (std::find_if(elements_.begin(), elements_.end(), match) ==
             elements_.end())
@@ -162,7 +162,7 @@ void pending<Element>::stop(const code& ec)
     ///////////////////////////////////////////////////////////////////////////
     mutex_.lock_upgrade();
 
-    if (!stopped_)
+    if ( ! stopped_)
     {
         mutex_.unlock_upgrade_and_lock();
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

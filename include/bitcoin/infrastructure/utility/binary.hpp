@@ -42,7 +42,7 @@ public:
     bool is_base2(std::string const& text);
 
     binary();
-    binary(binary const& other);
+    binary(binary const& x);
 
     explicit 
     binary(std::string const& bit_string);
@@ -67,10 +67,10 @@ public:
     bool is_prefix_of(uint32_t field) const;
     bool is_prefix_of(const binary& field) const;
 
-    bool operator<(const binary& other) const;
-    bool operator==(const binary& other) const;
-    bool operator!=(const binary& other) const;
-    binary& operator=(const binary& other);
+    bool operator<(const binary& x) const;
+    bool operator==(const binary& x) const;
+    bool operator!=(const binary& x) const;
+    binary& operator=(const binary& x);
     
     friend 
     std::istream& operator>>(std::istream& in, binary& to);

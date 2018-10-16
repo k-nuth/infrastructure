@@ -203,30 +203,27 @@ size_t deserializer<Iterator, CheckSafe>::read_size_little_endian()
 //-----------------------------------------------------------------------------
 
 template <typename Iterator, bool CheckSafe>
-uint8_t deserializer<Iterator, CheckSafe>::peek_byte()
-{
-    if (!safe(1)) {
+uint8_t deserializer<Iterator, CheckSafe>::peek_byte() {
+    if ( ! safe(1)) {
         invalidate();
-}
+    }
 
     return valid_ ? *iterator_ : 0;
 }
 
 template <typename Iterator, bool CheckSafe>
-uint8_t deserializer<Iterator, CheckSafe>::read_byte()
-{
+uint8_t deserializer<Iterator, CheckSafe>::read_byte() {
     ////return read_forward<1>()[0];
 
-    if (!safe(1)) {
+    if ( ! safe(1)) {
         invalidate();
-}
+    }
 
     return valid_ ? *iterator_++ : 0;
 }
 
 template <typename Iterator, bool CheckSafe>
-data_chunk deserializer<Iterator, CheckSafe>::read_bytes()
-{
+data_chunk deserializer<Iterator, CheckSafe>::read_bytes() {
     // This read is always safe but always reads zero bytes in unsafe reader.
     return read_bytes(remaining());
 }
@@ -234,19 +231,18 @@ data_chunk deserializer<Iterator, CheckSafe>::read_bytes()
 // Return size is guaranteed.
 // This is a memory exhaustion risk if caller does not control size.
 template <typename Iterator, bool CheckSafe>
-data_chunk deserializer<Iterator, CheckSafe>::read_bytes(size_t size)
-{
+data_chunk deserializer<Iterator, CheckSafe>::read_bytes(size_t size) {
     // TODO: avoid unnecessary default zero fill using
     // the allocator adapter here: stackoverflow.com/a/21028912/1172329.
     data_chunk out(size);
 
-    if (!safe(size)) {
+    if ( ! safe(size)) {
         invalidate();
-}
+    }
 
-    if (!valid_ || size == 0) {
+    if ( ! valid_ || size == 0) {
         return out;
-}
+    }
 
     auto const begin = iterator_;
     iterator_ += size;
@@ -255,8 +251,7 @@ data_chunk deserializer<Iterator, CheckSafe>::read_bytes(size_t size)
 }
 
 template <typename Iterator, bool CheckSafe>
-std::string deserializer<Iterator, CheckSafe>::read_string()
-{
+std::string deserializer<Iterator, CheckSafe>::read_string() {
     return read_string(read_size_little_endian());
 }
 
@@ -267,7 +262,7 @@ std::string deserializer<Iterator, CheckSafe>::read_string(size_t size) {
         invalidate();
     }
 
-    if (!valid_) {
+    if ( ! valid_) {
         return {};
     }
 
@@ -294,30 +289,28 @@ std::string deserializer<Iterator, CheckSafe>::read_string(size_t size) {
 }
 
 template <typename Iterator, bool CheckSafe>
-void deserializer<Iterator, CheckSafe>::skip(size_t size)
-{
-    if (!safe(size)) {
+void deserializer<Iterator, CheckSafe>::skip(size_t size) {
+    if ( ! safe(size)) {
         invalidate();
-}
+    }
 
-    if (!valid_) {
+    if ( ! valid_) {
         return;
-}
+    }
 
     iterator_ += size;
 }
 
 template <typename Iterator, bool CheckSafe>
 template <unsigned Size>
-byte_array<Size> deserializer<Iterator, CheckSafe>::read_forward()
-{
-    if (!safe(Size)) {
+byte_array<Size> deserializer<Iterator, CheckSafe>::read_forward() {
+    if ( ! safe(Size)) {
         invalidate();
-}
+    }
 
-    if (!valid_ || Size == 0) {
-        return{};
-};
+    if ( ! valid_ || Size == 0) {
+        return {};
+    }
 
     byte_array<Size> out;
     auto const begin = iterator_;
@@ -328,15 +321,14 @@ byte_array<Size> deserializer<Iterator, CheckSafe>::read_forward()
 
 template <typename Iterator, bool CheckSafe>
 template <unsigned Size>
-byte_array<Size> deserializer<Iterator, CheckSafe>::read_reverse()
-{
-    if (!safe(Size)) {
+byte_array<Size> deserializer<Iterator, CheckSafe>::read_reverse() {
+    if ( ! safe(Size)) {
         invalidate();
-}
+    }
 
-    if (!valid_) {
-        return{};
-};
+    if ( ! valid_) {
+        return {};
+    }
 
     byte_array<Size> out;
     auto const begin = iterator_;
@@ -347,15 +339,14 @@ byte_array<Size> deserializer<Iterator, CheckSafe>::read_reverse()
 
 template <typename Iterator, bool CheckSafe>
 template <typename Integer>
-Integer deserializer<Iterator, CheckSafe>::read_big_endian()
-{
-    if (!safe(sizeof(Integer))) {
+Integer deserializer<Iterator, CheckSafe>::read_big_endian() {
+    if ( ! safe(sizeof(Integer))) {
         invalidate();
-}
+    }
 
-    if (!valid_) {
-        return{};
-};
+    if ( ! valid_) {
+        return {};
+    }
 
     auto const begin = iterator_;
     iterator_ += sizeof(Integer);
@@ -364,15 +355,14 @@ Integer deserializer<Iterator, CheckSafe>::read_big_endian()
 
 template <typename Iterator, bool CheckSafe>
 template <typename Integer>
-Integer deserializer<Iterator, CheckSafe>::read_little_endian()
-{
-    if (!safe(sizeof(Integer))) {
+Integer deserializer<Iterator, CheckSafe>::read_little_endian() {
+    if ( ! safe(sizeof(Integer))) {
         invalidate();
-}
+    }
 
-    if (!valid_) {
-        return{};
-};
+    if ( ! valid_) {
+        return {};
+    }
 
     auto const begin = iterator_;
     iterator_ += sizeof(Integer);
@@ -382,19 +372,17 @@ Integer deserializer<Iterator, CheckSafe>::read_little_endian()
 // private
 
 template <typename Iterator, bool CheckSafe>
-bool deserializer<Iterator, CheckSafe>::safe(size_t size) const
-{
+bool deserializer<Iterator, CheckSafe>::safe(size_t size) const {
     // Bounds checking is disabled for unsafe deserializers.
-    if (!CheckSafe) {
+    if ( ! CheckSafe) {
         return true;
-}
+    }
 
     return size <= remaining();
 }
 
 template <typename Iterator, bool CheckSafe>
-size_t deserializer<Iterator, CheckSafe>::remaining() const
-{
+size_t deserializer<Iterator, CheckSafe>::remaining() const {
     return std::distance(iterator_, end_);
 }
 
@@ -402,14 +390,12 @@ size_t deserializer<Iterator, CheckSafe>::remaining() const
 //-----------------------------------------------------------------------------
 
 template <typename Iterator>
-deserializer<Iterator, true> make_safe_deserializer(Iterator begin, Iterator end)
-{
+deserializer<Iterator, true> make_safe_deserializer(Iterator begin, Iterator end) {
     return deserializer<Iterator, true>(begin, end);
 }
 
 template <typename Iterator>
-deserializer<Iterator, false> make_unsafe_deserializer(Iterator begin)
-{
+deserializer<Iterator, false> make_unsafe_deserializer(Iterator begin) {
     return deserializer<Iterator, false>(begin);
 }
 

@@ -74,7 +74,7 @@ public:
 
 protected:
     virtual 
-    void load_command_variables(variables_map& variables, int argc, const char* argv[]);
+    void load_command_variables(variables_map& variables, int argc, char const* argv[]);
 
     virtual 
     // int load_configuration_variables(variables_map& variables, std::string const& option_name);

@@ -89,12 +89,12 @@ public:
     /**
      * Sentinel - there is no short name.
      */
-    static const char no_short_name;
+    static char const no_short_name;
 
     /**
      * The character used to prefix command line options.
      */
-    static const char option_prefix_char;
+    static char const option_prefix_char;
 
     /**
      * Populate with normalized parameter data.

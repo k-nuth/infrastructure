@@ -91,7 +91,7 @@ void deadline::stop()
 // If the timer is canceled no call is made.
 void deadline::handle_timer(const boost_code& ec, handler handle) const
 {
-    if (!ec) {
+    if ( ! ec) {
         handle(error::success);
     } else if (ec != asio::error::operation_aborted) {
         handle(error::boost_to_error_code(ec));

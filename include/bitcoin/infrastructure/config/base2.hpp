@@ -87,7 +87,8 @@ public:
      * @param[out]  argument  The object from which to obtain the value.
      * @return                The output stream reference.
      */
-    friend std::ostream& operator<<(std::ostream& output, const base2& argument);
+    friend 
+    std::ostream& operator<<(std::ostream& output, const base2& argument);
 
 private:
 

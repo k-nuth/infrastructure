@@ -50,8 +50,8 @@ struct BI_API hd_lineage
     uint32_t parent_fingerprint;
     uint32_t child_number;
 
-    bool operator==(const hd_lineage& other) const;
-    bool operator!=(const hd_lineage& other) const;
+    bool operator==(hd_lineage const& x) const;
+    bool operator!=(hd_lineage const& other) const;
 };
 
 class hd_private;
@@ -74,9 +74,9 @@ public:
     hd_public(hd_public const& x);
     
     explicit
-    hd_public(const hd_key& public_key);
+    hd_public(hd_key const& public_key);
     
-    hd_public(const hd_key& public_key, uint32_t prefix);
+    hd_public(hd_key const& public_key, uint32_t prefix);
     
     explicit
     hd_public(std::string const& encoded);
@@ -84,16 +84,16 @@ public:
     hd_public(std::string const& encoded, uint32_t prefix);
 
     /// Operators.
-    bool operator<(const hd_public& other) const;
-    bool operator==(const hd_public& other) const;
-    bool operator!=(const hd_public& other) const;
-    hd_public& operator=(const hd_public& other);
+    bool operator<(hd_public const& x) const;
+    bool operator==(hd_public const& x) const;
+    bool operator!=(hd_public const& other) const;
+    hd_public& operator=(hd_public const& x);
     
     friend 
     std::istream& operator>>(std::istream& in, hd_public& to); 
     
     friend 
-    std::ostream& operator<<(std::ostream& out, const hd_public& of);
+    std::ostream& operator<<(std::ostream& out, hd_public const& of);
 
     /// Cast operators.
     // implicit
@@ -107,7 +107,7 @@ public:
 
     /// Accessors.
     const hd_chain_code& chain_code() const;
-    const hd_lineage& lineage() const;
+    hd_lineage const& lineage() const;
     const ec_compressed& point() const;
 
     /// Methods.
@@ -117,7 +117,7 @@ public:
 protected:
     /// Factories.
     static 
-    hd_public from_secret(const ec_secret& secret, const hd_chain_code& chain_code, const hd_lineage& lineage);
+    hd_public from_secret(ec_secret const& secret, const hd_chain_code& chain_code, hd_lineage const& lineage);
 
     /// Helpers.
     uint32_t fingerprint() const;
@@ -131,18 +131,18 @@ protected:
 
 private:
     static 
-    hd_public from_key(const hd_key& key);
+    hd_public from_key(hd_key const& key);
     
     static 
     hd_public from_string(std::string const& encoded);
     
     static 
-    hd_public from_key(const hd_key& key, uint32_t prefix);
+    hd_public from_key(hd_key const& key, uint32_t prefix);
     
     static
     hd_public from_string(std::string const& encoded, uint32_t prefix);
 
-    hd_public(const ec_compressed& point, const hd_chain_code& chain_code, const hd_lineage& lineage);
+    hd_public(const ec_compressed& point, const hd_chain_code& chain_code, hd_lineage const& lineage);
 };
 
 } // namespace wallet

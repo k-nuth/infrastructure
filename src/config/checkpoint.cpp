@@ -46,15 +46,15 @@ checkpoint::checkpoint(std::string const& value)
     std::stringstream(value) >> *this;
 }
 
-checkpoint::checkpoint(checkpoint const& other)
-    : hash_(other.hash()), height_(other.height())
+checkpoint::checkpoint(checkpoint const& x)
+    : hash_(x.hash()), height_(x.height())
 {}
 
 // This is intended for static initialization (i.e. of the internal defaults).
 checkpoint::checkpoint(std::string const& hash, size_t height)
     : height_(height)
 {
-    if (!decode_hash(hash_, hash)) {
+    if ( ! decode_hash(hash_, hash)) {
         BOOST_THROW_EXCEPTION(invalid_option_value(hash));
     }
 }
@@ -100,8 +100,8 @@ bool checkpoint::validate(hash_digest const& hash, size_t height, list const& ch
     return it == checks.end();
 }
 
-bool checkpoint::operator==(checkpoint const& other) const {
-    return height_ == other.height_ && hash_ == other.hash_;
+bool checkpoint::operator==(checkpoint const& x) const {
+    return height_ == x.height_ && hash_ == x.hash_;
 }
 
 std::istream& operator>>(std::istream& input, checkpoint& argument) {

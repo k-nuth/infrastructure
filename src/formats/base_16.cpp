@@ -91,7 +91,7 @@ bool decode_hash(hash_digest& out, std::string const& in) {
     return true;
 }
 
-hash_digest hash_literal(const char (&string)[2 * hash_size + 1]) {
+hash_digest hash_literal(char const (&string)[2 * hash_size + 1]) {
     hash_digest out;
     DEBUG_ONLY(auto const success =) decode_base16_private(out.data(), out.size(), string);
     BITCOIN_ASSERT(success);
@@ -100,7 +100,7 @@ hash_digest hash_literal(const char (&string)[2 * hash_size + 1]) {
 }
 
 // For support of template implementation only, do not call directly.
-bool decode_base16_private(uint8_t* out, size_t out_size, const char* in) {
+bool decode_base16_private(uint8_t* out, size_t out_size, char const* in) {
     if ( ! std::all_of(in, in + 2 * out_size, is_base16)) {
         return false;
     }

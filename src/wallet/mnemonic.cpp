@@ -40,7 +40,7 @@ namespace wallet {
 static constexpr size_t bits_per_word = 11;
 static constexpr size_t entropy_bit_divisor = 32;
 static constexpr size_t hmac_iterations = 2048;
-static const char* passphrase_prefix = "mnemonic";
+static char const* passphrase_prefix = "mnemonic";
 
 inline 
 uint8_t bip39_shift(size_t bit) {

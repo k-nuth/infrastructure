@@ -138,7 +138,7 @@ int ecdsa_signature_parse_der_lax(const secp256k1_context* ctx, secp256k1_ecdsa_
         memcpy(tmpsig + 64 - slen, input + spos, slen);
     }
 
-    if (!overflow) {
+    if ( ! overflow) {
         overflow = !secp256k1_ecdsa_signature_parse_compact(ctx, sig, tmpsig);
     }
     if (overflow) {

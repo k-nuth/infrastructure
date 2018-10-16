@@ -53,17 +53,17 @@ bool ostream_writer::operator!() const
 
 void ostream_writer::write_hash(hash_digest const& value)
 {
-    stream_.write(reinterpret_cast<const char*>(value.data()), value.size());
+    stream_.write(reinterpret_cast<char const*>(value.data()), value.size());
 }
 
 void ostream_writer::write_short_hash(const short_hash& value)
 {
-    stream_.write(reinterpret_cast<const char*>(value.data()), value.size());
+    stream_.write(reinterpret_cast<char const*>(value.data()), value.size());
 }
 
 void ostream_writer::write_mini_hash(const mini_hash& value)
 {
-    stream_.write(reinterpret_cast<const char*>(value.data()), value.size());
+    stream_.write(reinterpret_cast<char const*>(value.data()), value.size());
 }
 
 // Big Endian Integers.
@@ -176,13 +176,13 @@ void ostream_writer::write_bytes(data_chunk const& data)
     auto const size = data.size();
 
     if (size > 0) {
-        stream_.write(reinterpret_cast<const char*>(data.data()), size);
+        stream_.write(reinterpret_cast<char const*>(data.data()), size);
 }
 }
 
 void ostream_writer::write_bytes(const uint8_t* data, size_t size)
 {
-    auto buffer = reinterpret_cast<const char*>(data);
+    auto buffer = reinterpret_cast<char const*>(data);
     stream_.write(buffer, size);
 }
 

@@ -66,7 +66,7 @@ bool serialize(const secp256k1_context* context, byte_array<Size>& out,
 
 template <size_t Size>
 bool ec_add(const secp256k1_context* context, byte_array<Size>& in_out,
-    const ec_secret& secret)
+    ec_secret const& secret)
 {
     secp256k1_pubkey pubkey;
     return parse(context, pubkey, in_out) &&
@@ -76,7 +76,7 @@ bool ec_add(const secp256k1_context* context, byte_array<Size>& in_out,
 
 template <size_t Size>
 bool ec_multiply(const secp256k1_context* context, byte_array<Size>& in_out,
-    const ec_secret& secret)
+    ec_secret const& secret)
 {
     secp256k1_pubkey pubkey;
     return parse(context, pubkey, in_out) &&
@@ -86,7 +86,7 @@ bool ec_multiply(const secp256k1_context* context, byte_array<Size>& in_out,
 
 template <size_t Size>
 bool secret_to_public(const secp256k1_context* context, byte_array<Size>& out,
-    const ec_secret& secret)
+    ec_secret const& secret)
 {
     secp256k1_pubkey pubkey;
     return secp256k1_ec_pubkey_create(context, &pubkey, secret.data()) == 1 &&
@@ -125,38 +125,38 @@ bool verify_signature(const secp256k1_context* context,
 // Add and multiply EC values
 // ----------------------------------------------------------------------------
 
-bool ec_add(ec_compressed& point, const ec_secret& secret)
+bool ec_add(ec_compressed& point, ec_secret const& secret)
 {
     auto const context = verification.context();
     return ec_add(context, point, secret);
 }
 
-bool ec_add(ec_uncompressed& point, const ec_secret& secret)
+bool ec_add(ec_uncompressed& point, ec_secret const& secret)
 {
     auto const context = verification.context();
     return ec_add(context, point, secret);
 }
 
-bool ec_add(ec_secret& left, const ec_secret& right)
+bool ec_add(ec_secret& left, ec_secret const& right)
 {
     auto const context = verification.context();
     return secp256k1_ec_privkey_tweak_add(context, left.data(),
         right.data()) == 1;
 }
 
-bool ec_multiply(ec_compressed& point, const ec_secret& secret)
+bool ec_multiply(ec_compressed& point, ec_secret const& secret)
 {
     auto const context = verification.context();
     return ec_multiply(context, point, secret);
 }
 
-bool ec_multiply(ec_uncompressed& point, const ec_secret& secret)
+bool ec_multiply(ec_uncompressed& point, ec_secret const& secret)
 {
     auto const context = verification.context();
     return ec_multiply(context, point, secret);
 }
 
-bool ec_multiply(ec_secret& left, const ec_secret& right)
+bool ec_multiply(ec_secret& left, ec_secret const& right)
 {
     auto const context = verification.context();
     return secp256k1_ec_privkey_tweak_mul(context, left.data(),
@@ -180,13 +180,13 @@ bool decompress(ec_uncompressed& out, const ec_compressed& point)
     return parse(context, pubkey, point) && serialize(context, out, pubkey);
 }
 
-bool secret_to_public(ec_compressed& out, const ec_secret& secret)
+bool secret_to_public(ec_compressed& out, ec_secret const& secret)
 {
     auto const context = signing.context();
     return secret_to_public(context, out, secret);
 }
 
-bool secret_to_public(ec_uncompressed& out, const ec_secret& secret)
+bool secret_to_public(ec_uncompressed& out, ec_secret const& secret)
 {
     auto const context = signing.context();
     return secret_to_public(context, out, secret);
@@ -195,7 +195,7 @@ bool secret_to_public(ec_uncompressed& out, const ec_secret& secret)
 // Verify keys
 // ----------------------------------------------------------------------------
 
-bool verify(const ec_secret& secret)
+bool verify(ec_secret const& secret)
 {
     auto const context = verification.context();
     return secp256k1_ec_seckey_verify(context, secret.data()) == 1;
@@ -320,7 +320,7 @@ bool encode_signature(der_signature& out, const ec_signature& signature)
 // EC sign/verify
 // ----------------------------------------------------------------------------
 
-bool sign(ec_signature& out, const ec_secret& secret, hash_digest const& hash)
+bool sign(ec_signature& out, ec_secret const& secret, hash_digest const& hash)
 {
     secp256k1_ecdsa_signature signature;
     auto const context = signing.context();
@@ -377,7 +377,7 @@ bool verify_signature(data_slice point, hash_digest const& hash,
 // Recoverable sign/recover
 // ----------------------------------------------------------------------------
 
-bool sign_recoverable(recoverable_signature& out, const ec_secret& secret, hash_digest const& hash) {
+bool sign_recoverable(recoverable_signature& out, ec_secret const& secret, hash_digest const& hash) {
     int recovery_id;
     auto const context = signing.context();
     secp256k1_ecdsa_recoverable_signature signature;

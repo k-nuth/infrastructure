@@ -88,11 +88,11 @@ static bool negate_overflow64(const int64_t number)
 static void CheckAdd(const int64_t num1, const int64_t num2, size_t value,
 	size_t offset, size_t test)
 {
-	const number_buffer& add = number_adds[value][offset][test];
-    const number scriptnum1(num1);
-    const number scriptnum2(num2);
+	number const_buffer& add = number_adds[value][offset][test];
+    number const scriptnum1(num1);
+    number const scriptnum2(num2);
 
-    if (!add_overflow64(num1, num2))
+    if ( ! add_overflow64(num1, num2))
     {
         BI_SCRIPT_NUMBER_CHECK_EQ(add, scriptnum1 + scriptnum2, value, offset,
         	test);
@@ -104,10 +104,10 @@ static void CheckAdd(const int64_t num1, const int64_t num2, size_t value,
 static void CheckNegate(const int64_t num, size_t value,
 	size_t offset, size_t test)
 {
-	const number_buffer& negated = number_negates[value][offset][test];
-    const number scriptnum(num);
+	number const_buffer& negated = number_negates[value][offset][test];
+    number const scriptnum(num);
 
-    if (!negate_overflow64(num))
+    if ( ! negate_overflow64(num))
     {
         BI_SCRIPT_NUMBER_CHECK_EQ(negated, -scriptnum, value, offset, test);
     }
@@ -116,11 +116,11 @@ static void CheckNegate(const int64_t num, size_t value,
 static void CheckSubtract(const int64_t num1, const int64_t num2, size_t value,
 	size_t offset, size_t test)
 {
-	const number_subtract& subtract = number_subtracts[value][offset][test];
-    const number scriptnum1(num1);
-    const number scriptnum2(num2);
+	number const_subtract& subtract = number_subtracts[value][offset][test];
+    number const scriptnum1(num1);
+    number const scriptnum2(num2);
 
-    if (!subtract_overflow64(num1, num2))
+    if ( ! subtract_overflow64(num1, num2))
     {
         BI_SCRIPT_NUMBER_CHECK_EQ(subtract.forward, scriptnum1 - scriptnum2,
         	value, offset, test);
@@ -128,7 +128,7 @@ static void CheckSubtract(const int64_t num1, const int64_t num2, size_t value,
         	offset, test);
     }
 
-    if (!subtract_overflow64(num2, num1))
+    if ( ! subtract_overflow64(num2, num1))
     {
         BI_SCRIPT_NUMBER_CHECK_EQ(subtract.reverse, scriptnum2 - scriptnum1,
         	value, offset, test);
@@ -140,9 +140,9 @@ static void CheckSubtract(const int64_t num1, const int64_t num2, size_t value,
 static void CheckCompare(const int64_t num1, const int64_t num2,
 	size_t value, size_t offset, size_t test)
 {
-    const number_compare& compare = number_compares[value][offset][test];
-    const number scriptnum1(num1);
-    const number scriptnum2(num2);
+    number const_compare& compare = number_compares[value][offset][test];
+    number const scriptnum1(num1);
+    number const scriptnum2(num2);
 
     BOOST_CHECK(scriptnum1 == scriptnum1);
     BOOST_CHECK(scriptnum1 >= scriptnum1);
@@ -235,7 +235,7 @@ static number_buffer MakeAdd(const int64_t num1, const int64_t num2)
     bignum2.set_int64(num2);
 
     auto sum = bignum1 + bignum2;
-    const number_buffer add
+    number const_buffer add
     {
         sum.int32(),
         sum.data()
@@ -253,7 +253,7 @@ static number_buffer MakeNegate(const int64_t num)
     bignum.set_int64(num);
 
     auto negative = -bignum;
-    const number_buffer negated
+    number const_buffer negated
     {
         negative.int32(),
         negative.data()
@@ -270,14 +270,14 @@ static number_subtract MakeSubtract(const int64_t num1, const int64_t num2)
     bignum2.set_int64(num2);
 
     big_number forward;
-    if (!subtract_overflow64(num1, num2))
+    if ( ! subtract_overflow64(num1, num2))
         forward = bignum1 - bignum2;
 
     big_number reverse;
-    if (!subtract_overflow64(num2, num1))
+    if ( ! subtract_overflow64(num2, num1))
         reverse = bignum2 - bignum1;
 
-    const number_subtract subtract
+    number const_subtract subtract
     {
         { forward.int32(), forward.data() },
         { reverse.int32(), reverse.data() }

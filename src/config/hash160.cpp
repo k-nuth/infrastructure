@@ -32,37 +32,30 @@ namespace libbitcoin {
 namespace config {
 
 hash160::hash160()
-  : value_(null_short_hash)
-{
-}
+    : value_(null_short_hash)
+{}
 
-hash160::hash160(std::string const& hexcode)
-{
+hash160::hash160(std::string const& hexcode) {
     std::stringstream(hexcode) >> *this;
 }
 
 hash160::hash160(const short_hash& value)
-  : value_(value)
-{
-}
+    : value_(value)
+{}
 
-hash160::hash160(const hash160& other)
-  : hash160(other.value_)
-{
-}
+hash160::hash160(hash160 const& x)
+    : hash160(x.value_)
+{}
 
-hash160::operator const short_hash&() const
-{
+hash160::operator const short_hash&() const {
     return value_;
 }
 
-std::istream& operator>>(std::istream& input, hash160& argument)
-{
+std::istream& operator>>(std::istream& input, hash160& argument) {
     std::string hexcode;
     input >> hexcode;
 
-    if (!decode_base16(argument.value_, hexcode))
-    {
+    if ( ! decode_base16(argument.value_, hexcode)) {
         using namespace boost::program_options;
         BOOST_THROW_EXCEPTION(invalid_option_value(hexcode));
     }
@@ -70,8 +63,7 @@ std::istream& operator>>(std::istream& input, hash160& argument)
     return input;
 }
 
-std::ostream& operator<<(std::ostream& output, const hash160& argument)
-{
+std::ostream& operator<<(std::ostream& output, hash160 const& argument) {
     output << encode_base16(argument.value_);
     return output;
 }

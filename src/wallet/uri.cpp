@@ -73,16 +73,16 @@ bool is_query_char(char c) {
 // Verifies that all RFC 3986 escape sequences in a string are valid, and that
 // all characters belong to the given class.
 static 
-bool validate(std::string const& in, bool (*is_valid)(const char)) {
+bool validate(std::string const& in, bool (*is_valid)(char const)) {
     auto i = in.begin();
     while (in.end() != i) {
         if ('%' == *i) {
-            if (!(2 < in.end() - i && is_base16(i[1]) && is_base16(i[2]))) {
+            if ( ! (2 < in.end() - i && is_base16(i[1]) && is_base16(i[2]))) {
                 return false;
             }
             i += 3;
         } else {
-            if (!is_valid(*i)) {
+            if ( ! is_valid(*i)) {
                 return false;
             }
             i += 1;
@@ -102,7 +102,7 @@ std::string unescape(std::string const& in) {
     auto i = in.begin();
     while (in.end() != i) {
         if ('%' == *i && 2 < in.end() - i && is_base16(i[1]) && is_base16(i[2])) {
-            const char temp[] = { i[1], i[2], 0 };
+            char const temp[] = { i[1], i[2], 0 };
             out.push_back(base16_literal(temp)[0]);
             i += 3;
         } else {
@@ -359,13 +359,13 @@ void uri::encode_query(const query_map& map) {
     auto first = true;
     std::ostringstream query;
     for (auto const& term : map) {
-        if (!first) {
+        if ( ! first) {
             query << '&';
         }
 
         first = false;
         query << escape(term.first, is_query_char);
-        if (!term.second.empty()) {
+        if ( ! term.second.empty()) {
             query << '=' << escape(term.second, is_query_char);
         }
     }

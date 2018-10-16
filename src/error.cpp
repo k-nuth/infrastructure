@@ -28,7 +28,7 @@ class error_category_impl
     : public std::error_category
 {
 public:
-    const char* name() const noexcept override;
+    char const* name() const noexcept override;
     std::string message(int ev) const noexcept override;
     std::error_condition default_error_condition(int ev) const noexcept override;
 };
@@ -39,7 +39,7 @@ const error_category_impl& get_error_category_instance() {
     return instance;
 }
 
-const char* error_category_impl::name() const noexcept {
+char const* error_category_impl::name() const noexcept {
     return "bitcoin";
 }
 

@@ -129,24 +129,24 @@ public:
     bool operator==(int64_t value) const;
     bool operator!=(int64_t value) const;
 
-    bool operator>(const number& other) const;
-    bool operator<(const number& other) const;
-    bool operator>=(const number& other) const;
-    bool operator<=(const number& other) const;
-    bool operator==(const number& other) const;
-    bool operator!=(const number& other) const;
+    bool operator>(number const& x) const;
+    bool operator<(number const& x) const;
+    bool operator>=(number const& x) const;
+    bool operator<=(number const& x) const;
+    bool operator==(number const& x) const;
+    bool operator!=(number const& x) const;
 
     number operator+() const;
     number operator-() const;
     number operator+(int64_t value) const;
     number operator-(int64_t value) const;
-    number operator+(const number& other) const;
-    number operator-(const number& other) const;
+    number operator+(number const& x) const;
+    number operator-(number const& x) const;
 
     number& operator+=(int64_t value);
     number& operator-=(int64_t value);
-    number& operator+=(const number& other);
-    number& operator-=(const number& other);
+    number& operator+=(number const& x);
+    number& operator-=(number const& x);
 
 private:
     int64_t value_;

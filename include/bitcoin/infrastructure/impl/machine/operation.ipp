@@ -35,99 +35,101 @@ static BC_CONSTEXPR auto invalid_code = opcode::disabled_xor;
 // Constructors.
 //-----------------------------------------------------------------------------
 
-inline operation::operation()
-  : code_(invalid_code), valid_(false)
+inline 
+operation::operation()
+    : code_(invalid_code), valid_(false)
 {
     // The failed-state code must be disabled so it will never pass evaluation.
     BITCOIN_ASSERT(is_disabled());
 }
 
-inline operation::operation(operation&& other)
-  : operation(other.code_, std::move(other.data_), other.valid_)
-{
-}
+inline 
+operation::operation(operation&& x)
+    : operation(x.code_, std::move(x.data_), x.valid_)
+{}
 
-inline operation::operation(const operation& other)
-  : operation(other.code_, other.data_, other.valid_)
-{
-}
+inline 
+operation::operation(const operation& x)
+    : operation(x.code_, x.data_, x.valid_)
+{}
 
-inline operation::operation(data_chunk&& uncoded, bool minimal)
-  : code_(opcode_from_data(uncoded, minimal)),
-    data_(std::move(uncoded)),
-    valid_(!is_oversized())
+inline 
+operation::operation(data_chunk&& uncoded, bool minimal)
+    : code_(opcode_from_data(uncoded, minimal))
+    , data_(std::move(uncoded))
+    , valid_(!is_oversized())
 {
-    if (!valid_)
+    if ( ! valid_)
         reset();
 
     // Revert data if opcode_from_data produced a numeric encoding.
-    if (minimal && !is_payload(code_))
-    {
+    if (minimal && !is_payload(code_)) {
         data_.clear();
         data_.shrink_to_fit();
     }
 }
 
-inline operation::operation(data_chunk const& uncoded, bool minimal)
-  : code_(opcode_from_data(uncoded, minimal)),
-    data_(uncoded),
-    valid_(!is_oversized())
+inline 
+operation::operation(data_chunk const& uncoded, bool minimal)
+    : code_(opcode_from_data(uncoded, minimal))
+    , data_(uncoded)
+    , valid_(!is_oversized())
 {
-    if (!valid_)
+    if ( ! valid_)
         reset();
 
     // Revert data if opcode_from_data produced a numeric encoding.
-    if (minimal && !is_payload(code_))
-    {
+    if (minimal && !is_payload(code_)) {
         data_.clear();
         data_.shrink_to_fit();
     }
 }
 
-inline operation::operation(opcode code)
-  : code_(code), valid_(true)
-{
-}
+inline 
+operation::operation(opcode code)
+    : code_(code), valid_(true)
+{}
 
 // protected
-inline operation::operation(opcode code, data_chunk&& data, bool valid)
-  : code_(code), data_(std::move(data)), valid_(valid)
-{
-}
+inline 
+operation::operation(opcode code, data_chunk&& data, bool valid)
+    : code_(code), data_(std::move(data)), valid_(valid)
+{}
 
 // protected
-inline operation::operation(opcode code, data_chunk const& data, bool valid)
-  : code_(code), data_(data), valid_(valid)
-{
-}
+inline 
+operation::operation(opcode code, data_chunk const& data, bool valid)
+    : code_(code), data_(data), valid_(valid)
+{}
 
 // Operators.
 //-----------------------------------------------------------------------------
 
-inline operation& operation::operator=(operation&& other)
-{
-    code_ = other.code_;
-    data_ = std::move(other.data_);
-    valid_ = other.valid_;
+inline 
+operation& operation::operator=(operation&& x) {
+    code_ = x.code_;
+    data_ = std::move(x.data_);
+    valid_ = x.valid_;
     return *this;
 }
 
-inline operation& operation::operator=(const operation& other)
+inline 
+operation& operation::operator=(const operation& x)
 {
-    code_ = other.code_;
-    data_ = other.data_;
-    valid_ = other.valid_;
+    code_ = x.code_;
+    data_ = x.data_;
+    valid_ = x.valid_;
     return *this;
 }
 
-inline bool operation::operator==(const operation& other) const
-{
-    return (code_ == other.code_) && (data_ == other.data_);
+inline 
+bool operation::operator==(const operation& x) const {
+    return (code_ == x.code_) && (data_ == x.data_);
 }
 
-inline bool operation::operator!=(const operation& other) const
-{
-    return !(*this == other);
+inline 
+bool operation::operator!=(const operation& x) const {
+    return !(*this == x);
 }
 
 // Properties (size, accessors, cache).
@@ -146,13 +148,12 @@ inline bool operation::operator!=(const operation& other) const
 //         return 9;
 // }
 
-inline size_t operation::serialized_size() const
-{
+inline 
+size_t operation::serialized_size() const {
     static BC_CONSTEXPR auto op_size = sizeof(uint8_t);
     auto const size = data_.size();
 
-    switch (code_)
-    {
+    switch (code_) {
         case opcode::push_one_size:
             return op_size + sizeof(uint8_t) + size;
         case opcode::push_two_size:
@@ -164,13 +165,13 @@ inline size_t operation::serialized_size() const
     }
 }
 
-inline opcode operation::code() const
-{
+inline 
+opcode operation::code() const {
     return code_;
 }
 
-inline data_chunk const& operation::data() const
-{
+inline 
+data_chunk const& operation::data() const {
     return data_;
 }
 
@@ -183,12 +184,12 @@ inline data_chunk const& operation::data() const
 // than two bytes to encode. However the four byte encoding can represent
 // a value of any size, so remains valid despite the data size limit.
 //*****************************************************************************
-inline uint32_t operation::read_data_size(opcode code, reader& source)
+inline 
+uint32_t operation::read_data_size(opcode code, reader& source)
 {
     BC_CONSTEXPR auto op_75 = static_cast<uint8_t>(opcode::push_size_75);
 
-    switch (code)
-    {
+    switch (code) {
         case opcode::push_one_size:
             return source.read_byte();
         case opcode::push_two_size:
@@ -205,8 +206,8 @@ inline uint32_t operation::read_data_size(opcode code, reader& source)
 // CONSENSUS: this is non-minial but consensus critical due to find_and_delete.
 // Presumably this was just an oversight in the original script encoding.
 //*****************************************************************************
-inline opcode operation::opcode_from_size(size_t size)
-{
+inline 
+opcode operation::opcode_from_size(size_t size) {
     BITCOIN_ASSERT(size <= max_uint32);
     BC_CONSTEXPR auto op_75 = static_cast<uint8_t>(opcode::push_size_75);
 
@@ -220,12 +221,11 @@ inline opcode operation::opcode_from_size(size_t size)
         return opcode::push_four_size;
 }
 
-inline opcode operation::minimal_opcode_from_data(data_chunk const& data)
-{
+inline 
+opcode operation::minimal_opcode_from_data(data_chunk const& data) {
     auto const size = data.size();
 
-    if (size == 1)
-    {
+    if (size == 1) {
         auto const value = data.front();
 
         if (value == number::negative_1)
@@ -242,36 +242,35 @@ inline opcode operation::minimal_opcode_from_data(data_chunk const& data)
     return opcode_from_size(size);
 }
 
-inline opcode operation::nominal_opcode_from_data(data_chunk const& data)
-{
+inline 
+opcode operation::nominal_opcode_from_data(data_chunk const& data) {
     return opcode_from_size(data.size());
 }
 
-inline opcode operation::opcode_from_data(data_chunk const& data,
-    bool minimal)
-{
+inline 
+opcode operation::opcode_from_data(data_chunk const& data, bool minimal) {
     return minimal ? minimal_opcode_from_data(data) :
         nominal_opcode_from_data(data);
 }
 
-inline opcode operation::opcode_from_positive(uint8_t value)
-{
+inline 
+opcode operation::opcode_from_positive(uint8_t value) {
     BITCOIN_ASSERT(value >= number::positive_1);
     BITCOIN_ASSERT(value <= number::positive_16);
     BC_CONSTEXPR auto op_81 = static_cast<uint8_t>(opcode::push_positive_1);
     return static_cast<opcode>(value + op_81 - 1);
 }
 
-inline uint8_t operation::opcode_to_positive(opcode code)
-{
+inline 
+uint8_t operation::opcode_to_positive(opcode code) {
     BITCOIN_ASSERT(is_positive(code));
     BC_CONSTEXPR auto op_81 = static_cast<uint8_t>(opcode::push_positive_1);
     return static_cast<uint8_t>(code) - op_81 + 1;
 }
 
 // opcode: [0..79, 81..96]
-inline bool operation::is_push(opcode code)
-{
+inline 
+bool operation::is_push(opcode code) {
     BC_CONSTEXPR auto op_80 = static_cast<uint8_t>(opcode::reserved_80);
     BC_CONSTEXPR auto op_96 = static_cast<uint8_t>(opcode::push_positive_16);
     auto const value = static_cast<uint8_t>(code);
@@ -279,8 +278,8 @@ inline bool operation::is_push(opcode code)
 }
 
 // opcode: [1..78]
-inline bool operation::is_payload(opcode code)
-{
+inline 
+bool operation::is_payload(opcode code) {
     BC_CONSTEXPR auto op_1 = static_cast<uint8_t>(opcode::push_size_1);
     BC_CONSTEXPR auto op_78 = static_cast<uint8_t>(opcode::push_four_size);
     auto const value = static_cast<uint8_t>(code);
@@ -288,28 +287,28 @@ inline bool operation::is_payload(opcode code)
 }
 
 // opcode: [97..255]
-inline bool operation::is_counted(opcode code)
-{
+inline 
+bool operation::is_counted(opcode code) {
     BC_CONSTEXPR auto op_97 = static_cast<uint8_t>(opcode::nop);
     auto const value = static_cast<uint8_t>(code);
     return value >= op_97;
 }
 
 // stack: [[], 1..16]
-inline bool operation::is_version(opcode code)
-{
+inline 
+bool operation::is_version(opcode code) {
     return code == opcode::push_size_0 || is_positive(code);
 }
 
 // stack: [-1, 1..16]
-inline bool operation::is_numeric(opcode code)
-{
+inline 
+bool operation::is_numeric(opcode code) {
     return is_positive(code) || code == opcode::push_negative_1;
 }
 
 // stack: [1..16]
-inline bool operation::is_positive(opcode code)
-{
+inline 
+bool operation::is_positive(opcode code) {
     BC_CONSTEXPR auto op_81 = static_cast<uint8_t>(opcode::push_positive_1);
     BC_CONSTEXPR auto op_96 = static_cast<uint8_t>(opcode::push_positive_16);
     auto const value = static_cast<uint8_t>(code);
@@ -317,13 +316,12 @@ inline bool operation::is_positive(opcode code)
 }
 
 // opcode: [80, 98, 137, 138, 186..255]
-inline bool operation::is_reserved(opcode code)
-{
+inline 
+bool operation::is_reserved(opcode code) {
     BC_CONSTEXPR auto op_186 = static_cast<uint8_t>(opcode::reserved_186);
     BC_CONSTEXPR auto op_255 = static_cast<uint8_t>(opcode::reserved_255);
 
-    switch (code)
-    {
+    switch (code) {
         case opcode::reserved_80:
         case opcode::reserved_98:
         case opcode::reserved_137:
@@ -344,10 +342,9 @@ inline bool operation::is_reserved(opcode code)
 // the satoshi conditional range test so it is in fact reserved. Presumably
 // this was an unintended consequence of range testing enums.
 //*****************************************************************************
-inline bool operation::is_disabled(opcode code)
-{
-    switch (code)
-    {
+inline 
+bool operation::is_disabled(opcode code) {
+    switch (code) {
         case opcode::disabled_cat:
         case opcode::disabled_substr:
         case opcode::disabled_left:
@@ -375,10 +372,9 @@ inline bool operation::is_disabled(opcode code)
 // CONSENSUS: in order to properly treat VERIF and VERNOTIF as disabled (see
 // is_disabled comments) those codes must not be included here.
 //*****************************************************************************
-inline bool operation::is_conditional(opcode code)
-{
-    switch (code)
-    {
+inline 
+bool operation::is_conditional(opcode code) {
+    switch (code) {
         case opcode::if_:
         case opcode::notif:
         case opcode::else_:
@@ -395,61 +391,61 @@ inline bool operation::is_conditional(opcode code)
 // Presumably this was an unintended consequence of range testing enums.
 //*****************************************************************************
 // opcode: [0..96]
-inline bool operation::is_relaxed_push(opcode code)
-{
+inline 
+bool operation::is_relaxed_push(opcode code) {
     BC_CONSTEXPR auto op_96 = static_cast<uint8_t>(opcode::push_positive_16);
     auto const value = static_cast<uint8_t>(code);
     return value <= op_96;
 }
 
-inline bool operation::is_push() const
-{
+inline 
+bool operation::is_push() const {
     return is_push(code_);
 }
 
-inline bool operation::is_counted() const
-{
+inline 
+bool operation::is_counted() const {
     return is_counted(code_);
 }
 
-inline bool operation::is_version() const
-{
+inline 
+bool operation::is_version() const {
     return is_version(code_);
 }
 
-inline bool operation::is_positive() const
-{
+inline 
+bool operation::is_positive() const {
     return is_positive(code_);
 }
 
-inline bool operation::is_disabled() const
-{
+inline 
+bool operation::is_disabled() const {
     return is_disabled(code_);
 }
 
-inline bool operation::is_conditional() const
-{
+inline 
+bool operation::is_conditional() const {
     return is_conditional(code_);
 }
 
-inline bool operation::is_relaxed_push() const
-{
+inline 
+bool operation::is_relaxed_push() const {
     return is_relaxed_push(code_);
 }
 
-inline bool operation::is_oversized() const
-{
+inline 
+bool operation::is_oversized() const {
     // bit.ly/2eSDkOJ
     return data_.size() > max_push_data_size;
 }
 
-inline bool operation::is_minimal_push() const
-{
+inline 
+bool operation::is_minimal_push() const {
     return code_ == minimal_opcode_from_data(data_);
 }
 
-inline bool operation::is_nominal_push() const
-{
+inline 
+bool operation::is_nominal_push() const {
     return code_ == nominal_opcode_from_data(data_);
 }
 

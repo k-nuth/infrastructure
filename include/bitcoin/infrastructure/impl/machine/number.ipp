@@ -177,33 +177,33 @@ bool number::operator!=(int64_t value) const {
 }
 
 inline
-bool number::operator>(const number& other) const {
-    return operator>(other.value_);
+bool number::operator>(number const& x) const {
+    return operator>(x.value_);
 }
 
 inline
-bool number::operator<(const number& other) const {
-    return operator<(other.value_);
+bool number::operator<(number const& x) const {
+    return operator<(x.value_);
 }
 
 inline
-bool number::operator>=(const number& other) const {
-    return operator>=(other.value_);
+bool number::operator>=(number const& x) const {
+    return operator>=(x.value_);
 }
 
 inline
-bool number::operator<=(const number& other) const {
-    return operator<=(other.value_);
+bool number::operator<=(number const& x) const {
+    return operator<=(x.value_);
 }
 
 inline
-bool number::operator==(const number& other) const {
-    return operator==(other.value_);
+bool number::operator==(number const& x) const {
+    return operator==(x.value_);
 }
 
 inline
-bool number::operator!=(const number& other) const {
-    return operator!=(other.value_);
+bool number::operator!=(number const& x) const {
+    return operator!=(x.value_);
 }
 
 inline
@@ -225,13 +225,13 @@ number number::operator-(int64_t value) const {
 }
 
 inline
-number number::operator+(const number& other) const {
-    return operator+(other.value_);
+number number::operator+(number const& x) const {
+    return operator+(x.value_);
 }
 
 inline
-number number::operator-(const number& other) const {
-    return operator-(other.value_);
+number number::operator-(number const& x) const {
+    return operator-(x.value_);
 }
 
 inline
@@ -247,13 +247,13 @@ number number::operator-() const {
 }
 
 inline
-number& number::operator+=(const number& other) {
-    return operator+=(other.value_);
+number& number::operator+=(number const& x) {
+    return operator+=(x.value_);
 }
 
 inline
-number& number::operator-=(const number& other) {
-    return operator-=(other.value_);
+number& number::operator-=(number const& x) {
+    return operator-=(x.value_);
 }
 
 inline

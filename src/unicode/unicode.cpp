@@ -231,7 +231,7 @@ static bool is_utf8_trailing_byte(char byte)
 }
 
 // Determine if the full sequence is a valid utf8 character.
-static bool is_utf8_character_sequence(const char sequence[], uint8_t bytes)
+static bool is_utf8_character_sequence(char const sequence[], uint8_t bytes)
 {
     BITCOIN_ASSERT(bytes <= utf8_max_character_size);
 
@@ -267,7 +267,7 @@ static bool is_utf8_character_sequence(const char sequence[], uint8_t bytes)
 }
 
 // Determine if the text is terminated by a valid utf8 character.
-static bool is_terminal_utf8_character(const char text[], size_t size)
+static bool is_terminal_utf8_character(char const text[], size_t size)
 {
     BITCOIN_ASSERT(text != nullptr);
 
@@ -289,7 +289,7 @@ static bool is_terminal_utf8_character(const char text[], size_t size)
 // character recognition so we don't have to convert in full up to 3 times.
 // This does not guaratee that the entire string is valid as utf8, just that a
 // returned offset follows the last byte of a utf8 terminal char if it exists.
-static uint8_t offset_to_terminal_utf8_character(const char text[], size_t size)
+static uint8_t offset_to_terminal_utf8_character(char const text[], size_t size)
 {
     BITCOIN_ASSERT(text != nullptr);
 
@@ -307,7 +307,7 @@ static uint8_t offset_to_terminal_utf8_character(const char text[], size_t size)
 }
 
 // Convert utf8 char buffer to wchar_t buffer, with truncation handling.
-size_t to_utf16(wchar_t out[], size_t out_chars, const char in[],
+size_t to_utf16(wchar_t out[], size_t out_chars, char const in[],
     size_t in_bytes, uint8_t& truncated)
 {
     BITCOIN_ASSERT(in != nullptr);

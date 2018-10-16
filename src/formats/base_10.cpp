@@ -54,7 +54,7 @@ bool decode_base10(uint64_t& out, std::string const& amount, uint8_t decimal_pla
     }
 
     // Only digits should remain:
-    if (!std::all_of(value.begin(), value.end(), is_digit)) {
+    if ( ! std::all_of(value.begin(), value.end(), is_digit)) {
         return false;
     }
 

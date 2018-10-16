@@ -48,8 +48,8 @@ binary::binary()
     : final_block_excess_(0)
 {}
 
-binary::binary(const binary& other)
-    : blocks_(other.blocks_), final_block_excess_(other.final_block_excess_)
+binary::binary(const binary& x)
+    : blocks_(x.blocks_), final_block_excess_(x.final_block_excess_)
 {}
 
 binary::binary(std::string const& bit_string)
@@ -234,19 +234,19 @@ bool binary::is_prefix_of(data_slice field) const {
     return *this == truncated_prefix;
 }
 
-bool binary::operator<(const binary& other) const {
-    return encoded() < other.encoded();
+bool binary::operator<(const binary& x) const {
+    return encoded() < x.encoded();
 }
 
-bool binary::operator==(const binary& other) const {
-    if (size() != other.size()) {
+bool binary::operator==(const binary& x) const {
+    if (size() != x.size()) {
         return false;
     }
 
     auto const self = *this;
 
     for (binary::size_type i = 0; i < size(); ++i) {
-        if (self[i] != other[i]) {
+        if (self[i] != x[i]) {
             return false;
         }
     }
@@ -254,13 +254,13 @@ bool binary::operator==(const binary& other) const {
     return true;
 }
 
-bool binary::operator!=(const binary& other) const {
-    return !(*this == other);
+bool binary::operator!=(const binary& x) const {
+    return !(*this == x);
 }
 
-binary& binary::operator=(const binary& other) {
-    blocks_ = other.blocks_;
-    final_block_excess_ = other.final_block_excess_;
+binary& binary::operator=(const binary& x) {
+    blocks_ = x.blocks_;
+    final_block_excess_ = x.final_block_excess_;
     return *this;
 }
 
@@ -272,7 +272,7 @@ std::istream& operator>>(std::istream& in, binary& to) {
     uint8_t block = 0;
     auto bit_iterator = binary::bits_per_block;
 
-    for (const char representation: bitstring) {
+    for (char const representation: bitstring) {
         if (representation != '0' && representation != '1') {
             to.blocks_.clear();
             return in;

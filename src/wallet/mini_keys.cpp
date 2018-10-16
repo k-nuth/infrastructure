@@ -36,7 +36,7 @@ bool check_minikey(std::string const& minikey)
 
 bool minikey_to_secret(ec_secret& out_secret, std::string const& key)
 {
-    if (!check_minikey(key)) {
+    if ( ! check_minikey(key)) {
         return false;
 }
 

@@ -86,7 +86,7 @@ bool parse_counter_placeholder(path_string_type::const_iterator& it,
 
     if (file_char_traits::is_digit(c)) {
         // Parse width
-        if (!width_extract::call(it, end, width)) {
+        if ( ! width_extract::call(it, end, width)) {
             return false;
         }
         if (it == end) {
@@ -124,7 +124,7 @@ bool match_pattern(path_string_type const& file_name, path_string_type const& pa
         static bool scan_digits(path_string_type::const_iterator& it, path_string_type::const_iterator end, std::ptrdiff_t n) {
             for (; n > 0; --n) {
                 path_string_type::value_type c = *it++;
-                if (!file_char_traits::is_digit(c) || it == end) {
+                if ( ! file_char_traits::is_digit(c) || it == end) {
                     return false;
                 }
             }
@@ -170,7 +170,7 @@ bool match_pattern(path_string_type const& file_name, path_string_type const& pa
                 case file_char_traits::day_placeholder:
                 case file_char_traits::month_placeholder:
                 case file_char_traits::year_placeholder:
-                    if (!local::scan_digits(f_it, f_end, 2)) {
+                    if ( ! local::scan_digits(f_it, f_end, 2)) {
                         return false;
                     }
                     ++p_it;
@@ -178,7 +178,7 @@ bool match_pattern(path_string_type const& file_name, path_string_type const& pa
 
                 // Date/time components with 4-digits width
                 case file_char_traits::full_year_placeholder:
-                    if (!local::scan_digits(f_it, f_end, 4)) {
+                    if ( ! local::scan_digits(f_it, f_end, 4)) {
                         return false;
                     }
                     ++p_it;
@@ -202,7 +202,7 @@ bool match_pattern(path_string_type const& file_name, path_string_type const& pa
 
                     // Find where the file number ends
                     path_string_type::const_iterator f = f_it;
-                    if (!local::scan_digits(f, f_end, width)) {
+                    if ( ! local::scan_digits(f, f_end, width)) {
                         return false;
                     }
 
@@ -210,7 +210,7 @@ bool match_pattern(path_string_type const& file_name, path_string_type const& pa
                         ++f;
                     }
 
-                    if (!file_counter_extract::call(f_it, f, file_counter)) {
+                    if ( ! file_counter_extract::call(f_it, f, file_counter)) {
                         return false;
                     }
 

@@ -60,10 +60,10 @@ public:
     hd_private(data_chunk const& seed, uint64_t prefixes = mainnet);
     
     explicit
-    hd_private(const hd_key& private_key);
+    hd_private(hd_key const& private_key);
 
-    hd_private(const hd_key& private_key, uint64_t prefixes);
-    hd_private(const hd_key& private_key, uint32_t prefix);
+    hd_private(hd_key const& private_key, uint64_t prefixes);
+    hd_private(hd_key const& private_key, uint32_t prefix);
     
     explicit
     hd_private(std::string const& encoded);
@@ -72,8 +72,8 @@ public:
     hd_private(std::string const& encoded, uint32_t prefix);
 
     /// Operators.
-    bool operator<(const hd_private& other) const;
-    bool operator==(const hd_private& other) const;
+    bool operator<(const hd_private& x) const;
+    bool operator==(const hd_private& x) const;
     bool operator!=(const hd_private& other) const;
     hd_private& operator=(hd_private other);
 
@@ -89,13 +89,13 @@ public:
 
     /// Cast operators.
     explicit
-    operator const ec_secret&() const;
+    operator ec_secret const&() const;
 
     /// Serializer.
     std::string encoded() const;
 
     /// Accessors.
-    const ec_secret& secret() const;
+    ec_secret const& secret() const;
 
     /// Methods.
     hd_key to_hd_key() const;
@@ -106,14 +106,14 @@ public:
 private:
     /// Factories.
     static hd_private from_seed(data_slice seed, uint64_t prefixes);
-    static hd_private from_key(const hd_key& decoded);
-    static hd_private from_key(const hd_key& key, uint32_t public_prefix);
-    static hd_private from_key(const hd_key& key, uint64_t prefixes);
+    static hd_private from_key(hd_key const& decoded);
+    static hd_private from_key(hd_key const& key, uint32_t public_prefix);
+    static hd_private from_key(hd_key const& key, uint64_t prefixes);
     static hd_private from_string(std::string const& encoded);
     static hd_private from_string(std::string const& encoded, uint32_t public_prefix);
     static hd_private from_string(std::string const& encoded, uint64_t prefixes);
 
-    hd_private(const ec_secret& secret, const hd_chain_code& chain_code, const hd_lineage& lineage);
+    hd_private(ec_secret const& secret, const hd_chain_code& chain_code, hd_lineage const& lineage);
 
     /// Members.
     /// This should be const, apart from the need to implement assignment.

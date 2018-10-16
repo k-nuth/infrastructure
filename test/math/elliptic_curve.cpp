@@ -56,7 +56,7 @@ BOOST_AUTO_TEST_CASE(elliptic_curve__decompress__positive__test)
 BOOST_AUTO_TEST_CASE(elliptic_curve__sign__positive__test)
 {
     ec_signature signature;
-    const ec_secret secret = hash_literal(SECRET3);
+    ec_secret const secret = hash_literal(SECRET3);
     hash_digest const sighash = hash_literal(SIGHASH3);
     BOOST_REQUIRE(sign(signature, secret, sighash));
 
@@ -80,7 +80,7 @@ BOOST_AUTO_TEST_CASE(elliptic_curve__sign__round_trip_positive__test)
     ec_signature signature;
     data_chunk const data{ 'd', 'a', 't', 'a' };
     hash_digest const hash = bitcoin_hash(data);
-    const ec_secret secret = hash_literal(SECRET1);
+    ec_secret const secret = hash_literal(SECRET1);
     BOOST_REQUIRE(secret_to_public(point, secret));
     BOOST_REQUIRE(sign(signature, secret, hash));
     BOOST_REQUIRE(verify_signature(point, hash, signature));
@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_CASE(elliptic_curve__sign__round_trip_negative__test)
     ec_signature signature;
     data_chunk const data{ 'd', 'a', 't', 'a' };
     hash_digest hash = bitcoin_hash(data);
-    const ec_secret secret = base16_literal(SECRET1);
+    ec_secret const secret = base16_literal(SECRET1);
     BOOST_REQUIRE(secret_to_public(point, secret));
     BOOST_REQUIRE(sign(signature, secret, hash));
 
@@ -131,7 +131,7 @@ BOOST_AUTO_TEST_CASE(elliptic_curve__verify_signature__negative__test)
 BOOST_AUTO_TEST_CASE(elliptic_curve__ec_add__positive__test)
 {
     ec_secret secret1{ { 1, 2, 3 } };
-    const ec_secret secret2{ { 3, 2, 1 } };
+    ec_secret const secret2{ { 3, 2, 1 } };
     ec_compressed public1;
     BOOST_REQUIRE(secret_to_public(public1, secret1));
     BOOST_REQUIRE(ec_add(secret1, secret2));

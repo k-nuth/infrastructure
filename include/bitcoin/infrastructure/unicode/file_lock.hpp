@@ -169,7 +169,7 @@ inline void *create_file(std::string const& name, unsigned long access, unsigned
             boost::interprocess::winapi::file_share_read | boost::interprocess::winapi::file_share_write | boost::interprocess::winapi::file_share_delete,
             psec, creation_flags, attributes, 0);
         bool const invalid(boost::interprocess::winapi::invalid_handle_value == handle);
-        if (!invalid){
+        if ( ! invalid){
             return handle;
         }
         if (boost::interprocess::winapi::error_sharing_violation != boost::interprocess::winapi::get_last_error()){

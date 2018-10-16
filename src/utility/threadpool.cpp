@@ -68,7 +68,7 @@ void threadpool::spawn_once(thread_priority priority)
     work_mutex_.lock_upgrade();
 
     // Work prevents the service from running out of work and terminating.
-    if (!work_)
+    if ( ! work_)
     {
         work_mutex_.unlock_upgrade_and_lock();
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

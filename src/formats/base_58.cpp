@@ -24,19 +24,15 @@
 
 namespace libbitcoin {
 
-std::string const base58_chars =
-    "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+std::string const base58_chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
-bool is_base58(char ch)
-{
+bool is_base58(char ch) {
     // This works because the base58 characters happen to be in sorted order
     return std::binary_search(base58_chars.begin(), base58_chars.end(), ch);
 }
 
-bool is_base58(std::string const& text)
-{
-    auto const test = [](char ch)
-    {
+bool is_base58(std::string const& text) {
+    auto const test = [](char ch) {
         return is_base58(ch);
     };
 
@@ -44,25 +40,22 @@ bool is_base58(std::string const& text)
 }
 
 template <typename Data>
-auto search_first_nonzero(const Data& data) -> decltype(data.cbegin())
-{
+auto search_first_nonzero(const Data& data) -> decltype(data.cbegin()) {
     auto first_nonzero = data.cbegin();
     while (first_nonzero != data.end() && *first_nonzero == 0) {
         ++first_nonzero;
-}
+    }
 
     return first_nonzero;
 }
 
-size_t count_leading_zeros(data_slice unencoded)
-{
+size_t count_leading_zeros(data_slice unencoded) {
     // Skip and count leading '1's.
     size_t leading_zeros = 0;
-    for (const uint8_t byte: unencoded)
-    {
+    for (const uint8_t byte: unencoded) {
         if (byte != 0) {
             break;
-}
+        }
 
         ++leading_zeros;
     }
@@ -70,11 +63,9 @@ size_t count_leading_zeros(data_slice unencoded)
     return leading_zeros;
 }
 
-void pack_value(data_chunk& indexes, size_t carry)
-{
+void pack_value(data_chunk& indexes, size_t carry) {
     // Apply "b58 = b58 * 256 + ch".
-    for (auto it = indexes.rbegin(); it != indexes.rend(); ++it)
-    {
+    for (auto it = indexes.rbegin(); it != indexes.rend(); ++it) {
         carry += 256 * (*it);
         *it = carry % 58;
         carry /= 58;
@@ -83,8 +74,7 @@ void pack_value(data_chunk& indexes, size_t carry)
     BITCOIN_ASSERT(carry == 0);
 }
 
-std::string encode_base58(data_slice unencoded)
-{
+std::string encode_base58(data_slice unencoded) {
     size_t leading_zeros = count_leading_zeros(unencoded);
 
     // size = log(256) / log(58), rounded up.
@@ -95,9 +85,7 @@ std::string encode_base58(data_slice unencoded)
     data_chunk indexes(indexes_size);
 
     // Process the bytes.
-    for (auto it = unencoded.begin() + leading_zeros;
-        it != unencoded.end(); ++it)
-    {
+    for (auto it = unencoded.begin() + leading_zeros; it != unencoded.end(); ++it) {
         pack_value(indexes, *it);
     }
 
@@ -106,14 +94,12 @@ std::string encode_base58(data_slice unencoded)
 
     // Translate the result into a string.
     std::string encoded;
-    size_t const estimated_size = leading_zeros +
-        (indexes.end() - first_nonzero);
+    size_t const estimated_size = leading_zeros + (indexes.end() - first_nonzero);
     encoded.reserve(estimated_size);
     encoded.assign(leading_zeros, '1');
 
     // Set actual main bytes.
-    for (auto it = first_nonzero; it != indexes.end(); ++it)
-    {
+    for (auto it = first_nonzero; it != indexes.end(); ++it) {
         size_t const index = *it;
         encoded += base58_chars[index];
     }
@@ -121,15 +107,13 @@ std::string encode_base58(data_slice unencoded)
     return encoded;
 }
 
-size_t count_leading_zeros(std::string const& encoded)
-{
+size_t count_leading_zeros(std::string const& encoded) {
     // Skip and count leading '1's.
     size_t leading_zeros = 0;
-    for (const uint8_t digit: encoded)
-    {
+    for (const uint8_t digit: encoded) {
         if (digit != base58_chars[0]) {
             break;
-}
+    }
 
         ++leading_zeros;
     }
@@ -137,10 +121,8 @@ size_t count_leading_zeros(std::string const& encoded)
     return leading_zeros;
 }
 
-void unpack_char(data_chunk& data, size_t carry)
-{
-    for (auto it = data.rbegin(); it != data.rend(); it++)
-    {
+void unpack_char(data_chunk& data, size_t carry) {
+    for (auto it = data.rbegin(); it != data.rend(); it++) {
         carry += 58 * (*it);
         *it = carry % 256;
         carry /= 256;
@@ -149,8 +131,7 @@ void unpack_char(data_chunk& data, size_t carry)
     BITCOIN_ASSERT(carry == 0);
 }
 
-bool decode_base58(data_chunk& out, std::string const& in)
-{
+bool decode_base58(data_chunk& out, std::string const& in) {
     // Trim spaces and newlines around the string.
     auto const leading_zeros = count_leading_zeros(in);
 
@@ -161,12 +142,11 @@ bool decode_base58(data_chunk& out, std::string const& in)
     data_chunk data(data_size);
 
     // Process the characters.
-    for (auto it = in.begin() + leading_zeros; it != in.end(); ++it)
-    {
+    for (auto it = in.begin() + leading_zeros; it != in.end(); ++it) {
         auto const carry = base58_chars.find(*it);
         if (carry == std::string::npos) {
             return false;
-}
+        }
 
         unpack_char(data, carry);
     }
@@ -186,16 +166,15 @@ bool decode_base58(data_chunk& out, std::string const& in)
 }
 
 // For support of template implementation only, do not call directly.
-bool decode_base58_private(uint8_t* out, size_t out_size, const char* in)
-{
+bool decode_base58_private(uint8_t* out, size_t out_size, char const* in) {
     data_chunk buffer;
-    if (!decode_base58(buffer, in) || buffer.size() != out_size) {
+    if ( ! decode_base58(buffer, in) || buffer.size() != out_size) {
         return false;
-}
+    }
 
     for (size_t i = 0; i < out_size; ++i) {
         out[i] = buffer[i];
-}
+    }
 
     return true;
 }

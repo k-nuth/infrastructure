@@ -65,7 +65,7 @@ bool unwrap(uint8_t& out_version,
     std::array<uint8_t, UNWRAP_SIZE(Size)>& out_payload,
     uint32_t& out_checksum, const std::array<uint8_t, Size>& wrapped)
 {
-    if (!verify_checksum(wrapped)) {
+    if ( ! verify_checksum(wrapped)) {
         return false;
 }
 

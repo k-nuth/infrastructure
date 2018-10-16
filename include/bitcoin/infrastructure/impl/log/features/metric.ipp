@@ -32,9 +32,9 @@ metric_feature<BaseType>::metric_feature()
 }
 
 template <typename BaseType>
-metric_feature<BaseType>::metric_feature(const metric_feature& other)
-  : BaseType(static_cast<const BaseType&>(other)),
-    metric_attribute_(other.metric_attribute_)
+metric_feature<BaseType>::metric_feature(const metric_feature& x)
+  : BaseType(static_cast<const BaseType&>(x)),
+    metric_attribute_(x.metric_attribute_)
 {
     BaseType::attributes()[attributes::metric.get_name()] = metric_attribute_;
 }
@@ -85,10 +85,10 @@ boost::log::record metric_feature<BaseType>::open_record_unlocked(
 }
 
 template <typename BaseType>
-void metric_feature<BaseType>::swap_unlocked(metric_feature& other)
+void metric_feature<BaseType>::swap_unlocked(metric_feature& x)
 {
-    BaseType::swap_unlocked(static_cast<BaseType&>(other));
-    metric_attribute_.swap(other.metric_attribute_);
+    BaseType::swap_unlocked(static_cast<BaseType&>(x));
+    metric_attribute_.swap(x.metric_attribute_);
 }
 
 template <typename BaseType>

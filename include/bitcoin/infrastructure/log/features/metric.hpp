@@ -54,7 +54,7 @@ public:
 
 public:
     metric_feature();
-    metric_feature(const metric_feature& other);
+    metric_feature(const metric_feature& x);
 
     template <typename Arguments>
     explicit
@@ -69,7 +69,7 @@ protected:
     template <typename Arguments>
     boost::log::record open_record_unlocked(const Arguments& arguments);
 
-    void swap_unlocked(metric_feature& other);
+    void swap_unlocked(metric_feature& x);
 
 private:
     template <typename Arguments, typename Value>

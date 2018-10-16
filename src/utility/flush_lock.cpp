@@ -74,7 +74,7 @@ bool flush_lock::lock_shared()
 // Unlock is idempotent, returns true if unlocked on return.
 bool flush_lock::unlock_shared()
 {
-    if (!locked_) {
+    if ( ! locked_) {
         return true;
 }
 

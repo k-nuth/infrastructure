@@ -38,7 +38,7 @@ static BC_CONSTEXPR size_t dictionary_size = 2048;
  * This is a POD type, which means the compiler can write it directly
  * to static memory with no run-time overhead.
  */
-typedef std::array<const char*, dictionary_size> dictionary;
+typedef std::array<char const*, dictionary_size> dictionary;
 
 /**
  * A collection of candidate dictionaries for mnemonic validation.

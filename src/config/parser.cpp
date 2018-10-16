@@ -66,7 +66,7 @@ bool parser::get_option(variables_map& variables, std::string const& name) {
     return variable.as<bool>();
 }
 
-void parser::load_command_variables(variables_map& variables, int argc, const char* argv[])
+void parser::load_command_variables(variables_map& variables, int argc, char const* argv[])
 {
     auto const options = load_options();
     auto const arguments = load_arguments();

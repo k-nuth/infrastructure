@@ -70,14 +70,14 @@ network_address::network_address()
 {
 }
 
-network_address::network_address(const network_address& other)
-  : network_address(other.timestamp_, other.services_, other.ip_, other.port_)
+network_address::network_address(const network_address& x)
+  : network_address(x.timestamp_, x.services_, x.ip_, x.port_)
 {
 }
 
-network_address::network_address(network_address&& other)
-  : network_address(other.timestamp_, other.services_,
-      std::move(other.ip_), other.port_)
+network_address::network_address(network_address&& x)
+  : network_address(x.timestamp_, x.services_,
+      std::move(x.ip_), x.port_)
 {
 }
 
@@ -124,7 +124,7 @@ bool network_address::from_data(uint32_t version, reader& source,
     auto ip = source.read_bytes(ip_.size());
     port_ = source.read_2_bytes_big_endian();
 
-    if (!source) {
+    if ( ! source) {
         reset();
 }
 
@@ -233,28 +233,28 @@ void network_address::set_port(uint16_t value)
     port_ = value;
 }
 
-network_address& network_address::operator=(network_address&& other)
+network_address& network_address::operator=(network_address&& x)
 {
-    timestamp_ = other.timestamp_;
-    services_ = other.services_;
-    ip_ = std::move(other.ip_);
-    port_ = other.port_;
+    timestamp_ = x.timestamp_;
+    services_ = x.services_;
+    ip_ = std::move(x.ip_);
+    port_ = x.port_;
     return *this;
 }
 
-network_address& network_address::operator=(const network_address& other)
+network_address& network_address::operator=(const network_address& x)
 {
-    timestamp_ = other.timestamp_;
-    services_ = other.services_;
-    ip_ = other.ip_;
-    port_ = other.port_;
+    timestamp_ = x.timestamp_;
+    services_ = x.services_;
+    ip_ = x.ip_;
+    port_ = x.port_;
     return *this;
 }
 
-bool network_address::operator==(const network_address& other) const
+bool network_address::operator==(const network_address& x) const
 {
-    return (services_ == other.services_) && (port_ == other.port_)
-        && (ip_ == other.ip_);
+    return (services_ == x.services_) && (port_ == x.port_)
+        && (ip_ == x.ip_);
 }
 
 bool network_address::operator!=(const network_address& other) const
