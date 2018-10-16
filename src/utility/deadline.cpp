@@ -39,7 +39,7 @@ deadline::deadline(threadpool& pool)
 {
 }
 
-deadline::deadline(threadpool& pool, const asio::duration duration)
+deadline::deadline(threadpool& pool, asio::duration duration)
   : duration_(duration),
     timer_(pool.service())
     /*, CONSTRUCT_TRACK(deadline)*/
@@ -51,7 +51,7 @@ void deadline::start(handler handle)
     start(handle, duration_);
 }
 
-void deadline::start(handler handle, const asio::duration duration)
+void deadline::start(handler handle, asio::duration duration)
 {
     auto const timer_handler =
         std::bind(&deadline::handle_timer,

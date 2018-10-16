@@ -38,8 +38,8 @@ class deserializer
   : public reader/*, noncopyable*/
 {
 public:
-    deserializer(const Iterator begin);
-    deserializer(const Iterator begin, const Iterator end);
+    deserializer(Iterator begin);
+    deserializer(Iterator begin, Iterator end);
 
     template <unsigned Size>
     byte_array<Size> read_forward();
@@ -116,13 +116,13 @@ private:
 /// Slower deserializer (with bounds checking).
 /// Safe for use with public data, caller should check object state.
 template <typename Iterator>
-deserializer<Iterator, true> make_safe_deserializer(const Iterator begin,
-    const Iterator end);
+deserializer<Iterator, true> make_safe_deserializer(Iterator begin,
+    Iterator end);
 
 /// Faster deserializer (without bounds checking).
 /// Intended for use with internal/protected buffers only.
 template <typename Iterator>
-deserializer<Iterator, false> make_unsafe_deserializer(const Iterator begin);
+deserializer<Iterator, false> make_unsafe_deserializer(Iterator begin);
 
 } // namespace libbitcoin
 

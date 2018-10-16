@@ -27,7 +27,7 @@ namespace libbitcoin {
 std::string const base58_chars =
     "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
-bool is_base58(const char ch)
+bool is_base58(char ch)
 {
     // This works because the base58 characters happen to be in sorted order
     return std::binary_search(base58_chars.begin(), base58_chars.end(), ch);
@@ -35,7 +35,7 @@ bool is_base58(const char ch)
 
 bool is_base58(std::string const& text)
 {
-    auto const test = [](const char ch)
+    auto const test = [](char ch)
     {
         return is_base58(ch);
     };

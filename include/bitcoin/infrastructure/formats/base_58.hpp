@@ -26,7 +26,7 @@
 
 namespace libbitcoin {
 
-BI_API bool is_base58(const char ch);
+BI_API bool is_base58(char ch);
 BI_API bool is_base58(std::string const& text);
 
 /**

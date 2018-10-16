@@ -31,7 +31,7 @@ namespace libbitcoin {
  * The C standard library function `isxdigit` depends on the current locale,
  * and does not necessarily match the base16 encoding.
  */
-bool is_base16(const char c);
+bool is_base16(char c);
 
 /**
  * Convert data into a user-readable hex string.

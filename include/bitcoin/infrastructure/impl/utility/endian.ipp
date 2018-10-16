@@ -27,7 +27,7 @@ namespace libbitcoin {
     "The endian functions only work on unsigned types")
 
 template <typename Integer, typename Iterator>
-Integer from_big_endian(Iterator start, const Iterator end)
+Integer from_big_endian(Iterator start, Iterator end)
 {
     VERIFY_UNSIGNED(Integer);
     Integer out = 0;
@@ -41,7 +41,7 @@ Integer from_big_endian(Iterator start, const Iterator end)
 }
 
 template <typename Integer, typename Iterator>
-Integer from_little_endian(Iterator start, const Iterator end)
+Integer from_little_endian(Iterator start, Iterator end)
 {
     //// TODO: Type traits does not work for uint256_t.
     ////VERIFY_UNSIGNED(Integer);

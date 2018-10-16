@@ -31,21 +31,21 @@ namespace wallet {
 // They avoid C standard library character classification functions,
 // since those give different answers based on the current locale.
 static 
-bool is_alpha(const char c) {
+bool is_alpha(char c) {
     return
         ('A' <= c && c <= 'Z') ||
         ('a' <= c && c <= 'z');
 }
 
 static 
-bool is_scheme(const char c) {
+bool is_scheme(char c) {
     return
         is_alpha(c) || ('0' <= c && c <= '9') ||
         '+' == c || '-' == c || '.' == c;
 }
 
 static 
-bool is_path_char(const char c) {
+bool is_path_char(char c) {
     return
         is_alpha(c) || ('0' <= c && c <= '9') ||
         '-' == c || '.' == c || '_' == c || '~' == c || // unreserved
@@ -56,17 +56,17 @@ bool is_path_char(const char c) {
 }
 
 static 
-bool is_path(const char c) {
+bool is_path(char c) {
     return is_path_char(c) || '/' == c;
 }
 
 static 
-bool is_query(const char c) {
+bool is_query(char c) {
     return is_path_char(c) || '/' == c || '?' == c;
 }
 
 static 
-bool is_query_char(const char c) {
+bool is_query_char(char c) {
     return is_query(c) && '&' != c && '=' != c;
 }
 

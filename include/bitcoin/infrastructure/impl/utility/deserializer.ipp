@@ -33,43 +33,36 @@ namespace libbitcoin {
 
 // Since the end is not used just use begin.
 template <typename Iterator, bool CheckSafe>
-deserializer<Iterator, CheckSafe>::deserializer(const Iterator begin)
-  : iterator_(begin), end_(begin), valid_(true)
-{
-}
+deserializer<Iterator, CheckSafe>::deserializer(Iterator begin)
+    : iterator_(begin), end_(begin), valid_(true)
+{}
 
 template <typename Iterator, bool CheckSafe>
-deserializer<Iterator, CheckSafe>::deserializer(const Iterator begin,
-    const Iterator end)
-  : iterator_(begin), end_(end), valid_(true)
-{
-}
+deserializer<Iterator, CheckSafe>::deserializer(Iterator begin, Iterator end)
+    : iterator_(begin), end_(end), valid_(true)
+{}
 
 // Context.
 //-----------------------------------------------------------------------------
 
 template <typename Iterator, bool CheckSafe>
-deserializer<Iterator, CheckSafe>::operator bool() const
-{
+deserializer<Iterator, CheckSafe>::operator bool() const {
     return valid_;
 }
 
 template <typename Iterator, bool CheckSafe>
-bool deserializer<Iterator, CheckSafe>::operator!() const
-{
+bool deserializer<Iterator, CheckSafe>::operator!() const {
     return !valid_;
 }
 
 template <typename Iterator, bool CheckSafe>
-bool deserializer<Iterator, CheckSafe>::is_exhausted() const
-{
+bool deserializer<Iterator, CheckSafe>::is_exhausted() const {
     // This is always true in an unsafe reader.
     return !valid_ || remaining() == 0;
 }
 
 template <typename Iterator, bool CheckSafe>
-void deserializer<Iterator, CheckSafe>::invalidate()
-{
+void deserializer<Iterator, CheckSafe>::invalidate() {
     valid_ = false;
 }
 
@@ -77,20 +70,17 @@ void deserializer<Iterator, CheckSafe>::invalidate()
 //-----------------------------------------------------------------------------
 
 template <typename Iterator, bool CheckSafe>
-hash_digest deserializer<Iterator, CheckSafe>::read_hash()
-{
+hash_digest deserializer<Iterator, CheckSafe>::read_hash() {
     return read_forward<hash_size>();
 }
 
 template <typename Iterator, bool CheckSafe>
-short_hash deserializer<Iterator, CheckSafe>::read_short_hash()
-{
+short_hash deserializer<Iterator, CheckSafe>::read_short_hash() {
     return read_forward<short_hash_size>();
 }
 
 template <typename Iterator, bool CheckSafe>
-mini_hash deserializer<Iterator, CheckSafe>::read_mini_hash()
-{
+mini_hash deserializer<Iterator, CheckSafe>::read_mini_hash() {
     return read_forward<mini_hash_size>();
 }
 
@@ -412,14 +402,13 @@ size_t deserializer<Iterator, CheckSafe>::remaining() const
 //-----------------------------------------------------------------------------
 
 template <typename Iterator>
-deserializer<Iterator, true> make_safe_deserializer(const Iterator begin,
-    const Iterator end)
+deserializer<Iterator, true> make_safe_deserializer(Iterator begin, Iterator end)
 {
     return deserializer<Iterator, true>(begin, end);
 }
 
 template <typename Iterator>
-deserializer<Iterator, false> make_unsafe_deserializer(const Iterator begin)
+deserializer<Iterator, false> make_unsafe_deserializer(Iterator begin)
 {
     return deserializer<Iterator, false>(begin);
 }

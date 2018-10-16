@@ -40,7 +40,7 @@ class serializer
 public:
     using functor = std::function<void (serializer<Iterator> &)>;
 
-    serializer(const Iterator begin);
+    serializer(Iterator begin);
 
     template <typename Buffer>
     void write_forward(const Buffer& data);

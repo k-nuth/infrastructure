@@ -30,10 +30,9 @@
 namespace libbitcoin {
 
 template <typename Iterator>
-serializer<Iterator>::serializer(const Iterator begin)
-  : iterator_(begin), valid_(true)
-{
-}
+serializer<Iterator>::serializer(Iterator begin)
+    : iterator_(begin), valid_(true)
+{}
 
 // Context.
 //-----------------------------------------------------------------------------
