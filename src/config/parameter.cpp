@@ -76,8 +76,9 @@ char parameter::short_name(const po::option_description& option) const
 unsigned parameter::arguments_limit(int position,
     const po::option_description& option, const argument_list& arguments) const
 {
-    if (position == parameter::not_positional)
+    if (position == parameter::not_positional) {
         return option.semantic()->max_tokens();
+}
 
     return arguments[position].second;
 }

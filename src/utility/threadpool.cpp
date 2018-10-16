@@ -56,8 +56,9 @@ void threadpool::spawn(size_t number_threads, thread_priority priority)
     // This allows the pool to be restarted.
     service_.reset();
 
-    for (size_t i = 0; i < number_threads; ++i)
+    for (size_t i = 0; i < number_threads; ++i) {
         spawn_once(priority);
+}
 }
 
 void threadpool::spawn_once(thread_priority priority)

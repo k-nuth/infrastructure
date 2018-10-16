@@ -57,8 +57,9 @@ void sequencer::lock(action&& handler)
     mutex_.unlock();
     ///////////////////////////////////////////////////////////////////////
 
-    if (post)
+    if (post) {
         service_.post(std::move(handler));
+}
 }
 
 void sequencer::unlock()
@@ -85,8 +86,9 @@ void sequencer::unlock()
     mutex_.unlock();
     ///////////////////////////////////////////////////////////////////////
 
-    if (handler)
+    if (handler) {
         service_.post(std::move(handler));
+}
 }
 
 } // namespace libbitcoin

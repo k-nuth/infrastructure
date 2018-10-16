@@ -37,9 +37,10 @@ binary::size_type binary::blocks_size(size_type bit_size)
 
 bool binary::is_base2(std::string const& text)
 {
-    for (auto const& character: text)
-        if (character != '0' && character != '1')
+    for (auto const& character: text) {
+        if (character != '0' && character != '1') {
             return false;
+}
 
     return true;
 }
@@ -71,14 +72,16 @@ binary::binary(size_type size, data_slice blocks)
     // Copy blocks
     blocks_.resize(blocks.size());
 
-    if (blocks_.empty())
+    if (blocks_.empty()) {
         return;
+}
 
     std::copy_n(blocks.begin(), blocks.size(), blocks_.begin());
 
     // Pad with 00 for safety.
-    while (blocks_.size() * bits_per_block < size)
+    while (blocks_.size() * bits_per_block < size) {
         blocks_.push_back(0x00);
+}
 
     resize(size);
 }
@@ -139,9 +142,10 @@ void binary::append(const binary& post)
     resize(size() + post.size());
     data_chunk post_shift_blocks = duplicate.blocks();
 
-    for (size_type i = 0; i < post_shift_blocks.size(); i++)
+    for (size_type i = 0; i < post_shift_blocks.size(); i++) {
         blocks_[block_offset + i] = blocks_[block_offset + i] |
             post_shift_blocks[i];
+}
 }
 
 void binary::prepend(const binary& prior)
@@ -149,8 +153,9 @@ void binary::prepend(const binary& prior)
     shift_right(prior.size());
     data_chunk prior_blocks = prior.blocks();
 
-    for (size_type i = 0; i < prior_blocks.size(); i++)
+    for (size_type i = 0; i < prior_blocks.size(); i++) {
         blocks_[i] = blocks_[i] | prior_blocks[i];
+}
 }
 
 void binary::shift_left(size_type distance)
@@ -159,8 +164,9 @@ void binary::shift_left(size_type distance)
     const size_type initial_block_count = blocks_.size();
     size_type destination_size = 0;
 
-    if (distance < initial_size)
+    if (distance < initial_size) {
         destination_size = initial_size - distance;
+}
 
     const size_type block_offset = distance / bits_per_block;
     const size_type offset = distance % bits_per_block;
@@ -171,12 +177,14 @@ void binary::shift_left(size_type distance)
         uint8_t leading_bits = 0x00;
         uint8_t trailing_bits = 0x00;
 
-        if ((offset != 0) && ((block_offset + i + 1) < initial_block_count))
+        if ((offset != 0) && ((block_offset + i + 1) < initial_block_count)) {
             trailing_bits = blocks_[block_offset + i + 1] >>
                 (bits_per_block - offset);
+}
 
-        if ((block_offset + i) < initial_block_count)
+        if ((block_offset + i) < initial_block_count) {
             leading_bits = blocks_[block_offset + i] << offset;
+}
 
         blocks_[i] = leading_bits | trailing_bits;
     }
@@ -192,8 +200,9 @@ void binary::shift_right(size_type distance)
     const size_type offset_blocks = distance / bits_per_block;
     const size_type destination_size = initial_size + distance;
 
-    for (size_type i = 0; i < offset_blocks; i++)
+    for (size_type i = 0; i < offset_blocks; i++) {
         blocks_.insert(blocks_.begin(), 0x00);
+}
 
     uint8_t previous = 0x00;
 
@@ -208,19 +217,22 @@ void binary::shift_right(size_type distance)
 
     resize(destination_size);
 
-    if (offset_blocks + initial_block_count < blocks_.size())
+    if (offset_blocks + initial_block_count < blocks_.size()) {
         blocks_[blocks_.size() - 1] = previous << (bits_per_block - offset);
+}
 }
 
 binary binary::substring(size_type start, size_type length) const
 {
     size_type current_size = size();
 
-    if (start > current_size)
+    if (start > current_size) {
         start = current_size;
+}
 
-    if ((length == max_size_t) || ((start + length) > current_size))
+    if ((length == max_size_t) || ((start + length) > current_size)) {
         length = current_size - start;
+}
 
     binary result(current_size, blocks_);
     result.shift_left(start);
@@ -251,14 +263,16 @@ bool binary::operator<(const binary& other) const
 
 bool binary::operator==(const binary& other) const
 {
-    if (size() != other.size())
+    if (size() != other.size()) {
         return false;
+}
 
     auto const self = *this;
 
-    for (binary::size_type i = 0; i < size(); ++i)
-        if (self[i] != other[i])
+    for (binary::size_type i = 0; i < size(); ++i) {
+        if (self[i] != other[i]) {
             return false;
+}
 
     return true;
 }
@@ -312,8 +326,9 @@ std::istream& operator>>(std::istream& in, binary& to)
     }
 
     // Block wasn't finished but push it back.
-    if (bit_iterator != binary::bits_per_block)
+    if (bit_iterator != binary::bits_per_block) {
         to.blocks_.push_back(block);
+}
 
     to.resize(bitstring.size());
     return in;
@@ -321,8 +336,9 @@ std::istream& operator>>(std::istream& in, binary& to)
 
 std::ostream& operator<<(std::ostream& out, const binary& of)
 {
-    for (binary::size_type i = 0; i < of.size(); ++i)
+    for (binary::size_type i = 0; i < of.size(); ++i) {
         out << (of[i] ? '1' : '0');
+}
 
     return out;
 }

@@ -47,8 +47,9 @@ template <typename Data>
 auto search_first_nonzero(const Data& data) -> decltype(data.cbegin())
 {
     auto first_nonzero = data.cbegin();
-    while (first_nonzero != data.end() && *first_nonzero == 0)
+    while (first_nonzero != data.end() && *first_nonzero == 0) {
         ++first_nonzero;
+}
 
     return first_nonzero;
 }
@@ -59,8 +60,9 @@ size_t count_leading_zeros(data_slice unencoded)
     size_t leading_zeros = 0;
     for (const uint8_t byte: unencoded)
     {
-        if (byte != 0)
+        if (byte != 0) {
             break;
+}
 
         ++leading_zeros;
     }
@@ -125,8 +127,9 @@ size_t count_leading_zeros(std::string const& encoded)
     size_t leading_zeros = 0;
     for (const uint8_t digit: encoded)
     {
-        if (digit != base58_chars[0])
+        if (digit != base58_chars[0]) {
             break;
+}
 
         ++leading_zeros;
     }
@@ -161,8 +164,9 @@ bool decode_base58(data_chunk& out, std::string const& in)
     for (auto it = in.begin() + leading_zeros; it != in.end(); ++it)
     {
         auto const carry = base58_chars.find(*it);
-        if (carry == std::string::npos)
+        if (carry == std::string::npos) {
             return false;
+}
 
         unpack_char(data, carry);
     }
@@ -185,11 +189,13 @@ bool decode_base58(data_chunk& out, std::string const& in)
 bool decode_base58_private(uint8_t* out, size_t out_size, const char* in)
 {
     data_chunk buffer;
-    if (!decode_base58(buffer, in) || buffer.size() != out_size)
+    if (!decode_base58(buffer, in) || buffer.size() != out_size) {
         return false;
+}
 
-    for (size_t i = 0; i < out_size; ++i)
+    for (size_t i = 0; i < out_size; ++i) {
         out[i] = buffer[i];
+}
 
     return true;
 }

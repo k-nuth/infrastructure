@@ -39,12 +39,14 @@ int pkcs5_pbkdf2(const uint8_t* passphrase, size_t passphrase_length,
     /* A key_length of 0 is a no-op. */
     /* A salt_length of 0 is perfectly valid. */
 
-    if (salt_length > SIZE_MAX - 4)
+    if (salt_length > SIZE_MAX - 4) {
         return -1;
+}
     asalt_size = salt_length + 4;
     asalt = malloc(asalt_size);
-    if (asalt == NULL)
+    if (asalt == NULL) {
         return -1;
+}
 
     memcpy(asalt, salt, salt_length);
     for (count = 1; key_length > 0; count++)
@@ -61,8 +63,9 @@ int pkcs5_pbkdf2(const uint8_t* passphrase, size_t passphrase_length,
             HMACSHA512(digest1, sizeof(digest1), passphrase, passphrase_length,
                 digest2);
             memcpy(digest1, digest2, sizeof(digest1));
-            for (index = 0; index < sizeof(buffer); index++)
+            for (index = 0; index < sizeof(buffer); index++) {
                 buffer[index] ^= digest1[index];
+}
         }
 
         length = (key_length < sizeof(buffer) ? key_length : sizeof(buffer));

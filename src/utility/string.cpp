@@ -39,8 +39,9 @@ string_list split(std::string const& sentence, std::string const& delimiter, boo
     if (trim) {
         auto const trimmed = boost::trim_copy(sentence);
         boost::split(words, trimmed, delimit, compress);
-    } else
+    } else {
         boost::split(words, sentence, delimit, compress);
+}
 
     return words;
 }

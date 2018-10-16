@@ -116,15 +116,17 @@ bool network_address::from_data(uint32_t version, reader& source,
 {
     reset();
 
-    if (with_timestamp)
+    if (with_timestamp) {
         timestamp_ = source.read_4_bytes_little_endian();
+}
 
     services_ = source.read_8_bytes_little_endian();
     auto ip = source.read_bytes(ip_.size());
     port_ = source.read_2_bytes_big_endian();
 
-    if (!source)
+    if (!source) {
         reset();
+}
 
     // TODO: add array to reader interface (can't use template).
     std::move(ip.begin(), ip.end(), ip_.data());
@@ -154,8 +156,9 @@ void network_address::to_data(uint32_t version,
 void network_address::to_data(uint32_t version,
     writer& sink, bool with_timestamp) const
 {
-    if (with_timestamp)
+    if (with_timestamp) {
         sink.write_4_bytes_little_endian(timestamp_);
+}
 
     sink.write_8_bytes_little_endian(services_);
     sink.write_bytes(ip_.data(), ip_.size());
@@ -173,8 +176,9 @@ size_t network_address::satoshi_fixed_size(uint32_t version,
 {
     size_t result = 26;
 
-    if (with_timestamp)
+    if (with_timestamp) {
         result += 4u;
+}
 
     return result;
 }

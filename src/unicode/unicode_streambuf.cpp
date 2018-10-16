@@ -37,9 +37,10 @@ unicode_streambuf::unicode_streambuf(std::wstreambuf* wide_buffer, size_t size)
     narrow_(new char[narrow_size_]), wide_(new wchar_t[narrow_size_]),
     wide_buffer_(wide_buffer)
 {
-    if (wide_size_ > (bc::max_uint64 / utf8_max_character_size))
+    if (wide_size_ > (bc::max_uint64 / utf8_max_character_size)) {
         throw std::ios_base::failure(
             "Wide buffer must be no more than one fourth of max uint64.");
+}
 
     // Input buffer is not yet populated, reflect zero length buffer here.
     setg(narrow_, narrow_, narrow_);
@@ -68,8 +69,9 @@ std::streambuf::int_type unicode_streambuf::underflow()
     auto const read = static_cast<size_t>(wide_buffer_->sgetn(wide_, size));
 
     // Handle read termination.
-    if (read == 0)
+    if (read == 0) {
         return traits_type::eof();
+}
 
     // Convert utf16 to utf8, returning bytes written.
     auto const bytes = to_utf8(narrow_, narrow_size_, wide_, read);
@@ -116,8 +118,9 @@ std::streambuf::int_type unicode_streambuf::overflow(
         auto const written = wide_buffer_->sputn(wide_, chars);
 
         // Handle write failure as an EOF.
-        if (written != chars)
+        if (written != chars) {
             return traits_type::eof();
+}
     }
 
     // Copy the fractional character to the beginning of the buffer.
@@ -140,8 +143,9 @@ int unicode_streambuf::sync() {
     const int failure = -1;
 
     // We expect EOF to be returned, because we passed it.
-    if (overflow(traits_type::eof()) == traits_type::eof())
+    if (overflow(traits_type::eof()) == traits_type::eof()) {
         return success;
+}
 
     return failure;
 }

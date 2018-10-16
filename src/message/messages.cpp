@@ -26,14 +26,15 @@ namespace message {
 
 size_t variable_uint_size(uint64_t value)
 {
-    if (value < 0xfd)
+    if (value < 0xfd) {
         return 1;
-    else if (value <= 0xffff)
+    } else if (value <= 0xffff) {
         return 3;
-    else if (value <= 0xffffffff)
+    } else if (value <= 0xffffffff) {
         return 5;
-    else
+    } else {
         return 9;
+}
 }
 
 } // namespace message

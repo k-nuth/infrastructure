@@ -53,17 +53,20 @@ bool decode_base10(uint64_t& out, std::string const& amount,
 
     // Get rid of the decimal point:
     auto point = std::find(value.begin(), value.end(), '.');
-    if (point != value.end())
+    if (point != value.end()) {
         point = value.erase(point);
+}
 
     // Only digits should remain:
-    if (!std::all_of(value.begin(), value.end(), is_digit))
+    if (!std::all_of(value.begin(), value.end(), is_digit)) {
         return false;
+}
 
     // Add digits to the end if there are too few:
     auto actual_places = value.end() - point;
-    if (actual_places < decimal_places)
+    if (actual_places < decimal_places) {
         value.append(decimal_places - actual_places, '0');
+}
 
     // Remove digits from the end if there are too many:
     bool round = false;
@@ -73,18 +76,21 @@ bool decode_base10(uint64_t& out, std::string const& amount,
         round = !std::all_of(end, value.end(), char_is<'0'>);
         value.erase(end, value.end());
     }
-    if (strict && round)
+    if (strict && round) {
         return false;
+}
 
     // Convert to an integer:
     std::istringstream stream(value);
     uint64_t number = 0;
-    if (value.size() && !(stream >> number))
+    if (value.size() && !(stream >> number)) {
         return false;
+}
 
     // Round and return:
-    if (round && number == max_uint64)
+    if (round && number == max_uint64) {
         return false;
+}
     out = number + round;
     return true;
 }

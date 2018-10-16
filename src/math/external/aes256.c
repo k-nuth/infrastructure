@@ -263,15 +263,17 @@ void aes_expandEncKey(uint8_t* k, uint8_t* rc)
     k[3] ^= rj_sbox(k[28]);
     *rc = F( *rc);
 
-    for(i = 4; i < 16; i += 4)  k[i] ^= k[i-4],   k[i+1] ^= k[i-3],
+    for(i = 4; i < 16; i += 4) {  k[i] ^= k[i-4],   k[i+1] ^= k[i-3],
         k[i+2] ^= k[i-2], k[i+3] ^= k[i-1];
+}
     k[16] ^= rj_sbox(k[12]);
     k[17] ^= rj_sbox(k[13]);
     k[18] ^= rj_sbox(k[14]);
     k[19] ^= rj_sbox(k[15]);
 
-    for(i = 20; i < 32; i += 4) k[i] ^= k[i-4],   k[i+1] ^= k[i-3],
+    for(i = 20; i < 32; i += 4) { k[i] ^= k[i-4],   k[i+1] ^= k[i-3],
         k[i+2] ^= k[i-2], k[i+3] ^= k[i-1];
+}
 
 } /* aes_expandEncKey */
 
@@ -280,16 +282,18 @@ void aes_expandDecKey(uint8_t* k, uint8_t* rc)
 {
     uint8_t i;
 
-    for(i = 28; i > 16; i -= 4) k[i+0] ^= k[i-4], k[i+1] ^= k[i-3], 
+    for(i = 28; i > 16; i -= 4) { k[i+0] ^= k[i-4], k[i+1] ^= k[i-3], 
         k[i+2] ^= k[i-2], k[i+3] ^= k[i-1];
+}
 
     k[16] ^= rj_sbox(k[12]);
     k[17] ^= rj_sbox(k[13]);
     k[18] ^= rj_sbox(k[14]);
     k[19] ^= rj_sbox(k[15]);
 
-    for(i = 12; i > 0; i -= 4)  k[i+0] ^= k[i-4], k[i+1] ^= k[i-3],
+    for(i = 12; i > 0; i -= 4) {  k[i+0] ^= k[i-4], k[i+1] ^= k[i-3],
         k[i+2] ^= k[i-2], k[i+3] ^= k[i-1];
+}
 
     *rc = FD(*rc);
     k[0] ^= rj_sbox(k[29]) ^ (*rc);
@@ -314,8 +318,9 @@ void aes256_done(aes256_context* context)
 {
     register uint8_t i;
 
-    for (i = 0; i < sizeof(context->key); i++) 
+    for (i = 0; i < sizeof(context->key); i++) { 
         context->key[i] = context->enckey[i] = context->deckey[i] = 0;
+}
 } /* aes256_done */
 
 /* -------------------------------------------------------------------------- */
@@ -329,8 +334,9 @@ void aes256_encrypt_ecb(aes256_context* context, uint8_t* buf)
         aes_subBytes(buf);
         aes_shiftRows(buf);
         aes_mixColumns(buf);
-        if( i & 1 ) aes_addRoundKey( buf, &context->key[16]);
-        else aes_expandEncKey(context->key, &rcon), aes_addRoundKey(buf, context->key);
+        if( i & 1 ) { aes_addRoundKey( buf, &context->key[16]);
+        } else { aes_expandEncKey(context->key, &rcon), aes_addRoundKey(buf, context->key);
+}
     }
     aes_subBytes(buf);
     aes_shiftRows(buf);

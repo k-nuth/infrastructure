@@ -64,17 +64,21 @@ void statsd_formatter(const record_view& record, formatting_ostream& stream)
     // Get the LineID attribute value and put it into the stream.
     stream << record[attributes::metric] << ":";
 
-    if (has_attribute<int64_t>(attributes::counter.get_name())(record))
+    if (has_attribute<int64_t>(attributes::counter.get_name())(record)) {
         stream << record[attributes::counter] << "|c";
+}
 
-    if (has_attribute<uint64_t>(attributes::gauge.get_name())(record))
+    if (has_attribute<uint64_t>(attributes::gauge.get_name())(record)) {
         stream << record[attributes::gauge] << "|g";
+}
 
-    if (has_attribute<asio::milliseconds>(attributes::timer.get_name())(record))
+    if (has_attribute<asio::milliseconds>(attributes::timer.get_name())(record)) {
         stream << record[attributes::timer].get().count() << "|ms";
+}
 
-    if (has_attribute<float>(attributes::rate.get_name())(record))
+    if (has_attribute<float>(attributes::rate.get_name())(record)) {
         stream << "|@" << record[attributes::rate];
+}
 }
 
 static boost::shared_ptr<collector> file_collector(
@@ -144,8 +148,9 @@ boost::shared_ptr<text_udp_sink> add_udp_sink(threadpool& pool, authority const&
 }
 
 void initialize_statsd(threadpool& pool, authority const& server) {
-    if (server)
+    if (server) {
         add_udp_sink(pool, server)->set_filter(statsd_filter);
+}
 }
 
 } // namespace log

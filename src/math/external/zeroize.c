@@ -34,7 +34,8 @@ void zeroize(void* const buffer, size_t length)
 #else
     size_t i;
     volatile uint8_t* vbuffer = (volatile uint8_t*)buffer;
-    for (i = 0; i < length; i++)
+    for (i = 0; i < length; i++) {
         vbuffer[i] = 0;
+}
 #endif
 }

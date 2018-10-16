@@ -48,8 +48,9 @@ path parser::get_config_option(variables_map& variables, std::string const& name
     // read config from the map so we don't require an early notify
     auto const& config = variables[name];
     // prevent exception in the case where the config variable is not set
-    if (config.empty())
+    if (config.empty()) {
         return path();
+}
     return config.as<path>();
 }
 
@@ -58,8 +59,9 @@ bool parser::get_option(variables_map& variables, std::string const& name) {
     auto const& variable = variables[name];
 
     // prevent exception in the case where the settings variable is not set.
-    if (variable.empty())
+    if (variable.empty()) {
         return false;
+}
 
     return variable.as<bool>();
 }

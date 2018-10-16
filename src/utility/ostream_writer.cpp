@@ -175,8 +175,9 @@ void ostream_writer::write_bytes(data_chunk const& data)
 {
     auto const size = data.size();
 
-    if (size > 0)
+    if (size > 0) {
         stream_.write(reinterpret_cast<const char*>(data.data()), size);
+}
 }
 
 void ostream_writer::write_bytes(const uint8_t* data, size_t size)

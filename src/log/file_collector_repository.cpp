@@ -40,7 +40,7 @@ boost::shared_ptr<boost::log::sinks::file::collector> file_collector_repository:
         boost::bind(&file_collector::is_governed, _1, boost::cref(target_dir)));
 
     boost::shared_ptr<file_collector> result;
-    if (it != collectors_.end()) try
+    if (it != collectors_.end()) { try
     {
         // This may throw if the collector is being currently destroyed
         result = it->shared_from_this();
@@ -49,6 +49,7 @@ boost::shared_ptr<boost::log::sinks::file::collector> file_collector_repository:
     catch (boost::bad_weak_ptr&)
     {
     }
+}
 
     if (!result)
     {

@@ -84,16 +84,19 @@ bool decode_base64(data_chunk& out, std::string const& in)
     const static uint32_t mask = 0x000000FF;
 
     auto const length = in.length();
-    if ((length % 4) != 0)
+    if ((length % 4) != 0) {
         return false;
+}
 
     size_t padding = 0;
     if (length > 0)
     {
-        if (in[length - 1] == pad)
+        if (in[length - 1] == pad) {
             padding++;
-        if (in[length - 2] == pad)
+}
+        if (in[length - 2] == pad) {
             padding++;
+}
     }
 
     data_chunk decoded;
@@ -105,17 +108,17 @@ bool decode_base64(data_chunk& out, std::string const& in)
         for (size_t position = 0; position < 4; position++)
         {
             value <<= 6;
-            if (*cursor >= 0x41 && *cursor <= 0x5A)
+            if (*cursor >= 0x41 && *cursor <= 0x5A) {
                 value |= *cursor - 0x41;
-            else if (*cursor >= 0x61 && *cursor <= 0x7A)
+            } else if (*cursor >= 0x61 && *cursor <= 0x7A) {
                 value |= *cursor - 0x47;
-            else if (*cursor >= 0x30 && *cursor <= 0x39)
+            } else if (*cursor >= 0x30 && *cursor <= 0x39) {
                 value |= *cursor + 0x04;
-            else if (*cursor == 0x2B)
+            } else if (*cursor == 0x2B) {
                 value |= 0x3E;
-            else if (*cursor == 0x2F)
+            } else if (*cursor == 0x2F) {
                 value |= 0x3F;
-            else if (*cursor == pad)
+            } else if (*cursor == pad)
             {
                 // Handle 1 or 2 pad characters.
                 switch (in.end() - cursor)
@@ -133,8 +136,9 @@ bool decode_base64(data_chunk& out, std::string const& in)
                         return false;
                 }
             }
-            else
+            else {
                 return false;
+}
 
             cursor++;
         }

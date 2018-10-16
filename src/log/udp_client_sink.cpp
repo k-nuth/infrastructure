@@ -46,8 +46,9 @@ void udp_client_sink::consume(const record_view& record,
 
 void udp_client_sink::send(std::string const& message)
 {
-    if (!socket_ || !endpoint_)
+    if (!socket_ || !endpoint_) {
         return;
+}
 
     auto const payload = boost::make_shared<std::string>(message);
 

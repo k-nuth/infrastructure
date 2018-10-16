@@ -75,16 +75,18 @@ static void blkcpy(uint8_t* dest, uint8_t* src, size_t len)
 {
     size_t i;
 
-    for (i = 0; i < len; i++)
+    for (i = 0; i < len; i++) {
         dest[i] = src[i];
+}
 }
 
 static void blkxor(uint8_t* dest, uint8_t* src, size_t len)
 {
     size_t i;
 
-    for (i = 0; i < len; i++)
+    for (i = 0; i < len; i++) {
         dest[i] ^= src[i];
+}
 }
 
 /**
@@ -98,12 +100,14 @@ static void salsa20_8(uint8_t B[64])
     size_t i;
 
     /* Convert little-endian values in. */
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++) {
         B32[i] = le32dec(&B[i * 4]);
+}
 
     /* Compute x = doubleround^4(B32). */
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++) {
         x[i] = B32[i];
+}
     for (i = 0; i < 8; i += 2) {
 #define R(a,b) (((a) << (b)) | ((a) >> (32 - (b))))
         /* Operate on columns. */
@@ -135,12 +139,14 @@ static void salsa20_8(uint8_t B[64])
     }
 
     /* Compute B32 = B32 + x. */
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++) {
         B32[i] += x[i];
+}
 
     /* Convert little-endian values out. */
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++) {
         le32enc(&B[4 * i], B32[i]);
+}
 }
 
 /**
@@ -167,10 +173,12 @@ static void blockmix_salsa8(uint8_t* B, uint8_t* Y, size_t r)
     }
 
     /* 6: B' <-- (Y_0, Y_2 ... Y_{2r-2}, Y_1, Y_3 ... Y_{2r-1}) */
-    for (i = 0; i < r; i++)
+    for (i = 0; i < r; i++) {
         blkcpy(&B[i * 64], &Y[(i * 2) * 64], 64);
-    for (i = 0; i < r; i++)
+}
+    for (i = 0; i < r; i++) {
         blkcpy(&B[(i + r) * 64], &Y[(i * 2 + 1) * 64], 64);
+}
 }
 
 /**
@@ -267,12 +275,15 @@ int crypto_scrypt(const uint8_t* passphrase, size_t passphrase_length,
     }
 
     /* Allocate memory. */
-    if ((B = malloc(128 * r * p)) == NULL)
+    if ((B = malloc(128 * r * p)) == NULL) {
         goto err0;
-    if ((XY = malloc(256 * r)) == NULL)
+}
+    if ((XY = malloc(256 * r)) == NULL) {
         goto err1;
-    if ((V = malloc(128 * r * (size_t)N)) == NULL)
+}
+    if ((V = malloc(128 * r * (size_t)N)) == NULL) {
         goto err2;
+}
 
     /* 1: (B_0 ... B_{p-1}) <-- PBKDF2(P, S, 1, p * MFLen) */
     pbkdf2_sha256(passphrase, passphrase_length,

@@ -64,8 +64,9 @@ void SHA1Init(SHA1CTX* context)
 void SHA1Update(SHA1CTX* context, const uint8_t* message, size_t length)
 {
     /* Guard against overflow in while loop (returns digest of empty message). */
-    if (length > SIZE_MAX / 8)
+    if (length > SIZE_MAX / 8) {
         return;
+}
 
     while (length--)
     {

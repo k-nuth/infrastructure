@@ -192,8 +192,9 @@ size_t to_utf8(char out[], size_t out_bytes, const wchar_t in[],
     BITCOIN_ASSERT(out != nullptr);
     BITCOIN_ASSERT(out_bytes >= utf8_max_character_size * in_chars);
 
-    if (in_chars == 0)
+    if (in_chars == 0) {
         return 0;
+}
 
     size_t bytes = 0;
 
@@ -202,19 +203,22 @@ size_t to_utf8(char out[], size_t out_bytes, const wchar_t in[],
         auto const narrow = to_utf8({ in, &in[in_chars] });
         bytes = narrow.size();
 
-        if (bytes <= out_bytes)
+        if (bytes <= out_bytes) {
             memcpy(out, narrow.data(), bytes);
+}
     }
     catch (const boost::locale::conv::conversion_error&)
     {
         bytes = 0;
     }
 
-    if (bytes == 0)
+    if (bytes == 0) {
         throw std::istream::failure("utf-16 to utf-8 conversion failure");
+}
 
-    if (bytes > out_bytes)
+    if (bytes > out_bytes) {
         throw std::ios_base::failure("utf8 buffer is too small");
+}
 
     return bytes;
 }
@@ -273,8 +277,9 @@ static bool is_terminal_utf8_character(const char text[], size_t size)
     {
         auto const start = size - length;
         auto const sequence = &text[start];
-        if (is_utf8_character_sequence(sequence, length))
+        if (is_utf8_character_sequence(sequence, length)) {
             return true;
+}
     }
 
     return false;
@@ -293,8 +298,9 @@ static uint8_t offset_to_terminal_utf8_character(const char text[], size_t size)
         unread < size; unread++)
     {
         auto const length = size - unread;
-        if (is_terminal_utf8_character(text, length))
+        if (is_terminal_utf8_character(text, length)) {
             return unread;
+}
     }
 
     return 0;
@@ -311,8 +317,9 @@ size_t to_utf16(wchar_t out[], size_t out_chars, const char in[],
     // Calculate a character break offset of 0..4 bytes.
     truncated = offset_to_terminal_utf8_character(in, in_bytes);
 
-    if (in_bytes == 0)
+    if (in_bytes == 0) {
         return 0;
+}
 
     size_t chars = 0;
 
@@ -321,19 +328,22 @@ size_t to_utf16(wchar_t out[], size_t out_chars, const char in[],
         auto const wide = to_utf16({ in, &in[in_bytes - truncated] });
         chars = wide.size();
 
-        if (chars <= out_chars)
+        if (chars <= out_chars) {
             wmemcpy(out, wide.data(), chars);
+}
     }
     catch (const boost::locale::conv::conversion_error&)
     {
         chars = 0;
     }
 
-    if (chars == 0)
+    if (chars == 0) {
         throw std::ostream::failure("utf-8 to utf-16 conversion failure");
+}
 
-    if (chars > out_chars)
+    if (chars > out_chars) {
         throw std::ios_base::failure("utf16 buffer is too small");
+}
 
     return chars;
 }

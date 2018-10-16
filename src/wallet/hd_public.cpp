@@ -109,8 +109,9 @@ hd_public hd_public::from_key(const hd_key& key)
 hd_public hd_public::from_string(std::string const& encoded)
 {
     hd_key key;
-    if (!decode_base58(key, encoded))
-        return{};
+    if (!decode_base58(key, encoded)) {
+        return{}
+};
 
     return hd_public(from_key(key));
 }
@@ -129,8 +130,9 @@ hd_public hd_public::from_key(const hd_key& key, uint32_t prefix)
     auto const point = to_array<ec_compressed_size>(compressed);
 
     // Validate the prefix against the provided value.
-    if (actual_prefix != prefix)
-        return{};
+    if (actual_prefix != prefix) {
+        return{}
+};
 
     // The private prefix will be zero'd here, but there's no way to access it.
     const hd_lineage lineage
@@ -148,8 +150,9 @@ hd_public hd_public::from_string(std::string const& encoded,
     uint32_t prefix)
 {
     hd_key key;
-    if (!decode_base58(key, encoded))
-        return{};
+    if (!decode_base58(key, encoded)) {
+        return{}
+};
 
     return hd_public(from_key(key, prefix));
 }
@@ -217,19 +220,22 @@ hd_key hd_public::to_hd_key() const
 
 hd_public hd_public::derive_public(uint32_t index) const
 {
-    if (index >= hd_first_hardened_key)
-        return{};
+    if (index >= hd_first_hardened_key) {
+        return{}
+};
 
     auto const data = splice(point_, to_big_endian(index));
     auto const intermediate = split(hmac_sha512_hash(data, chain_));
 
     // The returned child key Ki is point(parse256(IL)) + Kpar.
     auto combined = point_;
-    if (!ec_add(combined, intermediate.left))
-        return{};
+    if (!ec_add(combined, intermediate.left)) {
+        return{}
+};
 
-    if (lineage_.depth == max_uint8)
-        return{};
+    if (lineage_.depth == max_uint8) {
+        return{}
+};
 
     const hd_lineage lineage
     {

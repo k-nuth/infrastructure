@@ -101,8 +101,9 @@ asio::duration pseudo_randomize(const asio::duration& expiration,
 asio::duration pseudo_random::duration(const asio::duration& expiration,
     uint8_t ratio)
 {
-    if (ratio == 0)
+    if (ratio == 0) {
         return expiration;
+}
 
     // Uses milliseconds level resolution.
     auto const max_expire = duration_cast<milliseconds>(expiration).count();
@@ -110,8 +111,9 @@ asio::duration pseudo_random::duration(const asio::duration& expiration,
     // [10 secs, 4] => 10000 / 4 => 2500
     auto const limit = max_expire / ratio;
 
-    if (limit == 0)
+    if (limit == 0) {
         return expiration;
+}
 
     // [0..2^64) % 2500 => [0..2500]
     auto const random_offset = static_cast<int>(pseudo_random::next(0, limit));

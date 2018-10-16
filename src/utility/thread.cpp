@@ -91,8 +91,9 @@ inline size_t cores()
 // ensure that no less than one thread is configured.
 size_t thread_default(size_t configured)
 {
-    if (configured == 0)
+    if (configured == 0) {
         return cores();
+}
 
     // Configured but no less than 1.
     return (std::max)(configured, size_t(1));
@@ -103,8 +104,9 @@ size_t thread_default(size_t configured)
 // as not to monopolize the processor. It also makes optimal config easy (0).
 size_t thread_ceiling(size_t configured)
 {
-    if (configured == 0)
+    if (configured == 0) {
         return cores();
+}
 
     // Cores/1 but no more than configured.
     return (std::min)(configured, cores());
@@ -115,8 +117,9 @@ size_t thread_ceiling(size_t configured)
 // to increase threads above minimum. It always ensures at least core threads.
 size_t thread_floor(size_t configured)
 {
-    if (configured == 0)
+    if (configured == 0) {
         return cores();
+}
 
     // Configured but no less than cores/1.
     return (std::max)(configured, cores());

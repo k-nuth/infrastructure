@@ -221,8 +221,9 @@ bool verify(const ec_uncompressed& point)
 bool is_compressed_key(data_slice point)
 {
     auto const size = point.size();
-    if (size != ec_compressed_size)
+    if (size != ec_compressed_size) {
         return false;
+}
 
     auto const first = point.data()[0];
     return first == compressed_even || first == compressed_odd;
@@ -231,8 +232,9 @@ bool is_compressed_key(data_slice point)
 bool is_uncompressed_key(data_slice point)
 {
     auto const size = point.size();
-    if (size != ec_uncompressed_size)
+    if (size != ec_uncompressed_size) {
         return false;
+}
 
     auto const first = point.data()[0];
     return first == uncompressed;
@@ -260,8 +262,9 @@ bool is_endorsement(const endorsement& endorsement)
 bool parse_endorsement(uint8_t& sighash_type, der_signature& der_signature,
     endorsement&& endorsement)
 {
-    if (endorsement.empty())
+    if (endorsement.empty()) {
         return false;
+}
 
     sighash_type = endorsement.back();
     endorsement.pop_back();
@@ -272,22 +275,25 @@ bool parse_endorsement(uint8_t& sighash_type, der_signature& der_signature,
 bool parse_signature(ec_signature& out, const der_signature& der_signature,
     bool strict)
 {
-    if (der_signature.empty())
+    if (der_signature.empty()) {
         return false;
+}
 
     bool valid;
     secp256k1_ecdsa_signature parsed;
     auto const context = verification.context();
 
-    if (strict)
+    if (strict) {
         valid = secp256k1_ecdsa_signature_parse_der(context, &parsed,
             der_signature.data(), der_signature.size()) == 1;
-    else
+    } else {
         valid = ecdsa_signature_parse_der_lax(context, &parsed,
             der_signature.data(), der_signature.size()) == 1;
+}
 
-    if (valid)
+    if (valid) {
         std::copy_n(std::begin(parsed.data), ec_signature_size, out.begin());
+}
 
     return valid;
 }
@@ -303,8 +309,9 @@ bool encode_signature(der_signature& out, const ec_signature& signature)
     out.resize(size);
 
     if (secp256k1_ecdsa_signature_serialize_der(context, out.data(), &size,
-        &sign) != 1)
+        &sign) != 1) {
         return false;
+}
 
     out.resize(size);
     return true;
@@ -319,8 +326,9 @@ bool sign(ec_signature& out, const ec_secret& secret, const hash_digest& hash)
     auto const context = signing.context();
 
     if (secp256k1_ecdsa_sign(context, &signature, hash.data(), secret.data(),
-        secp256k1_nonce_function_rfc6979, nullptr) != 1)
+        secp256k1_nonce_function_rfc6979, nullptr) != 1) {
         return false;
+}
 
     std::copy_n(std::begin(signature.data), out.size(), out.begin());
     return true;

@@ -190,10 +190,11 @@ void initialize()
 void initialize(log::file& debug_file, log::file& error_file,
     log::stream& output_stream, log::stream& error_stream, bool verbose)
 {
-    if (verbose)
+    if (verbose) {
         add_text_stream_sink(debug_file)->set_filter(base_filter);
-    else
+    } else {
         add_text_stream_sink(debug_file)->set_filter(lean_filter);
+}
 
     add_text_stream_sink(error_file)->set_filter(error_filter);
     add_text_stream_sink(output_stream)->set_filter(info_filter);
@@ -203,10 +204,11 @@ void initialize(log::file& debug_file, log::file& error_file,
 void initialize(const rotable_file& debug_file, const rotable_file& error_file,
     log::stream& output_stream, log::stream& error_stream, bool verbose)
 {
-    if (verbose)
+    if (verbose) {
         add_text_file_sink(debug_file)->set_filter(base_filter);
-    else
+    } else {
         add_text_file_sink(debug_file)->set_filter(lean_filter);
+}
 
     add_text_file_sink(error_file)->set_filter(error_filter);
     add_text_stream_sink(output_stream)->set_filter(info_filter);

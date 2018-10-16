@@ -119,8 +119,9 @@ hd_private hd_private::from_seed(data_slice seed, uint64_t prefixes)
     auto const intermediate = split(hmac_sha512_hash(seed, magic));
 
     // The key is invalid if parse256(IL) >= n or 0:
-    if (!verify(intermediate.left))
-        return{};
+    if (!verify(intermediate.left)) {
+        return{}
+};
 
     auto const master = hd_lineage
     {
@@ -153,8 +154,9 @@ hd_private hd_private::from_key(const hd_key& key, uint64_t prefixes)
     auto const secret = reader.read_forward<ec_secret_size>();
 
     // Validate the prefix against the provided value.
-    if (prefix != to_prefix(prefixes))
-        return{};
+    if (prefix != to_prefix(prefixes)) {
+        return{}
+};
 
     const hd_lineage lineage
     {
@@ -171,8 +173,9 @@ hd_private hd_private::from_string(std::string const& encoded,
     uint32_t public_prefix)
 {
     hd_key key;
-    if (!decode_base58(key, encoded))
-        return{};
+    if (!decode_base58(key, encoded)) {
+        return{}
+};
 
     return hd_private(from_key(key, public_prefix));
 }
@@ -252,11 +255,13 @@ hd_private hd_private::derive_private(uint32_t index) const
 
     // The child key ki is (parse256(IL) + kpar) mod n:
     auto child = secret_;
-    if (!ec_add(child, intermediate.left))
-        return{};
+    if (!ec_add(child, intermediate.left)) {
+        return{}
+};
 
-    if (lineage_.depth == max_uint8)
-        return{};
+    if (lineage_.depth == max_uint8) {
+        return{}
+};
 
     const hd_lineage lineage
     {

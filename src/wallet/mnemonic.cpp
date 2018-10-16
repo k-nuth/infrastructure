@@ -50,8 +50,9 @@ inline uint8_t bip39_shift(size_t bit)
 bool validate_mnemonic(const word_list& words, const dictionary& lexicon)
 {
     auto const word_count = words.size();
-    if ((word_count % mnemonic_word_multiple) != 0)
+    if ((word_count % mnemonic_word_multiple) != 0) {
         return false;
+}
 
     auto const total_bits = bits_per_word * word_count;
     auto const check_bits = total_bits / (entropy_bit_divisor + 1);
@@ -65,8 +66,9 @@ bool validate_mnemonic(const word_list& words, const dictionary& lexicon)
     for (auto const& word: words)
     {
         auto const position = find_position(lexicon, word);
-        if (position == -1)
+        if (position == -1) {
             return false;
+}
 
         for (size_t loop = 0; loop < bits_per_word; loop++, bit++)
         {
@@ -86,8 +88,9 @@ bool validate_mnemonic(const word_list& words, const dictionary& lexicon)
 
 word_list create_mnemonic(data_slice entropy, const dictionary &lexicon)
 {
-    if ((entropy.size() % mnemonic_seed_multiple) != 0)
+    if ((entropy.size() % mnemonic_seed_multiple) != 0) {
         return word_list();
+}
 
     const size_t entropy_bits = (entropy.size() * byte_bits);
     const size_t check_bits = (entropy_bits / entropy_bit_divisor);
@@ -112,8 +115,9 @@ word_list create_mnemonic(data_slice entropy, const dictionary &lexicon)
 
             auto const byte = bit / byte_bits;
 
-            if ((data[byte] & bip39_shift(bit)) > 0)
+            if ((data[byte] & bip39_shift(bit)) > 0) {
                 position++;
+}
         }
 
         BITCOIN_ASSERT(position < dictionary_size);
@@ -127,9 +131,10 @@ word_list create_mnemonic(data_slice entropy, const dictionary &lexicon)
 bool validate_mnemonic(const word_list& mnemonic,
     const dictionary_list& lexicons)
 {
-    for (auto const& lexicon: lexicons)
-        if (validate_mnemonic(mnemonic, *lexicon))
+    for (auto const& lexicon: lexicons) {
+        if (validate_mnemonic(mnemonic, *lexicon)) {
             return true;
+}
 
     return false;
 }

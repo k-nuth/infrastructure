@@ -38,8 +38,9 @@ uint32_t bitcoin_checksum(data_slice data)
 
 bool verify_checksum(data_slice data)
 {
-    if (data.size() < checksum_size)
+    if (data.size() < checksum_size) {
         return false;
+}
 
     // TODO: create a bitcoin_checksum overload that can accept begin/end.
     auto const checksum_begin = data.end() - checksum_size;

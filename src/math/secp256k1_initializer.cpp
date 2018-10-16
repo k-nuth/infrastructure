@@ -43,8 +43,9 @@ secp256k1_initializer::secp256k1_initializer(int flags)
 // Clean up the context on destruct.
 secp256k1_initializer::~secp256k1_initializer()
 {
-    if (context_ != nullptr)
+    if (context_ != nullptr) {
         secp256k1_context_destroy(context_);
+}
 }
 
 // Get the curve context and initialize on first use.

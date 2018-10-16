@@ -63,8 +63,9 @@ bool flush_lock::try_lock()
 // Lock is idempotent, returns true if locked on return.
 bool flush_lock::lock_shared()
 {
-    if (locked_)
+    if (locked_) {
         return true;
+}
 
     locked_ = create(file_);
     return locked_;
@@ -73,8 +74,9 @@ bool flush_lock::lock_shared()
 // Unlock is idempotent, returns true if unlocked on return.
 bool flush_lock::unlock_shared()
 {
-    if (!locked_)
+    if (!locked_) {
         return true;
+}
 
     locked_ = !destroy(file_);
     return !locked_;

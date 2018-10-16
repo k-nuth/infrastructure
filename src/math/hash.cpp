@@ -141,16 +141,18 @@ long_hash pkcs5_pbkdf2_hmac_sha512(data_slice passphrase,
     auto const result = pkcs5_pbkdf2(passphrase.data(), passphrase.size(),
         salt.data(), salt.size(), hash.data(), hash.size(), iterations);
 
-    if (result != 0)
+    if (result != 0) {
         throw std::bad_alloc();
+}
 
     return hash;
 }
 
 static void handle_script_result(int result)
 {
-    if (result == 0)
+    if (result == 0) {
         return;
+}
 
     switch (errno)
     {

@@ -92,8 +92,9 @@ static uint8_t decoder[96] =
 bool encode_base85(std::string& out, data_slice in)
 {
     const size_t size = in.size();
-    if (size % 4 != 0)
+    if (size % 4 != 0) {
         return false;
+}
 
     const size_t encoded_size = size * 5 / 4;
     std::string encoded;
@@ -106,8 +107,9 @@ bool encode_base85(std::string& out, data_slice in)
         accumulator = accumulator * 256 + unencoded_byte;
         if (++byte_index % 4 == 0)
         {
-            for (uint32_t divise = 85 * 85 * 85 * 85; divise > 0; divise /= 85)
+            for (uint32_t divise = 85 * 85 * 85 * 85; divise > 0; divise /= 85) {
                 encoded.push_back(encoder[accumulator / divise % 85]);
+}
 
             accumulator = 0;
         }
@@ -122,8 +124,9 @@ bool encode_base85(std::string& out, data_slice in)
 bool decode_base85(data_chunk& out, std::string const& in)
 {
     const size_t length = in.size();
-    if (length % 5 != 0)
+    if (length % 5 != 0) {
         return false;
+}
 
     const size_t decoded_size = length * 4 / 5;
     data_chunk decoded;
@@ -134,14 +137,16 @@ bool decode_base85(data_chunk& out, std::string const& in)
     for (const uint8_t encoded_character: in)
     {
         auto const position = encoded_character - 32;
-        if (position < 0 || position > 96)
+        if (position < 0 || position > 96) {
             return false;
+}
 
         accumulator = accumulator * 85 + decoder[position];
         if (++char_index % 5 == 0)
         {
-            for (uint32_t divise = 256 * 256 * 256; divise > 0; divise /= 256)
+            for (uint32_t divise = 256 * 256 * 256; divise > 0; divise /= 256) {
                 decoded.push_back(accumulator / divise % 256);
+}
 
             accumulator = 0;
         }

@@ -72,8 +72,9 @@ bool parse_counter_placeholder(path_string_type::const_iterator& it,
 {
     typedef qi::extract_uint<unsigned int, 10, 1, -1> width_extract;
 
-    if (it == end)
+    if (it == end) {
         return false;
+}
 
     path_string_type::value_type c = *it;
     if (c == file_char_traits::zero || c == file_char_traits::space ||
@@ -81,18 +82,21 @@ bool parse_counter_placeholder(path_string_type::const_iterator& it,
     {
         // Skip filler and alignment specification
         ++it;
-        if (it == end)
+        if (it == end) {
             return false;
+}
         c = *it;
     }
 
     if (file_char_traits::is_digit(c))
     {
         // Parse width
-        if (!width_extract::call(it, end, width))
+        if (!width_extract::call(it, end, width)) {
             return false;
-        if (it == end)
+}
+        if (it == end) {
             return false;
+}
         c = *it;
     }
 
@@ -100,10 +104,12 @@ bool parse_counter_placeholder(path_string_type::const_iterator& it,
     {
         // Skip precision
         ++it;
-        while (it != end && file_char_traits::is_digit(*it))
+        while (it != end && file_char_traits::is_digit(*it)) {
             ++it;
-        if (it == end)
+}
+        if (it == end) {
             return false;
+}
         c = *it;
     }
 
@@ -132,8 +138,9 @@ bool match_pattern(path_string_type const& file_name,
             for (; n > 0; --n)
             {
                 path_string_type::value_type c = *it++;
-                if (!file_char_traits::is_digit(c) || it == end)
+                if (!file_char_traits::is_digit(c) || it == end) {
                     return false;
+}
             }
             return true;
         }
@@ -162,8 +169,9 @@ bool match_pattern(path_string_type const& file_name,
                 ++p_it;
                 ++f_it;
             }
-            else
+            else {
                 return false;
+}
         }
         else
         {
@@ -176,8 +184,9 @@ bool match_pattern(path_string_type const& file_name,
                     ++f_it;
                     break;
                 }
-                else
+                else {
                     return false;
+}
 
             // Date/time components with 2-digits width
             case file_char_traits::seconds_placeholder:
@@ -186,15 +195,17 @@ bool match_pattern(path_string_type const& file_name,
             case file_char_traits::day_placeholder:
             case file_char_traits::month_placeholder:
             case file_char_traits::year_placeholder:
-                if (!local::scan_digits(f_it, f_end, 2))
+                if (!local::scan_digits(f_it, f_end, 2)) {
                     return false;
+}
                 ++p_it;
                 break;
 
             // Date/time components with 4-digits width
             case file_char_traits::full_year_placeholder:
-                if (!local::scan_digits(f_it, f_end, 4))
+                if (!local::scan_digits(f_it, f_end, 4)) {
                     return false;
+}
                 ++p_it;
                 break;
 
@@ -221,13 +232,16 @@ bool match_pattern(path_string_type const& file_name,
 
                     // Find where the file number ends
                     path_string_type::const_iterator f = f_it;
-                    if (!local::scan_digits(f, f_end, width))
+                    if (!local::scan_digits(f, f_end, width)) {
                         return false;
-                    while (f != f_end && file_char_traits::is_digit(*f))
+}
+                    while (f != f_end && file_char_traits::is_digit(*f)) {
                         ++f;
+}
 
-                    if (!file_counter_extract::call(f_it, f, file_counter))
+                    if (!file_counter_extract::call(f_it, f, file_counter)) {
                         return false;
+}
 
                     p_it = p;
                 }
@@ -246,11 +260,13 @@ bool match_pattern(path_string_type const& file_name,
             // that is added by the collector in case if file name clash
             return local::scan_digits(f_it, f_end, std::distance(f_it, f_end));
         }
-        else
+        else {
             return true;
+}
     }
-    else
+    else {
         return false;
+}
 }
 
 file_collector::file_collector(
@@ -330,8 +346,9 @@ void file_collector::store_file(filesystem::path const& src_path)
                 filesystem::remove(old_info.path);
                 // Free space has to be queried as it may not increase equally
                 // to the erased file size on compressed filesystems
-                if (min_free_space_)
+                if (min_free_space_) {
                     free_space = filesystem::space(storage_dir_).available;
+}
                 total_size_ -= old_info.size;
                 files_.erase(it++);
             }
@@ -370,8 +387,9 @@ uintmax_t file_collector::scan_for_files(
         if (method == boost::log::sinks::file::scan_matching)
         {
             mask = filename_string(pattern);
-            if (pattern.has_parent_path())
+            if (pattern.has_parent_path()) {
                 dir = make_absolute(pattern.parent_path());
+}
         }
         else
         {
@@ -382,8 +400,9 @@ uintmax_t file_collector::scan_for_files(
         {
             BOOST_LOG_EXPR_IF_MT(boost::lock_guard<boost::mutex> lock(mutex_);)
 
-            if (counter)
+            if (counter) {
                 *counter = 0;
+}
 
             file_list files;
             filesystem::directory_iterator it(dir), end;
@@ -417,8 +436,9 @@ uintmax_t file_collector::scan_for_files(
                             files.push_back(info);
                             ++file_count;
 
-                            if (counter && file_number >= *counter)
+                            if (counter && file_number >= *counter) {
                                 *counter = file_number + 1;
+}
                         }
                     }
                 }

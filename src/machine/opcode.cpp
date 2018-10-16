@@ -683,12 +683,14 @@ std::string opcode_to_hexadecimal(opcode code)
 
 bool opcode_from_hexadecimal(opcode& out_code, std::string const& value)
 {
-    if (value.size() != 4 || value[0] != '0' || value[1] != 'x')
+    if (value.size() != 4 || value[0] != '0' || value[1] != 'x') {
         return false;
+}
 
     data_chunk out;
-    if (!decode_base16(out, std::string(value.begin() + 2, value.end())))
+    if (!decode_base16(out, std::string(value.begin() + 2, value.end()))) {
         return false;
+}
 
     out_code = static_cast<opcode>(out.front());
     return true;

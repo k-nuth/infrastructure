@@ -111,8 +111,9 @@ size_t istream_reader::read_size_big_endian()
 
     // This facilitates safely passing the size into a follow-on reader.
     // Return zero allows follow-on use before testing reader state.
-    if (size <= max_size_t)
+    if (size <= max_size_t) {
         return static_cast<size_t>(size);
+}
 
     invalidate();
     return 0;
@@ -165,8 +166,9 @@ size_t istream_reader::read_size_little_endian()
 
     // This facilitates safely passing the size into a follow-on reader.
     // Return zero allows follow-on use before testing reader state.
-    if (size <= max_size_t)
+    if (size <= max_size_t) {
         return static_cast<size_t>(size);
+}
 
     invalidate();
     return 0;
@@ -191,8 +193,9 @@ data_chunk istream_reader::read_bytes()
 {
     data_chunk out;
 
-    while (!is_exhausted())
+    while (!is_exhausted()) {
         out.push_back(read_byte());
+}
 
     return out;
 }
@@ -233,8 +236,9 @@ std::string istream_reader::read_string(size_t size)
         terminated |= (character == string_terminator);
 
         // Stop pushing characters at the first null.
-        if (!terminated)
+        if (!terminated) {
             out.push_back(character);
+}
     }
 
     // Reduce the allocation to the number of characters pushed.

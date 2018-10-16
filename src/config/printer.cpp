@@ -94,8 +94,9 @@ printer::printer(const po::options_description& settings,
 static void enqueue_fragment(std::string& fragment,
     std::vector<std::string>& column)
 {
-    if (!fragment.empty())
+    if (!fragment.empty()) {
         column.push_back(fragment);
+}
 }
 
 // 100% component tested.
@@ -132,18 +133,19 @@ static std::string format_row_name(const parameter& value)
     // This is a problem when composing with a command-line argument that
     // wants to be upper case but must match in case with the env var option.
 
-    if (value.get_position() != parameter::not_positional)
+    if (value.get_position() != parameter::not_positional) {
         return (format(BI_PRINTER_TABLE_ARGUMENT_FORMAT) %
             boost::to_upper_copy(value.get_long_name())).str();
-    else if (value.get_short_name() == parameter::no_short_name)
+    } else if (value.get_short_name() == parameter::no_short_name) {
         return (format(BI_PRINTER_TABLE_OPTION_LONG_FORMAT) %
             value.get_long_name()).str();
-    else if (value.get_long_name().empty())
+    } else if (value.get_long_name().empty()) {
         return (format(BI_PRINTER_TABLE_OPTION_SHORT_FORMAT) %
             value.get_short_name()).str();
-    else
+    } else {
         return (format(BI_PRINTER_TABLE_OPTION_FORMAT) %
             value.get_short_name() % value.get_long_name()).str();
+}
 }
 
 // 100% component tested.
@@ -165,8 +167,9 @@ std::string printer::format_parameters_table(bool positional)
     for (auto const& parameter: parameters)
     {
         // Skip positional arguments if not positional.
-        if (!match_positional(positional, parameter))
+        if (!match_positional(positional, parameter)) {
             continue;
+}
 
         // Get the formatted parameter name.
         auto name = format_row_name(parameter);
@@ -196,8 +199,9 @@ std::string printer::format_paragraph(std::string const& paragraph)
 
     auto const lines = columnize(paragraph, 73);
 
-    for (auto const& line: lines)
+    for (auto const& line: lines) {
         output << paragraph_format % line;
+}
 
     return output.str();
 }
@@ -213,12 +217,13 @@ static std::string format_setting(const parameter& value,
     auto optional = value.get_args_limit() == 1;
 
     std::string formatter;
-    if (required)
+    if (required) {
         formatter = BI_PRINTER_SETTING_REQUIRED_FORMAT;
-    else if (optional)
+    } else if (optional) {
         formatter = BI_PRINTER_SETTING_OPTIONAL_FORMAT;
-    else
+    } else {
         formatter = BI_PRINTER_SETTING_MULTIPLE_FORMAT;
+}
 
     return (format(formatter) % name % BI_PRINTER_VALUE_TEXT).str();
 }
@@ -328,65 +333,76 @@ std::string printer::format_usage_parameters()
 
         if (toggle)
         {
-            if (is_short)
+            if (is_short) {
                 toggle_short_options.push_back(parameter.get_short_name());
-            else
+            } else {
                 toggle_long_options.push_back(long_name);
+}
         }
         else if (option)
         {
-            if (required)
+            if (required) {
                 required_options.push_back(long_name);
-            else if (optional)
+            } else if (optional) {
                 optional_options.push_back(long_name);
-            else
+            } else {
                 multiple_options.push_back(long_name);
+}
         }
         else
         {
             // to_upper_copy is a hack for boost bug, see format_row_name.
-            if (required)
+            if (required) {
                 required_arguments.push_back(boost::to_upper_copy(long_name));
-            else if (optional)
+            } else if (optional) {
                 optional_arguments.push_back(boost::to_upper_copy(long_name));
-            else
+            } else {
                 multiple_arguments.push_back(boost::to_upper_copy(long_name));
+}
         }
     }
 
     std::stringstream usage;
 
-    if (!toggle_short_options.empty())
+    if (!toggle_short_options.empty()) {
         usage << format(BI_PRINTER_USAGE_OPTION_TOGGLE_SHORT_FORMAT) %
             toggle_short_options;
+}
 
-    for (auto const& required_option: required_options)
+    for (auto const& required_option: required_options) {
         usage << format(BI_PRINTER_USAGE_OPTION_REQUIRED_FORMAT) %
             required_option % BI_PRINTER_VALUE_TEXT;
+}
 
-    for (auto const& toggle_long_option: toggle_long_options)
+    for (auto const& toggle_long_option: toggle_long_options) {
         usage << format(BI_PRINTER_USAGE_OPTION_TOGGLE_LONG_FORMAT) %
             toggle_long_option;
+}
 
-    for (auto const& optional_option: optional_options)
+    for (auto const& optional_option: optional_options) {
         usage << format(BI_PRINTER_USAGE_OPTION_OPTIONAL_FORMAT) %
             optional_option % BI_PRINTER_VALUE_TEXT;
+}
 
-    for (auto const& multiple_option: multiple_options)
+    for (auto const& multiple_option: multiple_options) {
         usage << format(BI_PRINTER_USAGE_OPTION_MULTIPLE_FORMAT) %
             multiple_option % BI_PRINTER_VALUE_TEXT;
+}
 
-    for (auto const& required_argument: required_arguments)
+    for (auto const& required_argument: required_arguments) {
         usage << format(BI_PRINTER_USAGE_ARGUMENT_REQUIRED_FORMAT) %
             required_argument;
+}
 
-    for (auto const& optional_argument: optional_arguments)
+    for (auto const& optional_argument: optional_arguments) {
         usage << format(BI_PRINTER_USAGE_ARGUMENT_OPTIONAL_FORMAT) %
             optional_argument;
+}
 
-    for (auto const& multiple_argument: multiple_arguments)
+    for (auto const& multiple_argument: multiple_arguments) {
         usage << format(BI_PRINTER_USAGE_ARGUMENT_MULTIPLE_FORMAT) %
             multiple_argument;
+}
 
     return boost::trim_copy(usage.str());
 }
@@ -396,11 +412,13 @@ std::string printer::format_usage_parameters()
 // 100% component tested.
 static void enqueue_name(int count, std::string& name, argument_list& names)
 {
-    if (count <= 0)
+    if (count <= 0) {
         return;
+}
 
-    if (count > printer::max_arguments)
+    if (count > printer::max_arguments) {
         count = -1;
+}
 
     names.push_back(argument_pair(name, count));
 }
@@ -429,8 +447,9 @@ void printer::generate_argument_names()
         argument_name = arguments.name_for_position(position);
 
         // Initialize the first name as having a zeroth instance.
-        if (max_previous_argument == 0)
+        if (max_previous_argument == 0) {
             previous_argument_name = argument_name;
+}
 
         // This is a duplicate of the previous name, so increment the count.
         if (argument_name == previous_argument_name)
@@ -471,10 +490,11 @@ void printer::generate_parameters()
         param.initialize(*option_ptr, argument_names);
 
         // Sort non-positonal parameters (i.e. options).
-        if (param.get_position() == parameter::not_positional)
+        if (param.get_position() == parameter::not_positional) {
             insert_sorted(parameters, param, compare_parameters);
-        else
+        } else {
             parameters.push_back(param);
+}
     }
 }
 
@@ -511,8 +531,9 @@ void printer::settings(std::ostream& output)
 {
     auto const& setting_table = format_settings_table();
 
-    if (!description_.empty())
+    if (!description_.empty()) {
         output << std::endl << description_;
+}
 
     output << std::endl << setting_table;
 }
