@@ -272,27 +272,25 @@ std::string deserializer<Iterator, CheckSafe>::read_string()
 
 // Removes trailing zeros, required for bitcoin string comparisons.
 template <typename Iterator, bool CheckSafe>
-std::string deserializer<Iterator, CheckSafe>::read_string(size_t size)
-{
-    if (!safe(size)) {
+std::string deserializer<Iterator, CheckSafe>::read_string(size_t size) {
+    if ( ! safe(size)) {
         invalidate();
-}
+    }
 
     if (!valid_) {
-        return{}
-};
+        return {};
+    }
 
     std::string out;
     out.reserve(size);
 
     // Read up to size characters, stopping at the first null (may be many).
-    for (size_t index = 0; index < size; ++index)
-    {
+    for (size_t index = 0; index < size; ++index) {
         auto const character = iterator_[index];
 
         if (character == string_terminator) {
             break;
-}
+        }
 
         out.push_back(character);
     }
@@ -328,7 +326,7 @@ byte_array<Size> deserializer<Iterator, CheckSafe>::read_forward()
 }
 
     if (!valid_ || Size == 0) {
-        return{}
+        return{};
 };
 
     byte_array<Size> out;
@@ -347,7 +345,7 @@ byte_array<Size> deserializer<Iterator, CheckSafe>::read_reverse()
 }
 
     if (!valid_) {
-        return{}
+        return{};
 };
 
     byte_array<Size> out;
@@ -366,7 +364,7 @@ Integer deserializer<Iterator, CheckSafe>::read_big_endian()
 }
 
     if (!valid_) {
-        return{}
+        return{};
 };
 
     auto const begin = iterator_;
@@ -383,7 +381,7 @@ Integer deserializer<Iterator, CheckSafe>::read_little_endian()
 }
 
     if (!valid_) {
-        return{}
+        return{};
 };
 
     auto const begin = iterator_;

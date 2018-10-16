@@ -21,8 +21,8 @@
 
 #include <algorithm>
 #include <cstddef>
-#include <iterator>
 #include <initializer_list>
+#include <iterator>
 
 #include <bitcoin/infrastructure/utility/assert.hpp>
 

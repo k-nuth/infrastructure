@@ -19,8 +19,8 @@
 #ifndef BITPRIM_INFRASTRUCTURE_PSEUDO_RANDOM_HPP
 #define BITPRIM_INFRASTRUCTURE_PSEUDO_RANDOM_HPP
 
-#include <random>
 #include <cstdint>
+#include <random>
 
 #include <bitcoin/infrastructure/constants.hpp>
 #include <bitcoin/infrastructure/define.hpp>

@@ -20,9 +20,9 @@
 #define LIBBITCOIN_INFRASTUCTURE_CONFIG_BASE16_HPP
 
 #include <array>
+#include <cstdint>
 #include <iostream>
 #include <string>
-#include <cstdint>
 
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>

@@ -20,8 +20,8 @@
 #define BITPRIM_INFRASTRUCTURE_LIMITS_HPP
 
 #include <algorithm>
-#include <stdexcept>
 #include <limits>
+#include <stdexcept>
 
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>

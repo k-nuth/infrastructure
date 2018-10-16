@@ -21,8 +21,8 @@
 
 #include <atomic>
 #include <cstddef>
-#include <memory>
 #include <functional>
+#include <memory>
 #include <thread>
 
 #include <bitcoin/infrastructure/define.hpp>

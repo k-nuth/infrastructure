@@ -21,8 +21,8 @@
 
 #include <boost/asio.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/config/authority.hpp>
+#include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/log/rotable_file.hpp>
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 

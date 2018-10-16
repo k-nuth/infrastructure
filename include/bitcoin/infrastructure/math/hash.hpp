@@ -28,9 +28,9 @@
 
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/define.hpp>
+#include <bitcoin/infrastructure/hash_define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/endian.hpp>
-#include <bitcoin/infrastructure/hash_define.hpp>
 
 namespace libbitcoin {
 

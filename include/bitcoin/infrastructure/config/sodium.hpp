@@ -24,8 +24,8 @@
 #include <vector>
 
 #include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>
+#include <bitcoin/infrastructure/utility/data.hpp>
 
 namespace libbitcoin {
 namespace config {

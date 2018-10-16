@@ -20,6 +20,7 @@
 #define BITPRIM_INFRASTRUCTURE_LOG_FEATURES_COUNTER_IPP
 
 #include <cstdint>
+
 #include <boost/log/attributes.hpp>
 #include <boost/scope_exit.hpp>
 

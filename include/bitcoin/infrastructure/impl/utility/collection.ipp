@@ -21,10 +21,10 @@
 #define BITPRIM_INFRASTRUCTURE_COLLECTION_IPP
 
 #include <algorithm>
-#include <iterator>
 #include <cstddef>
-#include <iterator>
 #include <iostream>
+#include <iterator>
+#include <iterator>
 #include <type_traits>
 #include <vector>
 

@@ -20,8 +20,8 @@
 #ifndef BITPRIM_INFRASTRUCTURE_COLLECTION_HPP
 #define BITPRIM_INFRASTRUCTURE_COLLECTION_HPP
 
-#include <iterator>
 #include <iostream>
+#include <iterator>
 #include <vector>
 
 #include <bitcoin/infrastructure/define.hpp>

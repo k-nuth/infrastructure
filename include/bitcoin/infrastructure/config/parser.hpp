@@ -24,8 +24,8 @@
 #include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/config/checkpoint.hpp>
+#include <bitcoin/infrastructure/define.hpp>
 
 namespace libbitcoin {
 

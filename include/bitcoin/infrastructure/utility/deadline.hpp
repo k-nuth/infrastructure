@@ -24,8 +24,8 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/error.hpp>
 #include <bitcoin/infrastructure/utility/asio.hpp>
-#include <bitcoin/infrastructure/utility/enable_shared_from_base.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
+#include <bitcoin/infrastructure/utility/enable_shared_from_base.hpp>
 #include <bitcoin/infrastructure/utility/noncopyable.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 #include <bitcoin/infrastructure/utility/threadpool.hpp>

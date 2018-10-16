@@ -20,8 +20,8 @@
 #define BITPRIM_INFRASTRUCTURE_WORK_HPP
 
 #include <functional>
-#include <string>
 #include <memory>
+#include <string>
 #include <utility>
 
 #include <bitcoin/infrastructure/define.hpp>

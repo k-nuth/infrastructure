@@ -20,13 +20,13 @@
 #define BITPRIM_INFRASTRUCTURE_LOG_FEATURES_TIMER_HPP
 
 #include <chrono>
+
 #include <boost/log/sources/features.hpp>
 #include <boost/log/sources/threading_models.hpp>
 #include <boost/log/utility/strictest_lock.hpp>
 
 namespace libbitcoin {
 namespace log {
-
 namespace attributes {
 
 BOOST_LOG_ATTRIBUTE_KEYWORD(timer, "Timer", std::chrono::milliseconds)

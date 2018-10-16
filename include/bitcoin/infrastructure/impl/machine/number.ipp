@@ -25,8 +25,8 @@
 
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/utility/limits.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
+#include <bitcoin/infrastructure/utility/limits.hpp>
 
 namespace libbitcoin {
 namespace machine {
@@ -85,7 +85,7 @@ inline bool number::set_data(data_chunk const& data, size_t max_size)
 inline data_chunk number::data() const
 {
     if (value_ == 0) {
-        return{}
+        return{};
 };
 
     data_chunk data;
