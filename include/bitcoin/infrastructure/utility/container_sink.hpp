@@ -44,7 +44,7 @@ public:
 
     std::streamsize write(const char_type* buffer, std::streamsize size)
     {
-        const auto safe_sink = reinterpret_cast<const SinkType*>(buffer);
+        auto const safe_sink = reinterpret_cast<const SinkType*>(buffer);
         container_.insert(container_.end(), safe_sink, safe_sink + size);
         return size;
     }

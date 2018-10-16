@@ -30,7 +30,6 @@
 #include <string>
 #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
-#include <boost/regex.hpp>
 #include <bitcoin/infrastructure/config/endpoint.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/formats/base_16.hpp>
@@ -38,120 +37,102 @@
 namespace libbitcoin {
 namespace config {
 
-using namespace boost;
 using namespace boost::program_options;
 
 endpoint::endpoint()
-  : endpoint("localhost")
-{
-}
+    : endpoint("localhost")
+{}
 
-endpoint::endpoint(const endpoint& other)
-  : scheme_(other.scheme()), host_(other.host()), port_(other.port())
-{
-}
+endpoint::endpoint(endpoint const& x)
+    : scheme_(x.scheme()), host_(x.host()), port_(x.port())
+{}
 
-endpoint::endpoint(const std::string& value)
-{
+endpoint::endpoint(std::string const& value) {
     std::stringstream(value) >> *this;
 }
 
-endpoint::endpoint(const authority& authority)
-  : endpoint(authority.to_string())
-{
-}
+endpoint::endpoint(authority const& authority)
+    : endpoint(authority.to_string())
+{}
 
-endpoint::endpoint(const std::string& host, uint16_t port)
-  : host_(host), port_(port)
-{
-}
+endpoint::endpoint(std::string const& host, uint16_t port)
+    : host_(host), port_(port)
+{}
 
-endpoint::endpoint(const asio::endpoint& host)
-  : endpoint(host.address(), host.port())
-{
-}
+endpoint::endpoint(asio::endpoint const& host)
+    : endpoint(host.address(), host.port())
+{}
 
-endpoint::endpoint(const asio::address& ip, uint16_t port)
-  : host_(ip.to_string()), port_(port)
-{
-}
+endpoint::endpoint(asio::address const& ip, uint16_t port)
+    : host_(ip.to_string()), port_(port)
+{}
 
-const std::string& endpoint::scheme() const
-{
+std::string const& endpoint::scheme() const {
     return scheme_;
 }
 
-const std::string& endpoint::host() const
-{
+std::string const& endpoint::host() const {
     return host_;
 }
 
-uint16_t endpoint::port() const
-{
+uint16_t endpoint::port() const {
     return port_;
 }
 
-std::string endpoint::to_string() const
-{
+std::string endpoint::to_string() const {
     std::stringstream value;
     value << *this;
     return value.str();
 }
 
-endpoint::operator const bool() const
-{
+endpoint::operator const bool() const {
     // Return true if initialized.
     // TODO: this is a quick hack, along with http/https.
-    return !scheme_.empty();
+    return ! scheme_.empty();
 }
 
-bool endpoint::operator==(const endpoint& other) const
-{
-    return host_ == other.host_ && port_ == other.port_ &&
-        scheme_ == other.scheme_;
+bool endpoint::operator==(endpoint const& x) const {
+    return host_ == x.host_ && port_ == x.port_ && scheme_ == x.scheme_;
 }
 
-std::istream& operator>>(std::istream& input, endpoint& argument)
-{
+std::istream& operator>>(std::istream& input, endpoint& argument) {
     std::string value;
     input >> value;
 
     // std::regex requires gcc 4.9, so we are using boost::regex for now.
-    static const regex regular("^((tcp|udp|http|https|inproc):\\/\\/)?"
-        "(\\[([0-9a-f:\\.]+)]|([^:]+))(:([0-9]{1,5}))?$");
+    // Bitprim: we use std::regex, becase we drop support por GCC<5
+    static 
+    std::regex const regular(R"(^((tcp|udp|http|https|inproc):\/\/)?(\[([0-9a-f:\.]+)\]|([^:]+))(:([0-9]{1,5}))?$)");
 
-    sregex_iterator it(value.begin(), value.end(), regular), end;
-    if (it == end)
-    {
+    std::sregex_iterator it(value.begin(), value.end(), regular), end;
+    if (it == end) {
         BOOST_THROW_EXCEPTION(invalid_option_value(value));
     }
 
-    const auto& match = *it;
+    auto const& match = *it;
     argument.scheme_ = match[2];
     argument.host_ = match[3];
     std::string port(match[7]);
 
-    try
-    {
-        argument.port_ = port.empty() ? 0 : lexical_cast<uint16_t>(port);
-    }
-    catch (const boost::exception&)
-    {
+    try {
+        argument.port_ = port.empty() ? 0 : boost::lexical_cast<uint16_t>(port);
+    } catch (...) {
         BOOST_THROW_EXCEPTION(invalid_option_value(value));
     }
 
     return input;
 }
 
-std::ostream& operator<<(std::ostream& output, const endpoint& argument)
-{
-    if (!argument.scheme().empty())
+std::ostream& operator<<(std::ostream& output, endpoint const& argument) {
+    if ( ! argument.scheme().empty()) {
         output << argument.scheme() << "://";
+    }
 
     output << argument.host();
 
-    if (argument.port() != 0)
+    if (argument.port() != 0) {
         output << ":" << argument.port();
+    }
 
     return output;
 }

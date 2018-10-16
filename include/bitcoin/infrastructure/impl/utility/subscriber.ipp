@@ -33,7 +33,7 @@ namespace libbitcoin {
 
 template <typename... Args>
 subscriber<Args...>::subscriber(threadpool& pool,
-    const std::string& class_name)
+    std::string const& class_name)
   : stopped_(true), dispatch_(pool, class_name)
     /*, track<subscriber<Args...>>(class_name)*/
 {
@@ -145,7 +145,7 @@ void subscriber<Args...>::do_invoke(Args... args)
 
     // Subscriptions may be created while this loop is executing.
     // Invoke subscribers from temporary list, without subscription renewal.
-    for (const auto& handler: subscriptions)
+    for (auto const& handler: subscriptions)
     {
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // DEADLOCK RISK, handler must not return to invoke.

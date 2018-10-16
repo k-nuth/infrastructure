@@ -200,16 +200,16 @@ void serializer<Iterator>::write_bytes(const uint8_t* data, size_t size)
 }
 
 template <typename Iterator>
-void serializer<Iterator>::write_string(const std::string& value)
+void serializer<Iterator>::write_string(std::string const& value)
 {
     write_variable_little_endian(value.size());
     write_forward(value);
 }
 
 template <typename Iterator>
-void serializer<Iterator>::write_string(const std::string& value, size_t size)
+void serializer<Iterator>::write_string(std::string const& value, size_t size)
 {
-    const auto length = std::min(size, value.size());
+    auto const length = std::min(size, value.size());
     write_bytes(reinterpret_cast<const uint8_t*>(value.data()), length);
     data_chunk padding(floor_subtract(size, length), string_terminator);
     write_bytes(padding);
@@ -262,8 +262,8 @@ template <typename Iterator>
 size_t serializer<Iterator>::read_size_big_endian()
 {
     static_assert(sizeof(size_t) >= sizeof(uint32_t), "unexpected size");
-    const auto prefix = *iterator_++;
-    const auto begin = iterator_;
+    auto const prefix = *iterator_++;
+    auto const begin = iterator_;
     uint64_t size;
 
     switch (prefix)
@@ -294,8 +294,8 @@ template <typename Iterator>
 size_t serializer<Iterator>::read_size_little_endian()
 {
     static_assert(sizeof(size_t) >= sizeof(uint32_t), "unexpected size");
-    const auto prefix = *iterator_++;
-    const auto begin = iterator_;
+    auto const prefix = *iterator_++;
+    auto const begin = iterator_;
     uint64_t size;
 
     switch (prefix)

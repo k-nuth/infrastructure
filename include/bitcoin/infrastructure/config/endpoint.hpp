@@ -35,15 +35,14 @@ namespace config {
  * Serialization helper for a network endpoint in URI format.
  * This is a container for a {scheme, host, port} tuple.
  */
-class BI_API endpoint
-{
+class BI_API endpoint {
 public:
     /**
      * A list of endpoints.
      * This must provide operator<< for ostream in order to be used as a
      * boost::program_options default_value.
      */
-    typedef std::vector<endpoint> list;
+    using list = std::vector<endpoint>;
 
     /**
      * Default constructor.
@@ -52,9 +51,9 @@ public:
 
     /**
      * Copy constructor.
-     * @param[in]  other  The object to copy into self on construct.
+     * @param[in]  x  The object to copy into self on construct.
      */
-    endpoint(const endpoint& other);
+    endpoint(endpoint const& x);
 
     /**
      * Initialization constructor.
@@ -62,33 +61,33 @@ public:
      * as zero and the scheme is reported as an empty string.
      * @param[in]  value  The initial value of the [scheme://]host[:port] form.
      */
-    endpoint(const std::string& value);
+    endpoint(std::string const& value);
 
     /**
      * Initialization constructor.
      * @param[in]  authority  The value to initialize with.
      */
-    endpoint(const authority& authority);
+    endpoint(authority const& authority);
 
     /**
      * Initialization constructor.
      * @param[in]  host  The host name or ip address to initialize with.
      * @param[in]  port  The port to initialize with.
      */
-    endpoint(const std::string& host, uint16_t port);
+    endpoint(std::string const& host, uint16_t port);
 
     /**
      * Initialization constructor.
      * @param[in]  endpoint  The endpoint addresss to initialize with.
      */
-    endpoint(const asio::endpoint& host);
+    endpoint(asio::endpoint const& host);
 
     /**
      * Initialization constructor.
      * @param[in]  ip    The boost ip addresss to initialize with.
      * @param[in]  port  The port to initialize with.
      */
-    endpoint(const asio::address& ip, uint16_t port);
+    endpoint(asio::address const& ip, uint16_t port);
 
     /**
      * Getter.
@@ -100,13 +99,13 @@ public:
      * Getter.
      * @return The scheme of the endpoint or empty string.
      */
-    const std::string& scheme() const;
+    std::string const& scheme() const;
 
     /**
      * Getter.
      * @return The host name or ip address of the endpoint.
      */
-    const std::string& host() const;
+    std::string const& host() const;
 
     /**
      * Getter.
@@ -123,9 +122,9 @@ public:
 
     /**
      * Override the equality operator.
-     * @param[in]  other  The other object with which to compare.
+     * @param[in]  x  The x object with which to compare.
      */
-    bool operator==(const endpoint& other) const;
+    bool operator==(endpoint const& x) const;
 
     /**
      * Define stream in. Throws if input is invalid.
@@ -133,8 +132,8 @@ public:
      * @param[out]  argument  The object to receive the read value.
      * @return                The input stream reference.
      */
-    friend std::istream& operator>>(std::istream& input,
-        endpoint& argument);
+    friend 
+    std::istream& operator>>(std::istream& input, endpoint& argument);
 
     /**
      * Define stream out.
@@ -142,8 +141,8 @@ public:
      * @param[out]  argument  The object from which to obtain the value.
      * @return                The output stream reference.
      */
-    friend std::ostream& operator<<(std::ostream& output,
-        const endpoint& argument);
+    friend 
+    std::ostream& operator<<(std::ostream& output, endpoint const& argument);
 
 private:
     std::string scheme_;

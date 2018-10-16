@@ -82,7 +82,7 @@ BI_API long_hash decode_mnemonic(const word_list& mnemonic);
  * Any passphrase can be used and will change the resulting seed.
  */
 BI_API long_hash decode_mnemonic(const word_list& mnemonic,
-    const std::string& passphrase);
+    std::string const& passphrase);
 
 #endif
 

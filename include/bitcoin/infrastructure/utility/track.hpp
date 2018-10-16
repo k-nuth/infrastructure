@@ -36,11 +36,11 @@ public:
     static std::atomic<size_t> instances;
 
 protected:
-    track(const std::string& class_name);
+    track(std::string const& class_name);
     virtual ~track();
 
 private:
-    const std::string class_;
+    std::string const class_;
 };
 
 #include <bitcoin/infrastructure/impl/utility/track.ipp>

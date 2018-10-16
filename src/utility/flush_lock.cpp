@@ -27,14 +27,14 @@
 namespace libbitcoin {
 
 // static
-bool flush_lock::create(const std::string& file)
+bool flush_lock::create(std::string const& file)
 {
     bc::ofstream stream(file);
     return stream.good();
 }
 
 // static
-bool flush_lock::exists(const std::string& file)
+bool flush_lock::exists(std::string const& file)
 {
     bc::ifstream stream(file);
     return stream.good();
@@ -42,7 +42,7 @@ bool flush_lock::exists(const std::string& file)
 }
 
 // static
-bool flush_lock::destroy(const std::string& file)
+bool flush_lock::destroy(std::string const& file)
 {
     return boost::filesystem::remove(file);
     ////std::remove(file.c_str());

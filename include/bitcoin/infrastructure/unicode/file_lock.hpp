@@ -55,7 +55,7 @@ class file_lock
    // MODIFIED TO EXPECT UTF8 ENCODING ON WINDOWS.
    //!Opens a file lock. Throws boost::interprocess::interprocess_exception if the file does not
    //!exist or there are no operating system resources.
-   file_lock(const std::string& name);
+   file_lock(std::string const& name);
 
    //!Moves the ownership of "moved"'s file mapping object to *this.
    //!After the call, "moved" does not represent any file mapping object.
@@ -153,14 +153,14 @@ class file_lock
 extern "C" __declspec(dllimport) void * __stdcall CreateFileW(const wchar_t *, unsigned long, unsigned long, struct boost::interprocess::winapi::interprocess_security_attributes*, unsigned long, unsigned long, void *);
 
 // ENABLE UNICODE PATHS ON WINDOWS FROM UTF8 STRING REGARDLESS OF BUILD CONFIGURATION.
-inline void* CreateFileUTF8(const std::string& name, unsigned long access, unsigned long mode,
+inline void* CreateFileUTF8(std::string const& name, unsigned long access, unsigned long mode,
     struct boost::interprocess::winapi::interprocess_security_attributes *psec, unsigned long creation, unsigned long attributes, void *ptemplate)
 {
     return CreateFileW(bc::to_utf16(name).c_str(), access, mode, psec, creation, attributes, ptemplate);
 }
 
 // ADAPTED FROM boost/interprocess/winapi/win32_api.hpp UNDER SAME LICENSE AS ABOVE.
-inline void *create_file(const std::string& name, unsigned long access, unsigned long creation_flags, unsigned long attributes, boost::interprocess::winapi::interprocess_security_attributes *psec)
+inline void *create_file(std::string const& name, unsigned long access, unsigned long creation_flags, unsigned long attributes, boost::interprocess::winapi::interprocess_security_attributes *psec)
 {
     for (unsigned int attempt(0); attempt < boost::interprocess::winapi::error_sharing_violation_tries; ++attempt){
         void * const handle = libbitcoin::interprocess::CreateFileUTF8(name, access,
@@ -180,7 +180,7 @@ inline void *create_file(const std::string& name, unsigned long access, unsigned
 
 // ADAPTED FROM boost/interprocess/os_file_functions.hpp UNDER SAME LICENSE AS ABOVE.
 inline boost::interprocess::file_handle_t open_existing_file
-(const std::string& name, boost::interprocess::mode_t mode, bool temporary = false)
+(std::string const& name, boost::interprocess::mode_t mode, bool temporary = false)
 {
     unsigned long attr = temporary ? boost::interprocess::winapi::file_attribute_temporary : 0;
     return libbitcoin::interprocess::create_file
@@ -190,7 +190,7 @@ inline boost::interprocess::file_handle_t open_existing_file
 #endif
 
 // MODIFIED TO ACCEPT STRING IN SUPPORT OF WINDOWS UNICODE PATHS.
-inline file_lock::file_lock(const std::string& name)
+inline file_lock::file_lock(std::string const& name)
 {
 #ifdef _MSC_VER
     m_file_hnd = libbitcoin::interprocess::open_existing_file(name, boost::interprocess::read_write);

@@ -97,7 +97,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_byte)
     auto sink = make_unsafe_serializer(data.begin());
 
     sink.write_byte(expected);
-    const auto result = source.read_byte();
+    auto const result = source.read_byte();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -114,7 +114,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_error_code)
     auto sink = make_unsafe_serializer(data.begin());
 
     sink.write_error_code(expected);
-    const auto result = source.read_error_code();
+    auto const result = source.read_error_code();
 
     BOOST_REQUIRE_EQUAL(expected, result);
     BOOST_REQUIRE((bool)sink);
@@ -131,7 +131,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_2_bytes_little_endian)
     auto sink = make_unsafe_serializer(data.begin());
 
     sink.write_2_bytes_little_endian(expected);
-    const auto result = source.read_2_bytes_little_endian();
+    auto const result = source.read_2_bytes_little_endian();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -149,7 +149,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_4_bytes_little_endian)
     auto sink = make_unsafe_serializer(data.begin());
 
     sink.write_4_bytes_little_endian(expected);
-    const auto result = source.read_4_bytes_little_endian();
+    auto const result = source.read_4_bytes_little_endian();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -166,7 +166,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_8_bytes_little_endian)
     auto sink = make_unsafe_serializer(data.begin());
 
     sink.write_8_bytes_little_endian(expected);
-    const auto result = source.read_8_bytes_little_endian();
+    auto const result = source.read_8_bytes_little_endian();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -183,7 +183,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_2_bytes_big_endian)
     auto sink = make_unsafe_serializer(data.begin());
 
     sink.write_2_bytes_big_endian(expected);
-    const auto result = source.read_2_bytes_big_endian();
+    auto const result = source.read_2_bytes_big_endian();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -200,7 +200,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_4_bytes_big_endian)
     auto sink = make_unsafe_serializer(data.begin());
 
     sink.write_4_bytes_big_endian(expected);
-    const auto result = source.read_4_bytes_big_endian();
+    auto const result = source.read_4_bytes_big_endian();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -217,7 +217,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_8_bytes_big_endian)
     auto sink = make_unsafe_serializer(data.begin());
 
     sink.write_8_bytes_big_endian(expected);
-    const auto result = source.read_8_bytes_big_endian();
+    auto const result = source.read_8_bytes_big_endian();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -236,7 +236,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_1_byte)
 
     sink.write_variable_little_endian(expected);
 
-    const auto result = source.read_variable_little_endian();
+    auto const result = source.read_variable_little_endian();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -254,7 +254,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_2_bytes)
 
     sink.write_variable_little_endian(expected);
 
-    const auto result = source.read_variable_little_endian();
+    auto const result = source.read_variable_little_endian();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -272,7 +272,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_4_bytes)
 
     sink.write_variable_little_endian(expected);
 
-    const auto result = source.read_variable_little_endian();
+    auto const result = source.read_variable_little_endian();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -290,7 +290,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_8_bytes)
 
     sink.write_variable_little_endian(expected);
 
-    const auto result = source.read_variable_little_endian();
+    auto const result = source.read_variable_little_endian();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -308,7 +308,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_1_byte)
 
     sink.write_variable_big_endian(expected);
 
-    const auto result = source.read_variable_big_endian();
+    auto const result = source.read_variable_big_endian();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -326,7 +326,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_2_bytes)
 
     sink.write_variable_big_endian(expected);
 
-    const auto result = source.read_variable_big_endian();
+    auto const result = source.read_variable_big_endian();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -344,7 +344,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_4_bytes)
 
     sink.write_variable_big_endian(expected);
 
-    const auto result = source.read_variable_big_endian();
+    auto const result = source.read_variable_big_endian();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -362,7 +362,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_8_bytes)
 
     sink.write_variable_big_endian(expected);
 
-    const auto result = source.read_variable_big_endian();
+    auto const result = source.read_variable_big_endian();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -388,7 +388,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_data_chunk)
 
     sink.write_bytes(expected);
 
-    const auto result = source.read_bytes(expected.size());
+    auto const result = source.read_bytes(expected.size());
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -412,7 +412,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_hash)
 
     sink.write_hash(expected);
 
-    const auto result = source.read_hash();
+    auto const result = source.read_hash();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -435,7 +435,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_short_hash)
 
     sink.write_short_hash(expected);
 
-    const auto result = source.read_short_hash();
+    auto const result = source.read_short_hash();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -446,7 +446,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_short_hash)
 
 BOOST_AUTO_TEST_CASE(roundtrip_fixed_string)
 {
-    const std::string expected = "my string data";
+    std::string const expected = "my string data";
 
     data_chunk data(expected.size());
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -454,7 +454,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_fixed_string)
 
     sink.write_string(expected, 10);
 
-    const auto result = source.read_string(10);
+    auto const result = source.read_string(10);
 
     BOOST_REQUIRE(expected.substr(0, 10) == result);
     BOOST_REQUIRE((bool)sink);
@@ -465,7 +465,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_fixed_string)
 
 BOOST_AUTO_TEST_CASE(roundtrip_string)
 {
-    const std::string expected = "my string data";
+    std::string const expected = "my string data";
 
     data_chunk data((expected.length() + message::variable_uint_size(expected.length())));
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -473,7 +473,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_string)
 
     sink.write_string(expected);
 
-    const auto result = source.read_string();
+    auto const result = source.read_string();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);
@@ -497,7 +497,7 @@ BOOST_AUTO_TEST_CASE(read_bytes_to_eof)
 
     sink.write_bytes(expected);
 
-    const auto result = source.read_bytes();
+    auto const result = source.read_bytes();
 
     BOOST_REQUIRE(expected == result);
     BOOST_REQUIRE((bool)sink);

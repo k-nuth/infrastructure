@@ -58,9 +58,9 @@ public:
     hd_private(const hd_key& private_key);
     hd_private(const hd_key& private_key, uint64_t prefixes);
     hd_private(const hd_key& private_key, uint32_t public_prefix);
-    hd_private(const std::string& encoded);
-    hd_private(const std::string& encoded, uint64_t prefixes);
-    hd_private(const std::string& encoded, uint32_t public_prefix);
+    hd_private(std::string const& encoded);
+    hd_private(std::string const& encoded, uint64_t prefixes);
+    hd_private(std::string const& encoded, uint32_t public_prefix);
 
     /// Operators.
     bool operator<(const hd_private& other) const;
@@ -95,10 +95,10 @@ private:
     static hd_private from_key(const hd_key& decoded);
     static hd_private from_key(const hd_key& decoded, uint32_t prefix);
     static hd_private from_key(const hd_key& decoded, uint64_t public_prefix);
-    static hd_private from_string(const std::string& encoded);
-    static hd_private from_string(const std::string& encoded,
+    static hd_private from_string(std::string const& encoded);
+    static hd_private from_string(std::string const& encoded,
         uint32_t public_prefix);
-    static hd_private from_string(const std::string& encoded,
+    static hd_private from_string(std::string const& encoded,
         uint64_t prefixes);
 
     hd_private(const ec_secret& secret, const hd_chain_code& chain_code,

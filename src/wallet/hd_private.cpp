@@ -70,7 +70,7 @@ hd_private::hd_private(const hd_key& private_key)
 }
 
 // This reads the private version and sets the public to mainnet.
-hd_private::hd_private(const std::string& encoded)
+hd_private::hd_private(std::string const& encoded)
     : hd_private(from_string(encoded, hd_public::mainnet))
 {
 }
@@ -88,13 +88,13 @@ hd_private::hd_private(const hd_key& private_key, uint64_t prefixes)
 }
 
 // This reads the private version and sets the public.
-hd_private::hd_private(const std::string& encoded, uint32_t prefix)
+hd_private::hd_private(std::string const& encoded, uint32_t prefix)
   : hd_private(from_string(encoded, prefix))
 {
 }
 
 // This validates the private version and sets the public.
-hd_private::hd_private(const std::string& encoded, uint64_t prefixes)
+hd_private::hd_private(std::string const& encoded, uint64_t prefixes)
   : hd_private(from_string(encoded, prefixes))
 {
 }
@@ -114,13 +114,13 @@ hd_private hd_private::from_seed(data_slice seed, uint64_t prefixes)
     // This is a magic constant from BIP32.
     static const data_chunk magic(to_chunk("Bitcoin seed"));
 
-    const auto intermediate = split(hmac_sha512_hash(seed, magic));
+    auto const intermediate = split(hmac_sha512_hash(seed, magic));
 
     // The key is invalid if parse256(IL) >= n or 0:
     if (!verify(intermediate.left))
         return{};
 
-    const auto master = hd_lineage
+    auto const master = hd_lineage
     {
         prefixes,
         0x00,
@@ -133,7 +133,7 @@ hd_private hd_private::from_seed(data_slice seed, uint64_t prefixes)
 
 hd_private hd_private::from_key(const hd_key& key, uint32_t public_prefix)
 {
-    const auto prefix = from_big_endian_unsafe<uint32_t>(key.begin());
+    auto const prefix = from_big_endian_unsafe<uint32_t>(key.begin());
     return from_key(key, to_prefixes(prefix, public_prefix));
 }
 
@@ -142,13 +142,13 @@ hd_private hd_private::from_key(const hd_key& key, uint64_t prefixes)
     stream_source<hd_key> istream(key);
     istream_reader reader(istream);
 
-    const auto prefix = reader.read_4_bytes_big_endian();
-    const auto depth = reader.read_byte();
-    const auto parent = reader.read_4_bytes_big_endian();
-    const auto child = reader.read_4_bytes_big_endian();
-    const auto chain = reader.read_forward<hd_chain_code_size>();
+    auto const prefix = reader.read_4_bytes_big_endian();
+    auto const depth = reader.read_byte();
+    auto const parent = reader.read_4_bytes_big_endian();
+    auto const child = reader.read_4_bytes_big_endian();
+    auto const chain = reader.read_forward<hd_chain_code_size>();
     reader.read_byte();
-    const auto secret = reader.read_forward<ec_secret_size>();
+    auto const secret = reader.read_forward<ec_secret_size>();
 
     // Validate the prefix against the provided value.
     if (prefix != to_prefix(prefixes))
@@ -165,7 +165,7 @@ hd_private hd_private::from_key(const hd_key& key, uint64_t prefixes)
     return hd_private(secret, chain, lineage);
 }
 
-hd_private hd_private::from_string(const std::string& encoded,
+hd_private hd_private::from_string(std::string const& encoded,
     uint32_t public_prefix)
 {
     hd_key key;
@@ -175,7 +175,7 @@ hd_private hd_private::from_string(const std::string& encoded,
     return hd_private(from_key(key, public_prefix));
 }
 
-hd_private hd_private::from_string(const std::string& encoded,
+hd_private hd_private::from_string(std::string const& encoded,
     uint64_t prefixes)
 {
     hd_key key;
@@ -242,11 +242,11 @@ hd_private hd_private::derive_private(uint32_t index) const
 {
     constexpr uint8_t depth = 0;
 
-    const auto data = (index >= hd_first_hardened_key) ?
+    auto const data = (index >= hd_first_hardened_key) ?
         splice(to_array(depth), secret_, to_big_endian(index)) :
         splice(point_, to_big_endian(index));
 
-    const auto intermediate = split(hmac_sha512_hash(data, chain_));
+    auto const intermediate = split(hmac_sha512_hash(data, chain_));
 
     // The child key ki is (parse256(IL) + kpar) mod n:
     auto child = secret_;

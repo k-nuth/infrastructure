@@ -55,7 +55,7 @@ public:
      * Initialization constructor.
      * @param[in]  hexcode  The hash value in string hexidecimal form.
      */
-    hash256(const std::string& hexcode);
+    hash256(std::string const& hexcode);
 
     /**
      * Initialization constructor.

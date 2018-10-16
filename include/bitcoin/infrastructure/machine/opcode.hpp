@@ -309,14 +309,14 @@ enum class opcode : uint8_t
 BI_API std::string opcode_to_string(opcode value, uint32_t active_forks);
 
 /// Convert a string to an opcode.
-BI_API bool opcode_from_string(opcode& out_code, const std::string& value);
+BI_API bool opcode_from_string(opcode& out_code, std::string const& value);
 
 /// Convert any opcode to a string hexadecimal representation.
 BI_API std::string opcode_to_hexadecimal(opcode code);
 
 /// Convert any hexadecimal byte to an opcode.
 BI_API bool opcode_from_hexadecimal(opcode& out_code,
-    const std::string& value);
+    std::string const& value);
 
 } // namespace machine
 } // namespace libbitcoin

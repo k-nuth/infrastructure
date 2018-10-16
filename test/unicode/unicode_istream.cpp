@@ -45,8 +45,8 @@ BOOST_AUTO_TEST_CASE(unicode_istream__conditional__test)
 
 BOOST_AUTO_TEST_CASE(unicode_istream__non_ascii__test)
 {
-    const auto utf8 = "テスト";
-    const auto utf16 = to_utf16(utf8);
+    auto const utf8 = "テスト";
+    auto const utf16 = to_utf16(utf8);
 
     std::wstringstream wide_stream(utf16);
     std::stringstream narrow_stream(utf8);
@@ -60,8 +60,8 @@ BOOST_AUTO_TEST_CASE(unicode_istream__non_ascii__test)
 
 BOOST_AUTO_TEST_CASE(unicode_istream__tokenization__test)
 {
-    const auto utf8 = "テスト\rス\nト\tテス スト";
-    const auto utf16 = to_utf16(utf8);
+    auto const utf8 = "テスト\rス\nト\tテス スト";
+    auto const utf16 = to_utf16(utf8);
 
     std::wstringstream wide_stream(utf16);
     std::stringstream narrow_stream(utf8);
@@ -87,7 +87,7 @@ BOOST_AUTO_TEST_CASE(unicode_istream__overflow__test)
     // The buffer is 256 (wide) and 1024 (narrow), resulting in a potential
     // character split because 256 is not a multiple of 3. However sgetn()
     // doesn't split on non-character boundaries as it reads, so this works.
-    const auto utf8_1800_bytes =
+    auto const utf8_1800_bytes =
         "テストテストテストテストテストテストテストテストテストテスト"
         "テストテストテストテストテストテストテストテストテストテスト"
         "テストテストテストテストテストテストテストテストテストテスト"
@@ -109,7 +109,7 @@ BOOST_AUTO_TEST_CASE(unicode_istream__overflow__test)
         "テストテストテストテストテストテストテストテストテストテスト"
         "テストテストテストテストテストテストテストテストテストテスト";
 
-    const auto utf16_600_chars = to_utf16(utf8_1800_bytes);
+    auto const utf16_600_chars = to_utf16(utf8_1800_bytes);
 
     std::wstringstream wide_stream(utf16_600_chars);
     std::stringstream narrow_stream(utf8_1800_bytes);

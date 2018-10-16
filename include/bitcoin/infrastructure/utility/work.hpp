@@ -54,7 +54,7 @@ public:
     typedef std::shared_ptr<work> ptr;
 
     /// Create an instance.
-    work(threadpool& pool, const std::string& name);
+    work(threadpool& pool, std::string const& name);
 
     /// Local execution for any operation, equivalent to std::bind.
     template <typename Handler, typename... Args>
@@ -120,7 +120,7 @@ public:
 
 private:
     ////template <typename Handler>
-    ////auto inject(Handler&& handler, const std::string& context,
+    ////auto inject(Handler&& handler, std::string const& context,
     ////    monitor::count_ptr counter) -> std::function<void()>
     ////{
     ////    auto label = name_ + "_" + context;
@@ -133,7 +133,7 @@ private:
     ////}
 
     // These are thread safe.
-    const std::string name_;
+    std::string const name_;
     ////monitor::count_ptr ordered_;
     ////monitor::count_ptr unordered_;
     ////monitor::count_ptr concurrent_;

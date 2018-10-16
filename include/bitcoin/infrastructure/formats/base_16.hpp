@@ -41,14 +41,14 @@ BI_API std::string encode_base16(data_slice data);
  * Convert a hex string into bytes.
  * @return false if the input is malformed.
  */
-BI_API bool decode_base16(data_chunk& out, const std::string &in);
+BI_API bool decode_base16(data_chunk& out, std::string const &in);
 
 /**
  * Converts a hex string to a number of bytes.
  * @return false if the input is malformed, or the wrong length.
  */
 template <size_t Size>
-bool decode_base16(byte_array<Size>& out, const std::string &in);
+bool decode_base16(byte_array<Size>& out, std::string const &in);
 
 /**
  * Converts a hex string literal to a data array.
@@ -69,7 +69,7 @@ BI_API std::string encode_hash(hash_digest hash);
  * The bitcoin_hash format is like base16, but with the bytes reversed.
  * @return false if the input is malformed.
  */
-BI_API bool decode_hash(hash_digest& out, const std::string& in);
+BI_API bool decode_hash(hash_digest& out, std::string const& in);
 
 /**
  * Convert a hex string literal into a bitcoin_hash.

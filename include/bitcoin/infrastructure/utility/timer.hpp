@@ -33,7 +33,7 @@ namespace libbitcoin {
 inline std::time_t zulu_time()
 {
     using wall_clock = std::chrono::system_clock;
-    const auto now = wall_clock::now();
+    auto const now = wall_clock::now();
     return wall_clock::to_time_t(now);
 }
 
@@ -42,7 +42,7 @@ inline std::string local_time()
 {
     static BC_CONSTEXPR size_t size = 24;
     char buffer[size];
-    const auto time = zulu_time();
+    auto const time = zulu_time();
 
     // std::strftime is required because gcc doesn't implement std::put_time.
     auto result = std::strftime(buffer, size, "%c", std::localtime(&time));
@@ -63,10 +63,10 @@ struct timer
     template <typename Function, typename ...Args>
     static typename Time::rep execution(Function func, Args&&... args)
     {
-        const auto start = Clock::now();
+        auto const start = Clock::now();
         func(std::forward<Args>(args)...);
-        const auto difference = Clock::now() - start;
-        const auto duration = std::chrono::duration_cast<Time>(difference);
+        auto const difference = Clock::now() - start;
+        auto const duration = std::chrono::duration_cast<Time>(difference);
         return duration.count();
     }
 

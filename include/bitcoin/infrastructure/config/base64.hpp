@@ -43,7 +43,7 @@ public:
      * Initialization constructor.
      * @param[in]  base64  The value to initialize with.
      */
-    base64(const std::string& base64);
+    base64(std::string const& base64);
 
     /**
      * Initialization constructor.

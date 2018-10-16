@@ -66,10 +66,10 @@ public:
     virtual void write_bytes(const uint8_t* data, size_t size) = 0;
 
     /// Write variable length string.
-    virtual void write_string(const std::string& value) = 0;
+    virtual void write_string(std::string const& value) = 0;
 
     /// Write required length string, padded with nulls.
-    virtual void write_string(const std::string& value, size_t size) = 0;
+    virtual void write_string(std::string const& value, size_t size) = 0;
 
     /// Advance iterator without writing.
     virtual void skip(size_t size) = 0;

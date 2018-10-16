@@ -41,7 +41,7 @@ config::authority socket::authority() const
     // Critical Section.
     mutex_.lock_shared();
 
-    const auto endpoint = socket_.remote_endpoint(ec);
+    auto const endpoint = socket_.remote_endpoint(ec);
 
     mutex_.unlock_shared();
     ///////////////////////////////////////////////////////////////////////////

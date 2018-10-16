@@ -51,14 +51,14 @@ void pseudo_random_fill(data_chunk& out)
 
 static uint32_t get_clock_seed()
 {
-    const auto now = high_resolution_clock::now();
+    auto const now = high_resolution_clock::now();
     return static_cast<uint32_t>(now.time_since_epoch().count());
 }
 
 std::mt19937& pseudo_random::get_twister()
 {
     // Boost.thread will clean up the thread statics using this function.
-    const auto deleter = [](std::mt19937* twister)
+    auto const deleter = [](std::mt19937* twister)
     {
         delete twister;
     };
@@ -103,19 +103,19 @@ asio::duration pseudo_random::duration(const asio::duration& expiration,
         return expiration;
 
     // Uses milliseconds level resolution.
-    const auto max_expire = duration_cast<milliseconds>(expiration).count();
+    auto const max_expire = duration_cast<milliseconds>(expiration).count();
 
     // [10 secs, 4] => 10000 / 4 => 2500
-    const auto limit = max_expire / ratio;
+    auto const limit = max_expire / ratio;
 
     if (limit == 0)
         return expiration;
 
     // [0..2^64) % 2500 => [0..2500]
-    const auto random_offset = static_cast<int>(pseudo_random::next(0, limit));
+    auto const random_offset = static_cast<int>(pseudo_random::next(0, limit));
 
     // (10000 - [0..2500]) => [7500..10000]
-    const auto expires = max_expire - random_offset;
+    auto const expires = max_expire - random_offset;
 
     // [7.5..10] second duration.
     return milliseconds(expires);

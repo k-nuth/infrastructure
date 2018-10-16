@@ -38,7 +38,7 @@ BC_CONSTEXPR uint8_t ubtc_decimal_places = 2;
  * or false to round them upwards.
  * @return false for failure.
  */
-BI_API bool decode_base10(uint64_t& out, const std::string& amount,
+BI_API bool decode_base10(uint64_t& out, std::string const& amount,
     uint8_t decimal_places=0, bool strict=true);
 
 /**
@@ -51,7 +51,7 @@ BI_API std::string encode_base10(uint64_t amount,
     uint8_t decimal_places=0);
 
 // Old names:
-BI_API bool btc_to_satoshi(uint64_t& satoshi, const std::string& btc);
+BI_API bool btc_to_satoshi(uint64_t& satoshi, std::string const& btc);
 BI_API std::string satoshi_to_btc(uint64_t satoshi);
 
 } // namespace libbitcoin

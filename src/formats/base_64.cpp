@@ -35,7 +35,7 @@ const static char table[] =
 std::string encode_base64(data_slice unencoded)
 {
     std::string encoded;
-    const auto size = unencoded.size();
+    auto const size = unencoded.size();
     encoded.reserve(((size / 3) + (size % 3 > 0)) * 4);
 
     uint32_t value;
@@ -78,11 +78,11 @@ std::string encode_base64(data_slice unencoded)
     return encoded;
 }
 
-bool decode_base64(data_chunk& out, const std::string& in)
+bool decode_base64(data_chunk& out, std::string const& in)
 {
     const static uint32_t mask = 0x000000FF;
 
-    const auto length = in.length();
+    auto const length = in.length();
     if ((length % 4) != 0)
         return false;
 

@@ -89,7 +89,7 @@ std::ostream& cerr = cerr_stream();
 #ifdef WITH_ICU
 
 // The backend selection is ignored if invalid (in this case on Windows).
-static std::string normal_form(const std::string& value, norm_type form)
+static std::string normal_form(std::string const& value, norm_type form)
 {
     auto backend = localization_backend_manager::global();
     backend.select(BI_LOCALE_BACKEND);
@@ -102,9 +102,9 @@ static std::string normal_form(const std::string& value, norm_type form)
 // normalization if the ICU dependency is missing.
 static void validate_localization()
 {
-    const auto ascii_space = "> <";
-    const auto ideographic_space = ">　<";
-    const auto normal = normal_form(ideographic_space, norm_type::norm_nfkd);
+    auto const ascii_space = "> <";
+    auto const ideographic_space = ">　<";
+    auto const normal = normal_form(ideographic_space, norm_type::norm_nfkd);
 
     if (normal != ascii_space)
         throw std::runtime_error(
@@ -112,14 +112,14 @@ static void validate_localization()
 }
 
 // Normalize strings using unicode nfc normalization.
-std::string to_normal_nfc_form(const std::string& value)
+std::string to_normal_nfc_form(std::string const& value)
 {
     std::call_once(icu_mutex, validate_localization);
     return normal_form(value, norm_type::norm_nfc);
 }
 
 // Normalize strings using unicode nfkd normalization.
-std::string to_normal_nfkd_form(const std::string& value)
+std::string to_normal_nfkd_form(std::string const& value)
 {
     std::call_once(icu_mutex, validate_localization);
     return normal_form(value, norm_type::norm_nfkd);
@@ -138,7 +138,7 @@ data_chunk to_utf8(wchar_t* environment[])
 // Convert wmain parameters to utf8 main parameters.
 data_chunk to_utf8(int argc, wchar_t* argv[])
 {
-    const auto arg_count = safe_to_unsigned<size_t>(argc);
+    auto const arg_count = safe_to_unsigned<size_t>(argc);
 
     // Convert each arg and determine the payload size.
     size_t payload_size = 0;
@@ -152,10 +152,10 @@ data_chunk to_utf8(int argc, wchar_t* argv[])
 
     // TODO: unsafe multiplication.
     // Determine the index size.
-    const auto index_size = safe_add(arg_count, size_t{1}) * sizeof(void*);
+    auto const index_size = safe_add(arg_count, size_t{1}) * sizeof(void*);
 
     // Allocate the new buffer.
-    const auto buffer_size = safe_add(index_size, payload_size);
+    auto const buffer_size = safe_add(index_size, payload_size);
     data_chunk buffer(buffer_size, 0x00);
     buffer.resize(buffer_size);
 
@@ -167,7 +167,7 @@ data_chunk to_utf8(int argc, wchar_t* argv[])
     for (size_t arg = 0; arg < arg_count; arg++)
     {
         index[arg] = arguments;
-        const auto size = collection[arg].size();
+        auto const size = collection[arg].size();
         std::copy_n(collection[arg].begin(), size, index[arg]);
         arguments += safe_add(size, size_t{ 1 });
     }
@@ -197,7 +197,7 @@ size_t to_utf8(char out[], size_t out_bytes, const wchar_t in[],
 
     try
     {
-        const auto narrow = to_utf8({ in, &in[in_chars] });
+        auto const narrow = to_utf8({ in, &in[in_chars] });
         bytes = narrow.size();
 
         if (bytes <= out_bytes)
@@ -269,8 +269,8 @@ static bool is_terminal_utf8_character(const char text[], size_t size)
     for (uint8_t length = 1; length <= utf8_max_character_size &&
         length < size; length++)
     {
-        const auto start = size - length;
-        const auto sequence = &text[start];
+        auto const start = size - length;
+        auto const sequence = &text[start];
         if (is_utf8_character_sequence(sequence, length))
             return true;
     }
@@ -290,7 +290,7 @@ static uint8_t offset_to_terminal_utf8_character(const char text[], size_t size)
     for (uint8_t unread = 0; unread < utf8_max_character_size &&
         unread < size; unread++)
     {
-        const auto length = size - unread;
+        auto const length = size - unread;
         if (is_terminal_utf8_character(text, length))
             return unread;
     }
@@ -316,7 +316,7 @@ size_t to_utf16(wchar_t out[], size_t out_chars, const char in[],
 
     try
     {
-        const auto wide = to_utf16({ in, &in[in_bytes - truncated] });
+        auto const wide = to_utf16({ in, &in[in_bytes - truncated] });
         chars = wide.size();
 
         if (chars <= out_chars)
@@ -337,7 +337,7 @@ size_t to_utf16(wchar_t out[], size_t out_chars, const char in[],
 }
 
 // Convert utf8 string to wstring.
-std::wstring to_utf16(const std::string& narrow)
+std::wstring to_utf16(std::string const& narrow)
 {
     using namespace boost::locale;
     return conv::utf_to_utf<wchar_t>(narrow, conv::method_type::stop);

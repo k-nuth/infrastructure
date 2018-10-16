@@ -34,7 +34,7 @@ hash160::hash160()
 {
 }
 
-hash160::hash160(const std::string& hexcode)
+hash160::hash160(std::string const& hexcode)
 {
     std::stringstream(hexcode) >> *this;
 }

@@ -34,7 +34,7 @@ std::string windows_config_directory()
 {
 #ifdef _MSC_VER
     wchar_t directory[MAX_PATH];
-    const auto result = SHGetFolderPathW(NULL, CSIDL_COMMON_APPDATA, NULL,
+    auto const result = SHGetFolderPathW(NULL, CSIDL_COMMON_APPDATA, NULL,
         SHGFP_TYPE_CURRENT, directory);
 
     if (SUCCEEDED(result))

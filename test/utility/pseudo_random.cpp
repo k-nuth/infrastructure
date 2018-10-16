@@ -27,7 +27,7 @@ BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__zero_duration__maximum)
 {
     const int max_seconds = 0;
     const asio::seconds maximum(max_seconds);
-    const auto result = pseudo_randomize(maximum, 1);
+    auto const result = pseudo_randomize(maximum, 1);
     BOOST_REQUIRE(result == maximum);
 }
 
@@ -36,7 +36,7 @@ BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__subminute_default_percent_
     const int max_seconds = 42;
     const asio::seconds maximum(max_seconds);
     const asio::seconds minimum(max_seconds - max_seconds / 2);
-    const auto result = pseudo_randomize(maximum);
+    auto const result = pseudo_randomize(maximum);
     BOOST_REQUIRE(result <= maximum);
     BOOST_REQUIRE(result >= minimum);
 }
@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__subminute_ratio_0__maximum
 {
     const int max_seconds = 42;
     const asio::seconds maximum(max_seconds);
-    const auto result = pseudo_randomize(maximum, 0);
+    auto const result = pseudo_randomize(maximum, 0);
     BOOST_REQUIRE(result == maximum);
 }
 
@@ -55,7 +55,7 @@ BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__subminute_ratio_1__expecte
     const int max_seconds = 42;
     const asio::seconds maximum(max_seconds);
     const asio::seconds minimum(max_seconds - max_seconds / ratio);
-    const auto result = pseudo_randomize(maximum, ratio);
+    auto const result = pseudo_randomize(maximum, ratio);
     BOOST_REQUIRE(result <= maximum);
     BOOST_REQUIRE(result >= minimum);
 }
@@ -65,7 +65,7 @@ BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__subminute_default_ratio__e
     const int max_seconds = 42;
     const asio::seconds maximum(max_seconds);
     const asio::seconds minimum(max_seconds - max_seconds / 2);
-    const auto result = pseudo_randomize(maximum);
+    auto const result = pseudo_randomize(maximum);
     BOOST_REQUIRE(result <= maximum);
     BOOST_REQUIRE(result >= minimum);
 }
@@ -77,7 +77,7 @@ BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__superminute_ratio_255__exp
     const int max_seconds = 420;
     const asio::milliseconds maximum(max_seconds);
     const asio::milliseconds minimum(max_seconds - max_seconds / ratio);
-    const auto result = pseudo_randomize(maximum, ratio);
+    auto const result = pseudo_randomize(maximum, ratio);
     BOOST_REQUIRE(result <= maximum);
     BOOST_REQUIRE(result >= minimum);
 }

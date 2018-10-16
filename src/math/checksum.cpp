@@ -26,13 +26,13 @@ namespace libbitcoin {
 
 void append_checksum(data_chunk& data)
 {
-    const auto checksum = bitcoin_checksum(data);
+    auto const checksum = bitcoin_checksum(data);
     extend_data(data, to_little_endian(checksum));
 }
 
 uint32_t bitcoin_checksum(data_slice data)
 {
-    const auto hash = bitcoin_hash(data);
+    auto const hash = bitcoin_hash(data);
     return from_little_endian_unsafe<uint32_t>(hash.begin());
 }
 
@@ -42,7 +42,7 @@ bool verify_checksum(data_slice data)
         return false;
 
     // TODO: create a bitcoin_checksum overload that can accept begin/end.
-    const auto checksum_begin = data.end() - checksum_size;
+    auto const checksum_begin = data.end() - checksum_size;
     data_slice slice(data.begin(), checksum_begin);
     auto checksum = from_little_endian_unsafe<uint32_t>(checksum_begin);
     return bitcoin_checksum(slice) == checksum;

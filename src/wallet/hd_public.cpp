@@ -64,7 +64,7 @@ hd_public::hd_public(const hd_key& public_key)
 }
 
 // This cannot validate the version.
-hd_public::hd_public(const std::string& encoded)
+hd_public::hd_public(std::string const& encoded)
   : hd_public(from_string(encoded))
 {
 }
@@ -76,7 +76,7 @@ hd_public::hd_public(const hd_key& public_key, uint32_t prefix)
 }
 
 // This validates the version.
-hd_public::hd_public(const std::string& encoded, uint32_t prefix)
+hd_public::hd_public(std::string const& encoded, uint32_t prefix)
   : hd_public(from_string(encoded, prefix))
 {
 }
@@ -100,11 +100,11 @@ hd_public hd_public::from_secret(const ec_secret& secret,
 
 hd_public hd_public::from_key(const hd_key& key)
 {
-    const auto prefix = from_big_endian_unsafe<uint32_t>(key.begin());
+    auto const prefix = from_big_endian_unsafe<uint32_t>(key.begin());
     return from_key(key, prefix);
 }
 
-hd_public hd_public::from_string(const std::string& encoded)
+hd_public hd_public::from_string(std::string const& encoded)
 {
     hd_key key;
     if (!decode_base58(key, encoded))
@@ -118,13 +118,13 @@ hd_public hd_public::from_key(const hd_key& key, uint32_t prefix)
     stream_source<hd_key> istream(key);
     istream_reader reader(istream);
 
-    const auto actual_prefix = reader.read_4_bytes_big_endian();
-    const auto depth = reader.read_byte();
-    const auto parent = reader.read_4_bytes_big_endian();
-    const auto child = reader.read_4_bytes_big_endian();
-    const auto chain = reader.read_forward<hd_chain_code_size>();
-    const auto compressed = reader.read_forward<ec_compressed_size>();
-    const auto point = to_array<ec_compressed_size>(compressed);
+    auto const actual_prefix = reader.read_4_bytes_big_endian();
+    auto const depth = reader.read_byte();
+    auto const parent = reader.read_4_bytes_big_endian();
+    auto const child = reader.read_4_bytes_big_endian();
+    auto const chain = reader.read_forward<hd_chain_code_size>();
+    auto const compressed = reader.read_forward<ec_compressed_size>();
+    auto const point = to_array<ec_compressed_size>(compressed);
 
     // Validate the prefix against the provided value.
     if (actual_prefix != prefix)
@@ -142,7 +142,7 @@ hd_public hd_public::from_key(const hd_key& key, uint32_t prefix)
     return hd_public(compressed, chain, lineage);
 }
 
-hd_public hd_public::from_string(const std::string& encoded,
+hd_public hd_public::from_string(std::string const& encoded,
     uint32_t prefix)
 {
     hd_key key;
@@ -218,8 +218,8 @@ hd_public hd_public::derive_public(uint32_t index) const
     if (index >= hd_first_hardened_key)
         return{};
 
-    const auto data = splice(point_, to_big_endian(index));
-    const auto intermediate = split(hmac_sha512_hash(data, chain_));
+    auto const data = splice(point_, to_big_endian(index));
+    auto const intermediate = split(hmac_sha512_hash(data, chain_));
 
     // The returned child key Ki is point(parse256(IL)) + Kpar.
     auto combined = point_;
@@ -245,7 +245,7 @@ hd_public hd_public::derive_public(uint32_t index) const
 
 uint32_t hd_public::fingerprint() const
 {
-    const auto message_digest = bitcoin_short_hash(point_);
+    auto const message_digest = bitcoin_short_hash(point_);
     return from_big_endian_unsafe<uint32_t>(message_digest.begin());
 }
 

@@ -58,7 +58,7 @@ public:
      * @param[in]  description  This application description (e.g. 'Server').
      */
     printer(const boost::program_options::options_description& settings,
-        const std::string& application, const std::string& description="");
+        std::string const& application, std::string const& description="");
 
     /**
      * Construct an instance of the printer class.
@@ -70,8 +70,8 @@ public:
      */
     printer(const boost::program_options::options_description& options,
         const boost::program_options::positional_options_description& arguments,
-        const std::string& application, const std::string& description="",
-        const std::string& command="");
+        std::string const& application, std::string const& description="",
+        std::string const& command="");
 
     /**
      * Convert a paragraph of text into a column.
@@ -81,7 +81,7 @@ public:
      * @param[in]  paragraph  The paragraph to columnize.
      * @return                The column, as a list of fragments.
      */
-    virtual std::vector<std::string> columnize(const std::string& paragraph,
+    virtual std::vector<std::string> columnize(std::string const& paragraph,
         size_t width);
 
     /**
@@ -108,7 +108,7 @@ public:
      * @param[in]  paragraph  The text to format.
      * @return                The formatted paragraph.
      */
-    virtual std::string format_paragraph(const std::string& paragraph);
+    virtual std::string format_paragraph(std::string const& paragraph);
 
     /**
      * Format the command line usage.

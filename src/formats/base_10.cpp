@@ -44,7 +44,7 @@ bool char_is(const char c)
     return c == C;
 }
 
-bool decode_base10(uint64_t& out, const std::string& amount,
+bool decode_base10(uint64_t& out, std::string const& amount,
     uint8_t decimal_places, bool strict)
 {
     std::string value(amount);
@@ -99,7 +99,7 @@ std::string encode_base10(uint64_t amount, uint8_t decimal_places)
     return string;
 }
 
-bool btc_to_satoshi(uint64_t& satoshi, const std::string& btc)
+bool btc_to_satoshi(uint64_t& satoshi, std::string const& btc)
 {
     return decode_base10(satoshi, btc, btc_decimal_places);
 }

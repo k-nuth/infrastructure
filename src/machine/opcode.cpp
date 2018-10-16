@@ -38,7 +38,7 @@ if (norm == text || norm == alias) { out_code = opcode::code; return true; }
 
 std::string opcode_to_string(opcode value, uint32_t active_forks)
 {
-    static const auto push_zero = static_cast<uint8_t>(opcode::reserved_80);
+    static auto const push_zero = static_cast<uint8_t>(opcode::reserved_80);
 
     switch (value)
     {
@@ -406,10 +406,10 @@ std::string opcode_to_string(opcode value, uint32_t active_forks)
 }
 
 // This converts only names, not any data for push codes.
-bool opcode_from_string(opcode& out_code, const std::string& value)
+bool opcode_from_string(opcode& out_code, std::string const& value)
 {
     // Normalize to ASCII lower case.
-    const auto norm = boost::algorithm::to_lower_copy(value);
+    auto const norm = boost::algorithm::to_lower_copy(value);
 
     RETURN_IF_OPCODE("zero", push_size_0);
     RETURN_IF_OPCODE("push_0", push_size_0);
@@ -679,7 +679,7 @@ std::string opcode_to_hexadecimal(opcode code)
     return "0x" + encode_base16(data_chunk{ static_cast<uint8_t>(code) });
 }
 
-bool opcode_from_hexadecimal(opcode& out_code, const std::string& value)
+bool opcode_from_hexadecimal(opcode& out_code, std::string const& value)
 {
     if (value.size() != 4 || value[0] != '0' || value[1] != 'x')
         return false;

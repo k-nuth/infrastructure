@@ -59,7 +59,7 @@ class BI_API dispatcher
 public:
     typedef std::function<void(const code&)> delay_handler;
 
-    dispatcher(threadpool& pool, const std::string& name);
+    dispatcher(threadpool& pool, std::string const& name);
 
     ////size_t ordered_backlog();
     ////size_t unordered_backlog();
@@ -182,12 +182,12 @@ public:
 
     /////// Executes multiple identical jobs concurrently until one completes.
     ////template <typename Count, typename Handler, typename... Args>
-    ////void race(Count count, const std::string& name, Handler&& handler,
+    ////void race(Count count, std::string const& name, Handler&& handler,
     ////    Args... args)
     ////{
     ////    // The first fail will also terminate race and return the code.
     ////    static const size_t clearance_count = 1;
-    ////    const auto call = synchronize(FORWARD_HANDLER(handler),
+    ////    auto const call = synchronize(FORWARD_HANDLER(handler),
     ////        clearance_count, name, false);
     ////
     ////    for (Count iteration = 0; iteration < count; ++iteration)
@@ -197,52 +197,52 @@ public:
     /////// Executes the job against each member of a collection concurrently.
     ////template <typename Element, typename Handler, typename... Args>
     ////void parallel(const std::vector<Element>& collection,
-    ////    const std::string& name, Handler&& handler, Args... args)
+    ////    std::string const& name, Handler&& handler, Args... args)
     ////{
     ////    // Failures are suppressed, success always returned to handler.
-    ////    const auto call = synchronize(FORWARD_HANDLER(handler),
+    ////    auto const call = synchronize(FORWARD_HANDLER(handler),
     ////        collection.size(), name, true);
     ////
-    ////    for (const auto& element: collection)
+    ////    for (auto const& element: collection)
     ////        concurrent(BIND_ELEMENT(args, element, call));
     ////}
     ////
     /////// Disperses the job against each member of a collection without order.
     ////template <typename Element, typename Handler, typename... Args>
     ////void disperse(const std::vector<Element>& collection,
-    ////    const std::string& name, Handler&& handler, Args... args)
+    ////    std::string const& name, Handler&& handler, Args... args)
     ////{
     ////    // Failures are suppressed, success always returned to handler.
-    ////    const auto call = synchronize(FORWARD_HANDLER(handler),
+    ////    auto const call = synchronize(FORWARD_HANDLER(handler),
     ////        collection.size(), name, true);
     ////
-    ////    for (const auto& element: collection)
+    ////    for (auto const& element: collection)
     ////        unordered(BIND_ELEMENT(args, element, call));
     ////}
     ////
     /////// Disperses the job against each member of a collection with order.
     ////template <typename Element, typename Handler, typename... Args>
     ////void serialize(const std::vector<Element>& collection,
-    ////    const std::string& name, Handler&& handler, Args... args)
+    ////    std::string const& name, Handler&& handler, Args... args)
     ////{
     ////    // Failures are suppressed, success always returned to handler.
-    ////    const auto call = synchronize(FORWARD_HANDLER(handler),
+    ////    auto const call = synchronize(FORWARD_HANDLER(handler),
     ////        collection.size(), name, true);
     ////
-    ////    for (const auto& element: collection)
+    ////    for (auto const& element: collection)
     ////        ordered(BIND_ELEMENT(args, element, call));
     ////}
     ////
     /////// Sequences the job against each member of a collection with order.
     ////template <typename Element, typename Handler, typename... Args>
     ////void sequential(const std::vector<Element>& collection,
-    ////    const std::string& name, Handler&& handler, Args... args)
+    ////    std::string const& name, Handler&& handler, Args... args)
     ////{
     ////    // Failures are suppressed, success always returned to handler.
-    ////    const auto call = synchronize(FORWARD_HANDLER(handler),
+    ////    auto const call = synchronize(FORWARD_HANDLER(handler),
     ////        collection.size(), name, true);
     ////
-    ////    for (const auto& element: collection)
+    ////    for (auto const& element: collection)
     ////        sequence(BIND_ELEMENT(args, element, call));
     ////}
 

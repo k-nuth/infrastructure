@@ -44,7 +44,7 @@ public:
      * Initialization constructor.
      * @param[in]  bin  The value to initialize with.
      */
-    base2(const std::string& binary);
+    base2(std::string const& binary);
 
     /**
      * @param[in]  value  The value to initialize with.

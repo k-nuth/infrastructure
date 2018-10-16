@@ -172,13 +172,15 @@ if (NO_CONAN_AT_ALL)
 
   if (MSVC)
     find_package(
-      Boost 1.56.0 REQUIRED
-      COMPONENTS atomic chrono date_time filesystem iostreams locale log log_setup program_options regex system thread unit_test_framework
+      Boost 1.66.0 REQUIRED
+      COMPONENTS atomic chrono date_time filesystem iostreams locale log log_setup program_options system thread unit_test_framework
+      # regex
     )
   else()
     find_package(
-      Boost 1.56.0 REQUIRED
-      COMPONENTS chrono date_time filesystem iostreams locale log program_options regex system thread unit_test_framework
+      Boost 1.66.0 REQUIRED
+      COMPONENTS chrono date_time filesystem iostreams locale log program_options system thread unit_test_framework
+      # regex
     )
   endif()
 endif()
@@ -396,7 +398,6 @@ set(bitprim_infrastructure_sources_just_libbitcoin
         src/utility/istream_reader.cpp
         src/utility/monitor.cpp
         src/utility/ostream_writer.cpp
-        src/utility/png.cpp
         src/utility/prioritized_mutex.cpp
         src/utility/pseudo_random.cpp
         src/utility/scope_lock.cpp
@@ -432,7 +433,7 @@ set(bitprim_infrastructure_sources_just_libbitcoin
         # src/wallet/parse_encrypted_keys/parse_encrypted_token.cpp   # #include <bitcoin/infrastructure/chain/script.hpp>
         # src/wallet/parse_encrypted_keys/parse_encrypted_token.hpp
         # src/wallet/payment_address.cpp
-        src/wallet/qrcode.cpp
+
         # src/wallet/select_outputs.cpp   #  #include <bitcoin/infrastructure/chain/points_value.hpp>
         # src/wallet/stealth_address.cpp    # #include <bitcoin/infrastructure/chain/script.hpp>
         # src/wallet/stealth_receiver.cpp # #include <bitcoin/infrastructure/chain/script.hpp>
@@ -447,6 +448,20 @@ set(bitprim_infrastructure_sources_just_libbitcoin
 #     src/math/external/scrypt-sse2.cpp)
 # endif()
   
+if (WITH_PNG)
+  set(bitprim_infrastructure_sources_just_libbitcoin 
+    ${bitprim_infrastructure_sources_just_libbitcoin}
+    src/utility/png.cpp
+  )
+endif()
+
+if (WITH_QRENCODE)
+  set(bitprim_infrastructure_sources_just_libbitcoin 
+    ${bitprim_infrastructure_sources_just_libbitcoin}
+    src/wallet/qrcode.cpp
+  )
+endif()
+
 
 set(bitprim_infrastructure_sources_just_bitprim
     # src/math/external/scrypt.cpp
@@ -508,16 +523,16 @@ else()
   endif()
 
   target_link_libraries(bitprim-infrastructure PUBLIC
-    ${Boost_CHRONO_LIBRARY}
+    # ${Boost_CHRONO_LIBRARY}
     ${Boost_DATE_TIME_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}
     ${Boost_IOSTREAMS_LIBRARY}
     ${Boost_LOCALE_LIBRARY}
     ${Boost_LOG_LIBRARY}
     ${Boost_PROGRAM_OPTIONS_LIBRARY}
-    ${Boost_REGEX_LIBRARY}
+    # ${Boost_REGEX_LIBRARY}
     ${Boost_SYSTEM_LIBRARY}
-    ${Boost_THREAD_LIBRARY}
+    # ${Boost_THREAD_LIBRARY}
   )
 endif()
 
@@ -560,7 +575,7 @@ endif()
 #------------------------------------------------------------------------------
 if (WITH_TESTS)
 
-  add_executable(bitprim_infrastructure_test
+  set(bitprim_infrastructure_test_sources
         test/config/authority.cpp
         test/config/base58.cpp
         test/config/checkpoint.cpp
@@ -608,12 +623,28 @@ if (WITH_TESTS)
         test/wallet/mnemonic.cpp
         test/wallet/mnemonic.hpp
         test/wallet/qrcode.cpp
-        test/wallet/uri.cpp
+        test/wallet/uri.cpp  
+  )
+
+
+  if (WITH_PNG)
+    set(bitprim_infrastructure_test_sources 
+        ${bitprim_infrastructure_test_sources}
+        src/utility/png.cpp
     )
+  endif()
 
+  if (WITH_QRENCODE)
+    set(bitprim_infrastructure_test_sources 
+        ${bitprim_infrastructure_test_sources}
+        src/wallet/qrcode.cpp
+    )
+  endif()
 
-
-    target_link_libraries(bitprim_infrastructure_test PUBLIC bitprim-infrastructure)
+  add_executable(bitprim_infrastructure_test
+                ${bitprim_infrastructure_test_sources}
+  )
+  target_link_libraries(bitprim_infrastructure_test PUBLIC bitprim-infrastructure)
 
 _group_sources(bitprim_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
 
@@ -649,6 +680,8 @@ _group_sources(bitprim_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
     endian_tests
 
     endpoint_tests
+
+
     # fee_filter_tests
     # filter_add_tests
     # filter_clear_tests
@@ -706,54 +739,6 @@ _group_sources(bitprim_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
     # version_tests
     # transaction_functions_tests
   )
-
-#    1/73 Test  #1: test.core.address_tests ..................***Failed    0.01 sec
-#    2/73 Test  #2: test.core.alert_payload_tests ............***Failed    0.01 sec
-#    3/73 Test  #3: test.core.alert_tests ....................***Failed    0.01 sec
-#    5/73 Test  #5: test.core.base_10_tests ..................***Failed    0.01 sec
-#   12/73 Test #12: test.core.chain_block_tests ..............***Failed    0.01 sec
-#   13/73 Test #13: test.core.message_block_tests ............***Failed    0.01 sec
-#   14/73 Test #14: test.core.block_transactions_tests .......***Failed    0.00 sec
-#   18/73 Test #18: test.core.compact_block_tests ............***Failed    0.00 sec
-#   21/73 Test #21: test.core.encrypted_tests ................***Failed    0.00 sec
-#   24/73 Test #24: test.core.fee_filter_tests ...............***Failed    0.00 sec
-#   25/73 Test #25: test.core.filter_add_tests ...............***Failed    0.00 sec
-#   26/73 Test #26: test.core.filter_clear_tests .............***Failed    0.00 sec
-#   27/73 Test #27: test.core.filter_load_tests ..............***Failed    0.00 sec
-#   28/73 Test #28: test.core.get_address_tests ..............***Failed    0.00 sec
-#   29/73 Test #29: test.core.get_block_transactions_tests ...***Failed    0.00 sec
-#   30/73 Test #30: test.core.get_blocks_tests ...............***Failed    0.00 sec
-#   31/73 Test #31: test.core.get_data_tests .................***Failed    0.00 sec
-#   32/73 Test #32: test.core.get_headers_tests ..............***Failed    0.01 sec
-#   36/73 Test #36: test.core.chain_header_tests .............***Failed    0.00 sec
-#   37/73 Test #37: test.core.headers_tests ..................***Failed    0.00 sec
-#   38/73 Test #38: test.core.heading_tests ..................***Failed    0.00 sec
-#   39/73 Test #39: test.core.input_tests ....................***Failed    0.00 sec
-#   40/73 Test #40: test.core.inventory_tests ................***Failed    0.00 sec
-#   41/73 Test #41: test.core.inventory_vector_tests .........***Failed    0.00 sec
-#   42/73 Test #42: test.core.memory_pool_tests ..............***Failed    0.00 sec
-#   43/73 Test #43: test.core.merkle_block_tests .............***Failed    0.00 sec
-#   44/73 Test #44: test.core.message_tests ..................***Failed    0.00 sec
-#   46/73 Test #46: test.core.network_address_tests ..........***Failed    0.00 sec
-#   47/73 Test #47: test.core.not_found_tests ................***Failed    0.00 sec
-#   48/73 Test #48: test.core.output_tests ...................***Failed    0.00 sec
-#   50/73 Test #50: test.core.payment_address_tests ..........***Failed    0.00 sec
-#   51/73 Test #51: test.core.ping_tests .....................***Failed    0.00 sec
-#   52/73 Test #52: test.core.point_tests ....................***Failed    0.00 sec
-#   53/73 Test #53: test.core.pong_tests .....................***Failed    0.00 sec
-#   54/73 Test #54: test.core.prefilled_transaction_tests ....***Failed    0.00 sec
-#   57/73 Test #57: test.core.reject_tests ...................***Failed    0.00 sec
-#   58/73 Test #58: test.core.script_tests ...................***Failed    0.00 sec
-#   59/73 Test #59: test.core.send_headers_tests .............***Failed    0.00 sec
-#   61/73 Test #61: test.core.stealth_tests ..................***Failed    0.00 sec
-#   64/73 Test #64: test.core.chain_transaction_tests ........***Failed    0.00 sec
-#   65/73 Test #65: test.core.message_transaction_tests ......***Failed    0.00 sec
-#   69/73 Test #69: test.core.uri_reader_tests ...............***Failed    0.00 sec
-#   71/73 Test #71: test.core.verack_tests ...................***Failed    0.00 sec
-#   72/73 Test #72: test.core.version_tests ..................***Failed    0.00 sec
-#   73/73 Test #73: test.core.transaction_functions_tests ....***Failed    0.00 sec
-  
-  
 
   if (WITH_PNG)
     _add_tests(bitprim_infrastructure_test png_tests)

@@ -34,11 +34,11 @@ public:
 
     static BC_CONSTEXPR size_type bits_per_block = byte_bits;
     static size_type blocks_size(size_type bit_size);
-    static bool is_base2(const std::string& text);
+    static bool is_base2(std::string const& text);
 
     binary();
     binary(const binary& other);
-    binary(const std::string& bit_string);
+    binary(std::string const& bit_string);
     binary(size_type size, uint32_t number);
     binary(size_type size, data_slice blocks);
 

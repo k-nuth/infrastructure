@@ -23,7 +23,7 @@ using namespace bc;
 
 BOOST_AUTO_TEST_SUITE(base_58_tests)
 
-void encdec_test(const std::string& hex, const std::string& encoded)
+void encdec_test(std::string const& hex, std::string const& encoded)
 {
     data_chunk data, decoded;
     BOOST_REQUIRE(decode_base16(data, hex));
@@ -68,13 +68,13 @@ BOOST_AUTO_TEST_CASE(base58_address_test)
 
 BOOST_AUTO_TEST_CASE(is_b58)
 {
-    const std::string base58_chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+    std::string const base58_chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
     for (char ch: base58_chars)
     {
         BOOST_REQUIRE(is_base58(ch));
     }
 
-    const std::string non_base58_chars = "0OIl+- //#";
+    std::string const non_base58_chars = "0OIl+- //#";
     for (char ch: non_base58_chars)
     {
         BOOST_REQUIRE(!is_base58(ch));

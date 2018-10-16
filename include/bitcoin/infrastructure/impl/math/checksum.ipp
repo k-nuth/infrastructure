@@ -42,7 +42,7 @@ bool insert_checksum(byte_array<Size>& out)
         return false;
 
     data_chunk body(out.begin(), out.end() - checksum_size);
-    const auto checksum = to_little_endian(bitcoin_checksum(body));
+    auto const checksum = to_little_endian(bitcoin_checksum(body));
     std::copy_n(checksum.begin(), checksum_size, out.end() - checksum_size);
     return true;
 }
@@ -68,7 +68,7 @@ bool unwrap(uint8_t& out_version,
 
     out_version = slice<0, 1>(wrapped)[0];
     out_payload = slice<1, Size - checksum_size>(wrapped);
-    const auto bytes = slice<Size - checksum_size, Size>(wrapped);
+    auto const bytes = slice<Size - checksum_size, Size>(wrapped);
     out_checksum = from_little_endian_unsafe<uint32_t>(bytes.begin());
     return true;
 }

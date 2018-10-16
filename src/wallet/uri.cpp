@@ -71,7 +71,7 @@ static bool is_query_char(const char c)
 
 // Verifies that all RFC 3986 escape sequences in a string are valid, and that
 // all characters belong to the given class.
-static bool validate(const std::string& in, bool (*is_valid)(const char))
+static bool validate(std::string const& in, bool (*is_valid)(const char))
 {
     auto i = in.begin();
     while (in.end() != i)
@@ -96,7 +96,7 @@ static bool validate(const std::string& in, bool (*is_valid)(const char))
 }
 
 // Decodes all RFC 3986 escape sequences in a string.
-static std::string unescape(const std::string& in)
+static std::string unescape(std::string const& in)
 {
     // Do the conversion:
     std::string out;
@@ -124,11 +124,11 @@ static std::string unescape(const std::string& in)
 
 // URI encodes a string (i.e. percent encoding).
 // is_valid a function returning true for acceptable characters.
-static std::string escape(const std::string& in, bool (*is_valid)(char))
+static std::string escape(std::string const& in, bool (*is_valid)(char))
 {
     std::ostringstream stream;
     stream << std::hex << std::uppercase << std::setfill('0');
-    for (const auto c: in)
+    for (auto const c: in)
     {
         if (is_valid(c))
             stream << c;
@@ -139,7 +139,7 @@ static std::string escape(const std::string& in, bool (*is_valid)(char))
     return stream.str();
 }
 
-bool uri::decode(const std::string& encoded, bool strict)
+bool uri::decode(std::string const& encoded, bool strict)
 {
     auto i = encoded.begin();
 
@@ -247,7 +247,7 @@ std::string uri::scheme() const
     return out;
 }
 
-void uri::set_scheme(const std::string& scheme)
+void uri::set_scheme(std::string const& scheme)
 {
     scheme_ = scheme;
 }
@@ -264,7 +264,7 @@ bool uri::has_authority() const
     return has_authority_;
 }
 
-void uri::set_authority(const std::string& authority)
+void uri::set_authority(std::string const& authority)
 {
     has_authority_ = true;
     authority_ = escape(authority, is_path_char);
@@ -282,7 +282,7 @@ std::string uri::path() const
     return unescape(path_);
 }
 
-void uri::set_path(const std::string& path)
+void uri::set_path(std::string const& path)
 {
     path_ = escape(path, is_path);
 }
@@ -299,7 +299,7 @@ bool uri::has_query() const
     return has_query_;
 }
 
-void uri::set_query(const std::string& query)
+void uri::set_query(std::string const& query)
 {
     has_query_ = true;
     query_ = escape(query, is_query);
@@ -322,7 +322,7 @@ bool uri::has_fragment() const
     return has_fragment_;
 }
 
-void uri::set_fragment(const std::string& fragment)
+void uri::set_fragment(std::string const& fragment)
 {
     has_fragment_ = true;
     fragment_ = escape(fragment, is_query);
@@ -371,7 +371,7 @@ void uri::encode_query(const query_map& map)
 {
     auto first = true;
     std::ostringstream query;
-    for (const auto& term: map)
+    for (auto const& term: map)
     {
         if (!first)
             query << '&';

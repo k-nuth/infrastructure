@@ -47,8 +47,8 @@ BOOST_AUTO_TEST_CASE(unicode_ostream__conditional__test)
 
 BOOST_AUTO_TEST_CASE(unicode_ostream__non_ascii__test)
 {
-    const auto utf8 = "テスト";
-    const auto utf16 = to_utf16(utf8);
+    auto const utf8 = "テスト";
+    auto const utf16 = to_utf16(utf8);
 
     std::wstringstream wide_stream;
     std::stringstream narrow_stream;
@@ -74,7 +74,7 @@ BOOST_AUTO_TEST_CASE(unicode_ostream__overflow__test)
     // method of the output stream buffer must compensate for character
     // splitting as the utf8 stream is not character-oriented, otherwise
     // this will fail.
-    const auto utf8_1800_bytes =
+    auto const utf8_1800_bytes =
         "テストテストテストテストテストテストテストテストテストテスト"
         "テストテストテストテストテストテストテストテストテストテスト"
         "テストテストテストテストテストテストテストテストテストテスト"
@@ -96,7 +96,7 @@ BOOST_AUTO_TEST_CASE(unicode_ostream__overflow__test)
         "テストテストテストテストテストテストテストテストテストテスト"
         "テストテストテストテストテストテストテストテストテストテスト";
 
-    const auto utf16_600_chars = to_utf16(utf8_1800_bytes);
+    auto const utf16_600_chars = to_utf16(utf8_1800_bytes);
 
     std::wstringstream wide_stream;
     std::stringstream narrow_stream;

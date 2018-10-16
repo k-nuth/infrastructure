@@ -148,7 +148,7 @@ inline bool operation::operator!=(const operation& other) const
 inline size_t operation::serialized_size() const
 {
     static BC_CONSTEXPR auto op_size = sizeof(uint8_t);
-    const auto size = data_.size();
+    auto const size = data_.size();
 
     switch (code_)
     {
@@ -195,7 +195,7 @@ inline uint32_t operation::read_data_size(opcode code, reader& source)
         case opcode::push_four_size:
             return source.read_4_bytes_little_endian();
         default:
-            const auto byte = static_cast<uint8_t>(code);
+            auto const byte = static_cast<uint8_t>(code);
             return byte <= op_75 ? byte : 0;
     }
 }
@@ -221,11 +221,11 @@ inline opcode operation::opcode_from_size(size_t size)
 
 inline opcode operation::minimal_opcode_from_data(const data_chunk& data)
 {
-    const auto size = data.size();
+    auto const size = data.size();
 
     if (size == 1)
     {
-        const auto value = data.front();
+        auto const value = data.front();
 
         if (value == number::negative_1)
             return opcode::push_negative_1;
@@ -273,7 +273,7 @@ inline bool operation::is_push(opcode code)
 {
     BC_CONSTEXPR auto op_80 = static_cast<uint8_t>(opcode::reserved_80);
     BC_CONSTEXPR auto op_96 = static_cast<uint8_t>(opcode::push_positive_16);
-    const auto value = static_cast<uint8_t>(code);
+    auto const value = static_cast<uint8_t>(code);
     return value <= op_96 && value != op_80;
 }
 
@@ -282,7 +282,7 @@ inline bool operation::is_payload(opcode code)
 {
     BC_CONSTEXPR auto op_1 = static_cast<uint8_t>(opcode::push_size_1);
     BC_CONSTEXPR auto op_78 = static_cast<uint8_t>(opcode::push_four_size);
-    const auto value = static_cast<uint8_t>(code);
+    auto const value = static_cast<uint8_t>(code);
     return value >= op_1 && value <= op_78;
 }
 
@@ -290,7 +290,7 @@ inline bool operation::is_payload(opcode code)
 inline bool operation::is_counted(opcode code)
 {
     BC_CONSTEXPR auto op_97 = static_cast<uint8_t>(opcode::nop);
-    const auto value = static_cast<uint8_t>(code);
+    auto const value = static_cast<uint8_t>(code);
     return value >= op_97;
 }
 
@@ -311,7 +311,7 @@ inline bool operation::is_positive(opcode code)
 {
     BC_CONSTEXPR auto op_81 = static_cast<uint8_t>(opcode::push_positive_1);
     BC_CONSTEXPR auto op_96 = static_cast<uint8_t>(opcode::push_positive_16);
-    const auto value = static_cast<uint8_t>(code);
+    auto const value = static_cast<uint8_t>(code);
     return value >= op_81 && value <= op_96;
 }
 
@@ -329,7 +329,7 @@ inline bool operation::is_reserved(opcode code)
         case opcode::reserved_138:
             return true;
         default:
-            const auto value = static_cast<uint8_t>(code);
+            auto const value = static_cast<uint8_t>(code);
             return value >= op_186 && value <= op_255;
     }
 }
@@ -397,7 +397,7 @@ inline bool operation::is_conditional(opcode code)
 inline bool operation::is_relaxed_push(opcode code)
 {
     BC_CONSTEXPR auto op_96 = static_cast<uint8_t>(opcode::push_positive_16);
-    const auto value = static_cast<uint8_t>(code);
+    auto const value = static_cast<uint8_t>(code);
     return value <= op_96;
 }
 

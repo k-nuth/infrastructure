@@ -50,7 +50,7 @@ std::vector<Element>& distinct(std::vector<Element>& list)
 template <typename Pair, typename Key>
 int find_pair_position(const std::vector<Pair>& list, const Key& key)
 {
-    const auto predicate = [&](const Pair& pair)
+    auto const predicate = [&](const Pair& pair)
     {
         return pair.first == key;
     };
@@ -66,7 +66,7 @@ int find_pair_position(const std::vector<Pair>& list, const Key& key)
 template <typename Element, typename Container>
 int find_position(const Container& list, const Element& value)
 {
-    const auto it = std::find(std::begin(list), std::end(list), value);
+    auto const it = std::find(std::begin(list), std::end(list), value);
 
     if (it == std::end(list))
         return -1;
@@ -94,7 +94,7 @@ template <typename Element>
 Element pop(std::vector<Element>& stack)
 {
     BITCOIN_ASSERT(!stack.empty());
-    const auto element = stack.back();
+    auto const element = stack.back();
     stack.pop_back();
     ////stack.shrink_to_fit();
     return element;
@@ -116,9 +116,9 @@ template <class Type>
 std::ostream& operator<<(std::ostream& output, const std::vector<Type>& list)
 {
     size_t current = 0;
-    const auto end = list.size();
+    auto const end = list.size();
 
-    for (const auto& element: list)
+    for (auto const& element: list)
     {
         output << element;
 

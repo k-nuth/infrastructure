@@ -51,7 +51,7 @@ public:
      * Initialization constructor.
      * @param[in]  base85  The value to initialize with.
      */
-    sodium(const std::string& base85);
+    sodium(std::string const& base85);
 
     /**
      * Initialization constructor.

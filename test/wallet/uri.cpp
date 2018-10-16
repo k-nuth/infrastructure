@@ -26,7 +26,7 @@ BOOST_AUTO_TEST_SUITE(uri_tests)
 
 BOOST_AUTO_TEST_CASE(uri__parse__http_roundtrip__test)
 {
-    const auto test = "http://github.com/libbitcoin?good=true#nice";
+    auto const test = "http://github.com/libbitcoin?good=true#nice";
     uri parsed;
     BOOST_REQUIRE(parsed.decode(test));
 
@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_CASE(uri__parse__http_roundtrip__test)
 
 BOOST_AUTO_TEST_CASE(uri__parse__messy_roundtrip__test)
 {
-    const auto test = "TEST:%78?%79#%7a";
+    auto const test = "TEST:%78?%79#%7a";
     uri parsed;
     BOOST_REQUIRE(parsed.decode(test));
 

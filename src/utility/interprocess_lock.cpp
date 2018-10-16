@@ -27,14 +27,14 @@
 namespace libbitcoin {
 
 // static
-bool interprocess_lock::create(const std::string& file)
+bool interprocess_lock::create(std::string const& file)
 {
     bc::ofstream stream(file);
     return stream.good();
 }
 
 // static
-bool interprocess_lock::destroy(const std::string& file)
+bool interprocess_lock::destroy(std::string const& file)
 {
     return boost::filesystem::remove(file);
     ////std::remove(file.c_str());

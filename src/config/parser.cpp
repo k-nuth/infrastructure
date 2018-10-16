@@ -46,7 +46,7 @@ std::string parser::format_invalid_parameter(std::string const& message) {
 
 path parser::get_config_option(variables_map& variables, std::string const& name) {
     // read config from the map so we don't require an early notify
-    const auto& config = variables[name];
+    auto const& config = variables[name];
     // prevent exception in the case where the config variable is not set
     if (config.empty())
         return path();
@@ -55,7 +55,7 @@ path parser::get_config_option(variables_map& variables, std::string const& name
 
 bool parser::get_option(variables_map& variables, std::string const& name) {
     // Read settings from the map so we don't require an early notify call.
-    const auto& variable = variables[name];
+    auto const& variable = variables[name];
 
     // prevent exception in the case where the settings variable is not set.
     if (variable.empty())
@@ -66,16 +66,16 @@ bool parser::get_option(variables_map& variables, std::string const& name) {
 
 void parser::load_command_variables(variables_map& variables, int argc, const char* argv[])
 {
-    const auto options = load_options();
-    const auto arguments = load_arguments();
+    auto const options = load_options();
+    auto const arguments = load_arguments();
     auto command_parser = command_line_parser(argc, argv).options(options)
         /*.allow_unregistered()*/.positional(arguments);
     store(command_parser.run(), variables);
 }
 
 void parser::load_environment_variables(variables_map& variables, std::string const& prefix) {
-    const auto& environment_variables = load_environment();
-    const auto environment = parse_environment(environment_variables, prefix);
+    auto const& environment_variables = load_environment();
+    auto const environment = parse_environment(environment_variables, prefix);
     store(environment, variables);
 }
 

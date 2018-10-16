@@ -25,7 +25,7 @@
 namespace libbitcoin {
 
 template <typename Value>
-Value deserialize(const std::string& text, bool trim)
+Value deserialize(std::string const& text, bool trim)
 {
     if (trim)
         return boost::lexical_cast<Value>(boost::trim_copy(text));
@@ -34,7 +34,7 @@ Value deserialize(const std::string& text, bool trim)
 }
 
 template <typename Value>
-void deserialize(Value& value, const std::string& text, bool trim)
+void deserialize(Value& value, std::string const& text, bool trim)
 {
     if (trim)
         value = boost::lexical_cast<Value>(boost::trim_copy(text));
@@ -43,13 +43,13 @@ void deserialize(Value& value, const std::string& text, bool trim)
 }
 
 template <typename Value>
-void deserialize(std::vector<Value>& collection, const std::string& text,
+void deserialize(std::vector<Value>& collection, std::string const& text,
     bool trim)
 {
     // This had problems with the inclusion of the ideographic (CJK) space
     // (0xe3,0x80, 0x80). Need to infuse the local in bc::split().
-    const auto tokens = split(text, " \n\r\t");
-    for (const auto& token: tokens)
+    auto const tokens = split(text, " \n\r\t");
+    for (auto const& token: tokens)
     {
         Value value;
         deserialize(value, token, true);
@@ -58,11 +58,11 @@ void deserialize(std::vector<Value>& collection, const std::string& text,
 }
 
 template <typename Value>
-std::string serialize(const Value& value, const std::string& fallback)
+std::string serialize(const Value& value, std::string const& fallback)
 {
     std::stringstream stream;
     stream << value;
-    const auto& text = stream.str();
+    auto const& text = stream.str();
     return text.empty() ? fallback : text;
 }
 

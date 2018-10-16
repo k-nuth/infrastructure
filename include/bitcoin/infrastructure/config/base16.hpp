@@ -45,7 +45,7 @@ public:
      * Initialization constructor.
      * @param[in]  hexcode  The value to initialize with.
      */
-    base16(const std::string& hexcode);
+    base16(std::string const& hexcode);
 
     /**
      * Initialization constructor.

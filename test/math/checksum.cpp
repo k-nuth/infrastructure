@@ -29,7 +29,7 @@ BOOST_AUTO_TEST_SUITE(checksum_tests)
 BOOST_AUTO_TEST_CASE(checksum__append_checksum__size__increased_by_checksum_size)
 {
     data_chunk data = { 0, 0, 0, 0, 0 };
-    const auto data_size = data.size();
+    auto const data_size = data.size();
     append_checksum(data);
     BOOST_REQUIRE_EQUAL(data.size(), data_size + checksum_size);
 }
@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(checksum__append_checksum__not_empty__valid)
 BOOST_AUTO_TEST_CASE(checksum__bitcoin_checksum__always__valid)
 {
     data_chunk data = { 0, 0, 0, 0, 0 };
-    const auto result = bitcoin_checksum(data);
+    auto const result = bitcoin_checksum(data);
     BOOST_REQUIRE_EQUAL(result, 0x93af0179u);
 }
 
@@ -68,7 +68,7 @@ BOOST_AUTO_TEST_CASE(checksum__build_checked_array__empty__valid)
     data_chunk data = {};
     auto checksum = data.size();
     byte_array<checksum_size> out;
-    const auto result = build_checked_array(out,
+    auto const result = build_checked_array(out,
     {
         data
     });
@@ -84,7 +84,7 @@ BOOST_AUTO_TEST_CASE(checksum__build_checked_array__not_empty__valid)
     data_chunk data = { 0, 0, 0, 0, 0 };
     auto checksum = data.size();
     byte_array<checksum_size + 5> out;
-    const auto result = build_checked_array(out,
+    auto const result = build_checked_array(out,
     {
         data
     });
@@ -100,7 +100,7 @@ BOOST_AUTO_TEST_CASE(checksum__build_checked_array__overflow__false)
     data_chunk data = { 0, 0, 0, 0, 0 };
     auto checksum = data.size();
     byte_array<checksum_size> out;
-    const auto result = build_checked_array(out,
+    auto const result = build_checked_array(out,
     {
         data
     });
@@ -158,7 +158,7 @@ BOOST_AUTO_TEST_CASE(checksum__verify_checksum__added__true)
 BOOST_AUTO_TEST_CASE(checksum__verify_checksum__invalidated__false)
 {
     data_chunk data = { 0, 0, 0, 0, 0 };
-    const auto data_size = data.size();
+    auto const data_size = data.size();
     append_checksum(data);
     data[data_size] = 42;
     BOOST_REQUIRE(!verify_checksum(data));

@@ -29,7 +29,7 @@ namespace wallet {
 /**
  * Convert Cascasius minikey to secret parameter.
  */
-BI_API bool minikey_to_secret(ec_secret& out_secret, const std::string& key);
+BI_API bool minikey_to_secret(ec_secret& out_secret, std::string const& key);
 
 } // namespace wallet
 } // namespace libbitcoin

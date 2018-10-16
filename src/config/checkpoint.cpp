@@ -24,7 +24,6 @@
 #include <string>
 #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
-#include <boost/regex.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/formats/base_16.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>
@@ -32,61 +31,52 @@
 namespace libbitcoin {
 namespace config {
 
-using namespace boost;
+// using namespace boost;
 using namespace boost::program_options;
 
 checkpoint::checkpoint()
-  : height_(0), hash_(bc::null_hash)
-{
+    : height_(0), hash_(bc::null_hash) {
 }
 
-checkpoint::checkpoint(const std::string& value)
-  : checkpoint()
+checkpoint::checkpoint(std::string const& value)
+    : checkpoint()
 {
     std::stringstream(value) >> *this;
 }
 
-checkpoint::checkpoint(const checkpoint& other)
-  : hash_(other.hash()), height_(other.height())
-{
-}
+checkpoint::checkpoint(checkpoint const& other)
+    : hash_(other.hash()), height_(other.height())
+{}
 
 // This is intended for static initialization (i.e. of the internal defaults).
-checkpoint::checkpoint(const std::string& hash, size_t height)
-  : height_(height)
+checkpoint::checkpoint(std::string const& hash, size_t height)
+    : height_(height)
 {
-    if (!decode_hash(hash_, hash))
-    {
+    if (!decode_hash(hash_, hash)) {
         BOOST_THROW_EXCEPTION(invalid_option_value(hash));
     }
 }
 
 checkpoint::checkpoint(const hash_digest& hash, size_t height)
-  : hash_(hash), height_(height)
-{
-}
+    : hash_(hash), height_(height)
+{}
 
-const hash_digest& checkpoint::hash() const
-{
+const hash_digest& checkpoint::hash() const {
     return hash_;
 }
 
-const size_t checkpoint::height() const
-{
+const size_t checkpoint::height() const {
     return height_;
 }
 
-std::string checkpoint::to_string() const
-{
+std::string checkpoint::to_string() const {
     std::stringstream value;
     value << *this;
     return value.str();
 }
 
-config::checkpoint::list checkpoint::sort(const list& checks)
-{
-    const auto comparitor = [](const checkpoint& left, const checkpoint& right)
-    {
+config::checkpoint::list checkpoint::sort(const list& checks) {
+    auto const comparitor = [](checkpoint const& left, checkpoint const& right) {
         return left.height() < right.height();
     };
 
@@ -95,62 +85,52 @@ config::checkpoint::list checkpoint::sort(const list& checks)
     return copy;
 }
 
-bool checkpoint::covered(size_t height, const list& checks)
-{
+bool checkpoint::covered(size_t height, const list& checks) {
     return !checks.empty() && height <= checks.back().height();
 }
 
-bool checkpoint::validate(const hash_digest& hash, size_t height,
-    const list& checks)
-{
-    const auto match_invalid = [&height, &hash](const config::checkpoint& item)
-    {
+bool checkpoint::validate(const hash_digest& hash, size_t height, const list& checks) {
+    auto const match_invalid = [&height, &hash](const config::checkpoint& item) {
         return height == item.height() && hash != item.hash();
     };
 
-    const auto it = std::find_if(checks.begin(), checks.end(), match_invalid);
+    auto const it = std::find_if(checks.begin(), checks.end(), match_invalid);
     return it == checks.end();
 }
 
-bool checkpoint::operator==(const checkpoint& other) const
-{
+bool checkpoint::operator==(checkpoint const& other) const {
     return height_ == other.height_ && hash_ == other.hash_;
 }
 
-std::istream& operator>>(std::istream& input, checkpoint& argument)
-{
+std::istream& operator>>(std::istream& input, checkpoint& argument) {
     std::string value;
     input >> value;
 
     // std::regex requires gcc 4.9, so we are using boost::regex for now.
-    static const regex regular("^([0-9a-f]{64})(:([0-9]{1,20}))?$");
+    // Bitprim: we use std::regex, becase we drop support por GCC<5
+    static
+    std::regex const regular("^([0-9a-f]{64})(:([0-9]{1,20}))?$");
 
-    sregex_iterator it(value.begin(), value.end(), regular), end;
-    if (it == end)
-    {
+    std::sregex_iterator it(value.begin(), value.end(), regular), end;
+    if (it == end) {
         BOOST_THROW_EXCEPTION(invalid_option_value(value));
     }
 
-    const auto& match = *it;
-    if (!decode_hash(argument.hash_, match[1]))
-    {
+    auto const& match = *it;
+    if ( ! decode_hash(argument.hash_, match[1])) {
         BOOST_THROW_EXCEPTION(invalid_option_value(value));
     }
 
-    try
-    {
-        argument.height_ = lexical_cast<size_t>(match[3]);
-    }
-    catch (const boost::exception&)
-    {
+    try {
+        argument.height_ = boost::lexical_cast<size_t>(match[3]);
+    } catch (...) {
         BOOST_THROW_EXCEPTION(invalid_option_value(value));
     }
 
     return input;
 }
 
-std::ostream& operator<<(std::ostream& output, const checkpoint& argument)
-{
+std::ostream& operator<<(std::ostream& output, checkpoint const& argument) {
     output << encode_hash(argument.hash()) << ":" << argument.height();
     return output;
 }

@@ -40,7 +40,7 @@ public:
     typedef std::function<void (Args...)> handler;
     typedef std::shared_ptr<subscriber<Args...>> ptr;
 
-    subscriber(threadpool& pool, const std::string& class_name);
+    subscriber(threadpool& pool, std::string const& class_name);
     virtual ~subscriber();
 
     /// Enable new subscriptions.

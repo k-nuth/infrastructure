@@ -52,7 +52,7 @@ class synchronizer
 {
 public:
     synchronizer(Handler&& handler, size_t clearance_count,
-        const std::string& name, synchronizer_terminate mode)
+        std::string const& name, synchronizer_terminate mode)
       : handler_(std::forward<Handler>(handler)),
         name_(name),
         clearance_count_(clearance_count),
@@ -101,7 +101,7 @@ public:
         ///////////////////////////////////////////////////////////////////////
         mutex_->lock_upgrade();
 
-        const auto initial_count = *counter_;
+        auto const initial_count = *counter_;
         BITCOIN_ASSERT(initial_count <= clearance_count_);
 
         // Another handler cleared this and shortcircuited the count, ignore.
@@ -112,8 +112,8 @@ public:
             return;
         }
 
-        const auto count = complete(ec) ? clearance_count_ : initial_count + 1;
-        const auto cleared = count == clearance_count_;
+        auto const count = complete(ec) ? clearance_count_ : initial_count + 1;
+        auto const cleared = count == clearance_count_;
 
         mutex_->unlock_upgrade_and_lock();
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -130,7 +130,7 @@ private:
     typedef typename std::decay<Handler>::type decay_handler;
 
     decay_handler handler_;
-    const std::string name_;
+    std::string const name_;
     const size_t clearance_count_;
     const synchronizer_terminate terminate_;
 
@@ -141,7 +141,7 @@ private:
 
 template <typename Handler>
 synchronizer<Handler> synchronize(Handler&& handler, size_t clearance_count,
-    const std::string& name, synchronizer_terminate mode=
+    std::string const& name, synchronizer_terminate mode=
     synchronizer_terminate::on_error)
 {
     return synchronizer<Handler>(std::forward<Handler>(handler),

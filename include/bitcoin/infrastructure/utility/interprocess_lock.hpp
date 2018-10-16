@@ -44,11 +44,11 @@ private:
     typedef interprocess::file_lock lock_file;
     typedef std::shared_ptr<lock_file> lock_ptr;
 
-    static bool create(const std::string& file);
-    static bool destroy(const std::string& file);
+    static bool create(std::string const& file);
+    static bool destroy(std::string const& file);
 
     lock_ptr lock_;
-    const std::string file_;
+    std::string const file_;
 };
 
 } // namespace libbitcoin

@@ -75,21 +75,21 @@ public:
      * Copy constructor.
      * @param[in]  other  The object to copy into self on construct.
      */
-    checkpoint(const checkpoint& other);
+    checkpoint(checkpoint const& other);
 
     /**
      * Initialization constructor.
      * The height is optional and will be set to zero if not provided.
      * @param[in]  value  The value of the hash[:height] form.
      */
-    checkpoint(const std::string& value);
+    checkpoint(std::string const& value);
 
     /**
      * Initialization constructor.
      * @param[in]  hash    The string block hash for the checkpoint.
      * @param[in]  height  The height of the hash.
      */
-    checkpoint(const std::string& hash, size_t height);
+    checkpoint(std::string const& hash, size_t height);
 
     /**
      * Initialization constructor.
@@ -120,7 +120,7 @@ public:
      * Override the equality operator.
      * @param[in]  other  The other object with which to compare.
      */
-    bool operator==(const checkpoint& other) const;
+    bool operator==(checkpoint const& other) const;
 
     /**
      * Define stream in. Throws if input is invalid.
@@ -138,7 +138,7 @@ public:
      * @return                The output stream reference.
      */
     friend std::ostream& operator<<(std::ostream& output,
-        const checkpoint& argument);
+        checkpoint const& argument);
 
 private:
     hash_digest hash_;

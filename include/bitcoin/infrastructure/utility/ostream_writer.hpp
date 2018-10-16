@@ -77,10 +77,10 @@ public:
     void write_bytes(const uint8_t* data, size_t size);
 
     /// Write variable length string.
-    void write_string(const std::string& value, size_t size);
+    void write_string(std::string const& value, size_t size);
 
     /// Write required length string, padded with nulls.
-    void write_string(const std::string& value);
+    void write_string(std::string const& value);
 
     /// Advance iterator without writing.
     void skip(size_t size);

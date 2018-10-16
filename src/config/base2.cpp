@@ -32,7 +32,7 @@ base2::base2()
 {
 }
 
-base2::base2(const std::string& binary)
+base2::base2(std::string const& binary)
 {
     std::stringstream(binary) >> *this;
 }

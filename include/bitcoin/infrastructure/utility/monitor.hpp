@@ -48,7 +48,7 @@ public:
         handler();
     }
 
-    void trace(size_t, const std::string&) const
+    void trace(size_t, std::string const&) const
     {
         ////#ifndef NDEBUG
         ////    LOG_DEBUG(LOG_SYSTEM)
@@ -58,7 +58,7 @@ public:
 
 private:
     count_ptr counter_;
-    const std::string name_;
+    std::string const name_;
 };
 
 } // namespace libbitcoin

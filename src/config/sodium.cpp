@@ -34,7 +34,7 @@ sodium::sodium()
 {
 }
 
-sodium::sodium(const std::string& base85)
+sodium::sodium(std::string const& base85)
 {
     std::stringstream(base85) >> *this;
 }

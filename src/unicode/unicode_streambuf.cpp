@@ -62,17 +62,17 @@ std::streambuf::int_type unicode_streambuf::underflow()
 {
     // streamsize is signed.
     BITCOIN_ASSERT(wide_size_ > 0 && wide_size_ <= bc::max_int64);
-    const auto size = static_cast<std::streamsize>(wide_size_);
+    auto const size = static_cast<std::streamsize>(wide_size_);
 
     // Read from the wide input buffer.
-    const auto read = static_cast<size_t>(wide_buffer_->sgetn(wide_, size));
+    auto const read = static_cast<size_t>(wide_buffer_->sgetn(wide_, size));
 
     // Handle read termination.
     if (read == 0)
         return traits_type::eof();
 
     // Convert utf16 to utf8, returning bytes written.
-    const auto bytes = to_utf8(narrow_, narrow_size_, wide_, read);
+    auto const bytes = to_utf8(narrow_, narrow_size_, wide_, read);
 
     // Reset gptr and egptr, eback never changes.
     setg(narrow_, narrow_, &narrow_[bytes]);
@@ -104,16 +104,16 @@ std::streambuf::int_type unicode_streambuf::overflow(
     uint8_t unwritten = 0;
 
     // Get the number of bytes in the buffer to convert.
-    const auto write = pptr() - pbase();
+    auto const write = pptr() - pbase();
 
     if (write > 0)
     {
         // Convert utf8 to utf16, returning chars written and bytes unread.
-        const auto chars = to_utf16(wide_, narrow_size_, narrow_, write,
+        auto const chars = to_utf16(wide_, narrow_size_, narrow_, write,
             unwritten);
 
         // Write to the wide output buffer.
-        const auto written = wide_buffer_->sputn(wide_, chars);
+        auto const written = wide_buffer_->sputn(wide_, chars);
 
         // Handle write failure as an EOF.
         if (written != chars)

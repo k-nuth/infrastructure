@@ -86,7 +86,7 @@ std::streamsize console_streambuf::xsgetn(wchar_t* buffer,
 
 #ifdef _MSC_VER
     DWORD read_bytes;
-    const auto result = ReadConsoleW(get_input_handle(), buffer,
+    auto const result = ReadConsoleW(get_input_handle(), buffer,
         static_cast<DWORD>(size), &read_bytes, nullptr);
 
     if (result == FALSE)
@@ -103,7 +103,7 @@ std::wstreambuf::int_type console_streambuf::underflow()
 #ifdef _MSC_VER
     if (gptr() == nullptr || gptr() >= egptr())
     {
-        const auto length = xsgetn(buffer_, buffer_size_);
+        auto const length = xsgetn(buffer_, buffer_size_);
         if (length > 0)
             setg(buffer_, buffer_, &buffer_[length]);
     }

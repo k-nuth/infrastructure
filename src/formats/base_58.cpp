@@ -23,7 +23,7 @@
 
 namespace libbitcoin {
 
-const std::string base58_chars =
+std::string const base58_chars =
     "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
 bool is_base58(const char ch)
@@ -32,9 +32,9 @@ bool is_base58(const char ch)
     return std::binary_search(base58_chars.begin(), base58_chars.end(), ch);
 }
 
-bool is_base58(const std::string& text)
+bool is_base58(std::string const& text)
 {
-    const auto test = [](const char ch)
+    auto const test = [](const char ch)
     {
         return is_base58(ch);
     };
@@ -118,7 +118,7 @@ std::string encode_base58(data_slice unencoded)
     return encoded;
 }
 
-size_t count_leading_zeros(const std::string& encoded)
+size_t count_leading_zeros(std::string const& encoded)
 {
     // Skip and count leading '1's.
     size_t leading_zeros = 0;
@@ -145,10 +145,10 @@ void unpack_char(data_chunk& data, size_t carry)
     BITCOIN_ASSERT(carry == 0);
 }
 
-bool decode_base58(data_chunk& out, const std::string& in)
+bool decode_base58(data_chunk& out, std::string const& in)
 {
     // Trim spaces and newlines around the string.
-    const auto leading_zeros = count_leading_zeros(in);
+    auto const leading_zeros = count_leading_zeros(in);
 
     // log(58) / log(256), rounded up.
     const size_t data_size = in.size() * 733 / 1000 + 1;
@@ -159,7 +159,7 @@ bool decode_base58(data_chunk& out, const std::string& in)
     // Process the characters.
     for (auto it = in.begin() + leading_zeros; it != in.end(); ++it)
     {
-        const auto carry = base58_chars.find(*it);
+        auto const carry = base58_chars.find(*it);
         if (carry == std::string::npos)
             return false;
 

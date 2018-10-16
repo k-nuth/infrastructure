@@ -26,14 +26,14 @@
 namespace libbitcoin {
 
 BI_API bool is_base58(const char ch);
-BI_API bool is_base58(const std::string& text);
+BI_API bool is_base58(std::string const& text);
 
 /**
  * Converts a base58 string to a number of bytes.
  * @return false if the input is malformed, or the wrong length.
  */
 template <size_t Size>
-bool decode_base58(byte_array<Size>& out, const std::string &in);
+bool decode_base58(byte_array<Size>& out, std::string const &in);
 
 /**
  * Converts a base58 string literal to a data array.
@@ -54,7 +54,7 @@ BI_API std::string encode_base58(data_slice unencoded);
  * Attempt to decode base58 data.
  * @return false if the input contains non-base58 characters.
  */
-BI_API bool decode_base58(data_chunk& out, const std::string& in);
+BI_API bool decode_base58(data_chunk& out, std::string const& in);
 
 } // namespace libbitcoin
 

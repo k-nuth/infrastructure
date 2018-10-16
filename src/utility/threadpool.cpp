@@ -114,7 +114,7 @@ void threadpool::join()
     // Critical Section
     unique_lock lock(threads_mutex_);
 
-    DEBUG_ONLY(const auto this_id = boost::this_thread::get_id();)
+    DEBUG_ONLY(auto const this_id = boost::this_thread::get_id();)
 
     for (auto& thread: threads_)
     {

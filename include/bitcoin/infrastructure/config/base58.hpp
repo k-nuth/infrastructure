@@ -43,7 +43,7 @@ public:
      * Initialization constructor.
      * @param[in]  base58  The value to initialize with.
      */
-    base58(const std::string& base58);
+    base58(std::string const& base58);
 
     /**
      * Initialization constructor.

@@ -27,7 +27,7 @@ namespace libbitcoin {
 template <unsigned Size>
 void ostream_writer::write_forward(const byte_array<Size>& value)
 {
-    const auto size = value.size();
+    auto const size = value.size();
     if (size > 0)
         stream_.write(reinterpret_cast<const char*>(value.data()), size);
 }

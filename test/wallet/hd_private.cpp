@@ -31,7 +31,7 @@ BOOST_AUTO_TEST_SUITE(hd_private_tests)
 
 BOOST_AUTO_TEST_CASE(hd_private__encoded__round_trip__expected)
 {
-    static const auto encoded = "xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi";
+    static auto const encoded = "xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi";
     const hd_private key(encoded);
     BOOST_REQUIRE_EQUAL(key.encoded(), encoded);
 }
@@ -42,11 +42,11 @@ BOOST_AUTO_TEST_CASE(hd_private__derive_private__short_seed__expected)
     BOOST_REQUIRE(decode_base16(seed, SHORT_SEED));
 
     const hd_private m(seed, hd_private::mainnet);
-    const auto m0h = m.derive_private(hd_first_hardened_key);
-    const auto m0h1 = m0h.derive_private(1);
-    const auto m0h12h = m0h1.derive_private(2 + hd_first_hardened_key);
-    const auto m0h12h2 = m0h12h.derive_private(2);
-    const auto m0h12h2x = m0h12h2.derive_private(1000000000);
+    auto const m0h = m.derive_private(hd_first_hardened_key);
+    auto const m0h1 = m0h.derive_private(1);
+    auto const m0h12h = m0h1.derive_private(2 + hd_first_hardened_key);
+    auto const m0h12h2 = m0h12h.derive_private(2);
+    auto const m0h12h2x = m0h12h2.derive_private(1000000000);
 
     BOOST_REQUIRE_EQUAL(m.encoded(), "xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi");
     BOOST_REQUIRE_EQUAL(m0h.encoded(), "xprv9uHRZZhk6KAJC1avXpDAp4MDc3sQKNxDiPvvkX8Br5ngLNv1TxvUxt4cV1rGL5hj6KCesnDYUhd7oWgT11eZG7XnxHrnYeSvkzY7d2bhkJ7");
@@ -62,18 +62,18 @@ BOOST_AUTO_TEST_CASE(hd_private__derive_public__short_seed__expected)
     BOOST_REQUIRE(decode_base16(seed, SHORT_SEED));
 
     const hd_private m(seed, hd_private::mainnet);
-    const auto m0h = m.derive_private(hd_first_hardened_key);
-    const auto m0h1 = m0h.derive_private(1);
-    const auto m0h12h = m0h1.derive_private(2 + hd_first_hardened_key);
-    const auto m0h12h2 = m0h12h.derive_private(2);
-    const auto m0h12h2x = m0h12h2.derive_private(1000000000);
+    auto const m0h = m.derive_private(hd_first_hardened_key);
+    auto const m0h1 = m0h.derive_private(1);
+    auto const m0h12h = m0h1.derive_private(2 + hd_first_hardened_key);
+    auto const m0h12h2 = m0h12h.derive_private(2);
+    auto const m0h12h2x = m0h12h2.derive_private(1000000000);
 
     hd_public m_pub = m;
-    const auto m0h_pub = m.derive_public(hd_first_hardened_key);
-    const auto m0h1_pub = m0h.derive_public(1);
-    const auto m0h12h_pub = m0h1.derive_public(2 + hd_first_hardened_key);
-    const auto m0h12h2_pub = m0h12h.derive_public(2);
-    const auto m0h12h2x_pub = m0h12h2.derive_public(1000000000);
+    auto const m0h_pub = m.derive_public(hd_first_hardened_key);
+    auto const m0h1_pub = m0h.derive_public(1);
+    auto const m0h12h_pub = m0h1.derive_public(2 + hd_first_hardened_key);
+    auto const m0h12h2_pub = m0h12h.derive_public(2);
+    auto const m0h12h2x_pub = m0h12h2.derive_public(1000000000);
 
     BOOST_REQUIRE_EQUAL(m_pub.encoded(), "xpub661MyMwAqRbcFtXgS5sYJABqqG9YLmC4Q1Rdap9gSE8NqtwybGhePY2gZ29ESFjqJoCu1Rupje8YtGqsefD265TMg7usUDFdp6W1EGMcet8");
     BOOST_REQUIRE_EQUAL(m0h_pub.encoded(), "xpub68Gmy5EdvgibQVfPdqkBBCHxA5htiqg55crXYuXoQRKfDBFA1WEjWgP6LHhwBZeNK1VTsfTFUHCdrfp1bgwQ9xv5ski8PX9rL2dZXvgGDnw");
@@ -89,11 +89,11 @@ BOOST_AUTO_TEST_CASE(hd_private__derive_private__long_seed__expected)
     BOOST_REQUIRE(decode_base16(seed, LONG_SEED));
 
     const hd_private m(seed, hd_private::mainnet);
-    const auto m0 = m.derive_private(0);
-    const auto m0xH = m0.derive_private(2147483647 + hd_first_hardened_key);
-    const auto m0xH1 = m0xH.derive_private(1);
-    const auto m0xH1yH = m0xH1.derive_private(2147483646 + hd_first_hardened_key);
-    const auto m0xH1yH2 = m0xH1yH.derive_private(2);
+    auto const m0 = m.derive_private(0);
+    auto const m0xH = m0.derive_private(2147483647 + hd_first_hardened_key);
+    auto const m0xH1 = m0xH.derive_private(1);
+    auto const m0xH1yH = m0xH1.derive_private(2147483646 + hd_first_hardened_key);
+    auto const m0xH1yH2 = m0xH1yH.derive_private(2);
 
     BOOST_REQUIRE_EQUAL(m.encoded(), "xprv9s21ZrQH143K31xYSDQpPDxsXRTUcvj2iNHm5NUtrGiGG5e2DtALGdso3pGz6ssrdK4PFmM8NSpSBHNqPqm55Qn3LqFtT2emdEXVYsCzC2U");
     BOOST_REQUIRE_EQUAL(m0.encoded(), "xprv9vHkqa6EV4sPZHYqZznhT2NPtPCjKuDKGY38FBWLvgaDx45zo9WQRUT3dKYnjwih2yJD9mkrocEZXo1ex8G81dwSM1fwqWpWkeS3v86pgKt");
@@ -109,18 +109,18 @@ BOOST_AUTO_TEST_CASE(hd_private__derive_public__long_seed__expected)
     BOOST_REQUIRE(decode_base16(seed, LONG_SEED));
 
     const hd_private m(seed, hd_private::mainnet);
-    const auto m0 = m.derive_private(0);
-    const auto m0xH = m0.derive_private(2147483647 + hd_first_hardened_key);
-    const auto m0xH1 = m0xH.derive_private(1);
-    const auto m0xH1yH = m0xH1.derive_private(2147483646 + hd_first_hardened_key);
-    const auto m0xH1yH2 = m0xH1yH.derive_private(2);
+    auto const m0 = m.derive_private(0);
+    auto const m0xH = m0.derive_private(2147483647 + hd_first_hardened_key);
+    auto const m0xH1 = m0xH.derive_private(1);
+    auto const m0xH1yH = m0xH1.derive_private(2147483646 + hd_first_hardened_key);
+    auto const m0xH1yH2 = m0xH1yH.derive_private(2);
 
     hd_public m_pub = m;
-    const auto m0_pub = m.derive_public(0);
-    const auto m0xH_pub = m0.derive_public(2147483647 + hd_first_hardened_key);
-    const auto m0xH1_pub = m0xH.derive_public(1);
-    const auto m0xH1yH_pub = m0xH1.derive_public(2147483646 + hd_first_hardened_key);
-    const auto m0xH1yH2_pub = m0xH1yH.derive_public(2);
+    auto const m0_pub = m.derive_public(0);
+    auto const m0xH_pub = m0.derive_public(2147483647 + hd_first_hardened_key);
+    auto const m0xH1_pub = m0xH.derive_public(1);
+    auto const m0xH1yH_pub = m0xH1.derive_public(2147483646 + hd_first_hardened_key);
+    auto const m0xH1yH2_pub = m0xH1yH.derive_public(2);
 
     BOOST_REQUIRE_EQUAL(m_pub.encoded(), "xpub661MyMwAqRbcFW31YEwpkMuc5THy2PSt5bDMsktWQcFF8syAmRUapSCGu8ED9W6oDMSgv6Zz8idoc4a6mr8BDzTJY47LJhkJ8UB7WEGuduB");
     BOOST_REQUIRE_EQUAL(m0_pub.encoded(), "xpub69H7F5d8KSRgmmdJg2KhpAK8SR3DjMwAdkxj3ZuxV27CprR9LgpeyGmXUbC6wb7ERfvrnKZjXoUmmDznezpbZb7ap6r1D3tgFxHmwMkQTPH");

@@ -35,7 +35,7 @@ BI_API bool encode_base85(std::string& out, data_slice in);
  * Attempt to decode base85 (Z85) data.
  * @return false if the input contains non-base85 characters or length (% 5).
  */
-BI_API bool decode_base85(data_chunk& out, const std::string& in);
+BI_API bool decode_base85(data_chunk& out, std::string const& in);
 
 } // namespace libbitcoin
 

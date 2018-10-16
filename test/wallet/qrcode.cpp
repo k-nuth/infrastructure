@@ -105,9 +105,9 @@ BOOST_AUTO_TEST_CASE(qrcode__invoke__qrencode_data__success)
         0x02, 0x03, 0x02, 0x02, 0x03, 0x03, 0x03, 0x02, 0x02
     };
 
-    static const auto expected_data_length = sizeof(expected_data) / sizeof(uint8_t);
-    static const std::string address = "bitcoin:1L4M4obtbpexxuKpLrDimMEYWB2Rx2yzus";
-    const auto encoded_qrcode = qr::encode(to_chunk(address));
+    static auto const expected_data_length = sizeof(expected_data) / sizeof(uint8_t);
+    static std::string const address = "bitcoin:1L4M4obtbpexxuKpLrDimMEYWB2Rx2yzus";
+    auto const encoded_qrcode = qr::encode(to_chunk(address));
 
     BOOST_REQUIRE_EQUAL(encoded_qrcode.size(), expected_data_length);
     BOOST_REQUIRE(std::memcmp(encoded_qrcode.data(), expected_data, expected_data_length) == 0);

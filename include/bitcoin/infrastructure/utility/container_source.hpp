@@ -53,7 +53,7 @@ public:
         if (result <= 0)
             return -1;
 
-        const auto value = static_cast<typename Container::size_type>(result);
+        auto const value = static_cast<typename Container::size_type>(result);
         std::copy_n(container_.begin() + position_, value, buffer);
         position_ += value;
         return result;

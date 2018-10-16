@@ -53,7 +53,7 @@ using namespace boost::log::sinks::file;
 typedef synchronous_sink<text_file_backend> text_file_sink;
 typedef synchronous_sink<udp_client_sink> text_udp_sink;
 
-static const auto statsd_filter = has_attr(attributes::metric) &&
+static auto const statsd_filter = has_attr(attributes::metric) &&
     (has_attr(attributes::counter) || has_attr(attributes::gauge) ||
         has_attr(attributes::timer));
 
@@ -92,8 +92,8 @@ static boost::shared_ptr<text_file_sink> add_text_file_sink(
     const rotable_file& rotation)
 {
     // Construct a log sink.
-    const auto sink = boost::make_shared<text_file_sink>();
-    const auto backend = sink->locked_backend();
+    auto const sink = boost::make_shared<text_file_sink>();
+    auto const backend = sink->locked_backend();
 
     // Add a file stream for the sink to write to.
     backend->set_file_name_pattern(rotation.original_log);
@@ -121,9 +121,8 @@ void initialize_statsd(const rotable_file& file)
     add_text_file_sink(file)->set_filter(statsd_filter);
 }
 
-static boost::shared_ptr<text_udp_sink> add_udp_sink(threadpool& pool,
-    const authority& server)
-{
+static 
+boost::shared_ptr<text_udp_sink> add_udp_sink(threadpool& pool, authority const& server) {
     auto socket = boost::make_shared<udp::socket>(pool.service());
     socket->open(udp::v6());
 
@@ -131,8 +130,8 @@ static boost::shared_ptr<text_udp_sink> add_udp_sink(threadpool& pool,
         server.port());
 
     // Construct a log sink.
-    const auto backend = boost::make_shared<udp_client_sink>(socket, endpoint);
-    const auto sink = boost::make_shared<text_udp_sink>(backend);
+    auto const backend = boost::make_shared<udp_client_sink>(socket, endpoint);
+    auto const sink = boost::make_shared<text_udp_sink>(backend);
 
     // Add the formatter to the sink.
     sink->set_formatter(&statsd_formatter);
@@ -142,8 +141,7 @@ static boost::shared_ptr<text_udp_sink> add_udp_sink(threadpool& pool,
     return sink;
 }
 
-void initialize_statsd(threadpool& pool, const authority& server)
-{
+void initialize_statsd(threadpool& pool, authority const& server) {
     if (server)
         add_udp_sink(pool, server)->set_filter(statsd_filter);
 }

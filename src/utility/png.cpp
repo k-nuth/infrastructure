@@ -61,7 +61,7 @@ extern "C" void sink_write(png_structp png_ptr, png_bytep data,
     png_size_t length)
 {
     static_assert(sizeof(length) <= sizeof(size_t), "png_size_t too large");
-    const auto size = static_cast<size_t>(length);
+    auto const size = static_cast<size_t>(length);
 
     auto& sink = *reinterpret_cast<ostream_writer*>(png_get_io_ptr(png_ptr));
     sink.write_bytes(reinterpret_cast<const uint8_t*>(data), size);
@@ -87,7 +87,7 @@ bool png::write_png(std::istream& in, uint32_t size, uint32_t dots_per_inch,
     if (bc::max_size_t / width < width)
         return false;
 
-    const auto area = width * width;
+    auto const area = width * width;
     auto data = source.read_bytes(area);
 
     try
@@ -97,9 +97,9 @@ bool png::write_png(std::istream& in, uint32_t size, uint32_t dots_per_inch,
         static constexpr uint8_t margin_value = 0xff;
 
         // TODO: unguarded overflow conditions.
-        const auto margin_size = margin * size;
-        const auto realwidth = (width + margin * 2) * size;
-        const auto row_size = (realwidth + 7) / bits_per_byte;
+        auto const margin_size = margin * size;
+        auto const realwidth = (width + margin * 2) * size;
+        auto const row_size = (realwidth + 7) / bits_per_byte;
 
         data_chunk row;
         row.reserve(row_size);

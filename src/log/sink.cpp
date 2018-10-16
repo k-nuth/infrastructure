@@ -59,20 +59,20 @@ using namespace boost::posix_time;
 typedef synchronous_sink<text_file_backend> text_file_sink;
 typedef synchronous_sink<text_ostream_backend> text_stream_sink;
 
-static const auto base_filter =
+static auto const base_filter =
     has_attr(attributes::channel) &&
     has_attr(attributes::severity) &&
     has_attr(attributes::timestamp);
 
-static const auto error_filter = base_filter && (
+static auto const error_filter = base_filter && (
     (attributes::severity == severity::warning) ||
     (attributes::severity == severity::error) ||
     (attributes::severity == severity::fatal));
 
-static const auto info_filter = base_filter &&
+static auto const info_filter = base_filter &&
     (attributes::severity == severity::info);
 
-static const auto lean_filter = base_filter &&
+static auto const lean_filter = base_filter &&
     (attributes::severity != severity::verbose);
 
 static std::map<severity, std::string> severity_mapping
@@ -108,8 +108,8 @@ static boost::shared_ptr<text_file_sink> add_text_file_sink(
     const rotable_file& rotation)
 {
     // Construct a log sink.
-    const auto sink = boost::make_shared<text_file_sink>();
-    const auto backend = sink->locked_backend();
+    auto const sink = boost::make_shared<text_file_sink>();
+    auto const backend = sink->locked_backend();
 
     // Add a file stream for the sink to write to.
     backend->set_file_name_pattern(rotation.original_log);
@@ -137,8 +137,8 @@ static boost::shared_ptr<text_stream_sink> add_text_stream_sink(
     boost::shared_ptr<Stream>& stream)
 {
     // Construct a log sink.
-    const auto sink = boost::make_shared<text_stream_sink>();
-    const auto backend = sink->locked_backend();
+    auto const sink = boost::make_shared<text_stream_sink>();
+    auto const backend = sink->locked_backend();
 
     // Add a stream for the sink to write to.
     backend->add_stream(stream);

@@ -41,7 +41,7 @@ namespace config {
 /**
  * A tuple to represent a positional argument name count.
  */
-typedef std::pair<const std::string, int> argument_pair;
+typedef std::pair<std::string const, int> argument_pair;
 
 /**
  * A type to represent the list of positional argument name counts.

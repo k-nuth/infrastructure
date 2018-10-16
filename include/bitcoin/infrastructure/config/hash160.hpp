@@ -43,7 +43,7 @@ public:
      * Initialization constructor.
      * @param[in]  hexcode  The value to initialize with.
      */
-    hash160(const std::string& hexcode);
+    hash160(std::string const& hexcode);
 
     /**
      * Initialization constructor.

@@ -90,7 +90,7 @@ uint64_t istream_reader::read_8_bytes_big_endian()
 
 uint64_t istream_reader::read_variable_big_endian()
 {
-    const auto value = read_byte();
+    auto const value = read_byte();
 
     switch (value)
     {
@@ -107,7 +107,7 @@ uint64_t istream_reader::read_variable_big_endian()
 
 size_t istream_reader::read_size_big_endian()
 {
-    const auto size = read_variable_big_endian();
+    auto const size = read_variable_big_endian();
 
     // This facilitates safely passing the size into a follow-on reader.
     // Return zero allows follow-on use before testing reader state.
@@ -123,7 +123,7 @@ size_t istream_reader::read_size_big_endian()
 
 code istream_reader::read_error_code()
 {
-    const auto value = read_little_endian<uint32_t>();
+    auto const value = read_little_endian<uint32_t>();
     return code(static_cast<error::error_code_t>(value));
 }
 
@@ -144,7 +144,7 @@ uint64_t istream_reader::read_8_bytes_little_endian()
 
 uint64_t istream_reader::read_variable_little_endian()
 {
-    const auto value = read_byte();
+    auto const value = read_byte();
 
     switch (value)
     {
@@ -161,7 +161,7 @@ uint64_t istream_reader::read_variable_little_endian()
 
 size_t istream_reader::read_size_little_endian()
 {
-    const auto size = read_variable_little_endian();
+    auto const size = read_variable_little_endian();
 
     // This facilitates safely passing the size into a follow-on reader.
     // Return zero allows follow-on use before testing reader state.
@@ -229,7 +229,7 @@ std::string istream_reader::read_string(size_t size)
     // Read all size characters, pushing all non-null (may be many).
     for (size_t index = 0; index < size && !empty(); ++index)
     {
-        const auto character = read_byte();
+        auto const character = read_byte();
         terminated |= (character == string_terminator);
 
         // Stop pushing characters at the first null.

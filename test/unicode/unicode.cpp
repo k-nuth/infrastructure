@@ -40,15 +40,15 @@ BOOST_AUTO_TEST_CASE(unicode__to_normal_nfc_form__validate__test)
     BOOST_REQUIRE(decode_base16(normal, "cf9300f0909080f09f92a9"));
     std::string expected_normal_string(normal.begin(), normal.end());
 
-    const auto derived_normal_string = bc::to_normal_nfc_form(original_string);
+    auto const derived_normal_string = bc::to_normal_nfc_form(original_string);
     BOOST_REQUIRE_EQUAL(expected_normal_string, derived_normal_string);
 }
 
 BOOST_AUTO_TEST_CASE(unicode__to_normal_nfkd_form__validate__test)
 {
-    const auto ascii_space_sandwich = "space-> <-space";
-    const auto ideographic_space_sandwich = "space->　<-space";
-    const auto normalized = to_normal_nfkd_form(ideographic_space_sandwich);
+    auto const ascii_space_sandwich = "space-> <-space";
+    auto const ideographic_space_sandwich = "space->　<-space";
+    auto const normalized = to_normal_nfkd_form(ideographic_space_sandwich);
     BOOST_REQUIRE_EQUAL(normalized.c_str(), ascii_space_sandwich);
 }
 
@@ -57,42 +57,42 @@ BOOST_AUTO_TEST_CASE(unicode__to_normal_nfkd_form__validate__test)
 // Use of L is not recommended as it will only work for ascii.
 BOOST_AUTO_TEST_CASE(unicode__to_utf8_string__ascii__test)
 {
-    const auto utf8_ascii = "ascii";
-    const auto utf16_ascii = L"ascii";
-    const auto converted = to_utf8(utf16_ascii);
+    auto const utf8_ascii = "ascii";
+    auto const utf16_ascii = L"ascii";
+    auto const converted = to_utf8(utf16_ascii);
     BOOST_REQUIRE_EQUAL(converted, utf8_ascii);
 }
 
 // Use of L is not recommended as it will only work for ascii.
 BOOST_AUTO_TEST_CASE(unicode__to_utf16_string__ascii__test)
 {
-    const auto utf8_ascii = "ascii";
-    const auto utf16_ascii = L"ascii";
-    const auto converted = to_utf16(utf8_ascii);
+    auto const utf8_ascii = "ascii";
+    auto const utf16_ascii = L"ascii";
+    auto const converted = to_utf16(utf8_ascii);
     BOOST_REQUIRE_EQUAL(converted.c_str(), utf16_ascii);
 }
 
 BOOST_AUTO_TEST_CASE(unicode__string_round_trip__ascii__test)
 {
-    const auto utf8_ascii = "ascii";
-    const auto narrowed = to_utf8(to_utf16(utf8_ascii));
+    auto const utf8_ascii = "ascii";
+    auto const narrowed = to_utf8(to_utf16(utf8_ascii));
     BOOST_REQUIRE_EQUAL(narrowed, utf8_ascii);
 }
 
 BOOST_AUTO_TEST_CASE(unicode__string_round_trip__utf8__test)
 {
-    const auto utf8 = "テスト";
-    const auto narrowed = to_utf8(to_utf16(utf8));
+    auto const utf8 = "テスト";
+    auto const narrowed = to_utf8(to_utf16(utf8));
     BOOST_REQUIRE_EQUAL(narrowed, utf8);
 }
 
 BOOST_AUTO_TEST_CASE(unicode__string_round_trip__wide_literal__test)
 {
-    const auto utf8 = "テスト";
-    const auto utf16 = L"テスト";
+    auto const utf8 = "テスト";
+    auto const utf16 = L"テスト";
 
-    const auto widened = to_utf16(utf8);
-    const auto narrowed = to_utf8(utf16);
+    auto const widened = to_utf16(utf8);
+    auto const narrowed = to_utf8(utf16);
 
 #ifdef _MSC_VER
     // This confirms that the L prefix does not work with non-ascii text when
@@ -114,9 +114,9 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf8_array__ascii__test)
 
     // Use of L is not recommended as it will only work for ascii.
     const std::wstring utf16(L"ascii");
-    const std::string expected_utf8("ascii");
+    std::string const expected_utf8("ascii");
 
-    const auto size = to_utf8(utf8, sizeof(utf8), utf16.c_str(), (int)utf16.size());
+    auto const size = to_utf8(utf8, sizeof(utf8), utf16.c_str(), (int)utf16.size());
     BOOST_REQUIRE_EQUAL(utf8, expected_utf8);
     BOOST_REQUIRE_EQUAL(size, expected_utf8.size());
 }
@@ -128,10 +128,10 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf8_array__non_ascii__test)
     // Text buffer provides null termination for test comparison.
     memset(utf8, 0, sizeof(utf8) / sizeof(char));
 
-    const std::string expected_utf8("テスト");
-    const auto utf16 = to_utf16(expected_utf8);
+    std::string const expected_utf8("テスト");
+    auto const utf16 = to_utf16(expected_utf8);
 
-    const auto size = to_utf8(utf8, sizeof(utf8), utf16.c_str(), (int)utf16.size());
+    auto const size = to_utf8(utf8, sizeof(utf8), utf16.c_str(), (int)utf16.size());
 
     BOOST_REQUIRE_EQUAL(utf8, expected_utf8);
     BOOST_REQUIRE_EQUAL(size, expected_utf8.size());
@@ -146,10 +146,10 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf16_array__ascii__test)
 
     // Use of L is not recommended as it will only work for ascii.
     const std::wstring expected_utf16(L"ascii");
-    const std::string utf8("ascii");
+    std::string const utf8("ascii");
 
     uint8_t truncated;
-    const auto size = to_utf16(utf16, sizeof(utf16), utf8.c_str(), (int)utf8.size(), truncated);
+    auto const size = to_utf16(utf16, sizeof(utf16), utf8.c_str(), (int)utf8.size(), truncated);
 
     BOOST_REQUIRE_EQUAL(utf16, expected_utf16.c_str());
     BOOST_REQUIRE_EQUAL(size, expected_utf16.size());
@@ -163,11 +163,11 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf16_array__non_ascii__test)
     // Text buffer provides null termination for test comparison.
     wmemset(utf16, 0, sizeof(utf16) / sizeof(wchar_t));
 
-    const std::string utf8("テスト");
-    const auto expected_utf16 = to_utf16(utf8);
+    std::string const utf8("テスト");
+    auto const expected_utf16 = to_utf16(utf8);
 
     uint8_t truncated;
-    const auto size = to_utf16(utf16, sizeof(utf16), utf8.c_str(), (int)utf8.size(), truncated);
+    auto const size = to_utf16(utf16, sizeof(utf16), utf8.c_str(), (int)utf8.size(), truncated);
 
     BOOST_REQUIRE_EQUAL(utf16, expected_utf16.c_str());
     BOOST_REQUIRE_EQUAL(size, expected_utf16.size());
@@ -185,17 +185,17 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf16_array__non_ascii_truncation1__test)
     auto expected_utf16 = to_utf16(utf8);
 
     // Lop off last byte, which will split the last character.
-    const auto drop_bytes = 1;
+    auto const drop_bytes = 1;
     utf8.resize(utf8.size() - drop_bytes);
 
     // Expect the loss of the last wide character.
     expected_utf16.resize(expected_utf16.size() - 1);
 
     // Expect the truncation of the remaining bytes of the last character.
-    const auto expected_truncated = strlen("ト") - 1;
+    auto const expected_truncated = strlen("ト") - 1;
 
     uint8_t truncated;
-    const auto size = to_utf16(utf16, sizeof(utf16), utf8.c_str(), (int)utf8.size(), truncated);
+    auto const size = to_utf16(utf16, sizeof(utf16), utf8.c_str(), (int)utf8.size(), truncated);
 
     BOOST_REQUIRE_EQUAL(truncated, expected_truncated);
     BOOST_REQUIRE_EQUAL(utf16, expected_utf16.c_str());
@@ -213,17 +213,17 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf16_array__non_ascii_truncation2__test)
     auto expected_utf16 = to_utf16(utf8);
 
     // Lop off last two bytes, which will split the last character.
-    const auto drop_bytes = 2;
+    auto const drop_bytes = 2;
     utf8.resize(utf8.size() - drop_bytes);
 
     // Expect the loss of the last wide character.
     expected_utf16.resize(expected_utf16.size() - 1);
 
     // Expect the truncation of the remaining bytes of the last character.
-    const auto expected_truncated = strlen("ト") - drop_bytes;
+    auto const expected_truncated = strlen("ト") - drop_bytes;
 
     uint8_t truncated;
-    const auto size = to_utf16(utf16, sizeof(utf16), utf8.c_str(), (int)utf8.size(), truncated);
+    auto const size = to_utf16(utf16, sizeof(utf16), utf8.c_str(), (int)utf8.size(), truncated);
 
     BOOST_REQUIRE_EQUAL(truncated, expected_truncated);
     BOOST_REQUIRE_EQUAL(utf16, expected_utf16.c_str());
@@ -267,7 +267,7 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf8_environment__null_termination__test)
     auto narrow_environment = reinterpret_cast<char**>(&environment[0]);
 
     // Each argument is a null terminated string.
-    const auto length = strlen(narrow_environment[0]);
+    auto const length = strlen(narrow_environment[0]);
     auto variable_terminator = narrow_environment[0][length];
     BOOST_REQUIRE_EQUAL(variable_terminator, '\0');
 
@@ -317,7 +317,7 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf8_main__null_termination__test)
     auto narrow_args = reinterpret_cast<char**>(&buffer[0]);
 
     // Each argument is a null terminated string.
-    const auto length = strlen(narrow_args[0]);
+    auto const length = strlen(narrow_args[0]);
     auto arg_terminator = narrow_args[0][length];
     BOOST_REQUIRE_EQUAL(arg_terminator, '\0');
 

@@ -41,7 +41,7 @@ public:
     typedef std::shared_ptr<resubscriber<Args...>> ptr;
 
     /// Construct an instance. The class_name is for debugging.
-    resubscriber(threadpool& pool, const std::string& class_name);
+    resubscriber(threadpool& pool, std::string const& class_name);
     virtual ~resubscriber();
 
     /// Enable new subscriptions.

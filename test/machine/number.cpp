@@ -311,7 +311,7 @@ static number_compare MakeCompare(const int64_t num1, const int64_t num2)
 
 static void write_bytes(bc::data_chunk chunk, std::ostream& out)
 {
-    for (const auto& byte : chunk)
+    for (auto const& byte : chunk)
         out << (boost::format(" 0x%02x, ") % static_cast<uint16_t>(byte));
 }
 
@@ -336,14 +336,14 @@ static void write_subtract(number_subtract subtract, std::ostream& out)
     out << "}, ";
 }
 
-static void write_names(const std::string& name, size_t count,
+static void write_names(std::string const& name, size_t count,
     std::ostream& out)
 {
     out << boost::format("const %1%[%2%][%3%][%4%]=\n{\n") % name %
         number_values_count % number_offsets_count % count;
 }
 
-static void write(const std::string& text, std::ostream& add_out,
+static void write(std::string const& text, std::ostream& add_out,
     std::ostream& neg_out, std::ostream& sub_out, std::ostream& cmp_out)
 {
     add_out << text;
@@ -352,8 +352,8 @@ static void write(const std::string& text, std::ostream& add_out,
     cmp_out << text;
 }
 
-static void replace(std::string& buffer, const std::string& find,
-    const std::string& replacement)
+static void replace(std::string& buffer, std::string const& find,
+    std::string const& replacement)
 {
     size_t pos = 0;
     while ((pos = buffer.find(find, pos)) != std::string::npos)

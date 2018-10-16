@@ -52,7 +52,7 @@ void deadline::start(handler handle)
 
 void deadline::start(handler handle, const asio::duration duration)
 {
-    const auto timer_handler =
+    auto const timer_handler =
         std::bind(&deadline::handle_timer,
             shared_from_this(), _1, handle);
 

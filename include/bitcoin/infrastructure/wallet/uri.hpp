@@ -36,35 +36,35 @@ public:
      * Decodes a URI from a string.
      * @param strict Set to false to tolerate unescaped special characters.
      */
-    bool decode(const std::string& encoded, bool strict=true);
+    bool decode(std::string const& encoded, bool strict=true);
     std::string encoded() const;
 
     /**
      * Returns the lowercased URI scheme.
      */
     std::string scheme() const;
-    void set_scheme(const std::string& scheme);
+    void set_scheme(std::string const& scheme);
 
     /**
      * Obtains the unescaped authority part, if any (user@server:port).
      */
     std::string authority() const;
     bool has_authority() const;
-    void set_authority(const std::string& authority);
+    void set_authority(std::string const& authority);
     void remove_authority();
 
     /**
      * Obtains the unescaped path part.
      */
     std::string path() const;
-    void set_path(const std::string& path);
+    void set_path(std::string const& path);
 
     /**
      * Returns the unescaped query string, if any.
      */
     std::string query() const;
     bool has_query() const;
-    void set_query(const std::string& query);
+    void set_query(std::string const& query);
     void remove_query();
 
     /**
@@ -72,7 +72,7 @@ public:
      */
     std::string fragment() const;
     bool has_fragment() const;
-    void set_fragment(const std::string& fragment);
+    void set_fragment(std::string const& fragment);
     void remove_fragment();
 
     typedef std::map<std::string, std::string> query_map;

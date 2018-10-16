@@ -37,14 +37,14 @@ BOOST_AUTO_TEST_CASE(base16_literal_test)
 
 BOOST_AUTO_TEST_CASE(base16_odd_length_invalid_test)
 {
-    const auto& hex_str = "10a7fd15cb45bda9e90e19a15";
+    auto const& hex_str = "10a7fd15cb45bda9e90e19a15";
     data_chunk data;
     BOOST_REQUIRE(!decode_base16(data, hex_str));
 }
 
 BOOST_AUTO_TEST_CASE(base16_short_hash_test)
 {
-    const auto& hex_str = "f85beb6356d0813ddb0dbb14230a249fe931a135";
+    auto const& hex_str = "f85beb6356d0813ddb0dbb14230a249fe931a135";
     short_hash hash;
     BOOST_REQUIRE(decode_base16(hash, hex_str));
     BOOST_REQUIRE_EQUAL(encode_base16(hash), hex_str);
@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE(base16_short_hash_test)
 // TODO: this should be tested for correctness, not just round-tripping.
 BOOST_AUTO_TEST_CASE(base16_round_trip_test)
 {
-    const auto& hex_str = "10a7fd15cb45bda9e90e19a15f";
+    auto const& hex_str = "10a7fd15cb45bda9e90e19a15f";
     data_chunk data;
     BOOST_REQUIRE(decode_base16(data, hex_str));
     BOOST_REQUIRE_EQUAL(encode_base16(data), hex_str);

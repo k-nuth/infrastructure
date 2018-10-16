@@ -28,39 +28,39 @@
 ////
 ////#define MAX_HASH \
 ////"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
-////static const auto max_hash = hash_literal(MAX_HASH);
+////static auto const max_hash = hash_literal(MAX_HASH);
 ////
 ////#define NEGATIVE1_HASH \
 ////"8000000000000000000000000000000000000000000000000000000000000000"
-////static const auto negative_zero_hash = hash_literal(NEGATIVE1_HASH);
+////static auto const negative_zero_hash = hash_literal(NEGATIVE1_HASH);
 ////
 ////#define MOST_HASH \
 ////"7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
-////static const auto most_hash = hash_literal(MOST_HASH);
+////static auto const most_hash = hash_literal(MOST_HASH);
 ////
 ////#define ODD_HASH \
 ////"8437390223499ab234bf128e8cd092343485898923aaaaabbcbcc4874353fff4"
-////static const auto odd_hash = hash_literal(ODD_HASH);
+////static auto const odd_hash = hash_literal(ODD_HASH);
 ////
 ////#define HALF_HASH \
 ////"00000000000000000000000000000000ffffffffffffffffffffffffffffffff"
-////static const auto half_hash = hash_literal(HALF_HASH);
+////static auto const half_hash = hash_literal(HALF_HASH);
 ////
 ////#define QUARTER_HASH \
 ////"000000000000000000000000000000000000000000000000ffffffffffffffff"
-////static const auto quarter_hash = hash_literal(QUARTER_HASH);
+////static auto const quarter_hash = hash_literal(QUARTER_HASH);
 ////
 ////#define UNIT_HASH \
 ////"0000000000000000000000000000000000000000000000000000000000000001"
-////static const auto unit_hash = hash_literal(UNIT_HASH);
+////static auto const unit_hash = hash_literal(UNIT_HASH);
 ////
 ////#define ONES_HASH \
 ////"0000000100000001000000010000000100000001000000010000000100000001"
-////static const auto ones_hash = hash_literal(ONES_HASH);
+////static auto const ones_hash = hash_literal(ONES_HASH);
 ////
 ////#define FIVES_HASH \
 ////"5555555555555555555555555555555555555555555555555555555555555555"
-////static const auto fives_hash = hash_literal(FIVES_HASH);
+////static auto const fives_hash = hash_literal(FIVES_HASH);
 ////
 ////// constructors
 //////-----------------------------------------------------------------------------
@@ -78,35 +78,35 @@
 ////
 ////BOOST_AUTO_TEST_CASE(uint256__constructor_move__42__equals_42)
 ////{
-////    static const auto expected = 42u;
+////    static auto const expected = 42u;
 ////    static const uint256_t value(uint256_t{ expected });
 ////    BOOST_REQUIRE_EQUAL(value, expected);
 ////}
 ////
 ////BOOST_AUTO_TEST_CASE(uint256__constructor_copy__odd_hash__equals_odd_hash)
 ////{
-////    static const auto expected = to_uint256(odd_hash);
+////    static auto const expected = to_uint256(odd_hash);
 ////    static const uint256_t value(expected);
 ////    BOOST_REQUIRE_EQUAL(value, expected);
 ////}
 ////
 ////BOOST_AUTO_TEST_CASE(uint256__constructor_uint32__minimum__equals_0)
 ////{
-////    static const auto expected = 0u;
+////    static auto const expected = 0u;
 ////    static const uint256_t value(expected);
 ////    BOOST_REQUIRE(value == expected);
 ////}
 ////
 ////BOOST_AUTO_TEST_CASE(uint256__constructor_uint32__42__equals_42)
 ////{
-////    static const auto expected = 42u;
+////    static auto const expected = 42u;
 ////    static const uint256_t value(expected);
 ////    BOOST_REQUIRE(value == expected);
 ////}
 ////
 ////BOOST_AUTO_TEST_CASE(uint256__constructor_uint32__maximum__equals_maximum)
 ////{
-////    static const auto expected = max_uint32;
+////    static auto const expected = max_uint32;
 ////    static const uint256_t value(expected);
 ////    BOOST_REQUIRE(value == expected);
 ////}
@@ -361,7 +361,7 @@
 ////BOOST_AUTO_TEST_CASE(uint256__not__odd_hash__expected)
 ////{
 ////    static const uint256_t value(odd_hash);
-////    static const auto not_value = ~value;
+////    static auto const not_value = ~value;
 ////    BOOST_REQUIRE_EQUAL(not_value[0], ~0xbcbcc4874353fff4);
 ////    BOOST_REQUIRE_EQUAL(not_value[1], ~0x3485898923aaaaab);
 ////    BOOST_REQUIRE_EQUAL(not_value[2], ~0x34bf128e8cd09234);
@@ -384,7 +384,7 @@
 ////BOOST_AUTO_TEST_CASE(uint256__twos_compliment__odd_hash__expected)
 ////{
 ////    static const uint256_t value(odd_hash);
-////    static const auto compliment = -value;
+////    static auto const compliment = -value;
 ////    BOOST_REQUIRE_EQUAL(compliment[0], ~0xbcbcc4874353fff4 + 1);
 ////    BOOST_REQUIRE_EQUAL(compliment[1], ~0x3485898923aaaaab);
 ////    BOOST_REQUIRE_EQUAL(compliment[2], ~0x34bf128e8cd09234);
@@ -423,7 +423,7 @@
 ////BOOST_AUTO_TEST_CASE(uint256__shift_right__odd_hash_32__expected)
 ////{
 ////    static const uint256_t value(odd_hash);
-////    static const auto shifted = value >> 32;
+////    static auto const shifted = value >> 32;
 ////    BOOST_REQUIRE_EQUAL(shifted[0], 0x23aaaaabbcbcc487);
 ////    BOOST_REQUIRE_EQUAL(shifted[1], 0x8cd0923434858989);
 ////    BOOST_REQUIRE_EQUAL(shifted[2], 0x23499ab234bf128e);
@@ -446,14 +446,14 @@
 ////BOOST_AUTO_TEST_CASE(uint256__add256__1_to_max_hash__null_hash)
 ////{
 ////    static const uint256_t value(max_hash);
-////    static const auto sum = value + 1;
+////    static auto const sum = value + 1;
 ////    BOOST_REQUIRE_EQUAL(sum, uint256_t());
 ////}
 ////
 ////BOOST_AUTO_TEST_CASE(uint256__add256__ones_hash_to_odd_hash__expected)
 ////{
 ////    static const uint256_t value(odd_hash);
-////    static const auto sum = value + uint256_t(ones_hash);
+////    static auto const sum = value + uint256_t(ones_hash);
 ////    BOOST_REQUIRE_EQUAL(sum[0], 0xbcbcc4884353fff5);
 ////    BOOST_REQUIRE_EQUAL(sum[1], 0x3485898a23aaaaac);
 ////    BOOST_REQUIRE_EQUAL(sum[2], 0x34bf128f8cd09235);
@@ -463,7 +463,7 @@
 ////BOOST_AUTO_TEST_CASE(uint256__add256__1_to_0xffffffff__0x0100000000)
 ////{
 ////    static const uint256_t value(0xffffffff);
-////    static const auto sum = value + 1;
+////    static auto const sum = value + 1;
 ////    BOOST_REQUIRE_EQUAL(sum[0], 0x0000000100000000);
 ////    BOOST_REQUIRE_EQUAL(sum[1], 0x0000000000000000);
 ////    BOOST_REQUIRE_EQUAL(sum[2], 0x0000000000000000);
@@ -473,7 +473,7 @@
 ////BOOST_AUTO_TEST_CASE(uint256__add256__1_to_negative_zero_hash__expected)
 ////{
 ////    static const uint256_t value(negative_zero_hash);
-////    static const auto sum = value + 1;
+////    static auto const sum = value + 1;
 ////    BOOST_REQUIRE_EQUAL(sum[0], 0x0000000000000001);
 ////    BOOST_REQUIRE_EQUAL(sum[1], 0x0000000000000000);
 ////    BOOST_REQUIRE_EQUAL(sum[2], 0x0000000000000000);
@@ -506,7 +506,7 @@
 ////BOOST_AUTO_TEST_CASE(uint256__divide256__max_hash_by_256__shifts_right_8_bits)
 ////{
 ////    static const uint256_t value(max_hash);
-////    static const auto quotient = value / uint256_t(256);
+////    static auto const quotient = value / uint256_t(256);
 ////    BOOST_REQUIRE_EQUAL(quotient[0], 0xffffffffffffffff);
 ////    BOOST_REQUIRE_EQUAL(quotient[1], 0xffffffffffffffff);
 ////    BOOST_REQUIRE_EQUAL(quotient[2], 0xffffffffffffffff);
@@ -533,7 +533,7 @@
 ////
 ////BOOST_AUTO_TEST_CASE(uint256__increment__0xffffffff__0x0100000000)
 ////{
-////    static const auto increment = ++uint256_t(0xffffffff);
+////    static auto const increment = ++uint256_t(0xffffffff);
 ////    BOOST_REQUIRE_EQUAL(increment[0], 0x0000000100000000);
 ////    BOOST_REQUIRE_EQUAL(increment[1], 0x0000000000000000);
 ////    BOOST_REQUIRE_EQUAL(increment[2], 0x0000000000000000);
@@ -542,7 +542,7 @@
 ////
 ////BOOST_AUTO_TEST_CASE(uint256__increment__negative_zero_hash__expected)
 ////{
-////    static const auto increment = ++uint256_t(negative_zero_hash);
+////    static auto const increment = ++uint256_t(negative_zero_hash);
 ////    BOOST_REQUIRE_EQUAL(increment[0], 0x0000000000000001);
 ////    BOOST_REQUIRE_EQUAL(increment[1], 0x0000000000000000);
 ////    BOOST_REQUIRE_EQUAL(increment[2], 0x0000000000000000);
@@ -930,7 +930,7 @@
 ////BOOST_AUTO_TEST_CASE(uint256__assign_divide__max_hash_by_256__shifts_right_8_bits)
 ////{
 ////    static const uint256_t value(max_hash);
-////    static const auto quotient = value / uint256_t(256);
+////    static auto const quotient = value / uint256_t(256);
 ////    BOOST_REQUIRE_EQUAL(quotient[0], 0xffffffffffffffff);
 ////    BOOST_REQUIRE_EQUAL(quotient[1], 0xffffffffffffffff);
 ////    BOOST_REQUIRE_EQUAL(quotient[2], 0xffffffffffffffff);

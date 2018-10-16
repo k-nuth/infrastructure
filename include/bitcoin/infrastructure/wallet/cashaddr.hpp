@@ -81,7 +81,7 @@ bool case_insensitive_equal(std::string const& a, std::string const& b) {
 }
 
 TEST_CASE("[cashaddr_testvectors_valid] cashaddr_testvectors_valid") {
-    static const std::string CASES[] = {
+    static std::string const CASES[] = {
         "prefix:x64nx6hz",
         "PREFIX:X64NX6HZ",
         "p:gpf8m4h7",
@@ -100,7 +100,7 @@ TEST_CASE("[cashaddr_testvectors_valid] cashaddr_testvectors_valid") {
 }
 
 TEST_CASE("[cashaddr_testvectors_invalid] cashaddr_testvectors_invalid") {
-    static const std::string CASES[] = {
+    static std::string const CASES[] = {
         "prefix:x32nx6hz",
         "prEfix:x64nx6hz",
         "prefix:x64nx6Hz",

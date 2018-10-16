@@ -64,7 +64,7 @@ static int get_priority(thread_priority priority)
 // Set the thread priority (or process if thread priority is not avaliable).
 void set_priority(thread_priority priority)
 {
-    const auto prioritization = get_priority(priority);
+    auto const prioritization = get_priority(priority);
 
 //#if defined(_MSC_VER)
 #ifdef BOOST_WINDOWS_API

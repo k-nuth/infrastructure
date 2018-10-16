@@ -35,7 +35,7 @@ BI_API std::string encode_base64(data_slice unencoded);
  * Attempt to decode base64 data.
  * @return false if the input contains non-base64 characters.
  */
-BI_API bool decode_base64(data_chunk& out, const std::string& in);
+BI_API bool decode_base64(data_chunk& out, std::string const& in);
 
 } // namespace libbitcoin
 

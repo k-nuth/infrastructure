@@ -56,7 +56,7 @@ bool serialize(const secp256k1_context* context, byte_array<Size>& out,
     const secp256k1_pubkey point)
 {
     auto size = Size;
-    const auto flags = to_flags(Size == ec_compressed_size);
+    auto const flags = to_flags(Size == ec_compressed_size);
     secp256k1_ec_pubkey_serialize(context, out.data(), &size, &point, flags);
     return size == Size;
 }
@@ -96,7 +96,7 @@ bool recover_public(const secp256k1_context* context, byte_array<Size>& out,
 {
     secp256k1_pubkey pubkey;
     secp256k1_ecdsa_recoverable_signature sign;
-    const auto recovery_id = safe_to_signed<int>(recoverable.recovery_id);
+    auto const recovery_id = safe_to_signed<int>(recoverable.recovery_id);
     return
         secp256k1_ecdsa_recoverable_signature_parse_compact(context,
             &sign, recoverable.signature.data(), recovery_id) == 1 &&
@@ -124,38 +124,38 @@ bool verify_signature(const secp256k1_context* context,
 
 bool ec_add(ec_compressed& point, const ec_secret& secret)
 {
-    const auto context = verification.context();
+    auto const context = verification.context();
     return ec_add(context, point, secret);
 }
 
 bool ec_add(ec_uncompressed& point, const ec_secret& secret)
 {
-    const auto context = verification.context();
+    auto const context = verification.context();
     return ec_add(context, point, secret);
 }
 
 bool ec_add(ec_secret& left, const ec_secret& right)
 {
-    const auto context = verification.context();
+    auto const context = verification.context();
     return secp256k1_ec_privkey_tweak_add(context, left.data(),
         right.data()) == 1;
 }
 
 bool ec_multiply(ec_compressed& point, const ec_secret& secret)
 {
-    const auto context = verification.context();
+    auto const context = verification.context();
     return ec_multiply(context, point, secret);
 }
 
 bool ec_multiply(ec_uncompressed& point, const ec_secret& secret)
 {
-    const auto context = verification.context();
+    auto const context = verification.context();
     return ec_multiply(context, point, secret);
 }
 
 bool ec_multiply(ec_secret& left, const ec_secret& right)
 {
-    const auto context = verification.context();
+    auto const context = verification.context();
     return secp256k1_ec_privkey_tweak_mul(context, left.data(),
         right.data()) == 1;
 }
@@ -166,26 +166,26 @@ bool ec_multiply(ec_secret& left, const ec_secret& right)
 bool compress(ec_compressed& out, const ec_uncompressed& point)
 {
     secp256k1_pubkey pubkey;
-    const auto context = verification.context();
+    auto const context = verification.context();
     return parse(context, pubkey, point) && serialize(context, out, pubkey);
 }
 
 bool decompress(ec_uncompressed& out, const ec_compressed& point)
 {
     secp256k1_pubkey pubkey;
-    const auto context = verification.context();
+    auto const context = verification.context();
     return parse(context, pubkey, point) && serialize(context, out, pubkey);
 }
 
 bool secret_to_public(ec_compressed& out, const ec_secret& secret)
 {
-    const auto context = signing.context();
+    auto const context = signing.context();
     return secret_to_public(context, out, secret);
 }
 
 bool secret_to_public(ec_uncompressed& out, const ec_secret& secret)
 {
-    const auto context = signing.context();
+    auto const context = signing.context();
     return secret_to_public(context, out, secret);
 }
 
@@ -194,21 +194,21 @@ bool secret_to_public(ec_uncompressed& out, const ec_secret& secret)
 
 bool verify(const ec_secret& secret)
 {
-    const auto context = verification.context();
+    auto const context = verification.context();
     return secp256k1_ec_seckey_verify(context, secret.data()) == 1;
 }
 
 bool verify(const ec_compressed& point)
 {
     secp256k1_pubkey pubkey;
-    const auto context = verification.context();
+    auto const context = verification.context();
     return parse(context, pubkey, point);
 }
 
 bool verify(const ec_uncompressed& point)
 {
     secp256k1_pubkey pubkey;
-    const auto context = verification.context();
+    auto const context = verification.context();
     return parse(context, pubkey, point);
 }
 
@@ -217,21 +217,21 @@ bool verify(const ec_uncompressed& point)
 
 bool is_compressed_key(data_slice point)
 {
-    const auto size = point.size();
+    auto const size = point.size();
     if (size != ec_compressed_size)
         return false;
 
-    const auto first = point.data()[0];
+    auto const first = point.data()[0];
     return first == compressed_even || first == compressed_odd;
 }
 
 bool is_uncompressed_key(data_slice point)
 {
-    const auto size = point.size();
+    auto const size = point.size();
     if (size != ec_uncompressed_size)
         return false;
 
-    const auto first = point.data()[0];
+    auto const first = point.data()[0];
     return first == uncompressed;
 }
 
@@ -247,7 +247,7 @@ bool is_even_key(const ec_compressed& point)
 
 bool is_endorsement(const endorsement& endorsement)
 {
-    const auto size = endorsement.size();
+    auto const size = endorsement.size();
     return size >= min_endorsement_size && size <= max_endorsement_size;
 }
 
@@ -274,7 +274,7 @@ bool parse_signature(ec_signature& out, const der_signature& der_signature,
 
     bool valid;
     secp256k1_ecdsa_signature parsed;
-    const auto context = verification.context();
+    auto const context = verification.context();
 
     if (strict)
         valid = secp256k1_ecdsa_signature_parse_der(context, &parsed,
@@ -295,7 +295,7 @@ bool encode_signature(der_signature& out, const ec_signature& signature)
     secp256k1_ecdsa_signature sign;
     std::copy_n(signature.begin(), ec_signature_size, std::begin(sign.data));
 
-    const auto context = signing.context();
+    auto const context = signing.context();
     auto size = max_der_signature_size;
     out.resize(size);
 
@@ -313,7 +313,7 @@ bool encode_signature(der_signature& out, const ec_signature& signature)
 bool sign(ec_signature& out, const ec_secret& secret, const hash_digest& hash)
 {
     secp256k1_ecdsa_signature signature;
-    const auto context = signing.context();
+    auto const context = signing.context();
 
     if (secp256k1_ecdsa_sign(context, &signature, hash.data(), secret.data(),
         secp256k1_nonce_function_rfc6979, nullptr) != 1)
@@ -327,7 +327,7 @@ bool verify_signature(const ec_compressed& point, const hash_digest& hash,
     const ec_signature& signature)
 {
     secp256k1_pubkey pubkey;
-    const auto context = verification.context();
+    auto const context = verification.context();
     return parse(context, pubkey, point) &&
         verify_signature(context, pubkey, hash, signature);
 }
@@ -336,7 +336,7 @@ bool verify_signature(const ec_uncompressed& point, const hash_digest& hash,
     const ec_signature& signature)
 {
     secp256k1_pubkey pubkey;
-    const auto context = verification.context();
+    auto const context = verification.context();
     return parse(context, pubkey, point) &&
         verify_signature(context, pubkey, hash, signature);
 }
@@ -351,13 +351,13 @@ bool verify_signature(data_slice point, const hash_digest& hash,
     // secp256k1_ecdsa_verify rejects non-normalized (low-s) signatures, but
     // bitcoin does not have such a limitation, so we always normalize.
     secp256k1_ecdsa_signature normal;
-    const auto context = verification.context();
+    auto const context = verification.context();
     secp256k1_ecdsa_signature_normalize(context, &normal, &parsed);
 
     // This uses a data slice and calls secp256k1_ec_pubkey_parse() in place of
     // parse() so that we can support the der_verify data_chunk optimization.
     secp256k1_pubkey pubkey;
-    const auto size = point.size();
+    auto const size = point.size();
     return
         secp256k1_ec_pubkey_parse(context, &pubkey, point.data(), size) == 1 &&
         secp256k1_ecdsa_verify(context, &normal, hash.data(), &pubkey) == 1;
@@ -370,10 +370,10 @@ bool sign_recoverable(recoverable_signature& out, const ec_secret& secret,
     const hash_digest& hash)
 {
     int recovery_id;
-    const auto context = signing.context();
+    auto const context = signing.context();
     secp256k1_ecdsa_recoverable_signature signature;
 
-    const auto result =
+    auto const result =
         secp256k1_ecdsa_sign_recoverable(context, &signature, hash.data(),
             secret.data(), secp256k1_nonce_function_rfc6979, nullptr) == 1 &&
         secp256k1_ecdsa_recoverable_signature_serialize_compact(context,
@@ -387,14 +387,14 @@ bool sign_recoverable(recoverable_signature& out, const ec_secret& secret,
 bool recover_public(ec_compressed& out,
     const recoverable_signature& recoverable, const hash_digest& hash)
 {
-    const auto context = verification.context();
+    auto const context = verification.context();
     return recover_public(context, out, recoverable, hash);
 }
 
 bool recover_public(ec_uncompressed& out,
     const recoverable_signature& recoverable, const hash_digest& hash)
 {
-    const auto context = verification.context();
+    auto const context = verification.context();
     return recover_public(context, out, recoverable, hash);
 }
 

@@ -34,7 +34,7 @@ hash256::hash256()
 {
 }
 
-hash256::hash256(const std::string& hexcode)
+hash256::hash256(std::string const& hexcode)
   : hash256()
 {
     std::stringstream(hexcode) >> *this;

@@ -53,7 +53,7 @@ public:
      * Copy constructor.
      * @param[in]  other  The object to copy into self on construct.
      */
-    authority(const authority& other);
+    authority(authority const& other);
 
     /**
      * Initialization constructor.
@@ -62,7 +62,7 @@ public:
      * @param[in]  authority  The initial value in one of two forms:
      *                        [2001:db8::2]:port or 1.2.240.1:port
      */
-    authority(const std::string& authority);
+    authority(std::string const& authority);
 
     /**
      * Initialization constructor.
@@ -83,20 +83,20 @@ public:
      *                   [2001:db8::2] or 2001:db8::2 or 1.2.240.1
      * @param[in]  port  The port to initialize with.
      */
-    authority(const std::string& host, uint16_t port);
+    authority(std::string const& host, uint16_t port);
 
     /**
      * Initialization constructor.
      * @param[in]  ip    The boost ip addresss to initialize with.
      * @param[in]  port  The port to initialize with.
      */
-    authority(const asio::address& ip, uint16_t port);
+    authority(asio::address const& ip, uint16_t port);
 
     /**
      * Initialization constructor.
      * @param[in]  endpoint  The boost endpoint address to initialize with.
      */
-    authority(const asio::endpoint& endpoint);
+    authority(asio::endpoint const& endpoint);
 
     /**
      * Getter.
@@ -148,13 +148,13 @@ public:
      * Override the equality operator.
      * @param[in]  other  The other object with which to compare.
      */
-    bool operator==(const authority& other) const;
+    bool operator==(authority const& other) const;
 
     /**
      * Override the inequality operator.
      * @param[in]  other  The other object with which to compare.
      */
-    bool operator!=(const authority& other) const;
+    bool operator!=(authority const& other) const;
 
     /**
      * Define stream in. Throws if input is invalid.
@@ -171,8 +171,8 @@ public:
      * @param[out]  argument  The object from which to obtain the value.
      * @return                The output stream reference.
      */
-    friend std::ostream& operator<<(std::ostream& output,
-        const authority& argument);
+    friend 
+    std::ostream& operator<<(std::ostream& output, authority const& argument);
 
 private:
     asio::ipv6 ip_;

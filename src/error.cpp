@@ -277,7 +277,7 @@ std::string error_category_impl::message(int ev) const BC_NOEXCEPT
         { error::op_check_multisig_verify8, "op_check_multisig_verify8" },
     };
 
-    const auto message = messages.find(ev);
+    auto const message = messages.find(ev);
     return message != messages.end() ? message->second : "invalid code";
 }
 

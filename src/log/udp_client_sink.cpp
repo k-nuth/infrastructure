@@ -37,17 +37,17 @@ udp_client_sink::udp_client_sink(socket_ptr socket, endpoint_ptr endpoint)
 }
 
 void udp_client_sink::consume(const record_view& record,
-    const std::string& message)
+    std::string const& message)
 {
     send(message);
 }
 
-void udp_client_sink::send(const std::string& message)
+void udp_client_sink::send(std::string const& message)
 {
     if (!socket_ || !endpoint_)
         return;
 
-    const auto payload = boost::make_shared<std::string>(message);
+    auto const payload = boost::make_shared<std::string>(message);
 
     // This is not guarded against interleaving of messages that exceed 64k.
     socket_->async_send_to(buffer(*payload), *endpoint_,

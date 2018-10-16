@@ -60,7 +60,7 @@ BOOST_AUTO_TEST_CASE(elliptic_curve__sign__positive__test)
     const hash_digest sighash = hash_literal(SIGHASH3);
     BOOST_REQUIRE(sign(signature, secret, sighash));
 
-    const auto result = encode_base16(signature);
+    auto const result = encode_base16(signature);
     BOOST_REQUIRE_EQUAL(result, EC_SIGNATURE3);
 }
 
@@ -70,7 +70,7 @@ BOOST_AUTO_TEST_CASE(elliptic_curve__encode_signature__positive__test)
     const ec_signature signature = base16_literal(EC_SIGNATURE3);
     BOOST_REQUIRE(encode_signature(out, signature));
 
-    const auto result = encode_base16(out);
+    auto const result = encode_base16(out);
     BOOST_REQUIRE_EQUAL(result, DER_SIGNATURE3);
 }
 
@@ -104,7 +104,7 @@ BOOST_AUTO_TEST_CASE(elliptic_curve__sign__round_trip_negative__test)
 BOOST_AUTO_TEST_CASE(elliptic_curve__verify_signature__positive__test)
 {
     ec_signature signature;
-    static const auto strict = false;
+    static auto const strict = false;
     const hash_digest sighash = hash_literal(SIGHASH2);
     const ec_compressed point = base16_literal(COMPRESSED2);
     der_signature distinguished;
@@ -116,7 +116,7 @@ BOOST_AUTO_TEST_CASE(elliptic_curve__verify_signature__positive__test)
 BOOST_AUTO_TEST_CASE(elliptic_curve__verify_signature__negative__test)
 {
     ec_signature signature;
-    static const auto strict = false;
+    static auto const strict = false;
     const hash_digest sighash = hash_literal(SIGHASH2);
     const ec_compressed point = base16_literal(COMPRESSED2);
     der_signature distinguished;

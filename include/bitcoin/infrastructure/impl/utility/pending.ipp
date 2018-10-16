@@ -105,7 +105,7 @@ code pending<Element>::store(element_ptr element, finder match)
     ///////////////////////////////////////////////////////////////////////////
     mutex_.lock_upgrade();
 
-    const auto stopped = stopped_.load();
+    auto const stopped = stopped_.load();
 
     if (!stopped)
     {
@@ -176,7 +176,7 @@ void pending<Element>::stop(const code& ec)
     mutex_.unlock_upgrade();
     ///////////////////////////////////////////////////////////////////////////
 
-    for (const auto element: copy)
+    for (auto const element: copy)
         element->stop(ec);
 }
 

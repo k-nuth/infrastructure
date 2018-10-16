@@ -25,7 +25,7 @@
 
 namespace libbitcoin {
 
-work::work(threadpool& pool, const std::string& name)
+work::work(threadpool& pool, std::string const& name)
   : name_(name),
     ////ordered_(std::make_shared<monitor::count>(0)),
     ////unordered_(std::make_shared<monitor::count>(0)),

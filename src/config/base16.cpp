@@ -33,7 +33,7 @@ base16::base16()
 {
 }
 
-base16::base16(const std::string& hexcode)
+base16::base16(std::string const& hexcode)
 {
     std::stringstream(hexcode) >> *this;
 }

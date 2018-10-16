@@ -63,7 +63,7 @@ bool qr::encode(std::istream& in, uint32_t version, error_recovery_level level,
     std::string qr_string;
     getline(in, qr_string);
 
-    const auto qrcode = QRcode_encodeString(qr_string.c_str(), version,
+    auto const qrcode = QRcode_encodeString(qr_string.c_str(), version,
         level, mode, case_sensitive);
 
     if (qrcode == nullptr)
@@ -72,7 +72,7 @@ bool qr::encode(std::istream& in, uint32_t version, error_recovery_level level,
     if (bc::max_size_t / qrcode->width < qrcode->width)
         return false;
 
-    const auto area = qrcode->width * qrcode->width;
+    auto const area = qrcode->width * qrcode->width;
     auto width_ptr = reinterpret_cast<const uint8_t*>(&qrcode->width);
     auto version_ptr = reinterpret_cast<const uint8_t*>(&qrcode->version);
 

@@ -33,7 +33,7 @@ base64::base64()
 {
 }
 
-base64::base64(const std::string& base64)
+base64::base64(std::string const& base64)
 {
     std::stringstream(base64) >> *this;
 }

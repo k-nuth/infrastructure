@@ -33,7 +33,7 @@ base58::base58()
 {
 }
 
-base58::base58(const std::string& base58)
+base58::base58(std::string const& base58)
 {
     std::stringstream(base58) >> *this;
 }

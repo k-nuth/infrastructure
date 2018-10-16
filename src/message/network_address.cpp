@@ -134,7 +134,7 @@ data_chunk network_address::to_data(uint32_t version,
     bool with_timestamp) const
 {
     data_chunk data;
-    const auto size = serialized_size(version, with_timestamp);
+    auto const size = serialized_size(version, with_timestamp);
     data.reserve(size);
     data_sink ostream(data);
     to_data(version, ostream, with_timestamp);

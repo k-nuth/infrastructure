@@ -63,7 +63,7 @@
 // std::cin >> text;
 //
 // Do not use the L qualifier when source is UTF-8 w/out BOM (mangles output):
-// const auto utf16 = L"acción.кошка.日本国";
+// auto const utf16 = L"acción.кошка.日本国";
 // std::wcout << utf16;
 
 // Regarding use of boost:
@@ -138,7 +138,7 @@ extern std::ostream& cerr;
  * @param[in]  value  The value to normalize.
  * @return            The normalized value.
  */
-BI_API std::string to_normal_nfc_form(const std::string& value);
+BI_API std::string to_normal_nfc_form(std::string const& value);
 
 /**
  * Normalize a string value using nfkd normalization.
@@ -146,7 +146,7 @@ BI_API std::string to_normal_nfc_form(const std::string& value);
  * @param[in]  value  The value to normalize.
  * @return            The normalized value.
  */
-BI_API std::string to_normal_nfkd_form(const std::string& value);
+BI_API std::string to_normal_nfkd_form(std::string const& value);
 
 #endif
 
@@ -207,7 +207,7 @@ BI_API size_t to_utf16(wchar_t out[], size_t out_chars, const char in[],
  * @param[in]  narrow  The utf8 string to convert.
  * @return             The resulting utf16 string.
  */
-BI_API std::wstring to_utf16(const std::string& narrow);
+BI_API std::wstring to_utf16(std::string const& narrow);
 
 /**
  * Initialize windows to use UTF8 for stdio. This cannot be uninitialized and

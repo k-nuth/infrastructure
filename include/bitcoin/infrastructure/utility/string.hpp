@@ -39,7 +39,7 @@ typedef std::vector<std::string> string_list;
  * return               The parsed value.
  */
 template <typename Value>
-Value deserialize(const std::string& text, bool trim);
+Value deserialize(std::string const& text, bool trim);
 
 /**
  * Convert a text string to the specified type.
@@ -49,7 +49,7 @@ Value deserialize(const std::string& text, bool trim);
  * @param[in]  trim     True if value should be trimmed before conversion.
  */
 template <typename Value>
-void deserialize(Value& value, const std::string& text, bool trim);
+void deserialize(Value& value, std::string const& text, bool trim);
 
 /**
  * Deserialize the tokens of a text string to a vector of the inner type.
@@ -59,7 +59,7 @@ void deserialize(Value& value, const std::string& text, bool trim);
  * @param[in]  trim        True if value should be trimmed before conversion.
  */
 template <typename Value>
-void deserialize(std::vector<Value>& collection, const std::string& text,
+void deserialize(std::vector<Value>& collection, std::string const& text,
     bool trim);
 
 /**
@@ -70,7 +70,7 @@ void deserialize(std::vector<Value>& collection, const std::string& text,
  * @return               The serialized value.
  */
 template <typename Value>
-std::string serialize(const Value& value, const std::string& fallback="");
+std::string serialize(const Value& value, std::string const& fallback="");
 
 /**
  * Join a list of strings into a single string, in order.
@@ -79,7 +79,7 @@ std::string serialize(const Value& value, const std::string& fallback="");
  * @return                The resulting string.
  */
 BI_API std::string join(const string_list& words,
-    const std::string& delimiter=" ");
+    std::string const& delimiter=" ");
 
 /**
  * Split a list of strings into a string vector string, in order, white space
@@ -89,8 +89,8 @@ BI_API std::string join(const string_list& words,
  * @param[in]  trim       Trim the sentence for whitespace, defaults to true.
  * @return                The list of resulting strings.
  */
-BI_API string_list split(const std::string& sentence,
-    const std::string& delimiter=" ", bool trim=true);
+BI_API string_list split(std::string const& sentence,
+    std::string const& delimiter=" ", bool trim=true);
 
 } // namespace libbitcoin
 

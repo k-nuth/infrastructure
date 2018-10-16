@@ -41,22 +41,22 @@ BOOST_AUTO_TEST_SUITE(checkpoint__construct)
 
 BOOST_AUTO_TEST_CASE(checkpoint__construct__default__null_hash)
 {
-    const checkpoint check;
+    checkpoint const check;
     BOOST_REQUIRE(check.hash() == null_hash);
     BOOST_REQUIRE_EQUAL(check.height(), 0u);
 }
 
 BOOST_AUTO_TEST_CASE(checkpoint__construct__copy__expected)
 {
-    const checkpoint check1(CHECKPOINT_C);
-    const checkpoint check2(check1);
+    checkpoint const check1(CHECKPOINT_C);
+    checkpoint const check2(check1);
     BOOST_REQUIRE_EQUAL(check2.height(), check1.height());
     BOOST_REQUIRE_EQUAL(encode_hash(check2.hash()), encode_hash(check1.hash()));
 }
 
 BOOST_AUTO_TEST_CASE(checkpoint__construct__string__expected)
 {
-    const checkpoint genesis(CHECKPOINT_B);
+    checkpoint const genesis(CHECKPOINT_B);
     BOOST_REQUIRE_EQUAL(genesis.height(), 11111u);
     BOOST_REQUIRE_EQUAL(genesis.to_string(), CHECKPOINT_B);
 }
@@ -64,10 +64,10 @@ BOOST_AUTO_TEST_CASE(checkpoint__construct__string__expected)
 BOOST_AUTO_TEST_CASE(checkpoint__construct__digest__expected)
 {
     const size_t expected_height = 42;
-    const auto expected_hash = CHECKPOINT_HASH_A;
+    auto const expected_hash = CHECKPOINT_HASH_A;
     hash_digest digest;
     bc::decode_hash(digest, expected_hash);
-    const checkpoint genesis(digest, expected_height);
+    checkpoint const genesis(digest, expected_height);
     BOOST_REQUIRE_EQUAL(genesis.height(), expected_height);
     BOOST_REQUIRE_EQUAL(encode_hash(genesis.hash()), expected_hash);
 }
@@ -119,7 +119,7 @@ BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(checkpoint__ostream)
 
-static const checkpoint::list test_checkpoints_list(
+static checkpoint const::list test_checkpoints_list(
 {
     { CHECKPOINT_A },
     { CHECKPOINT_B },
@@ -143,7 +143,7 @@ BOOST_AUTO_TEST_CASE(checkpoint__ostream__populated__expected)
 BOOST_AUTO_TEST_CASE(checkpoint__ostream__boost_lexical_cast__expected)
 {
     using namespace boost;
-    const auto serialized = lexical_cast<std::string>(test_checkpoints_list);
+    auto const serialized = lexical_cast<std::string>(test_checkpoints_list);
     BOOST_REQUIRE_EQUAL(serialized, CHECKPOINT_ABC);
 }
 

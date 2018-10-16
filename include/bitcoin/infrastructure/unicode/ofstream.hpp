@@ -38,7 +38,7 @@ public:
      * @param[in]  path  The utf8 path to the file.
      * @param[in]  mode  The file opening mode.
      */
-    ofstream(const std::string& path,
+    ofstream(std::string const& path,
         std::ofstream::openmode mode=std::ofstream::out);
 };
 

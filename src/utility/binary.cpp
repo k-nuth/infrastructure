@@ -35,9 +35,9 @@ binary::size_type binary::blocks_size(size_type bit_size)
     return bit_size == 0 ? 0 : (bit_size - 1) / bits_per_block + 1;
 }
 
-bool binary::is_base2(const std::string& text)
+bool binary::is_base2(std::string const& text)
 {
-    for (const auto& character: text)
+    for (auto const& character: text)
         if (character != '0' && character != '1')
             return false;
 
@@ -54,7 +54,7 @@ binary::binary(const binary& other)
 {
 }
 
-binary::binary(const std::string& bit_string)
+binary::binary(std::string const& bit_string)
   : binary()
 {
     std::stringstream(bit_string) >> *this;
@@ -93,7 +93,7 @@ void binary::resize(size_type size)
     {
         // This subtraction is guarded above.
         final_block_excess_ = static_cast<uint8_t>(bits_per_block - offset);
-        const auto last = safe_subtract(blocks_.size(), size_t(1));
+        auto const last = safe_subtract(blocks_.size(), size_t(1));
         uint8_t mask = 0xFF << final_block_excess_;
         blocks_[last] &= mask;
     }
@@ -254,7 +254,7 @@ bool binary::operator==(const binary& other) const
     if (size() != other.size())
         return false;
 
-    const auto self = *this;
+    auto const self = *this;
 
     for (binary::size_type i = 0; i < size(); ++i)
         if (self[i] != other[i])

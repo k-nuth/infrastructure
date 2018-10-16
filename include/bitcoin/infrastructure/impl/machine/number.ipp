@@ -69,8 +69,8 @@ inline bool number::set_data(const data_chunk& data, size_t max_size)
 
     if (is_negative(data))
     {
-        const auto last_shift = 8 * (data.size() - 1);
-        const auto mask = ~(negative_bit << last_shift);
+        auto const last_shift = 8 * (data.size() - 1);
+        auto const mask = ~(negative_bit << last_shift);
         value_ = -1 * (static_cast<int64_t>(value_ & mask));
     }
 
@@ -94,7 +94,7 @@ inline data_chunk number::data() const
         absolute >>= 8;
     }
 
-    const auto negative_bit_set = is_negative(data);
+    auto const negative_bit_set = is_negative(data);
 
     // If the most significant byte is >= 0x80 and the value is negative,
     // push a new 0x80 byte that will be popped off when converting to

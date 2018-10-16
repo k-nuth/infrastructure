@@ -46,22 +46,22 @@ inline uint8_t bip39_shift(size_t bit)
 
 bool validate_mnemonic(const word_list& words, const dictionary& lexicon)
 {
-    const auto word_count = words.size();
+    auto const word_count = words.size();
     if ((word_count % mnemonic_word_multiple) != 0)
         return false;
 
-    const auto total_bits = bits_per_word * word_count;
-    const auto check_bits = total_bits / (entropy_bit_divisor + 1);
-    const auto entropy_bits = total_bits - check_bits;
+    auto const total_bits = bits_per_word * word_count;
+    auto const check_bits = total_bits / (entropy_bit_divisor + 1);
+    auto const entropy_bits = total_bits - check_bits;
 
     BITCOIN_ASSERT((entropy_bits % byte_bits) == 0);
 
     size_t bit = 0;
     data_chunk data((total_bits + byte_bits - 1) / byte_bits, 0);
 
-    for (const auto& word: words)
+    for (auto const& word: words)
     {
-        const auto position = find_position(lexicon, word);
+        auto const position = find_position(lexicon, word);
         if (position == -1)
             return false;
 
@@ -69,7 +69,7 @@ bool validate_mnemonic(const word_list& words, const dictionary& lexicon)
         {
             if (position & (1 << (bits_per_word - loop - 1)))
             {
-                const auto byte = bit / byte_bits;
+                auto const byte = bit / byte_bits;
                 data[byte] |= bip39_shift(bit);
             }
         }
@@ -77,7 +77,7 @@ bool validate_mnemonic(const word_list& words, const dictionary& lexicon)
 
     data.resize(entropy_bits / byte_bits);
 
-    const auto mnemonic = create_mnemonic(data, lexicon);
+    auto const mnemonic = create_mnemonic(data, lexicon);
     return std::equal(mnemonic.begin(), mnemonic.end(), words.begin());
 }
 
@@ -94,7 +94,7 @@ word_list create_mnemonic(data_slice entropy, const dictionary &lexicon)
     BITCOIN_ASSERT((total_bits % bits_per_word) == 0);
     BITCOIN_ASSERT((word_count % mnemonic_word_multiple) == 0);
 
-    const auto data = build_chunk({entropy, sha256_hash(entropy)});
+    auto const data = build_chunk({entropy, sha256_hash(entropy)});
 
     size_t bit = 0;
     word_list words;
@@ -107,7 +107,7 @@ word_list create_mnemonic(data_slice entropy, const dictionary &lexicon)
             bit = (word * bits_per_word + loop);
             position <<= 1;
 
-            const auto byte = bit / byte_bits;
+            auto const byte = bit / byte_bits;
 
             if ((data[byte] & bip39_shift(bit)) > 0)
                 position++;
@@ -124,7 +124,7 @@ word_list create_mnemonic(data_slice entropy, const dictionary &lexicon)
 bool validate_mnemonic(const word_list& mnemonic,
     const dictionary_list& lexicons)
 {
-    for (const auto& lexicon: lexicons)
+    for (auto const& lexicon: lexicons)
         if (validate_mnemonic(mnemonic, *lexicon))
             return true;
 
@@ -133,8 +133,8 @@ bool validate_mnemonic(const word_list& mnemonic,
 
 long_hash decode_mnemonic(const word_list& mnemonic)
 {
-    const auto sentence = join(mnemonic);
-    const std::string salt(passphrase_prefix);
+    auto const sentence = join(mnemonic);
+    std::string const salt(passphrase_prefix);
     return pkcs5_pbkdf2_hmac_sha512(to_chunk(sentence), to_chunk(salt),
         hmac_iterations);
 }
@@ -142,11 +142,11 @@ long_hash decode_mnemonic(const word_list& mnemonic)
 #ifdef WITH_ICU
 
 long_hash decode_mnemonic(const word_list& mnemonic,
-    const std::string& passphrase)
+    std::string const& passphrase)
 {
-    const auto sentence = join(mnemonic);
-    const std::string prefix(passphrase_prefix);
-    const auto salt = to_normal_nfkd_form(prefix + passphrase);
+    auto const sentence = join(mnemonic);
+    std::string const prefix(passphrase_prefix);
+    auto const salt = to_normal_nfkd_form(prefix + passphrase);
     return pkcs5_pbkdf2_hmac_sha512(to_chunk(sentence), to_chunk(salt),
         hmac_iterations);
 }

@@ -137,7 +137,7 @@ long_hash pkcs5_pbkdf2_hmac_sha512(data_slice passphrase,
     data_slice salt, size_t iterations)
 {
     long_hash hash;
-    const auto result = pkcs5_pbkdf2(passphrase.data(), passphrase.size(),
+    auto const result = pkcs5_pbkdf2(passphrase.data(), passphrase.size(),
         salt.data(), salt.size(), hash.data(), hash.size(), iterations);
 
     if (result != 0)
@@ -168,7 +168,7 @@ data_chunk scrypt(data_slice data, data_slice salt, uint64_t N, uint32_t p,
     uint32_t r, size_t length)
 {
     data_chunk output(length);
-    const auto result = crypto_scrypt(data.data(), data.size(), salt.data(),
+    auto const result = crypto_scrypt(data.data(), data.size(), salt.data(),
         salt.size(), N, r, p, output.data(), output.size());
     handle_script_result(result);
     return output;

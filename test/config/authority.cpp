@@ -140,7 +140,7 @@ BOOST_AUTO_TEST_CASE(authority__port__hostname__expected)
 BOOST_AUTO_TEST_CASE(authority__port__boost_address__expected)
 {
     const uint16_t expected_port = 42;
-    const auto address = asio::address::from_string(BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
+    auto const address = asio::address::from_string(BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
     const authority host(address, expected_port);
     BOOST_REQUIRE_EQUAL(host.port(), expected_port);
 }
@@ -148,7 +148,7 @@ BOOST_AUTO_TEST_CASE(authority__port__boost_address__expected)
 BOOST_AUTO_TEST_CASE(authority__port__boost_endpoint__expected)
 {
     const uint16_t expected_port = 42;
-    const auto address = asio::address::from_string(BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
+    auto const address = asio::address::from_string(BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
     asio::endpoint tcp_endpoint(address, expected_port);
     const authority host(tcp_endpoint);
     BOOST_REQUIRE_EQUAL(host.port(), expected_port);
@@ -192,7 +192,7 @@ BOOST_AUTO_TEST_CASE(authority__ip__default__unspecified)
 
 BOOST_AUTO_TEST_CASE(authority__ip__copy__expected)
 {
-    const auto& expected_ip = test_ipv6_address;
+    auto const& expected_ip = test_ipv6_address;
     const authority other(expected_ip, 42);
     const authority host(other);
     BOOST_REQUIRE(ip_equal(host.ip(), expected_ip));
@@ -226,7 +226,7 @@ BOOST_AUTO_TEST_CASE(authority__ip__ipv6_compatible_alternative_authority__expec
 
 BOOST_AUTO_TEST_CASE(authority__ip__network_address__expected)
 {
-    const auto& expected_ip = test_ipv6_address;
+    auto const& expected_ip = test_ipv6_address;
     const message::network_address address
     {
         0, 0, test_ipv6_address, 42
@@ -238,7 +238,7 @@ BOOST_AUTO_TEST_CASE(authority__ip__network_address__expected)
 
 BOOST_AUTO_TEST_CASE(authority__ip__ip_address__expected)
 {
-    const auto& expected_ip = test_ipv6_address;
+    auto const& expected_ip = test_ipv6_address;
     const authority host(expected_ip, 42);
     BOOST_REQUIRE(ip_equal(host.ip(), expected_ip));
 }
@@ -263,14 +263,14 @@ BOOST_AUTO_TEST_CASE(authority__ip__ipv6_hostname__expected)
 
 BOOST_AUTO_TEST_CASE(authority__ip__boost_address__expected)
 {
-    const auto address = asio::address::from_string(BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
+    auto const address = asio::address::from_string(BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
     const authority host(address, 42);
     BOOST_REQUIRE(ip_equal(host.ip(), test_ipv6_address));
 }
 
 BOOST_AUTO_TEST_CASE(authority__ip__boost_endpoint__expected)
 {
-    const auto address = asio::address::from_string(BI_AUTHORITY_IPV4_ADDRESS);
+    auto const address = asio::address::from_string(BI_AUTHORITY_IPV4_ADDRESS);
     asio::endpoint tcp_endpoint(address, 42);
     const authority host(tcp_endpoint);
     BOOST_REQUIRE(ip_equal(host.ip(), test_mapped_ip_address));
@@ -373,7 +373,7 @@ BOOST_AUTO_TEST_CASE(authority__to_string__default__unspecified)
 
 BOOST_AUTO_TEST_CASE(authority__to_string__unspecified__unspecified)
 {
-    const auto line = "[" BI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS "]";
+    auto const line = "[" BI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS "]";
     const authority host(line);
     BOOST_REQUIRE_EQUAL(host.to_string(), line);
 }
@@ -392,28 +392,28 @@ BOOST_AUTO_TEST_CASE(authority__to_string__unspecified__unspecified)
 
 BOOST_AUTO_TEST_CASE(authority__to_string__ipv4__expected)
 {
-    const auto line = BI_AUTHORITY_IPV4_ADDRESS;
+    auto const line = BI_AUTHORITY_IPV4_ADDRESS;
     const authority host(line);
     BOOST_REQUIRE_EQUAL(host.to_string(), line);
 }
 
 BOOST_AUTO_TEST_CASE(authority__to_string__ipv4_port__expected)
 {
-    const auto line = BI_AUTHORITY_IPV4_ADDRESS ":42";
+    auto const line = BI_AUTHORITY_IPV4_ADDRESS ":42";
     const authority host(line);
     BOOST_REQUIRE_EQUAL(host.to_string(), line);
 }
 
 BOOST_AUTO_TEST_CASE(authority__to_string__ipv6__expected)
 {
-    const auto line = "[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]";
+    auto const line = "[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]";
     const authority host(line);
     BOOST_REQUIRE_EQUAL(host.to_string(), line);
 }
 
 BOOST_AUTO_TEST_CASE(authority__to_string__ipv6_port__expected)
 {
-    const auto line = "[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]:42";
+    auto const line = "[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]:42";
     const authority host(line);
     BOOST_REQUIRE_EQUAL(host.to_string(), line);
 }
@@ -434,14 +434,14 @@ BOOST_AUTO_TEST_CASE(authority__to_string__ipv6_alternative_compatible_port__exp
 
 BOOST_AUTO_TEST_CASE(authority__to_string__ipv6_alternative_compatible__expected)
 {
-    const auto line = "[" BI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]";
+    auto const line = "[" BI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]";
     const authority host(line);
     BOOST_REQUIRE_EQUAL(host.to_string(), line);
 }
 
 BOOST_AUTO_TEST_CASE(authority__to_string__ipv6_compatible_port__expected)
 {
-    const auto line = "[" BI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]:42";
+    auto const line = "[" BI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]:42";
     const authority host(line);
     BOOST_REQUIRE_EQUAL(host.to_string(), line);
 }
