@@ -68,7 +68,7 @@ private:
         boost::log::attribute_set& set, const Value& value);
 
     boost::log::attribute_set::iterator add_timer_unlocked(
-        boost::log::attribute_set& set, boost::parameter::void_);
+        boost::log::attribute_set& set, boost::parameter::void_ /*unused*/);
 };
 
 struct timer

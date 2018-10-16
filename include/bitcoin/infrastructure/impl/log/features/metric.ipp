@@ -103,7 +103,7 @@ boost::log::record metric_feature<BaseType>::open_record_with_metric_unlocked(
 template <typename BaseType>
 template <typename Arguments>
 boost::log::record metric_feature<BaseType>::open_record_with_metric_unlocked(
-    const Arguments& arguments, boost::parameter::void_)
+    const Arguments& arguments, boost::parameter::void_ /*unused*/)
 {
     return BaseType::open_record_unlocked(arguments);
 }

@@ -37,12 +37,12 @@
 
 #include <bitcoin/infrastructure/compat.h>
 
-static void blkcpy(uint8_t*, uint8_t*, size_t);
-static void blkxor(uint8_t*, uint8_t*, size_t);
-static void salsa20_8(uint8_t[64]);
-static void blockmix_salsa8(uint8_t*, uint8_t*, size_t);
-static uint64_t integerify(uint8_t*, size_t);
-static void smix(uint8_t* , size_t, uint64_t, uint8_t*, uint8_t*);
+static void blkcpy(uint8_t* /*dest*/, uint8_t* /*src*/, size_t /*len*/);
+static void blkxor(uint8_t* /*dest*/, uint8_t* /*src*/, size_t /*len*/);
+static void salsa20_8(uint8_t /*B*/[64]);
+static void blockmix_salsa8(uint8_t* /*B*/, uint8_t* /*Y*/, size_t /*r*/);
+static uint64_t integerify(uint8_t* /*B*/, size_t /*r*/);
+static void smix(uint8_t*  /*B*/, size_t /*r*/, uint64_t /*N*/, uint8_t* /*V*/, uint8_t* /*XY*/);
 
 static BI_C_INLINE uint32_t le32dec(const void* pp)
 {

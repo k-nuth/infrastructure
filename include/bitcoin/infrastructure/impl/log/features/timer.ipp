@@ -84,7 +84,7 @@ boost::log::attribute_set::iterator
 template <typename BaseType>
 boost::log::attribute_set::iterator
     timer_feature<BaseType>::add_timer_unlocked(
-        boost::log::attribute_set& set, boost::parameter::void_)
+        boost::log::attribute_set& set, boost::parameter::void_ /*unused*/)
 {
     return set.end();
 }

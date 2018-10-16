@@ -78,7 +78,7 @@ private:
 
     template <typename Arguments>
     boost::log::record open_record_with_metric_unlocked(
-        const Arguments& arguments, boost::parameter::void_);
+        const Arguments& arguments, boost::parameter::void_ /*unused*/);
 
 private:
     metric_attribute metric_attribute_;

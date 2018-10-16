@@ -84,7 +84,7 @@ boost::log::attribute_set::iterator
 template <typename BaseType>
 boost::log::attribute_set::iterator
     rate_feature<BaseType>::add_rate_unlocked(
-        boost::log::attribute_set& set, boost::parameter::void_)
+        boost::log::attribute_set& set, boost::parameter::void_ /*unused*/)
 {
     return set.end();
 }

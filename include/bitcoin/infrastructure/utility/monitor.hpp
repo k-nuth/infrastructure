@@ -49,7 +49,7 @@ public:
         handler();
     }
 
-    void trace(size_t, std::string const&) const
+    void trace(size_t /*unused*/, std::string const& /*unused*/) const
     {
         ////#ifndef NDEBUG
         ////    LOG_DEBUG(LOG_SYSTEM)

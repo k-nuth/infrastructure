@@ -77,7 +77,7 @@ boost::log::attribute_set::iterator
 
 template <typename BaseType>
 boost::log::attribute_set::iterator
-    counter_feature<BaseType>::add_counter_unlocked(boost::log::attribute_set& set, boost::parameter::void_) {
+    counter_feature<BaseType>::add_counter_unlocked(boost::log::attribute_set& set, boost::parameter::void_ /*unused*/) {
     return set.end();
 }
 
