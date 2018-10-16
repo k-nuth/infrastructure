@@ -191,7 +191,7 @@ void aes_subBytes_inv(uint8_t* buf) {
 } /* aes_subBytes_inv */
 
 /* -------------------------------------------------------------------------- */
-void aes_addRoundKey(uint8_t* buf, uint8_t* key) {
+void aes_addRoundKey(uint8_t* buf, uint8_t const* key) {
     register uint8_t i = 16;
 
     while (i--) { 
@@ -200,7 +200,7 @@ void aes_addRoundKey(uint8_t* buf, uint8_t* key) {
 } /* aes_addRoundKey */
 
 /* -------------------------------------------------------------------------- */
-void aes_addRoundKey_cpy(uint8_t* buf, uint8_t* key, uint8_t* cpk) {
+void aes_addRoundKey_cpy(uint8_t* buf, uint8_t const* key, uint8_t* cpk) {
     register uint8_t i = 16;
 
     while (i--) {  
