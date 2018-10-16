@@ -133,7 +133,8 @@ std::string to_normal_nfkd_form(std::string const& value)
 data_chunk to_utf8(wchar_t* environment[])
 {
     int count;
-    for (count = 0; environment[count] != nullptr; count++);
+    for (count = 0; environment[count] != nullptr; count++); //NOLINT
+
     return to_utf8(count, environment);
 }
 
