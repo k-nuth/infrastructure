@@ -47,7 +47,7 @@ bool build_checked_array(byte_array<Size>& out,
  * Appends a four-byte checksum into the end of an array.
  * Returns false if the array is too small to contain the checksum.
  */
-template<size_t Size>
+template <size_t Size>
 bool insert_checksum(byte_array<Size>& out);
 
 /**

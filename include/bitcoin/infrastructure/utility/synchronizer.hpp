@@ -133,7 +133,7 @@ private:
 
     decay_handler handler_;
     std::string const name_;
-    const size_t clearance_count_;
+    size_t const clearance_count_;
     const synchronizer_terminate terminate_;
 
     // We use pointer to reference the same value/mutex across instance copies.

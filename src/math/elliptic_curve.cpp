@@ -95,7 +95,7 @@ bool secret_to_public(const secp256k1_context* context, byte_array<Size>& out,
 
 template <size_t Size>
 bool recover_public(const secp256k1_context* context, byte_array<Size>& out,
-    const recoverable_signature& recoverable, const hash_digest& hash)
+    const recoverable_signature& recoverable, hash_digest const& hash)
 {
     secp256k1_pubkey pubkey;
     secp256k1_ecdsa_recoverable_signature sign;
@@ -108,7 +108,7 @@ bool recover_public(const secp256k1_context* context, byte_array<Size>& out,
 }
 
 bool verify_signature(const secp256k1_context* context,
-    const secp256k1_pubkey point, const hash_digest& hash,
+    const secp256k1_pubkey point, hash_digest const& hash,
     const ec_signature& signature)
 {
     // Copy to avoid exposing external types.
@@ -320,7 +320,7 @@ bool encode_signature(der_signature& out, const ec_signature& signature)
 // EC sign/verify
 // ----------------------------------------------------------------------------
 
-bool sign(ec_signature& out, const ec_secret& secret, const hash_digest& hash)
+bool sign(ec_signature& out, const ec_secret& secret, hash_digest const& hash)
 {
     secp256k1_ecdsa_signature signature;
     auto const context = signing.context();
@@ -334,7 +334,7 @@ bool sign(ec_signature& out, const ec_secret& secret, const hash_digest& hash)
     return true;
 }
 
-bool verify_signature(const ec_compressed& point, const hash_digest& hash,
+bool verify_signature(const ec_compressed& point, hash_digest const& hash,
     const ec_signature& signature)
 {
     secp256k1_pubkey pubkey;
@@ -343,7 +343,7 @@ bool verify_signature(const ec_compressed& point, const hash_digest& hash,
         verify_signature(context, pubkey, hash, signature);
 }
 
-bool verify_signature(const ec_uncompressed& point, const hash_digest& hash,
+bool verify_signature(const ec_uncompressed& point, hash_digest const& hash,
     const ec_signature& signature)
 {
     secp256k1_pubkey pubkey;
@@ -352,7 +352,7 @@ bool verify_signature(const ec_uncompressed& point, const hash_digest& hash,
         verify_signature(context, pubkey, hash, signature);
 }
 
-bool verify_signature(data_slice point, const hash_digest& hash,
+bool verify_signature(data_slice point, hash_digest const& hash,
     const ec_signature& signature)
 {
     // Copy to avoid exposing external types.
@@ -377,7 +377,7 @@ bool verify_signature(data_slice point, const hash_digest& hash,
 // Recoverable sign/recover
 // ----------------------------------------------------------------------------
 
-bool sign_recoverable(recoverable_signature& out, const ec_secret& secret, const hash_digest& hash) {
+bool sign_recoverable(recoverable_signature& out, const ec_secret& secret, hash_digest const& hash) {
     int recovery_id;
     auto const context = signing.context();
     secp256k1_ecdsa_recoverable_signature signature;
@@ -392,14 +392,14 @@ bool sign_recoverable(recoverable_signature& out, const ec_secret& secret, const
 }
 
 bool recover_public(ec_compressed& out,
-    const recoverable_signature& recoverable, const hash_digest& hash)
+    const recoverable_signature& recoverable, hash_digest const& hash)
 {
     auto const context = verification.context();
     return recover_public(context, out, recoverable, hash);
 }
 
 bool recover_public(ec_uncompressed& out,
-    const recoverable_signature& recoverable, const hash_digest& hash)
+    const recoverable_signature& recoverable, hash_digest const& hash)
 {
     auto const context = verification.context();
     return recover_public(context, out, recoverable, hash);

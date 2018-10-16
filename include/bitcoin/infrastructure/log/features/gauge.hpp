@@ -35,7 +35,7 @@ BOOST_LOG_ATTRIBUTE_KEYWORD(gauge, "Gauge", uint64_t)
 
 namespace features {
 
-template<typename BaseType>
+template <typename BaseType>
 class gauge_feature
   : public BaseType
 {
@@ -47,7 +47,8 @@ public:
     gauge_feature();
     gauge_feature(const gauge_feature& other);
 
-    template<typename Arguments>
+    template <typename Arguments>
+    explicit
     gauge_feature(const Arguments& arguments);
 
     typedef typename boost::log::strictest_lock<
@@ -58,11 +59,11 @@ public:
     >::type open_record_lock;
 
 protected:
-    template<typename Arguments>
+    template <typename Arguments>
     boost::log::record open_record_unlocked(const Arguments& arguments);
 
 private:
-    template<typename Value>
+    template <typename Value>
     boost::log::attribute_set::iterator add_gauge_unlocked(
         boost::log::attribute_set& set, const Value& value);
 
@@ -72,7 +73,7 @@ private:
 
 struct gauge
 {
-    template<typename BaseType>
+    template <typename BaseType>
     struct apply
     {
         using type = gauge_feature<BaseType>;

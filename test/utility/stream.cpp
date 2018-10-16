@@ -364,7 +364,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_data_chunk)
 
 BOOST_AUTO_TEST_CASE(roundtrip_hash)
 {
-    const hash_digest expected
+    hash_digest const expected
     {
         {
             0x4d, 0xc9, 0x32, 0x18, 0x4d, 0x86, 0xa0, 0xb2, 0xe4, 0xba, 0x65, 0xa8,

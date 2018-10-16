@@ -46,12 +46,14 @@ public:
      * Initialization constructor.
      * @param[in]  hexcode  The value to initialize with.
      */
+    explicit
     base16(std::string const& hexcode);
 
     /**
      * Initialization constructor.
      * @param[in]  value  The value to initialize with.
      */
+    explicit
     base16(data_chunk const& value);
 
     /**
@@ -59,6 +61,7 @@ public:
      * @param[in]  value  The value to initialize with.
      */
     template <size_t Size>
+    explicit
     base16(byte_array<Size> const& value)
         : value_(value.begin(), value.end())
     {}
@@ -73,12 +76,14 @@ public:
      * Overload cast to internal type.
      * @return  This object's value cast to internal type reference.
      */
+    explicit
     operator data_chunk const&() const;
 
     /**
      * Overload cast to generic data reference.
      * @return  This object's value cast to a generic data.
      */
+    explicit
     operator data_slice() const;
 
     /**

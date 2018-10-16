@@ -35,10 +35,12 @@ namespace libbitcoin {
 /// Reader to wrap arbitrary iterator.
 template <typename Iterator, bool CheckSafe>
 class deserializer
-  : public reader/*, noncopyable*/
+    : public reader/*, noncopyable*/
 {
 public:
+    explicit
     deserializer(Iterator begin);
+
     deserializer(Iterator begin, Iterator end);
 
     template <unsigned Size>
@@ -54,7 +56,9 @@ public:
     Integer read_little_endian();
 
     /// Context.
-    operator bool() const;
+    // implicit
+    operator bool() const;  //NOLINT
+
     bool operator!() const;
     bool is_exhausted() const;
     void invalidate();

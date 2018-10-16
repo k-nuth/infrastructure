@@ -37,7 +37,7 @@ std::string encode_base64(data_slice unencoded)
 {
     std::string encoded;
     auto const size = unencoded.size();
-    encoded.reserve(((size / 3) + (size % 3 > 0)) * 4);
+    encoded.reserve(((size / 3) + static_cast<unsigned long>(size % 3 > 0)) * 4);
 
     uint32_t value;
     auto cursor = unencoded.begin();

@@ -109,7 +109,7 @@ BC_CONSTEXPR hash_digest null_hash
 //     }
 // };
 
-// inline uint256_t to_uint256(const hash_digest& hash)
+// inline uint256_t to_uint256(hash_digest const& hash)
 // {
 //     return from_little_endian<uint256_t>(hash.begin(), hash.end());
 // }

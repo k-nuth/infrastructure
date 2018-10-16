@@ -53,7 +53,7 @@ bool serializer<Iterator>::operator!() const
 //-----------------------------------------------------------------------------
 
 template <typename Iterator>
-void serializer<Iterator>::write_hash(const hash_digest& hash)
+void serializer<Iterator>::write_hash(hash_digest const& hash)
 {
     write_forward(hash);
 }

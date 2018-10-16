@@ -34,6 +34,7 @@ public:
     using ptr = std::shared_ptr<scope_lock>;
 
     /// Lock using the specified mutex reference.
+    explicit
     scope_lock(shared_mutex& mutex);
 
     /// Unlock.

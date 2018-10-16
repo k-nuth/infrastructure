@@ -45,12 +45,14 @@ public:
      * Initialization constructor.
      * @param[in]  bin  The value to initialize with.
      */
+    explicit
     base2(std::string const& binary);
 
     /**
      * @param[in]  value  The value to initialize with.
      */
-    base2(const binary& value);
+    explicit
+    base2(binary const& value);
 
     /**
      * Copy constructor.
@@ -67,6 +69,7 @@ public:
      * Overload cast to internal type.
      * @return  This object's value cast to internal type reference.
      */
+    explicit
     operator const binary&() const;
 
     /**

@@ -39,6 +39,7 @@ public:
     using char_type = CharType;
     using category = boost::iostreams::source_tag;
 
+    explicit
     container_source(const Container& container)
         : container_(container), position_(0)
     {

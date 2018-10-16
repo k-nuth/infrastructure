@@ -26,7 +26,7 @@
 
 namespace libbitcoin {
 
-template<size_t Size>
+template <size_t Size>
 byte_array<Size> scrypt(data_slice data, data_slice salt, uint64_t N,
     uint32_t p, uint32_t r)
 {

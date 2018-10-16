@@ -88,8 +88,8 @@ std::string encode_base58(data_slice unencoded)
     size_t leading_zeros = count_leading_zeros(unencoded);
 
     // size = log(256) / log(58), rounded up.
-    const size_t number_nonzero = unencoded.size() - leading_zeros;
-    const size_t indexes_size = number_nonzero * 138 / 100 + 1;
+    size_t const number_nonzero = unencoded.size() - leading_zeros;
+    size_t const indexes_size = number_nonzero * 138 / 100 + 1;
 
     // Allocate enough space in big-endian base58 representation.
     data_chunk indexes(indexes_size);
@@ -106,7 +106,7 @@ std::string encode_base58(data_slice unencoded)
 
     // Translate the result into a string.
     std::string encoded;
-    const size_t estimated_size = leading_zeros +
+    size_t const estimated_size = leading_zeros +
         (indexes.end() - first_nonzero);
     encoded.reserve(estimated_size);
     encoded.assign(leading_zeros, '1');
@@ -114,7 +114,7 @@ std::string encode_base58(data_slice unencoded)
     // Set actual main bytes.
     for (auto it = first_nonzero; it != indexes.end(); ++it)
     {
-        const size_t index = *it;
+        size_t const index = *it;
         encoded += base58_chars[index];
     }
 
@@ -155,7 +155,7 @@ bool decode_base58(data_chunk& out, std::string const& in)
     auto const leading_zeros = count_leading_zeros(in);
 
     // log(58) / log(256), rounded up.
-    const size_t data_size = in.size() * 733 / 1000 + 1;
+    size_t const data_size = in.size() * 733 / 1000 + 1;
 
     // Allocate enough space in big-endian base256 representation.
     data_chunk data(data_size);
@@ -176,7 +176,7 @@ bool decode_base58(data_chunk& out, std::string const& in)
 
     // Copy result into output vector.
     data_chunk decoded;
-    const size_t estimated_size = leading_zeros + (data.end() - first_nonzero);
+    size_t const estimated_size = leading_zeros + (data.end() - first_nonzero);
     decoded.reserve(estimated_size);
     decoded.assign(leading_zeros, 0x00);
     decoded.insert(decoded.end(), first_nonzero, data.cend());

@@ -34,8 +34,7 @@ namespace config {
  * Serialization helper for a blockchain checkpoint.
  * This is a container for a {block hash, block height} tuple.
  */
-class BI_API checkpoint
-{
+class BI_API checkpoint {
 public:
     /**
      * A list of checkpoints.
@@ -49,14 +48,16 @@ public:
      * @param[in]  checks  The list of checkpoints.
      * @return             The sorted list of checkpoints.
      */
-    static list sort(const list& checks);
+    static 
+    list sort(list const& checks);
 
     /**
      * Confirm a checkpoint is in the range of a sorted list of checkpoints.
      * @param[in]  height  The height of checkpoint.
      * @param[in]  checks  The list of checkpoints.
      */
-    static bool covered(size_t height, const list& checks);
+    static 
+    bool covered(size_t height, list const& checks);
 
     /**
      * Validate a checkpoint against a set of checkpoints.
@@ -64,8 +65,8 @@ public:
      * @param[in]  height  The height of checkpoint.
      * @param[in]  checks  The set of checkpoints.
      */
-    static bool validate(const hash_digest& hash, size_t height,
-        const list& checks);
+    static 
+    bool validate(hash_digest const& hash, size_t height, list const& checks);
 
     /**
      * Default constructor.
@@ -76,13 +77,14 @@ public:
      * Copy constructor.
      * @param[in]  other  The object to copy into self on construct.
      */
-    checkpoint(checkpoint const& other);
+    checkpoint(checkpoint const& x);
 
     /**
      * Initialization constructor.
      * The height is optional and will be set to zero if not provided.
      * @param[in]  value  The value of the hash[:height] form.
      */
+    explicit
     checkpoint(std::string const& value);
 
     /**
@@ -97,19 +99,19 @@ public:
      * @param[in]  hash    The block hash for the checkpoint.
      * @param[in]  height  The height of the hash.
      */
-    checkpoint(const hash_digest& hash, size_t height);
+    checkpoint(hash_digest const& hash, size_t height);
 
     /**
      * Getter.
      * @return The block hash of the checkpoint.
      */
-    const hash_digest& hash() const;
+    hash_digest const& hash() const;
 
     /**
      * Getter.
      * @return The block height of the checkpoint.
      */
-    const size_t height() const;
+    size_t const height() const;
 
     /**
      * Get the checkpoint as a string.
@@ -129,8 +131,8 @@ public:
      * @param[out]  argument  The object to receive the read value.
      * @return                The input stream reference.
      */
-    friend std::istream& operator>>(std::istream& input,
-        checkpoint& argument);
+    friend 
+    std::istream& operator>>(std::istream& input, checkpoint& argument);
 
     /**
      * Define stream out.
@@ -138,8 +140,8 @@ public:
      * @param[out]  argument  The object from which to obtain the value.
      * @return                The output stream reference.
      */
-    friend std::ostream& operator<<(std::ostream& output,
-        checkpoint const& argument);
+    friend 
+    std::ostream& operator<<(std::ostream& output, checkpoint const& argument);
 
 private:
     hash_digest hash_;

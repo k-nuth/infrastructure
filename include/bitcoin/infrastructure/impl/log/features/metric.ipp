@@ -23,7 +23,7 @@ namespace libbitcoin {
 namespace log {
 namespace features {
 
-template<typename BaseType>
+template <typename BaseType>
 metric_feature<BaseType>::metric_feature()
   : BaseType(), metric_attribute_(metric_type())
 {
@@ -31,7 +31,7 @@ metric_feature<BaseType>::metric_feature()
         metric_attribute_);
 }
 
-template<typename BaseType>
+template <typename BaseType>
 metric_feature<BaseType>::metric_feature(const metric_feature& other)
   : BaseType(static_cast<const BaseType&>(other)),
     metric_attribute_(other.metric_attribute_)
@@ -39,8 +39,8 @@ metric_feature<BaseType>::metric_feature(const metric_feature& other)
     BaseType::attributes()[attributes::metric.get_name()] = metric_attribute_;
 }
 
-template<typename BaseType>
-template<typename Arguments>
+template <typename BaseType>
+template <typename Arguments>
 metric_feature<BaseType>::metric_feature(const Arguments& arguments)
   : BaseType(arguments),
     metric_attribute_(arguments[keywords::metric || metric_type()])
@@ -49,7 +49,7 @@ metric_feature<BaseType>::metric_feature(const Arguments& arguments)
         metric_attribute_);
 }
 
-template<typename BaseType>
+template <typename BaseType>
 typename metric_feature<BaseType>::metric_type
     metric_feature<BaseType>::metric() const
 {
@@ -59,7 +59,7 @@ typename metric_feature<BaseType>::metric_type
     return metric_attribute_.get();
 }
 
-template<typename BaseType>
+template <typename BaseType>
 void metric_feature<BaseType>::metric(const metric_type& value)
 {
     BOOST_LOG_EXPR_IF_MT(boost::log::aux::exclusive_lock_guard<threading_model>
@@ -68,15 +68,15 @@ void metric_feature<BaseType>::metric(const metric_type& value)
     metric_attribute_.set(value);
 }
 
-template<typename BaseType>
+template <typename BaseType>
 const typename metric_feature<BaseType>::metric_attribute&
     metric_feature<BaseType>::get_metric_attribute() const
 {
     return metric_attribute_;
 }
 
-template<typename BaseType>
-template<typename Arguments>
+template <typename BaseType>
+template <typename Arguments>
 boost::log::record metric_feature<BaseType>::open_record_unlocked(
     const Arguments& arguments)
 {
@@ -84,15 +84,15 @@ boost::log::record metric_feature<BaseType>::open_record_unlocked(
         arguments[keywords::metric | boost::parameter::void_()]);
 }
 
-template<typename BaseType>
+template <typename BaseType>
 void metric_feature<BaseType>::swap_unlocked(metric_feature& other)
 {
     BaseType::swap_unlocked(static_cast<BaseType&>(other));
     metric_attribute_.swap(other.metric_attribute_);
 }
 
-template<typename BaseType>
-template<typename Arguments, typename Value>
+template <typename BaseType>
+template <typename Arguments, typename Value>
 boost::log::record metric_feature<BaseType>::open_record_with_metric_unlocked(
     const Arguments& arguments, const Value& value)
 {
@@ -100,8 +100,8 @@ boost::log::record metric_feature<BaseType>::open_record_with_metric_unlocked(
     return BaseType::open_record_unlocked(arguments);
 }
 
-template<typename BaseType>
-template<typename Arguments>
+template <typename BaseType>
+template <typename Arguments>
 boost::log::record metric_feature<BaseType>::open_record_with_metric_unlocked(
     const Arguments& arguments, boost::parameter::void_)
 {

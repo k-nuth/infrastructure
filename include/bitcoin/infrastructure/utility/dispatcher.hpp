@@ -187,7 +187,7 @@ public:
     ////    Args... args)
     ////{
     ////    // The first fail will also terminate race and return the code.
-    ////    static const size_t clearance_count = 1;
+    ////    static size_t const clearance_count = 1;
     ////    auto const call = synchronize(FORWARD_HANDLER(handler),
     ////        clearance_count, name, false);
     ////

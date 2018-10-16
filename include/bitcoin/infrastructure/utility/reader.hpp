@@ -31,11 +31,10 @@
 namespace libbitcoin {
 
 /// Reader interface.
-class BI_API reader
-{
+class BI_API reader {
 public:
     /// Context.
-    virtual operator bool() const = 0;
+    virtual operator bool() const = 0;      //implicit //NOLINT
     virtual bool operator!() const = 0;
     virtual bool is_exhausted() const = 0;
     virtual void invalidate() = 0;

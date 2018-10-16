@@ -44,12 +44,14 @@ public:
      * Initialization constructor.
      * @param[in]  base64  The value to initialize with.
      */
+    explicit
     base64(std::string const& base64);
 
     /**
      * Initialization constructor.
      * @param[in]  value  The value to initialize with.
      */
+    explicit
     base64(data_chunk const& value);
 
     /**
@@ -62,12 +64,14 @@ public:
      * Overload cast to internal type.
      * @return  This object's value cast to internal type reference.
      */
+    explicit
     operator data_chunk const&() const;
 
     /**
      * Overload cast to generic data reference.
      * @return  This object's value cast to a generic data.
      */
+    explicit
     operator data_slice() const;
 
     /**

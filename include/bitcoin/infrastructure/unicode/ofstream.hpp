@@ -31,7 +31,7 @@ namespace libbitcoin {
  * This provides utf8 to utf16 path translation for Windows.
  */
 class BI_API ofstream
-  : public std::ofstream
+    : public std::ofstream
 {
 public:
     /**
@@ -39,8 +39,8 @@ public:
      * @param[in]  path  The utf8 path to the file.
      * @param[in]  mode  The file opening mode.
      */
-    ofstream(std::string const& path,
-        std::ofstream::openmode mode=std::ofstream::out);
+    explicit
+    ofstream(std::string const& path, std::ofstream::openmode mode = std::ofstream::out);
 };
 
 } // namespace libbitcoin

@@ -34,6 +34,7 @@ class BI_API prioritized_mutex
 public:
     using ptr = std::shared_ptr<prioritized_mutex>;
 
+    explicit
     prioritized_mutex(bool prioritize=true);
 
     void lock_low_priority();
@@ -43,7 +44,7 @@ public:
     void unlock_high_priority();
 
 private:
-    const bool prioritize_;
+    bool const prioritize_;
     shared_mutex data_mutex_;
     shared_mutex next_mutex_;
     shared_mutex wait_mutex_;

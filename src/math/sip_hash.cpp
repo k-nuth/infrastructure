@@ -81,7 +81,7 @@ sip_hasher& sip_hasher::write(uint8_t const* data, size_t size) {
     uint64_t t = tmp;
     int c = count;
 
-    while (size--) {
+    while (size-- != 0u) {
         t |= uint64_t(*(data++)) << (8 * (c % 8));
         c++;
         if ((c & 7) == 0) {

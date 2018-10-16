@@ -37,6 +37,7 @@ public:
     using char_type = CharType;
     using category = boost::iostreams::sink_tag;
 
+    explicit
     container_sink(Container& container)
         : container_(container)
     {

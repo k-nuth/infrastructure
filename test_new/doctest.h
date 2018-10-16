@@ -790,7 +790,7 @@ namespace detail
     template <typename T>
     struct deferred_false
     // cppcheck-suppress unusedStructMember
-    { static const bool value = false; };
+    { static bool const value = false; };
 
     // to silence the warning "-Wzero-as-null-pointer-constant" only for gcc 5 for the Approx template ctor - pragmas don't work for it...
     inline void* getNull() { return 0; }
@@ -817,7 +817,7 @@ namespace detail
         {
             static std::ostream& s;
             static const DOCTEST_REF_WRAP(T) t;
-            static const bool value = sizeof(testStreamable(s << t)) == sizeof(yes);
+            static bool const value = sizeof(testStreamable(s << t)) == sizeof(yes);
         };
     } // namespace has_insertion_operator_impl
 
@@ -1249,15 +1249,15 @@ namespace detail
     DOCTEST_INTERFACE const char* getAssertString(assertType::Enum val);
 
     // clang-format off
-    template<class T>               struct decay_array       { typedef T type; };
-    template<class T, unsigned N>   struct decay_array<T[N]> { typedef T* type; };
-    template<class T>               struct decay_array<T[]>  { typedef T* type; };
+    template <class T>               struct decay_array       { typedef T type; };
+    template <class T, unsigned N>   struct decay_array<T[N]> { typedef T* type; };
+    template <class T>               struct decay_array<T[]>  { typedef T* type; };
 
-    template<class T>   struct not_char_pointer              { enum { value = 1 }; };
-    template<>          struct not_char_pointer<char*>       { enum { value = 0 }; };
-    template<>          struct not_char_pointer<const char*> { enum { value = 0 }; };
+    template <class T>   struct not_char_pointer              { enum { value = 1 }; };
+    template <>          struct not_char_pointer<char*>       { enum { value = 0 }; };
+    template <>          struct not_char_pointer<const char*> { enum { value = 0 }; };
 
-    template<class T> struct can_use_op : not_char_pointer<typename decay_array<T>::type> {};
+    template <class T> struct can_use_op : not_char_pointer<typename decay_array<T>::type> {};
     // clang-format on
 
     struct TestFailureException
@@ -4762,7 +4762,7 @@ namespace detail
                              getAssertString(assert_type), decomposition);
         }
 
-        const bool isWarn = assert_type & assertType::is_warn;
+        bool const isWarn = assert_type & assertType::is_warn;
         DOCTEST_PRINTF_COLORED(loc, Color::LightGrey);
         DOCTEST_PRINTF_COLORED(msg,
                                passed ? Color::BrightGreen : isWarn ? Color::Yellow : Color::Red);
@@ -4796,7 +4796,7 @@ namespace detail
         if(!threw)
             DOCTEST_SNPRINTF(info2, DOCTEST_COUNTOF(info2), "didn't throw at all\n");
 
-        const bool isWarn = assert_type & assertType::is_warn;
+        bool const isWarn = assert_type & assertType::is_warn;
         DOCTEST_PRINTF_COLORED(loc, Color::LightGrey);
         DOCTEST_PRINTF_COLORED(msg,
                                threw ? Color::BrightGreen : isWarn ? Color::Yellow : Color::Red);
@@ -4836,7 +4836,7 @@ namespace detail
             DOCTEST_SNPRINTF(info3, DOCTEST_COUNTOF(info3), "  %s\n", exception.c_str());
         }
 
-        const bool isWarn = assert_type & assertType::is_warn;
+        bool const isWarn = assert_type & assertType::is_warn;
         DOCTEST_PRINTF_COLORED(loc, Color::LightGrey);
         DOCTEST_PRINTF_COLORED(msg,
                                threw_as ? Color::BrightGreen : isWarn ? Color::Yellow : Color::Red);
@@ -4873,7 +4873,7 @@ namespace detail
             DOCTEST_SNPRINTF(info3, DOCTEST_COUNTOF(info3), "  %s\n", exception.c_str());
         }
 
-        const bool isWarn = assert_type & assertType::is_warn;
+        bool const isWarn = assert_type & assertType::is_warn;
         DOCTEST_PRINTF_COLORED(loc, Color::LightGrey);
         DOCTEST_PRINTF_COLORED(msg,
                                threw ? isWarn ? Color::Yellow : Color::Red : Color::BrightGreen);
@@ -4965,7 +4965,7 @@ namespace detail
     bool MessageBuilder::log() {
         DOCTEST_LOG_START();
 
-        const bool isWarn = m_severity & assertType::is_warn;
+        bool const isWarn = m_severity & assertType::is_warn;
 
         // warn is just a message in this context so we dont treat it as an assert
         if(!isWarn) {
@@ -5227,7 +5227,7 @@ namespace detail
             std::printf("test suites with unskipped test cases passing the current filters: %u\n",
                         p->numTestSuitesPassingFilters);
         } else {
-            const bool anythingFailed = p->numFailed > 0 || p->numFailedAssertions > 0;
+            bool const anythingFailed = p->numFailed > 0 || p->numFailedAssertions > 0;
 
             char buff[DOCTEST_SNPRINTF_BUFFER_LENGTH];
 

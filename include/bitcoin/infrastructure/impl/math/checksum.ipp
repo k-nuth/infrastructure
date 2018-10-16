@@ -36,7 +36,7 @@ bool build_checked_array(byte_array<Size>& out,
     return build_array(out, slices) && insert_checksum(out);
 }
 
-template<size_t Size>
+template <size_t Size>
 bool insert_checksum(byte_array<Size>& out)
 {
     if (out.size() < checksum_size) {

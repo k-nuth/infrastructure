@@ -63,12 +63,14 @@ public:
      * as zero and the scheme is reported as an empty string.
      * @param[in]  value  The initial value of the [scheme://]host[:port] form.
      */
+    explicit
     endpoint(std::string const& value);
 
     /**
      * Initialization constructor.
      * @param[in]  authority  The value to initialize with.
      */
+    explicit
     endpoint(authority const& authority);
 
     /**
@@ -82,6 +84,7 @@ public:
      * Initialization constructor.
      * @param[in]  endpoint  The endpoint addresss to initialize with.
      */
+    explicit
     endpoint(asio::endpoint const& host);
 
     /**
@@ -95,7 +98,8 @@ public:
      * Getter.
      * @return True if the endpoint is initialized.
      */
-    operator const bool() const;
+    // implicit
+    operator bool const() const;    //NOLINT
 
     /**
      * Getter.

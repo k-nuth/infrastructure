@@ -50,19 +50,21 @@ public:
      * Copy constructor.
      * @param[in]  other  The object to copy into self on construct.
      */
-    hash256(const hash256& other);
+    hash256(hash256 const& x);
 
     /**
      * Initialization constructor.
      * @param[in]  hexcode  The hash value in string hexidecimal form.
      */
+    explicit
     hash256(std::string const& hexcode);
 
     /**
      * Initialization constructor.
      * @param[in]  value  The hash value to initialize with.
      */
-    hash256(const hash_digest& value);
+    explicit
+    hash256(hash_digest const& value);
 
     /**
      * Get the hash as a string.
@@ -80,7 +82,8 @@ public:
      * Cast to internal type.
      * @return  This object's value cast to internal type.
      */
-    operator const hash_digest&() const;
+    explicit
+    operator hash_digest const&() const;
 
     /**
      * Define stream in. Throws if input is invalid.
@@ -88,8 +91,8 @@ public:
      * @param[out]  argument  The object to receive the read value.
      * @return                The input stream reference.
      */
-    friend std::istream& operator>>(std::istream& input,
-        hash256& argument);
+    friend 
+    std::istream& operator>>(std::istream& input, hash256& argument);
 
     /**
      * Define stream out.
@@ -97,8 +100,8 @@ public:
      * @param[out]  argument  The object from which to obtain the value.
      * @return                The output stream reference.
      */
-    friend std::ostream& operator<<(std::ostream& output,
-        const hash256& argument);
+    friend 
+    std::ostream& operator<<(std::ostream& output, const hash256& argument);
 
 private:
     hash_digest value_;

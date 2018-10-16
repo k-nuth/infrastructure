@@ -51,7 +51,7 @@ bool ostream_writer::operator!() const
 // Hashes.
 //-----------------------------------------------------------------------------
 
-void ostream_writer::write_hash(const hash_digest& value)
+void ostream_writer::write_hash(hash_digest const& value)
 {
     stream_.write(reinterpret_cast<const char*>(value.data()), value.size());
 }

@@ -27,9 +27,10 @@
 namespace libbitcoin {
 
 class BI_API ostream_writer
-  : public writer
+    : public writer
 {
 public:
+    explicit
     ostream_writer(std::ostream& stream);
 
     template <unsigned Size>
@@ -45,11 +46,13 @@ public:
     void write_little_endian(Integer value);
 
     /// Context.
-    operator bool() const;
+    // implicit
+    operator bool() const;      //NOLINT
+    
     bool operator!() const;
 
     /// Write hashes.
-    void write_hash(const hash_digest& value);
+    void write_hash(hash_digest const& value);
     void write_short_hash(const short_hash& value);
     void write_mini_hash(const mini_hash& value);
 

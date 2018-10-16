@@ -40,6 +40,7 @@ class serializer
 public:
     using functor = std::function<void (serializer<Iterator> &)>;
 
+    explicit
     serializer(Iterator begin);
 
     template <typename Buffer>
@@ -55,11 +56,13 @@ public:
     void write_little_endian(Integer value);
 
     /// Context.
-    operator bool() const;
+    // implicit
+    operator bool() const;  //NOLINT
+    
     bool operator!() const;
 
     /// Write hashes.
-    void write_hash(const hash_digest& hash);
+    void write_hash(hash_digest const& hash);
     void write_short_hash(const short_hash& hash);
     void write_mini_hash(const mini_hash& hash);
 

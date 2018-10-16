@@ -35,31 +35,39 @@ namespace wallet {
 
 /// An extended private key, as defined by BIP 32.
 class BI_API hd_private
-  : public hd_public
+    : public hd_public
 {
 public:
     static const uint64_t mainnet;
     static const uint64_t testnet;
 
-    static uint32_t to_prefix(uint64_t prefixes)
-    {
+    static 
+    uint32_t to_prefix(uint64_t prefixes) {
         return prefixes >> 32;
     }
 
-    static uint64_t to_prefixes(uint32_t private_prefix,
-        uint32_t public_prefix)
-    {
+    static 
+    uint64_t to_prefixes(uint32_t private_prefix, uint32_t public_prefix) {
         return uint64_t(private_prefix) << 32 | public_prefix;
     }
 
     /// Constructors.
     hd_private();
-    hd_private(const hd_private& other);
-    hd_private(data_chunk const& seed, uint64_t prefixes=mainnet);
+    
+    hd_private(hd_private const& x);
+
+    explicit
+    hd_private(data_chunk const& seed, uint64_t prefixes = mainnet);
+    
+    explicit
     hd_private(const hd_key& private_key);
+
     hd_private(const hd_key& private_key, uint64_t prefixes);
     hd_private(const hd_key& private_key, uint32_t prefix);
+    
+    explicit
     hd_private(std::string const& encoded);
+
     hd_private(std::string const& encoded, uint64_t prefixes);
     hd_private(std::string const& encoded, uint32_t prefix);
 
@@ -68,14 +76,19 @@ public:
     bool operator==(const hd_private& other) const;
     bool operator!=(const hd_private& other) const;
     hd_private& operator=(hd_private other);
-    friend std::istream& operator>>(std::istream& in, hd_private& to);
-    friend std::ostream& operator<<(std::ostream& out,
-        const hd_private& of);
+
+    friend 
+    std::istream& operator>>(std::istream& in, hd_private& to);
+    
+    friend 
+    std::ostream& operator<<(std::ostream& out, const hd_private& of);
 
     // Swap implementation required to properly handle base class.
-    friend void swap(hd_private& left, hd_private& right);
+    friend 
+    void swap(hd_private& left, hd_private& right);
 
     /// Cast operators.
+    explicit
     operator const ec_secret&() const;
 
     /// Serializer.
@@ -97,13 +110,10 @@ private:
     static hd_private from_key(const hd_key& key, uint32_t public_prefix);
     static hd_private from_key(const hd_key& key, uint64_t prefixes);
     static hd_private from_string(std::string const& encoded);
-    static hd_private from_string(std::string const& encoded,
-        uint32_t public_prefix);
-    static hd_private from_string(std::string const& encoded,
-        uint64_t prefixes);
+    static hd_private from_string(std::string const& encoded, uint32_t public_prefix);
+    static hd_private from_string(std::string const& encoded, uint64_t prefixes);
 
-    hd_private(const ec_secret& secret, const hd_chain_code& chain_code,
-        const hd_lineage& lineage);
+    hd_private(const ec_secret& secret, const hd_chain_code& chain_code, const hd_lineage& lineage);
 
     /// Members.
     /// This should be const, apart from the need to implement assignment.

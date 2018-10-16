@@ -28,9 +28,10 @@
 namespace libbitcoin {
 
 class BI_API istream_reader
-  : public reader
+    : public reader
 {
 public:
+    explicit
     istream_reader(std::istream& stream);
 
     template <unsigned Size>
@@ -46,7 +47,9 @@ public:
     Integer read_little_endian();
 
     /// Context.
-    operator bool() const;
+    // implicit
+    operator bool() const;  //NOLINT
+    
     bool operator!() const;
     bool is_exhausted() const;
     void invalidate();

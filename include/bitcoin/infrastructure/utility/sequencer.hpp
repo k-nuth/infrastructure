@@ -31,14 +31,16 @@
 namespace libbitcoin {
 
 class sequencer
-  : public enable_shared_from_base<sequencer>
+    : public enable_shared_from_base<sequencer>
     /*, track<sequencer>*/
 {
 public:
     using ptr = std::shared_ptr<sequencer>;
     using action = std::function<void ()>;
 
+    explicit
     sequencer(asio::service& service);
+
     virtual ~sequencer();
 
     void lock(action&& handler);

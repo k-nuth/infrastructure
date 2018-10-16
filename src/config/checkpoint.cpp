@@ -59,15 +59,15 @@ checkpoint::checkpoint(std::string const& hash, size_t height)
     }
 }
 
-checkpoint::checkpoint(const hash_digest& hash, size_t height)
+checkpoint::checkpoint(hash_digest const& hash, size_t height)
     : hash_(hash), height_(height)
 {}
 
-const hash_digest& checkpoint::hash() const {
+hash_digest const& checkpoint::hash() const {
     return hash_;
 }
 
-const size_t checkpoint::height() const {
+size_t const checkpoint::height() const {
     return height_;
 }
 
@@ -77,7 +77,7 @@ std::string checkpoint::to_string() const {
     return value.str();
 }
 
-config::checkpoint::list checkpoint::sort(const list& checks) {
+config::checkpoint::list checkpoint::sort(list const& checks) {
     auto const comparitor = [](checkpoint const& left, checkpoint const& right) {
         return left.height() < right.height();
     };
@@ -87,11 +87,11 @@ config::checkpoint::list checkpoint::sort(const list& checks) {
     return copy;
 }
 
-bool checkpoint::covered(size_t height, const list& checks) {
+bool checkpoint::covered(size_t height, list const& checks) {
     return !checks.empty() && height <= checks.back().height();
 }
 
-bool checkpoint::validate(const hash_digest& hash, size_t height, const list& checks) {
+bool checkpoint::validate(hash_digest const& hash, size_t height, list const& checks) {
     auto const match_invalid = [&height, &hash](const config::checkpoint& item) {
         return height == item.height() && hash != item.hash();
     };

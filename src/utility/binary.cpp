@@ -85,7 +85,7 @@ binary::binary(size_type size, data_slice blocks)
 void binary::resize(size_type size) {
     final_block_excess_ = 0;
     blocks_.resize(blocks_size(size), 0);
-    const size_type offset = size % bits_per_block;
+    size_type const offset = size % bits_per_block;
 
     if (offset > 0) {
         // This subtraction is guarded above.
@@ -98,9 +98,9 @@ void binary::resize(size_type size) {
 
 bool binary::operator[](size_type index) const {
     BITCOIN_ASSERT(index < size());
-    const size_type block_index = index / bits_per_block;
+    size_type const block_index = index / bits_per_block;
     const uint8_t block = blocks_[block_index];
-    const size_type offset = index - (block_index * bits_per_block);
+    size_type const offset = index - (block_index * bits_per_block);
     const uint8_t bitmask = 1 << (bits_per_block - offset - 1);
     return (block & bitmask) > 0;
 }
@@ -116,14 +116,14 @@ std::string binary::encoded() const {
 }
 
 binary::size_type binary::size() const {
-    const size_type base_bit_size = blocks_.size() * bits_per_block;
+    size_type const base_bit_size = blocks_.size() * bits_per_block;
     return safe_subtract(base_bit_size,
         static_cast<size_type>(final_block_excess_));
 }
 
 void binary::append(const binary& post) {
-    const size_type block_offset = size() / bits_per_block;
-    const size_type offset = size() % bits_per_block;
+    size_type const block_offset = size() / bits_per_block;
+    size_type const offset = size() % bits_per_block;
 
     // overkill for byte alignment
     binary duplicate(post.size(), post.blocks());
@@ -146,16 +146,16 @@ void binary::prepend(const binary& prior) {
 }
 
 void binary::shift_left(size_type distance) {
-    const size_type initial_size = size();
-    const size_type initial_block_count = blocks_.size();
+    size_type const initial_size = size();
+    size_type const initial_block_count = blocks_.size();
     size_type destination_size = 0;
 
     if (distance < initial_size) {
         destination_size = initial_size - distance;
     }
 
-    const size_type block_offset = distance / bits_per_block;
-    const size_type offset = distance % bits_per_block;
+    size_type const block_offset = distance / bits_per_block;
+    size_type const offset = distance % bits_per_block;
 
     // shift
     for (size_type i = 0; i < initial_block_count; i++) {
@@ -177,11 +177,11 @@ void binary::shift_left(size_type distance) {
 }
 
 void binary::shift_right(size_type distance) {
-    const size_type initial_size = size();
-    const size_type initial_block_count = blocks_.size();
-    const size_type offset = distance % bits_per_block;
-    const size_type offset_blocks = distance / bits_per_block;
-    const size_type destination_size = initial_size + distance;
+    size_type const initial_size = size();
+    size_type const initial_block_count = blocks_.size();
+    size_type const offset = distance % bits_per_block;
+    size_type const offset_blocks = distance / bits_per_block;
+    size_type const destination_size = initial_size + distance;
 
     for (size_type i = 0; i < offset_blocks; i++) {
         blocks_.insert(blocks_.begin(), 0x00);

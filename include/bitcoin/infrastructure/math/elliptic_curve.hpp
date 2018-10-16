@@ -171,18 +171,18 @@ BI_API bool encode_signature(der_signature& out, const ec_signature& signature);
 
 /// Create a deterministic ECDSA signature using a private key.
 BI_API bool sign(ec_signature& out, const ec_secret& secret,
-    const hash_digest& hash);
+    hash_digest const& hash);
 
 /// Verify an EC signature using a compressed point.
 BI_API bool verify_signature(const ec_compressed& point,
-    const hash_digest& hash, const ec_signature& signature);
+    hash_digest const& hash, const ec_signature& signature);
 
 /// Verify an EC signature using an uncompressed point.
 BI_API bool verify_signature(const ec_uncompressed& point,
-    const hash_digest& hash, const ec_signature& signature);
+    hash_digest const& hash, const ec_signature& signature);
 
 /// Verify an EC signature using a potential point.
-BI_API bool verify_signature(data_slice point, const hash_digest& hash,
+BI_API bool verify_signature(data_slice point, hash_digest const& hash,
     const ec_signature& signature);
 
 // Recoverable sign/recover
@@ -190,15 +190,15 @@ BI_API bool verify_signature(data_slice point, const hash_digest& hash,
 
 /// Create a recoverable signature for use in message signing.
 BI_API bool sign_recoverable(recoverable_signature& out,
-    const ec_secret& secret, const hash_digest& hash);
+    const ec_secret& secret, hash_digest const& hash);
 
 /// Recover the compressed point from a recoverable message signature.
 BI_API bool recover_public(ec_compressed& out,
-    const recoverable_signature& recoverable, const hash_digest& hash);
+    const recoverable_signature& recoverable, hash_digest const& hash);
 
 /// Recover the uncompressed point from a recoverable message signature.
 BI_API bool recover_public(ec_uncompressed& out,
-    const recoverable_signature& recoverable, const hash_digest& hash);
+    const recoverable_signature& recoverable, hash_digest const& hash);
 
 } // namespace libbitcoin
 

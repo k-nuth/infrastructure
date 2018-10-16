@@ -38,35 +38,57 @@ namespace machine {
  * bytes but throwing an exception if arithmetic is done or the result is
  * interpreted as an integer.
  */
-class BI_API number
-{
+class BI_API number {
 public:
-    static const uint8_t negative_1;
-    static const uint8_t negative_0;
-    static const uint8_t positive_0;
-    static const uint8_t positive_1;
-    static const uint8_t positive_2;
-    static const uint8_t positive_3;
-    static const uint8_t positive_4;
-    static const uint8_t positive_5;
-    static const uint8_t positive_6;
-    static const uint8_t positive_7;
-    static const uint8_t positive_8;
-    static const uint8_t positive_9;
-    static const uint8_t positive_10;
-    static const uint8_t positive_11;
-    static const uint8_t positive_12;
-    static const uint8_t positive_13;
-    static const uint8_t positive_14;
-    static const uint8_t positive_15;
-    static const uint8_t positive_16;
-    static const uint8_t negative_mask;
+    // static constexpr uint8_t negative_1;
+    // static constexpr uint8_t negative_0;
+    // static constexpr uint8_t positive_0;
+    // static constexpr uint8_t positive_1;
+    // static constexpr uint8_t positive_2;
+    // static constexpr uint8_t positive_3;
+    // static constexpr uint8_t positive_4;
+    // static constexpr uint8_t positive_5;
+    // static constexpr uint8_t positive_6;
+    // static constexpr uint8_t positive_7;
+    // static constexpr uint8_t positive_8;
+    // static constexpr uint8_t positive_9;
+    // static constexpr uint8_t positive_10;
+    // static constexpr uint8_t positive_11;
+    // static constexpr uint8_t positive_12;
+    // static constexpr uint8_t positive_13;
+    // static constexpr uint8_t positive_14;
+    // static constexpr uint8_t positive_15;
+    // static constexpr uint8_t positive_16;
+    // static constexpr uint8_t negative_mask;
+
+    static constexpr uint8_t positive_0 = 0;
+    static constexpr uint8_t positive_1 = 1;
+    static constexpr uint8_t positive_2 = 2;
+    static constexpr uint8_t positive_3 = 3;
+    static constexpr uint8_t positive_4 = 4;
+    static constexpr uint8_t positive_5 = 5;
+    static constexpr uint8_t positive_6 = 6;
+    static constexpr uint8_t positive_7 = 7;
+    static constexpr uint8_t positive_8 = 8;
+    static constexpr uint8_t positive_9 = 9;
+    static constexpr uint8_t positive_10 = 10;
+    static constexpr uint8_t positive_11 = 11;
+    static constexpr uint8_t positive_12 = 12;
+    static constexpr uint8_t positive_13 = 13;
+    static constexpr uint8_t positive_14 = 14;
+    static constexpr uint8_t positive_15 = 15;
+    static constexpr uint8_t positive_16 = 16;
+
+    static constexpr uint8_t negative_mask = 0x80;
+    static constexpr uint8_t negative_1 = negative_mask | positive_1;
+    static constexpr uint8_t negative_0 = negative_mask | positive_0;
 
     /// Construct with zero value.
     number();
 
     /// Construct with specified value.
-    explicit number(int64_t value);
+    explicit 
+    number(int64_t value);
 
     /// Replace the value derived from a byte vector with LSB first ordering.
     bool set_data(data_chunk const& data, size_t max_size);

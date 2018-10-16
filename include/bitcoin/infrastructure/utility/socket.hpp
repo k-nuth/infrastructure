@@ -40,6 +40,7 @@ public:
     using ptr = std::shared_ptr<socket>;
 
     /// Construct an instance.
+    explicit
     socket(threadpool& thread);
 
     /// Obtain the authority of the remote endpoint.

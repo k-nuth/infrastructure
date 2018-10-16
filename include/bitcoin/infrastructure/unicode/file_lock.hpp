@@ -56,6 +56,7 @@ class file_lock
    // MODIFIED TO EXPECT UTF8 ENCODING ON WINDOWS.
    //!Opens a file lock. Throws boost::interprocess::interprocess_exception if the file does not
    //!exist or there are no operating system resources.
+   explicit
    file_lock(std::string const& name);
 
    //!Moves the ownership of "moved"'s file mapping object to *this.

@@ -41,7 +41,7 @@ sodium::sodium(std::string const& base85)
     std::stringstream(base85) >> *this;
 }
 
-sodium::sodium(const hash_digest& value)
+sodium::sodium(hash_digest const& value)
   : value_(value)
 {
 }
@@ -51,7 +51,7 @@ sodium::sodium(const sodium& other)
 {
 }
 
-sodium::operator const hash_digest&() const
+sodium::operator hash_digest const&() const
 {
     return value_;
 }
@@ -61,7 +61,7 @@ sodium::operator data_slice() const
     return value_;
 }
 
-sodium::operator const bool() const
+sodium::operator bool const() const
 {
     return value_ != null_hash;
 }

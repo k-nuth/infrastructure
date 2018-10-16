@@ -35,7 +35,7 @@ class BI_API pseudo_random
     /**
      * Fill a container with randomness using the default random engine.
      */
-    template<class Container>
+    template <class Container>
     static void fill(Container& out)
     {
         // uniform_int_distribution is undefined for sizes < 16 bits.
@@ -53,7 +53,7 @@ class BI_API pseudo_random
     /**
      * Shuffle a container using the default random engine.
      */
-    template<class Container>
+    template <class Container>
     static void shuffle(Container& out)
     {
         std::shuffle(out.begin(), out.end(), get_twister());

@@ -36,7 +36,9 @@ class BI_API interprocess_lock
 public:
     using path = boost::filesystem::path;
 
+    explicit
     interprocess_lock(const path& file);
+    
     virtual ~interprocess_lock();
 
     bool lock();

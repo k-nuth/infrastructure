@@ -52,36 +52,41 @@ public:
      * Initialization constructor.
      * @param[in]  base85  The value to initialize with.
      */
+    explicit
     sodium(std::string const& base85);
 
     /**
      * Initialization constructor.
      * @param[in]  value  The value to initialize with.
      */
-    sodium(const hash_digest& value);
+    explicit
+    sodium(hash_digest const& value);
 
     /**
      * Copy constructor.
      * @param[in]  other  The object to copy into self on construct.
      */
-    sodium(const sodium& other);
+    sodium(sodium const& x);
 
     /**
      * Getter.
      * @return True if the key is initialized.
      */
-    operator const bool() const;
+    // implicit
+    operator bool const() const;    //NOLINT
 
     /**
      * Overload cast to internal type.
      * @return  This object's value cast to internal type.
      */
-    operator const hash_digest&() const;
+    explicit
+    operator hash_digest const&() const;
 
     /**
      * Overload cast to generic data reference.
      * @return  This object's value cast to generic data.
      */
+    explicit
     operator data_slice() const;
 
     /**
@@ -96,8 +101,8 @@ public:
      * @param[out]  argument  The object to receive the read value.
      * @return                The input stream reference.
      */
-    friend std::istream& operator>>(std::istream& input,
-        sodium& argument);
+    friend 
+    std::istream& operator>>(std::istream& input, sodium& argument);
 
     /**
      * Overload stream out.
@@ -105,8 +110,8 @@ public:
      * @param[out]  argument  The object from which to obtain the value.
      * @return                The output stream reference.
      */
-    friend std::ostream& operator<<(std::ostream& output,
-        const sodium& argument);
+    friend 
+    std::ostream& operator<<(std::ostream& output, const sodium& argument);
 
 private:
 

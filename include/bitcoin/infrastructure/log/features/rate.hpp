@@ -34,7 +34,7 @@ BOOST_LOG_ATTRIBUTE_KEYWORD(rate, "Rate", float)
 
 namespace features {
 
-template<typename BaseType>
+template <typename BaseType>
 class rate_feature
   : public BaseType
 {
@@ -46,7 +46,8 @@ public:
     rate_feature();
     rate_feature(const rate_feature& other);
 
-    template<typename Arguments>
+    template <typename Arguments>
+    explicit
     rate_feature(const Arguments& arguments);
 
     typedef typename boost::log::strictest_lock<
@@ -57,11 +58,11 @@ public:
     >::type open_record_lock;
 
 protected:
-    template<typename Arguments>
+    template <typename Arguments>
     boost::log::record open_record_unlocked(const Arguments& arguments);
 
 private:
-    template<typename Value>
+    template <typename Value>
     boost::log::attribute_set::iterator add_rate_unlocked(
         boost::log::attribute_set& set, const Value& value);
 
@@ -71,7 +72,7 @@ private:
 
 struct rate
 {
-    template<typename BaseType>
+    template <typename BaseType>
     struct apply
     {
         using type = rate_feature<BaseType>;

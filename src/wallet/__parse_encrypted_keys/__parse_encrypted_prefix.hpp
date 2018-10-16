@@ -36,7 +36,7 @@
 namespace libbitcoin {
 namespace wallet {
 
-template<size_t Size>
+template <size_t Size>
 class parse_encrypted_prefix
 {
 public:

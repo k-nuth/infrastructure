@@ -28,50 +28,41 @@ namespace libbitcoin {
 namespace log {
 namespace features {
 
-template<typename BaseType>
+template <typename BaseType>
 counter_feature<BaseType>::counter_feature()
-{
-}
+{}
 
-template<typename BaseType>
+template <typename BaseType>
 counter_feature<BaseType>::counter_feature(const counter_feature& other)
-  : BaseType(static_cast<const BaseType&>(other))
-{
-}
+    : BaseType(static_cast<const BaseType&>(other))
+{}
 
-template<typename BaseType>
-template<typename Arguments>
+template <typename BaseType>
+template <typename Arguments>
 counter_feature<BaseType>::counter_feature(const Arguments& arguments)
-  : BaseType(arguments)
-{
-}
+    : BaseType(arguments)
+{}
 
-template<typename BaseType>
-template<typename Arguments>
-boost::log::record counter_feature<BaseType>::open_record_unlocked(
-    const Arguments& arguments)
-{
+template <typename BaseType>
+template <typename Arguments>
+boost::log::record counter_feature<BaseType>::open_record_unlocked(const Arguments& arguments) {
     auto& set = BaseType::attributes();
-    auto tag = add_counter_unlocked(set,
-        arguments[keywords::counter | boost::parameter::void_()]);
+    auto tag = add_counter_unlocked(set, arguments[keywords::counter | boost::parameter::void_()]);
 
-    BOOST_SCOPE_EXIT_TPL((&tag)(&set))
-    {
+    BOOST_SCOPE_EXIT_TPL((&tag)(&set)) {
         if (tag != set.end()) {
             set.erase(tag);
-}
+        }
     }
     BOOST_SCOPE_EXIT_END
 
     return BaseType::open_record_unlocked(arguments);
 }
 
-template<typename BaseType>
-template<typename Value>
+template <typename BaseType>
+template <typename Value>
 boost::log::attribute_set::iterator
-    counter_feature<BaseType>::add_counter_unlocked(
-        boost::log::attribute_set& set, const Value& value)
-{
+    counter_feature<BaseType>::add_counter_unlocked(boost::log::attribute_set& set, const Value& value) {
     auto tag = set.end();
     auto pair = BaseType::add_attribute_unlocked(
         attributes::counter.get_name(),
@@ -79,16 +70,14 @@ boost::log::attribute_set::iterator
 
     if (pair.second) {
         tag = pair.first;
-}
+    }
 
     return tag;
 }
 
-template<typename BaseType>
+template <typename BaseType>
 boost::log::attribute_set::iterator
-    counter_feature<BaseType>::add_counter_unlocked(
-        boost::log::attribute_set& set, boost::parameter::void_)
-{
+    counter_feature<BaseType>::add_counter_unlocked(boost::log::attribute_set& set, boost::parameter::void_) {
     return set.end();
 }
 

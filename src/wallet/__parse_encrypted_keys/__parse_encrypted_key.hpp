@@ -31,7 +31,7 @@ namespace libbitcoin {
 namespace wallet {
 
 // Swap not defined.
-template<size_t PrefixSize>
+template <size_t PrefixSize>
 class parse_encrypted_key
   : public parse_encrypted_prefix<PrefixSize>
 {

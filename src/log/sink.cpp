@@ -134,7 +134,7 @@ static boost::shared_ptr<text_file_sink> add_text_file_sink(
     return sink;
 }
 
-template<typename Stream>
+template <typename Stream>
 static boost::shared_ptr<text_stream_sink> add_text_stream_sink(
     boost::shared_ptr<Stream>& stream)
 {

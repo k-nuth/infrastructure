@@ -34,7 +34,7 @@ BOOST_LOG_ATTRIBUTE_KEYWORD(metric, "Metric", std::string)
 
 namespace features {
 
-template<typename BaseType>
+template <typename BaseType>
 class metric_feature
   : public BaseType
 {
@@ -56,7 +56,8 @@ public:
     metric_feature();
     metric_feature(const metric_feature& other);
 
-    template<typename Arguments>
+    template <typename Arguments>
+    explicit
     metric_feature(const Arguments& arguments);
 
     metric_type metric() const;
@@ -65,17 +66,17 @@ public:
 protected:
     const metric_attribute& get_metric_attribute() const;
 
-    template<typename Arguments>
+    template <typename Arguments>
     boost::log::record open_record_unlocked(const Arguments& arguments);
 
     void swap_unlocked(metric_feature& other);
 
 private:
-    template<typename Arguments, typename Value>
+    template <typename Arguments, typename Value>
     boost::log::record open_record_with_metric_unlocked(
         const Arguments& arguments, const Value& value);
 
-    template<typename Arguments>
+    template <typename Arguments>
     boost::log::record open_record_with_metric_unlocked(
         const Arguments& arguments, boost::parameter::void_);
 
@@ -85,7 +86,7 @@ private:
 
 struct metric
 {
-    template<typename BaseType>
+    template <typename BaseType>
     struct apply
     {
         using type = metric_feature<BaseType>;

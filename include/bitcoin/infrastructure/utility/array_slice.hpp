@@ -32,23 +32,23 @@ namespace libbitcoin {
  * buffer (c-style array) is more performant than the iterator abstraction.
  */
 template <typename Iterable>
-class array_slice
-{
+class array_slice {
 public:
+    //implicit
     template <typename Container>
-    array_slice(const Container& container);
+    array_slice(Container const& container);        //NOLINT
 
-    array_slice(const Iterable* begin, const Iterable* end);
+    array_slice(Iterable const* begin, Iterable const* end);
 
-    const Iterable* begin() const;
-    const Iterable* end() const;
-    const Iterable* data() const;
+    Iterable const* begin() const;
+    Iterable const* end() const;
+    Iterable const* data() const;
     std::size_t size() const;
     bool empty() const;
 
 private:
-    const Iterable* begin_;
-    const Iterable* end_;
+    Iterable const* begin_;
+    Iterable const* end_;
 };
 
 } // namespace libbitcoin

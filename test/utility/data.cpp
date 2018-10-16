@@ -58,9 +58,9 @@ BOOST_AUTO_TEST_CASE(data__build_chunk__one_slice__expected_size_and_value)
 
 BOOST_AUTO_TEST_CASE(data__build_chunk__three_slices__expected_size_and_value)
 {
-    const size_t size1 = 2;
-    const size_t size2 = 1;
-    const size_t size3 = 3;
+    size_t const size1 = 2;
+    size_t const size2 = 1;
+    size_t const size3 = 3;
     const uint8_t expected = 42;
     auto const result = build_chunk(
     {
@@ -115,9 +115,9 @@ BOOST_AUTO_TEST_CASE(data__build_array__under_capacity__true_excess_unchanged)
 
 BOOST_AUTO_TEST_CASE(data__build_array__exact_fill_multiple_slices__true_expected_values)
 {
-    const size_t size1 = 2;
-    const size_t size2 = 1;
-    const size_t size3 = 3;
+    size_t const size1 = 2;
+    size_t const size2 = 1;
+    size_t const size3 = 3;
     const uint8_t expected = 42;
     std::array<uint8_t, size1 + size2 + size3> value;
     auto const two_byte_vector = std::vector<uint8_t>{ { expected, expected } };

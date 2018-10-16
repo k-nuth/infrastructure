@@ -42,7 +42,7 @@ hash256::hash256(std::string const& hexcode)
     std::stringstream(hexcode) >> *this;
 }
 
-hash256::hash256(const hash_digest& value)
+hash256::hash256(hash_digest const& value)
   : value_(value)
 {
 }
@@ -59,7 +59,7 @@ std::string hash256::to_string() const
     return value.str();
 }
 
-hash256::operator const hash_digest&() const
+hash256::operator hash_digest const&() const
 {
     return value_;
 }

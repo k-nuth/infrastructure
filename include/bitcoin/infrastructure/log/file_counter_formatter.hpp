@@ -36,6 +36,7 @@ public:
 
 public:
     //! Initializing constructor
+    explicit
     file_counter_formatter(unsigned int width);
 
     //! Copy constructor

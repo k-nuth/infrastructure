@@ -63,12 +63,14 @@ public:
      * @param[in]  authority  The initial value in one of two forms:
      *                        [2001:db8::2]:port or 1.2.240.1:port
      */
+    explicit
     authority(std::string const& authority);
 
     /**
      * Initialization constructor.
      * @param[in]  net  The network address (ip and port) to initialize with.
      */
+    explicit
     authority(const message::network_address& address);
 
     /**
@@ -97,13 +99,15 @@ public:
      * Initialization constructor.
      * @param[in]  endpoint  The boost endpoint address to initialize with.
      */
+    explicit
     authority(asio::endpoint const& endpoint);
 
     /**
      * Getter.
      * @return True if the port is non-zero.
      */
-    operator const bool() const;
+    // implicit
+    operator bool const() const;    //NOLINT
 
     /**
      * Getter.
@@ -163,8 +167,8 @@ public:
      * @param[out]  argument  The object to receive the read value.
      * @return                The input stream reference.
      */
-    friend std::istream& operator>>(std::istream& input,
-        authority& argument);
+    friend 
+    std::istream& operator>>(std::istream& input, authority& argument);
 
     /**
      * Define stream out.

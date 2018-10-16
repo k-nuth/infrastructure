@@ -51,6 +51,7 @@ public:
      * Construct a deadline timer with a zero duration.
      * @param[in]  pool      The thread pool used by the timer.
      */
+    explicit
     deadline(threadpool& pool);
 
     /**

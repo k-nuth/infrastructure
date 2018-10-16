@@ -35,11 +35,11 @@ class BI_API writer
 {
 public:
     /// Context.
-    virtual operator bool() const = 0;
+    virtual operator bool() const = 0;      //implicit //NOLINT
     virtual bool operator!() const = 0;
 
     /// Write hashes.
-    virtual void write_hash(const hash_digest& value) = 0;
+    virtual void write_hash(hash_digest const& value) = 0;
     virtual void write_short_hash(const short_hash& value) = 0;
     virtual void write_mini_hash(const mini_hash& value) = 0;
 

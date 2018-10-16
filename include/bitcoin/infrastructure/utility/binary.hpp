@@ -27,19 +27,26 @@
 
 namespace libbitcoin {
 
-class BI_API binary
-{
+class BI_API binary {
 public:
     using block = uint8_t;
     using size_type = std::size_t;
 
-    static BC_CONSTEXPR size_type bits_per_block = byte_bits;
-    static size_type blocks_size(size_type bit_size);
-    static bool is_base2(std::string const& text);
+    static 
+    BC_CONSTEXPR size_type bits_per_block = byte_bits;
+    
+    static 
+    size_type blocks_size(size_type bit_size);
+    
+    static 
+    bool is_base2(std::string const& text);
 
     binary();
-    binary(const binary& other);
+    binary(binary const& other);
+
+    explicit 
     binary(std::string const& bit_string);
+
     binary(size_type size, uint32_t number);
     binary(size_type size, data_slice blocks);
 
@@ -64,8 +71,12 @@ public:
     bool operator==(const binary& other) const;
     bool operator!=(const binary& other) const;
     binary& operator=(const binary& other);
-    friend std::istream& operator>>(std::istream& in, binary& to);
-    friend std::ostream& operator<<(std::ostream& out, const binary& of);
+    
+    friend 
+    std::istream& operator>>(std::istream& in, binary& to);
+    
+    friend 
+    std::ostream& operator<<(std::ostream& out, const binary& of);
 
 private:
     static uint8_t shift_block_right(uint8_t next, uint8_t current, uint8_t prior,
@@ -77,14 +88,11 @@ private:
 
 } // namespace libbitcoin
 
-namespace std
-{
+namespace std {
 
-template<>
-struct hash<bc::binary>
-{
-    size_t operator()(const bc::binary& value) const
-    {
+template <>
+struct hash<bc::binary> {
+    size_t operator()(const bc::binary& value) const {
         return std::hash<std::string>()(value.encoded());
     }
 };

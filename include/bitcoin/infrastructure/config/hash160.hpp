@@ -31,8 +31,7 @@ namespace config {
 /**
  * Serialization helper for a bitcoin 160 bit hash.
  */
-class BI_API hash160
-{
+class BI_API hash160 {
 public:
 
     /**
@@ -44,24 +43,27 @@ public:
      * Initialization constructor.
      * @param[in]  hexcode  The value to initialize with.
      */
+    explicit
     hash160(std::string const& hexcode);
 
     /**
      * Initialization constructor.
      * @param[in]  value  The value to initialize with.
      */
+    explicit
     hash160(const short_hash& value);
 
     /**
      * Copy constructor.
      * @param[in]  other  The object to copy into self on construct.
      */
-    hash160(const hash160& other);
+    hash160(hash160 const& x);
 
     /**
      * Overload cast to internal type.
      * @return  This object's value cast to internal type.
      */
+    explicit
     operator const short_hash&() const;
 
     /**

@@ -65,7 +65,7 @@ BOOST_AUTO_TEST_CASE(checkpoint__construct__string__expected)
 
 BOOST_AUTO_TEST_CASE(checkpoint__construct__digest__expected)
 {
-    const size_t expected_height = 42;
+    size_t const expected_height = 42;
     auto const expected_hash = CHECKPOINT_HASH_A;
     hash_digest digest;
     bc::decode_hash(digest, expected_hash);

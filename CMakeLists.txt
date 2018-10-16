@@ -648,7 +648,7 @@ if (WITH_TESTS)
 
 _group_sources(bitprim_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
 
-#    TODO: Fer: chequear si hay nuevos tests en los makefiles (no Cmake)
+#    TODO(fernando): chequear si hay nuevos tests en los makefiles (no Cmake)
   _add_tests(bitprim_infrastructure_test
 
     # address_tests

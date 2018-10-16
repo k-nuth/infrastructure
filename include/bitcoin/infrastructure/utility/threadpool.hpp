@@ -37,7 +37,7 @@ namespace libbitcoin {
  * A collection of threads which can be passed operations through io_service.
  */
 class BI_API threadpool
-  : noncopyable
+    : noncopyable
 {
 public:
 
@@ -46,8 +46,8 @@ public:
      * @param[in]   number_threads  Number of threads to spawn.
      * @param[in]   priority        Priority of threads to spawn.
      */
-     threadpool(size_t number_threads=0,
-        thread_priority priority=thread_priority::normal);
+    explicit
+    threadpool(size_t number_threads = 0, thread_priority priority = thread_priority::normal);
 
     virtual ~threadpool();
 
@@ -66,8 +66,7 @@ public:
      * @param[in]   number_threads  Number of threads to add.
      * @param[in]   priority        Priority of threads to add.
      */
-    void spawn(size_t number_threads=1,
-        thread_priority priority=thread_priority::normal);
+    void spawn(size_t number_threads = 1, thread_priority priority = thread_priority::normal);
 
     /**
      * Abandon outstanding operations without dispatching handlers.

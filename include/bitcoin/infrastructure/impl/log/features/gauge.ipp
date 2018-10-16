@@ -28,26 +28,26 @@ namespace libbitcoin {
 namespace log {
 namespace features {
 
-template<typename BaseType>
+template <typename BaseType>
 gauge_feature<BaseType>::gauge_feature()
 {
 }
 
-template<typename BaseType>
+template <typename BaseType>
 gauge_feature<BaseType>::gauge_feature(const gauge_feature& other)
   : BaseType(static_cast<const BaseType&>(other))
 {
 }
 
-template<typename BaseType>
-template<typename Arguments>
+template <typename BaseType>
+template <typename Arguments>
 gauge_feature<BaseType>::gauge_feature(const Arguments& arguments)
   : BaseType(arguments)
 {
 }
 
-template<typename BaseType>
-template<typename Arguments>
+template <typename BaseType>
+template <typename Arguments>
 boost::log::record gauge_feature<BaseType>::open_record_unlocked(
     const Arguments& arguments)
 {
@@ -66,8 +66,8 @@ boost::log::record gauge_feature<BaseType>::open_record_unlocked(
     return BaseType::open_record_unlocked(arguments);
 }
 
-template<typename BaseType>
-template<typename Value>
+template <typename BaseType>
+template <typename Value>
 boost::log::attribute_set::iterator
     gauge_feature<BaseType>::add_gauge_unlocked(
         boost::log::attribute_set& set, const Value& value)
@@ -83,7 +83,7 @@ boost::log::attribute_set::iterator
     return tag;
 }
 
-template<typename BaseType>
+template <typename BaseType>
 boost::log::attribute_set::iterator
     gauge_feature<BaseType>::add_gauge_unlocked(
         boost::log::attribute_set& set, boost::parameter::void_)

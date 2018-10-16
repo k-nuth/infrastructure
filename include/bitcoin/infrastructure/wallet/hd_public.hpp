@@ -70,10 +70,17 @@ public:
 
     /// Constructors.
     hd_public();
-    hd_public(const hd_public& other);
+    
+    hd_public(hd_public const& x);
+    
+    explicit
     hd_public(const hd_key& public_key);
+    
     hd_public(const hd_key& public_key, uint32_t prefix);
+    
+    explicit
     hd_public(std::string const& encoded);
+
     hd_public(std::string const& encoded, uint32_t prefix);
 
     /// Operators.
@@ -81,12 +88,18 @@ public:
     bool operator==(const hd_public& other) const;
     bool operator!=(const hd_public& other) const;
     hd_public& operator=(const hd_public& other);
-    friend std::istream& operator>>(std::istream& in, hd_public& to);
-    friend std::ostream& operator<<(std::ostream& out,
-        const hd_public& of);
+    
+    friend 
+    std::istream& operator>>(std::istream& in, hd_public& to); 
+    
+    friend 
+    std::ostream& operator<<(std::ostream& out, const hd_public& of);
 
     /// Cast operators.
-    operator const bool() const;
+    // implicit
+    operator bool const() const;    //NOLINT
+    
+    explicit
     operator const ec_compressed&() const;
 
     /// Serializer.
@@ -103,8 +116,8 @@ public:
 
 protected:
     /// Factories.
-    static hd_public from_secret(const ec_secret& secret,
-        const hd_chain_code& chain_code, const hd_lineage& lineage);
+    static 
+    hd_public from_secret(const ec_secret& secret, const hd_chain_code& chain_code, const hd_lineage& lineage);
 
     /// Helpers.
     uint32_t fingerprint() const;
@@ -117,13 +130,19 @@ protected:
     ec_compressed point_;
 
 private:
-    static hd_public from_key(const hd_key& key);
-    static hd_public from_string(std::string const& encoded);
-    static hd_public from_key(const hd_key& key, uint32_t prefix);
-    static hd_public from_string(std::string const& encoded, uint32_t prefix);
+    static 
+    hd_public from_key(const hd_key& key);
+    
+    static 
+    hd_public from_string(std::string const& encoded);
+    
+    static 
+    hd_public from_key(const hd_key& key, uint32_t prefix);
+    
+    static
+    hd_public from_string(std::string const& encoded, uint32_t prefix);
 
-    hd_public(const ec_compressed& point,
-        const hd_chain_code& chain_code, const hd_lineage& lineage);
+    hd_public(const ec_compressed& point, const hd_chain_code& chain_code, const hd_lineage& lineage);
 };
 
 } // namespace wallet
