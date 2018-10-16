@@ -166,7 +166,7 @@ void initialize()
         class null_buffer
           : public std::streambuf
         {
-            public: int overflow(int value)
+            public: int overflow(int value) override
             {
                 return value;
             }

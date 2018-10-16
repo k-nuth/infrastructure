@@ -28,9 +28,9 @@ class error_category_impl
     : public std::error_category
 {
 public:
-    virtual const char* name() const noexcept;
-    virtual std::string message(int ev) const noexcept;
-    virtual std::error_condition default_error_condition(int ev) const noexcept;
+    const char* name() const noexcept override;
+    std::string message(int ev) const noexcept override;
+    std::error_condition default_error_condition(int ev) const noexcept override;
 };
 
 static 
