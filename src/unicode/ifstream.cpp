@@ -20,6 +20,7 @@
 
 #include <fstream>
 #include <string>
+
 #include <bitcoin/infrastructure/unicode/unicode.hpp>
 
 namespace libbitcoin {

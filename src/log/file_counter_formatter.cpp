@@ -16,6 +16,7 @@
 // Modification of boost implementation to alter log file rotation naming.
 
 #include <bitcoin/infrastructure/log/file_counter_formatter.hpp>
+
 #include <bitcoin/infrastructure/log/file_char_traits.hpp>
 
 namespace libbitcoin {

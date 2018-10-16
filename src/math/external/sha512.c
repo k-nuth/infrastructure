@@ -25,12 +25,13 @@
  */
 #include "sha512.h"
 
-#include <string.h>
 #include <stdint.h>
+#include <string.h>
+
 #include "zeroize.h"
 
-static uint64_t be64dec(const void* pp)
-{
+static 
+uint64_t be64dec(const void* pp) {
     const uint8_t* p = (uint8_t const*)pp;
 
     return ((uint64_t)(p[7]) + ((uint64_t)(p[6]) << 8) +
@@ -39,8 +40,8 @@ static uint64_t be64dec(const void* pp)
         ((uint64_t)(p[1]) << 48) + ((uint64_t)(p[0]) << 56));
 }
 
-static void be64enc(void *pp, uint64_t x)
-{
+static 
+void be64enc(void *pp, uint64_t x) {
     uint8_t* p = (uint8_t*)pp;
 
     p[7] = x & 0xff;
@@ -53,17 +54,16 @@ static void be64enc(void *pp, uint64_t x)
     p[0] = (x >> 56) & 0xff;
 }
 
-static void be64enc_vect(unsigned char* dst, const uint64_t* src, size_t len)
-{
+static 
+void be64enc_vect(unsigned char* dst, const uint64_t* src, size_t len) {
     size_t i;
-    for (i = 0; i < len / 8; i++) 
-    {
+    for (i = 0; i < len / 8; i++) {
         be64enc(dst + i * 8, src[i]);
     }
 }
 
-static void be64dec_vect(uint64_t* dst, const unsigned char* src, size_t len)
-{
+static 
+void be64dec_vect(uint64_t* dst, const unsigned char* src, size_t len) {
     size_t i;
     for (i = 0; i < len / 8; i++) 
     {
@@ -93,8 +93,8 @@ static void be64dec_vect(uint64_t* dst, const unsigned char* src, size_t len)
     S[(86 - i) % 8], S[(87 - i) % 8], \
     W[i] + k)
 
-static unsigned char PAD[SHA512_BLOCK_LENGTH] =
-{
+static 
+unsigned char PAD[SHA512_BLOCK_LENGTH] = {
     0x80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -109,17 +109,14 @@ void SHA512Pad(SHA512CTX* context);
 void SHA512Transform(uint64_t state[SHA512_STATE_LENGTH],
     const uint8_t block[SHA512_BLOCK_LENGTH]);
 
-void SHA512_(const uint8_t* input, size_t length,
-    uint8_t digest[SHA512_DIGEST_LENGTH])
-{
+void SHA512_(const uint8_t* input, size_t length, uint8_t digest[SHA512_DIGEST_LENGTH]) {
     SHA512CTX context;
     SHA512Init(&context);
     SHA512Update(&context, input, length);
     SHA512Final(&context, digest);
 }
 
-void SHA512Init(SHA512CTX* context)
-{
+void SHA512Init(SHA512CTX* context) {
     context->count[0] = context->count[1] = 0;
 
     context->state[0] = 0x6a09e667f3bcc908ULL;
@@ -132,23 +129,20 @@ void SHA512Init(SHA512CTX* context)
     context->state[7] = 0x5be0cd19137e2179ULL;
 }
 
-void SHA512Update(SHA512CTX* context, const uint8_t* input, size_t length)
-{
+void SHA512Update(SHA512CTX* context, const uint8_t* input, size_t length) {
     uint64_t bitlen[2];
     size_t r = (context->count[1] >> 3) & 0x7f;
 
     bitlen[1] = ((uint64_t)length) << 3;
     bitlen[0] = ((uint64_t)length) >> 61;
 
-    if ((context->count[1] += bitlen[1]) < bitlen[1]) 
-    {
+    if ((context->count[1] += bitlen[1]) < bitlen[1]) {
         context->count[0]++;
     }
 
     context->count[0] += bitlen[0];
 
-    if (length < 128 - r) 
-    {
+    if (length < 128 - r) {
         memcpy(&context->buf[r], input, length);
         return;
     }
@@ -159,8 +153,7 @@ void SHA512Update(SHA512CTX* context, const uint8_t* input, size_t length)
     input += 128 - r;
     length -= 128 - r;
 
-    while (length >= 128) 
-    {
+    while (length >= 128) {
         SHA512Transform(context->state, input);
         input += 128;
         length -= 128;
@@ -169,8 +162,7 @@ void SHA512Update(SHA512CTX* context, const uint8_t* input, size_t length)
     memcpy(context->buf, input, length);
 }
 
-void SHA512Final(SHA512CTX* context, uint8_t digest[SHA512_DIGEST_LENGTH])
-{
+void SHA512Final(SHA512CTX* context, uint8_t digest[SHA512_DIGEST_LENGTH]) {
     SHA512Pad(context);
     be64enc_vect(digest, context->state, SHA512_DIGEST_LENGTH);
     zeroize((void*)context, sizeof *context);
@@ -178,8 +170,7 @@ void SHA512Final(SHA512CTX* context, uint8_t digest[SHA512_DIGEST_LENGTH])
 
 /* Local */
 
-void SHA512Pad(SHA512CTX* context)
-{
+void SHA512Pad(SHA512CTX* context) {
     uint8_t len[16];
     size_t r, plen;
 
@@ -192,9 +183,7 @@ void SHA512Pad(SHA512CTX* context)
     SHA512Update(context, len, 16);
 }
 
-void SHA512Transform(uint64_t state[SHA512_STATE_LENGTH],
-    const uint8_t block[SHA512_BLOCK_LENGTH])
-{
+void SHA512Transform(uint64_t state[SHA512_STATE_LENGTH], const uint8_t block[SHA512_BLOCK_LENGTH]) {
     int i;
     uint64_t W[80];
     uint64_t S[8];
@@ -202,8 +191,7 @@ void SHA512Transform(uint64_t state[SHA512_STATE_LENGTH],
 
     be64dec_vect(W, block, SHA512_BLOCK_LENGTH);
 
-    for (i = 16; i < 80; i++)
-    {
+    for (i = 16; i < 80; i++) {
         W[i] = s1(W[i - 2]) + W[i - 7] + s0(W[i - 15]) + W[i - 16];
     }
 
@@ -290,8 +278,7 @@ void SHA512Transform(uint64_t state[SHA512_STATE_LENGTH],
     RNDr(S, W, 78, 0x5fcb6fab3ad6faecULL);
     RNDr(S, W, 79, 0x6c44198c4a475817ULL);
 
-    for (i = 0; i < 8; i++) 
-    {
+    for (i = 0; i < 8; i++) {
         state[i] += S[i];
     }
 

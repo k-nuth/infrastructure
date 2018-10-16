@@ -20,6 +20,7 @@
 
 #include <algorithm>
 #include <cstdint>
+
 #include <bitcoin/infrastructure/utility/container_sink.hpp>
 #include <bitcoin/infrastructure/utility/container_source.hpp>
 #include <bitcoin/infrastructure/utility/istream_reader.hpp>

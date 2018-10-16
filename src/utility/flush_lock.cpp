@@ -19,7 +19,9 @@
 #include <bitcoin/infrastructure/utility/flush_lock.hpp>
 
 #include <memory>
+
 #include <boost/filesystem.hpp>
+
 #include <bitcoin/infrastructure/unicode/file_lock.hpp>
 #include <bitcoin/infrastructure/unicode/ifstream.hpp>
 #include <bitcoin/infrastructure/unicode/ofstream.hpp>

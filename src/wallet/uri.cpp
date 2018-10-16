@@ -20,6 +20,7 @@
 
 #include <iomanip>
 #include <sstream>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/formats/base_16.hpp>
 

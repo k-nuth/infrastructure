@@ -20,7 +20,9 @@
 
 #include <cstdint>
 #include <string>
+
 #include <boost/algorithm/string.hpp>
+
 // #include <bitcoin/infrastructure/chain/script.hpp>
 #include <bitcoin/infrastructure/constants.hpp>
 #include <bitcoin/infrastructure/formats/base_16.hpp>

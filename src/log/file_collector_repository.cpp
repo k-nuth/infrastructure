@@ -18,9 +18,11 @@
 #include <bitcoin/infrastructure/log/file_collector_repository.hpp>
 
 #include <boost/bind.hpp>
-#include <boost/smart_ptr/make_shared_object.hpp>
 #include <boost/smart_ptr/bad_weak_ptr.hpp>
+#include <boost/smart_ptr/make_shared_object.hpp>
+
 #include <bitcoin/infrastructure/compat.hpp>
+
 
 namespace libbitcoin {
 namespace log {

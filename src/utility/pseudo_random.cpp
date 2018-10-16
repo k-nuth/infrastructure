@@ -21,7 +21,9 @@
 #include <chrono>
 #include <cstdint>
 #include <random>
+
 #include <boost/thread.hpp>
+
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>

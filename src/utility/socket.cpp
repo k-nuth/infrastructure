@@ -19,6 +19,7 @@
 #include <bitcoin/infrastructure/utility/socket.hpp>
 
 #include <memory>
+
 #include <bitcoin/infrastructure/config/authority.hpp>
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>

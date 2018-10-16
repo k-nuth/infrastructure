@@ -20,30 +20,26 @@
 
 #include <string>
 #include <vector>
+
 #include <boost/algorithm/string.hpp>
 
 namespace libbitcoin {
 
-std::string join(const string_list& words, std::string const& delimiter)
-{
+std::string join(const string_list& words, std::string const& delimiter) {
     return boost::join(words, delimiter);
 }
 
 // Note that use of token_compress_on may cause unexpected results when
 // working with CSV-style lists that accept empty elements.
-string_list split(std::string const& sentence, std::string const& delimiter,
-    bool trim)
-{
+string_list split(std::string const& sentence, std::string const& delimiter, bool trim) {
     string_list words;
     auto const compress = boost::token_compress_on;
     auto const delimit = boost::is_any_of(delimiter);
 
-    if (trim)
-    {
+    if (trim) {
         auto const trimmed = boost::trim_copy(sentence);
         boost::split(words, trimmed, delimit, compress);
-    }
-    else
+    } else
         boost::split(words, sentence, delimit, compress);
 
     return words;

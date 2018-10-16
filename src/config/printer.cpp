@@ -22,9 +22,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
 #include <boost/program_options.hpp>
+
 #include <bitcoin/infrastructure/config/parameter.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>

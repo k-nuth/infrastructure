@@ -20,6 +20,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "hmac_sha512.h"
 #include "zeroize.h"
 

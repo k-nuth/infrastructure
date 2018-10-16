@@ -27,6 +27,7 @@
 
 #include <stdint.h>
 #include <string.h>
+
 #include "sha256.h"
 #include "zeroize.h"
 

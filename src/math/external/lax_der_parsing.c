@@ -4,8 +4,8 @@
  * file COPYING or http://www.opensource.org/licenses/mit-license.php.*
  **********************************************************************/
 
-#include <string.h>
 #include <secp256k1.h>
+#include <string.h>
 
 #include "lax_der_parsing.h"
 

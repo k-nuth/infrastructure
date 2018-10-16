@@ -21,7 +21,9 @@
 #include <cstddef>
 #include <functional>
 #include <string>
+
 #include <boost/make_shared.hpp>
+
 #include <bitcoin/infrastructure/error.hpp>
 
 namespace libbitcoin {

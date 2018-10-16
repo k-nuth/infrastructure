@@ -28,10 +28,10 @@
 #ifdef BOOST_WINDOWS_API
     #include <windows.h>
 #else
-    #include <unistd.h>
     #include <pthread.h>
     #include <sys/resource.h>
     #include <sys/types.h>
+    #include <unistd.h>
     #ifndef PRIO_MAX
         #define PRIO_MAX 20
     #endif

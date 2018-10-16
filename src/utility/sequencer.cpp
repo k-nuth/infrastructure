@@ -19,6 +19,7 @@
 #include <bitcoin/infrastructure/utility/sequencer.hpp>
 
 #include <utility>
+
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>

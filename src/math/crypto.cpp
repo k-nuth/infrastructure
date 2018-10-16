@@ -22,6 +22,7 @@
 #include <bitcoin/infrastructure/math/hash.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
+
 #include "../math/external/aes256.h"
 
 namespace libbitcoin {

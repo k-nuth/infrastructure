@@ -20,6 +20,7 @@
 
 #include <memory>
 #include <string>
+
 #include <bitcoin/infrastructure/utility/delegates.hpp>
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 

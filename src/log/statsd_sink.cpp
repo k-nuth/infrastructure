@@ -20,6 +20,7 @@
 
 #include <map>
 #include <string>
+
 #include <boost/log/attributes.hpp>
 #include <boost/log/common.hpp>
 #include <boost/log/core.hpp>
@@ -27,6 +28,7 @@
 #include <boost/log/sinks.hpp>
 #include <boost/log/support/date_time.hpp>
 #include <boost/log/utility/setup/formatter_parser.hpp>
+
 #include <bitcoin/infrastructure/constants.hpp>
 #include <bitcoin/infrastructure/log/features/counter.hpp>
 #include <bitcoin/infrastructure/log/features/gauge.hpp>

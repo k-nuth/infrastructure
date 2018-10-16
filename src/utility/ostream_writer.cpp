@@ -20,11 +20,12 @@
 
 #include <algorithm>
 #include <iostream>
+
 #include <bitcoin/infrastructure/constants.hpp>
 // #include <bitcoin/infrastructure/math/limits.hpp>
 #include <bitcoin/infrastructure/utility/endian.hpp>
-#include <bitcoin/infrastructure/utility/reader.hpp>
 #include <bitcoin/infrastructure/utility/limits.hpp>
+#include <bitcoin/infrastructure/utility/reader.hpp>
 
 
 namespace libbitcoin {

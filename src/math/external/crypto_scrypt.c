@@ -32,8 +32,10 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <bitcoin/infrastructure/compat.h>
+
 #include "pbkdf2_sha256.h"
+
+#include <bitcoin/infrastructure/compat.h>
 
 static void blkcpy(uint8_t*, uint8_t*, size_t);
 static void blkxor(uint8_t*, uint8_t*, size_t);

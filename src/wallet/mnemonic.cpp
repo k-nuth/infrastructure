@@ -18,9 +18,13 @@
  */
 #include <bitcoin/infrastructure/wallet/mnemonic.hpp>
 
+#include "../math/external/pkcs5_pbkdf2.h"
+
 #include <algorithm>
 #include <cstdint>
+
 #include <boost/locale.hpp>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/unicode/unicode.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
@@ -28,7 +32,6 @@
 #include <bitcoin/infrastructure/utility/collection.hpp>
 #include <bitcoin/infrastructure/utility/string.hpp>
 #include <bitcoin/infrastructure/wallet/dictionary.hpp>
-#include "../math/external/pkcs5_pbkdf2.h"
 
 namespace libbitcoin {
 namespace wallet {

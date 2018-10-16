@@ -20,14 +20,17 @@
 
 #include <algorithm>
 #include <utility>
+
+#include "../math/external/lax_der_parsing.h"
+
+#include "secp256k1_initializer.hpp"
 #include <secp256k1.h>
 #include <secp256k1_recovery.h>
+
 #include <bitcoin/infrastructure/math/hash.hpp>
-#include <bitcoin/infrastructure/utility/limits.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
-#include "../math/external/lax_der_parsing.h"
-#include "secp256k1_initializer.hpp"
+#include <bitcoin/infrastructure/utility/limits.hpp>
 
 namespace libbitcoin {
 

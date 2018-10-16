@@ -22,8 +22,10 @@
 #include <iostream>
 #include <regex>
 #include <string>
+
 #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/formats/base_16.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>

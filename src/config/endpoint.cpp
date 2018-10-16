@@ -18,21 +18,19 @@
  */
 #include <bitcoin/infrastructure/config/endpoint.hpp>
 
-//#ifdef __MINGW32__
-//  #include <bitcoin/infrastructure/utility/byteswap.h>
-//#else
-  #include <bitcoin/infrastructure/utility/asio.hpp>
-//#endif
 
 #include <cstdint>
 #include <iostream>
 #include <regex>
 #include <string>
+
 #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
+
 #include <bitcoin/infrastructure/config/endpoint.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/formats/base_16.hpp>
+#include <bitcoin/infrastructure/utility/asio.hpp>
 
 namespace libbitcoin {
 namespace config {

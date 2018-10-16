@@ -20,7 +20,9 @@
 
 #include <iomanip>
 #include <sstream>
+
 #include <boost/algorithm/string.hpp>
+
 #include <bitcoin/infrastructure/constants.hpp>
 
 namespace libbitcoin {

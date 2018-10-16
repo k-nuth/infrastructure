@@ -18,9 +18,9 @@
  */
 #include <bitcoin/infrastructure/error.hpp>
 
+#include <bitcoin/infrastructure/compat.hpp>
 #include <boost/asio.hpp>
 #include <boost/system/error_code.hpp>
-#include <bitcoin/infrastructure/compat.hpp>
 
 using namespace bc;
 

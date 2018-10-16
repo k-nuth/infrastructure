@@ -19,6 +19,7 @@
 #include <bitcoin/infrastructure/formats/base_58.hpp>
 
 #include <boost/algorithm/string.hpp>
+
 #include <bitcoin/infrastructure/utility/assert.hpp>
 
 namespace libbitcoin {

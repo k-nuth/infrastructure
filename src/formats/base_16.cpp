@@ -21,7 +21,9 @@
 #include <algorithm>
 #include <iomanip>
 #include <sstream>
+
 #include <boost/algorithm/string.hpp>
+
 #include <bitcoin/infrastructure/utility/data.hpp>
 
 namespace libbitcoin {

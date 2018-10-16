@@ -19,6 +19,7 @@
 #include <bitcoin/infrastructure/utility/conditional_lock.hpp>
 
 #include <memory>
+
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
 namespace libbitcoin {

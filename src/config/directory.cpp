@@ -19,6 +19,7 @@
 #include <bitcoin/infrastructure/config/directory.hpp>
 
 #include <string>
+
 #include <bitcoin/infrastructure/unicode/unicode.hpp>
 
 #ifdef _MSC_VER

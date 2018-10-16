@@ -19,6 +19,7 @@
 #include <bitcoin/infrastructure/utility/deadline.hpp>
 
 #include <functional>
+
 #include <bitcoin/infrastructure/error.hpp>
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>

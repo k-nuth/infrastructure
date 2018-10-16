@@ -19,8 +19,8 @@
 #include <bitcoin/infrastructure/math/checksum.hpp>
 
 #include <bitcoin/infrastructure/math/hash.hpp>
-#include <bitcoin/infrastructure/utility/endian.hpp>
 #include <bitcoin/infrastructure/utility/deserializer.hpp>
+#include <bitcoin/infrastructure/utility/endian.hpp>
 
 namespace libbitcoin {
 

@@ -119,7 +119,8 @@ BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(checkpoint__ostream)
 
-static checkpoint const::list test_checkpoints_list(
+static 
+checkpoint::list const test_checkpoints_list(
 {
     { CHECKPOINT_A },
     { CHECKPOINT_B },

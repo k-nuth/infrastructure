@@ -18,16 +18,16 @@
  */
 #include <bitcoin/infrastructure/config/parser.hpp>
 
-#include <string>
+#include <iostream>
 #include <sstream>
+#include <string>
+
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
 #include <boost/throw_exception.hpp>
-#include <bitcoin/infrastructure/unicode/ifstream.hpp>
-// #include <bitcoin/infrastructure/multi_crypto_support.hpp>
 
-#include <iostream>
+#include <bitcoin/infrastructure/unicode/ifstream.hpp>
 
 namespace libbitcoin {
 namespace config {

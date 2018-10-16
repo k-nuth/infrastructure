@@ -19,6 +19,7 @@
 #include <bitcoin/infrastructure/utility/scope_lock.hpp>
 
 #include <memory>
+
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
 namespace libbitcoin {

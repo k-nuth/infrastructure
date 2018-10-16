@@ -24,6 +24,7 @@
 #include <errno.h>
 #include <new>
 #include <stdexcept>
+
 #include "../math/external/crypto_scrypt.h"
 #include "../math/external/hmac_sha256.h"
 #include "../math/external/hmac_sha512.h"

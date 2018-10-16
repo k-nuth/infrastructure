@@ -20,6 +20,7 @@
 
 #include <cstdint>
 #include <string>
+
 #include <bitcoin/infrastructure/math/elliptic_curve.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>
 

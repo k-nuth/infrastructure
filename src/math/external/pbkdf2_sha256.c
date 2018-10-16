@@ -29,10 +29,13 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include <sys/types.h>
-#include <bitcoin/infrastructure/compat.h>
+
 #include "hmac_sha256.h"
 #include "zeroize.h"
+
+#include <bitcoin/infrastructure/compat.h>
 
 static BI_C_INLINE void be32enc(void* pp, uint32_t x)
 {

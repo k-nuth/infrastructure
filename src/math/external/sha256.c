@@ -27,6 +27,7 @@
 
 #include <stdint.h>
 #include <string.h>
+
 #include "zeroize.h"
 
 static uint32_t be32dec(const void* pp)

@@ -32,8 +32,8 @@
  */
 #include "sha1.h"
 
-#include <stdint.h>
 #include <stddef.h>
+#include <stdint.h>
 
 #define SHIFT(bits, word) \
     (((word) << (bits)) | ((word) >> (32 - (bits))))

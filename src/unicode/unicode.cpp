@@ -25,7 +25,9 @@
 #include <mutex>
 #include <stdexcept>
 #include <string>
+
 #include <boost/locale.hpp>
+
 #include <bitcoin/infrastructure/define.hpp>
 // #include <bitcoin/infrastructure/math/limits.hpp>
 #include <bitcoin/infrastructure/unicode/console_streambuf.hpp>

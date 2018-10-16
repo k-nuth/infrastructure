@@ -20,6 +20,7 @@
 
 #include <cstdint>
 #include <string>
+
 #include <bitcoin/infrastructure/utility/data.hpp>
 
 // This implementation derived from public domain:

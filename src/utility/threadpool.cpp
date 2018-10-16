@@ -19,6 +19,7 @@
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 
 #include <thread>
+
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>

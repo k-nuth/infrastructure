@@ -22,6 +22,7 @@
 #include <cstring>
 #include <iostream>
 #include <streambuf>
+
 #include <bitcoin/infrastructure/constants.hpp>
 #include <bitcoin/infrastructure/unicode/unicode.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>

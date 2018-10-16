@@ -51,6 +51,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <string>
+
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
