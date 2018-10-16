@@ -100,7 +100,7 @@ BOOST_AUTO_TEST_CASE(mnemonic__validate_mnemonic__invalid)
 
 BOOST_AUTO_TEST_CASE(mnemonic__create_mnemonic__tiny)
 {
-    const data_chunk entropy(4, 0xa9);
+    data_chunk const entropy(4, 0xa9);
     auto const mnemonic = create_mnemonic(entropy);
     BOOST_REQUIRE_EQUAL(mnemonic.size(), 3u);
     BOOST_REQUIRE(validate_mnemonic(mnemonic));
@@ -108,7 +108,7 @@ BOOST_AUTO_TEST_CASE(mnemonic__create_mnemonic__tiny)
 
 BOOST_AUTO_TEST_CASE(mnemonic__create_mnemonic__giant)
 {
-    const data_chunk entropy(1024, 0xa9);
+    data_chunk const entropy(1024, 0xa9);
     auto const mnemonic = create_mnemonic(entropy);
     BOOST_REQUIRE_EQUAL(mnemonic.size(), 768u);
     BOOST_REQUIRE(validate_mnemonic(mnemonic));

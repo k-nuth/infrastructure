@@ -27,7 +27,7 @@ BOOST_AUTO_TEST_SUITE(binary__encoded)
 
 BOOST_AUTO_TEST_CASE(prefix_encoded__32_bits__expected_value)
 {
-    const data_chunk blocks{ { 0xba, 0xad, 0xf0, 0x0d } };
+    data_chunk const blocks{ { 0xba, 0xad, 0xf0, 0x0d } };
     const binary prefix(32, blocks);
     BOOST_REQUIRE_EQUAL(prefix.encoded(), "10111010101011011111000000001101");
 }
@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_SUITE(binary__to_string)
 
 BOOST_AUTO_TEST_CASE(prefix_to_string__32_bits__expected_value)
 {
-    const data_chunk blocks{ { 0xba, 0xad, 0xf0, 0x0d } };
+    data_chunk const blocks{ { 0xba, 0xad, 0xf0, 0x0d } };
     const binary prefix(32, blocks);
     std::stringstream stream;
     stream << prefix;
@@ -383,21 +383,21 @@ BOOST_AUTO_TEST_SUITE(binary__blocks)
 
 BOOST_AUTO_TEST_CASE(string_to_prefix__32_bits__expected_value)
 {
-    const data_chunk blocks{ { 0xba, 0xad, 0xf0, 0x0d } };
+    data_chunk const blocks{ { 0xba, 0xad, 0xf0, 0x0d } };
     const binary prefix("10111010101011011111000000001101");
     BOOST_REQUIRE(prefix.blocks() == blocks);
 }
 
 BOOST_AUTO_TEST_CASE(prefix_to_bytes__32_bits__expected_value)
 {
-    const data_chunk blocks{ { 0xba, 0xad, 0xf0, 0x0d } };
+    data_chunk const blocks{ { 0xba, 0xad, 0xf0, 0x0d } };
     const binary prefix(32, blocks);
     BOOST_REQUIRE(prefix.blocks() == blocks);
 }
 
 BOOST_AUTO_TEST_CASE(bytes_to_prefix__zero_bits__round_trips)
 {
-    const data_chunk bytes;
+    data_chunk const bytes;
     const binary prefix(0, bytes);
     std::stringstream stream;
     stream << prefix;
@@ -408,7 +408,7 @@ BOOST_AUTO_TEST_CASE(bytes_to_prefix__zero_bits__round_trips)
 
 BOOST_AUTO_TEST_CASE(prefix_to_bytes__zero_bits__round_trips)
 {
-    const data_chunk blocks{ { 0x00, 0x00, 0x00, 0x00 } };
+    data_chunk const blocks{ { 0x00, 0x00, 0x00, 0x00 } };
     const binary prefix(0, blocks);
     auto const bytes = prefix.blocks();
     std::stringstream stream;
@@ -432,7 +432,7 @@ BOOST_AUTO_TEST_CASE(bytes_to_prefix__one_bit__round_trips)
 
 BOOST_AUTO_TEST_CASE(prefix_to_bytes__one_bit__round_trips)
 {
-    const data_chunk blocks{ { 0xff, 0xff, 0xff, 0xff } };
+    data_chunk const blocks{ { 0xff, 0xff, 0xff, 0xff } };
     const binary prefix(1, blocks);
     auto const bytes = prefix.blocks();
     std::stringstream stream;
@@ -445,7 +445,7 @@ BOOST_AUTO_TEST_CASE(prefix_to_bytes__one_bit__round_trips)
 
 BOOST_AUTO_TEST_CASE(bytes_to_prefix__two_bits_leading_zero__round_trips)
 {
-    const data_chunk bytes{ { 0x01, 0x42, 0x42, 0x42, 0x42, 0x42, 0x42, 0x42 } };
+    data_chunk const bytes{ { 0x01, 0x42, 0x42, 0x42, 0x42, 0x42, 0x42, 0x42 } };
     auto const prefix = binary(2, bytes);
     std::stringstream stream;
     stream << prefix;
@@ -456,7 +456,7 @@ BOOST_AUTO_TEST_CASE(bytes_to_prefix__two_bits_leading_zero__round_trips)
 
 BOOST_AUTO_TEST_CASE(prefix_to_bytes__two_bits_leading_zero__round_trips)
 {
-    const data_chunk blocks{ { 0x42, 0x42, 0x42, 0x01 } };
+    data_chunk const blocks{ { 0x42, 0x42, 0x42, 0x01 } };
     const binary prefix(2, blocks);
     auto bytes = prefix.blocks();
     std::stringstream stream;
@@ -469,7 +469,7 @@ BOOST_AUTO_TEST_CASE(prefix_to_bytes__two_bits_leading_zero__round_trips)
 
 BOOST_AUTO_TEST_CASE(bytes_to_prefix__two_bytes_leading_null_byte__round_trips)
 {
-    const data_chunk bytes{ { 0xFF, 0x00 } };
+    data_chunk const bytes{ { 0xFF, 0x00 } };
     auto const prefix = binary(16, bytes);
     std::stringstream stream;
     stream << prefix;
@@ -480,7 +480,7 @@ BOOST_AUTO_TEST_CASE(bytes_to_prefix__two_bytes_leading_null_byte__round_trips)
 
 BOOST_AUTO_TEST_CASE(prefix_to_bytes__two_bytes_leading_null_byte__round_trips)
 {
-    const data_chunk blocks{ { 0x00, 0x00 } };
+    data_chunk const blocks{ { 0x00, 0x00 } };
     const binary prefix(16, blocks);
     auto bytes = prefix.blocks();
     std::stringstream stream;

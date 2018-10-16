@@ -48,8 +48,7 @@ unicode_streambuf::unicode_streambuf(std::wstreambuf* wide_buffer, size_t size)
     setp(narrow_, &narrow_[narrow_size_ - 1]);
 }
 
-unicode_streambuf::~unicode_streambuf()
-{
+unicode_streambuf::~unicode_streambuf() {
     sync();
     delete[] wide_;
     delete[] narrow_;
@@ -136,8 +135,7 @@ std::streambuf::int_type unicode_streambuf::overflow(
 };
 
 // Flush our output sequence.
-int unicode_streambuf::sync()
-{
+int unicode_streambuf::sync() {
     const int success = 0;
     const int failure = -1;
 

@@ -38,7 +38,7 @@ public:
     /**
      * Default constructor.
      */
-    base2();
+    base2() = default;
 
     /**
      * Initialization constructor.
@@ -55,7 +55,7 @@ public:
      * Copy constructor.
      * @param[in]  other  The object to copy into self on construct.
      */
-    base2(const base2& other);
+    base2(base2 const& x);
 
     /**
      * Get number of bits in value.
@@ -74,8 +74,8 @@ public:
      * @param[out]  argument  The object to receive the read value.
      * @return                The input stream reference.
      */
-    friend std::istream& operator>>(std::istream& input,
-        base2& argument);
+    friend 
+    std::istream& operator>>(std::istream& input, base2& argument);
 
     /**
      * Overload stream out.
@@ -83,8 +83,7 @@ public:
      * @param[out]  argument  The object from which to obtain the value.
      * @return                The output stream reference.
      */
-    friend std::ostream& operator<<(std::ostream& output,
-        const base2& argument);
+    friend std::ostream& operator<<(std::ostream& output, const base2& argument);
 
 private:
 

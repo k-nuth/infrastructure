@@ -34,7 +34,7 @@ static const uint64_t negative_bit = number::negative_mask;
 static const uint64_t unsigned_max_int64 = bc::max_int64;
 static const uint64_t absolute_min_int64 = bc::min_int64;
 
-inline bool is_negative(const data_chunk& data)
+inline bool is_negative(data_chunk const& data)
 {
     return (data.back() & number::negative_mask) != 0;
 }
@@ -53,7 +53,7 @@ inline number::number(int64_t value)
 //-----------------------------------------------------------------------------
 
 // The data is interpreted as little-endian.
-inline bool number::set_data(const data_chunk& data, size_t max_size)
+inline bool number::set_data(data_chunk const& data, size_t max_size)
 {
     if (data.size() > max_size)
         return false;

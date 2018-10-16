@@ -109,7 +109,7 @@ bool binary::operator[](size_type index) const
     return (block & bitmask) > 0;
 }
 
-const data_chunk& binary::blocks() const
+data_chunk const& binary::blocks() const
 {
     return blocks_;
 }

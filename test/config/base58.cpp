@@ -40,8 +40,8 @@ BOOST_AUTO_TEST_CASE(base58__constructor__default__does_not_throw)
 
 BOOST_AUTO_TEST_CASE(base58__constructor__valid_string_cast__decodes)
 {
-    const data_chunk original(BASE58_DECODED_A);
-    const data_chunk instance(base58(BASE58_ENCODED_A));
+    data_chunk const original(BASE58_DECODED_A);
+    data_chunk const instance(base58(BASE58_ENCODED_A));
     BOOST_REQUIRE(original == instance);
 }
 

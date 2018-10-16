@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE(base58_test)
 
 BOOST_AUTO_TEST_CASE(base58_address_test)
 {
-    const data_chunk pubkey
+    data_chunk const pubkey
     {
         {
             0x00, 0x5c, 0xc8, 0x7f, 0x4a, 0x3f, 0xdf, 0xe3,

@@ -68,7 +68,7 @@ public:
     explicit number(int64_t value);
 
     /// Replace the value derived from a byte vector with LSB first ordering.
-    bool set_data(const data_chunk& data, size_t max_size);
+    bool set_data(data_chunk const& data, size_t max_size);
 
     // Properties
     //-------------------------------------------------------------------------

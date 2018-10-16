@@ -23,26 +23,27 @@
 namespace libbitcoin {
 namespace machine {
 
-const uint8_t number::negative_1 = negative_mask | positive_1;
-const uint8_t number::negative_0 = negative_mask | positive_0;
-const uint8_t number::positive_0 = 0;
-const uint8_t number::positive_1 = 1;
-const uint8_t number::positive_2 = 2;
-const uint8_t number::positive_3 = 3;
-const uint8_t number::positive_4 = 4;
-const uint8_t number::positive_5 = 5;
-const uint8_t number::positive_6 = 6;
-const uint8_t number::positive_7 = 7;
-const uint8_t number::positive_8 = 8;
-const uint8_t number::positive_9 = 9;
-const uint8_t number::positive_10 = 10;
-const uint8_t number::positive_11 = 11;
-const uint8_t number::positive_12 = 12;
-const uint8_t number::positive_13 = 13;
-const uint8_t number::positive_14 = 14;
-const uint8_t number::positive_15 = 15;
-const uint8_t number::positive_16 = 16;
-const uint8_t number::negative_mask = 0x80;
+uint8_t const number::positive_0 = 0;
+uint8_t const number::positive_1 = 1;
+uint8_t const number::positive_2 = 2;
+uint8_t const number::positive_3 = 3;
+uint8_t const number::positive_4 = 4;
+uint8_t const number::positive_5 = 5;
+uint8_t const number::positive_6 = 6;
+uint8_t const number::positive_7 = 7;
+uint8_t const number::positive_8 = 8;
+uint8_t const number::positive_9 = 9;
+uint8_t const number::positive_10 = 10;
+uint8_t const number::positive_11 = 11;
+uint8_t const number::positive_12 = 12;
+uint8_t const number::positive_13 = 13;
+uint8_t const number::positive_14 = 14;
+uint8_t const number::positive_15 = 15;
+uint8_t const number::positive_16 = 16;
+
+uint8_t const number::negative_mask = 0x80;
+uint8_t const number::negative_1 = negative_mask | positive_1;
+uint8_t const number::negative_0 = negative_mask | positive_0;
 
 } // namespace machine
 } // namespace libbitcoin

@@ -44,7 +44,7 @@ public:
 
     void resize(size_type size);
     bool operator[](size_type index) const;
-    const data_chunk& blocks() const;
+    data_chunk const& blocks() const;
     std::string encoded() const;
 
     /// size in bits

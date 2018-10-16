@@ -284,7 +284,7 @@ BOOST_AUTO_TEST_CASE(data__to_array_slice__double_long_hash__expected)
 {
     const uint8_t l = 42;
     const uint8_t u = 24;
-    const data_chunk source
+    data_chunk const source
     {
         l, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -318,35 +318,35 @@ BOOST_AUTO_TEST_CASE(data__to_chunk__long_hash__expected)
 
 BOOST_AUTO_TEST_CASE(data__starts_with__empty_empty__true)
 {
-    static const data_chunk buffer{};
-    static const data_chunk sequence{};
+    static data_chunk const buffer{};
+    static data_chunk const sequence{};
     BOOST_REQUIRE(starts_with(buffer.begin(), buffer.end(), sequence));
 }
 
 BOOST_AUTO_TEST_CASE(data__starts_with__not_empty_empty__false)
 {
-    static const data_chunk buffer{};
-    static const data_chunk sequence{ 42 };
+    static data_chunk const buffer{};
+    static data_chunk const sequence{ 42 };
     BOOST_REQUIRE(!starts_with(buffer.begin(), buffer.end(), sequence));
 }
 
 BOOST_AUTO_TEST_CASE(data__starts_with__same_same__true)
 {
-    static const data_chunk buffer{ 42 };
-    static const data_chunk sequence{ 42 };
+    static data_chunk const buffer{ 42 };
+    static data_chunk const sequence{ 42 };
     BOOST_REQUIRE(starts_with(buffer.begin(), buffer.end(), sequence));
 }
 
 BOOST_AUTO_TEST_CASE(data__starts_with__too_short__false)
 {
-    static const data_chunk buffer{ 42 };
-    static const data_chunk sequence{ 42, 24 };
+    static data_chunk const buffer{ 42 };
+    static data_chunk const sequence{ 42, 24 };
     BOOST_REQUIRE(!starts_with(buffer.begin(), buffer.end(), sequence));
 }
 
 BOOST_AUTO_TEST_CASE(data__xor_data0__same__zeros)
 {
-    static const data_chunk source{ 0, 1 };
+    static data_chunk const source{ 0, 1 };
     auto const result = xor_data<2>(source, source);
     BOOST_REQUIRE_EQUAL(result.size(), 2u);
     BOOST_REQUIRE_EQUAL(result[0], 0);
@@ -355,14 +355,14 @@ BOOST_AUTO_TEST_CASE(data__xor_data0__same__zeros)
 
 BOOST_AUTO_TEST_CASE(data__xor_data1__empty__empty)
 {
-    static const data_chunk source{};
+    static data_chunk const source{};
     auto const result = xor_data<0>(source, source, 0);
     BOOST_REQUIRE_EQUAL(result.size(), 0);
 }
 
 BOOST_AUTO_TEST_CASE(data__xor_data1__same__zeros)
 {
-    static const data_chunk source{ 0, 1 };
+    static data_chunk const source{ 0, 1 };
     auto const result = xor_data<2>(source, source, 0);
     BOOST_REQUIRE_EQUAL(result.size(), 2u);
     BOOST_REQUIRE_EQUAL(result[0], 0);
@@ -371,7 +371,7 @@ BOOST_AUTO_TEST_CASE(data__xor_data1__same__zeros)
 
 BOOST_AUTO_TEST_CASE(data__xor_data1__same_offset__zeros)
 {
-    static const data_chunk source{ 0, 1, 0 };
+    static data_chunk const source{ 0, 1, 0 };
     auto const result = xor_data<2>(source, source, 1);
     BOOST_REQUIRE_EQUAL(result.size(), 2u);
     BOOST_REQUIRE_EQUAL(result[0], 0);
@@ -380,8 +380,8 @@ BOOST_AUTO_TEST_CASE(data__xor_data1__same_offset__zeros)
 
 BOOST_AUTO_TEST_CASE(data__xor_data1__distinct__ones)
 {
-    static const data_chunk source{ 0, 1, 0 };
-    static const data_chunk opposite{ 1, 0, 1 };
+    static data_chunk const source{ 0, 1, 0 };
+    static data_chunk const opposite{ 1, 0, 1 };
     auto const result = xor_data<3>(source, opposite, 0);
     BOOST_REQUIRE_EQUAL(result.size(), 3u);
     BOOST_REQUIRE_EQUAL(result[0], 1);
@@ -391,8 +391,8 @@ BOOST_AUTO_TEST_CASE(data__xor_data1__distinct__ones)
 
 BOOST_AUTO_TEST_CASE(data__xor_data1__distinct_bites__bits)
 {
-    static const data_chunk source1{ 42, 13 };
-    static const data_chunk source2{ 24, 13 };
+    static data_chunk const source1{ 42, 13 };
+    static data_chunk const source2{ 24, 13 };
     auto const result = xor_data<2>(source1, source2, 0);
     BOOST_REQUIRE_EQUAL(result.size(), 2u);
     BOOST_REQUIRE_EQUAL(result[0], 50u);
@@ -401,8 +401,8 @@ BOOST_AUTO_TEST_CASE(data__xor_data1__distinct_bites__bits)
 
 BOOST_AUTO_TEST_CASE(data__xor_data2__distinct_bites__bits)
 {
-    static const data_chunk source1{ 0, 42, 13 };
-    static const data_chunk source2{ 0, 0, 24, 13 };
+    static data_chunk const source1{ 0, 42, 13 };
+    static data_chunk const source2{ 0, 0, 24, 13 };
     auto const result = xor_data<2>(source1, source2, 1, 2);
     BOOST_REQUIRE_EQUAL(result.size(), 2u);
     BOOST_REQUIRE_EQUAL(result[0], 50u);

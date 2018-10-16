@@ -34,12 +34,12 @@
 namespace libbitcoin {
 namespace wallet {
 
-data_chunk qr::encode(const data_chunk& data)
+data_chunk qr::encode(data_chunk const& data)
 {
     return qr::encode(data, version, level, mode, case_sensitive);
 }
 
-data_chunk qr::encode(const data_chunk& data, uint32_t version,
+data_chunk qr::encode(data_chunk const& data, uint32_t version,
     error_recovery_level level, encode_mode mode, bool case_sensitive)
 {
     data_chunk out;

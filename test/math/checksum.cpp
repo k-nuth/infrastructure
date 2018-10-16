@@ -138,13 +138,13 @@ BOOST_AUTO_TEST_CASE(checksum__insert_checksum__underflow__false)
 
 BOOST_AUTO_TEST_CASE(checksum__verify_checksum__underflow__false)
 {
-    const data_chunk data = { 0, 0, 0 };
+    data_chunk const data = { 0, 0, 0 };
     BOOST_REQUIRE(!verify_checksum(data));
 }
 
 BOOST_AUTO_TEST_CASE(checksum__verify_checksum__not_set__false)
 {
-    const data_chunk data = { 0, 0, 0, 0, 0 };
+    data_chunk const data = { 0, 0, 0, 0, 0 };
     BOOST_REQUIRE(!verify_checksum(data));
 }
 

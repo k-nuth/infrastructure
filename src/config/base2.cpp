@@ -30,42 +30,35 @@
 namespace libbitcoin {
 namespace config {
 
-base2::base2()
-{
-}
+// base2::base2()
+// {
+// }
 
-base2::base2(std::string const& binary)
-{
+base2::base2(std::string const& binary) {
     std::stringstream(binary) >> *this;
 }
 
 base2::base2(const binary& value)
-  : value_(value)
-{
-}
+    : value_(value)
+{}
 
-base2::base2(const base2& other)
-  : base2(other.value_)
-{
-}
+base2::base2(base2 const& x)
+    : base2(x.value_)
+{}
 
-size_t base2::size() const
-{
+size_t base2::size() const {
     return value_.size();
 }
 
-base2::operator const binary&() const
-{
+base2::operator const binary&() const {
     return value_;
 }
 
-std::istream& operator>>(std::istream& input, base2& argument)
-{
+std::istream& operator>>(std::istream& input, base2& argument) {
     std::string binary;
     input >> binary;
 
-    if (!binary::is_base2(binary))
-    {
+    if ( ! binary::is_base2(binary)) {
         using namespace boost::program_options;
         BOOST_THROW_EXCEPTION(invalid_option_value(binary));
     }
@@ -75,8 +68,7 @@ std::istream& operator>>(std::istream& input, base2& argument)
     return input;
 }
 
-std::ostream& operator<<(std::ostream& output, const base2& argument)
-{
+std::ostream& operator<<(std::ostream& output, const base2& argument) {
     output << argument.value_;
     return output;
 }

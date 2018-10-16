@@ -31,42 +31,35 @@
 namespace libbitcoin {
 namespace config {
 
-base58::base58()
-{
-}
+// base58::base58()
+// {
+// }
 
-base58::base58(std::string const& base58)
-{
+base58::base58(std::string const& base58) {
     std::stringstream(base58) >> *this;
 }
 
-base58::base58(const data_chunk& value)
-  : value_(value)
-{
-}
+base58::base58(data_chunk const& value)
+    : value_(value)
+{}
 
-base58::base58(const base58& other)
-  : base58(other.value_)
-{
-}
+base58::base58(base58 const& x)
+    : base58(x.value_)
+{}
 
-base58::operator const data_chunk&() const
-{
+base58::operator data_chunk const&() const {
     return value_;
 }
 
-base58::operator data_slice() const
-{
+base58::operator data_slice() const {
     return value_;
 }
 
-std::istream& operator>>(std::istream& input, base58& argument)
-{
+std::istream& operator>>(std::istream& input, base58& argument) {
     std::string base58;
     input >> base58;
 
-    if (!decode_base58(argument.value_, base58))
-    {
+    if ( ! decode_base58(argument.value_, base58)) {
         using namespace boost::program_options;
         BOOST_THROW_EXCEPTION(invalid_option_value(base58));
     }
@@ -74,8 +67,7 @@ std::istream& operator>>(std::istream& input, base58& argument)
     return input;
 }
 
-std::ostream& operator<<(std::ostream& output, const base58& argument)
-{
+std::ostream& operator<<(std::ostream& output, const base58& argument) {
     output << encode_base58(argument.value_);
     return output;
 }

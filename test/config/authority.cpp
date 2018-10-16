@@ -17,8 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <sstream>
+
 #include <boost/program_options.hpp>
 #include <boost/test/unit_test.hpp>
+
 #include <bitcoin/infrastructure.hpp>
 
 using namespace bc;

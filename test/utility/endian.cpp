@@ -27,7 +27,7 @@ BOOST_AUTO_TEST_SUITE(endian_tests)
 
 BOOST_AUTO_TEST_CASE(endian__from_big_endian_stream_unsafe__insufficient_data__stream_failure)
 {
-    static const data_chunk data{ 0xFF };
+    static data_chunk const data{ 0xFF };
     data_source stream(data);
     BOOST_REQUIRE(!stream.eof());
 
@@ -65,7 +65,7 @@ BOOST_AUTO_TEST_CASE(endian__from_big_endian_stream_unsafe__valid__expected)
 
 BOOST_AUTO_TEST_CASE(endian__from_little_endian_stream_unsafe__insufficient_data__stream_failure)
 {
-    static const data_chunk data{ 0xFF };
+    static data_chunk const data{ 0xFF };
     data_source stream(data);
     BOOST_REQUIRE(!stream.eof());
 

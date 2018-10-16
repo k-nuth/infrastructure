@@ -37,7 +37,7 @@ public:
     /**
      * Default constructor.
      */
-    base64();
+    base64() = default;
 
     /**
      * Initialization constructor.
@@ -49,19 +49,19 @@ public:
      * Initialization constructor.
      * @param[in]  value  The value to initialize with.
      */
-    base64(const data_chunk& value);
+    base64(data_chunk const& value);
 
     /**
      * Copy constructor.
      * @param[in]  other  The object to copy into self on construct.
      */
-    base64(const base64& other);
+    base64(const base64& x);
 
     /**
      * Overload cast to internal type.
      * @return  This object's value cast to internal type reference.
      */
-    operator const data_chunk&() const;
+    operator data_chunk const&() const;
 
     /**
      * Overload cast to generic data reference.
@@ -75,8 +75,8 @@ public:
      * @param[out]  argument  The object to receive the read value.
      * @return                The input stream reference.
      */
-    friend std::istream& operator>>(std::istream& input,
-        base64& argument);
+    friend 
+    std::istream& operator>>(std::istream& input, base64& argument);
 
     /**
      * Overload stream out.
@@ -84,8 +84,8 @@ public:
      * @param[out]  argument  The object from which to obtain the value.
      * @return                The output stream reference.
      */
-    friend std::ostream& operator<<(std::ostream& output,
-        const base64& argument);
+    friend 
+    std::ostream& operator<<(std::ostream& output, const base64& argument);
 
 private:
 

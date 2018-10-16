@@ -78,7 +78,7 @@ BOOST_AUTO_TEST_CASE(elliptic_curve__sign__round_trip_positive__test)
 {
     ec_compressed point;
     ec_signature signature;
-    const data_chunk data{ 'd', 'a', 't', 'a' };
+    data_chunk const data{ 'd', 'a', 't', 'a' };
     const hash_digest hash = bitcoin_hash(data);
     const ec_secret secret = hash_literal(SECRET1);
     BOOST_REQUIRE(secret_to_public(point, secret));
@@ -90,7 +90,7 @@ BOOST_AUTO_TEST_CASE(elliptic_curve__sign__round_trip_negative__test)
 {
     ec_compressed point;
     ec_signature signature;
-    const data_chunk data{ 'd', 'a', 't', 'a' };
+    data_chunk const data{ 'd', 'a', 't', 'a' };
     hash_digest hash = bitcoin_hash(data);
     const ec_secret secret = base16_literal(SECRET1);
     BOOST_REQUIRE(secret_to_public(point, secret));

@@ -54,7 +54,7 @@ public:
     /// Constructors.
     hd_private();
     hd_private(const hd_private& other);
-    hd_private(const data_chunk& seed, uint64_t prefixes=mainnet);
+    hd_private(data_chunk const& seed, uint64_t prefixes=mainnet);
     hd_private(const hd_key& private_key);
     hd_private(const hd_key& private_key, uint64_t prefixes);
     hd_private(const hd_key& private_key, uint32_t public_prefix);

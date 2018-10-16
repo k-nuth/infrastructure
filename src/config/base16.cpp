@@ -31,42 +31,35 @@
 namespace libbitcoin {
 namespace config {
 
-base16::base16()
-{
-}
+// base16::base16()
+// {
+// }
 
-base16::base16(std::string const& hexcode)
-{
+base16::base16(std::string const& hexcode) {
     std::stringstream(hexcode) >> *this;
 }
 
-base16::base16(const data_chunk& value)
-  : value_(value)
-{
-}
+base16::base16(data_chunk const& value)
+    : value_(value)
+{}
 
-base16::base16(const base16& other)
-  : base16(other.value_)
-{
-}
+base16::base16(base16 const& x)
+    : base16(x.value_)
+{}
 
-base16::operator const data_chunk&() const
-{
+base16::operator data_chunk const&() const {
     return value_;
 }
 
-base16::operator data_slice() const
-{
+base16::operator data_slice() const {
     return value_;
 }
 
-std::istream& operator>>(std::istream& input, base16& argument)
-{
+std::istream& operator>>(std::istream& input, base16& argument) {
     std::string hexcode;
     input >> hexcode;
 
-    if (!decode_base16(argument.value_, hexcode))
-    {
+    if ( ! decode_base16(argument.value_, hexcode)) {
         using namespace boost::program_options;
         BOOST_THROW_EXCEPTION(invalid_option_value(hexcode));
     }
@@ -74,8 +67,7 @@ std::istream& operator>>(std::istream& input, base16& argument)
     return input;
 }
 
-std::ostream& operator<<(std::ostream& output, const base16& argument)
-{
+std::ostream& operator<<(std::ostream& output, const base16& argument) {
     output << encode_base16(argument.value_);
     return output;
 }

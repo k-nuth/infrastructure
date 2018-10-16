@@ -18,9 +18,11 @@
  */
 #include <sstream>
 #include <string>
+
 #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
 #include <boost/test/unit_test.hpp>
+
 #include <bitcoin/infrastructure.hpp>
 
 using namespace bc;

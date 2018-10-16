@@ -31,42 +31,35 @@
 namespace libbitcoin {
 namespace config {
 
-base64::base64()
-{
-}
+// base64::base64()
+// {
+// }
 
-base64::base64(std::string const& base64)
-{
+base64::base64(std::string const& base64) {
     std::stringstream(base64) >> *this;
 }
 
-base64::base64(const data_chunk& value)
-  : value_(value)
-{
-}
+base64::base64(data_chunk const& value)
+    : value_(value)
+{}
 
-base64::base64(const base64& other)
-  : base64(other.value_)
-{
-}
+base64::base64(base64 const& x)
+    : base64(x.value_)
+{}
 
-base64::operator const data_chunk&() const
-{
+base64::operator data_chunk const&() const {
     return value_;
 }
 
-base64::operator data_slice() const
-{
+base64::operator data_slice() const {
     return value_;
 }
 
-std::istream& operator>>(std::istream& input, base64& argument)
-{
+std::istream& operator>>(std::istream& input, base64& argument) {
     std::string base64;
     input >> base64;
 
-    if (!decode_base64(argument.value_, base64))
-    {
+    if ( ! decode_base64(argument.value_, base64)) {
         using namespace boost::program_options;
         BOOST_THROW_EXCEPTION(invalid_option_value(base64));
     }
@@ -74,8 +67,7 @@ std::istream& operator>>(std::istream& input, base64& argument)
     return input;
 }
 
-std::ostream& operator<<(std::ostream& output, const base64& argument)
-{
+std::ostream& operator<<(std::ostream& output, const base64& argument) {
     output << encode_base64(argument.value_);
     return output;
 }

@@ -39,7 +39,7 @@ public:
     /**
      * Default constructor.
      */
-    base16();
+    base16() = default;
 
     /**
      * Initialization constructor.
@@ -51,29 +51,28 @@ public:
      * Initialization constructor.
      * @param[in]  value  The value to initialize with.
      */
-    base16(const data_chunk& value);
+    base16(data_chunk const& value);
 
     /**
      * Initialization constructor.
      * @param[in]  value  The value to initialize with.
      */
-    template<size_t Size>
-    base16(const byte_array<Size>& value)
-      : value_(value.begin(), value.end())
-    {
-    }
+    template <size_t Size>
+    base16(byte_array<Size> const& value)
+        : value_(value.begin(), value.end())
+    {}
 
     /**
      * Copy constructor.
      * @param[in]  other  The object to copy into self on construct.
      */
-    base16(const base16& other);
+    base16(base16 const& x);
 
     /**
      * Overload cast to internal type.
      * @return  This object's value cast to internal type reference.
      */
-    operator const data_chunk&() const;
+    operator data_chunk const&() const;
 
     /**
      * Overload cast to generic data reference.
@@ -87,8 +86,8 @@ public:
      * @param[out]  argument  The object to receive the read value.
      * @return                The input stream reference.
      */
-    friend std::istream& operator>>(std::istream& input,
-        base16& argument);
+    friend 
+    std::istream& operator>>(std::istream& input, base16& argument);
 
     /**
      * Overload stream out.
@@ -96,8 +95,8 @@ public:
      * @param[out]  argument  The object from which to obtain the value.
      * @return                The output stream reference.
      */
-    friend std::ostream& operator<<(std::ostream& output,
-        const base16& argument);
+    friend 
+    std::ostream& operator<<(std::ostream& output, const base16& argument);
 
 private:
 

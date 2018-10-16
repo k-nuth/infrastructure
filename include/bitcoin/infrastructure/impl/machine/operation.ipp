@@ -67,7 +67,7 @@ inline operation::operation(data_chunk&& uncoded, bool minimal)
     }
 }
 
-inline operation::operation(const data_chunk& uncoded, bool minimal)
+inline operation::operation(data_chunk const& uncoded, bool minimal)
   : code_(opcode_from_data(uncoded, minimal)),
     data_(uncoded),
     valid_(!is_oversized())
@@ -95,7 +95,7 @@ inline operation::operation(opcode code, data_chunk&& data, bool valid)
 }
 
 // protected
-inline operation::operation(opcode code, const data_chunk& data, bool valid)
+inline operation::operation(opcode code, data_chunk const& data, bool valid)
   : code_(code), data_(data), valid_(valid)
 {
 }
@@ -168,7 +168,7 @@ inline opcode operation::code() const
     return code_;
 }
 
-inline const data_chunk& operation::data() const
+inline data_chunk const& operation::data() const
 {
     return data_;
 }
@@ -219,7 +219,7 @@ inline opcode operation::opcode_from_size(size_t size)
         return opcode::push_four_size;
 }
 
-inline opcode operation::minimal_opcode_from_data(const data_chunk& data)
+inline opcode operation::minimal_opcode_from_data(data_chunk const& data)
 {
     auto const size = data.size();
 
@@ -241,12 +241,12 @@ inline opcode operation::minimal_opcode_from_data(const data_chunk& data)
     return opcode_from_size(size);
 }
 
-inline opcode operation::nominal_opcode_from_data(const data_chunk& data)
+inline opcode operation::nominal_opcode_from_data(data_chunk const& data)
 {
     return opcode_from_size(data.size());
 }
 
-inline opcode operation::opcode_from_data(const data_chunk& data,
+inline opcode operation::opcode_from_data(data_chunk const& data,
     bool minimal)
 {
     return minimal ? minimal_opcode_from_data(data) :

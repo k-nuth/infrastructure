@@ -35,13 +35,13 @@
 
 namespace libbitcoin {
 
-bool png::write_png(const data_chunk& data, uint32_t size, std::ostream& out)
+bool png::write_png(data_chunk const& data, uint32_t size, std::ostream& out)
 {
     data_source istream(data);
     return png::write_png(istream, size, out);
 }
 
-bool png::write_png(const data_chunk& data, uint32_t size,
+bool png::write_png(data_chunk const& data, uint32_t size,
     uint32_t dots_per_inch, uint32_t margin, uint32_t inches_per_meter,
     const color& foreground, const color& background, std::ostream& out)
 {

@@ -42,7 +42,7 @@ network_address::network_address(uint32_t timestamp, uint64_t services,
 }
 
 network_address network_address::factory_from_data(uint32_t version,
-    const data_chunk& data, bool with_timestamp)
+    data_chunk const& data, bool with_timestamp)
 {
     network_address instance;
     instance.from_data(version, data, with_timestamp);
@@ -98,7 +98,7 @@ void network_address::reset()
 }
 
 bool network_address::from_data(uint32_t version,
-    const data_chunk& data, bool with_timestamp)
+    data_chunk const& data, bool with_timestamp)
 {
     data_source istream(data);
     return from_data(version, istream, with_timestamp);
