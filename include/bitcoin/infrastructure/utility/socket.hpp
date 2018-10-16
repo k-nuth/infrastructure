@@ -20,6 +20,7 @@
 #define BITPRIM_INFRASTRUCTURE_SOCKET_HPP
 
 #include <memory>
+
 #include <bitcoin/infrastructure/config/authority.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/error.hpp>

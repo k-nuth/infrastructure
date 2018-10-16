@@ -40,13 +40,15 @@ inline data_chunk to_chunk(uint8_t byte)
 inline data_chunk build_chunk(loaf slices, size_t extra_reserve)
 {
     size_t size = 0;
-    for (auto const slice: slices)
+    for (auto const slice: slices) {
         size += slice.size();
+}
 
     data_chunk out;
     out.reserve(size + extra_reserve);
-    for (auto const slice: slices)
+    for (auto const slice: slices) {
         out.insert(out.end(), slice.begin(), slice.end());
+}
 
     return out;
 }
@@ -55,11 +57,13 @@ template <size_t Size>
 bool build_array(byte_array<Size>& out, loaf slices)
 {
     size_t size = 0;
-    for (auto const slice: slices)
+    for (auto const slice: slices) {
         size += slice.size();
+}
 
-    if (size > Size)
+    if (size > Size) {
         return false;
+}
 
     auto position = out.begin();
     for (auto const slice: slices)
@@ -167,8 +171,9 @@ byte_array<Size> xor_data(data_slice bytes1, data_slice bytes2, size_t offset1,
     auto const& data1 = bytes1.data();
     auto const& data2 = bytes2.data();
     byte_array<Size> out;
-    for (size_t i = 0; i < Size; i++)
+    for (size_t i = 0; i < Size; i++) {
         out[i] = data1[i + offset1] ^ data2[i + offset2];
+}
 
     return out;
 }

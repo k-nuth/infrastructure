@@ -20,6 +20,7 @@
 #define LIBBITCOIN_INFRASTUCTURE_BASE_16_HPP
 
 #include <string>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>
 

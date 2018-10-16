@@ -24,6 +24,7 @@
 #include <memory>
 #include <string>
 #include <utility>
+
 #include <bitcoin/infrastructure/define.hpp>
 
 // libbitcoin defines the log and tracking but does not use them.

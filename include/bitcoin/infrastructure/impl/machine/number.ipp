@@ -55,17 +55,20 @@ inline number::number(int64_t value)
 // The data is interpreted as little-endian.
 inline bool number::set_data(data_chunk const& data, size_t max_size)
 {
-    if (data.size() > max_size)
+    if (data.size() > max_size) {
         return false;
+}
 
     value_ = 0;
 
-    if (data.empty())
+    if (data.empty()) {
         return true;
+}
 
     // This is "from little endian" with a variable buffer.
-    for (size_t i = 0; i != data.size(); ++i)
+    for (size_t i = 0; i != data.size(); ++i) {
         value_ |= static_cast<int64_t>(data[i]) << (8 * i);
+}
 
     if (is_negative(data))
     {
@@ -80,8 +83,9 @@ inline bool number::set_data(data_chunk const& data, size_t max_size)
 // The result is little-endian.
 inline data_chunk number::data() const
 {
-    if (value_ == 0)
-        return{};
+    if (value_ == 0) {
+        return{}
+};
 
     data_chunk data;
     const bool set_negative = value_ < 0;
@@ -99,19 +103,20 @@ inline data_chunk number::data() const
     // If the most significant byte is >= 0x80 and the value is negative,
     // push a new 0x80 byte that will be popped off when converting to
     // an integral.
-    if (negative_bit_set && set_negative)
+    if (negative_bit_set && set_negative) {
         data.push_back(number::negative_mask);
 
     // If the most significant byte is >= 0x80 and the value is positive,
     // push a new zero-byte to make the significant byte < 0x80 again.
-    else if (negative_bit_set)
+    } else if (negative_bit_set) {
         data.push_back(0);
 
     // If the most significant byte is < 0x80 and the value is negative,
     // add 0x80 to it, since it will be subtracted and interpreted as
     // a negative when converting to an integral.
-    else if (set_negative)
+    } else if (set_negative) {
         data.back() |= number::negative_mask;
+}
 
     return data;
 }

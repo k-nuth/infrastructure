@@ -22,6 +22,7 @@
 #include <cstdint>
 #include <istream>
 #include <vector>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/reader.hpp>

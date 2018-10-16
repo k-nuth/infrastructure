@@ -20,22 +20,21 @@
 #define BITPRIM_INFRASTRUCTURE_HANDLERS_HPP
 
 #include <functional>
+
 #include <bitcoin/infrastructure/error.hpp>
 
 namespace libbitcoin {
 
-    typedef std::function<void(const code&)> handle0;
+using handle0 = std::function<void(const code&)>;
 
-    template <typename Type>
-    using handle1 = std::function<void(const code&, const Type&)>;
+template <typename Type>
+using handle1 = std::function<void(const code&, const Type&)>;
 
-    template <typename Type1, typename Type2>
-    using handle2 = std::function<void(const code&, const Type1&,
-        const Type2&)>;
+template <typename Type1, typename Type2>
+using handle2 = std::function<void(const code&, const Type1&, const Type2&)>;
 
-    template <typename Type1, typename Type2, typename Type3>
-    using handle3 = std::function<void(const code&, const Type1&,
-        const Type2&, const Type3&)>;
+template <typename Type1, typename Type2, typename Type3>
+using handle3 = std::function<void(const code&, const Type1&, const Type2&, const Type3&)>;
 
 } // namespace libbitcoin
 

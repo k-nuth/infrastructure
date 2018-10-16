@@ -20,9 +20,11 @@
 #define BITPRIM_INFRASTRUCTURE_LOG_SOURCE_HPP
 
 #include <string>
+
 #include <boost/log/attributes/clock.hpp>
 #include <boost/log/sources/global_logger_storage.hpp>
 #include <boost/log/sources/severity_channel_logger.hpp>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/log/attributes.hpp>
 #include <bitcoin/infrastructure/log/severity.hpp>

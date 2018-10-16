@@ -21,6 +21,7 @@
 
 #include <random>
 #include <cstdint>
+
 #include <bitcoin/infrastructure/constants.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/asio.hpp>

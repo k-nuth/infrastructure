@@ -20,8 +20,10 @@
 #define BITPRIM_INFRASTRUCTURE_LOG_ATTRIBUTES_HPP
 
 #include <string>
+
 #include <boost/log/attributes/clock.hpp>
 #include <boost/log/expressions/keyword.hpp>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/log/severity.hpp>
 

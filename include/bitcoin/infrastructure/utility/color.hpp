@@ -20,6 +20,7 @@
 #define BITPRIM_INFRASTRUCTURE_COLOR_HPP
 
 #include <cstdint>
+
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 

@@ -21,6 +21,7 @@
 
 #include <cstdint>
 #include <istream>
+
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/color.hpp>

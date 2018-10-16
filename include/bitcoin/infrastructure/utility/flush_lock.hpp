@@ -20,7 +20,9 @@
 #define BITPRIM_INFRASTRUCTURE_CRASH_LOCK_HPP
 
 #include <memory>
+
 #include <boost/filesystem.hpp>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/unicode/file_lock.hpp>
 

@@ -28,15 +28,17 @@ template <unsigned Size>
 void ostream_writer::write_forward(const byte_array<Size>& value)
 {
     auto const size = value.size();
-    if (size > 0)
+    if (size > 0) {
         stream_.write(reinterpret_cast<const char*>(value.data()), size);
+}
 }
 
 template <unsigned Size>
 void ostream_writer::write_reverse(const byte_array<Size>& value)
 {
-    for (unsigned i = 0; i < Size; i++)
+    for (unsigned i = 0; i < Size; i++) {
         write_byte(value[Size - (i + 1)]);
+}
 }
 
 template <typename Integer>

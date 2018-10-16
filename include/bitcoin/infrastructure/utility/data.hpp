@@ -26,6 +26,7 @@
 #include <iterator>
 #include <queue>
 #include <vector>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/array_slice.hpp>
 

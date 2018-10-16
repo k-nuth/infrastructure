@@ -24,8 +24,7 @@
 namespace libbitcoin {
 namespace log {
 
-enum class severity
-{
+enum class severity {
     verbose,
     debug,
     info,

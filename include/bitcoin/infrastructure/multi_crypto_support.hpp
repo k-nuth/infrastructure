@@ -20,6 +20,7 @@
 #define BITPRIM_INFRASTRUCTURE_MULTI_INFRASTUCTURE_SUPPORT_HPP_
 
 #include <string>
+
 #include <bitcoin/infrastructure/config/settings.hpp>
 
 namespace libbitcoin {

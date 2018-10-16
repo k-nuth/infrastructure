@@ -22,6 +22,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <iostream>
+
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>

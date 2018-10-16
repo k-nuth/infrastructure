@@ -23,7 +23,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
 #include <boost/asio.hpp>
+
 #include <bitcoin/infrastructure/config/authority.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/formats/base_16.hpp>

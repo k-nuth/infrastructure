@@ -23,6 +23,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+
 #include <bitcoin/infrastructure/utility/dispatcher.hpp>
 #include <bitcoin/infrastructure/utility/enable_shared_from_base.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>

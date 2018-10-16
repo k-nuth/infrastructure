@@ -20,9 +20,11 @@
 #define BITPRIM_INFRASTRUCTURE_LOG_UDP_CLIENT_SINK_HPP
 
 #include <string>
+
 #include <boost/asio.hpp>
 #include <boost/log/sinks/basic_sink_backend.hpp>
 #include <boost/shared_ptr.hpp>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/error.hpp>
 

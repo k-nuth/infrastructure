@@ -20,6 +20,7 @@
 #define LIBBITCOIN_INFRASTUCTURE_MACHINE_NUMBER_HPP
 
 #include <cstddef>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 

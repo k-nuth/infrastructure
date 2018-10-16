@@ -55,8 +55,9 @@ boost::log::record rate_feature<BaseType>::open_record_unlocked(
 
     BOOST_SCOPE_EXIT_TPL((&tag)(&set))
     {
-        if (tag != set.end())
+        if (tag != set.end()) {
             set.erase(tag);
+}
     }
     BOOST_SCOPE_EXIT_END
 
@@ -73,8 +74,9 @@ boost::log::attribute_set::iterator
     auto pair = BaseType::add_attribute_unlocked(attributes::rate.get_name(),
         boost::log::attributes::constant<float>(value));
 
-    if (pair.second)
+    if (pair.second) {
         tag = pair.first;
+}
 
     return tag;
 }

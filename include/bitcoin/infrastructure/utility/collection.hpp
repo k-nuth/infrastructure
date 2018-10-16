@@ -23,6 +23,7 @@
 #include <iterator>
 #include <iostream>
 #include <vector>
+
 #include <bitcoin/infrastructure/define.hpp>
 
 /* NOTE: don't declare 'using namespace foo' in headers. */

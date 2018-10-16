@@ -20,6 +20,7 @@
 #define LIBBITCOIN_INFRASTUCTURE_MINI_KEYS_HPP
 
 #include <string>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/math/elliptic_curve.hpp>
 

@@ -22,7 +22,9 @@
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
+
 #include <boost/iostreams/stream.hpp>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/limits.hpp>

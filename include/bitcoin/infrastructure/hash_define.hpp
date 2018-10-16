@@ -22,8 +22,10 @@
 #include <cstddef>
 #include <string>
 #include <vector>
+
 #include <boost/functional/hash_fwd.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
+
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>

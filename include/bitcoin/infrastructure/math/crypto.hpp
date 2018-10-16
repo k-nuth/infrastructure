@@ -20,6 +20,7 @@
 #define LIBBITCOIN_INFRASTUCTURE_AES256_HPP
 
 #include <cstdint>
+
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>

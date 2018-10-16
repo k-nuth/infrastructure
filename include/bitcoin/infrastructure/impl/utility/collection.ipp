@@ -57,8 +57,9 @@ int find_pair_position(const std::vector<Pair>& list, const Key& key)
 
     auto it = std::find_if(list.begin(), list.end(), predicate);
 
-    if (it == list.end())
+    if (it == list.end()) {
         return -1;
+}
 
     return static_cast<int>(distance(list.begin(), it));
 }
@@ -68,8 +69,9 @@ int find_position(const Container& list, const Element& value)
 {
     auto const it = std::find(std::begin(list), std::end(list), value);
 
-    if (it == std::end(list))
+    if (it == std::end(list)) {
         return -1;
+}
 
     return static_cast<int>(std::distance(list.begin(), it));
 }
@@ -122,8 +124,9 @@ std::ostream& operator<<(std::ostream& output, const std::vector<Type>& list)
     {
         output << element;
 
-        if (++current < end)
+        if (++current < end) {
             output << std::endl;
+}
     }
 
     return output;

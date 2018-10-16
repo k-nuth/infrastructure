@@ -20,7 +20,9 @@
 #define BITPRIM_INFRASTRUCTURE_LOG_SINK_HPP
 
 #include <iostream>
+
 #include <boost/smart_ptr.hpp>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/log/rotable_file.hpp>
 #include <bitcoin/infrastructure/log/severity.hpp>

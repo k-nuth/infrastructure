@@ -14,6 +14,7 @@
 #define BITPRIM_INFRASTRUCTURE_INTERPROCESS_FILE_LOCK_HPP
 
 #include <string>
+
 #include <boost/interprocess/detail/config_begin.hpp>
 #include <boost/interprocess/detail/workaround.hpp>
 #include <boost/interprocess/exceptions.hpp>

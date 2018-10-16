@@ -38,8 +38,9 @@ bool build_checked_array(byte_array<Size>& out,
 template<size_t Size>
 bool insert_checksum(byte_array<Size>& out)
 {
-    if (out.size() < checksum_size)
+    if (out.size() < checksum_size) {
         return false;
+}
 
     data_chunk body(out.begin(), out.end() - checksum_size);
     auto const checksum = to_little_endian(bitcoin_checksum(body));
@@ -63,8 +64,9 @@ bool unwrap(uint8_t& out_version,
     std::array<uint8_t, UNWRAP_SIZE(Size)>& out_payload,
     uint32_t& out_checksum, const std::array<uint8_t, Size>& wrapped)
 {
-    if (!verify_checksum(wrapped))
+    if (!verify_checksum(wrapped)) {
         return false;
+}
 
     out_version = slice<0, 1>(wrapped)[0];
     out_payload = slice<1, Size - checksum_size>(wrapped);

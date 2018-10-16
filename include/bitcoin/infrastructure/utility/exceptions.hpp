@@ -20,14 +20,14 @@
 #define BITPRIM_INFRASTRUCTURE_EXCEPTIONS_HPP
 
 #include <exception>
+
 #include <bitcoin/infrastructure/define.hpp>
 
 namespace libbitcoin {
 
 class BI_API end_of_stream
-  : std::exception
-{
-};
+    : std::exception
+{};
 
 }
 

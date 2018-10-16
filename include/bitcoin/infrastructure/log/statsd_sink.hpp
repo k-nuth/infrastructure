@@ -20,6 +20,7 @@
 #define BITPRIM_INFRASTRUCTURE_LOG_STATSD_SINK_HPP
 
 #include <boost/asio.hpp>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/config/authority.hpp>
 #include <bitcoin/infrastructure/log/rotable_file.hpp>

@@ -22,6 +22,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <string>
+
 #include <bitcoin/infrastructure/error.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 // #include <bitcoin/infrastructure/math/hash.hpp>

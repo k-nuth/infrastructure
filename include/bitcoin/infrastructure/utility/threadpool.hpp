@@ -24,6 +24,7 @@
 #include <memory>
 #include <functional>
 #include <thread>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/noncopyable.hpp>

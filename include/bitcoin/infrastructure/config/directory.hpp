@@ -20,7 +20,9 @@
 #define LIBBITCOIN_INFRASTUCTURE_CONFIG_DIRECTORY_HPP
 
 #include <string>
+
 #include <boost/filesystem.hpp>
+
 #include <bitcoin/infrastructure/define.hpp>
 
 namespace libbitcoin {

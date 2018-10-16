@@ -21,6 +21,7 @@
 
 #include <cstdint>
 #include <string>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/machine/rule_fork.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>

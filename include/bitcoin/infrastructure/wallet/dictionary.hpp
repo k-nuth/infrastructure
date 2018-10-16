@@ -21,6 +21,7 @@
 
 #include <array>
 #include <vector>
+
 #include <bitcoin/infrastructure/compat.hpp>
 
 namespace libbitcoin {

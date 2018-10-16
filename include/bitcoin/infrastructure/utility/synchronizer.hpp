@@ -26,6 +26,7 @@
 #include <thread>
 #include <type_traits>
 #include <utility>
+
 #include <bitcoin/infrastructure/error.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
@@ -122,8 +123,9 @@ public:
         mutex_->unlock();
         ///////////////////////////////////////////////////////////////////////
 
-        if (cleared)
+        if (cleared) {
             handler_(result(ec), std::forward<Args>(args)...);
+}
     }
 
 private:

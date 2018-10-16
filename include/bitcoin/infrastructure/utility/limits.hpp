@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <stdexcept>
 #include <limits>
+
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
 
@@ -69,8 +70,9 @@ Integer safe_add(Integer left, Integer right)
 {
     static auto const maximum = (std::numeric_limits<Integer>::max)();
 
-    if (left > maximum - right)
+    if (left > maximum - right) {
         throw std::overflow_error("addition overflow");
+}
 
     return left + right;
 }
@@ -80,8 +82,9 @@ Integer safe_subtract(Integer left, Integer right)
 {
     static auto const minimum = (std::numeric_limits<Integer>::min)();
 
-    if (left < minimum + right)
+    if (left < minimum + right) {
         throw std::underflow_error("subtraction underflow");
+}
 
     return left - right;
 }
@@ -106,8 +109,9 @@ To safe_signed(From signed_value)
     static auto const signed_minimum = (std::numeric_limits<To>::min)();
     static auto const signed_maximum = (std::numeric_limits<To>::max)();
 
-    if (signed_value < signed_minimum || signed_value > signed_maximum)
+    if (signed_value < signed_minimum || signed_value > signed_maximum) {
         throw std::range_error("signed assignment out of range");
+}
 
     return static_cast<To>(signed_value);
 }
@@ -118,8 +122,9 @@ To safe_unsigned(From unsigned_value)
     static auto const unsigned_minimum = (std::numeric_limits<To>::min)();
     static auto const unsigned_maximum = (std::numeric_limits<To>::max)();
 
-    if (unsigned_value < unsigned_minimum || unsigned_value > unsigned_maximum)
+    if (unsigned_value < unsigned_minimum || unsigned_value > unsigned_maximum) {
         throw std::range_error("unsigned assignment out of range");
+}
 
     return static_cast<To>(unsigned_value);
 }
@@ -130,8 +135,9 @@ To safe_to_signed(From unsigned_value)
     static_assert(sizeof(uint64_t) >= sizeof(To), "safe assign out of range");
     static auto const signed_maximum = (std::numeric_limits<To>::max)();
 
-    if (unsigned_value > static_cast<uint64_t>(signed_maximum))
+    if (unsigned_value > static_cast<uint64_t>(signed_maximum)) {
         throw std::range_error("to signed assignment out of range");
+}
 
     return static_cast<To>(unsigned_value);
 }
@@ -143,8 +149,9 @@ To safe_to_unsigned(From signed_value)
     static auto const unsigned_maximum = (std::numeric_limits<To>::max)();
 
     if (signed_value < 0 ||
-        static_cast<uint64_t>(signed_value) > unsigned_maximum)
+        static_cast<uint64_t>(signed_value) > unsigned_maximum) {
         throw std::range_error("to unsigned assignment out of range");
+}
 
     return static_cast<To>(signed_value);
 }
@@ -156,11 +163,13 @@ To domain_constrain(From value)
     static auto const minimum = (std::numeric_limits<To>::min)();
     static auto const maximum = (std::numeric_limits<To>::max)();
 
-    if (value < minimum)
+    if (value < minimum) {
         return minimum;
+}
 
-    if (value > maximum)
+    if (value > maximum) {
         return maximum;
+}
 
     return static_cast<To>(value);
 }
@@ -169,11 +178,13 @@ To domain_constrain(From value)
 template <typename To, typename From>
 To range_constrain(From value, To minimum, To maximum)
 {
-    if (value < minimum)
+    if (value < minimum) {
         return minimum;
+}
 
-    if (value > maximum)
+    if (value > maximum) {
         return maximum;
+}
 
     return static_cast<To>(value);
 }

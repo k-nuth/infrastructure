@@ -23,6 +23,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/formats/base_16.hpp>
 

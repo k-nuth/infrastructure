@@ -38,8 +38,9 @@ byte_array<Size> istream_reader::read_reverse()
 {
     byte_array<Size> out;
 
-    for (unsigned i = 0; i < Size; i++)
+    for (unsigned i = 0; i < Size; i++) {
         out[Size - (i + 1)] = read_byte();
+}
 
     return out;
 }

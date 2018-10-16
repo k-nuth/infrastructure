@@ -24,6 +24,7 @@
 #include <functional>
 #include <memory>
 #include <vector>
+
 #include <bitcoin/infrastructure/error.hpp>
 #include <bitcoin/infrastructure/utility/noncopyable.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>

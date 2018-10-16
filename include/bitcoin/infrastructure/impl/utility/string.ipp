@@ -27,19 +27,21 @@ namespace libbitcoin {
 template <typename Value>
 Value deserialize(std::string const& text, bool trim)
 {
-    if (trim)
+    if (trim) {
         return boost::lexical_cast<Value>(boost::trim_copy(text));
-    else
+    } else {
         return boost::lexical_cast<Value>(text);
+}
 }
 
 template <typename Value>
 void deserialize(Value& value, std::string const& text, bool trim)
 {
-    if (trim)
+    if (trim) {
         value = boost::lexical_cast<Value>(boost::trim_copy(text));
-    else
+    } else {
         value = boost::lexical_cast<Value>(text);
+}
 }
 
 template <typename Value>

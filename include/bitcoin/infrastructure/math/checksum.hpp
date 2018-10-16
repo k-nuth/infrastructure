@@ -23,6 +23,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <initializer_list>
+
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>

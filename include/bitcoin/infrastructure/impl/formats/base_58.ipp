@@ -32,8 +32,9 @@ template <size_t Size>
 bool decode_base58(byte_array<Size>& out, std::string const &in)
 {
     byte_array<Size> result;
-    if (!decode_base58_private(result.data(), result.size(), in.data()))
+    if (!decode_base58_private(result.data(), result.size(), in.data())) {
         return false;
+}
 
     out = result;
     return true;

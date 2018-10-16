@@ -20,6 +20,7 @@
 #define BITPRIM_INFRASTRUCTURE_DEADLINE_HPP
 
 #include <memory>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/error.hpp>
 #include <bitcoin/infrastructure/utility/asio.hpp>

@@ -21,6 +21,7 @@
 
 #include <cstdint>
 #include <string>
+
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 

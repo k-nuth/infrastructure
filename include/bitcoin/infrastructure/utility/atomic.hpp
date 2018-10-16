@@ -21,6 +21,7 @@
 
 #include <type_traits>
 #include <utility>
+
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
 namespace libbitcoin {

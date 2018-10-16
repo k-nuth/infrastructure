@@ -22,6 +22,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <istream>
+
 #include <bitcoin/infrastructure/utility/reader.hpp>
 
 namespace libbitcoin {

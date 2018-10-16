@@ -20,6 +20,7 @@
 #define BITPRIM_INFRASTRUCTURE_ENDIAN_HPP
 
 #include <istream>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 

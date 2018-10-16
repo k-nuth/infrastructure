@@ -19,6 +19,7 @@
 #define BITPRIM_INFRASTRUCTURE_LOG_FILE_COUNTER_FORMATTER_HPP
 
 #include <sstream>
+
 #include <boost/filesystem/path.hpp>
 
 #include <bitcoin/infrastructure/define.hpp>

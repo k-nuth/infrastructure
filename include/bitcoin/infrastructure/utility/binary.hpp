@@ -21,6 +21,7 @@
 
 #include <cstdint>
 #include <string>
+
 #include <bitcoin/infrastructure/constants.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 

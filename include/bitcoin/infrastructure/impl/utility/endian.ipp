@@ -33,8 +33,9 @@ Integer from_big_endian(Iterator start, const Iterator end)
     Integer out = 0;
     size_t i = sizeof(Integer);
 
-    while (0 < i && start != end)
+    while (0 < i && start != end) {
         out |= static_cast<Integer>(*start++) << (8 * --i);
+}
 
     return out;
 }
@@ -47,8 +48,9 @@ Integer from_little_endian(Iterator start, const Iterator end)
     Integer out = 0;
     size_t i = 0;
 
-    while (i < sizeof(Integer) && start != end)
+    while (i < sizeof(Integer) && start != end) {
         out |= static_cast<Integer>(*start++) << (8 * i++);
+}
 
     return out;
 }
@@ -60,8 +62,9 @@ Integer from_big_endian_unsafe(Iterator start)
     Integer out = 0;
     size_t i = sizeof(Integer);
 
-    while (0 < i)
+    while (0 < i) {
         out |= static_cast<Integer>(*start++) << (8 * --i);
+}
 
     return out;
 }
@@ -73,8 +76,9 @@ Integer from_little_endian_unsafe(Iterator start)
     Integer out = 0;
     size_t i = 0;
 
-    while (i < sizeof(Integer))
+    while (i < sizeof(Integer)) {
         out |= static_cast<Integer>(*start++) << (8 * i++);
+}
 
     return out;
 }

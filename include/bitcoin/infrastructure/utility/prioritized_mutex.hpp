@@ -20,6 +20,7 @@
 #define BITPRIM_INFRASTRUCTURE_PRIORITIZED_MUTEX_HPP
 
 #include <memory>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 

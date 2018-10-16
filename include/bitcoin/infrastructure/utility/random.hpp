@@ -20,6 +20,7 @@
 #define BITPRIM_INFRASTRUCTURE_RANDOM_HPP
 
 #include <cstdint>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>

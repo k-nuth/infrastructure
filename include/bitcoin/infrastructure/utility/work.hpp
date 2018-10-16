@@ -23,6 +23,7 @@
 #include <string>
 #include <memory>
 #include <utility>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/error.hpp>
 #include <bitcoin/infrastructure/utility/asio.hpp>

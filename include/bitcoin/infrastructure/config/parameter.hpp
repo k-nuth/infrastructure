@@ -22,7 +22,9 @@
 #include <string>
 #include <utility>
 #include <vector>
+
 #include <boost/program_options.hpp>
+
 #include <bitcoin/infrastructure/define.hpp>
 
 /* NOTE: don't declare 'using namespace foo' in headers. */

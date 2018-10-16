@@ -21,6 +21,7 @@
 
 #include <cstddef>
 #include <streambuf>
+
 #include <bitcoin/infrastructure/define.hpp>
 
 namespace libbitcoin {

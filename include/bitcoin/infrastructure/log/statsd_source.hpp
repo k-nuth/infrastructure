@@ -20,10 +20,12 @@
 #define BITPRIM_INFRASTRUCTURE_LOG_STATSD_SOURCE_HPP
 
 #include <chrono>
+
 #include <boost/log/sources/basic_logger.hpp>
 #include <boost/log/sources/features.hpp>
 #include <boost/log/sources/global_logger_storage.hpp>
 #include <boost/log/sources/threading_models.hpp>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/log/features/counter.hpp>
 #include <bitcoin/infrastructure/log/features/gauge.hpp>

@@ -20,6 +20,7 @@
 #define BITPRIM_INFRASTRUCTURE_OSTREAM_WRITER_HPP
 
 #include <ostream>
+
 #include <bitcoin/infrastructure/error.hpp>
 #include <bitcoin/infrastructure/utility/writer.hpp>
 

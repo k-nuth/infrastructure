@@ -20,6 +20,7 @@
 #define LIBBITCOIN_INFRASTUCTURE_ELLIPTIC_CURVE_HPP
 
 #include <cstddef>
+
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>

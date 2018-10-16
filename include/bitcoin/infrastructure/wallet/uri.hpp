@@ -21,6 +21,7 @@
 
 #include <map>
 #include <string>
+
 #include <bitcoin/infrastructure/define.hpp>
 
 namespace libbitcoin {

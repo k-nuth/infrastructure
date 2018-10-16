@@ -20,8 +20,10 @@
 #define LIBBITCOIN_INFRASTUCTURE_CONFIG_PARSER_HPP
 
 #include <string>
+
 #include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/config/checkpoint.hpp>
 

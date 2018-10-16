@@ -22,6 +22,7 @@
 #include <functional>
 #include <memory>
 #include <queue>
+
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/enable_shared_from_base.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>

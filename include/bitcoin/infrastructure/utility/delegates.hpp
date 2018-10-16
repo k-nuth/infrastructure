@@ -20,6 +20,7 @@
 #define BITPRIM_INFRASTRUCTURE_DELEGATES_HPP
 
 #include <functional>
+
 #include <bitcoin/infrastructure/utility/work.hpp>
 
 namespace libbitcoin {
