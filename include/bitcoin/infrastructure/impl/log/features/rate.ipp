@@ -71,7 +71,7 @@ boost::log::attribute_set::iterator
     boost::log::attribute_set& set, const Value& value)
 {
     auto tag = set.end();
-    auto pair = BaseType::add_attribute_unlocked(attributes::rate.get_name(),
+    auto pair = BaseType::add_attribute_unlocked(attributes::rate_type::get_name(),
         boost::log::attributes::constant<float>(value));
 
     if (pair.second) {

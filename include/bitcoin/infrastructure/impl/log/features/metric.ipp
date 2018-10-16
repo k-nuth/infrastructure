@@ -27,7 +27,7 @@ template <typename BaseType>
 metric_feature<BaseType>::metric_feature()
   : BaseType(), metric_attribute_(metric_type())
 {
-    BaseType::add_attribute_unlocked(attributes::metric.get_name(),
+    BaseType::add_attribute_unlocked(attributes::metric_type::get_name(),
         metric_attribute_);
 }
 
@@ -36,7 +36,7 @@ metric_feature<BaseType>::metric_feature(const metric_feature& x)
   : BaseType(static_cast<const BaseType&>(x)),
     metric_attribute_(x.metric_attribute_)
 {
-    BaseType::attributes()[attributes::metric.get_name()] = metric_attribute_;
+    BaseType::attributes()[attributes::metric_type::get_name()] = metric_attribute_;
 }
 
 template <typename BaseType>
@@ -45,7 +45,7 @@ metric_feature<BaseType>::metric_feature(const Arguments& arguments)
   : BaseType(arguments),
     metric_attribute_(arguments[keywords::metric || metric_type()])
 {
-    BaseType::add_attribute_unlocked(attributes::metric.get_name(),
+    BaseType::add_attribute_unlocked(attributes::metric_type::get_name(),
         metric_attribute_);
 }
 

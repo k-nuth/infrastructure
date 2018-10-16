@@ -59,43 +59,39 @@ static auto const statsd_filter = has_attr(attributes::metric) &&
     (has_attr(attributes::counter) || has_attr(attributes::gauge) ||
         has_attr(attributes::timer));
 
-void statsd_formatter(const record_view& record, formatting_ostream& stream)
-{
+void statsd_formatter(const record_view& record, formatting_ostream& stream) {
     // Get the LineID attribute value and put it into the stream.
     stream << record[attributes::metric] << ":";
 
-    if (has_attribute<int64_t>(attributes::counter.get_name())(record)) {
+    if (has_attribute<int64_t>(attributes::counter_type::get_name())(record)) {
         stream << record[attributes::counter] << "|c";
-}
+    }
 
-    if (has_attribute<uint64_t>(attributes::gauge.get_name())(record)) {
+    if (has_attribute<uint64_t>(attributes::gauge_type::get_name())(record)) {
         stream << record[attributes::gauge] << "|g";
-}
+    }
 
-    if (has_attribute<asio::milliseconds>(attributes::timer.get_name())(record)) {
+    if (has_attribute<asio::milliseconds>(attributes::timer_type::get_name())(record)) {
         stream << record[attributes::timer].get().count() << "|ms";
-}
+    }
 
-    if (has_attribute<float>(attributes::rate.get_name())(record)) {
+    if (has_attribute<float>(attributes::rate_type::get_name())(record)) {
         stream << "|@" << record[attributes::rate];
-}
+    }
 }
 
-static boost::shared_ptr<collector> file_collector(
-    const rotable_file& rotation)
-{
+static 
+boost::shared_ptr<collector> file_collector(const rotable_file& rotation) {
     // rotation_size controls enable/disable so use zero as max sentinel.
     return bc::log::make_collector(
         rotation.archive_directory,
-        rotation.maximum_archive_size == 0 ? max_size_t :
-            rotation.maximum_archive_size,
+        rotation.maximum_archive_size == 0 ? max_size_t : rotation.maximum_archive_size,
         rotation.minimum_free_space,
-        rotation.maximum_archive_files == 0 ? max_size_t :
-            rotation.maximum_archive_files);
+        rotation.maximum_archive_files == 0 ? max_size_t : rotation.maximum_archive_files);
 }
 
-static boost::shared_ptr<text_file_sink> add_text_file_sink(
-    const rotable_file& rotation)
+static 
+boost::shared_ptr<text_file_sink> add_text_file_sink(const rotable_file& rotation)
 {
     // Construct a log sink.
     auto const sink = boost::make_shared<text_file_sink>();
@@ -105,8 +101,7 @@ static boost::shared_ptr<text_file_sink> add_text_file_sink(
     backend->set_file_name_pattern(rotation.original_log);
 
     // Set archival parameters.
-    if (rotation.rotation_size != 0)
-    {
+    if (rotation.rotation_size != 0) {
         backend->set_rotation_size(rotation.rotation_size);
         backend->set_file_collector(file_collector(rotation));
     }
@@ -122,8 +117,7 @@ static boost::shared_ptr<text_file_sink> add_text_file_sink(
     return sink;
 }
 
-void initialize_statsd(const rotable_file& file)
-{
+void initialize_statsd(const rotable_file& file) {
     add_text_file_sink(file)->set_filter(statsd_filter);
 }
 
@@ -132,8 +126,7 @@ boost::shared_ptr<text_udp_sink> add_udp_sink(threadpool& pool, authority const&
     auto socket = boost::make_shared<udp::socket>(pool.service());
     socket->open(udp::v6());
 
-    auto endpoint = boost::make_shared<udp::endpoint>(server.asio_ip(),
-        server.port());
+    auto endpoint = boost::make_shared<udp::endpoint>(server.asio_ip(), server.port());
 
     // Construct a log sink.
     auto const backend = boost::make_shared<udp_client_sink>(socket, endpoint);
@@ -150,7 +143,7 @@ boost::shared_ptr<text_udp_sink> add_udp_sink(threadpool& pool, authority const&
 void initialize_statsd(threadpool& pool, authority const& server) {
     if (server) {
         add_udp_sink(pool, server)->set_filter(statsd_filter);
-}
+    }
 }
 
 } // namespace log

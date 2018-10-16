@@ -30,36 +30,29 @@ namespace features {
 
 template <typename BaseType>
 gauge_feature<BaseType>::gauge_feature()
-{
-}
+{}
 
 template <typename BaseType>
 gauge_feature<BaseType>::gauge_feature(const gauge_feature& other)
-  : BaseType(static_cast<const BaseType&>(other))
-{
-}
+    : BaseType(static_cast<const BaseType&>(other))
+{}
 
 template <typename BaseType>
 template <typename Arguments>
 gauge_feature<BaseType>::gauge_feature(const Arguments& arguments)
-  : BaseType(arguments)
-{
-}
+    : BaseType(arguments)
+{}
 
 template <typename BaseType>
 template <typename Arguments>
-boost::log::record gauge_feature<BaseType>::open_record_unlocked(
-    const Arguments& arguments)
-{
+boost::log::record gauge_feature<BaseType>::open_record_unlocked(const Arguments& arguments) {
     auto& set = BaseType::attributes();
-    auto tag = add_gauge_unlocked(set,
-        arguments[keywords::gauge | boost::parameter::void_()]);
+    auto tag = add_gauge_unlocked(set, arguments[keywords::gauge | boost::parameter::void_()]);
 
-    BOOST_SCOPE_EXIT_TPL((&tag)(&set))
-    {
+    BOOST_SCOPE_EXIT_TPL((&tag)(&set)) {
         if (tag != set.end()) {
             set.erase(tag);
-}
+        }
     }
     BOOST_SCOPE_EXIT_END
 
@@ -69,25 +62,21 @@ boost::log::record gauge_feature<BaseType>::open_record_unlocked(
 template <typename BaseType>
 template <typename Value>
 boost::log::attribute_set::iterator
-    gauge_feature<BaseType>::add_gauge_unlocked(
-        boost::log::attribute_set& set, const Value& value)
-{
+gauge_feature<BaseType>::add_gauge_unlocked(boost::log::attribute_set& set, const Value& value) {
     auto tag = set.end();
-    auto pair = BaseType::add_attribute_unlocked(attributes::gauge.get_name(),
+    auto pair = BaseType::add_attribute_unlocked(attributes::gauge_type::get_name(),
         boost::log::attributes::constant<uint64_t>(value));
 
     if (pair.second) {
         tag = pair.first;
-}
+    }
 
     return tag;
 }
 
 template <typename BaseType>
 boost::log::attribute_set::iterator
-    gauge_feature<BaseType>::add_gauge_unlocked(
-        boost::log::attribute_set& set, boost::parameter::void_ /*unused*/)
-{
+gauge_feature<BaseType>::add_gauge_unlocked(boost::log::attribute_set& set, boost::parameter::void_ /*unused*/) {
     return set.end();
 }
 

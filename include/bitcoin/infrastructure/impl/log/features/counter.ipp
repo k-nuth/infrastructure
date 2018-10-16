@@ -62,10 +62,10 @@ boost::log::record counter_feature<BaseType>::open_record_unlocked(const Argumen
 template <typename BaseType>
 template <typename Value>
 boost::log::attribute_set::iterator
-    counter_feature<BaseType>::add_counter_unlocked(boost::log::attribute_set& set, const Value& value) {
+counter_feature<BaseType>::add_counter_unlocked(boost::log::attribute_set& set, const Value& value) {
     auto tag = set.end();
     auto pair = BaseType::add_attribute_unlocked(
-        attributes::counter.get_name(),
+        attributes::counter_type::get_name(),
         boost::log::attributes::constant<int64_t>(value));
 
     if (pair.second) {
@@ -77,7 +77,7 @@ boost::log::attribute_set::iterator
 
 template <typename BaseType>
 boost::log::attribute_set::iterator
-    counter_feature<BaseType>::add_counter_unlocked(boost::log::attribute_set& set, boost::parameter::void_ /*unused*/) {
+counter_feature<BaseType>::add_counter_unlocked(boost::log::attribute_set& set, boost::parameter::void_ /*unused*/) {
     return set.end();
 }
 
