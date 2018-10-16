@@ -40,12 +40,8 @@ bool binary::is_base2(std::string const& text) {
             return false;
         }
     }
-
     return true;
 }
-
-binary::binary()
-{}
 
 binary::binary(std::string const& bit_string)
     : binary()

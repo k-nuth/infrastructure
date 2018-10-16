@@ -30,7 +30,7 @@ public:
     void operator=(const noncopyable&) = delete;
 
 protected:
-    noncopyable() {}
+    noncopyable() = default;
 };
 
 } // namespace libbitcoin

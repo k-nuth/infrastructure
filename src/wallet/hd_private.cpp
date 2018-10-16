@@ -103,7 +103,7 @@ hd_private hd_private::from_seed(data_slice seed, uint64_t prefixes) {
     // The key is invalid if parse256(IL) >= n or 0:
     if ( ! verify(intermediate.left)) {
         return {};
-    };
+    }
 
     auto const master = hd_lineage {
         prefixes,

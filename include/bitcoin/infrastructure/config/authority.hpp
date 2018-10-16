@@ -48,7 +48,7 @@ public:
     /**
      * Default constructor.
      */
-    authority();
+    authority() = default;
 
     /**
      * Copy constructor.

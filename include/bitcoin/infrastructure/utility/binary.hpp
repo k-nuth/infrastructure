@@ -41,7 +41,7 @@ public:
     static 
     bool is_base2(std::string const& text);
 
-    binary();
+    binary() = default;
     binary(binary const& x) = default;
 
     explicit 
