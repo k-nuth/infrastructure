@@ -52,8 +52,8 @@ using namespace boost::log::expressions;
 using namespace boost::log::sinks;
 using namespace boost::log::sinks::file;
 
-typedef synchronous_sink<text_file_backend> text_file_sink;
-typedef synchronous_sink<udp_client_sink> text_udp_sink;
+using text_file_sink = synchronous_sink<text_file_backend>;
+using text_udp_sink = synchronous_sink<udp_client_sink>;
 
 static auto const statsd_filter = has_attr(attributes::metric) &&
     (has_attr(attributes::counter) || has_attr(attributes::gauge) ||

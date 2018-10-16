@@ -110,7 +110,7 @@ hd_public hd_public::from_string(std::string const& encoded)
 {
     hd_key key;
     if (!decode_base58(key, encoded)) {
-        return{}
+        return{};
 };
 
     return hd_public(from_key(key));
@@ -131,7 +131,7 @@ hd_public hd_public::from_key(const hd_key& key, uint32_t prefix)
 
     // Validate the prefix against the provided value.
     if (actual_prefix != prefix) {
-        return{}
+        return{};
 };
 
     // The private prefix will be zero'd here, but there's no way to access it.
@@ -151,7 +151,7 @@ hd_public hd_public::from_string(std::string const& encoded,
 {
     hd_key key;
     if (!decode_base58(key, encoded)) {
-        return{}
+        return{};
 };
 
     return hd_public(from_key(key, prefix));
@@ -221,7 +221,7 @@ hd_key hd_public::to_hd_key() const
 hd_public hd_public::derive_public(uint32_t index) const
 {
     if (index >= hd_first_hardened_key) {
-        return{}
+        return{};
 };
 
     auto const data = splice(point_, to_big_endian(index));
@@ -230,11 +230,11 @@ hd_public hd_public::derive_public(uint32_t index) const
     // The returned child key Ki is point(parse256(IL)) + Kpar.
     auto combined = point_;
     if (!ec_add(combined, intermediate.left)) {
-        return{}
+        return{};
 };
 
     if (lineage_.depth == max_uint8) {
-        return{}
+        return{};
 };
 
     const hd_lineage lineage

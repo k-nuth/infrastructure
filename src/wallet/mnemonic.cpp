@@ -42,17 +42,16 @@ static constexpr size_t entropy_bit_divisor = 32;
 static constexpr size_t hmac_iterations = 2048;
 static const char* passphrase_prefix = "mnemonic";
 
-inline uint8_t bip39_shift(size_t bit)
-{
+inline 
+uint8_t bip39_shift(size_t bit) {
     return (1 << (byte_bits - (bit % byte_bits) - 1));
 }
 
-bool validate_mnemonic(const word_list& words, const dictionary& lexicon)
-{
+bool validate_mnemonic(const word_list& words, const dictionary& lexicon) {
     auto const word_count = words.size();
     if ((word_count % mnemonic_word_multiple) != 0) {
         return false;
-}
+    }
 
     auto const total_bits = bits_per_word * word_count;
     auto const check_bits = total_bits / (entropy_bit_divisor + 1);
@@ -63,17 +62,14 @@ bool validate_mnemonic(const word_list& words, const dictionary& lexicon)
     size_t bit = 0;
     data_chunk data((total_bits + byte_bits - 1) / byte_bits, 0);
 
-    for (auto const& word: words)
-    {
+    for (auto const& word: words) {
         auto const position = find_position(lexicon, word);
         if (position == -1) {
             return false;
-}
+        }
 
-        for (size_t loop = 0; loop < bits_per_word; loop++, bit++)
-        {
-            if (position & (1 << (bits_per_word - loop - 1)))
-            {
+        for (size_t loop = 0; loop < bits_per_word; loop++, bit++) {
+            if (position & (1 << (bits_per_word - loop - 1))) {
                 auto const byte = bit / byte_bits;
                 data[byte] |= bip39_shift(bit);
             }
@@ -86,11 +82,10 @@ bool validate_mnemonic(const word_list& words, const dictionary& lexicon)
     return std::equal(mnemonic.begin(), mnemonic.end(), words.begin());
 }
 
-word_list create_mnemonic(data_slice entropy, const dictionary &lexicon)
-{
+word_list create_mnemonic(data_slice entropy, const dictionary &lexicon) {
     if ((entropy.size() % mnemonic_seed_multiple) != 0) {
         return word_list();
-}
+    }
 
     const size_t entropy_bits = (entropy.size() * byte_bits);
     const size_t check_bits = (entropy_bits / entropy_bit_divisor);
@@ -105,11 +100,9 @@ word_list create_mnemonic(data_slice entropy, const dictionary &lexicon)
     size_t bit = 0;
     word_list words;
 
-    for (size_t word = 0; word < word_count; word++)
-    {
+    for (size_t word = 0; word < word_count; word++) {
         size_t position = 0;
-        for (size_t loop = 0; loop < bits_per_word; loop++)
-        {
+        for (size_t loop = 0; loop < bits_per_word; loop++) {
             bit = (word * bits_per_word + loop);
             position <<= 1;
 
@@ -117,7 +110,7 @@ word_list create_mnemonic(data_slice entropy, const dictionary &lexicon)
 
             if ((data[byte] & bip39_shift(bit)) > 0) {
                 position++;
-}
+            }
         }
 
         BITCOIN_ASSERT(position < dictionary_size);
@@ -128,35 +121,29 @@ word_list create_mnemonic(data_slice entropy, const dictionary &lexicon)
     return words;
 }
 
-bool validate_mnemonic(const word_list& mnemonic,
-    const dictionary_list& lexicons)
-{
+bool validate_mnemonic(const word_list& mnemonic, const dictionary_list& lexicons) {
     for (auto const& lexicon: lexicons) {
         if (validate_mnemonic(mnemonic, *lexicon)) {
             return true;
-}
+        }
+    }
 
     return false;
 }
 
-long_hash decode_mnemonic(const word_list& mnemonic)
-{
+long_hash decode_mnemonic(const word_list& mnemonic) {
     auto const sentence = join(mnemonic);
     std::string const salt(passphrase_prefix);
-    return pkcs5_pbkdf2_hmac_sha512(to_chunk(sentence), to_chunk(salt),
-        hmac_iterations);
+    return pkcs5_pbkdf2_hmac_sha512(to_chunk(sentence), to_chunk(salt), hmac_iterations);
 }
 
 #ifdef WITH_ICU
 
-long_hash decode_mnemonic(const word_list& mnemonic,
-    std::string const& passphrase)
-{
+long_hash decode_mnemonic(const word_list& mnemonic, std::string const& passphrase) {
     auto const sentence = join(mnemonic);
     std::string const prefix(passphrase_prefix);
     auto const salt = to_normal_nfkd_form(prefix + passphrase);
-    return pkcs5_pbkdf2_hmac_sha512(to_chunk(sentence), to_chunk(salt),
-        hmac_iterations);
+    return pkcs5_pbkdf2_hmac_sha512(to_chunk(sentence), to_chunk(salt), hmac_iterations);
 }
 
 #endif
