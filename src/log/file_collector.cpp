@@ -228,9 +228,9 @@ bool match_pattern(path_string_type const& file_name, path_string_type const& pa
             // The actual file name may end with an additional counter
             // that is added by the collector in case if file name clash
             return local::scan_digits(f_it, f_end, std::distance(f_it, f_end));
-        } else {
-            return true;
-        }
+        } 
+        return true;
+        
     } else {
         return false;
     }

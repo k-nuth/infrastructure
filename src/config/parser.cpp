@@ -104,9 +104,8 @@ load_error parser::load_configuration_variables_path(variables_map& variables, b
             auto const config = parse_config_file(file, config_settings);
             store(config, variables);
             return load_error::success;
-        } else {
-            return load_error::non_existing_file;
-        }
+        } 
+        return load_error::non_existing_file;
     }
 
     // Loading from an empty stream causes the defaults to populate.
