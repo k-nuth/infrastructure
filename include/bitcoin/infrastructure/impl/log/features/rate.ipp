@@ -27,28 +27,19 @@ namespace log {
 namespace features {
 
 template <typename BaseType>
-rate_feature<BaseType>::rate_feature()
-{
-}
-
-template <typename BaseType>
 rate_feature<BaseType>::rate_feature(const rate_feature& other)
     : BaseType(static_cast<const BaseType&>(other))
-{
-}
+{}
 
 template <typename BaseType>
 template <typename Arguments>
 rate_feature<BaseType>::rate_feature(const Arguments& arguments)
-  : BaseType(arguments)
-{
-}
+    : BaseType(arguments)
+{}
 
 template <typename BaseType>
 template <typename Arguments>
-boost::log::record rate_feature<BaseType>::open_record_unlocked(
-    const Arguments& arguments)
-{
+boost::log::record rate_feature<BaseType>::open_record_unlocked(const Arguments& arguments) {
     auto& set = BaseType::attributes();
     auto tag = add_rate_unlocked(set,
         arguments[keywords::rate | boost::parameter::void_()]);
@@ -57,7 +48,7 @@ boost::log::record rate_feature<BaseType>::open_record_unlocked(
     {
         if (tag != set.end()) {
             set.erase(tag);
-}
+        }
     }
     BOOST_SCOPE_EXIT_END
 
@@ -76,16 +67,14 @@ boost::log::attribute_set::iterator
 
     if (pair.second) {
         tag = pair.first;
-}
+    }
 
     return tag;
 }
 
 template <typename BaseType>
 boost::log::attribute_set::iterator
-    rate_feature<BaseType>::add_rate_unlocked(
-        boost::log::attribute_set& set, boost::parameter::void_ /*unused*/)
-{
+rate_feature<BaseType>::add_rate_unlocked(boost::log::attribute_set& set, boost::parameter::void_ /*unused*/) {
     return set.end();
 }
 

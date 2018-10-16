@@ -27,11 +27,6 @@ namespace log {
 namespace features {
 
 template <typename BaseType>
-timer_feature<BaseType>::timer_feature()
-{
-}
-
-template <typename BaseType>
 timer_feature<BaseType>::timer_feature(const timer_feature& other)
   : BaseType(static_cast<const BaseType&>(other))
 {

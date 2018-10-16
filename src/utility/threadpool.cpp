@@ -85,11 +85,11 @@ void threadpool::spawn_once(thread_priority priority)
     // Critical Section
     unique_lock lock(threads_mutex_);
 
-    threads_.push_back(asio::thread([this, priority]()
+    threads_.emplace_back([this, priority]()
     {
         set_priority(priority);
         service_.run();
-    }));
+    });
 
     ++size_;
     ///////////////////////////////////////////////////////////////////////////

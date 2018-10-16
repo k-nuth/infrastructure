@@ -71,7 +71,7 @@ public:
     /// Constructors.
     hd_public();
     
-    hd_public(hd_public const& x);
+    hd_public(hd_public const& x) = default;
     
     explicit
     hd_public(hd_key const& public_key);
@@ -124,7 +124,7 @@ protected:
 
     /// Members.
     /// These should be const, apart from the need to implement assignment.
-    bool valid_;
+    bool valid_{false};
     hd_chain_code chain_;
     hd_lineage lineage_;
     ec_compressed point_;

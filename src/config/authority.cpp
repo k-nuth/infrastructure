@@ -108,7 +108,6 @@ std::string to_ipv6_hostname(asio::address const& ip_address) {
 }
 
 authority::authority()
-    : port_(0)
 {}
 
 authority::authority(authority const& x)

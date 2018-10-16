@@ -181,7 +181,7 @@ public:
 
 private:
     asio::ipv6 ip_;
-    uint16_t port_;
+    uint16_t port_{0};
 };
 
 } // namespace config

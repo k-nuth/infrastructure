@@ -36,15 +36,15 @@ BOOST_LOG_ATTRIBUTE_KEYWORD(timer, "Timer", std::chrono::milliseconds)
 namespace features {
 
 template <typename BaseType>
-class timer_feature
-  : public BaseType
+class timer_feature : public BaseType
 {
 public:
     using char_type = typename BaseType::char_type;
     using threading_model = typename BaseType::threading_model;
 
 public:
-    timer_feature();
+    timer_feature() = default;
+    
     timer_feature(const timer_feature& other);
 
     template <typename Arguments>
@@ -64,11 +64,9 @@ protected:
 
 private:
     template <typename Value>
-    boost::log::attribute_set::iterator add_timer_unlocked(
-        boost::log::attribute_set& set, const Value& value);
+    boost::log::attribute_set::iterator add_timer_unlocked(boost::log::attribute_set& set, const Value& value);
 
-    boost::log::attribute_set::iterator add_timer_unlocked(
-        boost::log::attribute_set& set, boost::parameter::void_ /*unused*/);
+    boost::log::attribute_set::iterator add_timer_unlocked(boost::log::attribute_set& set, boost::parameter::void_ /*unused*/);
 };
 
 struct timer

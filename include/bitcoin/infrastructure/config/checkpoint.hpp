@@ -145,7 +145,7 @@ public:
 
 private:
     hash_digest hash_;
-    size_t height_;
+    size_t height_{0};
 };
 
 } // namespace config

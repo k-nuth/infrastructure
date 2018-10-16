@@ -21,7 +21,7 @@
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
-#include <errno.h>
+#include <cerrno>
 #include <new>
 #include <stdexcept>
 

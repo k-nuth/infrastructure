@@ -37,8 +37,8 @@ namespace config {
 using namespace boost::program_options;
 
 checkpoint::checkpoint()
-    : height_(0), hash_(bc::null_hash) {
-}
+    : hash_(bc::null_hash) 
+{}
 
 checkpoint::checkpoint(std::string const& value)
     : checkpoint()

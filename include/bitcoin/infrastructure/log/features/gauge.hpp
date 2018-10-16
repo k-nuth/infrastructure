@@ -36,15 +36,15 @@ BOOST_LOG_ATTRIBUTE_KEYWORD(gauge, "Gauge", uint64_t)
 namespace features {
 
 template <typename BaseType>
-class gauge_feature
-  : public BaseType
+class gauge_feature : public BaseType
 {
 public:
     using char_type = typename BaseType::char_type;
     using threading_model = typename BaseType::threading_model;
 
 public:
-    gauge_feature();
+    gauge_feature() = default;
+
     gauge_feature(const gauge_feature& other);
 
     template <typename Arguments>
@@ -64,11 +64,9 @@ protected:
 
 private:
     template <typename Value>
-    boost::log::attribute_set::iterator add_gauge_unlocked(
-        boost::log::attribute_set& set, const Value& value);
+    boost::log::attribute_set::iterator add_gauge_unlocked(boost::log::attribute_set& set, const Value& value);
 
-    boost::log::attribute_set::iterator add_gauge_unlocked(
-        boost::log::attribute_set& set, boost::parameter::void_ /*unused*/);
+    boost::log::attribute_set::iterator add_gauge_unlocked(boost::log::attribute_set& set, boost::parameter::void_ /*unused*/);
 };
 
 struct gauge

@@ -91,7 +91,7 @@ public:
     size_t serialized_size(uint32_t version, bool with_timestamp) const;
 
     network_address& operator=(network_address&& x);
-    network_address& operator=(const network_address& x);
+    network_address& operator=(const network_address& x) = default;
 
     bool operator==(const network_address& x) const;
     bool operator!=(const network_address& other) const;

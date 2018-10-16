@@ -43,7 +43,7 @@ public:
     using threading_model = typename BaseType::threading_model;
 
 public:
-    rate_feature();
+    rate_feature() = default;
     rate_feature(const rate_feature& other);
 
     template <typename Arguments>

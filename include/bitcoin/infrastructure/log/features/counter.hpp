@@ -35,15 +35,14 @@ BOOST_LOG_ATTRIBUTE_KEYWORD(counter, "Counter", int64_t)
 namespace features {
 
 template <typename BaseType>
-class counter_feature
-  : public BaseType
+class counter_feature : public BaseType
 {
 public:
     using char_type = typename BaseType::char_type;
     using threading_model = typename BaseType::threading_model;
 
 public:
-    counter_feature();
+    counter_feature() = default;
     counter_feature(const counter_feature& other);
 
     template <typename Arguments>

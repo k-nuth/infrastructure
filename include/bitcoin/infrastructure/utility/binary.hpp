@@ -42,7 +42,7 @@ public:
     bool is_base2(std::string const& text);
 
     binary();
-    binary(binary const& x);
+    binary(binary const& x) = default;
 
     explicit 
     binary(std::string const& bit_string);
@@ -83,7 +83,7 @@ private:
         size_type original_offset, size_type intended_offset);
 
     data_chunk blocks_;
-    uint8_t final_block_excess_;
+    uint8_t final_block_excess_{0};
 };
 
 } // namespace libbitcoin

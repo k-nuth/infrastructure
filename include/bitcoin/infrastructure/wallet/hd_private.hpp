@@ -54,7 +54,7 @@ public:
     /// Constructors.
     hd_private();
     
-    hd_private(hd_private const& x);
+    hd_private(hd_private const& x) = default;
 
     explicit
     hd_private(data_chunk const& seed, uint64_t prefixes = mainnet);

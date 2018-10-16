@@ -48,38 +48,32 @@ const uint32_t hd_public::testnet = 70617039;
 // ----------------------------------------------------------------------------
 
 hd_public::hd_public()
-  : valid_(false), chain_(null_hash), lineage_({0, 0, 0, 0})
-  , point_(null_compressed_point)
-{}
-
-hd_public::hd_public(hd_public const& x)
-  : valid_(x.valid_), chain_(x.chain_), lineage_(x.lineage_),
-    point_(x.point_)
+    : chain_(null_hash), lineage_({0, 0, 0, 0})
+    , point_(null_compressed_point)
 {}
 
 // This cannot validate the version.
 hd_public::hd_public(hd_key const& public_key)
-  : hd_public(from_key(public_key))
+    : hd_public(from_key(public_key))
 {}
 
 // This cannot validate the version.
 hd_public::hd_public(std::string const& encoded)
-  : hd_public(from_string(encoded))
+    : hd_public(from_string(encoded))
 {}
 
 // This validates the version.
 hd_public::hd_public(hd_key const& public_key, uint32_t prefix)
-  : hd_public(from_key(public_key, prefix))
+    : hd_public(from_key(public_key, prefix))
 {}
 
 // This validates the version.
 hd_public::hd_public(std::string const& encoded, uint32_t prefix)
-  : hd_public(from_string(encoded, prefix))
+    : hd_public(from_string(encoded, prefix))
 {}
 
-hd_public::hd_public(const ec_compressed& point,
-    const hd_chain_code& chain_code, hd_lineage const& lineage)
-  : valid_(true), point_(point), chain_(chain_code), lineage_(lineage)
+hd_public::hd_public(const ec_compressed& point, const hd_chain_code& chain_code, hd_lineage const& lineage)
+    : valid_(true), point_(point), chain_(chain_code), lineage_(lineage)
 {}
 
 // Factories.
@@ -235,13 +229,7 @@ uint32_t hd_public::fingerprint() const {
 // Operators.
 // ----------------------------------------------------------------------------
 
-hd_public& hd_public::operator=(hd_public const& x) {
-    valid_ = x.valid_;
-    chain_ = x.chain_;
-    lineage_ = x.lineage_;
-    point_ = x.point_;
-    return *this;
-}
+hd_public& hd_public::operator=(hd_public const& x) = default;
 
 bool hd_public::operator<(hd_public const& x) const {
     return encoded() < x.encoded();

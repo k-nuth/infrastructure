@@ -29,10 +29,6 @@ namespace log {
 namespace features {
 
 template <typename BaseType>
-counter_feature<BaseType>::counter_feature()
-{}
-
-template <typename BaseType>
 counter_feature<BaseType>::counter_feature(const counter_feature& other)
     : BaseType(static_cast<const BaseType&>(other))
 {}

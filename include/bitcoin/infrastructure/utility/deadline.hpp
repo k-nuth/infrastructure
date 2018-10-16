@@ -39,8 +39,8 @@ namespace libbitcoin {
  * makes timer firing and cancellation conditions safer.
  */
 class BI_API deadline
-  : public enable_shared_from_base<deadline>,
-    noncopyable
+    : public enable_shared_from_base<deadline>
+    , noncopyable
     /*, track<deadline>*/
 {
 public:

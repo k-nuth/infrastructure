@@ -29,10 +29,6 @@ namespace log {
 namespace features {
 
 template <typename BaseType>
-gauge_feature<BaseType>::gauge_feature()
-{}
-
-template <typename BaseType>
 gauge_feature<BaseType>::gauge_feature(const gauge_feature& other)
     : BaseType(static_cast<const BaseType&>(other))
 {}

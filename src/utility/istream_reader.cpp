@@ -111,7 +111,7 @@ size_t istream_reader::read_size_big_endian() {
 
 code istream_reader::read_error_code() {
     auto const value = read_little_endian<uint32_t>();
-    return code(static_cast<error::error_code_t>(value));
+    return {static_cast<error::error_code_t>(value)};
 }
 
 uint16_t istream_reader::read_2_bytes_little_endian() {

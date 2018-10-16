@@ -45,11 +45,6 @@ bool binary::is_base2(std::string const& text) {
 }
 
 binary::binary()
-    : final_block_excess_(0)
-{}
-
-binary::binary(const binary& x)
-    : blocks_(x.blocks_), final_block_excess_(x.final_block_excess_)
 {}
 
 binary::binary(std::string const& bit_string)
@@ -258,11 +253,7 @@ bool binary::operator!=(const binary& x) const {
     return !(*this == x);
 }
 
-binary& binary::operator=(const binary& x) {
-    blocks_ = x.blocks_;
-    final_block_excess_ = x.final_block_excess_;
-    return *this;
-}
+binary& binary::operator=(const binary& x) = default;
 
 std::istream& operator>>(std::istream& in, binary& to) {
     std::string bitstring;

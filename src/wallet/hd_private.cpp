@@ -52,10 +52,6 @@ hd_private::hd_private()
     : secret_(null_hash)
 {}
 
-hd_private::hd_private(hd_private const& x)
-    : hd_public(x), secret_(x.secret_)
-{}
-
 hd_private::hd_private(data_chunk const& seed, uint64_t prefixes)
     : hd_private(from_seed(seed, prefixes))
 {}
