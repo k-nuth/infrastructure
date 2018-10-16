@@ -117,9 +117,9 @@ protected:
     ec_compressed point_;
 
 private:
-    static hd_public from_key(const hd_key& public_key);
+    static hd_public from_key(const hd_key& key);
     static hd_public from_string(std::string const& encoded);
-    static hd_public from_key(const hd_key& public_key, uint32_t prefix);
+    static hd_public from_key(const hd_key& key, uint32_t prefix);
     static hd_public from_string(std::string const& encoded, uint32_t prefix);
 
     hd_public(const ec_compressed& point,

@@ -54,7 +54,7 @@ public:
      * Copy constructor.
      * @param[in]  other  The object to copy into self on construct.
      */
-    authority(authority const& other);
+    authority(authority const& x);
 
     /**
      * Initialization constructor.
@@ -149,13 +149,13 @@ public:
      * Override the equality operator.
      * @param[in]  other  The other object with which to compare.
      */
-    bool operator==(authority const& other) const;
+    bool operator==(authority const& x) const;
 
     /**
      * Override the inequality operator.
      * @param[in]  other  The other object with which to compare.
      */
-    bool operator!=(authority const& other) const;
+    bool operator!=(authority const& x) const;
 
     /**
      * Define stream in. Throws if input is invalid.

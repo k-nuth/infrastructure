@@ -62,7 +62,7 @@ BI_API word_list create_mnemonic(data_slice entropy,
  * words are spelled correctly and the checksum matches.
  * The words must have been created using mnemonic encoding.
  */
-BI_API bool validate_mnemonic(const word_list& mnemonic,
+BI_API bool validate_mnemonic(const word_list& words,
     const dictionary &lexicon);
 
 /**

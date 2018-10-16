@@ -43,10 +43,10 @@ void aes256_init(aes256_context* context,
 void aes256_done(aes256_context* context);
 
 void aes256_encrypt_ecb(aes256_context* context,
-    uint8_t plain_text[AES256_BLOCK_LENGTH]);
+    uint8_t buf[AES256_BLOCK_LENGTH]);
 
 void aes256_decrypt_ecb(aes256_context* context,
-    uint8_t cypher_text[AES256_BLOCK_LENGTH]);
+    uint8_t buf[AES256_BLOCK_LENGTH]);
 
 #ifdef __cplusplus
 }
