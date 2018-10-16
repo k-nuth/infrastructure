@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE(hd_public__derive_public__invalid__false)
     data_chunk seed;
     BOOST_REQUIRE(decode_base16(seed, SHORT_SEED));
 
-    const hd_private m(seed, hd_private::mainnet);
+    hd_private const m(seed, hd_private::mainnet);
     hd_public const m_pub = m;
     BOOST_REQUIRE(!m_pub.derive_public(hd_first_hardened_key));
 }
@@ -51,7 +51,7 @@ BOOST_AUTO_TEST_CASE(hd_public__derive_public__short_seed__expected)
     data_chunk seed;
     BOOST_REQUIRE(decode_base16(seed, SHORT_SEED));
 
-    const hd_private m(seed, hd_private::mainnet);
+    hd_private const m(seed, hd_private::mainnet);
     auto const m0h = m.derive_private(hd_first_hardened_key);
     auto const m0h1 = m0h.derive_private(1);
 
@@ -75,7 +75,7 @@ BOOST_AUTO_TEST_CASE(hd_public__derive_public__long_seed__expected)
     data_chunk seed;
     BOOST_REQUIRE(decode_base16(seed, LONG_SEED));
 
-    const hd_private m(seed, hd_private::mainnet);
+    hd_private const m(seed, hd_private::mainnet);
     auto const m0 = m.derive_private(0);
     auto const m0xH = m0.derive_private(2147483647 + hd_first_hardened_key);
     auto const m0xH1 = m0xH.derive_private(1);

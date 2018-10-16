@@ -257,17 +257,17 @@ hd_private& hd_private::operator=(hd_private other) {
     return *this;
 }
 
-bool hd_private::operator<(const hd_private& x) const {
+bool hd_private::operator<(hd_private const& x) const {
     return encoded() < x.encoded();
 }
 
-bool hd_private::operator==(const hd_private& x) const {
+bool hd_private::operator==(hd_private const& x) const {
     return secret_ == x.secret_ && valid_ == x.valid_ &&
         chain_ == x.chain_ && lineage_ == x.lineage_ &&
         point_ == x.point_;
 }
 
-bool hd_private::operator!=(const hd_private& other) const {
+bool hd_private::operator!=(hd_private const& other) const {
     return !(*this == other);
 }
 
@@ -287,7 +287,7 @@ std::istream& operator>>(std::istream& in, hd_private& to) {
     return in;
 }
 
-std::ostream& operator<<(std::ostream& out, const hd_private& of) {
+std::ostream& operator<<(std::ostream& out, hd_private const& of) {
     out << of.encoded();
     return out;
 }

@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_SUITE(hd_private_tests)
 BOOST_AUTO_TEST_CASE(hd_private__encoded__round_trip__expected)
 {
     static auto const encoded = "xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi";
-    const hd_private key(encoded);
+    hd_private const key(encoded);
     BOOST_REQUIRE_EQUAL(key.encoded(), encoded);
 }
 
@@ -41,7 +41,7 @@ BOOST_AUTO_TEST_CASE(hd_private__derive_private__short_seed__expected)
     data_chunk seed;
     BOOST_REQUIRE(decode_base16(seed, SHORT_SEED));
 
-    const hd_private m(seed, hd_private::mainnet);
+    hd_private const m(seed, hd_private::mainnet);
     auto const m0h = m.derive_private(hd_first_hardened_key);
     auto const m0h1 = m0h.derive_private(1);
     auto const m0h12h = m0h1.derive_private(2 + hd_first_hardened_key);
@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE(hd_private__derive_public__short_seed__expected)
     data_chunk seed;
     BOOST_REQUIRE(decode_base16(seed, SHORT_SEED));
 
-    const hd_private m(seed, hd_private::mainnet);
+    hd_private const m(seed, hd_private::mainnet);
     auto const m0h = m.derive_private(hd_first_hardened_key);
     auto const m0h1 = m0h.derive_private(1);
     auto const m0h12h = m0h1.derive_private(2 + hd_first_hardened_key);
@@ -88,7 +88,7 @@ BOOST_AUTO_TEST_CASE(hd_private__derive_private__long_seed__expected)
     data_chunk seed;
     BOOST_REQUIRE(decode_base16(seed, LONG_SEED));
 
-    const hd_private m(seed, hd_private::mainnet);
+    hd_private const m(seed, hd_private::mainnet);
     auto const m0 = m.derive_private(0);
     auto const m0xH = m0.derive_private(2147483647 + hd_first_hardened_key);
     auto const m0xH1 = m0xH.derive_private(1);
@@ -108,7 +108,7 @@ BOOST_AUTO_TEST_CASE(hd_private__derive_public__long_seed__expected)
     data_chunk seed;
     BOOST_REQUIRE(decode_base16(seed, LONG_SEED));
 
-    const hd_private m(seed, hd_private::mainnet);
+    hd_private const m(seed, hd_private::mainnet);
     auto const m0 = m.derive_private(0);
     auto const m0xH = m0.derive_private(2147483647 + hd_first_hardened_key);
     auto const m0xH1 = m0xH.derive_private(1);

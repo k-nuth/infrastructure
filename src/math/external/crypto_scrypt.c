@@ -37,22 +37,22 @@
 
 #include <bitcoin/infrastructure/compat.h>
 
-static void blkcpy(uint8_t* /*dest*/, uint8_t* /*src*/, size_t /*len*/);
-static void blkxor(uint8_t* /*dest*/, uint8_t* /*src*/, size_t /*len*/);
+static void blkcpy(uint8_t* /*dest*/, uint8_t const* /*src*/, size_t /*len*/);
+static void blkxor(uint8_t* /*dest*/, uint8_t const* /*src*/, size_t /*len*/);
 static void salsa20_8(uint8_t /*B*/[64]);
 static void blockmix_salsa8(uint8_t* /*B*/, uint8_t* /*Y*/, size_t /*r*/);
 static uint64_t integerify(uint8_t* /*B*/, size_t /*r*/);
 static void smix(uint8_t*  /*B*/, size_t /*r*/, uint64_t /*N*/, uint8_t* /*V*/, uint8_t* /*XY*/);
 
-static BI_C_INLINE uint32_t le32dec(const void* pp)
-{
+static 
+BI_C_INLINE uint32_t le32dec(const void* pp) {
     const uint8_t* p = (uint8_t const* )pp;
     return ((uint32_t)(p[0]) + ((uint32_t)(p[1]) << 8) +
             ((uint32_t)(p[2]) << 16) + ((uint32_t)(p[3]) << 24));
 }
 
-static BI_C_INLINE void le32enc(void* pp, uint32_t x)
-{
+static 
+BI_C_INLINE void le32enc(void* pp, uint32_t x) {
     uint8_t* p = (uint8_t* )pp;
     p[0] = x & 0xff;
     p[1] = (x >> 8) & 0xff;
@@ -60,8 +60,8 @@ static BI_C_INLINE void le32enc(void* pp, uint32_t x)
     p[3] = (x >> 24) & 0xff;
 }
 
-static BI_C_INLINE uint64_t le64dec(const void* pp)
-{
+static 
+BI_C_INLINE uint64_t le64dec(const void* pp) {
     const uint8_t* p = (uint8_t const* )pp;
 
     return ((uint64_t)(p[0]) + ((uint64_t)(p[1]) << 8) +
@@ -80,7 +80,8 @@ void blkcpy(uint8_t* dest, uint8_t const* src, size_t len) {
     }
 }
 
-static void blkxor(uint8_t* dest, uint8_t const* src, size_t len) {
+static 
+void blkxor(uint8_t* dest, uint8_t const* src, size_t len) {
     size_t i;
 
     for (i = 0; i < len; i++) {
@@ -92,7 +93,8 @@ static void blkxor(uint8_t* dest, uint8_t const* src, size_t len) {
  * salsa20_8(B):
  * Apply the salsa20/8 core to the provided block.
  */
-static void salsa20_8(uint8_t B[64]) {
+static 
+void salsa20_8(uint8_t B[64]) {
     uint32_t B32[16];
     uint32_t x[16];
     size_t i;

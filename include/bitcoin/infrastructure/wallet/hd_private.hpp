@@ -72,16 +72,16 @@ public:
     hd_private(std::string const& encoded, uint32_t prefix);
 
     /// Operators.
-    bool operator<(const hd_private& x) const;
-    bool operator==(const hd_private& x) const;
-    bool operator!=(const hd_private& other) const;
+    bool operator<(hd_private const& x) const;
+    bool operator==(hd_private const& x) const;
+    bool operator!=(hd_private const& other) const;
     hd_private& operator=(hd_private other);
 
     friend 
     std::istream& operator>>(std::istream& in, hd_private& to);
     
     friend 
-    std::ostream& operator<<(std::ostream& out, const hd_private& of);
+    std::ostream& operator<<(std::ostream& out, hd_private const& of);
 
     // Swap implementation required to properly handle base class.
     friend 
