@@ -408,8 +408,7 @@ std::string opcode_to_string(opcode value, uint32_t active_forks)
 }
 
 // This converts only names, not any data for push codes.
-bool opcode_from_string(opcode& out_code, std::string const& value)
-{
+bool opcode_from_string(opcode& out_code, std::string const& value) {       //NOLINT
     // Normalize to ASCII lower case.
     auto const norm = boost::algorithm::to_lower_copy(value);
 
@@ -676,21 +675,19 @@ bool opcode_from_string(opcode& out_code, std::string const& value)
     return opcode_from_hexadecimal(out_code, value);
 }
 
-std::string opcode_to_hexadecimal(opcode code)
-{
+std::string opcode_to_hexadecimal(opcode code) {
     return "0x" + encode_base16(data_chunk{ static_cast<uint8_t>(code) });
 }
 
-bool opcode_from_hexadecimal(opcode& out_code, std::string const& value)
-{
+bool opcode_from_hexadecimal(opcode& out_code, std::string const& value) {
     if (value.size() != 4 || value[0] != '0' || value[1] != 'x') {
         return false;
-}
+    }
 
     data_chunk out;
-    if (!decode_base16(out, std::string(value.begin() + 2, value.end()))) {
+    if ( ! decode_base16(out, std::string(value.begin() + 2, value.end()))) {
         return false;
-}
+    }
 
     out_code = static_cast<opcode>(out.front());
     return true;
