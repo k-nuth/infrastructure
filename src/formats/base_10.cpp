@@ -79,7 +79,7 @@ bool decode_base10(uint64_t& out, std::string const& amount, uint8_t decimal_pla
     // Convert to an integer:
     std::istringstream stream(value);
     uint64_t number = 0;
-    if (value.size() != 0u && ! (stream >> number)) {
+    if ( ! value.empty() && ! (stream >> number)) {
         return false;
     }
 
