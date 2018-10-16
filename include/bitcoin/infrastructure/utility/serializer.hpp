@@ -37,7 +37,7 @@ class serializer
   : public writer/*, noncopyable*/
 {
 public:
-    typedef std::function<void(serializer<Iterator>&)> functor;
+    using functor = std::function<void (serializer<Iterator> &)>;
 
     serializer(const Iterator begin);
 

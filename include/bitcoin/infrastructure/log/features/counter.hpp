@@ -39,8 +39,8 @@ class counter_feature
   : public BaseType
 {
 public:
-    typedef typename BaseType::char_type char_type;
-    typedef typename BaseType::threading_model threading_model;
+    using char_type = typename BaseType::char_type;
+    using threading_model = typename BaseType::threading_model;
 
 public:
     counter_feature();
@@ -74,7 +74,7 @@ struct counter
     template<typename BaseType>
     struct apply
     {
-        typedef counter_feature<BaseType> type;
+        using type = counter_feature<BaseType>;
     };
 };
 

@@ -32,7 +32,7 @@ namespace libbitcoin {
 class BI_API interprocess_lock
 {
 public:
-    typedef boost::filesystem::path path;
+    using path = boost::filesystem::path;
 
     interprocess_lock(const path& file);
     virtual ~interprocess_lock();
@@ -41,8 +41,8 @@ public:
     bool unlock();
 
 private:
-    typedef interprocess::file_lock lock_file;
-    typedef std::shared_ptr<lock_file> lock_ptr;
+    using lock_file = interprocess::file_lock;
+    using lock_ptr = std::shared_ptr<lock_file>;
 
     static bool create(std::string const& file);
     static bool destroy(std::string const& file);

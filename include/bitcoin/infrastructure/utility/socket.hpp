@@ -36,7 +36,7 @@ class BI_API socket
     /*, public track<socket>*/
 {
 public:
-    typedef std::shared_ptr<socket> ptr;
+    using ptr = std::shared_ptr<socket>;
 
     /// Construct an instance.
     socket(threadpool& thread);

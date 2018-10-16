@@ -26,8 +26,8 @@
 namespace libbitcoin {
 namespace log {
 
-typedef boost::shared_ptr<std::ostream> stream;
-typedef boost::log::formatting_ostream::ostream_type formatter;
+using stream = boost::shared_ptr<std::ostream>;
+using formatter = boost::log::formatting_ostream::ostream_type;
 
 struct rotable_file
 {

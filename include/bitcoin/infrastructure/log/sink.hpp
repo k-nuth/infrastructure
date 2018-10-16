@@ -29,7 +29,7 @@
 namespace libbitcoin {
 namespace log {
 
-typedef boost::shared_ptr<bc::ofstream> file;
+using file = boost::shared_ptr<bc::ofstream>;
 
 /// Initializes null (as opposed to default) logging sinks.
 void initialize();

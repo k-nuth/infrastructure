@@ -39,8 +39,8 @@ class rate_feature
   : public BaseType
 {
 public:
-    typedef typename BaseType::char_type char_type;
-    typedef typename BaseType::threading_model threading_model;
+    using char_type = typename BaseType::char_type;
+    using threading_model = typename BaseType::threading_model;
 
 public:
     rate_feature();
@@ -74,7 +74,7 @@ struct rate
     template<typename BaseType>
     struct apply
     {
-        typedef rate_feature<BaseType> type;
+        using type = rate_feature<BaseType>;
     };
 };
 

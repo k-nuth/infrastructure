@@ -32,26 +32,25 @@ namespace libbitcoin {
 // modified from boost.iostreams example
 // boost.org/doc/libs/1_55_0/libs/iostreams/doc/tutorial/container_source.html
 template <typename Container, typename SourceType, typename CharType>
-class BI_API container_source
-{
+class BI_API container_source {
 public:
-    typedef CharType char_type;
-    typedef boost::iostreams::source_tag category;
+    using char_type = CharType;
+    using category = boost::iostreams::source_tag;
 
     container_source(const Container& container)
-      : container_(container), position_(0)
+        : container_(container), position_(0)
     {
         static_assert(sizeof(SourceType) == sizeof(CharType), "invalid size");
     }
 
-    std::streamsize read(char_type* buffer, std::streamsize size)
-    {
+    std::streamsize read(char_type* buffer, std::streamsize size) {
         auto amount = safe_subtract(container_.size(), position_);
         auto result = std::min(size, static_cast<std::streamsize>(amount));
 
         // TODO: use ios eof symbol (template-based).
-        if (result <= 0)
+        if (result <= 0) {
             return -1;
+        }
 
         auto const value = static_cast<typename Container::size_type>(result);
         std::copy_n(container_.begin() + position_, value, buffer);

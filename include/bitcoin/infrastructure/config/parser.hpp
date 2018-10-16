@@ -28,11 +28,10 @@
 namespace libbitcoin {
 
 // These are just annoyingly long.
-typedef boost::program_options::variables_map variables_map;
-typedef boost::program_options::option_description option_metadata;
-typedef boost::program_options::options_description options_metadata;
-typedef boost::program_options::positional_options_description
-    arguments_metadata;
+using variables_map = boost::program_options::variables_map;
+using option_metadata = boost::program_options::option_description;
+using options_metadata = boost::program_options::options_description;
+using arguments_metadata = boost::program_options::positional_options_description;
 
 namespace config {
 

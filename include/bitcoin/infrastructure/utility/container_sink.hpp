@@ -21,7 +21,9 @@
 
 #include <algorithm>
 #include <cstdint>
+
 #include <boost/iostreams/stream.hpp>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
@@ -29,21 +31,19 @@ namespace libbitcoin {
 
 // modified from boost.iostreams example
 // boost.org/doc/libs/1_55_0/libs/iostreams/doc/tutorial/container_source.html
-template <typename Container, typename SinkType, typename CharType>
-class BI_API container_sink
-{
+template <typename Container, typename SinkType, typename CharType> 
+class BI_API container_sink {
 public:
-    typedef CharType char_type;
-    typedef boost::iostreams::sink_tag category;
+    using char_type = CharType;
+    using category = boost::iostreams::sink_tag;
 
     container_sink(Container& container)
-      : container_(container)
+        : container_(container)
     {
         static_assert(sizeof(SinkType) == sizeof(CharType), "invalid size");
     }
 
-    std::streamsize write(const char_type* buffer, std::streamsize size)
-    {
+    std::streamsize write(const char_type* buffer, std::streamsize size) {
         auto const safe_sink = reinterpret_cast<const SinkType*>(buffer);
         container_.insert(container_.end(), safe_sink, safe_sink + size);
         return size;

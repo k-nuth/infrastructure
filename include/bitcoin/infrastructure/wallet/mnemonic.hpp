@@ -46,7 +46,7 @@ static BC_CONSTEXPR size_t mnemonic_seed_multiple = 4;
 /**
  * Represents a mnemonic word list.
  */
-typedef string_list word_list;
+using word_list = string_list;
 
 /**
  * Create a new mnenomic (list of words) from provided entropy and a dictionary

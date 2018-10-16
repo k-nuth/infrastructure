@@ -30,7 +30,7 @@ namespace libbitcoin {
 class BI_API sequential_lock
 {
 public:
-    typedef size_t handle;
+    using handle = size_t;
 
     /// Determine if the given handle is a write-locked handle.
     static bool is_write_locked(handle value)

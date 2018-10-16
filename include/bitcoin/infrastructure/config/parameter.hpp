@@ -46,13 +46,13 @@ typedef std::pair<std::string const, int> argument_pair;
 /**
  * A type to represent the list of positional argument name counts.
  */
-typedef std::vector<argument_pair> argument_list;
+using argument_list = std::vector<argument_pair>;
 
 /**
  * A type to represent a list of parameter structures.
  */
 class parameter;
-typedef std::vector<parameter> parameter_list;
+using parameter_list = std::vector<parameter>;
 
 /**
  * Normalized storage for command line arguments and options.

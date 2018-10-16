@@ -32,36 +32,36 @@ namespace asio {
 
 namespace error = boost::asio::error;
 
-typedef std::chrono::hours hours;
-typedef std::chrono::minutes minutes;
-typedef std::chrono::seconds seconds;
-typedef std::chrono::milliseconds milliseconds;
-typedef std::chrono::microseconds microseconds;
+using hours = std::chrono::hours;
+using minutes = std::chrono::minutes;
+using seconds = std::chrono::seconds;
+using milliseconds = std::chrono::milliseconds;
+using microseconds = std::chrono::microseconds;
 
 // Steady clock: use for continuity, not time of day determinations.
-typedef std::chrono::steady_clock steady_clock;
-typedef steady_clock::duration duration;
-typedef steady_clock::time_point time_point;
-typedef boost::asio::basic_waitable_timer<steady_clock> timer;
+using steady_clock = std::chrono::steady_clock;
+using duration = steady_clock::duration;
+using time_point = steady_clock::time_point;
+using timer = boost::asio::basic_waitable_timer<steady_clock>;
 
-typedef boost::asio::io_service service;
-typedef boost::asio::ip::address address;
-typedef boost::asio::ip::address_v4 ipv4;
-typedef boost::asio::ip::address_v6 ipv6;
-typedef boost::asio::ip::tcp tcp;
-typedef boost::asio::ip::tcp::endpoint endpoint;
+using service = boost::asio::io_service;
+using address = boost::asio::ip::address;
+using ipv4 = boost::asio::ip::address_v4;
+using ipv6 = boost::asio::ip::address_v6;
+using tcp = boost::asio::ip::tcp;
+using endpoint = boost::asio::ip::tcp::endpoint;
 
-typedef tcp::socket socket;
-typedef tcp::acceptor acceptor;
-typedef tcp::resolver resolver;
-typedef tcp::resolver::query query;
-typedef tcp::resolver::iterator iterator;
+using socket = tcp::socket;
+using acceptor = tcp::acceptor;
+using resolver = tcp::resolver;
+using query = tcp::resolver::query;
+using iterator = tcp::resolver::iterator;
 
 // Boost thread is used because of thread_specific_ptr limitation:
 // stackoverflow.com/q/22448022/1172329
-typedef boost::thread thread;
+using thread = boost::thread;
 
-typedef std::shared_ptr<socket> socket_ptr;
+using socket_ptr = std::shared_ptr<socket>;
 
 BC_CONSTEXPR int max_connections = boost::asio::socket_base::max_connections;
 

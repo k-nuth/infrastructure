@@ -57,7 +57,7 @@ class BI_API dispatcher
   : noncopyable
 {
 public:
-    typedef std::function<void(const code&)> delay_handler;
+    using delay_handler = std::function<void (const code &)>;
 
     dispatcher(threadpool& pool, std::string const& name);
 

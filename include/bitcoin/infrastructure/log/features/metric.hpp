@@ -39,16 +39,13 @@ class metric_feature
   : public BaseType
 {
 public:
-    typedef typename BaseType::char_type char_type;
-    typedef typename BaseType::threading_model threading_model;
+    using char_type = typename BaseType::char_type;
+    using threading_model = typename BaseType::threading_model;
 
-    typedef std::string metric_type;
-    typedef boost::log::attributes::mutable_constant<metric_type>
-        metric_attribute;
+    using metric_type = std::string;
+    using metric_attribute = boost::log::attributes::mutable_constant<metric_type>;
 
-    typedef typename boost::log::strictest_lock<
-        boost::lock_guard<threading_model>
-    >::type open_record_lock;
+    using open_record_lock = typename boost::log::strictest_lock<boost::lock_guard<threading_model> >::type;
 
     typedef typename boost::log::strictest_lock<
         typename BaseType::swap_lock,
@@ -91,7 +88,7 @@ struct metric
     template<typename BaseType>
     struct apply
     {
-        typedef metric_feature<BaseType> type;
+        using type = metric_feature<BaseType>;
     };
 };
 

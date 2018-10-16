@@ -38,7 +38,7 @@ public:
      * This must provide operator<< for ostream in order to be used as a
      * boost::program_options default_value.
      */
-    typedef std::vector<hash256> list;
+    using list = std::vector<hash256>;
 
     /**
      * Default constructor.

@@ -40,8 +40,8 @@ class timer_feature
   : public BaseType
 {
 public:
-    typedef typename BaseType::char_type char_type;
-    typedef typename BaseType::threading_model threading_model;
+    using char_type = typename BaseType::char_type;
+    using threading_model = typename BaseType::threading_model;
 
 public:
     timer_feature();
@@ -75,7 +75,7 @@ struct timer
     template<typename BaseType>
     struct apply
     {
-        typedef timer_feature<BaseType> type;
+        using type = timer_feature<BaseType>;
     };
 };
 

@@ -30,12 +30,12 @@
 namespace libbitcoin {
 namespace message {
 
-typedef byte_array<16> ip_address;
+using ip_address = byte_array<16>;
 
 class BI_API network_address
 {
 public:
-    typedef std::vector<network_address> list;
+    using list = std::vector<network_address>;
 
     static network_address factory_from_data(uint32_t version,
         data_chunk const& data, bool with_timestamp);

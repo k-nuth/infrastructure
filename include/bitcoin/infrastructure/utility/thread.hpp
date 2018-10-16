@@ -48,14 +48,14 @@ enum class thread_priority
     lowest
 };
 
-typedef boost::shared_mutex shared_mutex;
-typedef boost::upgrade_mutex upgrade_mutex;
+using shared_mutex = boost::shared_mutex;
+using upgrade_mutex = boost::upgrade_mutex;
 
-typedef boost::unique_lock<shared_mutex> unique_lock;
-typedef boost::shared_lock<shared_mutex> shared_lock;
+using unique_lock = boost::unique_lock<shared_mutex>;
+using shared_lock = boost::shared_lock<shared_mutex>;
 
-typedef std::shared_ptr<boost::shared_mutex> shared_mutex_ptr;
-typedef std::shared_ptr<boost::upgrade_mutex> upgrade_mutex_ptr;
+using shared_mutex_ptr = std::shared_ptr<boost::shared_mutex>;
+using upgrade_mutex_ptr = std::shared_ptr<boost::upgrade_mutex>;
 
 BI_API void set_priority(thread_priority priority);
 BI_API thread_priority priority(bool priority);

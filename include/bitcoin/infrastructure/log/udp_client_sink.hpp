@@ -35,8 +35,8 @@ class BI_API udp_client_sink
 {
 public:
     using udp = boost::asio::ip::udp;
-    typedef boost::shared_ptr<udp::socket> socket_ptr;
-    typedef boost::shared_ptr<udp::endpoint> endpoint_ptr;
+    using socket_ptr = boost::shared_ptr<udp::socket>;
+    using endpoint_ptr = boost::shared_ptr<udp::endpoint>;
 
     udp_client_sink(socket_ptr socket, endpoint_ptr endpoint);
 
@@ -44,7 +44,7 @@ public:
         std::string const& message);
 
 protected:
-    typedef boost::shared_ptr<std::string> message_ptr;
+    using message_ptr = boost::shared_ptr<std::string>;
 
     void send(std::string const& message);
     void handle_send(const boost_code&, size_t, message_ptr payload);

@@ -41,7 +41,7 @@ public:
      * This must provide operator<< for ostream in order to be used as a
      * boost::program_options default_value.
      */
-    typedef std::vector<checkpoint> list;
+    using list = std::vector<checkpoint>;
 
     /**
      * Created a sorted copy of the list of checkpoints.

@@ -42,7 +42,7 @@ typedef std::array<const char*, dictionary_size> dictionary;
 /**
  * A collection of candidate dictionaries for mnemonic validation.
  */
-typedef std::vector<const dictionary*> dictionary_list;
+using dictionary_list = std::vector<const dictionary *>;
 
 namespace language
 {

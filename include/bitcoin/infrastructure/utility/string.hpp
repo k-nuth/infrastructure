@@ -29,7 +29,7 @@
 
 namespace libbitcoin {
 
-typedef std::vector<std::string> string_list;
+using string_list = std::vector<std::string>;
 
 /**
  * Convert a text string to the specified type.

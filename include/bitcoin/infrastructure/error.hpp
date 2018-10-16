@@ -36,10 +36,10 @@ enum console_result : int
 };
 
 /// Alias for error code declarations.
-typedef std::error_code code;
+using code = std::error_code;
 
 /// Alias for boost error code declarations.
-typedef boost::system::error_code boost_code;
+using boost_code = boost::system::error_code;
 
 namespace error {
 

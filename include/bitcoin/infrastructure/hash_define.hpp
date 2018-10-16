@@ -40,20 +40,20 @@ static BC_CONSTEXPR size_t short_hash_size = 20;
 static BC_CONSTEXPR size_t mini_hash_size = 6;
 
 // Common bitcoin hash containers.
-typedef byte_array<hash_size> hash_digest;
-typedef byte_array<half_hash_size> half_hash;
-typedef byte_array<quarter_hash_size> quarter_hash;
-typedef byte_array<long_hash_size> long_hash;
-typedef byte_array<short_hash_size> short_hash;
-typedef byte_array<mini_hash_size> mini_hash;
+using hash_digest = byte_array<hash_size>;
+using half_hash = byte_array<half_hash_size>;
+using quarter_hash = byte_array<quarter_hash_size>;
+using long_hash = byte_array<long_hash_size>;
+using short_hash = byte_array<short_hash_size>;
+using mini_hash = byte_array<mini_hash_size>;
 
 // Lists of common bitcoin hashes.
-typedef std::vector<hash_digest> hash_list;
-typedef std::vector<half_hash> half_hash_list;
-typedef std::vector<quarter_hash> quarter_hash_list;
-typedef std::vector<long_hash> long_hash_list;
-typedef std::vector<short_hash> short_hash_list;
-typedef std::vector<mini_hash> mini_hash_list;
+using hash_list = std::vector<hash_digest>;
+using half_hash_list = std::vector<half_hash>;
+using quarter_hash_list = std::vector<quarter_hash>;
+using long_hash_list = std::vector<long_hash>;
+using short_hash_list = std::vector<short_hash>;
+using mini_hash_list = std::vector<mini_hash>;
 
 // // Alias for boost big integer type.
 // typedef boost::multiprecision::uint256_t uint256_t;

@@ -57,7 +57,7 @@ namespace libbitcoin {
 // typedef std::vector<mini_hash> mini_hash_list;
 
 // Alias for boost big integer type.
-typedef boost::multiprecision::uint256_t uint256_t;
+using uint256_t = boost::multiprecision::uint256_t;
 
 // // Null-valued common bitcoin hashes.
 

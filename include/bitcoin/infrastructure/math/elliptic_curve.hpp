@@ -32,30 +32,30 @@ static BC_CONSTEXPR uint8_t ec_even_sign = 2;
 
 /// Private key:
 static BC_CONSTEXPR size_t ec_secret_size = 32;
-typedef byte_array<ec_secret_size> ec_secret;
+using ec_secret = byte_array<ec_secret_size>;
 
 /// Compressed public key:
 static BC_CONSTEXPR size_t ec_compressed_size = 33;
-typedef byte_array<ec_compressed_size> ec_compressed;
+using ec_compressed = byte_array<ec_compressed_size>;
 
-typedef std::vector<ec_compressed> point_list;
+using point_list = std::vector<ec_compressed>;
 
 /// Uncompressed public key:
 static BC_CONSTEXPR size_t ec_uncompressed_size = 65;
-typedef byte_array<ec_uncompressed_size> ec_uncompressed;
+using ec_uncompressed = byte_array<ec_uncompressed_size>;
 
 // Parsed ECDSA signature:
 static BC_CONSTEXPR size_t ec_signature_size = 64;
-typedef byte_array<ec_signature_size> ec_signature;
+using ec_signature = byte_array<ec_signature_size>;
 
 // DER encoded signature:
 static BC_CONSTEXPR size_t max_der_signature_size = 72;
-typedef data_chunk der_signature;
+using der_signature = data_chunk;
 
 /// DER encoded signature with sighash byte for contract endorsement:
 static BC_CONSTEXPR size_t min_endorsement_size = 9;
 static BC_CONSTEXPR size_t max_endorsement_size = 73;
-typedef data_chunk endorsement;
+using endorsement = data_chunk;
 
 /// Recoverable ecdsa signature for message signing:
 struct BI_API recoverable_signature
