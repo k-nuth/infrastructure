@@ -21,6 +21,7 @@
 
 #include <cstdint>
 #include <cstddef>
+
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/wallet/encrypted_keys.hpp>
 

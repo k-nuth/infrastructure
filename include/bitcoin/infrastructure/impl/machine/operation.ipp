@@ -20,6 +20,7 @@
 #define LIBBITCOIN_INFRASTUCTURE_MACHINE_OPERATION_IPP
 
 #include <cstdint>
+
 #include <bitcoin/infrastructure/constants.hpp>
 #include <bitcoin/infrastructure/machine/number.hpp>
 #include <bitcoin/infrastructure/machine/opcode.hpp>

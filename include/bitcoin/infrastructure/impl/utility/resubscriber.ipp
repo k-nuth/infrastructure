@@ -23,6 +23,7 @@
 #include <memory>
 #include <string>
 #include <utility>
+
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/dispatcher.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>

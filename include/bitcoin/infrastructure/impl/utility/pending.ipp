@@ -21,6 +21,7 @@
 
 #include <algorithm>
 #include <cstddef>
+
 #include <bitcoin/infrastructure/error.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>

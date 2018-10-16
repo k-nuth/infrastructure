@@ -22,6 +22,7 @@
 #include <cstdint>
 #include <cstdlib>
 #include <stdexcept>
+
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/constants.hpp>
 #include <bitcoin/infrastructure/utility/limits.hpp>

@@ -22,6 +22,7 @@
 #include <atomic>
 #include <cstddef>
 #include <string>
+
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/log/source.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>

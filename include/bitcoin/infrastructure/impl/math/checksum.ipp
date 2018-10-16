@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <cstddef>
 #include <initializer_list>
+
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/endian.hpp>
