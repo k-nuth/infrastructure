@@ -28,7 +28,7 @@
 namespace libbitcoin {
 
 class BI_API istream_reader
-    : public reader
+    // : public reader
 {
 public:
     explicit
@@ -48,50 +48,50 @@ public:
 
     /// Context.
     // implicit
-    operator bool() const override;
+    operator bool() const;
     
-    bool operator!() const override;
-    bool is_exhausted() const override;
-    void invalidate() override;
+    bool operator!() const;
+    bool is_exhausted() const;
+    void invalidate();
 
     /// Read hashes.
-    hash_digest read_hash() override;
-    short_hash read_short_hash() override;
-    mini_hash read_mini_hash() override;
+    hash_digest read_hash();
+    short_hash read_short_hash();
+    mini_hash read_mini_hash();
 
     /// Read big endian integers.
-    uint16_t read_2_bytes_big_endian() override;
-    uint32_t read_4_bytes_big_endian() override;
-    uint64_t read_8_bytes_big_endian() override;
-    uint64_t read_variable_big_endian() override;
-    size_t read_size_big_endian() override;
+    uint16_t read_2_bytes_big_endian();
+    uint32_t read_4_bytes_big_endian();
+    uint64_t read_8_bytes_big_endian();
+    uint64_t read_variable_big_endian();
+    size_t read_size_big_endian();
 
     /// Read little endian integers.
-    code read_error_code() override;
-    uint16_t read_2_bytes_little_endian() override;
-    uint32_t read_4_bytes_little_endian() override;
-    uint64_t read_8_bytes_little_endian() override;
-    uint64_t read_variable_little_endian() override;
-    size_t read_size_little_endian() override;
+    code read_error_code();
+    uint16_t read_2_bytes_little_endian();
+    uint32_t read_4_bytes_little_endian();
+    uint64_t read_8_bytes_little_endian();
+    uint64_t read_variable_little_endian();
+    size_t read_size_little_endian();
 
     /// Read/peek one byte.
-    uint8_t peek_byte() override;
-    uint8_t read_byte() override;
+    uint8_t peek_byte();
+    uint8_t read_byte();
 
     /// Read all remaining bytes.
-    data_chunk read_bytes() override;
+    data_chunk read_bytes();
 
     /// Read required size buffer.
-    data_chunk read_bytes(size_t size) override;
+    data_chunk read_bytes(size_t size);
 
     /// Read variable length string.
-    std::string read_string() override;
+    std::string read_string();
 
     /// Read required size string and trim nulls.
-    std::string read_string(size_t size) override;
+    std::string read_string(size_t size);
 
     /// Advance iterator without reading.
-    void skip(size_t size) override;
+    void skip(size_t size);
 
 private:
     // The buffer is faulted or at eof.

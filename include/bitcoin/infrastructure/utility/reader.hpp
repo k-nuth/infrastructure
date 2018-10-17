@@ -34,49 +34,49 @@ namespace libbitcoin {
 class BI_API reader {
 public:
     /// Context.
-    virtual operator bool() const = 0;      //implicit //NOLINT
-    virtual bool operator!() const = 0;
-    virtual bool is_exhausted() const = 0;
-    virtual void invalidate() = 0;
+    operator bool() const;
+    bool operator!() const;
+    bool is_exhausted() const;
+    void invalidate();
 
     /// Read hashes.
-    virtual hash_digest read_hash() = 0;
-    virtual short_hash read_short_hash() = 0;
-    virtual mini_hash read_mini_hash() = 0;
+    hash_digest read_hash();
+    short_hash read_short_hash();
+    mini_hash read_mini_hash();
 
     /// Read big endian integers.
-    virtual uint16_t read_2_bytes_big_endian() = 0;
-    virtual uint32_t read_4_bytes_big_endian() = 0;
-    virtual uint64_t read_8_bytes_big_endian() = 0;
-    virtual uint64_t read_variable_big_endian() = 0;
-    virtual size_t read_size_big_endian() = 0;
+    uint16_t read_2_bytes_big_endian();
+    uint32_t read_4_bytes_big_endian();
+    uint64_t read_8_bytes_big_endian();
+    uint64_t read_variable_big_endian();
+    size_t read_size_big_endian();
 
     /// Read little endian integers.
-    virtual code read_error_code() = 0;
-    virtual uint16_t read_2_bytes_little_endian() = 0;
-    virtual uint32_t read_4_bytes_little_endian() = 0;
-    virtual uint64_t read_8_bytes_little_endian() = 0;
-    virtual uint64_t read_variable_little_endian() = 0;
-    virtual size_t read_size_little_endian() = 0;
+    code read_error_code();
+    uint16_t read_2_bytes_little_endian();
+    uint32_t read_4_bytes_little_endian();
+    uint64_t read_8_bytes_little_endian();
+    uint64_t read_variable_little_endian();
+    size_t read_size_little_endian();
 
     /// Read/peek one byte.
-    virtual uint8_t peek_byte() = 0;
-    virtual uint8_t read_byte() = 0;
+    uint8_t peek_byte();
+    uint8_t read_byte();
 
     /// Read all remaining bytes.
-    virtual data_chunk read_bytes() = 0;
+    data_chunk read_bytes();
 
     /// Read required size buffer.
-    virtual data_chunk read_bytes(size_t size) = 0;
+    data_chunk read_bytes(size_t size);
 
     /// Read variable length string.
-    virtual std::string read_string() = 0;
+    std::string read_string();
 
     /// Read required length string and trim nulls.
-    virtual std::string read_string(size_t size) = 0;
+    std::string read_string(size_t size);
 
     /// Advance iterator without reading.
-    virtual void skip(size_t size) = 0;
+    void skip(size_t size);
 };
 
 } // namespace libbitcoin

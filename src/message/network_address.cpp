@@ -55,59 +55,59 @@ void network_address::reset() {
 
 bool network_address::from_data(uint32_t version, data_chunk const& data, bool with_timestamp) {
     data_source istream(data);
-    return from_data(version, istream, with_timestamp);
+    return from_data_stream(version, istream, with_timestamp);
 }
 
-bool network_address::from_data(uint32_t version, std::istream& stream, bool with_timestamp) {
+bool network_address::from_data_stream(uint32_t version, std::istream& stream, bool with_timestamp) {
     istream_reader source(stream);
-    return from_data(version, source, with_timestamp);
+    return from_data_reader(version, source, with_timestamp);
 }
 
-bool network_address::from_data(uint32_t version, reader& source, bool with_timestamp) {
-    reset();
+// bool network_address::from_data(uint32_t version, reader& source, bool with_timestamp) {
+//     reset();
 
-    if (with_timestamp) {
-        timestamp_ = source.read_4_bytes_little_endian();
-    }
+//     if (with_timestamp) {
+//         timestamp_ = source.read_4_bytes_little_endian();
+//     }
 
-    services_ = source.read_8_bytes_little_endian();
-    auto ip = source.read_bytes(ip_.size());
-    port_ = source.read_2_bytes_big_endian();
+//     services_ = source.read_8_bytes_little_endian();
+//     auto ip = source.read_bytes(ip_.size());
+//     port_ = source.read_2_bytes_big_endian();
 
-    if ( ! source) {
-        reset();
-    }
+//     if ( ! source) {
+//         reset();
+//     }
 
-    // TODO(libbitcoin): add array to reader interface (can't use template).
-    std::move(ip.begin(), ip.end(), ip_.data());
-    return source;
-}
+//     // TODO(libbitcoin): add array to reader interface (can't use template).
+//     std::move(ip.begin(), ip.end(), ip_.data());
+//     return source;
+// }
 
 data_chunk network_address::to_data(uint32_t version, bool with_timestamp) const {
     data_chunk data;
     auto const size = serialized_size(version, with_timestamp);
     data.reserve(size);
     data_sink ostream(data);
-    to_data(version, ostream, with_timestamp);
+    to_data_stream(version, ostream, with_timestamp);
     ostream.flush();
     BITCOIN_ASSERT(data.size() == size);
     return data;
 }
 
-void network_address::to_data(uint32_t version, std::ostream& stream, bool with_timestamp) const {
+void network_address::to_data_stream(uint32_t version, std::ostream& stream, bool with_timestamp) const {
     ostream_writer sink(stream);
-    to_data(version, sink, with_timestamp);
+    to_data_writer(version, sink, with_timestamp);
 }
 
-void network_address::to_data(uint32_t version, writer& sink, bool with_timestamp) const {
-    if (with_timestamp) {
-        sink.write_4_bytes_little_endian(timestamp_);
-    }
+// void network_address::to_data(uint32_t version, writer& sink, bool with_timestamp) const {
+//     if (with_timestamp) {
+//         sink.write_4_bytes_little_endian(timestamp_);
+//     }
 
-    sink.write_8_bytes_little_endian(services_);
-    sink.write_bytes(ip_.data(), ip_.size());
-    sink.write_2_bytes_big_endian(port_);
-}
+//     sink.write_8_bytes_little_endian(services_);
+//     sink.write_bytes(ip_.data(), ip_.size());
+//     sink.write_2_bytes_big_endian(port_);
+// }
 
 size_t network_address::serialized_size(uint32_t version, bool with_timestamp) const {
     return network_address::satoshi_fixed_size(version, with_timestamp);
@@ -165,17 +165,17 @@ network_address network_address::factory_from_data(uint32_t version, data_chunk 
     return instance;
 }
 
-network_address network_address::factory_from_data(uint32_t version, std::istream& stream, bool with_timestamp) {
+network_address network_address::factory_from_data_stream(uint32_t version, std::istream& stream, bool with_timestamp) {
     network_address instance;
-    instance.from_data(version, stream, with_timestamp);
+    instance.from_data_stream(version, stream, with_timestamp);
     return instance;
 }
 
-network_address network_address::factory_from_data(uint32_t version, reader& source, bool with_timestamp) { 
-    network_address instance;
-    instance.from_data(version, source, with_timestamp);
-    return instance;
-}
+// network_address network_address::factory_from_data(uint32_t version, reader& source, bool with_timestamp) { 
+//     network_address instance;
+//     instance.from_data(version, source, with_timestamp);
+//     return instance;
+// }
 
 } // namespace message
 } // namespace libbitcoin

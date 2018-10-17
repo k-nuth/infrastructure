@@ -35,45 +35,45 @@ class BI_API writer
 {
 public:
     /// Context.
-    virtual operator bool() const = 0;      //implicit //NOLINT
-    virtual bool operator!() const = 0;
+    operator bool() const;
+    bool operator!() const;
 
     /// Write hashes.
-    virtual void write_hash(hash_digest const& value) = 0;
-    virtual void write_short_hash(short_hash const& value) = 0;
-    virtual void write_mini_hash(const mini_hash& value) = 0;
+    void write_hash(hash_digest const& value);
+    void write_short_hash(short_hash const& value);
+    void write_mini_hash(const mini_hash& value);
 
     /// Write big endian integers.
-    virtual void write_2_bytes_big_endian(uint16_t value) = 0;
-    virtual void write_4_bytes_big_endian(uint32_t value) = 0;
-    virtual void write_8_bytes_big_endian(uint64_t value) = 0;
-    virtual void write_variable_big_endian(uint64_t value) = 0;
-    virtual void write_size_big_endian(size_t value) = 0;
+    void write_2_bytes_big_endian(uint16_t value);
+    void write_4_bytes_big_endian(uint32_t value);
+    void write_8_bytes_big_endian(uint64_t value);
+    void write_variable_big_endian(uint64_t value);
+    void write_size_big_endian(size_t value);
 
     /// Write little endian integers.
-    virtual void write_2_bytes_little_endian(uint16_t value) = 0;
-    virtual void write_4_bytes_little_endian(uint32_t value) = 0;
-    virtual void write_8_bytes_little_endian(uint64_t value) = 0;
-    virtual void write_variable_little_endian(uint64_t value) = 0;
-    virtual void write_size_little_endian(size_t value) = 0;
+    void write_2_bytes_little_endian(uint16_t value);
+    void write_4_bytes_little_endian(uint32_t value);
+    void write_8_bytes_little_endian(uint64_t value);
+    void write_variable_little_endian(uint64_t value);
+    void write_size_little_endian(size_t value);
 
     /// Write one byte.
-    virtual void write_byte(uint8_t value) = 0;
+    void write_byte(uint8_t value);
 
     /// Write all bytes.
-    virtual void write_bytes(data_chunk const& data) = 0;
+    void write_bytes(data_chunk const& data);
 
     /// Write required size buffer.
-    virtual void write_bytes(const uint8_t* data, size_t size) = 0;
+    void write_bytes(const uint8_t* data, size_t size);
 
     /// Write variable length string.
-    virtual void write_string(std::string const& value) = 0;
+    void write_string(std::string const& value);
 
     /// Write required length string, padded with nulls.
-    virtual void write_string(std::string const& value, size_t size) = 0;
+    void write_string(std::string const& value, size_t size);
 
     /// Advance iterator without writing.
-    virtual void skip(size_t size) = 0;
+    void skip(size_t size);
 };
 
 } // namespace libbitcoin

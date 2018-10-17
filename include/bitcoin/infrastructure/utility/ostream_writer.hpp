@@ -27,7 +27,7 @@
 namespace libbitcoin {
 
 class BI_API ostream_writer
-    : public writer
+    // : public writer
 {
 public:
     explicit
@@ -47,47 +47,47 @@ public:
 
     /// Context.
     // implicit
-    operator bool() const override;
+    operator bool() const;
     
-    bool operator!() const override;
+    bool operator!() const;
 
     /// Write hashes.
-    void write_hash(hash_digest const& value) override;
-    void write_short_hash(short_hash const& value) override;
-    void write_mini_hash(const mini_hash& value) override;
+    void write_hash(hash_digest const& value);
+    void write_short_hash(short_hash const& value);
+    void write_mini_hash(const mini_hash& value);
 
     /// Write big endian integers.
-    void write_2_bytes_big_endian(uint16_t value) override;
-    void write_4_bytes_big_endian(uint32_t value) override;
-    void write_8_bytes_big_endian(uint64_t value) override;
-    void write_variable_big_endian(uint64_t value) override;
-    void write_size_big_endian(size_t value) override;
+    void write_2_bytes_big_endian(uint16_t value);
+    void write_4_bytes_big_endian(uint32_t value);
+    void write_8_bytes_big_endian(uint64_t value);
+    void write_variable_big_endian(uint64_t value);
+    void write_size_big_endian(size_t value);
 
     /// Write little endian integers.
     void write_error_code(code const& ec);
-    void write_2_bytes_little_endian(uint16_t value) override;
-    void write_4_bytes_little_endian(uint32_t value) override;
-    void write_8_bytes_little_endian(uint64_t value) override;
-    void write_variable_little_endian(uint64_t value) override;
-    void write_size_little_endian(size_t value) override;
+    void write_2_bytes_little_endian(uint16_t value);
+    void write_4_bytes_little_endian(uint32_t value);
+    void write_8_bytes_little_endian(uint64_t value);
+    void write_variable_little_endian(uint64_t value);
+    void write_size_little_endian(size_t value);
 
     /// Write one byte.
-    void write_byte(uint8_t value) override;
+    void write_byte(uint8_t value);
 
     /// Write all bytes.
-    void write_bytes(data_chunk const& data) override;
+    void write_bytes(data_chunk const& data);
 
     /// Write required size buffer.
-    void write_bytes(const uint8_t* data, size_t size) override;
+    void write_bytes(const uint8_t* data, size_t size);
 
     /// Write variable length string.
-    void write_string(std::string const& value, size_t size) override;
+    void write_string(std::string const& value, size_t size);
 
     /// Write required length string, padded with nulls.
-    void write_string(std::string const& value) override;
+    void write_string(std::string const& value);
 
     /// Advance iterator without writing.
-    void skip(size_t size) override;
+    void skip(size_t size);
 
 private:
     std::ostream& stream_;
