@@ -27,29 +27,23 @@
 namespace libbitcoin {
 
 template <typename Type>
-class atomic
-{
+class atomic {
 public:
 
     /// Create an atomically-accessible default instance of the type.
-    atomic()
-    {
-    }
+    atomic() {}
 
     /// Create an atomically-accessible copied instance of the type.
     atomic(const Type& instance)
-      : instance_(instance)
-    {
-    }
+        : instance_(instance)
+    {}
 
     /// Create an atomically-accessible moved instance of the type.
     atomic(Type&& instance)
-      : instance_(std::forward<Type>(instance))
-    {
-    }
+        : instance_(std::forward<Type>(instance))
+    {}
 
-    Type load() const
-    {
+    Type load() const {
         // Critical Section
         ///////////////////////////////////////////////////////////////////////
         shared_lock lock(mutex_);
@@ -58,8 +52,7 @@ public:
         ///////////////////////////////////////////////////////////////////////
     }
 
-    void store(const Type& instance)
-    {
+    void store(const Type& instance) {
         // Critical Section
         ///////////////////////////////////////////////////////////////////////
         unique_lock lock(mutex_);
@@ -68,8 +61,7 @@ public:
         ///////////////////////////////////////////////////////////////////////
     }
 
-    void store(Type&& instance)
-    {
+    void store(Type&& instance) {
         // Critical Section
         ///////////////////////////////////////////////////////////////////////
         unique_lock lock(mutex_);
@@ -79,7 +71,7 @@ public:
     }
 
 private:
-    typedef typename std::decay<Type>::type decay_type;
+    using decay_type = typename std::decay<Type>::type;
 
     decay_type instance_;
     mutable shared_mutex mutex_;

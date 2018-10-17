@@ -32,26 +32,25 @@ namespace libbitcoin {
 namespace message {
 
 using ip_address = byte_array<16>;
+constexpr ip_address null_address {{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }};
 
 class BI_API network_address {
 public:
     using list = std::vector<network_address>;
 
-    network_address();
+    network_address() = default;
 
-    // BC_CONSTCTOR required for declaration of constexpr address types.
-    BC_CONSTCTOR 
+    constexpr 
     network_address(uint32_t timestamp, uint64_t services, ip_address const& ip, uint16_t port)
-        : timestamp_(timestamp), services_(services), ip_(ip), port_(port)
+        : timestamp_(timestamp)
+        , services_(services)
+        , ip_(ip)
+        , port_(port)
     {}
 
-    network_address(uint32_t timestamp, uint64_t services, ip_address&& ip, uint16_t port);
 
-    network_address(network_address const& x);
-    network_address(network_address&& x) noexcept;
-
+    network_address(network_address const& x) = default;
     network_address& operator=(network_address const& x) = default;
-    network_address& operator=(network_address&& x) noexcept;
 
     bool operator==(network_address const& x) const;
     bool operator!=(network_address const& x) const;
@@ -67,20 +66,22 @@ public:
     ip_address& ip();
     ip_address const& ip() const;
     void set_ip(ip_address const& value);
-    void set_ip(ip_address&& value);
 
     uint16_t port() const;
     void set_port(uint16_t value);
 
+    size_t serialized_size(uint32_t version, bool with_timestamp) const;
+
     bool from_data(uint32_t version, data_chunk const& data, bool with_timestamp);
     bool from_data(uint32_t version, std::istream& stream, bool with_timestamp);
     bool from_data(uint32_t version, reader& source, bool with_timestamp);
+
     data_chunk to_data(uint32_t version, bool with_timestamp) const;
     void to_data(uint32_t version, std::ostream& stream, bool with_timestamp) const;
     void to_data(uint32_t version, writer& sink, bool with_timestamp) const;
+
     bool is_valid() const;
     void reset();
-    size_t serialized_size(uint32_t version, bool with_timestamp) const;
 
     static 
     network_address factory_from_data(uint32_t version, data_chunk const& data, bool with_timestamp);
@@ -96,23 +97,23 @@ public:
 
 
 private:
-    uint32_t timestamp_;
-    uint64_t services_;
-    ip_address ip_;
-    uint16_t port_;
+    uint32_t timestamp_{0};
+    uint64_t services_{0};
+    ip_address ip_{null_address};
+    uint16_t port_{0};
 };
 
 // version::services::none
-BC_CONSTEXPR uint32_t no_services = 0;
-BC_CONSTEXPR uint32_t no_timestamp = 0;
-BC_CONSTEXPR uint16_t unspecified_ip_port = 0;
-BC_CONSTEXPR ip_address unspecified_ip_address {{
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00
+constexpr uint32_t no_services = 0;
+constexpr uint32_t no_timestamp = 0;
+constexpr uint16_t unspecified_ip_port = 0;
+constexpr ip_address unspecified_ip_address {{
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00
 }};
 
 // Defaults to full node services.
-BC_CONSTEXPR network_address unspecified_network_address {
+constexpr network_address unspecified_network_address {
     no_timestamp,
     no_services,
     unspecified_ip_address,

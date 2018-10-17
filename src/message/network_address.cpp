@@ -29,47 +29,7 @@
 namespace libbitcoin {
 namespace message {
 
-static ip_address const null_address {{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }};
-
-network_address::network_address()
-    // : network_address(0, 0, null_address, 0)
-    : timestamp_(0)
-    , services_(0)
-    , ip_(null_address)
-    , port_(0)
-{}
-
-// TODO: create derived address that adds the timestamp.
-network_address::network_address(uint32_t timestamp, uint64_t services, ip_address&& ip, uint16_t port)
-    : timestamp_(timestamp)
-    , services_(services)
-    , ip_(ip)
-    , port_(port)
-{}
-
-network_address::network_address(network_address const& x)
-    // : network_address(x.timestamp_, x.services_, x.ip_, x.port_)
-    : timestamp_(x.timestamp_)
-    , services_(x.services_)
-    , ip_(x.ip_)
-    , port_(x.port_)
-{}
-
-network_address::network_address(network_address&& x) noexcept
-    // : network_address(x.timestamp_, x.services_, x.ip_, x.port_)
-    : timestamp_(x.timestamp_)
-    , services_(x.services_)
-    , ip_(x.ip_)
-    , port_(x.port_)
-{}
-
-network_address& network_address::operator=(network_address&& x) noexcept { 
-    timestamp_ = x.timestamp_;
-    services_ = x.services_;
-    ip_ = x.ip_;
-    port_ = x.port_;
-    return *this;
-}
+// TODO(libbitcoin): create derived address that adds the timestamp.
 
 bool network_address::operator==(network_address const& x) const {
     return (services_ == x.services_) && (port_ == x.port_) && (ip_ == x.ip_);
@@ -188,10 +148,6 @@ ip_address const& network_address::ip() const {
 }
 
 void network_address::set_ip(ip_address const& value) {
-    ip_ = value;
-}
-
-void network_address::set_ip(ip_address&& value) {
     ip_ = value;
 }
 
