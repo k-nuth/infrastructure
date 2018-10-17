@@ -444,7 +444,7 @@ void printer::generate_argument_names() {
 
 // 100% component tested.
 static 
-bool compare_parameters(const parameter left, const parameter right) {
+bool compare_parameters(const parameter& left, const parameter& right) {
     return left.get_format_name() < right.get_format_name();
 }
 
@@ -457,7 +457,7 @@ void printer::generate_parameters() {
     parameters.clear();
 
     parameter param;
-    for (auto option_ptr: options.options()) {
+    for (const auto& option_ptr: options.options()) {
         param.initialize(*option_ptr, argument_names);
 
         // Sort non-positonal parameters (i.e. options).

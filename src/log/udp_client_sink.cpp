@@ -25,6 +25,7 @@
 #include <boost/make_shared.hpp>
 
 #include <bitcoin/infrastructure/error.hpp>
+#include <utility>
 
 namespace libbitcoin {
 namespace log {
@@ -34,7 +35,7 @@ using namespace boost::asio;
 using namespace boost::log;
 
 udp_client_sink::udp_client_sink(socket_ptr socket, endpoint_ptr endpoint)
-    : socket_(socket), endpoint_(endpoint)
+    : socket_(std::move(socket)), endpoint_(std::move(endpoint))
 {}
 
 void udp_client_sink::consume(const record_view& record, std::string const& message) {

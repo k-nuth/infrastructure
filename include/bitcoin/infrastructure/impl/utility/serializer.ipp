@@ -125,7 +125,7 @@ void serializer<Iterator>::write_size_big_endian(size_t value)
 //-----------------------------------------------------------------------------
 
 template <typename Iterator>
-void serializer<Iterator>::write_error_code(const code& ec)
+void serializer<Iterator>::write_error_code(code const& ec)
 {
     write_4_bytes_little_endian(static_cast<uint32_t>(ec.value()));
 }

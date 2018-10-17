@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef BITPRIM_INFRASTRUCTURE_CONDITIONAL_LOCK_HPP
-#define BITPRIM_INFRASTRUCTURE_CONDITIONAL_LOCK_HPP
+#ifndef BITPRIM_INFRASTRUCTURE_CONDITIONAL_LOCK_HPP_
+#define BITPRIM_INFRASTRUCTURE_CONDITIONAL_LOCK_HPP_
 
 #include <memory>
 
@@ -26,20 +26,19 @@
 
 namespace libbitcoin {
 
-class BI_API conditional_lock
-{
+class BI_API conditional_lock {
 public:
     /// Conditional lock using specified mutex pointer.
     explicit
-    conditional_lock(std::shared_ptr<shared_mutex> mutex_ptr);
+    conditional_lock(std::shared_ptr<shared_mutex> const& mutex_ptr);
 
     /// Unlock.
     virtual ~conditional_lock();
 
 private:
-    const std::shared_ptr<shared_mutex> mutex_ptr_;
+    std::shared_ptr<shared_mutex> const mutex_ptr_;
 };
 
 } // namespace libbitcoin
 
-#endif
+#endif // BITPRIM_INFRASTRUCTURE_CONDITIONAL_LOCK_HPP_

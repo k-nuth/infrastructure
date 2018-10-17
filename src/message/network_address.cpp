@@ -29,11 +29,11 @@
 namespace libbitcoin {
 namespace message {
 
-static const ip_address null_address {{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }};
+static ip_address const null_address {{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }};
 
 // TODO: create derived address that adds the timestamp.
 network_address::network_address(uint32_t timestamp, uint64_t services, ip_address&& ip, uint16_t port)
-    : timestamp_(timestamp), services_(services), ip_(std::move(ip)), port_(port)
+    : timestamp_(timestamp), services_(services), ip_(ip), port_(port)
 {}
 
 network_address network_address::factory_from_data(uint32_t version, data_chunk const& data, bool with_timestamp) {
@@ -58,12 +58,12 @@ network_address::network_address()
     : network_address(0, 0, null_address, 0)
 {}
 
-network_address::network_address(const network_address& x)
+network_address::network_address(network_address const& x)
     : network_address(x.timestamp_, x.services_, x.ip_, x.port_)
 {}
 
 network_address::network_address(network_address&& x)
-    : network_address(x.timestamp_, x.services_, std::move(x.ip_), x.port_)
+    : network_address(x.timestamp_, x.services_, x.ip_, x.port_)
 {}
 
 bool network_address::is_valid() const {
@@ -170,16 +170,16 @@ ip_address& network_address::ip() {
     return ip_;
 }
 
-const ip_address& network_address::ip() const {
+ip_address const& network_address::ip() const {
     return ip_;
 }
 
-void network_address::set_ip(const ip_address& value) {
+void network_address::set_ip(ip_address const& value) {
     ip_ = value;
 }
 
 void network_address::set_ip(ip_address&& value) {
-    ip_ = std::move(value);
+    ip_ = value;
 }
 
 uint16_t network_address::port() const {
@@ -193,16 +193,16 @@ void network_address::set_port(uint16_t value) {
 network_address& network_address::operator=(network_address&& x) {
     timestamp_ = x.timestamp_;
     services_ = x.services_;
-    ip_ = std::move(x.ip_);
+    ip_ = x.ip_;
     port_ = x.port_;
     return *this;
 }
 
-bool network_address::operator==(const network_address& x) const {
+bool network_address::operator==(network_address const& x) const {
     return (services_ == x.services_) && (port_ == x.port_) && (ip_ == x.ip_);
 }
 
-bool network_address::operator!=(const network_address& x) const {
+bool network_address::operator!=(network_address const& x) const {
     return !(*this == x);
 }
 

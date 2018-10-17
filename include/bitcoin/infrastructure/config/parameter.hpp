@@ -60,15 +60,13 @@ using parameter_list = std::vector<parameter>;
  * Normalized storage for command line arguments and options.
  * TEST: option_metadata does not provide virtual methods so must wrap to mock.
  */
-class BI_API parameter
-{
+class BI_API parameter {
 private:
 
     /**
      * Enumerated options for selecting the canonical name.
      */
-    enum search_options : int
-    {
+    enum search_options : int {
         /** --name/-n */
         dashed_both_prefer_long = 1,
 
@@ -84,24 +82,28 @@ public:
     /**
      * Sentinel - the option is not a positional argument.
      */
-    static const int not_positional;
+    static 
+    const int not_positional;
 
     /**
      * Sentinel - there is no short name.
      */
-    static char const no_short_name;
+    static 
+    char const no_short_name;
 
     /**
      * The character used to prefix command line options.
      */
-    static char const option_prefix_char;
+    static 
+    char const option_prefix_char;
 
     /**
      * Populate with normalized parameter data.
      * @param[in]  option     The metadata of the option to test.
      * @param[in]  arguments  The list of supported positional arguments.
      */
-    virtual void initialize(
+    virtual 
+    void initialize(
         const boost::program_options::option_description& option,
         const argument_list& arguments);
 
@@ -112,7 +114,8 @@ public:
      * @param[in]  arguments  The list of supported positional arguments.
      * @return                Relative position or -1 if not positional.
      */
-    virtual int position(
+    virtual 
+    int position(
         const boost::program_options::option_description& option,
         const argument_list& arguments) const;
 
@@ -132,7 +135,8 @@ public:
      * @param[in]  option  The metadata of the option to test.
      * @return             The short name character or null character.
      */
-    virtual char short_name(
+    virtual 
+    char short_name(
         const boost::program_options::option_description& option) const;
 
     /**

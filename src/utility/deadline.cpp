@@ -24,6 +24,7 @@
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
+#include <utility>
 
 namespace libbitcoin {
 
@@ -33,29 +34,23 @@ using std::placeholders::_1;
 // Deadline is guaranteed to call handler exactly once unless canceled/reset.
 
 deadline::deadline(threadpool& pool)
-  : duration_(asio::seconds(0)),
-    timer_(pool.service())
+    : duration_(asio::seconds(0))
+    , timer_(pool.service())
     /*, CONSTRUCT_TRACK(deadline)*/
-{
-}
+{}
 
 deadline::deadline(threadpool& pool, asio::duration duration)
-  : duration_(duration),
-    timer_(pool.service())
+    : duration_(duration)
+    , timer_(pool.service())
     /*, CONSTRUCT_TRACK(deadline)*/
-{
+{}
+
+void deadline::start(handler handle) {
+    start(std::move(handle), duration_);
 }
 
-void deadline::start(handler handle)
-{
-    start(handle, duration_);
-}
-
-void deadline::start(handler handle, asio::duration duration)
-{
-    auto const timer_handler =
-        std::bind(&deadline::handle_timer,
-            shared_from_this(), _1, handle);
+void deadline::start(handler handle, asio::duration duration) {
+    auto const timer_handler = std::bind(&deadline::handle_timer, shared_from_this(), _1, handle);
 
     // Critical Section
     ///////////////////////////////////////////////////////////////////////////
@@ -74,8 +69,7 @@ void deadline::start(handler handle, asio::duration duration)
 // Cancellation calls handle_timer with asio::error::operation_aborted.
 // We do not handle the cancelation result code, which will return success
 // in the case of a race in which the timer is already canceled.
-void deadline::stop()
-{
+void deadline::stop() {
     // Critical Section
     ///////////////////////////////////////////////////////////////////////////
     unique_lock lock(mutex_);
@@ -89,13 +83,12 @@ void deadline::stop()
 // If the timer expires the callback is fired with a success code.
 // If the timer fails the callback is fired with the normalized error code.
 // If the timer is canceled no call is made.
-void deadline::handle_timer(const boost_code& ec, handler handle) const
-{
+void deadline::handle_timer(const boost_code& ec, handler const& handle) const {
     if ( ! ec) {
         handle(error::success);
     } else if (ec != asio::error::operation_aborted) {
         handle(error::boost_to_error_code(ec));
-}
+    }
 }
 
 } // namespace libbitcoin

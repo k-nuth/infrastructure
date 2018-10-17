@@ -64,7 +64,7 @@ public:
     void write_size_big_endian(size_t value) override;
 
     /// Write little endian integers.
-    void write_error_code(const code& ec);
+    void write_error_code(code const& ec);
     void write_2_bytes_little_endian(uint16_t value) override;
     void write_4_bytes_little_endian(uint32_t value) override;
     void write_8_bytes_little_endian(uint64_t value) override;

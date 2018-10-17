@@ -25,16 +25,16 @@
 
 namespace libbitcoin {
 
-using handle0 = std::function<void(const code&)>;
+using handle0 = std::function<void(code const&)>;
 
 template <typename Type>
-using handle1 = std::function<void(const code&, const Type&)>;
+using handle1 = std::function<void(code const&, const Type&)>;
 
 template <typename Type1, typename Type2>
-using handle2 = std::function<void(const code&, const Type1&, const Type2&)>;
+using handle2 = std::function<void(code const&, const Type1&, const Type2&)>;
 
 template <typename Type1, typename Type2, typename Type3>
-using handle3 = std::function<void(const code&, const Type1&, const Type2&, const Type3&)>;
+using handle3 = std::function<void(code const&, const Type1&, const Type2&, const Type3&)>;
 
 } // namespace libbitcoin
 

@@ -115,7 +115,7 @@ void ostream_writer::write_size_big_endian(size_t value)
 // Little Endian Integers.
 //-----------------------------------------------------------------------------
 
-void ostream_writer::write_error_code(const code& ec)
+void ostream_writer::write_error_code(code const& ec)
 {
     write_4_bytes_little_endian(static_cast<uint32_t>(ec.value()));
 }

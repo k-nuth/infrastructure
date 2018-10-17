@@ -33,33 +33,33 @@ namespace message {
 
 using ip_address = byte_array<16>;
 
-class BI_API network_address
-{
+class BI_API network_address {
 public:
     using list = std::vector<network_address>;
 
-    static network_address factory_from_data(uint32_t version,
-        data_chunk const& data, bool with_timestamp);
-    static network_address factory_from_data(uint32_t version,
-        std::istream& stream, bool with_timestamp);
-    static network_address factory_from_data(uint32_t version,
-        reader& source, bool with_timestamp);
-    static size_t satoshi_fixed_size(uint32_t version,
-        bool with_timestamp);
+    static 
+    network_address factory_from_data(uint32_t version, data_chunk const& data, bool with_timestamp);
+    
+    static 
+    network_address factory_from_data(uint32_t version, std::istream& stream, bool with_timestamp);
+
+    static 
+    network_address factory_from_data(uint32_t version, reader& source, bool with_timestamp);
+
+    static 
+    size_t satoshi_fixed_size(uint32_t version, bool with_timestamp);
 
     network_address();
 
     // BC_CONSTCTOR required for declaration of constexpr address types.
-    BC_CONSTCTOR network_address(uint32_t timestamp, uint64_t services,
-        const ip_address& ip, uint16_t port)
-      : timestamp_(timestamp), services_(services), ip_(ip), port_(port)
-    {
-    }
+    BC_CONSTCTOR 
+    network_address(uint32_t timestamp, uint64_t services, ip_address const& ip, uint16_t port)
+        : timestamp_(timestamp), services_(services), ip_(ip), port_(port)
+    {}
 
-    network_address(uint32_t timestamp, uint64_t services, ip_address&& ip,
-        uint16_t port);
+    network_address(uint32_t timestamp, uint64_t services, ip_address&& ip, uint16_t port);
 
-    network_address(const network_address& x);
+    network_address(network_address const& x);
     network_address(network_address&& x);
 
     // Starting version 31402, addresses are prefixed with a timestamp.
@@ -70,31 +70,28 @@ public:
     void set_services(uint64_t value);
 
     ip_address& ip();
-    const ip_address& ip() const;
-    void set_ip(const ip_address& value);
+    ip_address const& ip() const;
+    void set_ip(ip_address const& value);
     void set_ip(ip_address&& value);
 
     uint16_t port() const;
     void set_port(uint16_t value);
 
-    bool from_data(uint32_t version, data_chunk const& data,
-        bool with_timestamp);
-    bool from_data(uint32_t version, std::istream& stream,
-        bool with_timestamp);
+    bool from_data(uint32_t version, data_chunk const& data, bool with_timestamp);
+    bool from_data(uint32_t version, std::istream& stream, bool with_timestamp);
     bool from_data(uint32_t version, reader& source, bool with_timestamp);
     data_chunk to_data(uint32_t version, bool with_timestamp) const;
-    void to_data(uint32_t version, std::ostream& stream,
-        bool with_timestamp) const;
+    void to_data(uint32_t version, std::ostream& stream, bool with_timestamp) const;
     void to_data(uint32_t version, writer& sink, bool with_timestamp) const;
     bool is_valid() const;
     void reset();
     size_t serialized_size(uint32_t version, bool with_timestamp) const;
 
     network_address& operator=(network_address&& x);
-    network_address& operator=(const network_address& x) = default;
+    network_address& operator=(network_address const& x) = default;
 
-    bool operator==(const network_address& x) const;
-    bool operator!=(const network_address& x) const;
+    bool operator==(network_address const& x) const;
+    bool operator!=(network_address const& x) const;
 
 private:
     uint32_t timestamp_;
@@ -107,17 +104,13 @@ private:
 BC_CONSTEXPR uint32_t no_services = 0;
 BC_CONSTEXPR uint32_t no_timestamp = 0;
 BC_CONSTEXPR uint16_t unspecified_ip_port = 0;
-BC_CONSTEXPR ip_address unspecified_ip_address
-{
-    {
+BC_CONSTEXPR ip_address unspecified_ip_address {{
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00
-    }
-};
+}};
 
 // Defaults to full node services.
-BC_CONSTEXPR network_address unspecified_network_address
-{
+BC_CONSTEXPR network_address unspecified_network_address {
     no_timestamp,
     no_services,
     unspecified_ip_address,

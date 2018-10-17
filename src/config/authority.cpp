@@ -41,7 +41,7 @@ using namespace boost::program_options;
 // returns: [2001:db8::2] or [2001:db8::2] or 1.2.240.1
 static 
 std::string to_host_name(std::string const& host) {
-    if (host.find(":") == std::string::npos || host.find("[") == 0) {
+    if (host.find(':') == std::string::npos || host.find('[') == 0) {
         return host;
     }
 

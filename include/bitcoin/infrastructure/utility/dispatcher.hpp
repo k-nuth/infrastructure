@@ -54,11 +54,9 @@ namespace libbitcoin {
 
 /// This  class is thread safe.
 /// If the ios service is stopped jobs will not be dispatched.
-class BI_API dispatcher
-  : noncopyable
-{
+class BI_API dispatcher : noncopyable {
 public:
-    using delay_handler = std::function<void (const code &)>;
+    using delay_handler = std::function<void (code const &)>;
 
     dispatcher(threadpool& pool, std::string const& name);
 
@@ -69,54 +67,49 @@ public:
 
     /// Invokes a job on the current thread. Equivalent to invoking std::bind.
     template <typename... Args>
-    static void bound(Args&&... args)
-    {
+    static 
+    void bound(Args&&... args) {
         BIND_ARGS(args)();
     }
 
     /// Posts a job to the service. Concurrent and not ordered.
     template <typename... Args>
-    void concurrent(Args&&... args)
-    {
+    void concurrent(Args&&... args) {
         heap_->concurrent(BIND_ARGS(args));
     }
 
     /// Post a job to the strand. Ordered and not concurrent.
     template <typename... Args>
-    void ordered(Args&&... args)
-    {
+    void ordered(Args&&... args) {
         heap_->ordered(BIND_ARGS(args));
     }
 
     /// Posts a strand-wrapped job to the service. Not ordered or concurrent.
     /// The wrap provides non-concurrency, order is prevented by service post.
     template <typename... Args>
-    void unordered(Args&&... args)
-    {
+    void unordered(Args&&... args) {
         heap_->unordered(BIND_ARGS(args));
     }
 
     /// Posts an asynchronous job to the sequencer. Ordered and not concurrent.
     /// The sequencer provides both non-concurrency and ordered execution.
     template <typename... Args>
-    void lock(Args&&... args)
-    {
+    void lock(Args&&... args) {
         heap_->lock(BIND_ARGS(args));
     }
 
     /// Complete sequential execution.
-    inline void unlock()
-    {
+    inline 
+    void unlock() {
         heap_->unlock();
     }
 
     /// Posts job to service after specified delay. Concurrent and not ordered.
     /// The timer cannot be canceled so delay should be within stop criteria.
-    inline void delayed(const asio::duration& delay, delay_handler handler)
-    {
+    inline 
+    void delayed(asio::duration const& delay, delay_handler const& handler) {
         auto timer = std::make_shared<deadline>(pool_, delay);
-        timer->start([handler, timer](const code& ec)
-        {
+        timer->start([handler, timer](code const& ec) {
             handler(ec);
             timer->stop();
         });
@@ -124,22 +117,17 @@ public:
 
     /// Returns a delegate that will execute the job on the current thread.
     template <typename... Args>
-    static auto bound_delegate(Args&&... args) ->
-        delegates::bound<decltype(BIND_ARGS(args))>
-    {
-        return
-        {
+    static 
+    auto bound_delegate(Args&&... args) -> delegates::bound<decltype(BIND_ARGS(args))> {
+        return {
             BIND_ARGS(args)
         };
     }
 
     /// Returns a delegate that will post the job via the service.
     template <typename... Args>
-    auto concurrent_delegate(Args&&... args) ->
-        delegates::concurrent<decltype(BIND_ARGS(args))>
-    {
-        return
-        {
+    auto concurrent_delegate(Args&&... args) -> delegates::concurrent<decltype(BIND_ARGS(args))> {
+        return {
             BIND_ARGS(args),
             heap_
         };
@@ -147,11 +135,8 @@ public:
 
     /// Returns a delegate that will post the job via the strand.
     template <typename... Args>
-    auto ordered_delegate(Args&&... args) ->
-        delegates::ordered<decltype(BIND_ARGS(args))>
-    {
-        return
-        {
+    auto ordered_delegate(Args&&... args) -> delegates::ordered<decltype(BIND_ARGS(args))> {
+        return {
             BIND_ARGS(args),
             heap_
         };
@@ -159,11 +144,8 @@ public:
 
     /// Returns a delegate that will post a wrapped job via the service.
     template <typename... Args>
-    auto unordered_delegate(Args&&... args) ->
-        delegates::unordered<decltype(BIND_ARGS(args))>
-    {
-        return
-        {
+    auto unordered_delegate(Args&&... args) -> delegates::unordered<decltype(BIND_ARGS(args))> {
+        return {
             BIND_ARGS(args),
             heap_
         };
@@ -171,11 +153,8 @@ public:
 
     /// Returns a delegate that will post a job via the sequencer.
     template <typename... Args>
-    auto sequence_delegate(Args&&... args) ->
-        delegates::sequence<decltype(BIND_ARGS(args))>
-    {
-        return
-        {
+    auto sequence_delegate(Args&&... args) -> delegates::sequence<decltype(BIND_ARGS(args))> {
+        return {
             BIND_ARGS(args),
             heap_
         };
@@ -248,13 +227,12 @@ public:
     ////}
 
     /// The size of the dispatcher's threadpool at the time of calling.
-    inline size_t size() const
-    {
+    inline 
+    size_t size() const {
         return pool_.size();
     }
 
 private:
-
     // This is thread safe.
     work::ptr heap_;
     threadpool& pool_;

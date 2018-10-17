@@ -63,7 +63,7 @@ public:
     void remove(element_ptr element);
 
     /// Stop all elements of the collection (idempotent).
-    void stop(const code& ec);
+    void stop(code const& ec);
 
     /// Close and erase all elements of the collection (blocking).
     void close();

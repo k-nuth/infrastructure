@@ -45,7 +45,7 @@ class BI_API deadline
 {
 public:
     using ptr = std::shared_ptr<deadline>;
-    using handler = std::function<void (const code &)>;
+    using handler = std::function<void (code const &)>;
 
     /**
      * Construct a deadline timer with a zero duration.
@@ -84,7 +84,7 @@ public:
     void stop();
 
 private:
-    void handle_timer(const boost_code& ec, handler handle) const;
+    void handle_timer(const boost_code& ec, const handler& handle) const;
 
     asio::timer timer_;
     asio::duration duration_;

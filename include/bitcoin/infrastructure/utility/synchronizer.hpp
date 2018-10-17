@@ -64,7 +64,7 @@ public:
     }
 
     // Determine if the code is cause for termination.
-    bool complete(const code& ec)
+    bool complete(code const& ec)
     {
         switch (terminate_)
         {
@@ -80,7 +80,7 @@ public:
     }
 
     // Assuming we are terminating, generate the proper result code.
-    code result(const code& ec)
+    code result(code const& ec)
     {
         switch (terminate_)
         {
@@ -96,7 +96,7 @@ public:
     }
 
     template <typename... Args>
-    void operator()(const code& ec, Args&&... args)
+    void operator()(code const& ec, Args&&... args)
     {
         // Critical Section
         ///////////////////////////////////////////////////////////////////////

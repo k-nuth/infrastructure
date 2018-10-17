@@ -52,7 +52,7 @@ BI_API void pseudo_random_fill(data_chunk& chunk);
  *                      portion of the maximum duration.
  * @return              The randomized duration.
  */
-BI_API asio::duration pseudo_randomize(const asio::duration& maximum,
+BI_API asio::duration pseudo_randomize(asio::duration const& maximum,
     uint8_t ratio=2);
 
 } // namespace libbitcoin

@@ -89,7 +89,7 @@ uint64_t pseudo_random::next(uint64_t begin, uint64_t end)
     return distribution(get_twister());
 }
 
-asio::duration pseudo_randomize(const asio::duration& expiration,
+asio::duration pseudo_randomize(asio::duration const& expiration,
     uint8_t ratio)
 {
     return pseudo_random::duration(expiration, ratio);
@@ -98,7 +98,7 @@ asio::duration pseudo_randomize(const asio::duration& expiration,
 // Randomly select a time duration in the range:
 // [(expiration - expiration / ratio) .. expiration]
 // Not fully testable due to lack of random engine injection.
-asio::duration pseudo_random::duration(const asio::duration& expiration,
+asio::duration pseudo_random::duration(asio::duration const& expiration,
     uint8_t ratio)
 {
     if (ratio == 0) {

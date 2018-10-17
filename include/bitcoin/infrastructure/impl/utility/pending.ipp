@@ -154,7 +154,7 @@ void pending<Element>::remove(element_ptr element)
 
 // This is idempotent.
 template <typename Element>
-void pending<Element>::stop(const code& ec)
+void pending<Element>::stop(code const& ec)
 {
     elements copy;
 

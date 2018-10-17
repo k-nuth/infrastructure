@@ -29,7 +29,7 @@
 namespace libbitcoin {
 
 monitor::monitor(count_ptr counter, std::string&& name)
-  : counter_(counter), name_(std::move(name))
+  : counter_(std::move(counter)), name_(std::move(name))
 {
     trace(++(*counter_), "+");
 }
