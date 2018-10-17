@@ -37,7 +37,7 @@ char const parameter::option_prefix_char = '-';
 // 100% component coverage, common scenarios.
 // A required argument may only be preceeded by required arguments.
 // Requiredness may be in error if the metadata is inconsistent.
-void parameter::initialize(const po::option_description& option, const argument_list& arguments) {
+void parameter::initialize(const po::option_description& option, argument_list const& arguments) {
     set_position(position(option, arguments));
     set_args_limit(arguments_limit(get_position(), option, arguments));
     set_required(option.semantic()->is_required());
@@ -49,7 +49,7 @@ void parameter::initialize(const po::option_description& option, const argument_
 }
 
 // 100% component coverage, all three scenarios (long, short, both)
-int parameter::position(const po::option_description& option, const argument_list& arguments) const {
+int parameter::position(const po::option_description& option, argument_list const& arguments) const {
     return find_pair_position(arguments, option.long_name());
 }
 
@@ -66,7 +66,7 @@ char parameter::short_name(const po::option_description& option) const {
 }
 
 // 100% component coverage
-unsigned parameter::arguments_limit(int position, const po::option_description& option, const argument_list& arguments) const {
+unsigned parameter::arguments_limit(int position, const po::option_description& option, argument_list const& arguments) const {
     if (position == parameter::not_positional) {
         return option.semantic()->max_tokens();
     }

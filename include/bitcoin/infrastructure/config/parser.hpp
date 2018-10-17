@@ -57,33 +57,25 @@ public:
     boost::filesystem::path get_config_option(variables_map& variables, std::string const& name);
 
     /// Load command line options (named).
-    virtual 
-    options_metadata load_options() = 0;
+    options_metadata load_options();
 
     /// Load command line arguments (positional).
-    virtual 
-    arguments_metadata load_arguments() = 0;
+    arguments_metadata load_arguments();
 
     /// Load environment variable settings.
-    virtual 
-    options_metadata load_environment() = 0;
+    options_metadata load_environment();
 
     /// Load configuration file settings.
-    virtual 
-    options_metadata load_settings() = 0;
+    options_metadata load_settings();
 
 protected:
-    virtual 
     void load_command_variables(variables_map& variables, int argc, char const* argv[]);
 
-    virtual 
     // int load_configuration_variables(variables_map& variables, std::string const& option_name);
     load_error load_configuration_variables(variables_map& variables, std::string const& option_name);
 
-    virtual    
     load_error load_configuration_variables_path(variables_map& variables, boost::filesystem::path const& config_path);
 
-    virtual 
     void load_environment_variables(variables_map& variables, std::string const& prefix);
 
 };

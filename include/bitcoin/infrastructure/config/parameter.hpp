@@ -36,8 +36,8 @@ namespace config {
  * Shorthand for property declarations in parameter class.
  */
 #define BI_PROPERTY(type, name) \
-    public: virtual type get_##name() const { return name##_; } \
-    public: virtual void set_##name(type const& value) { name##_ = value; } \
+    public: type get_##name() const { return name##_; } \
+    public: void set_##name(type const& value) { name##_ = value; } \
     private: type name##_
 
 /**
@@ -102,10 +102,9 @@ public:
      * @param[in]  option     The metadata of the option to test.
      * @param[in]  arguments  The list of supported positional arguments.
      */
-    virtual 
     void initialize(
-        const boost::program_options::option_description& option,
-        const argument_list& arguments);
+        boost::program_options::option_description const& option,
+        argument_list const& arguments);
 
     /**
      * Determine if the option is an argument by testing for it by name in the
@@ -114,10 +113,9 @@ public:
      * @param[in]  arguments  The list of supported positional arguments.
      * @return                Relative position or -1 if not positional.
      */
-    virtual 
     int position(
-        const boost::program_options::option_description& option,
-        const argument_list& arguments) const;
+        boost::program_options::option_description const& option,
+        argument_list const& arguments) const;
 
     /**
      * Get the value for the args_limit property.
@@ -127,17 +125,15 @@ public:
      * @return                The arguments limit value for the option.
      */
     unsigned arguments_limit(int position,
-        const boost::program_options::option_description& option,
-        const argument_list& arguments) const;
+        boost::program_options::option_description const& option,
+        argument_list const& arguments) const;
 
     /**
      * Get the option's short name character or zero.
      * @param[in]  option  The metadata of the option to test.
      * @return             The short name character or null character.
      */
-    virtual 
-    char short_name(
-        const boost::program_options::option_description& option) const;
+    char short_name(boost::program_options::option_description const& option) const;
 
     /**
      * Virtual property declarations.

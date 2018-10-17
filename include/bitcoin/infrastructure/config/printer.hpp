@@ -29,8 +29,6 @@
 #include <bitcoin/infrastructure/config/parameter.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 
-/* NOTE: don't declare 'using namespace foo' in headers. */
-
 namespace libbitcoin {
 namespace config {
 
@@ -38,14 +36,13 @@ namespace config {
  * Shorthand for property declarations in printer class.
  */
 #define BI_PROPERTY_GET_REF(type, name) \
-    public: virtual type& get_##name() { return name##_; } \
+    public: type& get_##name() { return name##_; } \
     private: type name##_
 
 /**
  * Class for managing the serialization of command line options and arguments.
  */
-class BI_API printer
-{
+class BI_API printer {
 public:
 
     /**
@@ -83,73 +80,72 @@ public:
      * @param[in]  paragraph  The paragraph to columnize.
      * @return                The column, as a list of fragments.
      */
-    virtual std::vector<std::string> columnize(std::string const& paragraph,
-        size_t width);
+    std::vector<std::string> columnize(std::string const& paragraph, size_t width);
 
     /**
      * Format the command description.
      * @return  The command description.
      */
-    virtual std::string format_description();
+    std::string format_description();
 
     /**
      * Format the parameters table.
      * @param[in]  positional  True for positional otherwize named.
      * @return                 The formatted help arguments table.
      */
-    virtual std::string format_parameters_table(bool positional);
+    std::string format_parameters_table(bool positional);
 
     /**
      * Format the settings table.
      * @return  The formatted settings table.
      */
-    virtual std::string format_settings_table();
+    std::string format_settings_table();
 
     /**
      * Format a paragraph.
      * @param[in]  paragraph  The text to format.
      * @return                The formatted paragraph.
      */
-    virtual std::string format_paragraph(std::string const& paragraph);
+    std::string format_paragraph(std::string const& paragraph);
 
     /**
      * Format the command line usage.
      * @return  The formatted usage.
      */
-    virtual std::string format_usage();
+    std::string format_usage();
 
     /**
      * Format the command line parameters.
      * @return  The formatted command line parameters.
      */
-    virtual std::string format_usage_parameters();
+    std::string format_usage_parameters();
 
     /**
      * Build the list of argument name/count tuples.
      */
-    virtual void generate_argument_names();
+    void generate_argument_names();
 
     /**
      * Build the list of parameters.
      */
-    virtual void generate_parameters();
+    void generate_parameters();
 
     /**
      * Parse the arguments and options into the normalized parameter list.
      */
-    virtual void initialize();
+    void initialize();
 
     /**
      * Serialize command line help (full details).
      * @param[out] output  Stream that is sink for output.
      */
-    virtual void commandline(std::ostream& output);
+    void commandline(std::ostream& output);
 
     /**
      * Serialize as config settings (full details).
      * @param[out] output  Stream that is sink for output.
      */
-    virtual void settings(std::ostream& output);
+    void settings(std::ostream& output);
 
     /**
      * Virtual property declarations, passed on construct.

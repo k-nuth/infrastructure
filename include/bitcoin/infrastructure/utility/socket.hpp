@@ -33,7 +33,7 @@ namespace libbitcoin {
 
 /// This class is thread safe but the socket may not be used concurrently.
 class BI_API socket
-  : noncopyable
+    : noncopyable
     /*, public track<socket>*/
 {
 public:
@@ -50,7 +50,7 @@ public:
     asio::socket& get();
 
     /// Signal cancel of all outstanding work on the socket.
-    virtual void stop();
+    void stop();
 
 private:
     // This is thread safe.
