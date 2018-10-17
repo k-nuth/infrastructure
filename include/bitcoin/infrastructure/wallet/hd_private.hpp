@@ -75,7 +75,7 @@ public:
     bool operator<(hd_private const& x) const;
     bool operator==(hd_private const& x) const;
     bool operator!=(hd_private const& x) const;
-    hd_private& operator=(hd_private other);
+    hd_private& operator=(hd_private x);
 
     friend 
     std::istream& operator>>(std::istream& in, hd_private& to);

@@ -142,6 +142,7 @@ public:
     /**
      * Virtual property declarations.
      */
+    //TODO(fernando): remove these macros
     BI_PROPERTY(int, position);
     BI_PROPERTY(bool, required);
     BI_PROPERTY(char, short_name);
