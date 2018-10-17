@@ -34,15 +34,15 @@ namespace libbitcoin {
 
 template <typename... Args>
 class subscriber
-  : public enable_shared_from_base<subscriber<Args...>>
+    : public enable_shared_from_base<subscriber<Args...>>
     /*, track<subscriber<Args...>>*/
 {
 public:
-    typedef std::function<void (Args...)> handler;
-    typedef std::shared_ptr<subscriber<Args...>> ptr;
+    using handler = std::function<void (Args...)>;
+    using ptr = std::shared_ptr<subscriber<Args...>>;
 
     subscriber(threadpool& pool, std::string const& class_name);
-    virtual ~subscriber();
+    ~subscriber();
 
     /// Enable new subscriptions.
     void start();
@@ -60,7 +60,7 @@ public:
     void relay(Args... args);
 
 private:
-    typedef std::vector<handler> list;
+    using list = std::vector<handler>;
 
     void do_invoke(Args... args);
 

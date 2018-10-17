@@ -33,7 +33,7 @@ public:
     conditional_lock(std::shared_ptr<shared_mutex> const& mutex_ptr);
 
     /// Unlock.
-    virtual ~conditional_lock();
+    ~conditional_lock();
 
 private:
     std::shared_ptr<shared_mutex> const mutex_ptr_;

@@ -34,15 +34,15 @@ namespace libbitcoin {
 /// A managed collection of object pointers.
 template <typename Element>
 class pending
-  : noncopyable
+    : noncopyable
 {
 public:
-    typedef std::shared_ptr<Element> element_ptr;
-    typedef std::vector<element_ptr> elements;
+    using element_ptr = std::shared_ptr<Element>;
+    using elements = std::vector<element_ptr>;
     using finder = std::function<bool(const element_ptr& element)>;
 
     pending(size_t initial_capacity);
-    virtual ~pending();
+    ~pending();
 
     /// Safely copy the member collection.
     elements collection() const;

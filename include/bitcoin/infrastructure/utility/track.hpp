@@ -37,7 +37,7 @@ public:
 
 protected:
     track(std::string const& class_name);
-    virtual ~track();
+    ~track();
 
 private:
     std::string const class_;

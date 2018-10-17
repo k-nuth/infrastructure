@@ -33,24 +33,21 @@
 namespace libbitcoin {
 
 /// A reference counting wrapper for closures placed on the asio work heap.
-class BI_API monitor
-{
+class BI_API monitor {
 public:
     using count = std::atomic<size_t>;
     using count_ptr = std::shared_ptr<count>;
 
     monitor(count_ptr counter, std::string&& name);
-    virtual ~monitor();
+    ~monitor();
 
     template <typename Handler>
-    void invoke(Handler handler) const
-    {
+    void invoke(Handler handler) const {
         ////trace(*counter_, "*");
         handler();
     }
 
-    void trace(size_t /*unused*/, std::string const& /*unused*/) const
-    {
+    void trace(size_t /*unused*/, std::string const& /*unused*/) const {
         ////#ifndef NDEBUG
         ////    LOG_DEBUG(LOG_SYSTEM)
         ////        << action << " " << name_ << " {" << count << "}";

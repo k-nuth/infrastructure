@@ -41,7 +41,7 @@ public:
     explicit
     sequencer(asio::service& service);
 
-    virtual ~sequencer();
+    ~sequencer();
 
     void lock(action&& handler);
     void unlock();

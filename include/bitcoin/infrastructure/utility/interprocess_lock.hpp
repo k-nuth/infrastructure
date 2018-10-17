@@ -39,7 +39,7 @@ public:
     explicit
     interprocess_lock(path const& file);
     
-    virtual ~interprocess_lock();
+    ~interprocess_lock();
 
     bool lock();
     bool unlock();

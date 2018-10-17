@@ -38,7 +38,7 @@ public:
     scope_lock(shared_mutex& mutex);
 
     /// Unlock.
-    virtual ~scope_lock();
+    ~scope_lock();
 
 private:
     shared_mutex& mutex_;

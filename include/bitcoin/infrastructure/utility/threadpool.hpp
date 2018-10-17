@@ -49,7 +49,7 @@ public:
     explicit
     threadpool(size_t number_threads = 0, thread_priority priority = thread_priority::normal);
 
-    virtual ~threadpool();
+    ~threadpool();
 
     /**
      * There are no threads configured in the threadpool.
