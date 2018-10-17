@@ -39,6 +39,8 @@ public:
     base2() = default;
     base2(base2 const& x) = default;
     base2(base2&& x) = default;
+    base2& operator=(base2 const&) = default;
+    base2& operator=(base2&&) = default;
 
     /**
      * Initialization constructor.

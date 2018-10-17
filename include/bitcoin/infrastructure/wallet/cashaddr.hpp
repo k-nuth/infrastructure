@@ -31,7 +31,9 @@
 
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin { namespace wallet { namespace cashaddr {
+namespace libbitcoin { 
+namespace wallet { 
+namespace cashaddr {
 
 /**
  * Encode a cashaddr string. Returns the empty string in case of failure.
@@ -43,7 +45,9 @@ std::string encode(std::string const& prefix, data_chunk const& payload);
  */
 std::pair<std::string, data_chunk> decode(std::string const& str, std::string const& default_prefix);
 
-}}} // namespace libbitcoin::wallet::cashaddr 
+} // namespace cashaddr 
+} // namespace wallet
+} // namespace libbitcoin
 
 #endif /* BITPRIM_INFRASTUCTURE_WALLET_CASHADDR_HPP_ */
 

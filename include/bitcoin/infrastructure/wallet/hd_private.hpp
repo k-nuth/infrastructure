@@ -33,28 +33,31 @@
 namespace libbitcoin {
 namespace wallet {
 
+static constexpr
+uint32_t to_prefix(uint64_t prefixes) {
+    return prefixes >> 32;
+}
+
+constexpr
+uint64_t to_prefixes(uint32_t private_prefix, uint32_t public_prefix) {
+    return uint64_t(private_prefix) << 32 | public_prefix;
+}
+
 /// An extended private key, as defined by BIP 32.
-class BI_API hd_private
-    : public hd_public
-{
+class BI_API hd_private : public hd_public {
 public:
-    static uint64_t const mainnet;
-    static uint64_t const testnet;
+    // static constexpr
+    // uint64_t to_prefixes(uint32_t private_prefix, uint32_t public_prefix) {
+    //     return uint64_t(private_prefix) << 32 | public_prefix;
+    // }
 
-    static 
-    uint32_t to_prefix(uint64_t prefixes) {
-        return prefixes >> 32;
-    }
-
-    static 
-    uint64_t to_prefixes(uint32_t private_prefix, uint32_t public_prefix) {
-        return uint64_t(private_prefix) << 32 | public_prefix;
-    }
+    static constexpr uint64_t mainnet = to_prefixes(76066276, hd_public::mainnet);
+    static constexpr uint64_t testnet = to_prefixes(70615956, hd_public::testnet);
 
     /// Constructors.
-    hd_private();
-    
+    hd_private() = default;
     hd_private(hd_private const& x) = default;
+    hd_private& operator=(hd_private x);
 
     explicit
     hd_private(data_chunk const& seed, uint64_t prefixes = mainnet);
@@ -75,7 +78,6 @@ public:
     bool operator<(hd_private const& x) const;
     bool operator==(hd_private const& x) const;
     bool operator!=(hd_private const& x) const;
-    hd_private& operator=(hd_private x);
 
     friend 
     std::istream& operator>>(std::istream& in, hd_private& to);
@@ -117,7 +119,7 @@ private:
 
     /// Members.
     /// This should be const, apart from the need to implement assignment.
-    ec_secret secret_;
+    ec_secret secret_ {null_hash};
 };
 
 } // namespace wallet

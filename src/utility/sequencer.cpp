@@ -27,68 +27,80 @@
 namespace libbitcoin {
 
 sequencer::sequencer(asio::service& service)
-  : service_(service), executing_(false)
-{
-}
+    : service_(service), executing_(false)
+{}
 
-sequencer::~sequencer()
-{
+sequencer::~sequencer() {
     BITCOIN_ASSERT_MSG(actions_.empty(), "sequencer not cleared");
 }
 
-void sequencer::lock(action&& handler)
-{
-    auto post = false;
+// void sequencer::lock(action&& handler) {
+//     auto post = false;
 
+//     // Critical Section
+//     ///////////////////////////////////////////////////////////////////////
+//     mutex_.lock();
+
+//     if (executing_) {
+//         actions_.push(std::move(handler));
+//     } else {
+//         post = true;
+//         executing_ = true;
+//     }
+
+//     mutex_.unlock();
+//     ///////////////////////////////////////////////////////////////////////
+
+//     if (post) {
+//         service_.post(std::move(handler));
+//     }
+// }
+
+void sequencer::lock(action&& handler) {
     // Critical Section
     ///////////////////////////////////////////////////////////////////////
-    mutex_.lock();
+    {
+        unique_lock locker(mutex_);
 
-    if (executing_)
-    {
-        actions_.push(std::move(handler));
-    }
-    else
-    {
-        post = true;
+        if (executing_) {
+            actions_.push(std::move(handler));
+            return;
+        } 
         executing_ = true;
-    }
-
-    mutex_.unlock();
+    } //unlock()
     ///////////////////////////////////////////////////////////////////////
 
-    if (post) {
-        service_.post(std::move(handler));
-}
+    service_.post(std::move(handler));
 }
 
-void sequencer::unlock()
-{
+
+void sequencer::unlock() {
+    using std::swap;
+
     action handler;
 
     // Critical Section
     ///////////////////////////////////////////////////////////////////////
-    mutex_.lock();
-
-    BITCOIN_ASSERT_MSG(executing_, "called unlock but sequence not locked");
-
-    if (actions_.empty())
+    // mutex_.lock();
     {
-        executing_ = false;
-    }
-    else
-    {
+        unique_lock locker(mutex_);
+
+        BITCOIN_ASSERT_MSG(executing_, "called unlock but sequence not locked");
+
+        if (actions_.empty()) {
+            executing_ = false;
+            return;
+        } 
+
         executing_ = true;
-        std::swap(handler, actions_.front());
+        swap(handler, actions_.front());
         actions_.pop();
-    }
-
-    mutex_.unlock();
+    } // unlock()
     ///////////////////////////////////////////////////////////////////////
 
     if (handler) {
         service_.post(std::move(handler));
-}
+    }
 }
 
 } // namespace libbitcoin

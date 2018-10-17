@@ -37,6 +37,8 @@ public:
     base64() = default;
     base64(base64 const& x) = default;
     base64(base64&& x) = default;
+    base64& operator=(base64 const&) = default;
+    base64& operator=(base64&&) = default;
 
     explicit
     base64(std::string const& base64);

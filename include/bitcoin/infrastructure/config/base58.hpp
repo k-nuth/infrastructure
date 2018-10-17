@@ -37,6 +37,9 @@ public:
     base58() = default;
     base58(base58 const& x) = default;
     base58(base58&& x) = default;
+    base58& operator=(base58 const&) = default;
+    base58& operator=(base58&&) = default;
+
 
     explicit
     base58(std::string const& base58);

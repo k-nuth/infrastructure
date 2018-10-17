@@ -31,16 +31,14 @@
 namespace libbitcoin {
 
 template <typename Source, typename Target>
-std::vector<Target> cast(const std::vector<Source>& source)
-{
+std::vector<Target> cast(const std::vector<Source>& source) {
     std::vector<Target> target(source.size());
     target.assign(source.begin(), source.end());
     return target;
 }
 
-template <typename Element>
-std::vector<Element>& distinct(std::vector<Element>& list)
-{
+template <typename T>
+std::vector<T>& distinct(std::vector<T>& list) {
     std::sort(list.begin(), list.end());
     list.erase(std::unique(list.begin(), list.end()), list.end());
     list.shrink_to_fit();
@@ -48,10 +46,8 @@ std::vector<Element>& distinct(std::vector<Element>& list)
 }
 
 template <typename Pair, typename Key>
-int find_pair_position(const std::vector<Pair>& list, const Key& key)
-{
-    auto const predicate = [&](const Pair& pair)
-    {
+int find_pair_position(const std::vector<Pair>& list, const Key& key) {
+    auto const predicate = [&](const Pair& pair) {
         return pair.first == key;
     };
 
@@ -59,42 +55,37 @@ int find_pair_position(const std::vector<Pair>& list, const Key& key)
 
     if (it == list.end()) {
         return -1;
-}
+    }
 
     return static_cast<int>(distance(list.begin(), it));
 }
 
-template <typename Element, typename Container>
-int find_position(const Container& list, const Element& value)
-{
+template <typename T, typename Container>
+int find_position(const Container& list, T const& value) {
     auto const it = std::find(std::begin(list), std::end(list), value);
 
     if (it == std::end(list)) {
         return -1;
-}
+    }
 
     return static_cast<int>(std::distance(list.begin(), it));
 }
 
-template <typename Type, typename Predicate>
-typename std::vector<Type>::iterator insert_sorted(std::vector<Type>& list,
-    Type& element, Predicate predicate)
-{
+template <typename T, typename Predicate>
+typename std::vector<T>::iterator insert_sorted(std::vector<T>& list, T& element, Predicate predicate) {
     return list.insert(std::upper_bound(list.begin(), list.end(), element,
         predicate), element);
 }
 
-template <typename Type>
-void move_append(std::vector<Type>& target, std::vector<Type>& source)
-{
+template <typename T>
+void move_append(std::vector<T>& target, std::vector<T>& source) {
     target.reserve(target.size() + source.size());
     std::move(source.begin(), source.end(), std::back_inserter(target));
     source.clear();
 }
 
-template <typename Element>
-Element pop(std::vector<Element>& stack)
-{
+template <typename T>
+T pop(std::vector<T>& stack) {
     BITCOIN_ASSERT(!stack.empty());
     auto const element = stack.back();
     stack.pop_back();
@@ -112,26 +103,25 @@ Element pop(std::vector<Element>& stack)
 
 } // namespace libbitcoin
 
-namespace std {
+// namespace std {
 
-template <typename Type>
-std::ostream& operator<<(std::ostream& output, const std::vector<Type>& list)
-{
+template <typename T>
+std::ostream& operator<<(std::ostream& output, std::vector<T> const& list) {
     size_t current = 0;
     auto const end = list.size();
 
-    for (auto const& element: list)
-    {
+    for (auto const& element : list) {
         output << element;
 
         if (++current < end) {
-            output << std::endl;
-}
+            // output << std::endl;
+            output << '\n';
+        }
     }
 
     return output;
 }
 
-} // namespace std
+// } // namespace std
 
 #endif

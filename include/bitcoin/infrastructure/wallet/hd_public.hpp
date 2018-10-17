@@ -32,19 +32,18 @@ namespace libbitcoin {
 namespace wallet {
 
 /// A constant used in key derivation.
-static BC_CONSTEXPR uint32_t hd_first_hardened_key = 1 << 31;
+static constexpr uint32_t hd_first_hardened_key = 1 << 31;
 
 /// An hd key chain code.
-static BC_CONSTEXPR size_t hd_chain_code_size = 32;
+static constexpr size_t hd_chain_code_size = 32;
 using hd_chain_code = byte_array<hd_chain_code_size>;
 
 /// A decoded hd public or private key.
-static BC_CONSTEXPR size_t hd_key_size = 82;
+static constexpr size_t hd_key_size = 82;
 using hd_key = byte_array<hd_key_size>;
 
 /// Key derivation information used in the serialization format.
-struct BI_API hd_lineage
-{
+struct BI_API hd_lineage {
     uint64_t prefixes;
     uint8_t depth;
     uint32_t parent_fingerprint;
@@ -57,14 +56,13 @@ struct BI_API hd_lineage
 class hd_private;
 
 /// An extended public key, as defined by BIP 32.
-class BI_API hd_public
-{
+class BI_API hd_public {
 public:
-    static const uint32_t mainnet;
-    static const uint32_t testnet;
+    static constexpr uint32_t mainnet = 76067358;
+    static constexpr uint32_t testnet = 70617039;
 
-    static uint32_t to_prefix(uint64_t prefixes)
-    {
+    static constexpr
+    uint32_t to_prefix(uint64_t prefixes) {
         return prefixes & 0x00000000FFFFFFFF;
     }
 

@@ -18,7 +18,8 @@
  */
 #include <bitcoin/infrastructure/message/message_tools.hpp>
 
-namespace libbitcoin { namespace message {
+namespace libbitcoin { 
+namespace message {
 
 size_t variable_uint_size(uint64_t value) {
     if (value < 0xfd) {
@@ -37,4 +38,5 @@ size_t variable_uint_size(uint64_t value) {
     
 }
 
-}} // namespace libbitcoin::message
+} // namespace message
+} // namespace libbitcoin

@@ -40,6 +40,8 @@ public:
     base16() = default;
     base16(base16 const& x) = default;
     base16(base16&& x) = default;
+    base16& operator=(base16 const&) = default;
+    base16& operator=(base16&&) = default;
 
     explicit
     base16(std::string const& hexcode);

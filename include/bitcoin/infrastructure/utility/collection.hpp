@@ -40,16 +40,16 @@ namespace libbitcoin {
  * @returns              A new enumeration with elements cast to Target.
  */
 template <typename Source, typename Target>
-std::vector<Target> cast(const std::vector<Source>& source);
+std::vector<Target> cast(std::vector<Source> const& source);
 
 /**
  * Obtain the sorted distinct elements of the list.
- * @param      <Element>  The list element type.
+ * @param      <T>        The list element type.
  * @param[in]  list       The list.
  * @return                The sorted list reduced to its distinct elements.
  */
-template <typename Element>
-std::vector<Element>& distinct(std::vector<Element>& list);
+template <typename T>
+std::vector<T>& distinct(std::vector<T>& list);
 
 /**
  * Find the position of a pair in an ordered list.
@@ -59,63 +59,62 @@ std::vector<Element>& distinct(std::vector<Element>& list);
  * @return             The position or -1 if not found.
  */
 template <typename Pair, typename Key>
-int find_pair_position(const std::vector<const Pair>& list, Key& key);
+int find_pair_position(std::vector<Pair const> const& list, Key& key);
 
 /**
  * Find the position of an element in an ordered list.
- * @param      <Element>  The type of list member elements.
+ * @param      <T>        The type of list member elements.
  * @param[in]  list       The list to search.
  * @param[in]  value      The value of the element to find.
  * @return                The position or -1 if not found.
  */
-template <typename Element, typename Container>
-int find_position(const Container& list, const Element& value);
+template <typename T, typename Container>
+int find_position(Container const& list, T const& value);
 
 /**
  * Facilitate a list insertion sort by inserting into a sorted position.
- * @param      <Type>       The type of list member elements.
+ * @param      <T>          The type of list member elements.
  * @param      <Predicate>  The sort predicate function signature.
  * @param[in]  list         The list to modify.
  * @param[in]  element      The element to insert.
  * @param[in]  predicate    The sort predicate.
  * @return                  The vector iterator.
  */
-template <typename Type, typename Predicate>
-typename std::vector<Type>::iterator insert_sorted(std::vector<Type>& list,
-    const Type& element, Predicate predicate);
+template <typename T, typename Predicate>
+typename std::vector<T>::iterator insert_sorted(std::vector<T>& list, T const& element, Predicate predicate);
 
 /**
  * Move members of a source list to end of a target list. Source is cleared.
- * @param      <Type>     The type of list member elements.
+ * @param      <T>        The type of list member elements.
  * @param[in]  target     The target list.
  * @param[in]  source     The source list
  */
-template <typename Type>
-void move_append(std::vector<Type>& target, std::vector<Type>& source);
+template <typename T>
+void move_append(std::vector<T>& target, std::vector<T>& source);
 
 /**
  * Pop an element from the stack and return its value.
- * @param      <Element>  The stack element type.
+ * @param      <T>         The stack element type.
  * @param[in]  stack       The stack.
  */
-template <typename Element>
-Element pop(std::vector<Element>& stack);
+template <typename T>
+T pop(std::vector<T>& stack);
 
 } // namespace libbitcoin
 
-namespace std {
+// namespace std {
 
 /**
  * Make vectors of serializable elements serializable to std::ostream.
- * @param      <Type>  The type of list member elements.
+ * @param      <T>     The type of list member elements.
  * @param[in]  output  The output stream to serialize to.
  * @param[in]  list    The list to serialize.
  * @return             The output stream.
  */
-template <typename Type>
-std::ostream& operator<<(std::ostream& output, const std::vector<Type>& list);
+template <typename T>
+std::ostream& operator<<(std::ostream& output, std::vector<T> const& list);
 
-} // namespace std
+// } // namespace std
 
 #include <bitcoin/infrastructure/impl/utility/collection.ipp>
 
