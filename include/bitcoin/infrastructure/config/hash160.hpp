@@ -34,37 +34,21 @@ namespace config {
 class BI_API hash160 {
 public:
 
-    /**
-     * Default constructor.
-     */
-    hash160();
+    hash160() = default;
+    hash160(hash160 const& x) = default;
 
-    /**
-     * Initialization constructor.
-     * @param[in]  hexcode  The value to initialize with.
-     */
     explicit
     hash160(std::string const& hexcode);
 
-    /**
-     * Initialization constructor.
-     * @param[in]  value  The value to initialize with.
-     */
     explicit
-    hash160(const short_hash& value);
-
-    /**
-     * Copy constructor.
-     * @param[in]  other  The object to copy into self on construct.
-     */
-    hash160(hash160 const& x);
+    hash160(short_hash const& value);
 
     /**
      * Overload cast to internal type.
      * @return  This object's value cast to internal type.
      */
     explicit
-    operator const short_hash&() const;
+    operator short_hash const&() const;
 
     /**
      * Overload stream in. Throws if input is invalid.
@@ -85,11 +69,7 @@ public:
     std::ostream& operator<<(std::ostream& output, hash160 const& argument);
 
 private:
-
-    /**
-     * The state of this object.
-     */
-    short_hash value_;
+    short_hash value_{null_short_hash};
 };
 
 } // namespace config

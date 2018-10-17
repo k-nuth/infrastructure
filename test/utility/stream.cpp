@@ -392,7 +392,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_hash)
 
 BOOST_AUTO_TEST_CASE(roundtrip_short_hash)
 {
-    const short_hash expected
+    short_hash const expected
     {
         {
             0xed, 0x36, 0x48, 0xaf, 0x53, 0xc2, 0x8a, 0x79, 0x90, 0xab, 0x62, 0x04,

@@ -31,9 +31,6 @@
 namespace libbitcoin {
 namespace config {
 
-// base16::base16()
-// {
-// }
 
 base16::base16(std::string const& hexcode) {
     std::stringstream(hexcode) >> *this;
@@ -43,8 +40,8 @@ base16::base16(data_chunk const& value)
     : value_(value)
 {}
 
-base16::base16(base16 const& x)
-    : base16(x.value_)
+base16::base16(data_chunk&& value)
+    : value_(std::move(value))
 {}
 
 base16::operator data_chunk const&() const {

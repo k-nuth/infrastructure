@@ -53,7 +53,7 @@ public:
 
     /// Write hashes.
     void write_hash(hash_digest const& value) override;
-    void write_short_hash(const short_hash& value) override;
+    void write_short_hash(short_hash const& value) override;
     void write_mini_hash(const mini_hash& value) override;
 
     /// Write big endian integers.

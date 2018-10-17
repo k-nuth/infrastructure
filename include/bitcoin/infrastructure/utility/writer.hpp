@@ -40,7 +40,7 @@ public:
 
     /// Write hashes.
     virtual void write_hash(hash_digest const& value) = 0;
-    virtual void write_short_hash(const short_hash& value) = 0;
+    virtual void write_short_hash(short_hash const& value) = 0;
     virtual void write_mini_hash(const mini_hash& value) = 0;
 
     /// Write big endian integers.

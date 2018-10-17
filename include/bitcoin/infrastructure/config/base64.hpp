@@ -31,34 +31,22 @@ namespace config {
 /**
  * Serialization helper for base64 encoded data.
  */
-class BI_API base64
-{
+class BI_API base64 {
 public:
 
-    /**
-     * Default constructor.
-     */
     base64() = default;
+    base64(base64 const& x) = default;
+    base64(base64&& x) = default;
 
-    /**
-     * Initialization constructor.
-     * @param[in]  base64  The value to initialize with.
-     */
     explicit
     base64(std::string const& base64);
 
-    /**
-     * Initialization constructor.
-     * @param[in]  value  The value to initialize with.
-     */
     explicit
     base64(data_chunk const& value);
 
-    /**
-     * Copy constructor.
-     * @param[in]  other  The object to copy into self on construct.
-     */
-    base64(const base64& x);
+    explicit
+    base64(data_chunk&& value);
+
 
     /**
      * Overload cast to internal type.
@@ -90,7 +78,7 @@ public:
      * @return                The output stream reference.
      */
     friend 
-    std::ostream& operator<<(std::ostream& output, const base64& argument);
+    std::ostream& operator<<(std::ostream& output, base64 const& argument);
 
 private:
 

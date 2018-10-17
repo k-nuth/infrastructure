@@ -59,7 +59,7 @@ void serializer<Iterator>::write_hash(hash_digest const& hash)
 }
 
 template <typename Iterator>
-void serializer<Iterator>::write_short_hash(const short_hash& hash)
+void serializer<Iterator>::write_short_hash(short_hash const& hash)
 {
     write_forward(hash);
 }

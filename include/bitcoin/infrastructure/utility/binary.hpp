@@ -57,30 +57,30 @@ public:
 
     /// size in bits
     size_type size() const;
-    void append(const binary& post);
-    void prepend(const binary& prior);
+    void append(binary const& post);
+    void prepend(binary const& prior);
     void shift_left(size_type distance);
     void shift_right(size_type distance);
     binary substring(size_type start, size_type length=max_size_t) const;
 
     bool is_prefix_of(data_slice field) const;
     bool is_prefix_of(uint32_t field) const;
-    bool is_prefix_of(const binary& field) const;
+    bool is_prefix_of(binary const& field) const;
 
-    bool operator<(const binary& x) const;
-    bool operator==(const binary& x) const;
-    bool operator!=(const binary& x) const;
-    binary& operator=(const binary& x);
+    bool operator<(binary const& x) const;
+    bool operator==(binary const& x) const;
+    bool operator!=(binary const& x) const;
+    binary& operator=(binary const& x);
     
     friend 
     std::istream& operator>>(std::istream& in, binary& to);
     
     friend 
-    std::ostream& operator<<(std::ostream& out, const binary& of);
+    std::ostream& operator<<(std::ostream& out, binary const& of);
 
 private:
-    static uint8_t shift_block_right(uint8_t next, uint8_t current, uint8_t prior,
-        size_type original_offset, size_type intended_offset);
+    static 
+    uint8_t shift_block_right(uint8_t next, uint8_t current, uint8_t prior, size_type original_offset, size_type intended_offset);
 
     data_chunk blocks_;
     uint8_t final_block_excess_{0};

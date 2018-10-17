@@ -31,10 +31,6 @@
 namespace libbitcoin {
 namespace config {
 
-hash256::hash256()
-    : value_(null_hash)
-{}
-
 hash256::hash256(std::string const& hexcode)
     : hash256()
 {
@@ -43,10 +39,6 @@ hash256::hash256(std::string const& hexcode)
 
 hash256::hash256(hash_digest const& value)
     : value_(value)
-{}
-
-hash256::hash256(const hash256& x)
-    : hash256(x.value_)
 {}
 
 std::string hash256::to_string() const {

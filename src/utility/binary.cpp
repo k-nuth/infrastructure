@@ -112,7 +112,7 @@ binary::size_type binary::size() const {
         static_cast<size_type>(final_block_excess_));
 }
 
-void binary::append(const binary& post) {
+void binary::append(binary const& post) {
     size_type const block_offset = size() / bits_per_block;
     size_type const offset = size() % bits_per_block;
 
@@ -127,7 +127,7 @@ void binary::append(const binary& post) {
     }
 }
 
-void binary::prepend(const binary& prior) {
+void binary::prepend(binary const& prior) {
     shift_right(prior.size());
     data_chunk prior_blocks = prior.blocks();
 
@@ -216,20 +216,20 @@ bool binary::is_prefix_of(uint32_t field) const {
     return is_prefix_of(to_little_endian(field));
 }
 
-bool binary::is_prefix_of(const binary& field) const {
+bool binary::is_prefix_of(binary const& field) const {
     return is_prefix_of(field.blocks());
 }
 
 bool binary::is_prefix_of(data_slice field) const {
-    const binary truncated_prefix(size(), field);
+    binary const truncated_prefix(size(), field);
     return *this == truncated_prefix;
 }
 
-bool binary::operator<(const binary& x) const {
+bool binary::operator<(binary const& x) const {
     return encoded() < x.encoded();
 }
 
-bool binary::operator==(const binary& x) const {
+bool binary::operator==(binary const& x) const {
     if (size() != x.size()) {
         return false;
     }
@@ -245,11 +245,11 @@ bool binary::operator==(const binary& x) const {
     return true;
 }
 
-bool binary::operator!=(const binary& x) const {
+bool binary::operator!=(binary const& x) const {
     return !(*this == x);
 }
 
-binary& binary::operator=(const binary& x) = default;
+binary& binary::operator=(binary const& x) = default;
 
 std::istream& operator>>(std::istream& in, binary& to) {
     std::string bitstring;
@@ -291,7 +291,7 @@ std::istream& operator>>(std::istream& in, binary& to) {
     return in;
 }
 
-std::ostream& operator<<(std::ostream& out, const binary& of)
+std::ostream& operator<<(std::ostream& out, binary const& of)
 {
     for (binary::size_type i = 0; i < of.size(); ++i) {
         out << (of[i] ? '1' : '0');

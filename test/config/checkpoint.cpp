@@ -124,9 +124,9 @@ BOOST_AUTO_TEST_SUITE(checkpoint__ostream)
 static 
 checkpoint::list const test_checkpoints_list(
 {
-    { CHECKPOINT_A },
-    { CHECKPOINT_B },
-    { CHECKPOINT_C }
+    checkpoint{CHECKPOINT_A},
+    checkpoint{CHECKPOINT_B},
+    checkpoint{CHECKPOINT_C}
 });
 
 BOOST_AUTO_TEST_CASE(checkpoint__ostream__empty__expected)

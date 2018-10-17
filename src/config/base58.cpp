@@ -43,8 +43,8 @@ base58::base58(data_chunk const& value)
     : value_(value)
 {}
 
-base58::base58(base58 const& x)
-    : base58(x.value_)
+base58::base58(data_chunk&& value)
+    : value_(std::move(value))
 {}
 
 base58::operator data_chunk const&() const {

@@ -36,10 +36,9 @@ class BI_API base2
 {
 public:
 
-    /**
-     * Default constructor.
-     */
     base2() = default;
+    base2(base2 const& x) = default;
+    base2(base2&& x) = default;
 
     /**
      * Initialization constructor.
@@ -54,11 +53,6 @@ public:
     explicit
     base2(binary const& value);
 
-    /**
-     * Copy constructor.
-     * @param[in]  other  The object to copy into self on construct.
-     */
-    base2(base2 const& x);
 
     /**
      * Get number of bits in value.
@@ -70,7 +64,7 @@ public:
      * @return  This object's value cast to internal type reference.
      */
     explicit
-    operator const binary&() const;
+    operator binary const&() const;
 
     /**
      * Overload stream in. If input is invalid sets no bytes in argument.
@@ -91,10 +85,6 @@ public:
     std::ostream& operator<<(std::ostream& output, const base2& argument);
 
 private:
-
-    /**
-     * The state of this object.
-     */
     binary value_;
 };
 

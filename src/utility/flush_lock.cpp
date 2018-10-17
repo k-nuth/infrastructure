@@ -50,7 +50,7 @@ bool flush_lock::destroy(std::string const& file)
     ////std::remove(file.c_str());
 }
 
-flush_lock::flush_lock(const path& file)
+flush_lock::flush_lock(path const& file)
   : file_(file.string()), locked_(false)
 {
 }

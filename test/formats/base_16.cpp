@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(base16_short_hash_test)
     short_hash hash;
     BOOST_REQUIRE(decode_base16(hash, hex_str));
     BOOST_REQUIRE_EQUAL(encode_base16(hash), hex_str);
-    const short_hash expected
+    short_hash const expected
     {
         {
            0xf8, 0x5b, 0xeb, 0x63, 0x56, 0xd0, 0x81, 0x3d, 0xdb, 0x0d,

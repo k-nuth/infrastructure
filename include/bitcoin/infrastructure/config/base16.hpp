@@ -33,28 +33,22 @@ namespace config {
 /**
  * Serialization helper for base16 encoded data.
  */
-class BI_API base16
-{
+//TODO(fernando): make a generic class for baseX
+class BI_API base16 {
 public:
 
-    /**
-     * Default constructor.
-     */
     base16() = default;
+    base16(base16 const& x) = default;
+    base16(base16&& x) = default;
 
-    /**
-     * Initialization constructor.
-     * @param[in]  hexcode  The value to initialize with.
-     */
     explicit
     base16(std::string const& hexcode);
 
-    /**
-     * Initialization constructor.
-     * @param[in]  value  The value to initialize with.
-     */
     explicit
     base16(data_chunk const& value);
+
+    explicit
+    base16(data_chunk&& value);
 
     /**
      * Initialization constructor.
@@ -65,12 +59,6 @@ public:
     base16(byte_array<Size> const& value)
         : value_(value.begin(), value.end())
     {}
-
-    /**
-     * Copy constructor.
-     * @param[in]  x  The object to copy into self on construct.
-     */
-    base16(base16 const& x);
 
     /**
      * Overload cast to internal type.
@@ -105,10 +93,6 @@ public:
     std::ostream& operator<<(std::ostream& output, base16 const& argument);
 
 private:
-
-    /**
-     * The state of this object.
-     */
     data_chunk value_;
 };
 

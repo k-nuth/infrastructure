@@ -31,34 +31,21 @@ namespace config {
 /**
  * Serialization helper for base58 encoded text.
  */
-class BI_API base58
-{
+class BI_API base58 {
 public:
 
-    /**
-     * Default constructor.
-     */
     base58() = default;
+    base58(base58 const& x) = default;
+    base58(base58&& x) = default;
 
-    /**
-     * Initialization constructor.
-     * @param[in]  base58  The value to initialize with.
-     */
     explicit
     base58(std::string const& base58);
 
-    /**
-     * Initialization constructor.
-     * @param[in]  value  The value to initialize with.
-     */
     explicit
     base58(data_chunk const& value);
 
-    /**
-     * Copy constructor.
-     * @param[in]  other  The object to copy into self on construct.
-     */
-    base58(base58 const& x);
+    explicit
+    base58(data_chunk&& value);
 
     /**
      * Overload cast to internal type.
@@ -93,10 +80,6 @@ public:
     std::ostream& operator<<(std::ostream& output, const base58& argument);
 
 private:
-
-    /**
-     * The state of this object.
-     */
     data_chunk value_;
 };
 

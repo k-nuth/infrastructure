@@ -42,7 +42,7 @@ bool interprocess_lock::destroy(std::string const& file)
     ////std::remove(file.c_str());
 }
 
-interprocess_lock::interprocess_lock(const path& file)
+interprocess_lock::interprocess_lock(path const& file)
   : file_(file.string())
 {
 }

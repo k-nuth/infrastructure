@@ -30,27 +30,19 @@
 namespace libbitcoin {
 namespace config {
 
-// base2::base2()
-// {
-// }
-
 base2::base2(std::string const& binary) {
     std::stringstream(binary) >> *this;
 }
 
-base2::base2(const binary& value)
+base2::base2(binary const& value)
     : value_(value)
-{}
-
-base2::base2(base2 const& x)
-    : base2(x.value_)
 {}
 
 size_t base2::size() const {
     return value_.size();
 }
 
-base2::operator const binary&() const {
+base2::operator binary const&() const {
     return value_;
 }
 

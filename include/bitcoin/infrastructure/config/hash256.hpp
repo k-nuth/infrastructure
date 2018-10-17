@@ -41,16 +41,9 @@ public:
      */
     using list = std::vector<hash256>;
 
-    /**
-     * Default constructor.
-     */
-    hash256();
+    hash256() = default;
 
-    /**
-     * Copy constructor.
-     * @param[in]  other  The object to copy into self on construct.
-     */
-    hash256(hash256 const& x);
+    hash256(hash256 const& x) = default;
 
     /**
      * Initialization constructor.
@@ -82,8 +75,8 @@ public:
      * Cast to internal type.
      * @return  This object's value cast to internal type.
      */
-    explicit
-    operator hash_digest const&() const;
+    // implicit
+    operator hash_digest const&() const;    //NOLINT
 
     /**
      * Define stream in. Throws if input is invalid.
@@ -104,7 +97,7 @@ public:
     std::ostream& operator<<(std::ostream& output, const hash256& argument);
 
 private:
-    hash_digest value_;
+    hash_digest value_{null_hash};
 };
 
 } // namespace config

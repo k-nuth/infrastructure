@@ -36,7 +36,7 @@ public:
     using path = boost::filesystem::path;
 
     explicit
-    flush_lock(const path& file);
+    flush_lock(path const& file);
 
     bool try_lock();
     bool lock_shared();

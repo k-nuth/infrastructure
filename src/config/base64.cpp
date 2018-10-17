@@ -31,10 +31,6 @@
 namespace libbitcoin {
 namespace config {
 
-// base64::base64()
-// {
-// }
-
 base64::base64(std::string const& base64) {
     std::stringstream(base64) >> *this;
 }
@@ -43,9 +39,10 @@ base64::base64(data_chunk const& value)
     : value_(value)
 {}
 
-base64::base64(base64 const& x)
-    : base64(x.value_)
+base64::base64(data_chunk&& value)
+    : value_(std::move(value))
 {}
+
 
 base64::operator data_chunk const&() const {
     return value_;
@@ -67,7 +64,7 @@ std::istream& operator>>(std::istream& input, base64& argument) {
     return input;
 }
 
-std::ostream& operator<<(std::ostream& output, const base64& argument) {
+std::ostream& operator<<(std::ostream& output, base64 const& argument) {
     output << encode_base64(argument.value_);
     return output;
 }

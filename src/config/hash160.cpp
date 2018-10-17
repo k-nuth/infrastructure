@@ -31,23 +31,15 @@
 namespace libbitcoin {
 namespace config {
 
-hash160::hash160()
-    : value_(null_short_hash)
-{}
-
 hash160::hash160(std::string const& hexcode) {
     std::stringstream(hexcode) >> *this;
 }
 
-hash160::hash160(const short_hash& value)
+hash160::hash160(short_hash const& value)
     : value_(value)
 {}
 
-hash160::hash160(hash160 const& x)
-    : hash160(x.value_)
-{}
-
-hash160::operator const short_hash&() const {
+hash160::operator short_hash const&() const {
     return value_;
 }
 
