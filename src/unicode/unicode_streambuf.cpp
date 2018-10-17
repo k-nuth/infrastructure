@@ -132,8 +132,8 @@ std::streambuf::int_type unicode_streambuf::overflow(std::streambuf::int_type ch
 
 // Flush our output sequence.
 int unicode_streambuf::sync() {
-    const int success = 0;
-    const int failure = -1;
+    int const success = 0;
+    int const failure = -1;
 
     // We expect EOF to be returned, because we passed it.
     if (overflow(traits_type::eof()) == traits_type::eof()) {

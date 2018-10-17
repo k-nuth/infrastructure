@@ -51,7 +51,7 @@ public:
     /**
      * Number of arguments above which the argument is considered unlimited.
      */
-    BI_API static const int max_arguments;
+    BI_API static int const max_arguments;
 
     /**
      * Construct an instance of the printer class.

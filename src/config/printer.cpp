@@ -71,7 +71,7 @@ using namespace libbitcoin;
 using namespace libbitcoin::config;
 using boost::format;
 
-const int printer::max_arguments = 256;
+int const printer::max_arguments = 256;
 
 printer::printer(const po::options_description& options,
     const po::positional_options_description& arguments,

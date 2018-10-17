@@ -37,18 +37,6 @@ class BI_API network_address {
 public:
     using list = std::vector<network_address>;
 
-    static 
-    network_address factory_from_data(uint32_t version, data_chunk const& data, bool with_timestamp);
-    
-    static 
-    network_address factory_from_data(uint32_t version, std::istream& stream, bool with_timestamp);
-
-    static 
-    network_address factory_from_data(uint32_t version, reader& source, bool with_timestamp);
-
-    static 
-    size_t satoshi_fixed_size(uint32_t version, bool with_timestamp);
-
     network_address();
 
     // BC_CONSTCTOR required for declaration of constexpr address types.
@@ -60,7 +48,14 @@ public:
     network_address(uint32_t timestamp, uint64_t services, ip_address&& ip, uint16_t port);
 
     network_address(network_address const& x);
-    network_address(network_address&& x);
+    network_address(network_address&& x) noexcept;
+
+    network_address& operator=(network_address const& x) = default;
+    network_address& operator=(network_address&& x) noexcept;
+
+    bool operator==(network_address const& x) const;
+    bool operator!=(network_address const& x) const;
+
 
     // Starting version 31402, addresses are prefixed with a timestamp.
     uint32_t timestamp() const;
@@ -87,11 +82,18 @@ public:
     void reset();
     size_t serialized_size(uint32_t version, bool with_timestamp) const;
 
-    network_address& operator=(network_address&& x);
-    network_address& operator=(network_address const& x) = default;
+    static 
+    network_address factory_from_data(uint32_t version, data_chunk const& data, bool with_timestamp);
+    
+    static 
+    network_address factory_from_data(uint32_t version, std::istream& stream, bool with_timestamp);
 
-    bool operator==(network_address const& x) const;
-    bool operator!=(network_address const& x) const;
+    static 
+    network_address factory_from_data(uint32_t version, reader& source, bool with_timestamp);
+
+    static 
+    size_t satoshi_fixed_size(uint32_t version, bool with_timestamp);
+
 
 private:
     uint32_t timestamp_;

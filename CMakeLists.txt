@@ -306,7 +306,7 @@ endif()
 
 set(bitprim_infrastructure_sources_just_libbitcoin 
         # src/machine/interpreter.cpp
-        src/machine/number.cpp
+        # src/machine/number.cpp        #Fernando: commented for the moment...
         src/machine/opcode.cpp
         # src/machine/operation.cpp
         # src/machine/program.cpp

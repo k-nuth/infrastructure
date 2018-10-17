@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_4_bytes_little_endian)
 
 BOOST_AUTO_TEST_CASE(roundtrip_8_bytes_little_endian)
 {
-    const uint64_t expected = 0xd4b14be5d8f02abe;
+    uint64_t const expected = 0xd4b14be5d8f02abe;
     std::stringstream stream;
     ostream_writer sink(stream);
     istream_reader source(stream);
@@ -155,7 +155,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_4_bytes_big_endian)
 
 BOOST_AUTO_TEST_CASE(roundtrip_8_bytes_big_endian)
 {
-    const uint64_t expected = 0xd4b14be5d8f02abe;
+    uint64_t const expected = 0xd4b14be5d8f02abe;
     std::stringstream stream;
     ostream_writer sink(stream);
     istream_reader source(stream);
@@ -173,7 +173,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_8_bytes_big_endian)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_1_byte)
 {
-    const uint64_t expected = 0xAA;
+    uint64_t const expected = 0xAA;
     std::stringstream stream;
     ostream_writer sink(stream);
     istream_reader source(stream);
@@ -193,7 +193,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_1_byte)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_2_bytes)
 {
-    const uint64_t expected = 43707;
+    uint64_t const expected = 43707;
     std::stringstream stream;
     ostream_writer sink(stream);
     istream_reader source(stream);
@@ -214,7 +214,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_2_bytes)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_4_bytes)
 {
-    const uint64_t expected = 2898120443;
+    uint64_t const expected = 2898120443;
     std::stringstream stream;
     ostream_writer sink(stream);
     istream_reader source(stream);
@@ -234,7 +234,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_4_bytes)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_8_bytes)
 {
-    const uint64_t expected = 0xd4b14be5d8f02abe;
+    uint64_t const expected = 0xd4b14be5d8f02abe;
     std::stringstream stream;
     ostream_writer sink(stream);
     istream_reader source(stream);
@@ -255,7 +255,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_8_bytes)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_1_byte)
 {
-    const uint64_t expected = 0xAA;
+    uint64_t const expected = 0xAA;
     std::stringstream stream;
     ostream_writer sink(stream);
     istream_reader source(stream);
@@ -275,7 +275,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_1_byte)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_2_bytes)
 {
-    const uint64_t expected = 43707;
+    uint64_t const expected = 43707;
     std::stringstream stream;
     ostream_writer sink(stream);
     istream_reader source(stream);
@@ -296,7 +296,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_2_bytes)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_4_bytes)
 {
-    const uint64_t expected = 2898120443;
+    uint64_t const expected = 2898120443;
     std::stringstream stream;
     ostream_writer sink(stream);
     istream_reader source(stream);
@@ -316,7 +316,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_4_bytes)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_8_bytes)
 {
-    const uint64_t expected = 0xd4b14be5d8f02abe;
+    uint64_t const expected = 0xd4b14be5d8f02abe;
     std::stringstream stream;
     ostream_writer sink(stream);
     istream_reader source(stream);

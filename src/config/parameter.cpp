@@ -30,7 +30,7 @@
 namespace po = boost::program_options;
 using namespace libbitcoin::config;
 
-const int parameter::not_positional = -1;
+int const parameter::not_positional = -1;
 char const parameter::no_short_name = 0x00;
 char const parameter::option_prefix_char = '-';
 

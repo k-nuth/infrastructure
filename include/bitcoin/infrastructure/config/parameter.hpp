@@ -37,7 +37,7 @@ namespace config {
  */
 #define BI_PROPERTY(type, name) \
     public: virtual type get_##name() const { return name##_; } \
-    public: virtual void set_##name(type value) { name##_ = value; } \
+    public: virtual void set_##name(type const& value) { name##_ = value; } \
     private: type name##_
 
 /**
@@ -83,7 +83,7 @@ public:
      * Sentinel - the option is not a positional argument.
      */
     static 
-    const int not_positional;
+    int const not_positional;
 
     /**
      * Sentinel - there is no short name.

@@ -31,9 +31,9 @@
 namespace libbitcoin {
 namespace machine {
 
-static const uint64_t negative_bit = number::negative_mask;
-static const uint64_t unsigned_max_int64 = bc::max_int64;
-static const uint64_t absolute_min_int64 = bc::min_int64;
+static uint64_t const negative_bit = number::negative_mask;
+static uint64_t const unsigned_max_int64 = bc::max_int64;
+static uint64_t const absolute_min_int64 = bc::min_int64;
 
 inline 
 bool is_negative(data_chunk const& data) {

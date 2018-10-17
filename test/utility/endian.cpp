@@ -53,7 +53,7 @@ BOOST_AUTO_TEST_CASE(endian__from_big_endian_stream_unsafe__eof__stream_partial_
 
 BOOST_AUTO_TEST_CASE(endian__from_big_endian_stream_unsafe__valid__expected)
 {
-    static const uint64_t expected = 4234531234u;
+    static uint64_t const expected = 4234531234u;
     std::stringstream stream;
     auto bytes = to_big_endian(expected);
     auto const action = [&stream](uint8_t& value) { stream.put(value); };
@@ -90,7 +90,7 @@ BOOST_AUTO_TEST_CASE(endian__from_little_endian_stream_unsafe__eof__stream_parti
 
 BOOST_AUTO_TEST_CASE(endian__from_little_endian_stream_unsafe__valid__expected)
 {
-    static const uint64_t expected = 4234531234u;
+    static uint64_t const expected = 4234531234u;
     std::stringstream stream;
     auto bytes = to_little_endian(expected);
     auto const action = [&stream](uint8_t& value) { stream.put(value); };
@@ -153,14 +153,14 @@ BOOST_AUTO_TEST_CASE(endian__round_trip32__little_to_little__expected)
 
 BOOST_AUTO_TEST_CASE(endian__round_trip64__little_to_little__expected)
 {
-    static const uint64_t expected = 0x1122334455667788;
+    static uint64_t const expected = 0x1122334455667788;
     auto const little_endian = to_little_endian<uint64_t>(expected);
     BOOST_REQUIRE_EQUAL(from_little_endian_unsafe<uint64_t>(little_endian.begin()), expected);
 }
 
 BOOST_AUTO_TEST_CASE(endian__round_trip64__big_to_big__expected)
 {
-    static const uint64_t expected = 0x1122334455667788;
+    static uint64_t const expected = 0x1122334455667788;
     auto const big_endian = to_big_endian<uint64_t>(expected);
     BOOST_REQUIRE_EQUAL(from_big_endian_unsafe<uint64_t>(big_endian.begin()), expected);
 }

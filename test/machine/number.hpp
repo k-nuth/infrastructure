@@ -28,7 +28,7 @@
 
 // DO NOT TEST WITH MACRO VALUES BELOW THAT VARY BY PLATFORM,
 // SUCH AS LONG_MIN, LONG_MAX.
-const int64_t number_values[] =
+int64_t const number_values[] =
 {
     0,
     1,
@@ -45,7 +45,7 @@ const int64_t number_values[] =
     ////LLONG_MAX
 };
 
-const int64_t number_offsets[] =
+int64_t const number_offsets[] =
 {
     1,
     0x79,

@@ -71,7 +71,7 @@ void set_thread_priority_test(int priority)
 BOOST_AUTO_TEST_CASE(thread__set_thread_priorites__all__set_as_expected)
 {
     // Save so we can restore at the end of this test case.
-    const int save = get_thread_priority_test();
+    int const save = get_thread_priority_test();
 
     set_priority(thread_priority::high);
     BOOST_REQUIRE_EQUAL(THREAD_PRIORITY_ABOVE_NORMAL, get_thread_priority_test());
@@ -94,7 +94,7 @@ BOOST_AUTO_TEST_CASE(thread__set_thread_priorites__all__set_as_expected)
 BOOST_AUTO_TEST_CASE(thread__set_thread_priorites__all__set_as_expected)
 {
     // Save so we can restore at the end of this test case.
-    const int save = get_thread_priority_test();
+    int const save = get_thread_priority_test();
 
     // Haven't had any luck matching the set and get priority calls as in win.
     BOOST_REQUIRE_NO_THROW(set_priority(thread_priority::high));

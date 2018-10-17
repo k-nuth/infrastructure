@@ -55,7 +55,7 @@ void be64enc(void *pp, uint64_t x) {
 }
 
 static 
-void be64enc_vect(unsigned char* dst, const uint64_t* src, size_t len) {
+void be64enc_vect(unsigned char* dst, uint64_t const* src, size_t len) {
     size_t i;
     for (i = 0; i < len / 8; i++) {
         be64enc(dst + i * 8, src[i]);

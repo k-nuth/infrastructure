@@ -38,8 +38,8 @@ class BI_API hd_private
     : public hd_public
 {
 public:
-    static const uint64_t mainnet;
-    static const uint64_t testnet;
+    static uint64_t const mainnet;
+    static uint64_t const testnet;
 
     static 
     uint32_t to_prefix(uint64_t prefixes) {

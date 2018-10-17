@@ -160,7 +160,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_4_bytes_little_endian)
 
 BOOST_AUTO_TEST_CASE(roundtrip_8_bytes_little_endian)
 {
-    const uint64_t expected = 0xd4b14be5d8f02abe;
+    uint64_t const expected = 0xd4b14be5d8f02abe;
     data_chunk data(8);
     auto source = make_safe_deserializer(data.begin(), data.end());
     auto sink = make_unsafe_serializer(data.begin());
@@ -211,7 +211,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_4_bytes_big_endian)
 
 BOOST_AUTO_TEST_CASE(roundtrip_8_bytes_big_endian)
 {
-    const uint64_t expected = 0xd4b14be5d8f02abe;
+    uint64_t const expected = 0xd4b14be5d8f02abe;
     data_chunk data(8);
     auto source = make_safe_deserializer(data.begin(), data.end());
     auto sink = make_unsafe_serializer(data.begin());
@@ -229,7 +229,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_8_bytes_big_endian)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_1_byte)
 {
-    const uint64_t expected = 0xAA;
+    uint64_t const expected = 0xAA;
     data_chunk data(1);
     auto source = make_safe_deserializer(data.begin(), data.end());
     auto sink = make_unsafe_serializer(data.begin());
@@ -247,7 +247,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_1_byte)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_2_bytes)
 {
-    const uint64_t expected = 43707;
+    uint64_t const expected = 43707;
     data_chunk data(3);
     auto source = make_safe_deserializer(data.begin(), data.end());
     auto sink = make_unsafe_serializer(data.begin());
@@ -265,7 +265,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_2_bytes)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_4_bytes)
 {
-    const uint64_t expected = 2898120443;
+    uint64_t const expected = 2898120443;
     data_chunk data(sizeof(uint32_t) + 1);
     auto source = make_safe_deserializer(data.begin(), data.end());
     auto sink = make_unsafe_serializer(data.begin());
@@ -283,7 +283,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_4_bytes)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_8_bytes)
 {
-    const uint64_t expected = 0xd4b14be5d8f02abe;
+    uint64_t const expected = 0xd4b14be5d8f02abe;
     data_chunk data(sizeof(uint64_t) + 1);
     auto source = make_safe_deserializer(data.begin(), data.end());
     auto sink = make_unsafe_serializer(data.begin());
@@ -301,7 +301,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_8_bytes)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_1_byte)
 {
-    const uint64_t expected = 0xAA;
+    uint64_t const expected = 0xAA;
     data_chunk data(1);
     auto source = make_safe_deserializer(data.begin(), data.end());
     auto sink = make_unsafe_serializer(data.begin());
@@ -319,7 +319,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_1_byte)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_2_bytes)
 {
-    const uint64_t expected = 43707;
+    uint64_t const expected = 43707;
     data_chunk data(sizeof(uint16_t) + 1);
     auto source = make_safe_deserializer(data.begin(), data.end());
     auto sink = make_unsafe_serializer(data.begin());
@@ -337,7 +337,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_2_bytes)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_4_bytes)
 {
-    const uint64_t expected = 2898120443;
+    uint64_t const expected = 2898120443;
     data_chunk data(sizeof(uint32_t) + 1);
     auto source = make_safe_deserializer(data.begin(), data.end());
     auto sink = make_unsafe_serializer(data.begin());
@@ -355,7 +355,7 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_4_bytes)
 
 BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_8_bytes)
 {
-    const uint64_t expected = 0xd4b14be5d8f02abe;
+    uint64_t const expected = 0xd4b14be5d8f02abe;
     data_chunk data(sizeof(uint64_t) + 1);
     auto source = make_safe_deserializer(data.begin(), data.end());
     auto sink = make_unsafe_serializer(data.begin());
