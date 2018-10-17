@@ -47,7 +47,7 @@ public:
 
     /// Context.
     // implicit
-    operator bool() const;      //NOLINT
+    operator bool() const override;
     
     bool operator!() const override;
 

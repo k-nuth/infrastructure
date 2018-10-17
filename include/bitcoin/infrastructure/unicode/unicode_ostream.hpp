@@ -49,7 +49,7 @@ public:
 #ifdef _MSC_VER
     ~unicode_ostream() override;
 #else
-    ~unicode_ostream() = default;
+    ~unicode_ostream() override = default;
 #endif    
 
 };

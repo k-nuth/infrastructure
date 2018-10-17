@@ -48,7 +48,7 @@ public:
 
     /// Context.
     // implicit
-    operator bool() const;
+    operator bool() const override;
     
     bool operator!() const override;
     bool is_exhausted() const override;

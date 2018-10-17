@@ -54,7 +54,7 @@ protected:
 #ifdef _MSC_VER
     ~console_streambuf() override;
 #else
-    ~console_streambuf() = default;
+    ~console_streambuf() override = default;
 #endif
 
 

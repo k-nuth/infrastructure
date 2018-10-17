@@ -50,7 +50,7 @@ public:
 #ifdef _MSC_VER
     ~unicode_istream() override;
 #else
-    ~unicode_istream() = default;
+    ~unicode_istream() override = default;
 #endif
 
 };
