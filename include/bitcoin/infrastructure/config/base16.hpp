@@ -68,7 +68,7 @@ public:
 
     /**
      * Copy constructor.
-     * @param[in]  other  The object to copy into self on construct.
+     * @param[in]  x  The object to copy into self on construct.
      */
     base16(base16 const& x);
 
@@ -102,7 +102,7 @@ public:
      * @return                The output stream reference.
      */
     friend 
-    std::ostream& operator<<(std::ostream& output, const base16& argument);
+    std::ostream& operator<<(std::ostream& output, base16 const& argument);
 
 private:
 

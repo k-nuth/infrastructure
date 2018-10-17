@@ -25,21 +25,18 @@
 
 namespace libbitcoin {
 
-unicode_istream::unicode_istream(std::istream& narrow_stream,
-    std::wistream& wide_stream, size_t size)
+unicode_istream::unicode_istream(std::istream& narrow_stream, std::wistream& wide_stream, size_t size)
 #ifdef _MSC_VER
   : std::istream(new unicode_streambuf(wide_stream.rdbuf(), size))
 #else
   : std::istream(narrow_stream.rdbuf())
 #endif
-{
-}
+{}
 
-unicode_istream::~unicode_istream()
-{
 #ifdef _MSC_VER
+unicode_istream::~unicode_istream() {
     delete rdbuf();
-#endif
 }
+#endif
 
 } // namespace libbitcoin

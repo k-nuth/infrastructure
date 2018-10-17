@@ -45,22 +45,22 @@ public:
 public:
     gauge_feature() = default;
 
-    gauge_feature(const gauge_feature& other);
+    gauge_feature(const gauge_feature& x);
 
     template <typename Arguments>
     explicit
-    gauge_feature(const Arguments& arguments);
+    gauge_feature(Arguments const& arguments);
 
-    typedef typename boost::log::strictest_lock<
+    using open_record_lock = typename boost::log::strictest_lock<
         boost::lock_guard<threading_model>,
         typename BaseType::open_record_lock,
         typename BaseType::add_attribute_lock,
         typename BaseType::remove_attribute_lock
-    >::type open_record_lock;
+    >::type;
 
 protected:
     template <typename Arguments>
-    boost::log::record open_record_unlocked(const Arguments& arguments);
+    boost::log::record open_record_unlocked(Arguments const& arguments);
 
 private:
     template <typename Value>

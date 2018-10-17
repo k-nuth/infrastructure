@@ -67,7 +67,7 @@ std::istream& operator>>(std::istream& input, base16& argument) {
     return input;
 }
 
-std::ostream& operator<<(std::ostream& output, const base16& argument) {
+std::ostream& operator<<(std::ostream& output, base16 const& argument) {
     output << encode_base16(argument.value_);
     return output;
 }

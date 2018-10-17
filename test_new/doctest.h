@@ -544,11 +544,11 @@ extern "C" __declspec(dllimport) void __stdcall DebugBreak();
 #ifndef DOCTEST_CONFIG_USE_IOSFWD
 namespace std
 {
-template <class charT>
+template <typename charT>
 struct char_traits;
 template <>
 struct char_traits<char>;
-template <class charT, class traits>
+template <typename charT, typename traits>
 class basic_ostream;
 typedef basic_ostream<char, char_traits<char> > ostream;
 } // namespace std
@@ -677,7 +677,7 @@ class DOCTEST_INTERFACE String
         view data;
     };
 
-    void copy(const String& other);
+    void copy(const String& x);
 
     void setOnHeap() { *reinterpret_cast<unsigned char*>(&buf[last]) = 128; }
     void setLast(unsigned in = last) { buf[last] = char(in); }
@@ -690,7 +690,7 @@ public:
 
     String(char const* in);
 
-    String(const String& other) { copy(other); }
+    String(const String& x) { copy(other); }
 
     ~String() {
         if(!isOnStack())
@@ -699,7 +699,7 @@ public:
 
     // GCC 4.9/5/6 report Wstrict-overflow when optimizations are ON and it got inlined in the vector class somewhere...
     // see commit 574ef95f0cd379118be5011704664e4b5351f1e0 and build https://travis-ci.org/onqtam/doctest/builds/230671611
-    DOCTEST_NOINLINE String& operator=(const String& other) {
+    DOCTEST_NOINLINE String& operator=(const String& x) {
         if(this != &other) {
             if(!isOnStack())
                 delete[] data.ptr;
@@ -709,13 +709,13 @@ public:
 
         return *this;
     }
-    String& operator+=(const String& other);
+    String& operator+=(const String& x);
 
-    String operator+(const String& other) const { return String(*this) += other; }
+    String operator+(const String& x) const { return String(*this) += other; }
 
 #ifdef DOCTEST_CONFIG_WITH_RVALUE_REFERENCES
-    String(String&& other);
-    String& operator=(String&& other);
+    String(String&& x);
+    String& operator=(String&& x);
 #endif // DOCTEST_CONFIG_WITH_RVALUE_REFERENCES
 
     bool isOnStack() const { return (buf[last] & 128) == 0; }
@@ -865,7 +865,7 @@ namespace detail
     {
     };
 
-    template <class T, class U>
+    template <typename T, typename U>
     struct Typelist
     {
         typedef T Head;
@@ -873,11 +873,11 @@ namespace detail
     };
 
     // type of recursive function
-    template <class TList, class Callable>
+    template <typename TList, typename Callable>
     struct ForEachType;
 
     // Recursion rule
-    template <class Head, class Tail, class Callable>
+    template <typename Head, typename Tail, typename Callable>
     struct ForEachType<Typelist<Head, Tail>, Callable> : public ForEachType<Tail, Callable>
     {
         enum
@@ -896,7 +896,7 @@ namespace detail
     };
 
     // Recursion end
-    template <class Head, class Callable>
+    template <typename Head, typename Callable>
     struct ForEachType<Typelist<Head, NullType>, Callable>
     {
     public:
@@ -1249,15 +1249,15 @@ namespace detail
     DOCTEST_INTERFACE char const* getAssertString(assertType::Enum val);
 
     // clang-format off
-    template <class T>               struct decay_array       { typedef T type; };
-    template <class T, unsigned N>   struct decay_array<T[N]> { typedef T* type; };
-    template <class T>               struct decay_array<T[]>  { typedef T* type; };
+    template <typename T>               struct decay_array       { typedef T type; };
+    template <typename T, unsigned N>   struct decay_array<T[N]> { typedef T* type; };
+    template <typename T>               struct decay_array<T[]>  { typedef T* type; };
 
-    template <class T>   struct not_char_pointer              { enum { value = 1 }; };
+    template <typename T>   struct not_char_pointer              { enum { value = 1 }; };
     template <>          struct not_char_pointer<char*>       { enum { value = 0 }; };
     template <>          struct not_char_pointer<char const*> { enum { value = 0 }; };
 
-    template <class T> struct can_use_op : not_char_pointer<typename decay_array<T>::type> {};
+    template <typename T> struct can_use_op : not_char_pointer<typename decay_array<T>::type> {};
     // clang-format on
 
     struct TestFailureException
@@ -1289,7 +1289,7 @@ namespace detail
                 , m_file(file)
                 , m_line(line) {}
 
-        bool operator<(const SubcaseSignature& other) const;
+        bool operator<(const SubcaseSignature& x) const;
     };
 
     // cppcheck-suppress copyCtorAndEqOperator
@@ -1299,7 +1299,7 @@ namespace detail
         bool             m_entered;
 
         Subcase(char const* name, char const* file, int line);
-        Subcase(const Subcase& other);
+        Subcase(const Subcase& x);
         ~Subcase();
 
         operator bool() const { return m_entered; }
@@ -1322,11 +1322,11 @@ namespace detail
                 : m_passed(passed)
                 , m_decomposition(decomposition) {}
 
-        DOCTEST_NOINLINE Result(const Result& other)
+        DOCTEST_NOINLINE Result(const Result& x)
                 : m_passed(other.m_passed)
                 , m_decomposition(other.m_decomposition) {}
 
-        Result& operator=(const Result& other);
+        Result& operator=(const Result& x);
 
         operator bool() { return !m_passed; }
 
@@ -1552,11 +1552,11 @@ namespace detail
             return *this;
         }
 
-        TestCase(const TestCase& other) { *this = other; }
+        TestCase(const TestCase& x) { *this = other; }
 
-        TestCase& operator=(const TestCase& other);
+        TestCase& operator=(const TestCase& x);
 
-        bool operator<(const TestCase& other) const;
+        bool operator<(const TestCase& x) const;
     };
 
     // forward declarations of functions used by the macros
@@ -1604,13 +1604,13 @@ namespace detail
     } // namespace binaryAssertComparison
 
     // clang-format off
-    template <int, class L, class R> struct RelationalComparator     { bool operator()(const DOCTEST_REF_WRAP(L),     const DOCTEST_REF_WRAP(R)    ) const { return false;        } };
-    template <class L, class R> struct RelationalComparator<0, L, R> { bool operator()(const DOCTEST_REF_WRAP(L) lhs, const DOCTEST_REF_WRAP(R) rhs) const { return eq(lhs, rhs); } };
-    template <class L, class R> struct RelationalComparator<1, L, R> { bool operator()(const DOCTEST_REF_WRAP(L) lhs, const DOCTEST_REF_WRAP(R) rhs) const { return ne(lhs, rhs); } };
-    template <class L, class R> struct RelationalComparator<2, L, R> { bool operator()(const DOCTEST_REF_WRAP(L) lhs, const DOCTEST_REF_WRAP(R) rhs) const { return gt(lhs, rhs); } };
-    template <class L, class R> struct RelationalComparator<3, L, R> { bool operator()(const DOCTEST_REF_WRAP(L) lhs, const DOCTEST_REF_WRAP(R) rhs) const { return lt(lhs, rhs); } };
-    template <class L, class R> struct RelationalComparator<4, L, R> { bool operator()(const DOCTEST_REF_WRAP(L) lhs, const DOCTEST_REF_WRAP(R) rhs) const { return ge(lhs, rhs); } };
-    template <class L, class R> struct RelationalComparator<5, L, R> { bool operator()(const DOCTEST_REF_WRAP(L) lhs, const DOCTEST_REF_WRAP(R) rhs) const { return le(lhs, rhs); } };
+    template <int, typename L, typename R> struct RelationalComparator     { bool operator()(const DOCTEST_REF_WRAP(L),     const DOCTEST_REF_WRAP(R)    ) const { return false;        } };
+    template <typename L, typename R> struct RelationalComparator<0, L, R> { bool operator()(const DOCTEST_REF_WRAP(L) lhs, const DOCTEST_REF_WRAP(R) rhs) const { return eq(lhs, rhs); } };
+    template <typename L, typename R> struct RelationalComparator<1, L, R> { bool operator()(const DOCTEST_REF_WRAP(L) lhs, const DOCTEST_REF_WRAP(R) rhs) const { return ne(lhs, rhs); } };
+    template <typename L, typename R> struct RelationalComparator<2, L, R> { bool operator()(const DOCTEST_REF_WRAP(L) lhs, const DOCTEST_REF_WRAP(R) rhs) const { return gt(lhs, rhs); } };
+    template <typename L, typename R> struct RelationalComparator<3, L, R> { bool operator()(const DOCTEST_REF_WRAP(L) lhs, const DOCTEST_REF_WRAP(R) rhs) const { return lt(lhs, rhs); } };
+    template <typename L, typename R> struct RelationalComparator<4, L, R> { bool operator()(const DOCTEST_REF_WRAP(L) lhs, const DOCTEST_REF_WRAP(R) rhs) const { return ge(lhs, rhs); } };
+    template <typename L, typename R> struct RelationalComparator<5, L, R> { bool operator()(const DOCTEST_REF_WRAP(L) lhs, const DOCTEST_REF_WRAP(R) rhs) const { return le(lhs, rhs); } };
     // clang-format on
 
     struct DOCTEST_INTERFACE ResultBuilder
@@ -1895,7 +1895,7 @@ namespace detail
         }
 
         // steal the contents of the other - acting as a move constructor...
-        DOCTEST_NOINLINE ContextBuilder(ContextBuilder& other)
+        DOCTEST_NOINLINE ContextBuilder(ContextBuilder& x)
                 : numCaptures(other.numCaptures)
                 , head(other.head)
                 , tail(other.tail) {
@@ -2362,7 +2362,7 @@ public:
 #define DOCTEST_FAIL(x) DOCTEST_ADD_FAIL_AT(__FILE__, __LINE__, x)
 
 #if __cplusplus >= 201402L || (DOCTEST_MSVC >= DOCTEST_COMPILER(19, 10, 0))
-template <class T, T x>
+template <typename T, T x>
 constexpr T to_lvalue = x;
 #define DOCTEST_TO_LVALUE(...) to_lvalue<decltype(__VA_ARGS__), __VA_ARGS__>
 #else
@@ -3495,7 +3495,7 @@ namespace detail
 #endif // DOCTEST_CONFIG_DISABLE
 } // namespace detail
 
-void String::copy(const String& other) {
+void String::copy(const String& x) {
     if(other.isOnStack()) {
         detail::my_memcpy(buf, other.buf, len);
     } else {
@@ -3521,7 +3521,7 @@ String::String(char const* in) {
     }
 }
 
-String& String::operator+=(const String& other) {
+String& String::operator+=(const String& x) {
     const unsigned my_old_size = size();
     const unsigned other_size  = other.size();
     const unsigned total_size  = my_old_size + other_size;
@@ -3571,13 +3571,13 @@ String& String::operator+=(const String& other) {
 }
 
 #ifdef DOCTEST_CONFIG_WITH_RVALUE_REFERENCES
-String::String(String&& other) {
+String::String(String&& x) {
     detail::my_memcpy(buf, other.buf, len);
     other.buf[0] = '\0';
     other.setLast();
 }
 
-String& String::operator=(String&& other) {
+String& String::operator=(String&& x) {
     if(this != &other) {
         if(!isOnStack())
             delete[] data.ptr;
@@ -3822,7 +3822,7 @@ namespace detail
         return *this;
     }
 
-    TestCase& TestCase::operator=(const TestCase& other) {
+    TestCase& TestCase::operator=(const TestCase& x) {
         m_test              = other.m_test;
         m_full_name         = other.m_full_name;
         m_name              = other.m_name;
@@ -3843,7 +3843,7 @@ namespace detail
         return *this;
     }
 
-    bool TestCase::operator<(const TestCase& other) const {
+    bool TestCase::operator<(const TestCase& x) const {
         if(m_line != other.m_line)
             return m_line < other.m_line;
         const int file_cmp = std::strcmp(m_file, other.m_file);
@@ -4059,7 +4059,7 @@ namespace detail
 
     TestAccessibleContextState* getTestsContextState() { return contextState; }
 
-    bool SubcaseSignature::operator<(const SubcaseSignature& other) const {
+    bool SubcaseSignature::operator<(const SubcaseSignature& x) const {
         if(m_line != other.m_line)
             return m_line < other.m_line;
         if(std::strcmp(m_file, other.m_file) != 0)
@@ -4099,7 +4099,7 @@ namespace detail
         m_entered = true;
     }
 
-    Subcase::Subcase(const Subcase& other)
+    Subcase::Subcase(const Subcase& x)
             : m_signature(other.m_signature.m_name, other.m_signature.m_file,
                           other.m_signature.m_line)
             , m_entered(other.m_entered) {}
@@ -4123,7 +4123,7 @@ namespace detail
 
     Result::~Result() {}
 
-    Result& Result::operator=(const Result& other) {
+    Result& Result::operator=(const Result& x) {
         m_passed        = other.m_passed;
         m_decomposition = other.m_decomposition;
 

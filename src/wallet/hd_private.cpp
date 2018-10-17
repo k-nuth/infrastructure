@@ -248,8 +248,8 @@ hd_public hd_private::derive_public(uint32_t index) const {
 // Operators.
 // ----------------------------------------------------------------------------
 
-hd_private& hd_private::operator=(hd_private other) {
-    swap(*this, other);
+hd_private& hd_private::operator=(hd_private x) {
+    swap(*this, x);
     return *this;
 }
 
@@ -263,8 +263,8 @@ bool hd_private::operator==(hd_private const& x) const {
         point_ == x.point_;
 }
 
-bool hd_private::operator!=(hd_private const& other) const {
-    return !(*this == other);
+bool hd_private::operator!=(hd_private const& x) const {
+    return !(*this == x);
 }
 
 // We must assume mainnet for public version here.

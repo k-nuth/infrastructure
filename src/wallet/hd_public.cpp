@@ -240,8 +240,8 @@ bool hd_public::operator==(hd_public const& x) const {
         lineage_ == x.lineage_ && point_ == x.point_;
 }
 
-bool hd_public::operator!=(hd_public const& other) const {
-    return !(*this == other);
+bool hd_public::operator!=(hd_public const& x) const {
+    return !(*this == x);
 }
 
 std::istream& operator>>(std::istream& in, hd_public& to) {
@@ -271,8 +271,8 @@ bool hd_lineage::operator == (hd_lineage const& x) const {
         child_number == x.child_number;
 }
 
-bool hd_lineage::operator!=(hd_lineage const& other) const {
-    return !(*this == other);
+bool hd_lineage::operator!=(hd_lineage const& x) const {
+    return !(*this == x);
 }
 
 } // namespace wallet

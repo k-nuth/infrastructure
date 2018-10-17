@@ -33,10 +33,10 @@
 // Log name.
 #define LOG_SYSTEM "system"
 
-template <class Shared>
+template <typename Shared>
 std::atomic<size_t> track<Shared>::instances(0);
 
-template <class Shared>
+template <typename Shared>
 track<Shared>::track(std::string const& DEBUG_ONLY(class_name))
 #ifndef NDEBUG
   : class_(class_name)
@@ -47,7 +47,7 @@ track<Shared>::track(std::string const& DEBUG_ONLY(class_name))
 #endif
 }
 
-template <class Shared>
+template <typename Shared>
 track<Shared>::~track()
 {
 #ifndef NDEBUG

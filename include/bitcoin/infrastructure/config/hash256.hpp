@@ -76,7 +76,7 @@ public:
      * Override the equality operator.
      * @param[in]  other  The other object with which to compare.
      */
-    bool operator==(const hash256& other) const;
+    bool operator==(const hash256& x) const;
 
     /**
      * Cast to internal type.

@@ -202,8 +202,8 @@ bool network_address::operator==(const network_address& x) const {
     return (services_ == x.services_) && (port_ == x.port_) && (ip_ == x.ip_);
 }
 
-bool network_address::operator!=(const network_address& other) const {
-    return !(*this == other);
+bool network_address::operator!=(const network_address& x) const {
+    return !(*this == x);
 }
 
 } // namespace message

@@ -41,7 +41,7 @@ metric_feature<BaseType>::metric_feature(const metric_feature& x)
 
 template <typename BaseType>
 template <typename Arguments>
-metric_feature<BaseType>::metric_feature(const Arguments& arguments)
+metric_feature<BaseType>::metric_feature(Arguments const& arguments)
   : BaseType(arguments),
     metric_attribute_(arguments[keywords::metric || metric_type()])
 {
@@ -78,7 +78,7 @@ const typename metric_feature<BaseType>::metric_attribute&
 template <typename BaseType>
 template <typename Arguments>
 boost::log::record metric_feature<BaseType>::open_record_unlocked(
-    const Arguments& arguments)
+    Arguments const& arguments)
 {
     return open_record_with_metric_unlocked(arguments,
         arguments[keywords::metric | boost::parameter::void_()]);
@@ -94,7 +94,7 @@ void metric_feature<BaseType>::swap_unlocked(metric_feature& x)
 template <typename BaseType>
 template <typename Arguments, typename Value>
 boost::log::record metric_feature<BaseType>::open_record_with_metric_unlocked(
-    const Arguments& arguments, const Value& value)
+    Arguments const& arguments, const Value& value)
 {
     metric_attribute_.set(value);
     return BaseType::open_record_unlocked(arguments);
@@ -103,7 +103,7 @@ boost::log::record metric_feature<BaseType>::open_record_with_metric_unlocked(
 template <typename BaseType>
 template <typename Arguments>
 boost::log::record metric_feature<BaseType>::open_record_with_metric_unlocked(
-    const Arguments& arguments, boost::parameter::void_ /*unused*/)
+    Arguments const& arguments, boost::parameter::void_ /*unused*/)
 {
     return BaseType::open_record_unlocked(arguments);
 }

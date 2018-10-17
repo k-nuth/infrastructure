@@ -74,7 +74,7 @@ public:
     /// Operators.
     bool operator<(hd_private const& x) const;
     bool operator==(hd_private const& x) const;
-    bool operator!=(hd_private const& other) const;
+    bool operator!=(hd_private const& x) const;
     hd_private& operator=(hd_private other);
 
     friend 

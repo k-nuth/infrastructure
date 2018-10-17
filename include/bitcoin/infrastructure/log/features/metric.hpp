@@ -47,10 +47,10 @@ public:
 
     using open_record_lock = typename boost::log::strictest_lock<boost::lock_guard<threading_model> >::type;
 
-    typedef typename boost::log::strictest_lock<
+    using swap_lock = typename boost::log::strictest_lock<
         typename BaseType::swap_lock,
         boost::log::aux::exclusive_lock_guard<threading_model>
-    >::type swap_lock;
+    >::type;
 
 public:
     metric_feature();
@@ -58,7 +58,7 @@ public:
 
     template <typename Arguments>
     explicit
-    metric_feature(const Arguments& arguments);
+    metric_feature(Arguments const& arguments);
 
     metric_type metric() const;
     void metric(const metric_type& value);
@@ -67,18 +67,18 @@ protected:
     const metric_attribute& get_metric_attribute() const;
 
     template <typename Arguments>
-    boost::log::record open_record_unlocked(const Arguments& arguments);
+    boost::log::record open_record_unlocked(Arguments const& arguments);
 
     void swap_unlocked(metric_feature& x);
 
 private:
     template <typename Arguments, typename Value>
     boost::log::record open_record_with_metric_unlocked(
-        const Arguments& arguments, const Value& value);
+        Arguments const& arguments, const Value& value);
 
     template <typename Arguments>
     boost::log::record open_record_with_metric_unlocked(
-        const Arguments& arguments, boost::parameter::void_ /*unused*/);
+        Arguments const& arguments, boost::parameter::void_ /*unused*/);
 
 private:
     metric_attribute metric_attribute_;

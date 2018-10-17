@@ -114,7 +114,7 @@ Element pop(std::vector<Element>& stack)
 
 namespace std {
 
-template <class Type>
+template <typename Type>
 std::ostream& operator<<(std::ostream& output, const std::vector<Type>& list)
 {
     size_t current = 0;

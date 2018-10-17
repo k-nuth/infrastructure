@@ -279,184 +279,179 @@ std::string error_category_impl::message(int ev) const noexcept {
 
 // We are not currently using this.
 std::error_condition error_category_impl::default_error_condition(int ev) const noexcept {
-    return std::error_condition(ev, *this);
+    return {ev, *this};
 }
 
 namespace libbitcoin {
 namespace error {
 
-    code make_error_code(error_code_t e)
-    {
-        return code(e, get_error_category_instance());
-    }
+code make_error_code(error_code_t e) {
+    return {e, get_error_category_instance()};
+}
 
-    std::error_condition make_error_condition(error_condition_t e)
-    {
-        return std::error_condition(e, get_error_category_instance());
-    }
+std::error_condition make_error_condition(error_condition_t e) {
+    return {e, get_error_category_instance()};
+}
 
-    error_code_t boost_to_error_code(const boost_code& ec)
-    {
-        namespace boost_error = boost::system::errc;
+error_code_t boost_to_error_code(const boost_code& ec) {
+    namespace boost_error = boost::system::errc;
 
 #ifdef _MSC_VER
-        // TODO: is there a means to map ASIO errors to boost errors?
-        // ASIO codes are unique on Windows but not on Linux.
-        namespace asio_error = boost::asio::error;
+    // TODO: is there a means to map ASIO errors to boost errors?
+    // ASIO codes are unique on Windows but not on Linux.
+    namespace asio_error = boost::asio::error;
 #endif
-        // TODO: use a static map (hash table)
-        switch (ec.value())
-        {
-            // There should be no boost mapping to the shutdown sentinel.
-            //    return error::service_stopped;
-
-            case boost_error::success:
-                return error::success;
-
-            // network errors
-#ifdef _MSC_VER
-            case asio_error::connection_aborted:
-            case asio_error::connection_reset:
-            case asio_error::operation_aborted:
-            case asio_error::operation_not_supported:
-#endif
-            case boost_error::connection_aborted:
-            case boost_error::connection_refused:
-            case boost_error::connection_reset:
-            case boost_error::not_connected:
-            case boost_error::operation_canceled:
-            case boost_error::operation_not_permitted:
-            case boost_error::operation_not_supported:
-            case boost_error::owner_dead:
-            case boost_error::permission_denied:
-                return error::operation_failed;
-
-#ifdef _MSC_VER
-            case asio_error::address_family_not_supported:
-#endif
-            case boost_error::address_family_not_supported:
-            case boost_error::address_not_available:
-            case boost_error::bad_address:
-            case boost_error::destination_address_required:
-                return error::resolve_failed;
-
-            case boost_error::broken_pipe:
-            case boost_error::host_unreachable:
-            case boost_error::network_down:
-            case boost_error::network_reset:
-            case boost_error::network_unreachable:
-            case boost_error::no_link:
-            case boost_error::no_protocol_option:
-            case boost_error::no_such_file_or_directory:
-            case boost_error::not_a_socket:
-            case boost_error::protocol_not_supported:
-            case boost_error::wrong_protocol_type:
-                return error::network_unreachable;
-
-            case boost_error::address_in_use:
-            case boost_error::already_connected:
-            case boost_error::connection_already_in_progress:
-            case boost_error::operation_in_progress:
-                return error::address_in_use;
-
-            case boost_error::bad_message:
-            case boost_error::illegal_byte_sequence:
-            case boost_error::io_error:
-            case boost_error::message_size:
-            case boost_error::no_message_available:
-            case boost_error::no_message:
-            case boost_error::no_stream_resources:
-            case boost_error::not_a_stream:
-            case boost_error::protocol_error:
-                return error::bad_stream;
-
-#ifdef _MSC_VER
-            case asio_error::timed_out:
-#endif
-            case boost_error::stream_timeout:
-            case boost_error::timed_out:
-                return error::channel_timeout;
-
-            // file system errors
-            case boost_error::cross_device_link:
-            case boost_error::bad_file_descriptor:
-            case boost_error::device_or_resource_busy:
-            case boost_error::directory_not_empty:
-            case boost_error::executable_format_error:
-            case boost_error::file_exists:
-            case boost_error::file_too_large:
-            case boost_error::filename_too_long:
-            case boost_error::invalid_seek:
-            case boost_error::is_a_directory:
-            case boost_error::no_space_on_device:
-            case boost_error::no_such_device:
-            case boost_error::no_such_device_or_address:
-            case boost_error::read_only_file_system:
-            // same as operation_would_block on non-windows
-            //case boost_error::resource_unavailable_try_again:
-            case boost_error::text_file_busy:
-            case boost_error::too_many_files_open:
-            case boost_error::too_many_files_open_in_system:
-            case boost_error::too_many_links:
-            case boost_error::too_many_symbolic_link_levels:
-                return error::file_system;
-
-            // unknown errors
-            case boost_error::argument_list_too_long:
-            case boost_error::argument_out_of_domain:
-            case boost_error::function_not_supported:
-            case boost_error::identifier_removed:
-            case boost_error::inappropriate_io_control_operation:
-            case boost_error::interrupted:
-            case boost_error::invalid_argument:
-            case boost_error::no_buffer_space:
-            case boost_error::no_child_process:
-            case boost_error::no_lock_available:
-            case boost_error::no_such_process:
-            case boost_error::not_a_directory:
-            case boost_error::not_enough_memory:
-            case boost_error::operation_would_block:
-            case boost_error::resource_deadlock_would_occur:
-            case boost_error::result_out_of_range:
-            case boost_error::state_not_recoverable:
-            case boost_error::value_too_large:
-            default:
-                return error::unknown;
-        }
-    }
-
-    error_code_t posix_to_error_code(int ec)
+    // TODO: use a static map (hash table)
+    switch (ec.value())
     {
-        // TODO: expand mapping for database scenario.
-        switch (ec)
-        {
-            // protocol codes (from zeromq)
-            case ENOBUFS:
-            case ENOTSUP:
-            case EPROTONOSUPPORT:
-                return error::operation_failed;
-            case ENETDOWN:
-                return error::network_unreachable;
-            case EADDRINUSE:
-                return error::address_in_use;
-            case EADDRNOTAVAIL:
-                return error::resolve_failed;
-            case ECONNREFUSED:
-                return error::accept_failed;
-            case EINPROGRESS:
-                return error::channel_timeout;
-                return error::bad_stream;
-            case EAGAIN:
-                return error::channel_timeout;
-            case EFAULT:
-                return error::bad_stream;
-            case EINTR:
-            case ENOTSOCK:
-                return error::service_stopped;
-            default:
-                return error::unknown;
-        }
+        // There should be no boost mapping to the shutdown sentinel.
+        //    return error::service_stopped;
+
+        case boost_error::success:
+            return error::success;
+
+        // network errors
+#ifdef _MSC_VER
+        case asio_error::connection_aborted:
+        case asio_error::connection_reset:
+        case asio_error::operation_aborted:
+        case asio_error::operation_not_supported:
+#endif
+        case boost_error::connection_aborted:
+        case boost_error::connection_refused:
+        case boost_error::connection_reset:
+        case boost_error::not_connected:
+        case boost_error::operation_canceled:
+        case boost_error::operation_not_permitted:
+        case boost_error::operation_not_supported:
+        case boost_error::owner_dead:
+        case boost_error::permission_denied:
+            return error::operation_failed;
+
+#ifdef _MSC_VER
+        case asio_error::address_family_not_supported:
+#endif
+        case boost_error::address_family_not_supported:
+        case boost_error::address_not_available:
+        case boost_error::bad_address:
+        case boost_error::destination_address_required:
+            return error::resolve_failed;
+
+        case boost_error::broken_pipe:
+        case boost_error::host_unreachable:
+        case boost_error::network_down:
+        case boost_error::network_reset:
+        case boost_error::network_unreachable:
+        case boost_error::no_link:
+        case boost_error::no_protocol_option:
+        case boost_error::no_such_file_or_directory:
+        case boost_error::not_a_socket:
+        case boost_error::protocol_not_supported:
+        case boost_error::wrong_protocol_type:
+            return error::network_unreachable;
+
+        case boost_error::address_in_use:
+        case boost_error::already_connected:
+        case boost_error::connection_already_in_progress:
+        case boost_error::operation_in_progress:
+            return error::address_in_use;
+
+        case boost_error::bad_message:
+        case boost_error::illegal_byte_sequence:
+        case boost_error::io_error:
+        case boost_error::message_size:
+        case boost_error::no_message_available:
+        case boost_error::no_message:
+        case boost_error::no_stream_resources:
+        case boost_error::not_a_stream:
+        case boost_error::protocol_error:
+            return error::bad_stream;
+
+#ifdef _MSC_VER
+        case asio_error::timed_out:
+#endif
+        case boost_error::stream_timeout:
+        case boost_error::timed_out:
+            return error::channel_timeout;
+
+        // file system errors
+        case boost_error::cross_device_link:
+        case boost_error::bad_file_descriptor:
+        case boost_error::device_or_resource_busy:
+        case boost_error::directory_not_empty:
+        case boost_error::executable_format_error:
+        case boost_error::file_exists:
+        case boost_error::file_too_large:
+        case boost_error::filename_too_long:
+        case boost_error::invalid_seek:
+        case boost_error::is_a_directory:
+        case boost_error::no_space_on_device:
+        case boost_error::no_such_device:
+        case boost_error::no_such_device_or_address:
+        case boost_error::read_only_file_system:
+        // same as operation_would_block on non-windows
+        //case boost_error::resource_unavailable_try_again:
+        case boost_error::text_file_busy:
+        case boost_error::too_many_files_open:
+        case boost_error::too_many_files_open_in_system:
+        case boost_error::too_many_links:
+        case boost_error::too_many_symbolic_link_levels:
+            return error::file_system;
+
+        // unknown errors
+        case boost_error::argument_list_too_long:
+        case boost_error::argument_out_of_domain:
+        case boost_error::function_not_supported:
+        case boost_error::identifier_removed:
+        case boost_error::inappropriate_io_control_operation:
+        case boost_error::interrupted:
+        case boost_error::invalid_argument:
+        case boost_error::no_buffer_space:
+        case boost_error::no_child_process:
+        case boost_error::no_lock_available:
+        case boost_error::no_such_process:
+        case boost_error::not_a_directory:
+        case boost_error::not_enough_memory:
+        case boost_error::operation_would_block:
+        case boost_error::resource_deadlock_would_occur:
+        case boost_error::result_out_of_range:
+        case boost_error::state_not_recoverable:
+        case boost_error::value_too_large:
+        default:
+            return error::unknown;
     }
+}
+
+error_code_t posix_to_error_code(int ec) {
+    // TODO(libbitcoin): expand mapping for database scenario.
+    switch (ec) {
+        // protocol codes (from zeromq)
+        case ENOBUFS:
+        case ENOTSUP:
+        case EPROTONOSUPPORT:
+            return error::operation_failed;
+        case ENETDOWN:
+            return error::network_unreachable;
+        case EADDRINUSE:
+            return error::address_in_use;
+        case EADDRNOTAVAIL:
+            return error::resolve_failed;
+        case ECONNREFUSED:
+            return error::accept_failed;
+        case EINPROGRESS:
+            return error::channel_timeout;
+            return error::bad_stream;
+        case EAGAIN:
+            return error::channel_timeout;
+        case EFAULT:
+            return error::bad_stream;
+        case EINTR:
+        case ENOTSOCK:
+            return error::service_stopped;
+        default:
+            return error::unknown;
+    }
+}
 
 } // namespace error
 } // namespace libbitcoin

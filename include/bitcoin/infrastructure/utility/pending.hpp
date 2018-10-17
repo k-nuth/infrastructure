@@ -32,7 +32,7 @@
 namespace libbitcoin {
 
 /// A managed collection of object pointers.
-template <class Element>
+template <typename Element>
 class pending
   : noncopyable
 {

@@ -76,10 +76,10 @@ template <size_t Size>
 bool build_array(byte_array<Size>& out, loaf slices);
 
 /**
- * Extend iterable object by appending other.
+ * Extend iterable object by appending x.
  */
-template <class Target, class Extension>
-void extend_data(Target& bytes, const Extension& other);
+template <typename Target, typename Extension>
+void extend_data(Target& bytes, const Extension& x);
 
 /**
  * Extracty a subarray from start position with length end minus start.

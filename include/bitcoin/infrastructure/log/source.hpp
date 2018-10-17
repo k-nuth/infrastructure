@@ -35,8 +35,7 @@ namespace log {
 typedef boost::log::sources::severity_channel_logger_mt<severity, std::string>
     severity_source;
 
-BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source)
-{
+BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source) {
     static auto const name = attributes::timestamp.get_name();
     severity_source logger;
     logger.add_attribute(name, boost::log::attributes::utc_clock());

@@ -27,19 +27,19 @@ namespace log {
 namespace features {
 
 template <typename BaseType>
-rate_feature<BaseType>::rate_feature(const rate_feature& other)
-    : BaseType(static_cast<const BaseType&>(other))
+rate_feature<BaseType>::rate_feature(const rate_feature& x)
+    : BaseType(static_cast<const BaseType&>(x))
 {}
 
 template <typename BaseType>
 template <typename Arguments>
-rate_feature<BaseType>::rate_feature(const Arguments& arguments)
+rate_feature<BaseType>::rate_feature(Arguments const& arguments)
     : BaseType(arguments)
 {}
 
 template <typename BaseType>
 template <typename Arguments>
-boost::log::record rate_feature<BaseType>::open_record_unlocked(const Arguments& arguments) {
+boost::log::record rate_feature<BaseType>::open_record_unlocked(Arguments const& arguments) {
     auto& set = BaseType::attributes();
     auto tag = add_rate_unlocked(set,
         arguments[keywords::rate | boost::parameter::void_()]);

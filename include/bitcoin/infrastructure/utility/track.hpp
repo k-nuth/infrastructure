@@ -27,9 +27,9 @@
 // These are defined in bc so that they can be used in network and blockchain.
 
 #define CONSTRUCT_TRACK(class_name) \
-    track<class_name>(#class_name)
+    track<typename_name>(#class_name)
 
-template <class Shared>
+template <typename Shared>
 class track
 {
 public:

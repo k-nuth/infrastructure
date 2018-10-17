@@ -27,14 +27,14 @@ namespace log {
 namespace features {
 
 template <typename BaseType>
-timer_feature<BaseType>::timer_feature(const timer_feature& other)
-  : BaseType(static_cast<const BaseType&>(other))
+timer_feature<BaseType>::timer_feature(timer_feature const& x)
+  : BaseType(static_cast<const BaseType&>(x))
 {
 }
 
 template <typename BaseType>
 template <typename Arguments>
-timer_feature<BaseType>::timer_feature(const Arguments& arguments)
+timer_feature<BaseType>::timer_feature(Arguments const& arguments)
   : BaseType(arguments)
 {
 }
@@ -42,7 +42,7 @@ timer_feature<BaseType>::timer_feature(const Arguments& arguments)
 template <typename BaseType>
 template <typename Arguments>
 boost::log::record timer_feature<BaseType>::open_record_unlocked(
-    const Arguments& arguments)
+    Arguments const& arguments)
 {
     auto& set = BaseType::attributes();
     auto tag = add_timer_unlocked(set,

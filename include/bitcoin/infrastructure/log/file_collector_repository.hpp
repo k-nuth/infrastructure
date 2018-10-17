@@ -49,20 +49,17 @@ private:
 
 private:
     //! Base type
-    typedef boost::log::aux::lazy_singleton<file_collector_repository,
-        boost::shared_ptr<file_collector_repository>> base_type;
+    using base_type = boost::log::aux::lazy_singleton<file_collector_repository, boost::shared_ptr<file_collector_repository>>;
 
 #if !defined(BOOST_LOG_BROKEN_FRIEND_TEMPLATE_SPECIALIZATIONS)
-    friend class boost::log::aux::lazy_singleton<file_collector_repository,
-        boost::shared_ptr<file_collector_repository>>;
+    friend class 
+    boost::log::aux::lazy_singleton<file_collector_repository, boost::shared_ptr<file_collector_repository>>;
 #else
     friend class base_type;
 #endif
 
     //! The type of the list of collectors
-    typedef boost::intrusive::list<
-        file_collector,
-        boost::intrusive::base_hook<file_collector_hook>> file_collectors;
+    using file_collectors = boost::intrusive::list<file_collector, boost::intrusive::base_hook<file_collector_hook>>;
 
 private:
 #if !defined(BOOST_LOG_NO_THREADS)

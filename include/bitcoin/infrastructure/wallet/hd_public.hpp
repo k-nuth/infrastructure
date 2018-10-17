@@ -51,7 +51,7 @@ struct BI_API hd_lineage
     uint32_t child_number;
 
     bool operator==(hd_lineage const& x) const;
-    bool operator!=(hd_lineage const& other) const;
+    bool operator!=(hd_lineage const& x) const;
 };
 
 class hd_private;
@@ -86,7 +86,7 @@ public:
     /// Operators.
     bool operator<(hd_public const& x) const;
     bool operator==(hd_public const& x) const;
-    bool operator!=(hd_public const& other) const;
+    bool operator!=(hd_public const& x) const;
     hd_public& operator=(hd_public const& x);
     
     friend 

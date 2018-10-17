@@ -28,20 +28,20 @@
 
 namespace libbitcoin {
 
-template <class Element>
+template <typename Element>
 pending<Element>::pending(size_t initial_capacity)
   : stopped_(false)
 {
     elements_.reserve(initial_capacity);
 }
 
-template <class Element>
+template <typename Element>
 pending<Element>::~pending()
 {
     ////BITCOIN_ASSERT_MSG(elements_.empty(), "Pending collection not cleared.");
 }
 
-template <class Element>
+template <typename Element>
 typename pending<Element>::elements pending<Element>::collection() const
 {
     // Critical Section
@@ -52,7 +52,7 @@ typename pending<Element>::elements pending<Element>::collection() const
     ///////////////////////////////////////////////////////////////////////////
 };
 
-template <class Element>
+template <typename Element>
 size_t pending<Element>::size() const
 {
     // Critical Section
@@ -63,7 +63,7 @@ size_t pending<Element>::size() const
     ///////////////////////////////////////////////////////////////////////////
 };
 
-template <class Element>
+template <typename Element>
 bool pending<Element>::exists(finder match) const
 {
     // Critical Section
@@ -75,7 +75,7 @@ bool pending<Element>::exists(finder match) const
     ///////////////////////////////////////////////////////////////////////////
 }
 
-template <class Element>
+template <typename Element>
 code pending<Element>::store(element_ptr element)
 {
     // Critical Section
@@ -99,7 +99,7 @@ code pending<Element>::store(element_ptr element)
     return error::success;
 }
 
-template <class Element>
+template <typename Element>
 code pending<Element>::store(element_ptr element, finder match)
 {
     // Critical Section
@@ -129,7 +129,7 @@ code pending<Element>::store(element_ptr element, finder match)
     return stopped ? error::service_stopped : error::address_in_use;
 }
 
-template <class Element>
+template <typename Element>
 void pending<Element>::remove(element_ptr element)
 {
     // Critical Section
@@ -153,7 +153,7 @@ void pending<Element>::remove(element_ptr element)
 }
 
 // This is idempotent.
-template <class Element>
+template <typename Element>
 void pending<Element>::stop(const code& ec)
 {
     elements copy;
@@ -181,7 +181,7 @@ void pending<Element>::stop(const code& ec)
         element->stop(ec);
 }
 
-template <class Element>
+template <typename Element>
 void pending<Element>::close()
 {
     // Critical Section

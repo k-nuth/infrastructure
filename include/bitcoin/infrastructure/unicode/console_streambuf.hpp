@@ -30,15 +30,15 @@ namespace libbitcoin {
  * Class to patch Windows stdin keyboard input, file input is not a problem.
  * This class and members are no-ops when called in non-MSVC++ builds.
  */
-class BI_API console_streambuf
-  : public std::wstreambuf
+class BI_API console_streambuf : public std::wstreambuf
 {
 public:
     /**
      * Initialize stdio to use utf8 translation on Windows.
      * @param[in]  size  The stream buffer size.
      */
-    static void initialize(size_t size);
+    static 
+    void initialize(size_t size);
 
 protected:
     /**
@@ -46,12 +46,17 @@ protected:
      * @param[in]  stream_buffer  The stream buffer to patch.
      * @param[in]  size           The stream buffer size.
      */
-    console_streambuf(const std::wstreambuf& stream_buffer, size_t size);
+    console_streambuf(std::wstreambuf const& stream_buffer, size_t size);
 
     /**
      * Delete stream buffer.
      */
+#ifdef _MSC_VER
     ~console_streambuf() override;
+#else
+    ~console_streambuf() = default;
+#endif
+
 
     /**
      * Implement alternate console read.

@@ -29,19 +29,19 @@ namespace log {
 namespace features {
 
 template <typename BaseType>
-gauge_feature<BaseType>::gauge_feature(const gauge_feature& other)
-    : BaseType(static_cast<const BaseType&>(other))
+gauge_feature<BaseType>::gauge_feature(const gauge_feature& x)
+    : BaseType(static_cast<const BaseType&>(x))
 {}
 
 template <typename BaseType>
 template <typename Arguments>
-gauge_feature<BaseType>::gauge_feature(const Arguments& arguments)
+gauge_feature<BaseType>::gauge_feature(Arguments const& arguments)
     : BaseType(arguments)
 {}
 
 template <typename BaseType>
 template <typename Arguments>
-boost::log::record gauge_feature<BaseType>::open_record_unlocked(const Arguments& arguments) {
+boost::log::record gauge_feature<BaseType>::open_record_unlocked(Arguments const& arguments) {
     auto& set = BaseType::attributes();
     auto tag = add_gauge_unlocked(set, arguments[keywords::gauge | boost::parameter::void_()]);
 

@@ -76,7 +76,7 @@ public:
     void set_fragment(std::string const& fragment);
     void remove_fragment();
 
-    typedef std::map<std::string, std::string> query_map;
+    using query_map = std::map<std::string, std::string>;
 
     /**
      * Interprets the query string as a sequence of key-value pairs.

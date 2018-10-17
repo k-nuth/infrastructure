@@ -29,19 +29,19 @@ namespace log {
 namespace features {
 
 template <typename BaseType>
-counter_feature<BaseType>::counter_feature(const counter_feature& other)
-    : BaseType(static_cast<const BaseType&>(other))
+counter_feature<BaseType>::counter_feature(const counter_feature& x)
+    : BaseType(static_cast<const BaseType&>(x))
 {}
 
 template <typename BaseType>
 template <typename Arguments>
-counter_feature<BaseType>::counter_feature(const Arguments& arguments)
+counter_feature<BaseType>::counter_feature(Arguments const& arguments)
     : BaseType(arguments)
 {}
 
 template <typename BaseType>
 template <typename Arguments>
-boost::log::record counter_feature<BaseType>::open_record_unlocked(const Arguments& arguments) {
+boost::log::record counter_feature<BaseType>::open_record_unlocked(Arguments const& arguments) {
     auto& set = BaseType::attributes();
     auto tag = add_counter_unlocked(set, arguments[keywords::counter | boost::parameter::void_()]);
 

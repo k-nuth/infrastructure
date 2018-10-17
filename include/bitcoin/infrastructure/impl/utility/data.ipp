@@ -76,16 +76,14 @@ bool build_array(byte_array<Size>& out, loaf slices)
     return true;
 }
 
-template <class Target, class Extension>
-void extend_data(Target& bytes, const Extension& other)
-{
-    bytes.insert(std::end(bytes), std::begin(other), std::end(other));
+template <typename Target, typename Extension>
+void extend_data(Target& bytes, const Extension& x) {
+    bytes.insert(std::end(bytes), std::begin(x), std::end(x));
 }
 
 // std::array<> is used in place of byte_array<> to enable Size deduction.
 template <size_t Start, size_t End, size_t Size>
-byte_array<End - Start> slice(const std::array<uint8_t, Size>& bytes)
-{
+byte_array<End - Start> slice(const std::array<uint8_t, Size>& bytes) {
     static_assert(End <= Size, "Slice end must not exceed array size.");
     byte_array<End - Start> out;
     std::copy(std::begin(bytes) + Start, std::begin(bytes) + End, out.begin());

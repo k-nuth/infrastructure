@@ -45,7 +45,13 @@ public:
     /**
      * Delete the unicode_streambuf that wraps wide_stream.
      */
+
+#ifdef _MSC_VER
     ~unicode_ostream() override;
+#else
+    ~unicode_ostream() = default;
+#endif    
+
 };
 
 } // namespace libbitcoin

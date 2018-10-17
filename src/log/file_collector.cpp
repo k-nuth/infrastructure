@@ -64,10 +64,8 @@ inline void move_file(filesystem::path const& from, filesystem::path const& to) 
 }
 
 //! The function parses the format placeholder for file counter
-bool parse_counter_placeholder(path_string_type::const_iterator& it,
-    path_string_type::const_iterator end, unsigned int& width)
-{
-    typedef qi::extract_uint<unsigned int, 10, 1, -1> width_extract;
+bool parse_counter_placeholder(path_string_type::const_iterator& it, path_string_type::const_iterator end, unsigned int& width) {
+    using width_extract = qi::extract_uint<unsigned int, 10, 1, -1>;
 
     if (it == end) {
         return false;
@@ -117,11 +115,12 @@ bool parse_counter_placeholder(path_string_type::const_iterator& it,
 
 //! The function matches the file name and the pattern
 bool match_pattern(path_string_type const& file_name, path_string_type const& pattern, unsigned int& file_counter) {
-    typedef qi::extract_uint<unsigned int, 10, 1, -1> file_counter_extract;
+    using file_counter_extract = qi::extract_uint<unsigned int, 10, 1, -1>;
 
     struct local {
         // Verifies that the string contains exactly n digits
-        static bool scan_digits(path_string_type::const_iterator& it, path_string_type::const_iterator end, std::ptrdiff_t n) {
+        static 
+        bool scan_digits(path_string_type::const_iterator& it, path_string_type::const_iterator end, std::ptrdiff_t n) {
             for (; n > 0; --n) {
                 path_string_type::value_type c = *it++;
                 if ( ! file_char_traits::is_digit(c) || it == end) {
@@ -137,6 +136,7 @@ bool match_pattern(path_string_type const& file_name, path_string_type const& pa
         f_end = file_name.end(),
         p_it = pattern.begin(),
         p_end = pattern.end();
+        
     bool placeholder_expected = false;
 
     while (f_it != f_end && p_it != p_end) {

@@ -94,7 +94,7 @@ public:
     network_address& operator=(const network_address& x) = default;
 
     bool operator==(const network_address& x) const;
-    bool operator!=(const network_address& other) const;
+    bool operator!=(const network_address& x) const;
 
 private:
     uint32_t timestamp_;

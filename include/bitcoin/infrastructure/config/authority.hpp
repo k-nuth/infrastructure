@@ -52,7 +52,7 @@ public:
 
     /**
      * Copy constructor.
-     * @param[in]  other  The object to copy into self on construct.
+     * @param[in]  x  The object to copy into self on construct.
      */
     authority(authority const& x);
 

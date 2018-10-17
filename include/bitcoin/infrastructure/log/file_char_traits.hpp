@@ -31,7 +31,7 @@ struct BI_API file_char_traits
 {
 //#ifdef _MSC_VER
 #ifdef BOOST_WINDOWS_API
-    typedef wchar_t char_type;
+    using char_type = wchar_t;
 #else
     using char_type = char;
 #endif

@@ -112,7 +112,7 @@ namespace std {
  * @param[in]  list    The list to serialize.
  * @return             The output stream.
  */
-template <class Type>
+template <typename Type>
 std::ostream& operator<<(std::ostream& output, const std::vector<Type>& list);
 
 } // namespace std
