@@ -102,7 +102,7 @@ T pop(std::vector<T>& stack);
 
 } // namespace libbitcoin
 
-// namespace std {
+namespace std {
 
 /**
  * Make vectors of serializable elements serializable to std::ostream.
@@ -114,7 +114,7 @@ T pop(std::vector<T>& stack);
 template <typename T>
 std::ostream& operator<<(std::ostream& output, std::vector<T> const& list);
 
-// } // namespace std
+} // namespace std
 
 #include <bitcoin/infrastructure/impl/utility/collection.ipp>
 

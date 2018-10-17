@@ -28,8 +28,7 @@
 namespace po = boost::program_options;
 using namespace bc::config;
 
-enum opt
-{
+enum opt {
     short_long = 0,
     shorty,
     longy,
@@ -41,8 +40,8 @@ enum opt
     multitoken
 };
 
-static void load_test_options(po::options_description& options)
-{
+static 
+void load_test_options(po::options_description& options) {
     using namespace boost::filesystem;
     using namespace boost::program_options;
     options.add_options()
@@ -59,8 +58,8 @@ static void load_test_options(po::options_description& options)
         ("multitoken", value<int>()->multitoken(), "Multi-token int.");
 }
 
-static void load_test_arguments(argument_list& arguments)
-{
+static 
+void load_test_arguments(argument_list& arguments) {
     arguments.push_back(argument_pair("longy", 1));
     arguments.push_back(argument_pair("simple", 2));
     arguments.push_back(argument_pair("defaulty", 3));

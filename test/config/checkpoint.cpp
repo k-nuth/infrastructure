@@ -24,6 +24,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <bitcoin/infrastructure.hpp>
+#include <bitcoin/infrastructure/utility/collection.hpp>
 
 using namespace bc;
 using namespace bc::config;
@@ -86,18 +87,15 @@ BOOST_AUTO_TEST_CASE(checkpoint__construct__invalid_height_characters__throws_in
     BOOST_REQUIRE_THROW(checkpoint(CHECKPOINT_HASH_A ":1000000000100000000001"), invalid_option_value);
 }
 
-BOOST_AUTO_TEST_CASE(checkpoint__construct__bogus_height_characters__throws_invalid_option_value)
-{
+BOOST_AUTO_TEST_CASE(checkpoint__construct__bogus_height_characters__throws_invalid_option_value) {
     BOOST_REQUIRE_THROW(checkpoint(CHECKPOINT_HASH_A ":xxx"), invalid_option_value);
 }
 
-BOOST_AUTO_TEST_CASE(checkpoint__construct__bogus_line_hash__throws_invalid_option_value)
-{
+BOOST_AUTO_TEST_CASE(checkpoint__construct__bogus_line_hash__throws_invalid_option_value) {
     BOOST_REQUIRE_THROW(checkpoint("bogus:42"), invalid_option_value);
 }
 
-BOOST_AUTO_TEST_CASE(checkpoint__construct__bogus_hash__throws_invalid_option_value)
-{
+BOOST_AUTO_TEST_CASE(checkpoint__construct__bogus_hash__throws_invalid_option_value) {
     BOOST_REQUIRE_THROW(checkpoint("bogus", 42), invalid_option_value);
 }
 
@@ -107,8 +105,7 @@ BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_AUTO_TEST_SUITE(checkpoint__istream)
 
-BOOST_AUTO_TEST_CASE(checkpoint__istream__empty__expected)
-{
+BOOST_AUTO_TEST_CASE(checkpoint__istream__empty__expected) {
     checkpoint deserialized;
     std::stringstream serialized(CHECKPOINT_A);
     serialized >> deserialized;
@@ -122,31 +119,26 @@ BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE(checkpoint__ostream)
 
 static 
-checkpoint::list const test_checkpoints_list(
-{
+checkpoint::list const test_checkpoints_list({
     checkpoint{CHECKPOINT_A},
     checkpoint{CHECKPOINT_B},
     checkpoint{CHECKPOINT_C}
 });
 
-BOOST_AUTO_TEST_CASE(checkpoint__ostream__empty__expected)
-{
+BOOST_AUTO_TEST_CASE(checkpoint__ostream__empty__expected) {
     std::stringstream serialized;
     serialized << checkpoint::list();
     BOOST_REQUIRE_EQUAL(serialized.str(), "");
 }
 
-BOOST_AUTO_TEST_CASE(checkpoint__ostream__populated__expected)
-{
+BOOST_AUTO_TEST_CASE(checkpoint__ostream__populated__expected) {
     std::stringstream serialized;
     serialized << test_checkpoints_list;
     BOOST_REQUIRE_EQUAL(serialized.str(), CHECKPOINT_ABC);
 }
 
-BOOST_AUTO_TEST_CASE(checkpoint__ostream__boost_lexical_cast__expected)
-{
-    using namespace boost;
-    auto const serialized = lexical_cast<std::string>(test_checkpoints_list);
+BOOST_AUTO_TEST_CASE(checkpoint__ostream__boost_lexical_cast__expected) {
+    auto const serialized = boost::lexical_cast<std::string>(test_checkpoints_list);
     BOOST_REQUIRE_EQUAL(serialized, CHECKPOINT_ABC);
 }
 

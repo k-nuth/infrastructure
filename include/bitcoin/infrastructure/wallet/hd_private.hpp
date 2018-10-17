@@ -33,11 +33,6 @@
 namespace libbitcoin {
 namespace wallet {
 
-static constexpr
-uint32_t to_prefix(uint64_t prefixes) {
-    return prefixes >> 32;
-}
-
 constexpr
 uint64_t to_prefixes(uint32_t private_prefix, uint32_t public_prefix) {
     return uint64_t(private_prefix) << 32 | public_prefix;
@@ -53,6 +48,11 @@ public:
 
     static constexpr uint64_t mainnet = to_prefixes(76066276, hd_public::mainnet);
     static constexpr uint64_t testnet = to_prefixes(70615956, hd_public::testnet);
+
+    static constexpr
+    uint32_t to_prefix(uint64_t prefixes) {
+        return prefixes >> 32;
+    }
 
     /// Constructors.
     hd_private() = default;

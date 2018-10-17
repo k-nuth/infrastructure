@@ -103,7 +103,7 @@ T pop(std::vector<T>& stack) {
 
 } // namespace libbitcoin
 
-// namespace std {
+namespace std {
 
 template <typename T>
 std::ostream& operator<<(std::ostream& output, std::vector<T> const& list) {
@@ -122,6 +122,6 @@ std::ostream& operator<<(std::ostream& output, std::vector<T> const& list) {
     return output;
 }
 
-// } // namespace std
+} // namespace std
 
 #endif
