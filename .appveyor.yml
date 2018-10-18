@@ -41,8 +41,7 @@ environment:
 
 install:
   - set PATH=%PATH%;%PYTHON%/Scripts/
-  - python -m pip install --upgrade pip
-  
+  - python -m pip install --upgrade pip > NUL
   # - pip.exe install conan --upgrade > NUL
   # - pip.exe install conan==1.7.4 > NUL
   - pip.exe install conan==1.8.3 > NUL
@@ -75,23 +74,24 @@ test_script:
         conan remote remove bitprim
       }
 
-  - ps: |
-      If ($env:WAIT_FOR_DEPS -eq 1) {
-        conan user
-        conan remote add bitprim_temp https://api.bintray.com/conan/bitprim/bitprim
-        echo "waiting for secp256k1/0.X@bitprim/staging ..."
-        conan search secp256k1/0.X@bitprim/staging -r bitprim_temp > $null
-        while($env:lastExitCode -eq 1) {
-          Write-Host "."
-          Start-Sleep -s 10
-          conan search secp256k1/0.X@bitprim/staging -r bitprim_temp > $null
-        }
-        Write-Host "secp256k1/0.X@bitprim/staging found"
-      }
-      Else {
-        # python build.py
-        PowerShell .\.appveyor\build.ps1
-      }
+  - PowerShell .\.appveyor\build.ps1
+  # - ps: |
+  #     If ($env:WAIT_FOR_DEPS -eq 1) {
+  #       conan user
+  #       conan remote add bitprim_temp https://api.bintray.com/conan/bitprim/bitprim
+  #       echo "waiting for secp256k1/0.X@bitprim/staging ..."
+  #       conan search secp256k1/0.X@bitprim/staging -r bitprim_temp > $null
+  #       while($env:lastExitCode -eq 1) {
+  #         Write-Host "."
+  #         Start-Sleep -s 10
+  #         conan search secp256k1/0.X@bitprim/staging -r bitprim_temp > $null
+  #       }
+  #       Write-Host "secp256k1/0.X@bitprim/staging found"
+  #     }
+  #     Else {
+  #       # python build.py
+  #       PowerShell .\.appveyor\build.ps1
+  #     }
 
 
 
