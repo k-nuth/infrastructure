@@ -55,13 +55,20 @@ void network_address::reset() {
 
 bool network_address::from_data(uint32_t version, data_chunk const& data, bool with_timestamp) {
     data_source istream(data);
-    return from_data_stream(version, istream, with_timestamp);
+    return from_data(version, istream, with_timestamp);
 }
 
-bool network_address::from_data_stream(uint32_t version, std::istream& stream, bool with_timestamp) {
+// bool network_address::from_data(uint32_t version, std::istream& stream, bool with_timestamp) {
+//     istream_reader source(stream);
+//     return from_data(version, source, with_timestamp);
+// }
+
+bool network_address::from_data(uint32_t version, data_source& stream, bool with_timestamp) {
     istream_reader source(stream);
-    return from_data_reader(version, source, with_timestamp);
+    return from_data(version, source, with_timestamp);
 }
+
+
 
 // bool network_address::from_data(uint32_t version, reader& source, bool with_timestamp) {
 //     reset();
@@ -88,16 +95,23 @@ data_chunk network_address::to_data(uint32_t version, bool with_timestamp) const
     auto const size = serialized_size(version, with_timestamp);
     data.reserve(size);
     data_sink ostream(data);
-    to_data_stream(version, ostream, with_timestamp);
+    to_data(version, ostream, with_timestamp);
     ostream.flush();
     BITCOIN_ASSERT(data.size() == size);
     return data;
 }
 
-void network_address::to_data_stream(uint32_t version, std::ostream& stream, bool with_timestamp) const {
+// void network_address::to_data(uint32_t version, std::ostream& stream, bool with_timestamp) const {
+//     ostream_writer sink(stream);
+//     to_data(version, sink, with_timestamp);
+// }
+
+
+void network_address::to_data(uint32_t version, data_sink& stream, bool with_timestamp) const {
     ostream_writer sink(stream);
-    to_data_writer(version, sink, with_timestamp);
+    to_data(version, sink, with_timestamp);
 }
+
 
 // void network_address::to_data(uint32_t version, writer& sink, bool with_timestamp) const {
 //     if (with_timestamp) {
@@ -165,11 +179,19 @@ network_address network_address::factory_from_data(uint32_t version, data_chunk 
     return instance;
 }
 
-network_address network_address::factory_from_data_stream(uint32_t version, std::istream& stream, bool with_timestamp) {
+// network_address network_address::factory_from_data(uint32_t version, std::istream& stream, bool with_timestamp) {
+//     network_address instance;
+//     instance.from_data(version, stream, with_timestamp);
+//     return instance;
+// }
+
+network_address network_address::factory_from_data(uint32_t version, data_source& stream, bool with_timestamp) {
     network_address instance;
-    instance.from_data_stream(version, stream, with_timestamp);
+    instance.from_data(version, stream, with_timestamp);
     return instance;
 }
+
+
 
 // network_address network_address::factory_from_data(uint32_t version, reader& source, bool with_timestamp) { 
 //     network_address instance;

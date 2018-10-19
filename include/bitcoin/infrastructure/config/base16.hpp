@@ -66,7 +66,7 @@ public:
      * Overload cast to internal type.
      * @return  This object's value cast to internal type reference.
      */
-    explicit
+    // implicit
     operator data_chunk const&() const;
 
     /**
