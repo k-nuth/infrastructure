@@ -184,8 +184,9 @@ data_chunk const& operation::data() const {
 // than two bytes to encode. However the four byte encoding can represent
 // a value of any size, so remains valid despite the data size limit.
 //*****************************************************************************
+template <typename R>
 inline 
-uint32_t operation::read_data_size(opcode code, reader& source) {
+uint32_t operation::read_data_size(opcode code, R& source) {
     BC_CONSTEXPR auto op_75 = static_cast<uint8_t>(opcode::push_size_75);
 
     switch (code) {
