@@ -27,21 +27,27 @@
 namespace libbitcoin {
 
 template <typename Integer, typename Iterator>
+constexpr
 Integer from_big_endian(Iterator start, Iterator end);
 
 template <typename Integer, typename Iterator>
+constexpr
 Integer from_little_endian(Iterator start, Iterator end);
 
 template <typename Integer, typename Iterator>
+constexpr
 Integer from_big_endian_unsafe(Iterator start);
 
 template <typename Integer, typename Iterator>
+constexpr
 Integer from_little_endian_unsafe(Iterator start);
 
 template <typename Integer>
+constexpr
 Integer from_big_endian_stream_unsafe(std::istream& stream);
 
 template <typename Integer>
+constexpr
 Integer from_little_endian_stream_unsafe(std::istream& stream);
 
 template <typename Integer>

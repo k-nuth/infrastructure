@@ -41,7 +41,7 @@
 // //-----------------------------------------------------------------------------
 
 // // static
-// operation operation::factory_from_data(const data_chunk& encoded)
+// operation operation::factory_from_data(data_chunk const& encoded)
 // {
 //     operation instance;
 //     instance.from_data(encoded);
@@ -64,7 +64,7 @@
 // //    return instance;
 // //}
 
-// bool operation::from_data(const data_chunk& encoded)
+// bool operation::from_data(data_chunk const& encoded)
 // {
 //     data_source istream(encoded);
 //     return from_data_stream(istream);
@@ -127,7 +127,7 @@
 // }
 
 // static bool opcode_from_data_prefix(opcode& out_code,
-//     const std::string& prefix, const data_chunk& data)
+//     const std::string& prefix, data_chunk const& data)
 // {
 //     BC_CONSTEXPR auto op_75 = static_cast<uint8_t>(opcode::push_size_75);
 //     const auto size = data.size();
@@ -281,7 +281,7 @@
 // //    sink.write_bytes(data_);
 // //}
 
-// static std::string opcode_to_prefix(opcode code, const data_chunk& data)
+// static std::string opcode_to_prefix(opcode code, data_chunk const& data)
 // {
 //     // If opcode is minimal for a size-based encoding, do not set a prefix.
 //     if (code == operation::opcode_from_size(data.size()))

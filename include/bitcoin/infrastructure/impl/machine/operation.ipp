@@ -49,7 +49,7 @@ operation::operation(operation&& x)
 {}
 
 inline 
-operation::operation(const operation& x)
+operation::operation(operation const& x)
     : operation(x.code_, x.data_, x.valid_)
 {}
 
@@ -114,7 +114,7 @@ operation& operation::operator=(operation&& x) {
 }
 
 inline 
-operation& operation::operator=(const operation& x)
+operation& operation::operator=(operation const& x)
 {
     code_ = x.code_;
     data_ = x.data_;
@@ -123,12 +123,12 @@ operation& operation::operator=(const operation& x)
 }
 
 inline 
-bool operation::operator==(const operation& x) const {
+bool operation::operator==(operation const& x) const {
     return (code_ == x.code_) && (data_ == x.data_);
 }
 
 inline 
-bool operation::operator!=(const operation& x) const {
+bool operation::operator!=(operation const& x) const {
     return !(*this == x);
 }
 
