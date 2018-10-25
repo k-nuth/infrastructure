@@ -56,14 +56,6 @@
 //     return instance;
 // }
 
-// // static
-// //operation operation::factory_from_data(reader& source)
-// //{
-// //    operation instance;
-// //    instance.from_data(source);
-// //    return instance;
-// //}
-
 // bool operation::from_data(data_chunk const& encoded)
 // {
 //     data_source istream(encoded);
@@ -75,28 +67,6 @@
 //     istream_reader source(stream);
 //     return from_data_reader(source);
 // }
-
-// // TODO: optimize for larger data by using a shared byte array.
-// //bool operation::from_data(reader& source)
-// //{
-// //    ////reset();
-// //    valid_ = true;
-// //    code_ = static_cast<opcode>(source.read_byte());
-// //    const auto size = read_data_size(code_, source);
-// //
-// //    // The max_script_size and max_push_data_size constants limit
-// //    // evaluation, but not all scripts evaluate, so use max_block_size
-// //    // to guard memory allocation here.
-// //    if (size > get_max_block_size()) //TODO: bitprim max_block_size changed to get_max_block_size (check space for BCH)
-// //        source.invalidate();
-// //    else
-// //        data_ = source.read_bytes(size);
-// //
-// //    if (!source)
-// //        reset();
-// //
-// //    return valid_;
-// //}
 
 // inline bool is_push_token(const std::string& token)
 // {
