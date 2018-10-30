@@ -70,15 +70,15 @@ public:
      * Initialization constructor.
      * @param[in]  net  The network address (ip and port) to initialize with.
      */
-    explicit
-    authority(const message::network_address& address);
+    // implicit //Note(bitprim): in bitprim-network it is used the implicit convertion
+    authority(message::network_address const& address);
 
     /**
      * Initialization constructor.
      * @param[in]  ip    The ip addresss to initialize with.
      * @param[in]  port  The port to initialize with.
      */
-    authority(const message::ip_address& ip, uint16_t port);
+    authority(message::ip_address const& ip, uint16_t port);
 
     /**
      * Initialization constructor.
