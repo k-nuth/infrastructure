@@ -117,12 +117,12 @@ authority::authority(std::string const& authority) {
 }
 
 // This is the format returned from peers on the bitcoin network.
-authority::authority(const message::network_address& address)
+authority::authority(message::network_address const& address)
     : authority(address.ip(), address.port())
 {}
 
 static 
-asio::ipv6 to_boost_address(const message::ip_address& in) {
+asio::ipv6 to_boost_address(message::ip_address const& in) {
     asio::ipv6::bytes_type bytes;
     BITCOIN_ASSERT(bytes.size() == in.size());
     std::copy_n(in.begin(), in.size(), bytes.begin());
@@ -139,7 +139,7 @@ message::ip_address to_BI_address(const asio::ipv6& in) {
     return out;
 }
 
-authority::authority(const message::ip_address& ip, uint16_t port)
+authority::authority(message::ip_address const& ip, uint16_t port)
     : ip_(to_boost_address(ip)), port_(port)
 {}
 

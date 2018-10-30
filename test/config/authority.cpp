@@ -65,14 +65,14 @@ BC_CONSTEXPR message::ip_address test_ipv6_address =
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02
 };
 
-static bool ip_equal(const message::ip_address& left,
-    const message::ip_address& right)
+static bool ip_equal(message::ip_address const& left,
+    message::ip_address const& right)
 {
     return std::equal(left.begin(), left.end(), right.begin());
 }
 
-static bool net_equal(const message::network_address& left,
-    const message::network_address& right)
+static bool net_equal(message::network_address const& left,
+    message::network_address const& right)
 {
     return ip_equal(left.ip(), right.ip()) && (left.port() == right.port());
 }

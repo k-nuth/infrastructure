@@ -18,14 +18,14 @@
  */
 #include <bitcoin/infrastructure/config/parser.hpp>
 
-#include <iostream>
-#include <sstream>
-#include <string>
+// #include <iostream>
+// #include <sstream>
+// #include <string>
 
-#include <boost/algorithm/string.hpp>
-#include <boost/filesystem.hpp>
-#include <boost/program_options.hpp>
-#include <boost/throw_exception.hpp>
+// #include <boost/algorithm/string.hpp>
+// #include <boost/filesystem.hpp>
+// #include <boost/program_options.hpp>
+// #include <boost/throw_exception.hpp>
 
 #include <bitcoin/infrastructure/unicode/ifstream.hpp>
 
@@ -36,84 +36,90 @@ using namespace boost::filesystem;
 using namespace boost::program_options;
 using namespace boost::system;
 
-// The error is obtained from boost, which circumvents our localization.
-// English-only hack to patch missing arg name in boost exception message.
-std::string parser::format_invalid_parameter(std::string const& message) {
-    std::string clean_message(message);
-    boost::replace_all(clean_message, "for option is invalid", "is invalid");
-    return "Error: " + clean_message;
-}
+// // The error is obtained from boost, which circumvents our localization.
+// // English-only hack to patch missing arg name in boost exception message.
+// std::string parser::format_invalid_parameter(std::string const& message) {
+//     std::string clean_message(message);
+//     boost::replace_all(clean_message, "for option is invalid", "is invalid");
+//     return "Error: " + clean_message;
+// }
 
-path parser::get_config_option(variables_map& variables, std::string const& name) {
-    // read config from the map so we don't require an early notify
-    auto const& config = variables[name];
-    // prevent exception in the case where the config variable is not set
-    if (config.empty()) {
-        return path();
-}
-    return config.as<path>();
-}
+// path parser::get_config_option(variables_map& variables, std::string const& name) {
+//     // read config from the map so we don't require an early notify
+//     auto const& config = variables[name];
+//     // prevent exception in the case where the config variable is not set
+//     if (config.empty()) {
+//         return path();
+// }
+//     return config.as<path>();
+// }
 
-bool parser::get_option(variables_map& variables, std::string const& name) {
-    // Read settings from the map so we don't require an early notify call.
-    auto const& variable = variables[name];
+// bool parser::get_option(variables_map& variables, std::string const& name) {
+//     // Read settings from the map so we don't require an early notify call.
+//     auto const& variable = variables[name];
 
-    // prevent exception in the case where the settings variable is not set.
-    if (variable.empty()) {
-        return false;
-}
+//     // prevent exception in the case where the settings variable is not set.
+//     if (variable.empty()) {
+//         return false;
+// }
 
-    return variable.as<bool>();
-}
+//     return variable.as<bool>();
+// }
 
-void parser::load_command_variables(variables_map& variables, int argc, char const* argv[])
-{
-    auto const options = load_options();
-    auto const arguments = load_arguments();
-    auto command_parser = command_line_parser(argc, argv).options(options)
-        /*.allow_unregistered()*/.positional(arguments);
-    store(command_parser.run(), variables);
-}
+// void parser::load_command_variables(variables_map& variables, int argc, char const* argv[])
+// {
+//     // auto const options = load_options();
+//     // auto const arguments = load_arguments();
 
-void parser::load_environment_variables(variables_map& variables, std::string const& prefix) {
-    auto const& environment_variables = load_environment();
-    auto const environment = parse_environment(environment_variables, prefix);
-    store(environment, variables);
-}
+//     auto const options = derived().load_options();
+//     auto const arguments = derived().load_arguments();
 
-// int parser::load_configuration_variables(variables_map& variables, std::string const& option_name) {
-load_error parser::load_configuration_variables(variables_map& variables, std::string const& option_name) {
-    auto const config_path = get_config_option(variables, option_name);
-    return load_configuration_variables_path(variables, config_path);
-}
+//     auto command_parser = command_line_parser(argc, argv).options(options)
+//         /*.allow_unregistered()*/.positional(arguments);
+//     store(command_parser.run(), variables);
+// }
 
-load_error parser::load_configuration_variables_path(variables_map& variables, boost::filesystem::path const& config_path) {
-    auto const config_settings = load_settings();
+// void parser::load_environment_variables(variables_map& variables, std::string const& prefix) {
+//     // auto const& environment_variables = load_environment();
+//     auto const& environment_variables = derived().load_environment();
+//     auto const environment = parse_environment(environment_variables, prefix);
+//     store(environment, variables);
+// }
 
-    // If the existence test errors out we pretend there's no file :/.
-    error_code code;
-    if ( ! config_path.empty()) {
-        if (exists(config_path, code)) {
-            auto const& path = config_path.string();
-            bc::ifstream file(path);
+// // int parser::load_configuration_variables(variables_map& variables, std::string const& option_name) {
+// load_error parser::load_configuration_variables(variables_map& variables, std::string const& option_name) {
+//     auto const config_path = get_config_option(variables, option_name);
+//     return load_configuration_variables_path(variables, config_path);
+// }
 
-            if ( ! file.good()) {
-                BOOST_THROW_EXCEPTION(reading_file(path.c_str()));
-            }
+// load_error parser::load_configuration_variables_path(variables_map& variables, boost::filesystem::path const& config_path) {
+//     // auto const config_settings = load_settings();
+//     auto const config_settings = derived().load_settings();
 
-            auto const config = parse_config_file(file, config_settings);
-            store(config, variables);
-            return load_error::success;
-        } 
-        return load_error::non_existing_file;
-    }
+//     // If the existence test errors out we pretend there's no file :/.
+//     error_code code;
+//     if ( ! config_path.empty()) {
+//         if (exists(config_path, code)) {
+//             auto const& path = config_path.string();
+//             bc::ifstream file(path);
 
-    // Loading from an empty stream causes the defaults to populate.
-    std::stringstream stream;
-    auto const config = parse_config_file(stream, config_settings);
-    store(config, variables);
-    return load_error::default_config;
-}
+//             if ( ! file.good()) {
+//                 BOOST_THROW_EXCEPTION(reading_file(path.c_str()));
+//             }
+
+//             auto const config = parse_config_file(file, config_settings);
+//             store(config, variables);
+//             return load_error::success;
+//         } 
+//         return load_error::non_existing_file;
+//     }
+
+//     // Loading from an empty stream causes the defaults to populate.
+//     std::stringstream stream;
+//     auto const config = parse_config_file(stream, config_settings);
+//     store(config, variables);
+//     return load_error::default_config;
+// }
 
 } // namespace config
 } // namespace libbitcoin
