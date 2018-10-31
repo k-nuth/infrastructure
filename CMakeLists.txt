@@ -307,7 +307,7 @@ endif()
 set(bitprim_infrastructure_sources_just_libbitcoin 
         # src/machine/interpreter.cpp
         src/machine/number.cpp        #Fernando: commented for the moment...
-        src/machine/opcode.cpp
+        # src/machine/opcode.cpp
         # src/machine/operation.cpp
         # src/machine/program.cpp
 
@@ -322,7 +322,7 @@ set(bitprim_infrastructure_sources_just_libbitcoin
         src/config/hash160.cpp
         src/config/hash256.cpp
         src/config/parameter.cpp
-        src/config/parser.cpp
+        # src/config/parser.cpp
         src/config/printer.cpp
         src/config/sodium.cpp
 
@@ -797,10 +797,10 @@ set(_bitprim_infrastructure_headers
 
     bitcoin/infrastructure/machine/interpreter.hpp
     bitcoin/infrastructure/machine/number.hpp    
-    bitcoin/infrastructure/machine/opcode.hpp
+    # bitcoin/infrastructure/machine/opcode.hpp
     # bitcoin/infrastructure/machine/operation.hpp
     bitcoin/infrastructure/machine/program.hpp
-    bitcoin/infrastructure/machine/rule_fork.hpp
+    # bitcoin/infrastructure/machine/rule_fork.hpp
     bitcoin/infrastructure/machine/script_pattern.hpp
     bitcoin/infrastructure/machine/sighash_algorithm.hpp
     bitcoin/infrastructure/machine/script_version.hpp
@@ -816,7 +816,7 @@ set(_bitprim_infrastructure_headers
     bitcoin/infrastructure/config/hash160.hpp
     bitcoin/infrastructure/config/hash256.hpp
     bitcoin/infrastructure/config/parameter.hpp
-    bitcoin/infrastructure/config/parser.hpp
+    # bitcoin/infrastructure/config/parser.hpp
     bitcoin/infrastructure/config/printer.hpp
     bitcoin/infrastructure/config/settings.hpp
     bitcoin/infrastructure/config/sodium.hpp
