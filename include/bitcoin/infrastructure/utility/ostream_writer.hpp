@@ -31,11 +31,11 @@ class BI_API ostream_writer
     // : public writer
 {
 public:
-    // explicit
-    // ostream_writer(std::ostream& stream);
-
     explicit
-    ostream_writer(data_sink& stream);
+    ostream_writer(std::ostream& stream);
+
+    // explicit
+    // ostream_writer(data_sink& stream);
 
     template <unsigned Size>
     void write_forward(const byte_array<Size>& value);
@@ -94,8 +94,8 @@ public:
     void skip(size_t size);
 
 private:
-    // std::ostream& stream_;
-    data_sink& stream_;
+    std::ostream& stream_;
+    // data_sink& stream_;
 };
 
 } // namespace libbitcoin
