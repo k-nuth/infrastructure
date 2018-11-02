@@ -30,10 +30,14 @@
 
 namespace libbitcoin {
 
-ostream_writer::ostream_writer(std::ostream& stream)
-  : stream_(stream)
-{
-}
+// ostream_writer::ostream_writer(std::ostream& stream)
+//   : stream_(stream)
+// {
+// }
+
+ostream_writer::ostream_writer(data_sink& stream)
+    : stream_(stream)
+{}
 
 // Context.
 //-----------------------------------------------------------------------------

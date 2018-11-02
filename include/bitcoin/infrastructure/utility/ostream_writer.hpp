@@ -19,9 +19,10 @@
 #ifndef BITPRIM_INFRASTRUCTURE_OSTREAM_WRITER_HPP
 #define BITPRIM_INFRASTRUCTURE_OSTREAM_WRITER_HPP
 
-#include <ostream>
+// #include <ostream>
 
 #include <bitcoin/infrastructure/error.hpp>
+#include <bitcoin/infrastructure/utility/container_sink.hpp>
 #include <bitcoin/infrastructure/utility/writer.hpp>
 
 namespace libbitcoin {
@@ -30,8 +31,11 @@ class BI_API ostream_writer
     // : public writer
 {
 public:
+    // explicit
+    // ostream_writer(std::ostream& stream);
+
     explicit
-    ostream_writer(std::ostream& stream);
+    ostream_writer(data_sink& stream);
 
     template <unsigned Size>
     void write_forward(const byte_array<Size>& value);
@@ -90,7 +94,8 @@ public:
     void skip(size_t size);
 
 private:
-    std::ostream& stream_;
+    // std::ostream& stream_;
+    data_sink& stream_;
 };
 
 } // namespace libbitcoin
