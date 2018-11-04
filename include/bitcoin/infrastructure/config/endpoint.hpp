@@ -63,7 +63,8 @@ public:
      * as zero and the scheme is reported as an empty string.
      * @param[in]  value  The initial value of the [scheme://]host[:port] form.
      */
-    explicit
+    // explicit
+    // implicit
     endpoint(std::string const& value);
 
     /**
