@@ -33,7 +33,7 @@
 #include <bitcoin/infrastructure/config/hash160.hpp>
 #include <bitcoin/infrastructure/config/hash256.hpp>
 #include <bitcoin/infrastructure/config/parameter.hpp>
-#include <bitcoin/infrastructure/config/parser.hpp>
+// #include <bitcoin/infrastructure/config/parser.hpp>
 #include <bitcoin/infrastructure/config/printer.hpp>
 #include <bitcoin/infrastructure/config/settings.hpp>
 #include <bitcoin/infrastructure/config/sodium.hpp>
@@ -64,10 +64,10 @@
 
 // #include <bitcoin/infrastructure/machine/interpreter.hpp>
 #include <bitcoin/infrastructure/machine/number.hpp>
-#include <bitcoin/infrastructure/machine/opcode.hpp>
+// #include <bitcoin/infrastructure/machine/opcode.hpp>
 // #include <bitcoin/infrastructure/machine/operation.hpp>
 // #include <bitcoin/infrastructure/machine/program.hpp>
-#include <bitcoin/infrastructure/machine/rule_fork.hpp>
+// #include <bitcoin/infrastructure/machine/rule_fork.hpp>
 #include <bitcoin/infrastructure/machine/script_pattern.hpp>
 #include <bitcoin/infrastructure/machine/script_version.hpp>
 #include <bitcoin/infrastructure/machine/sighash_algorithm.hpp>

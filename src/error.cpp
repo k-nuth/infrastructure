@@ -104,6 +104,7 @@ std::string error_category_impl::message(int ev) const noexcept {
         { error::forward_reference, "transactions out of order" },
         { error::merkle_mismatch, "merkle root mismatch" },
         { error::block_legacy_sigop_limit, "too many block legacy signature operations" },
+        { error::non_canonical_ordered, "the block is not canonically ordered" },
 
         // accept block
         { error::block_non_final, "block contains a non-final transaction" },
