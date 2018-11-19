@@ -96,6 +96,9 @@ class BitprimInfrastructureConan(BitprimConanFile):
 
 
     def configure(self):
+        self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
+
+
         if self.settings.arch == "x86_64" and self.options.microarchitecture == "_DUMMY_":
             del self.options.fix_march
             # self.options.remove("fix_march")
@@ -106,6 +109,8 @@ class BitprimInfrastructureConan(BitprimConanFile):
             self.options["*"].microarchitecture = self.options.microarchitecture
 
     def package_id(self):
+        self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
+
         self.info.options.with_tests = "ANY"
         self.info.options.with_examples = "ANY"
         self.info.options.verbose = "ANY"
