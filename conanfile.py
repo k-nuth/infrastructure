@@ -46,6 +46,8 @@ class BitprimInfrastructureConan(BitprimConanFile):
                "verbose": [True, False],
                "cxxflags": "ANY",
                "cflags": "ANY",
+               "glibcxx_supports_cxx11_abi": "ANY",
+
     }
 
     default_options = "shared=False", \
@@ -59,7 +61,9 @@ class BitprimInfrastructureConan(BitprimConanFile):
         "fix_march=False", \
         "verbose=False", \
         "cxxflags=_DUMMY_", \
-        "cflags=_DUMMY_"
+        "cflags=_DUMMY_", \
+        "glibcxx_supports_cxx11_abi=_DUMMY_"
+
 
     generators = "cmake"
     exports = "conan_*", "ci_utils/*"
