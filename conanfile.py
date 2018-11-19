@@ -97,7 +97,7 @@ class BitprimInfrastructureConan(BitprimConanFile):
 
     def configure(self):
         self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
-
+        BitprimConanFile.configure(self)
 
         if self.settings.arch == "x86_64" and self.options.microarchitecture == "_DUMMY_":
             del self.options.fix_march
@@ -109,7 +109,8 @@ class BitprimInfrastructureConan(BitprimConanFile):
             self.options["*"].microarchitecture = self.options.microarchitecture
 
     def package_id(self):
-        self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
+        BitprimConanFile.package_id(self)
+        # self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
 
         self.info.options.with_tests = "ANY"
         self.info.options.with_examples = "ANY"
@@ -118,10 +119,10 @@ class BitprimInfrastructureConan(BitprimConanFile):
         self.info.options.cxxflags = "ANY"
         self.info.options.cflags = "ANY"
 
-        #For Bitprim Packages libstdc++ and libstdc++11 are the same
-        if self.settings.compiler == "gcc" or self.settings.compiler == "clang":
-            if str(self.settings.compiler.libcxx) == "libstdc++" or str(self.settings.compiler.libcxx) == "libstdc++11":
-                self.info.settings.compiler.libcxx = "ANY"
+        # #For Bitprim Packages libstdc++ and libstdc++11 are the same
+        # if self.settings.compiler == "gcc" or self.settings.compiler == "clang":
+        #     if str(self.settings.compiler.libcxx) == "libstdc++" or str(self.settings.compiler.libcxx) == "libstdc++11":
+        #         self.info.settings.compiler.libcxx = "ANY"
 
     def build(self):
         # for dep in self.deps_cpp_info.deps:
