@@ -100,7 +100,7 @@ class BitprimInfrastructureConan(BitprimConanFile):
 
 
     def configure(self):
-        self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
+        # self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
         BitprimConanFile.configure(self)
 
         if self.settings.arch == "x86_64" and self.options.microarchitecture == "_DUMMY_":
