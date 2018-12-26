@@ -128,6 +128,14 @@ class BitprimInfrastructureConan(BitprimConanFile):
         #     if str(self.settings.compiler.libcxx) == "libstdc++" or str(self.settings.compiler.libcxx) == "libstdc++11":
         #         self.info.settings.compiler.libcxx = "ANY"
 
+    # default_options = "shared=False", \
+    #     "fPIC=True", \
+    #     "with_icu=False", \
+    #     "with_png=False", \
+    #     "with_qrencode=False", \
+    #     "microarchitecture=_DUMMY_",  \
+    #     "glibcxx_supports_cxx11_abi=_DUMMY_"
+
     def build(self):
         # for dep in self.deps_cpp_info.deps:
         #     # self.output.warn(self.deps_cpp_info["MyLib"].libdirs)
