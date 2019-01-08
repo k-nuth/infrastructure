@@ -47,9 +47,9 @@ osx: &osx
    os: osx
    language: generic
 
-windows: &windows
-   os: windows
-   language: generic
+# windows: &windows
+#    os: windows
+#    language: generic
 
 before_install:
   - |
@@ -104,18 +104,18 @@ jobs:
   include:
 
 
-# Travis Windows Tests ----------------------------------------------
-    - stage: travis windows tests
-      os: windows
-      # sudo: required
-      language: python
-      python: "3.6"
-      # services:
-      #   - docker
-      install:
-        - python -m pip install --upgrade pip > NUL
-      script:
-        - conan user
+# # Travis Windows Tests ----------------------------------------------
+#     - stage: travis windows tests
+#       os: windows
+#       # sudo: required
+#       language: python
+#       python: "3.6"
+#       # services:
+#       #   - docker
+#       install:
+#         - python -m pip install --upgrade pip > NUL
+#       script:
+#         - conan user
 
 
 # Wait for dependencies ----------------------------------------------
