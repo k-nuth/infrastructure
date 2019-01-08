@@ -108,8 +108,8 @@ jobs:
     - stage: travis windows tests
       os: windows
       # sudo: required
-      # language: python
-      # python: "3.6"
+      language: python
+      python: "3.6"
       # services:
       #   - docker
       install:
