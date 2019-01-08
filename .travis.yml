@@ -47,7 +47,7 @@ osx: &osx
    os: osx
    language: generic
 
-windows: windows
+windows: &windows
    os: windows
    language: generic
 
