@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef BITPRIM_INFRASTRUCTURE_HASH_DEFINE_HPP
-#define BITPRIM_INFRASTRUCTURE_HASH_DEFINE_HPP
+#ifndef KNUTH_INFRASTRUCTURE_HASH_DEFINE_HPP
+#define KNUTH_INFRASTRUCTURE_HASH_DEFINE_HPP
 
 #include <cstddef>
 #include <string>
@@ -126,10 +126,10 @@ BC_CONSTEXPR hash_digest null_hash
 // /// Generate a bitcoin hash.
 // BI_API hash_digest bitcoin_hash(data_slice data);
 
-// #ifdef BITPRIM_CURRENCY_LTC
+// #ifdef KNUTH_CURRENCY_LTC
 // /// Generate a litecoin hash.
 // BI_API hash_digest litecoin_hash(data_slice data);
-// #endif //BITPRIM_CURRENCY_LTC
+// #endif //KNUTH_CURRENCY_LTC
 
 // /// Generate a bitcoin short hash.
 // BI_API short_hash bitcoin_short_hash(data_slice data);

@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef BITPRIM_INFRASTRUCTURE_MESSAGE_TOOLS_HPP_
-#define BITPRIM_INFRASTRUCTURE_MESSAGE_TOOLS_HPP_
+#ifndef KNUTH_INFRASTRUCTURE_MESSAGE_TOOLS_HPP_
+#define KNUTH_INFRASTRUCTURE_MESSAGE_TOOLS_HPP_
 
 #include <cstddef>
 #include <cstdint>
@@ -32,4 +32,4 @@ BI_API size_t variable_uint_size(uint64_t value);
 } // namespace message
 } // namespace libbitcoin
 
-#endif // BITPRIM_INFRASTRUCTURE_MESSAGE_TOOLS_HPP_
+#endif // KNUTH_INFRASTRUCTURE_MESSAGE_TOOLS_HPP_

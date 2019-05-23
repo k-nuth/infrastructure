@@ -1,12 +1,12 @@
-# - Config file for the BITPRIM_INFRASTRUCTURE package
+# - Config file for the KNUTH_INFRASTRUCTURE package
 #
-#  BITPRIM_INFRASTRUCTURE_INCLUDE_DIRS - include directories for BITPRIM_INFRASTRUCTURE
-#  BITPRIM_INFRASTRUCTURE_LIBRARIES    - libraries to link against
+#  KNUTH_INFRASTRUCTURE_INCLUDE_DIRS - include directories for KNUTH_INFRASTRUCTURE
+#  KNUTH_INFRASTRUCTURE_LIBRARIES    - libraries to link against
 
-get_filename_component(BITPRIM_INFRASTRUCTURE_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
-set(BITPRIM_INFRASTRUCTURE_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+get_filename_component(KNUTH_INFRASTRUCTURE_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+set(KNUTH_INFRASTRUCTURE_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
 
-include("${BITPRIM_INFRASTRUCTURE_CMAKE_DIR}/bitprim-infrastructureTargets.cmake")
-set(BITPRIM_INFRASTRUCTURE_LIBRARIES bitprim-infrastructure)
+include("${KNUTH_INFRASTRUCTURE_CMAKE_DIR}/knuth-infrastructureTargets.cmake")
+set(KNUTH_INFRASTRUCTURE_LIBRARIES knuth-infrastructure)
 
 find_package(secp256k1 0 REQUIRED)

@@ -130,10 +130,10 @@ BI_API data_chunk scrypt(data_slice data, data_slice salt, uint64_t N,
 BI_API hash_digest bitcoin_hash(data_slice data);
 
 //TODO(fernando): see what to do with Currency
-// #ifdef BITPRIM_CURRENCY_LTC
+// #ifdef KNUTH_CURRENCY_LTC
 /// Generate a litecoin hash.
 BI_API hash_digest litecoin_hash(data_slice data);
-// #endif //BITPRIM_CURRENCY_LTC
+// #endif //KNUTH_CURRENCY_LTC
 
 /// Generate a bitcoin short hash.
 BI_API short_hash bitcoin_short_hash(data_slice data);

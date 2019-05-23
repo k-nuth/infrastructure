@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef BITPRIM_INFRASTRUCTURE_LOG_SEVERITY_HPP
-#define BITPRIM_INFRASTRUCTURE_LOG_SEVERITY_HPP
+#ifndef KNUTH_INFRASTRUCTURE_LOG_SEVERITY_HPP
+#define KNUTH_INFRASTRUCTURE_LOG_SEVERITY_HPP
 
 #include <bitcoin/infrastructure/define.hpp>
 

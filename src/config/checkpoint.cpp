@@ -109,7 +109,7 @@ std::istream& operator>>(std::istream& input, checkpoint& argument) {
     input >> value;
 
     // std::regex requires gcc 4.9, so we are using boost::regex for now.
-    // Bitprim: we use std::regex, becase we drop support por GCC<5
+    // Knuth: we use std::regex, becase we drop support por GCC<5
     static
     std::regex const regular("^([0-9a-f]{64})(:([0-9]{1,20}))?$");
 

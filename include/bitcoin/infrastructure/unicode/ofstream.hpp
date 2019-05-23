@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef BITPRIM_INFRASTRUCTURE_OFSTREAM_HPP
-#define BITPRIM_INFRASTRUCTURE_OFSTREAM_HPP
+#ifndef KNUTH_INFRASTRUCTURE_OFSTREAM_HPP
+#define KNUTH_INFRASTRUCTURE_OFSTREAM_HPP
 
 #include <fstream>
 #include <string>

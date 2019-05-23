@@ -15,8 +15,8 @@
 
 // Modification of boost implementation to alter log file rotation naming.
 
-#ifndef BITPRIM_INFRASTRUCTURE_LOG_FILE_COLLECTOR_REPOSITORY_HPP
-#define BITPRIM_INFRASTRUCTURE_LOG_FILE_COLLECTOR_REPOSITORY_HPP
+#ifndef KNUTH_INFRASTRUCTURE_LOG_FILE_COLLECTOR_REPOSITORY_HPP
+#define KNUTH_INFRASTRUCTURE_LOG_FILE_COLLECTOR_REPOSITORY_HPP
 
 #include <boost/intrusive/list.hpp>
 #include <boost/intrusive/list_hook.hpp>

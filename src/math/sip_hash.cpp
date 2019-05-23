@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2018 Bitprim developers (see AUTHORS)
+ * Copyright (c) 2016-2019 Knuth Project.
  *
  * This file is part of Knuth Project.
  *

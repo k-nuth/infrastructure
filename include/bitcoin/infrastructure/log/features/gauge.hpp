@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef BITPRIM_INFRASTRUCTURE_LOG_FEATURES_GAUGE_HPP
-#define BITPRIM_INFRASTRUCTURE_LOG_FEATURES_GAUGE_HPP
+#ifndef KNUTH_INFRASTRUCTURE_LOG_FEATURES_GAUGE_HPP
+#define KNUTH_INFRASTRUCTURE_LOG_FEATURES_GAUGE_HPP
 
 #include <boost/log/sources/basic_logger.hpp>
 #include <boost/log/sources/features.hpp>

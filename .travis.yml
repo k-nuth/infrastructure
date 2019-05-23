@@ -88,10 +88,10 @@ script:
 
   #   fi
 
-  # - conan remote add bitprim https://api.bintray.com/conan/bitprim/bitprim
+  # - conan remote add knuth https://api.bintray.com/conan/k-nuth/k-nuth
   # - conan info . --only None
   # - conan info . --only None -s compiler=gcc -s compiler.version=5 -s compiler.libcxx=libstdc++
-  # - conan remote remove bitprim
+  # - conan remote remove knuth
   - |
     if [[ "${CHECK_FORMATTING}" != "true" ]]; then
       echo ${CONAN_STABLE_BRANCH_PATTERN}
@@ -131,16 +131,16 @@ jobs:
       script:
         - |
           conan user
-          conan remote add bitprim_temp https://api.bintray.com/conan/bitprim/bitprim
-          echo "waiting for secp256k1/0.X@bitprim/staging ..."
-          conan search secp256k1/0.X@bitprim/staging -r bitprim_temp > /dev/null
+          conan remote add knuth_temp https://api.bintray.com/conan/k-nuth/k-nuth
+          echo "waiting for secp256k1/0.X@knuth/staging ..."
+          conan search secp256k1/0.X@knuth/staging -r knuth_temp > /dev/null
           while [ $? == 1 ]
           do
             printf "."
             sleep 10
-            conan search secp256k1/0.X@bitprim/staging -r bitprim_temp > /dev/null
+            conan search secp256k1/0.X@knuth/staging -r knuth_temp > /dev/null
           done
-          echo "secp256k1/0.X@bitprim/staging found"
+          echo "secp256k1/0.X@knuth/staging found"
 
 
 
@@ -220,7 +220,7 @@ jobs:
 #         - pyenv activate conan
 #         - eval $(python ci_utils/set_envvars_and_files.py)
 #         - conan user
-#         - conan remote add bitprim_temp https://api.bintray.com/conan/bitprim/bitprim
+#         - conan remote add knuth_temp https://api.bintray.com/conan/k-nuth/k-nuth
 #         - cd ${TRAVIS_BUILD_DIR}
 #         - pwd
 #         - ls -ltra
@@ -230,14 +230,14 @@ jobs:
 #         # - cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DENABLE_TESTS=OFF -DWITH_TESTS=OFF -DWITH_TOOLS=OFF -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DCMAKE_CXX_FLAGS="${CXX_FLAGS}" ${BOOST_OPTS}
 #         # - cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DENABLE_TESTS=OFF -DWITH_TESTS=OFF -DWITH_TOOLS=OFF -DCMAKE_BUILD_TYPE=$BUILD_TYPE
 #         # - cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=ON                 -DENABLE_TESTS=OFF -DWITH_TESTS=OFF -DWITH_TOOLS=OFF -DCMAKE_BUILD_TYPE=Release
-#         - cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DUSE_CONAN=ON  -DENABLE_TESTS=OFF -DWITH_TESTS=OFF -DWITH_TOOLS=OFF -DCMAKE_BUILD_TYPE=Release -DJUST_BITPRIM_SOURCES=ON -DWITH_KEOKEN=ON
+#         - cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DUSE_CONAN=ON  -DENABLE_TESTS=OFF -DWITH_TESTS=OFF -DWITH_TOOLS=OFF -DCMAKE_BUILD_TYPE=Release -DJUST_KNUTH_SOURCES=ON -DWITH_KEOKEN=ON
 #         - export PATH=$PATH:/usr/local/opt/llvm/bin/
 #         - clang-tidy --version
 #         # - sudo find / -name "run-clang-tidy.py"
 #         # - /usr/local/Cellar/llvm/6.0.0/share/clang/run-clang-tidy.py -checks='*,-modernize-use-using,-hicpp-deprecated-headers,-modernize-deprecated-headers' -header-filter=${TRAVIS_BUILD_DIR}/include
 #         # - python ci_utils/run-clang-tidy.py -checks='*,-modernize-use-using,-hicpp-deprecated-headers,-modernize-deprecated-headers' -warnings-as-errors='*,-modernize-use-using,-hicpp-deprecated-headers,-modernize-deprecated-headers' -header-filter=${TRAVIS_BUILD_DIR}/include
-#         # - python ../ci_utils/run-clang-tidy.py -checks='*,-android-*,-modernize-use-using,-hicpp-deprecated-headers,-modernize-deprecated-headers,-cppcoreguidelines-pro-type-vararg,-cppcoreguidelines-owning-memory,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-hicpp-vararg,-hicpp-no-malloc,-fuchsia-default-arguments,-google-runtime-references,-cppcoreguidelines-no-malloc,-hicpp-no-malloc,-llvm-header-guard,-android-cloexec-fopen,-cppcoreguidelines-pro-type-union-access,-cppcoreguidelines-pro-type-const-cast,-hicpp-braces-around-statements,-hicpp-special-member-functions,-readability-braces-around-statements,-coreguidelines-special-member-function,-cppcoreguidelines-special-member-functions,-clang-diagnostic-static-inline-explicit-instantiation,-fuchsia-overloaded-operator,-cppcoreguidelines-pro-type-member-init,-hicpp-member-init' -warnings-as-errors='*' -header-filter=${TRAVIS_BUILD_DIR}/include/bitprim
-#         - python ../ci_utils/run-clang-tidy.py -checks='*,-android-*,-hicpp-deprecated-headers,-modernize-deprecated-headers,-cppcoreguidelines-pro-type-vararg,-cppcoreguidelines-owning-memory,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-hicpp-vararg,-hicpp-no-malloc,-fuchsia-default-arguments,-google-runtime-references,-cppcoreguidelines-no-malloc,-hicpp-no-malloc,-llvm-header-guard,-android-cloexec-fopen,-cppcoreguidelines-pro-type-union-access,-cppcoreguidelines-pro-type-const-cast,-hicpp-braces-around-statements,-hicpp-special-member-functions,-readability-braces-around-statements,-coreguidelines-special-member-function,-cppcoreguidelines-special-member-functions,-clang-diagnostic-static-inline-explicit-instantiation,-fuchsia-overloaded-operator,-cppcoreguidelines-pro-type-member-init,-hicpp-member-init' -warnings-as-errors='*' -header-filter=${TRAVIS_BUILD_DIR}/include/bitprim
+#         # - python ../ci_utils/run-clang-tidy.py -checks='*,-android-*,-modernize-use-using,-hicpp-deprecated-headers,-modernize-deprecated-headers,-cppcoreguidelines-pro-type-vararg,-cppcoreguidelines-owning-memory,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-hicpp-vararg,-hicpp-no-malloc,-fuchsia-default-arguments,-google-runtime-references,-cppcoreguidelines-no-malloc,-hicpp-no-malloc,-llvm-header-guard,-android-cloexec-fopen,-cppcoreguidelines-pro-type-union-access,-cppcoreguidelines-pro-type-const-cast,-hicpp-braces-around-statements,-hicpp-special-member-functions,-readability-braces-around-statements,-coreguidelines-special-member-function,-cppcoreguidelines-special-member-functions,-clang-diagnostic-static-inline-explicit-instantiation,-fuchsia-overloaded-operator,-cppcoreguidelines-pro-type-member-init,-hicpp-member-init' -warnings-as-errors='*' -header-filter=${TRAVIS_BUILD_DIR}/include/knuth
+#         - python ../ci_utils/run-clang-tidy.py -checks='*,-android-*,-hicpp-deprecated-headers,-modernize-deprecated-headers,-cppcoreguidelines-pro-type-vararg,-cppcoreguidelines-owning-memory,-cppcoreguidelines-pro-bounds-pointer-arithmetic,-hicpp-vararg,-hicpp-no-malloc,-fuchsia-default-arguments,-google-runtime-references,-cppcoreguidelines-no-malloc,-hicpp-no-malloc,-llvm-header-guard,-android-cloexec-fopen,-cppcoreguidelines-pro-type-union-access,-cppcoreguidelines-pro-type-const-cast,-hicpp-braces-around-statements,-hicpp-special-member-functions,-readability-braces-around-statements,-coreguidelines-special-member-function,-cppcoreguidelines-special-member-functions,-clang-diagnostic-static-inline-explicit-instantiation,-fuchsia-overloaded-operator,-cppcoreguidelines-pro-type-member-init,-hicpp-member-init' -warnings-as-errors='*' -header-filter=${TRAVIS_BUILD_DIR}/include/knuth
 
 #           # # Find non-ASCII characters in headers
 #           # hpps=$(find include doc -name \*\.hpp)
@@ -290,7 +290,7 @@ jobs:
       services:
         - docker
       env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=conanio/gcc7 
-           BITPRIM_RUN_TESTS=true
+           KNUTH_RUN_TESTS=true
       if: branch =~ /^(release|hotfix|dev|feature).*$/    #Avoid master
 
     - stage: build and upload binaries
@@ -372,7 +372,7 @@ jobs:
       language: generic
       osx_image: xcode10.1
       env: CONAN_APPLE_CLANG_VERSIONS=10.0
-           BITPRIM_RUN_TESTS=true
+           KNUTH_RUN_TESTS=true
       if: branch =~ /^(release|hotfix).+$/    #Just releases
 
     - stage: build and upload binaries
@@ -422,14 +422,14 @@ jobs:
 
         - eval $(python ci_utils/set_envvars_and_files.py)
         #TODO(fernando): configure the remote and user using environment variables
-        - conan remote add bitprim_temp https://api.bintray.com/conan/bitprim/bitprim
+        - conan remote add knuth_temp https://api.bintray.com/conan/k-nuth/k-nuth
         - conan user
-        - conan user ${CONAN_LOGIN_USERNAME} -r bitprim_temp -p ${CONAN_PASSWORD}
+        - conan user ${CONAN_LOGIN_USERNAME} -r knuth_temp -p ${CONAN_PASSWORD}
         - conan user
-        - echo "conan alias ${REPO_NAME}/0.X@bitprim/${BITPRIM_CONAN_CHANNEL} ${REPO_NAME}/${BITPRIM_CONAN_VERSION}@bitprim/${BITPRIM_CONAN_CHANNEL}"
-        - conan alias "${REPO_NAME}/0.X@bitprim/${BITPRIM_CONAN_CHANNEL}" "${REPO_NAME}/${BITPRIM_CONAN_VERSION}@bitprim/${BITPRIM_CONAN_CHANNEL}"
-        - echo "conan upload ${REPO_NAME}/0.X@bitprim/${BITPRIM_CONAN_CHANNEL} --all -r bitprim_temp"
-        - conan upload "${REPO_NAME}/0.X@bitprim/${BITPRIM_CONAN_CHANNEL}" --all -r bitprim_temp        
+        - echo "conan alias ${REPO_NAME}/0.X@knuth/${KNUTH_CONAN_CHANNEL} ${REPO_NAME}/${KNUTH_CONAN_VERSION}@knuth/${KNUTH_CONAN_CHANNEL}"
+        - conan alias "${REPO_NAME}/0.X@knuth/${KNUTH_CONAN_CHANNEL}" "${REPO_NAME}/${KNUTH_CONAN_VERSION}@knuth/${KNUTH_CONAN_CHANNEL}"
+        - echo "conan upload ${REPO_NAME}/0.X@knuth/${KNUTH_CONAN_CHANNEL} --all -r knuth_temp"
+        - conan upload "${REPO_NAME}/0.X@knuth/${KNUTH_CONAN_CHANNEL}" --all -r knuth_temp        
 
 # Push to repos ------------------------------------------------------
     - stage: push to repos

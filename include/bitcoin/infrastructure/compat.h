@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef BITPRIM_INFRASTRUCTURE_COMPAT_H
-#define BITPRIM_INFRASTRUCTURE_COMPAT_H
+#ifndef KNUTH_INFRASTRUCTURE_COMPAT_H
+#define KNUTH_INFRASTRUCTURE_COMPAT_H
 
 #ifdef _MSC_VER
     /* There is no <endian.h> for MSVC but it is always little endian. */

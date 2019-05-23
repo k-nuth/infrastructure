@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef BITPRIM_INFRASTRUCTURE_CONDITIONAL_LOCK_HPP_
-#define BITPRIM_INFRASTRUCTURE_CONDITIONAL_LOCK_HPP_
+#ifndef KNUTH_INFRASTRUCTURE_CONDITIONAL_LOCK_HPP_
+#define KNUTH_INFRASTRUCTURE_CONDITIONAL_LOCK_HPP_
 
 #include <memory>
 
@@ -41,4 +41,4 @@ private:
 
 } // namespace libbitcoin
 
-#endif // BITPRIM_INFRASTRUCTURE_CONDITIONAL_LOCK_HPP_
+#endif // KNUTH_INFRASTRUCTURE_CONDITIONAL_LOCK_HPP_

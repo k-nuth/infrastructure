@@ -23,7 +23,7 @@ namespace libbitcoin {
 namespace infrastructure {
 
 char const* version() {
-    return BITPRIM_INFRASTRUCTURE_VERSION;
+    return KNUTH_INFRASTRUCTURE_VERSION;
 }
 
 } // namespace infrastructure

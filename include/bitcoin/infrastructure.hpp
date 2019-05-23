@@ -4,8 +4,8 @@
 //        GENERATED SOURCE CODE, DO NOT EDIT EXCEPT EXPERIMENTALLY
 //
 ///////////////////////////////////////////////////////////////////////////////
-#ifndef BITPRIM_INFRASTRUCTURE_INFRASTRUCTURE_HPP_
-#define BITPRIM_INFRASTRUCTURE_INFRASTRUCTURE_HPP_
+#ifndef KNUTH_INFRASTRUCTURE_INFRASTRUCTURE_HPP_
+#define KNUTH_INFRASTRUCTURE_INFRASTRUCTURE_HPP_
 
 /**
  * API Users: Include only this header. Direct use of other headers is fragile
@@ -145,4 +145,4 @@
 #include <bitcoin/infrastructure/wallet/qrcode.hpp>
 #include <bitcoin/infrastructure/wallet/uri.hpp>
 
-#endif /*BITPRIM_INFRASTRUCTURE_INFRASTRUCTURE_HPP_*/
+#endif /*KNUTH_INFRASTRUCTURE_INFRASTRUCTURE_HPP_*/

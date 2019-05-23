@@ -19,9 +19,9 @@
 
 cmake_minimum_required(VERSION 3.4)
 
-# bitprim-infrastructure
+# knuth-infrastructure
 #==============================================================================
-project(bitprim-infrastructure
+project(knuth-infrastructure
   VERSION 0
   LANGUAGES CXX C)
   # VERSION 0.11.0
@@ -111,32 +111,32 @@ if (WITH_QRENCODE)
 endif()
 
 
-# Implement --JUST_BITPRIM_SOURCES for linting.
+# Implement --JUST_KNUTH_SOURCES for linting.
 #------------------------------------------------------------------------------
-option(JUST_BITPRIM_SOURCES "Just Bitprim source code to be linted." OFF)
-if (JUST_BITPRIM_SOURCES)
-  message(STATUS "Bitprim: Just Bitprim source code to be linted: enabled")
+option(JUST_KNUTH_SOURCES "Just Knuth source code to be linted." OFF)
+if (JUST_KNUTH_SOURCES)
+  message(STATUS "Knuth: Just Knuth source code to be linted: enabled")
 endif()
 
 
 
-set(BITPRIM_PROJECT_VERSION "-" CACHE STRING "Specify the Bitprim Project Version.")
-# message(${BITPRIM_PROJECT_VERSION})
-message( STATUS "Bitprim: Compiling version ${BITPRIM_PROJECT_VERSION}")
+set(KNUTH_PROJECT_VERSION "-" CACHE STRING "Specify the Knuth Project Version.")
+# message(${KNUTH_PROJECT_VERSION})
+message( STATUS "Knuth: Compiling version ${KNUTH_PROJECT_VERSION}")
 
 set(MICROARCHITECTURE "x86_64" CACHE STRING "Specify the Microarchitecture (x86_64|...).")
-message( STATUS "Bitprim: Compiling for ${MICROARCHITECTURE}")
-# add_definitions(-DBITPRIM_MICROARCHITECTURE=${MICROARCHITECTURE})
-# add_definitions(-DBITPRIM_MICROARCHITECTURE_STR="${MICROARCHITECTURE}")
+message( STATUS "Knuth: Compiling for ${MICROARCHITECTURE}")
+# add_definitions(-DKNUTH_MICROARCHITECTURE=${MICROARCHITECTURE})
+# add_definitions(-DKNUTH_MICROARCHITECTURE_STR="${MICROARCHITECTURE}")
 
 
 
 # Conan infrastructure
 #==============================================================================
-if(EXISTS ${CMAKE_SOURCE_DIR}/ci_utils/cmake/bitprimbuildinfo.cmake)
-    include(${CMAKE_SOURCE_DIR}/ci_utils/cmake/bitprimbuildinfo.cmake)
+if(EXISTS ${CMAKE_SOURCE_DIR}/ci_utils/cmake/knuthbuildinfo.cmake)
+    include(${CMAKE_SOURCE_DIR}/ci_utils/cmake/knuthbuildinfo.cmake)
 else()
-    message( STATUS "bitprimbuildinfo doent exists")
+    message( STATUS "knuthbuildinfo doent exists")
 endif()
 
 
@@ -234,7 +234,7 @@ include(CheckCXXCompilerFlag)
 #------------------------------------------------------------------------------
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/ci_utils/cmake)
 
-include(BitprimTools)
+include(KnuthTools)
 
 
 # Warn on all stuff.
@@ -297,14 +297,14 @@ endif()
 # Build
 #==============================================================================
 
-# src/bitprim-infrastructure.la => ${libdir}
+# src/knuth-infrastructure.la => ${libdir}
 #------------------------------------------------------------------------------
 set(MODE STATIC)
 if (ENABLE_SHARED)
   set(MODE SHARED)
 endif()
 
-set(bitprim_infrastructure_sources_just_libbitcoin 
+set(knuth_infrastructure_sources_just_libbitcoin 
         # src/machine/interpreter.cpp
         src/machine/number.cpp        #Fernando: commented for the moment...
         # src/machine/opcode.cpp
@@ -442,87 +442,87 @@ set(bitprim_infrastructure_sources_just_libbitcoin
       )
 
 # if (${CURRENCY} STREQUAL "LTC")
-#     set(bitprim_domain_sources_just_bitprim 
-#     ${bitprim_domain_sources_just_bitprim}         
+#     set(knuth_domain_sources_just_knuth 
+#     ${knuth_domain_sources_just_knuth}         
 #     src/math/external/scrypt.cpp
 #     src/math/external/scrypt-sse2.cpp)
 # endif()
   
 if (WITH_PNG)
-  set(bitprim_infrastructure_sources_just_libbitcoin 
-    ${bitprim_infrastructure_sources_just_libbitcoin}
+  set(knuth_infrastructure_sources_just_libbitcoin 
+    ${knuth_infrastructure_sources_just_libbitcoin}
     src/utility/png.cpp
   )
 endif()
 
 if (WITH_QRENCODE)
-  set(bitprim_infrastructure_sources_just_libbitcoin 
-    ${bitprim_infrastructure_sources_just_libbitcoin}
+  set(knuth_infrastructure_sources_just_libbitcoin 
+    ${knuth_infrastructure_sources_just_libbitcoin}
     src/wallet/qrcode.cpp
   )
 endif()
 
 
-set(bitprim_infrastructure_sources_just_bitprim
+set(knuth_infrastructure_sources_just_knuth
     # src/math/external/scrypt.cpp
     # src/math/external/scrypt-sse2.cpp
     src/wallet/cashaddr.cpp
 )
 
-if (NOT JUST_BITPRIM_SOURCES)
-  set(bitprim_infrastructure_sources 
-    ${bitprim_infrastructure_sources_just_libbitcoin}
+if (NOT JUST_KNUTH_SOURCES)
+  set(knuth_infrastructure_sources 
+    ${knuth_infrastructure_sources_just_libbitcoin}
   )
 endif()
 
-set(bitprim_infrastructure_sources 
-  ${bitprim_infrastructure_sources}   
-  ${bitprim_infrastructure_sources_just_bitprim}         
+set(knuth_infrastructure_sources 
+  ${knuth_infrastructure_sources}   
+  ${knuth_infrastructure_sources_just_knuth}         
 )
 
-add_library(bitprim-infrastructure ${MODE} ${bitprim_infrastructure_sources})
+add_library(knuth-infrastructure ${MODE} ${knuth_infrastructure_sources})
 
 if (ENABLE_POSITION_INDEPENDENT_CODE)
-    set_property(TARGET bitprim-infrastructure PROPERTY POSITION_INDEPENDENT_CODE ON)
+    set_property(TARGET knuth-infrastructure PROPERTY POSITION_INDEPENDENT_CODE ON)
 endif(ENABLE_POSITION_INDEPENDENT_CODE)
 
 
 
-#set_target_properties(bitprim-infrastructure PROPERTIES CXX_VISIBILITY_PRESET hidden)
-#set_target_properties(bitprim-infrastructure PROPERTIES CXX_VISIBILITY_PRESET internal)
+#set_target_properties(knuth-infrastructure PROPERTIES CXX_VISIBILITY_PRESET hidden)
+#set_target_properties(knuth-infrastructure PROPERTIES CXX_VISIBILITY_PRESET internal)
 
 #-fvisibility=default|internal|hidden|protected
 
-# add_library(bitprim-infrastructure ${MODE}
+# add_library(knuth-infrastructure ${MODE}
 #        src/wallet/uri.cpp)
 
-target_include_directories(bitprim-infrastructure PUBLIC
+target_include_directories(knuth-infrastructure PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
   
 if (NOT ENABLE_SHARED)
-    target_compile_definitions(bitprim-infrastructure PUBLIC -DBI_STATIC) #TODO(fernando): manage with Conan????
+    target_compile_definitions(knuth-infrastructure PUBLIC -DBI_STATIC) #TODO(fernando): manage with Conan????
 endif()
 
-target_compile_definitions(bitprim-infrastructure PUBLIC -DBITPRIM_PROJECT_VERSION="${BITPRIM_PROJECT_VERSION}") #TODO(fernando): manage with Conan????
+target_compile_definitions(knuth-infrastructure PUBLIC -DKNUTH_PROJECT_VERSION="${KNUTH_PROJECT_VERSION}") #TODO(fernando): manage with Conan????
 
-target_include_directories(bitprim-infrastructure SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(knuth-infrastructure SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
 
 # if (${CURRENCY} STREQUAL "LTC")
-#   target_include_directories(bitprim-infrastructure SYSTEM PUBLIC ${OPENSSL_INCLUDE_DIR})
+#   target_include_directories(knuth-infrastructure SYSTEM PUBLIC ${OPENSSL_INCLUDE_DIR})
 # endif()
 
 if (NOT NO_CONAN_AT_ALL)
-  target_link_libraries(bitprim-infrastructure PUBLIC ${CONAN_LIBS})
+  target_link_libraries(knuth-infrastructure PUBLIC ${CONAN_LIBS})
 else()
   if (MSVC)
-    target_link_libraries(bitprim-infrastructure PUBLIC
+    target_link_libraries(knuth-infrastructure PUBLIC
       ${Boost_ATOMIC_LIBRARY}
       ${Boost_LOG_SETUP_LIBRARY}
     )
   endif()
 
-  target_link_libraries(bitprim-infrastructure PUBLIC
+  target_link_libraries(knuth-infrastructure PUBLIC
     # ${Boost_CHRONO_LIBRARY}
     ${Boost_DATE_TIME_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}
@@ -536,22 +536,22 @@ else()
   )
 endif()
 
-target_link_libraries(bitprim-infrastructure PUBLIC ${CMAKE_THREAD_LIBS_INIT})  #TODO(fernando): manage with Conan????
+target_link_libraries(knuth-infrastructure PUBLIC ${CMAKE_THREAD_LIBS_INIT})  #TODO(fernando): manage with Conan????
 
 # if (NO_CONAN_AT_ALL)
     if (MINGW) #(WIN32)
-        target_link_libraries(bitprim-infrastructure PUBLIC ws2_32 wsock32)
+        target_link_libraries(knuth-infrastructure PUBLIC ws2_32 wsock32)
     endif()
 # endif()
 
 if (WITH_PNG)
     if (NO_CONAN_AT_ALL)
-        target_link_libraries(bitprim-infrastructure PUBLIC png)
+        target_link_libraries(knuth-infrastructure PUBLIC png)
     endif (NO_CONAN_AT_ALL)
 endif()
 
 # if (${CURRENCY} STREQUAL "LTC")
-#   target_link_libraries(bitprim-infrastructure PUBLIC ${OPENSSL_CRYPTO_LIBRARY})  #TODO(fernando): manage with Conan
+#   target_link_libraries(knuth-infrastructure PUBLIC ${OPENSSL_CRYPTO_LIBRARY})  #TODO(fernando): manage with Conan
 
 #   # OPENSSL_CRYPTO_LIBRARY
 #   # OPENSSL_SSL_LIBRARY
@@ -559,10 +559,10 @@ endif()
 # endif()
 
 if (NOT USE_CONAN)
-  target_link_libraries(bitprim-infrastructure PUBLIC secp256k1)
+  target_link_libraries(knuth-infrastructure PUBLIC secp256k1)
 endif()
 
-_group_sources(bitprim-infrastructure "${CMAKE_CURRENT_LIST_DIR}")
+_group_sources(knuth-infrastructure "${CMAKE_CURRENT_LIST_DIR}")
 
 # Tests
 #==============================================================================
@@ -571,11 +571,11 @@ if (WITH_TESTS OR WITH_TESTS_NEW)
   enable_testing()
 endif()
 
-# local: test/bitprim_infrastructure_test
+# local: test/knuth_infrastructure_test
 #------------------------------------------------------------------------------
 if (WITH_TESTS)
 
-  set(bitprim_infrastructure_test_sources
+  set(knuth_infrastructure_test_sources
         test/config/authority.cpp
         test/config/base58.cpp
         test/config/checkpoint.cpp
@@ -628,28 +628,28 @@ if (WITH_TESTS)
 
 
   if (WITH_PNG)
-    set(bitprim_infrastructure_test_sources 
-        ${bitprim_infrastructure_test_sources}
+    set(knuth_infrastructure_test_sources 
+        ${knuth_infrastructure_test_sources}
         src/utility/png.cpp
     )
   endif()
 
   if (WITH_QRENCODE)
-    set(bitprim_infrastructure_test_sources 
-        ${bitprim_infrastructure_test_sources}
+    set(knuth_infrastructure_test_sources 
+        ${knuth_infrastructure_test_sources}
         src/wallet/qrcode.cpp
     )
   endif()
 
-  add_executable(bitprim_infrastructure_test
-                ${bitprim_infrastructure_test_sources}
+  add_executable(knuth_infrastructure_test
+                ${knuth_infrastructure_test_sources}
   )
-  target_link_libraries(bitprim_infrastructure_test PUBLIC bitprim-infrastructure)
+  target_link_libraries(knuth_infrastructure_test PUBLIC knuth-infrastructure)
 
-_group_sources(bitprim_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
+_group_sources(knuth_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
 
 #    TODO(fernando): chequear si hay nuevos tests en los makefiles (no Cmake)
-  _add_tests(bitprim_infrastructure_test
+  _add_tests(knuth_infrastructure_test
 
     # address_tests
     # alert_payload_tests
@@ -741,51 +741,51 @@ _group_sources(bitprim_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
   )
 
   if (WITH_PNG)
-    _add_tests(bitprim_infrastructure_test png_tests)
+    _add_tests(knuth_infrastructure_test png_tests)
   endif()
 
   if (WITH_QRENCODE)
-    _add_tests(bitprim_infrastructure_test qrcode_tests)
+    _add_tests(knuth_infrastructure_test qrcode_tests)
   endif()
 endif()
 
 # if (WITH_TESTS_NEW)
-#     add_executable(bitprim_infrastructure_test_new
+#     add_executable(knuth_infrastructure_test_new
 #             test_new/main.cpp
 #     )
-#     target_link_libraries(bitprim_infrastructure_test_new PUBLIC bitprim-infrastructure)
+#     target_link_libraries(knuth_infrastructure_test_new PUBLIC knuth-infrastructure)
 
-#     add_test(NAME bitprim_infrastructure_test_new COMMAND bitprim_infrastructure_test_new)
+#     add_test(NAME knuth_infrastructure_test_new COMMAND knuth_infrastructure_test_new)
 # endif()
 
 
 # Examples
 #==============================================================================
-# local: examples/bitprim_infrastructure_examples
+# local: examples/knuth_infrastructure_examples
 #------------------------------------------------------------------------------
 if (WITH_EXAMPLES)
-  add_executable(bitprim_infrastructure_examples
+  add_executable(knuth_infrastructure_examples
     examples/main.cpp)
 
-  target_link_libraries(bitprim_infrastructure_examples PUBLIC bitprim-infrastructure)
+  target_link_libraries(knuth_infrastructure_examples PUBLIC knuth-infrastructure)
 
-  _group_sources(bitprim_infrastructure_examples "${CMAKE_CURRENT_LIST_DIR}/examples")
+  _group_sources(knuth_infrastructure_examples "${CMAKE_CURRENT_LIST_DIR}/examples")
 endif()
 
 # Install
 #==============================================================================
-install(TARGETS bitprim-infrastructure EXPORT bitprim-infrastructure
+install(TARGETS knuth-infrastructure EXPORT knuth-infrastructure
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
     INCLUDES DESTINATION include
 )
 
-#install(EXPORT bitprim-infrastructureTargets
+#install(EXPORT knuth-infrastructureTargets
 #
 #)
 
-set(_bitprim_infrastructure_headers
+set(_knuth_infrastructure_headers
     # bitcoin/infrastructure/multi_crypto_support.hpp
     bitcoin/infrastructure/compat.h
     bitcoin/infrastructure/compat.hpp
@@ -982,7 +982,7 @@ set(_bitprim_infrastructure_headers
     bitcoin/infrastructure.hpp
     )
 
-foreach (_header ${_bitprim_infrastructure_headers})
+foreach (_header ${_knuth_infrastructure_headers})
   get_filename_component(_directory "${_header}" DIRECTORY)
   install(FILES "include/${_header}" DESTINATION "include/${_directory}")
 endforeach()
@@ -991,9 +991,9 @@ endforeach()
 #==============================================================================
 include(CMakePackageConfigHelpers)
 
-export(EXPORT bitprim-infrastructure
-  FILE "${CMAKE_CURRENT_BINARY_DIR}/bitprim-infrastructureTargets.cmake")
-export(PACKAGE bitprim-infrastructure)
+export(EXPORT knuth-infrastructure
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/knuth-infrastructureTargets.cmake")
+export(PACKAGE knuth-infrastructure)
 
 if (UNIX)
   set(_config_package_location "lib/cmake")
@@ -1001,21 +1001,21 @@ elseif (WIN32)
   set(_config_package_location "cmake")
 endif()
 
-install(EXPORT bitprim-infrastructure
-  FILE bitprim-infrastructureTargets.cmake
+install(EXPORT knuth-infrastructure
+  FILE knuth-infrastructureTargets.cmake
   DESTINATION ${_config_package_location})
 
-configure_file(bitprim-infrastructureConfig.cmake.in
-  "${CMAKE_CURRENT_BINARY_DIR}/bitprim-infrastructureConfig.cmake"
+configure_file(knuth-infrastructureConfig.cmake.in
+  "${CMAKE_CURRENT_BINARY_DIR}/knuth-infrastructureConfig.cmake"
   @ONLY)
 
 write_basic_package_version_file(
-  "${CMAKE_CURRENT_BINARY_DIR}/bitprim-infrastructureConfigVersion.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/knuth-infrastructureConfigVersion.cmake"
   VERSION ${PROJECT_VERSION}
   COMPATIBILITY AnyNewerVersion)
 
 install(
   FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/bitprim-infrastructureConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/bitprim-infrastructureConfigVersion.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/knuth-infrastructureConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/knuth-infrastructureConfigVersion.cmake"
   DESTINATION ${_config_package_location})

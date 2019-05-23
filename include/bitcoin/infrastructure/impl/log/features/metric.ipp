@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef BITPRIM_INFRASTRUCTURE_LOG_FEATURES_METRIC_IPP
-#define BITPRIM_INFRASTRUCTURE_LOG_FEATURES_METRIC_IPP
+#ifndef KNUTH_INFRASTRUCTURE_LOG_FEATURES_METRIC_IPP
+#define KNUTH_INFRASTRUCTURE_LOG_FEATURES_METRIC_IPP
 
 namespace libbitcoin {
 namespace log {
