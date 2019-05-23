@@ -3,7 +3,7 @@
  * Copyright (c) 2017 Pieter Wuille
  * Copyright (c) 2017 The Bitcoin developers
  *
- * This file is part of Bitprim.
+ * This file is part of Knuth Project.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
