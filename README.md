@@ -1,4 +1,4 @@
-# Knuth Infrastructure <a target="_blank" href="http://semver.org">![Version][badge.version]</a> <a target="_blank" href="https://travis-ci.org/knuth/knuth-infrastructure">![Travis status][badge.Travis]</a> <a target="_blank" href="https://ci.appveyor.com/project/knuth/knuth-infrastructure">![Appveyor status][badge.Appveyor]</a> <a target="_blank" href="https://gitter.im/knuth/Lobby">![Gitter Chat][badge.Gitter]</a>
+# Knuth Infrastructure <a target="_blank" href="http://semver.org">![Version][badge.version]</a> <a target="_blank" href="https://travis-ci.org/knuth/kth-infrastructure">![Travis status][badge.Travis]</a> <a target="_blank" href="https://ci.appveyor.com/project/knuth/kth-infrastructure">![Appveyor status][badge.Appveyor]</a> <a target="_blank" href="https://gitter.im/knuth/Lobby">![Gitter Chat][badge.Gitter]</a>
 
 > Infrastructure functionality
 
@@ -16,23 +16,23 @@ So, for any platform, an installation can be performed in 2 simple steps:
 
 1. Configure the Conan remote:
 ```
-conan remote add knuth https://api.bintray.com/conan/k-nuth/k-nuth
+conan remote add kth https://api.bintray.com/conan/k-nuth/kth
 ```
 
 2. Install the appropriate library:
 
 ```
-conan install knuth-infrastructure/0.X@knuth/stable 
+conan install kth-infrastructure/0.X@kth/stable 
 ```
 
 In you want to tune the installation for better performance, please refer to [this](https://knuth.github.io/docfx/content/user_guide/installation.html#advanced-installation).
 
 
 <!-- Links -->
-[badge.Appveyor]: https://ci.appveyor.com/api/projects/status/github/knuth/knuth-infrastructure?svg=true&branch=dev
+[badge.Appveyor]: https://ci.appveyor.com/api/projects/status/github/knuth/kth-infrastructure?svg=true&branch=dev
 [badge.Gitter]: https://img.shields.io/badge/gitter-join%20chat-blue.svg
-[badge.Travis]: https://travis-ci.org/knuth/knuth-infrastructure.svg?branch=master
-[badge.version]: https://badge.fury.io/gh/knuth%2Fknuth-infrastructure.svg
+[badge.Travis]: https://travis-ci.org/knuth/kth-infrastructure.svg?branch=master
+[badge.version]: https://badge.fury.io/gh/knuth%2Fkth-infrastructure.svg
 
 [CMake]: http://www.cmake.org
 [Doxygen]: http://www.doxygen.org

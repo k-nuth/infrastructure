@@ -6,7 +6,7 @@
 get_filename_component(KNUTH_INFRASTRUCTURE_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 set(KNUTH_INFRASTRUCTURE_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
 
-include("${KNUTH_INFRASTRUCTURE_CMAKE_DIR}/knuth-infrastructureTargets.cmake")
-set(KNUTH_INFRASTRUCTURE_LIBRARIES knuth-infrastructure)
+include("${KNUTH_INFRASTRUCTURE_CMAKE_DIR}/kth-infrastructureTargets.cmake")
+set(KNUTH_INFRASTRUCTURE_LIBRARIES kth-infrastructure)
 
 find_package(secp256k1 0 REQUIRED)

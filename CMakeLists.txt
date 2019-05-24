@@ -19,9 +19,9 @@
 
 cmake_minimum_required(VERSION 3.4)
 
-# knuth-infrastructure
+# kth-infrastructure
 #==============================================================================
-project(knuth-infrastructure
+project(kth-infrastructure
   VERSION 0
   LANGUAGES CXX C)
   # VERSION 0.11.0
@@ -297,7 +297,7 @@ endif()
 # Build
 #==============================================================================
 
-# src/knuth-infrastructure.la => ${libdir}
+# src/kth-infrastructure.la => ${libdir}
 #------------------------------------------------------------------------------
 set(MODE STATIC)
 if (ENABLE_SHARED)
@@ -480,49 +480,49 @@ set(knuth_infrastructure_sources
   ${knuth_infrastructure_sources_just_knuth}         
 )
 
-add_library(knuth-infrastructure ${MODE} ${knuth_infrastructure_sources})
+add_library(kth-infrastructure ${MODE} ${knuth_infrastructure_sources})
 
 if (ENABLE_POSITION_INDEPENDENT_CODE)
-    set_property(TARGET knuth-infrastructure PROPERTY POSITION_INDEPENDENT_CODE ON)
+    set_property(TARGET kth-infrastructure PROPERTY POSITION_INDEPENDENT_CODE ON)
 endif(ENABLE_POSITION_INDEPENDENT_CODE)
 
 
 
-#set_target_properties(knuth-infrastructure PROPERTIES CXX_VISIBILITY_PRESET hidden)
-#set_target_properties(knuth-infrastructure PROPERTIES CXX_VISIBILITY_PRESET internal)
+#set_target_properties(kth-infrastructure PROPERTIES CXX_VISIBILITY_PRESET hidden)
+#set_target_properties(kth-infrastructure PROPERTIES CXX_VISIBILITY_PRESET internal)
 
 #-fvisibility=default|internal|hidden|protected
 
-# add_library(knuth-infrastructure ${MODE}
+# add_library(kth-infrastructure ${MODE}
 #        src/wallet/uri.cpp)
 
-target_include_directories(knuth-infrastructure PUBLIC
+target_include_directories(kth-infrastructure PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
   
 if (NOT ENABLE_SHARED)
-    target_compile_definitions(knuth-infrastructure PUBLIC -DBI_STATIC) #TODO(fernando): manage with Conan????
+    target_compile_definitions(kth-infrastructure PUBLIC -DBI_STATIC) #TODO(fernando): manage with Conan????
 endif()
 
-target_compile_definitions(knuth-infrastructure PUBLIC -DKNUTH_PROJECT_VERSION="${KNUTH_PROJECT_VERSION}") #TODO(fernando): manage with Conan????
+target_compile_definitions(kth-infrastructure PUBLIC -DKNUTH_PROJECT_VERSION="${KNUTH_PROJECT_VERSION}") #TODO(fernando): manage with Conan????
 
-target_include_directories(knuth-infrastructure SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(kth-infrastructure SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
 
 # if (${CURRENCY} STREQUAL "LTC")
-#   target_include_directories(knuth-infrastructure SYSTEM PUBLIC ${OPENSSL_INCLUDE_DIR})
+#   target_include_directories(kth-infrastructure SYSTEM PUBLIC ${OPENSSL_INCLUDE_DIR})
 # endif()
 
 if (NOT NO_CONAN_AT_ALL)
-  target_link_libraries(knuth-infrastructure PUBLIC ${CONAN_LIBS})
+  target_link_libraries(kth-infrastructure PUBLIC ${CONAN_LIBS})
 else()
   if (MSVC)
-    target_link_libraries(knuth-infrastructure PUBLIC
+    target_link_libraries(kth-infrastructure PUBLIC
       ${Boost_ATOMIC_LIBRARY}
       ${Boost_LOG_SETUP_LIBRARY}
     )
   endif()
 
-  target_link_libraries(knuth-infrastructure PUBLIC
+  target_link_libraries(kth-infrastructure PUBLIC
     # ${Boost_CHRONO_LIBRARY}
     ${Boost_DATE_TIME_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}
@@ -536,22 +536,22 @@ else()
   )
 endif()
 
-target_link_libraries(knuth-infrastructure PUBLIC ${CMAKE_THREAD_LIBS_INIT})  #TODO(fernando): manage with Conan????
+target_link_libraries(kth-infrastructure PUBLIC ${CMAKE_THREAD_LIBS_INIT})  #TODO(fernando): manage with Conan????
 
 # if (NO_CONAN_AT_ALL)
     if (MINGW) #(WIN32)
-        target_link_libraries(knuth-infrastructure PUBLIC ws2_32 wsock32)
+        target_link_libraries(kth-infrastructure PUBLIC ws2_32 wsock32)
     endif()
 # endif()
 
 if (WITH_PNG)
     if (NO_CONAN_AT_ALL)
-        target_link_libraries(knuth-infrastructure PUBLIC png)
+        target_link_libraries(kth-infrastructure PUBLIC png)
     endif (NO_CONAN_AT_ALL)
 endif()
 
 # if (${CURRENCY} STREQUAL "LTC")
-#   target_link_libraries(knuth-infrastructure PUBLIC ${OPENSSL_CRYPTO_LIBRARY})  #TODO(fernando): manage with Conan
+#   target_link_libraries(kth-infrastructure PUBLIC ${OPENSSL_CRYPTO_LIBRARY})  #TODO(fernando): manage with Conan
 
 #   # OPENSSL_CRYPTO_LIBRARY
 #   # OPENSSL_SSL_LIBRARY
@@ -559,10 +559,10 @@ endif()
 # endif()
 
 if (NOT USE_CONAN)
-  target_link_libraries(knuth-infrastructure PUBLIC secp256k1)
+  target_link_libraries(kth-infrastructure PUBLIC secp256k1)
 endif()
 
-_group_sources(knuth-infrastructure "${CMAKE_CURRENT_LIST_DIR}")
+_group_sources(kth-infrastructure "${CMAKE_CURRENT_LIST_DIR}")
 
 # Tests
 #==============================================================================
@@ -644,7 +644,7 @@ if (WITH_TESTS)
   add_executable(knuth_infrastructure_test
                 ${knuth_infrastructure_test_sources}
   )
-  target_link_libraries(knuth_infrastructure_test PUBLIC knuth-infrastructure)
+  target_link_libraries(knuth_infrastructure_test PUBLIC kth-infrastructure)
 
 _group_sources(knuth_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
 
@@ -753,7 +753,7 @@ endif()
 #     add_executable(knuth_infrastructure_test_new
 #             test_new/main.cpp
 #     )
-#     target_link_libraries(knuth_infrastructure_test_new PUBLIC knuth-infrastructure)
+#     target_link_libraries(knuth_infrastructure_test_new PUBLIC kth-infrastructure)
 
 #     add_test(NAME knuth_infrastructure_test_new COMMAND knuth_infrastructure_test_new)
 # endif()
@@ -767,21 +767,21 @@ if (WITH_EXAMPLES)
   add_executable(knuth_infrastructure_examples
     examples/main.cpp)
 
-  target_link_libraries(knuth_infrastructure_examples PUBLIC knuth-infrastructure)
+  target_link_libraries(knuth_infrastructure_examples PUBLIC kth-infrastructure)
 
   _group_sources(knuth_infrastructure_examples "${CMAKE_CURRENT_LIST_DIR}/examples")
 endif()
 
 # Install
 #==============================================================================
-install(TARGETS knuth-infrastructure EXPORT knuth-infrastructure
+install(TARGETS kth-infrastructure EXPORT kth-infrastructure
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
     INCLUDES DESTINATION include
 )
 
-#install(EXPORT knuth-infrastructureTargets
+#install(EXPORT kth-infrastructureTargets
 #
 #)
 
@@ -991,9 +991,9 @@ endforeach()
 #==============================================================================
 include(CMakePackageConfigHelpers)
 
-export(EXPORT knuth-infrastructure
-  FILE "${CMAKE_CURRENT_BINARY_DIR}/knuth-infrastructureTargets.cmake")
-export(PACKAGE knuth-infrastructure)
+export(EXPORT kth-infrastructure
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/kth-infrastructureTargets.cmake")
+export(PACKAGE kth-infrastructure)
 
 if (UNIX)
   set(_config_package_location "lib/cmake")
@@ -1001,21 +1001,21 @@ elseif (WIN32)
   set(_config_package_location "cmake")
 endif()
 
-install(EXPORT knuth-infrastructure
-  FILE knuth-infrastructureTargets.cmake
+install(EXPORT kth-infrastructure
+  FILE kth-infrastructureTargets.cmake
   DESTINATION ${_config_package_location})
 
-configure_file(knuth-infrastructureConfig.cmake.in
-  "${CMAKE_CURRENT_BINARY_DIR}/knuth-infrastructureConfig.cmake"
+configure_file(kth-infrastructureConfig.cmake.in
+  "${CMAKE_CURRENT_BINARY_DIR}/kth-infrastructureConfig.cmake"
   @ONLY)
 
 write_basic_package_version_file(
-  "${CMAKE_CURRENT_BINARY_DIR}/knuth-infrastructureConfigVersion.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/kth-infrastructureConfigVersion.cmake"
   VERSION ${PROJECT_VERSION}
   COMPATIBILITY AnyNewerVersion)
 
 install(
   FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/knuth-infrastructureConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/knuth-infrastructureConfigVersion.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/kth-infrastructureConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/kth-infrastructureConfigVersion.cmake"
   DESTINATION ${_config_package_location})

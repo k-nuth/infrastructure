@@ -1,5 +1,5 @@
 git remote -v
-git remote add upstream https://github.com/knuth/knuth-core.git
+git remote add upstream https://github.com/knuth/kth-core.git
 git remote -v
 
 git fetch upstream

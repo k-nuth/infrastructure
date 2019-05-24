@@ -50,7 +50,7 @@ sudo pip3.6 install --upgrade conan
 # sudo pip3.6 install --upgrade conan_package_tools
 
 conan user
-conan remote add knuth_temp https://api.bintray.com/conan/k-nuth/k-nuth
+conan remote add knuth_temp https://api.bintray.com/conan/k-nuth/kth
 
 
 

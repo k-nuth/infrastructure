@@ -24,10 +24,10 @@ from ci_utils import KnuthConanFile
 
 
 class KnuthInfrastructureConan(KnuthConanFile):
-    name = "knuth-infrastructure"
+    name = "kth-infrastructure"
     # version = get_version()
     license = "http://www.boost.org/users/license.html"
-    url = "https://github.com/knuth/knuth-infrastructure"
+    url = "https://github.com/knuth/kth-infrastructure"
     description = "Multicrypto Cross-Platform C++ Development Toolkit"
     settings = "os", "compiler", "build_type", "arch"
 
@@ -67,25 +67,25 @@ class KnuthInfrastructureConan(KnuthConanFile):
 
     generators = "cmake"
     exports = "conan_*", "ci_utils/*"
-    exports_sources = "src/*", "CMakeLists.txt", "cmake/*", "knuth-infrastructureConfig.cmake.in", "include/*", "test/*", "examples/*", "test_new/*"
-    package_files = "build/lknuth-infrastructure.a"
+    exports_sources = "src/*", "CMakeLists.txt", "cmake/*", "kth-infrastructureConfig.cmake.in", "include/*", "test/*", "examples/*", "test_new/*"
+    package_files = "build/lkth-infrastructure.a"
     build_policy = "missing"
 
     def requirements(self):
-        self.requires("boost/1.69.0@knuth/stable")
+        self.requires("boost/1.69.0@bitprim/stable")
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
 
         # if self.options.with_png:
-        #     self.requires("libpng/1.6.34@knuth/stable")
+        #     self.requires("libpng/1.6.34@bitprim/stable")
             
         # if self.options.with_qrencode:
-        #     self.requires("libqrencode/4.0.0@knuth/stable")
+        #     self.requires("libqrencode/4.0.0@bitprim/stable")
 
         if self.options.with_png:
-            self.requires("libpng/1.6.34@knuth/stable")
+            self.requires("libpng/1.6.34@bitprim/stable")
 
         if self.options.with_qrencode:
-            self.requires("libqrencode/4.0.0@knuth/stable")
+            self.requires("libqrencode/4.0.0@bitprim/stable")
 
     def config_options(self):
         if self.settings.arch != "x86_64":
@@ -213,7 +213,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
 
     def package_info(self):
         self.cpp_info.includedirs = ['include']
-        self.cpp_info.libs = ["knuth-infrastructure"]
+        self.cpp_info.libs = ["kth-infrastructure"]
 
         if self.settings.os == "Linux" or self.settings.os == "FreeBSD":
             self.cpp_info.libs.append("pthread")

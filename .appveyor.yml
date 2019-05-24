@@ -73,40 +73,40 @@ test_script:
         $a = python ci_utils/set_envvars_and_files.py
         Write-Host $a
         Invoke-Expression $a
-        conan remote add knuth https://api.bintray.com/conan/k-nuth/k-nuth
+        conan remote add kth https://api.bintray.com/conan/k-nuth/kth
         # conan info . --only None
         # conan info . --only None -s compiler=gcc -s compiler.version=5 -s compiler.libcxx=libstdc++
         python ci_utils/process_conan_reqs.py
         conan remove "*" -f
-        conan remote remove knuth
+        conan remote remove kth
       }
 
   - ps: |
       If ($env:WAIT_FOR_DEPS -eq 1) {
         conan user
-        conan remote add knuth_temp https://api.bintray.com/conan/k-nuth/k-nuth
-        echo "waiting for secp256k1/0.X@knuth/staging ..."
-        conan search secp256k1/0.X@knuth/staging -r knuth_temp > $null
+        conan remote add kth_temp https://api.bintray.com/conan/k-nuth/kth
+        echo "waiting for secp256k1/0.X@kth/staging ..."
+        conan search secp256k1/0.X@kth/staging -r kth_temp > $null
         while($env:lastExitCode -eq 1) {
           Write-Host "."
           Start-Sleep -s 10
-          conan search secp256k1/0.X@knuth/staging -r knuth_temp > $null
+          conan search secp256k1/0.X@kth/staging -r kth_temp > $null
         }
-        Write-Host "secp256k1/0.X@knuth/staging found"
+        Write-Host "secp256k1/0.X@kth/staging found"
       }
 
   - ps: |
       If ($env:WAIT_FOR_DEPS -eq 1) {
         conan user
-        conan remote add knuth_temp https://api.bintray.com/conan/k-nuth/k-nuth
-        echo "waiting for secp256k1/0.X@knuth/staging ..."
-        conan search secp256k1/0.X@knuth/staging -r knuth_temp > $null
+        conan remote add kth_temp https://api.bintray.com/conan/k-nuth/kth
+        echo "waiting for secp256k1/0.X@kth/staging ..."
+        conan search secp256k1/0.X@kth/staging -r kth_temp > $null
         while($env:lastExitCode -eq 1) {
           Write-Host "."
           Start-Sleep -s 10
-          conan search secp256k1/0.X@knuth/staging -r knuth_temp > $null
+          conan search secp256k1/0.X@kth/staging -r kth_temp > $null
         }
-        Write-Host "secp256k1/0.X@knuth/staging found"
+        Write-Host "secp256k1/0.X@kth/staging found"
       }
       # Else {
       #   # python build.py

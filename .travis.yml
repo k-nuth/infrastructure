@@ -88,7 +88,7 @@ script:
 
   #   fi
 
-  # - conan remote add knuth https://api.bintray.com/conan/k-nuth/k-nuth
+  # - conan remote add knuth https://api.bintray.com/conan/k-nuth/kth
   # - conan info . --only None
   # - conan info . --only None -s compiler=gcc -s compiler.version=5 -s compiler.libcxx=libstdc++
   # - conan remote remove knuth
@@ -131,16 +131,16 @@ jobs:
       script:
         - |
           conan user
-          conan remote add knuth_temp https://api.bintray.com/conan/k-nuth/k-nuth
-          echo "waiting for secp256k1/0.X@knuth/staging ..."
-          conan search secp256k1/0.X@knuth/staging -r knuth_temp > /dev/null
+          conan remote add kth_temp https://api.bintray.com/conan/k-nuth/kth
+          echo "waiting for secp256k1/0.X@kth/staging ..."
+          conan search secp256k1/0.X@kth/staging -r kth_temp > /dev/null
           while [ $? == 1 ]
           do
             printf "."
             sleep 10
-            conan search secp256k1/0.X@knuth/staging -r knuth_temp > /dev/null
+            conan search secp256k1/0.X@kth/staging -r kth_temp > /dev/null
           done
-          echo "secp256k1/0.X@knuth/staging found"
+          echo "secp256k1/0.X@kth/staging found"
 
 
 
@@ -220,7 +220,7 @@ jobs:
 #         - pyenv activate conan
 #         - eval $(python ci_utils/set_envvars_and_files.py)
 #         - conan user
-#         - conan remote add knuth_temp https://api.bintray.com/conan/k-nuth/k-nuth
+#         - conan remote add kth_temp https://api.bintray.com/conan/k-nuth/kth
 #         - cd ${TRAVIS_BUILD_DIR}
 #         - pwd
 #         - ls -ltra
@@ -422,14 +422,14 @@ jobs:
 
         - eval $(python ci_utils/set_envvars_and_files.py)
         #TODO(fernando): configure the remote and user using environment variables
-        - conan remote add knuth_temp https://api.bintray.com/conan/k-nuth/k-nuth
+        - conan remote add kth_temp https://api.bintray.com/conan/k-nuth/kth
         - conan user
-        - conan user ${CONAN_LOGIN_USERNAME} -r knuth_temp -p ${CONAN_PASSWORD}
+        - conan user ${CONAN_LOGIN_USERNAME} -r kth_temp -p ${CONAN_PASSWORD}
         - conan user
-        - echo "conan alias ${REPO_NAME}/0.X@knuth/${KNUTH_CONAN_CHANNEL} ${REPO_NAME}/${KNUTH_CONAN_VERSION}@knuth/${KNUTH_CONAN_CHANNEL}"
-        - conan alias "${REPO_NAME}/0.X@knuth/${KNUTH_CONAN_CHANNEL}" "${REPO_NAME}/${KNUTH_CONAN_VERSION}@knuth/${KNUTH_CONAN_CHANNEL}"
-        - echo "conan upload ${REPO_NAME}/0.X@knuth/${KNUTH_CONAN_CHANNEL} --all -r knuth_temp"
-        - conan upload "${REPO_NAME}/0.X@knuth/${KNUTH_CONAN_CHANNEL}" --all -r knuth_temp        
+        - echo "conan alias ${REPO_NAME}/0.X@kth/${KNUTH_CONAN_CHANNEL} ${REPO_NAME}/${KNUTH_CONAN_VERSION}@kth/${KNUTH_CONAN_CHANNEL}"
+        - conan alias "${REPO_NAME}/0.X@kth/${KNUTH_CONAN_CHANNEL}" "${REPO_NAME}/${KNUTH_CONAN_VERSION}@kth/${KNUTH_CONAN_CHANNEL}"
+        - echo "conan upload ${REPO_NAME}/0.X@kth/${KNUTH_CONAN_CHANNEL} --all -r kth_temp"
+        - conan upload "${REPO_NAME}/0.X@kth/${KNUTH_CONAN_CHANNEL}" --all -r kth_temp        
 
 # Push to repos ------------------------------------------------------
     - stage: push to repos

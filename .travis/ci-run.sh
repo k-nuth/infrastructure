@@ -23,7 +23,7 @@ clang-tidy --version
 conan user
 conan --version
 
-conan remote add knuth_temp https://api.bintray.com/conan/k-nuth/k-nuth
+conan remote add knuth_temp https://api.bintray.com/conan/k-nuth/kth
 
 cd /home/conan/project
 
@@ -31,8 +31,8 @@ echo $CONAN_CHANNEL
 eval $(python ci_utils/set_envvars_and_files.py)
 echo $CONAN_CHANNEL
 
-# git clone --depth=50 --branch=dev https://github.com/knuth/knuth-domain.git knuth/knuth-domain
-# cd knuth/knuth-domain
+# git clone --depth=50 --branch=dev https://github.com/knuth/kth-domain.git knuth/kth-domain
+# cd knuth/kth-domain
 # git submodule update --init --recursive
 
 mkdir build
