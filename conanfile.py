@@ -72,7 +72,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
     build_policy = "missing"
 
     def requirements(self):
-        self.requires("boost/1.69.0@bitprim/stable")
+        self.requires("boost/1.70.0@kth/stable")
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
 
         # if self.options.with_png:
