@@ -39,7 +39,7 @@ linux: &linux
    os: linux
    sudo: required
    language: python
-   python: "3.6"
+   python: "3.7"
    services:
      - docker
 
@@ -109,7 +109,7 @@ jobs:
 #       os: windows
 #       # sudo: required
 #       language: python
-#       python: "3.6"
+#       python: "3.7"
 #       # services:
 #       #   - docker
 #       install:
@@ -123,7 +123,7 @@ jobs:
       os: linux
       sudo: required
       language: python
-      python: "3.6"
+      python: "3.7"
       services:
         - docker
       env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=conanio/gcc8
@@ -149,7 +149,7 @@ jobs:
       os: linux
       sudo: required
       language: python
-      python: "3.6"
+      python: "3.7"
       services:
         - docker
       if: branch =~ /^(release|hotfix|dev|feature).*$/    #Avoid master
@@ -255,7 +255,7 @@ jobs:
 #       os: linux
 #       sudo: required
 #       language: python
-#       python: "3.6"
+#       python: "3.7"
 #       services:
 #         - docker
 #       env: CONAN_CLANG_VERSIONS=6.0 CONAN_DOCKER_IMAGE=conanio/clang60
@@ -276,7 +276,7 @@ jobs:
       os: linux
       sudo: required
       language: python
-      python: "3.6"
+      python: "3.7"
       services:
         - docker
       env: CONAN_GCC_VERSIONS=9 CONAN_DOCKER_IMAGE=conanio/gcc9
@@ -286,7 +286,7 @@ jobs:
       os: linux
       sudo: required
       language: python
-      python: "3.6"
+      python: "3.7"
       services:
         - docker
       env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=conanio/gcc8
@@ -297,7 +297,7 @@ jobs:
       os: linux
       sudo: required
       language: python
-      python: "3.6"
+      python: "3.7"
       services:
         - docker
       env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=conanio/gcc7 
@@ -309,7 +309,7 @@ jobs:
       os: linux
       sudo: required
       language: python
-      python: "3.6"
+      python: "3.7"
       services:
         - docker
       env: CONAN_GCC_VERSIONS=6 CONAN_DOCKER_IMAGE=conanio/gcc6
@@ -320,7 +320,7 @@ jobs:
       os: linux
       sudo: required
       language: python
-      python: "3.6"
+      python: "3.7"
       services:
         - docker
       env: CONAN_GCC_VERSIONS=5 CONAN_DOCKER_IMAGE=conanio/gcc5
@@ -331,7 +331,7 @@ jobs:
     #   os: linux
     #   sudo: required
     #   language: python
-    #   python: "3.6"
+    #   python: "3.7"
     #   services:
     #     - docker
     #   env: CONAN_GCC_VERSIONS=4.9 CONAN_DOCKER_IMAGE=conanio/gcc49
@@ -343,7 +343,7 @@ jobs:
       os: linux
       sudo: required
       language: python
-      python: "3.6"
+      python: "3.7"
       services:
         - docker
       env: CONAN_CLANG_VERSIONS=7.0 CONAN_DOCKER_IMAGE=conanio/clang7
@@ -353,7 +353,7 @@ jobs:
     #   os: linux
     #   sudo: required
     #   language: python
-    #   python: "3.6"
+    #   python: "3.7"
     #   services:
     #     - docker
     #   env: CONAN_CLANG_VERSIONS=6.0 CONAN_DOCKER_IMAGE=conanio/clang60
@@ -363,7 +363,7 @@ jobs:
     #   os: linux
     #   sudo: required
     #   language: python
-    #   python: "3.6"
+    #   python: "3.7"
     #   services:
     #     - docker
     #   env: CONAN_CLANG_VERSIONS=5.0 CONAN_DOCKER_IMAGE=conanio/clang50
@@ -373,7 +373,7 @@ jobs:
     #   os: linux
     #   sudo: required
     #   language: python
-    #   python: "3.6"
+    #   python: "3.7"
     #   services:
     #     - docker
     #   env: CONAN_CLANG_VERSIONS=4.0 CONAN_DOCKER_IMAGE=conanio/clang40
@@ -383,7 +383,7 @@ jobs:
     #   os: linux
     #   sudo: required
     #   language: python
-    #   python: "3.6"
+    #   python: "3.7"
     #   services:
     #     - docker
     #   env: CONAN_CLANG_VERSIONS=3.9 CONAN_DOCKER_IMAGE=conanio/clang39
@@ -430,7 +430,7 @@ jobs:
       os: linux
       sudo: required
       language: python
-      python: "3.6"
+      python: "3.7"
       # install: skip
       if: branch =~ /^(release|hotfix|dev|feature).*$/    #Avoid master
       script:
