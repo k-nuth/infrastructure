@@ -30,13 +30,13 @@ namespace libbitcoin {
 /**
  * The secret for aes256 block cypher.
  */
-BC_CONSTEXPR uint8_t aes256_key_size = 32;
+constexpr uint8_t aes256_key_size = 32;
 using aes_secret = byte_array<aes256_key_size>;
 
 /**
  * The data block for use with aes256 block cypher.
  */
-BC_CONSTEXPR uint8_t aes256_block_size = 16;
+constexpr uint8_t aes256_block_size = 16;
 using aes_block = byte_array<aes256_block_size>;
 
 /**

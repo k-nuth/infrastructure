@@ -41,7 +41,7 @@ inline std::time_t zulu_time()
 /// Standard date-time string, e.g. Sun Oct 17 04:41:13 2010, locale dependent.
 inline std::string local_time()
 {
-    static BC_CONSTEXPR size_t size = 24;
+    static constexpr size_t size = 24;
     char buffer[size];
     auto const time = zulu_time();
 

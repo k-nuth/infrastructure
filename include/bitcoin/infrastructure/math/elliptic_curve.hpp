@@ -29,33 +29,33 @@
 namespace libbitcoin {
 
 /// The sign byte value for an even (y-valued) key.
-static BC_CONSTEXPR uint8_t ec_even_sign = 2;
+static constexpr uint8_t ec_even_sign = 2;
 
 /// Private key:
-static BC_CONSTEXPR size_t ec_secret_size = 32;
+static constexpr size_t ec_secret_size = 32;
 using ec_secret = byte_array<ec_secret_size>;
 
 /// Compressed public key:
-static BC_CONSTEXPR size_t ec_compressed_size = 33;
+static constexpr size_t ec_compressed_size = 33;
 using ec_compressed = byte_array<ec_compressed_size>;
 
 using point_list = std::vector<ec_compressed>;
 
 /// Uncompressed public key:
-static BC_CONSTEXPR size_t ec_uncompressed_size = 65;
+static constexpr size_t ec_uncompressed_size = 65;
 using ec_uncompressed = byte_array<ec_uncompressed_size>;
 
 // Parsed ECDSA signature:
-static BC_CONSTEXPR size_t ec_signature_size = 64;
+static constexpr size_t ec_signature_size = 64;
 using ec_signature = byte_array<ec_signature_size>;
 
 // DER encoded signature:
-static BC_CONSTEXPR size_t max_der_signature_size = 72;
+static constexpr size_t max_der_signature_size = 72;
 using der_signature = data_chunk;
 
 /// DER encoded signature with sighash byte for contract endorsement:
-static BC_CONSTEXPR size_t min_endorsement_size = 9;
-static BC_CONSTEXPR size_t max_endorsement_size = 73;
+static constexpr size_t min_endorsement_size = 9;
+static constexpr size_t max_endorsement_size = 73;
 using endorsement = data_chunk;
 
 /// Recoverable ecdsa signature for message signing:
@@ -65,13 +65,13 @@ struct BI_API recoverable_signature
     uint8_t recovery_id;
 };
 
-static BC_CONSTEXPR ec_compressed null_compressed_point =
+static constexpr ec_compressed null_compressed_point =
 {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
-static BC_CONSTEXPR ec_uncompressed null_uncompressed_point =
+static constexpr ec_uncompressed null_uncompressed_point =
 {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

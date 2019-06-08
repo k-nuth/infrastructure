@@ -33,7 +33,7 @@ public:
     using size_type = std::size_t;
 
     static 
-    BC_CONSTEXPR size_type bits_per_block = byte_bits;
+    constexpr size_type bits_per_block = byte_bits;
     
     static 
     size_type blocks_size(size_type bit_size);

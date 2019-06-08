@@ -30,7 +30,7 @@
 // namespace libbitcoin {
 // namespace machine {
 
-// static BC_CONSTEXPR auto invalid_code = opcode::disabled_xor;
+// static constexpr auto invalid_code = opcode::disabled_xor;
 
 // // Constructors.
 // //-----------------------------------------------------------------------------
@@ -150,7 +150,7 @@
 
 // inline 
 // size_t operation::serialized_size() const {
-//     static BC_CONSTEXPR auto op_size = sizeof(uint8_t);
+//     static constexpr auto op_size = sizeof(uint8_t);
 //     auto const size = data_.size();
 
 //     switch (code_) {
@@ -187,7 +187,7 @@
 // template <typename R>
 // inline 
 // uint32_t operation::read_data_size(opcode code, R& source) {
-//     BC_CONSTEXPR auto op_75 = static_cast<uint8_t>(opcode::push_size_75);
+//     constexpr auto op_75 = static_cast<uint8_t>(opcode::push_size_75);
 
 //     switch (code) {
 //         case opcode::push_one_size:
@@ -209,7 +209,7 @@
 // inline 
 // opcode operation::opcode_from_size(size_t size) {
 //     BITCOIN_ASSERT(size <= max_uint32);
-//     BC_CONSTEXPR auto op_75 = static_cast<uint8_t>(opcode::push_size_75);
+//     constexpr auto op_75 = static_cast<uint8_t>(opcode::push_size_75);
 
 //     if (size <= op_75)
 //         return static_cast<opcode>(size);
@@ -257,22 +257,22 @@
 // opcode operation::opcode_from_positive(uint8_t value) {
 //     BITCOIN_ASSERT(value >= number::positive_1);
 //     BITCOIN_ASSERT(value <= number::positive_16);
-//     BC_CONSTEXPR auto op_81 = static_cast<uint8_t>(opcode::push_positive_1);
+//     constexpr auto op_81 = static_cast<uint8_t>(opcode::push_positive_1);
 //     return static_cast<opcode>(value + op_81 - 1);
 // }
 
 // inline 
 // uint8_t operation::opcode_to_positive(opcode code) {
 //     BITCOIN_ASSERT(is_positive(code));
-//     BC_CONSTEXPR auto op_81 = static_cast<uint8_t>(opcode::push_positive_1);
+//     constexpr auto op_81 = static_cast<uint8_t>(opcode::push_positive_1);
 //     return static_cast<uint8_t>(code) - op_81 + 1;
 // }
 
 // // opcode: [0..79, 81..96]
 // inline 
 // bool operation::is_push(opcode code) {
-//     BC_CONSTEXPR auto op_80 = static_cast<uint8_t>(opcode::reserved_80);
-//     BC_CONSTEXPR auto op_96 = static_cast<uint8_t>(opcode::push_positive_16);
+//     constexpr auto op_80 = static_cast<uint8_t>(opcode::reserved_80);
+//     constexpr auto op_96 = static_cast<uint8_t>(opcode::push_positive_16);
 //     auto const value = static_cast<uint8_t>(code);
 //     return value <= op_96 && value != op_80;
 // }
@@ -280,8 +280,8 @@
 // // opcode: [1..78]
 // inline 
 // bool operation::is_payload(opcode code) {
-//     BC_CONSTEXPR auto op_1 = static_cast<uint8_t>(opcode::push_size_1);
-//     BC_CONSTEXPR auto op_78 = static_cast<uint8_t>(opcode::push_four_size);
+//     constexpr auto op_1 = static_cast<uint8_t>(opcode::push_size_1);
+//     constexpr auto op_78 = static_cast<uint8_t>(opcode::push_four_size);
 //     auto const value = static_cast<uint8_t>(code);
 //     return value >= op_1 && value <= op_78;
 // }
@@ -289,7 +289,7 @@
 // // opcode: [97..255]
 // inline 
 // bool operation::is_counted(opcode code) {
-//     BC_CONSTEXPR auto op_97 = static_cast<uint8_t>(opcode::nop);
+//     constexpr auto op_97 = static_cast<uint8_t>(opcode::nop);
 //     auto const value = static_cast<uint8_t>(code);
 //     return value >= op_97;
 // }
@@ -309,8 +309,8 @@
 // // stack: [1..16]
 // inline 
 // bool operation::is_positive(opcode code) {
-//     BC_CONSTEXPR auto op_81 = static_cast<uint8_t>(opcode::push_positive_1);
-//     BC_CONSTEXPR auto op_96 = static_cast<uint8_t>(opcode::push_positive_16);
+//     constexpr auto op_81 = static_cast<uint8_t>(opcode::push_positive_1);
+//     constexpr auto op_96 = static_cast<uint8_t>(opcode::push_positive_16);
 //     auto const value = static_cast<uint8_t>(code);
 //     return value >= op_81 && value <= op_96;
 // }
@@ -318,8 +318,8 @@
 // // opcode: [80, 98, 137, 138, 186..255]
 // inline 
 // bool operation::is_reserved(opcode code) {
-//     BC_CONSTEXPR auto op_186 = static_cast<uint8_t>(opcode::reserved_186);
-//     BC_CONSTEXPR auto op_255 = static_cast<uint8_t>(opcode::reserved_255);
+//     constexpr auto op_186 = static_cast<uint8_t>(opcode::reserved_186);
+//     constexpr auto op_255 = static_cast<uint8_t>(opcode::reserved_255);
 
 //     switch (code) {
 //         case opcode::reserved_80:
@@ -393,7 +393,7 @@
 // // opcode: [0..96]
 // inline 
 // bool operation::is_relaxed_push(opcode code) {
-//     BC_CONSTEXPR auto op_96 = static_cast<uint8_t>(opcode::push_positive_16);
+//     constexpr auto op_96 = static_cast<uint8_t>(opcode::push_positive_16);
 //     auto const value = static_cast<uint8_t>(code);
 //     return value <= op_96;
 // }
