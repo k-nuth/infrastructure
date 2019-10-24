@@ -38,8 +38,8 @@ static constexpr uint8_t compressed_even = 0x02;
 static constexpr uint8_t compressed_odd = 0x03;
 static constexpr uint8_t uncompressed = 0x04;
 
-BC_CONSTFUNC int to_flags(bool compressed)
-{
+constexpr 
+int to_flags(bool compressed) {
     return compressed ? SECP256K1_EC_COMPRESSED : SECP256K1_EC_UNCOMPRESSED;
 }
 
@@ -48,16 +48,12 @@ BC_CONSTFUNC int to_flags(bool compressed)
 // These allow strong typing of private keys without redundant code.
 
 template <size_t Size>
-bool parse(const secp256k1_context* context, secp256k1_pubkey& out,
-    const byte_array<Size>& point)
-{
+bool parse(const secp256k1_context* context, secp256k1_pubkey& out, const byte_array<Size>& point) {
     return secp256k1_ec_pubkey_parse(context, &out, point.data(), Size) == 1;
 }
 
 template <size_t Size>
-bool serialize(const secp256k1_context* context, byte_array<Size>& out,
-    const secp256k1_pubkey point)
-{
+bool serialize(const secp256k1_context* context, byte_array<Size>& out, const secp256k1_pubkey point) {
     auto size = Size;
     auto const flags = to_flags(Size == ec_compressed_size);
     secp256k1_ec_pubkey_serialize(context, out.data(), &size, &point, flags);
@@ -65,9 +61,7 @@ bool serialize(const secp256k1_context* context, byte_array<Size>& out,
 }
 
 template <size_t Size>
-bool ec_add(const secp256k1_context* context, byte_array<Size>& in_out,
-    ec_secret const& secret)
-{
+bool ec_add(const secp256k1_context* context, byte_array<Size>& in_out, ec_secret const& secret) {
     secp256k1_pubkey pubkey;
     return parse(context, pubkey, in_out) &&
         secp256k1_ec_pubkey_tweak_add(context, &pubkey, secret.data()) == 1 &&
@@ -75,9 +69,7 @@ bool ec_add(const secp256k1_context* context, byte_array<Size>& in_out,
 }
 
 template <size_t Size>
-bool ec_multiply(const secp256k1_context* context, byte_array<Size>& in_out,
-    ec_secret const& secret)
-{
+bool ec_multiply(const secp256k1_context* context, byte_array<Size>& in_out, ec_secret const& secret) {
     secp256k1_pubkey pubkey;
     return parse(context, pubkey, in_out) &&
         secp256k1_ec_pubkey_tweak_mul(context, &pubkey, secret.data()) == 1 &&
@@ -85,18 +77,14 @@ bool ec_multiply(const secp256k1_context* context, byte_array<Size>& in_out,
 }
 
 template <size_t Size>
-bool secret_to_public(const secp256k1_context* context, byte_array<Size>& out,
-    ec_secret const& secret)
-{
+bool secret_to_public(const secp256k1_context* context, byte_array<Size>& out, ec_secret const& secret) {
     secp256k1_pubkey pubkey;
     return secp256k1_ec_pubkey_create(context, &pubkey, secret.data()) == 1 &&
         serialize(context, out, pubkey);
 }
 
 template <size_t Size>
-bool recover_public(const secp256k1_context* context, byte_array<Size>& out,
-    const recoverable_signature& recoverable, hash_digest const& hash)
-{
+bool recover_public(const secp256k1_context* context, byte_array<Size>& out, const recoverable_signature& recoverable, hash_digest const& hash) {
     secp256k1_pubkey pubkey;
     secp256k1_ecdsa_recoverable_signature sign;
     auto const recovery_id = safe_to_signed<int>(recoverable.recovery_id);
@@ -109,8 +97,8 @@ bool recover_public(const secp256k1_context* context, byte_array<Size>& out,
 
 bool verify_signature(const secp256k1_context* context,
     const secp256k1_pubkey point, hash_digest const& hash,
-    const ec_signature& signature)
-{
+    const ec_signature& signature) {
+
     // Copy to avoid exposing external types.
     secp256k1_ecdsa_signature parsed;
     std::copy_n(signature.begin(), ec_signature_size, std::begin(parsed.data));
@@ -125,20 +113,17 @@ bool verify_signature(const secp256k1_context* context,
 // Add and multiply EC values
 // ----------------------------------------------------------------------------
 
-bool ec_add(ec_compressed& point, ec_secret const& secret)
-{
+bool ec_add(ec_compressed& point, ec_secret const& secret) {
     auto const context = verification.context();
     return ec_add(context, point, secret);
 }
 
-bool ec_add(ec_uncompressed& point, ec_secret const& secret)
-{
+bool ec_add(ec_uncompressed& point, ec_secret const& secret) {
     auto const context = verification.context();
     return ec_add(context, point, secret);
 }
 
-bool ec_add(ec_secret& left, ec_secret const& right)
-{
+bool ec_add(ec_secret& left, ec_secret const& right) {
     auto const context = verification.context();
     return secp256k1_ec_privkey_tweak_add(context, left.data(),
         right.data()) == 1;
