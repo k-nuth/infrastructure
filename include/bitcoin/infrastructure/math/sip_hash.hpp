@@ -44,11 +44,11 @@ uint64_t get_uint64(hash_digest const& x) {
     //precondition: 0 <= i < sizeof(hash_digest) / sizeof(uint64_t)
 
     auto const* ptr = x.data() + i * sizeof(uint64_t);
-    
-    return ((uint64_t)ptr[0]) | ((uint64_t)ptr[1]) << 8 |
-            ((uint64_t)ptr[2]) << 16 | ((uint64_t)ptr[3]) << 24 |
-            ((uint64_t)ptr[4]) << 32 | ((uint64_t)ptr[5]) << 40 |
-            ((uint64_t)ptr[6]) << 48 | ((uint64_t)ptr[7]) << 56;
+
+    return (static_cast<uint64_t>(ptr[0]))       | (static_cast<uint64_t>(ptr[1])) <<  8 |
+           (static_cast<uint64_t>(ptr[2])) << 16 | (static_cast<uint64_t>(ptr[3])) << 24 |
+           (static_cast<uint64_t>(ptr[4])) << 32 | (static_cast<uint64_t>(ptr[5])) << 40 |
+           (static_cast<uint64_t>(ptr[6])) << 48 | (static_cast<uint64_t>(ptr[7])) << 56;
 }
 
 /** SipHash-2-4 */

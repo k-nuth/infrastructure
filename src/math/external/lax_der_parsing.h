@@ -78,7 +78,7 @@ extern "C" {
  *  guaranteed to fail for every message and public key.
  */
 int ecdsa_signature_parse_der_lax(
-    const secp256k1_context* ctx,
+    secp256k1_context const* ctx,
     secp256k1_ecdsa_signature* sig,
     const unsigned char *input,
     size_t inputlen

@@ -194,7 +194,7 @@ void serializer<Iterator>::write_bytes(data_chunk const& data)
 }
 
 template <typename Iterator>
-void serializer<Iterator>::write_bytes(const uint8_t* data, size_t size)
+void serializer<Iterator>::write_bytes(uint8_t const* data, size_t size)
 {
     iterator_ = std::copy_n(data, size, iterator_);
 }
@@ -210,7 +210,7 @@ template <typename Iterator>
 void serializer<Iterator>::write_string(std::string const& value, size_t size)
 {
     auto const length = std::min(size, value.size());
-    write_bytes(reinterpret_cast<const uint8_t*>(value.data()), length);
+    write_bytes(reinterpret_cast<uint8_t const*>(value.data()), length);
     data_chunk padding(floor_subtract(size, length), string_terminator);
     write_bytes(padding);
 }

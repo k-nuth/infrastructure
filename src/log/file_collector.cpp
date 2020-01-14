@@ -131,16 +131,16 @@ bool match_pattern(path_string_type const& file_name, path_string_type const& pa
         }
     };
 
-    path_string_type::const_iterator
-        f_it = file_name.begin(),
-        f_end = file_name.end(),
-        p_it = pattern.begin(),
-        p_end = pattern.end();
+    auto f_it = file_name.begin(),
+    auto f_end = file_name.end(),
+    auto p_it = pattern.begin(),
+    auto p_end = pattern.end();
         
     bool placeholder_expected = false;
 
     while (f_it != f_end && p_it != p_end) {
-        path_string_type::value_type p_c = *p_it, f_c = *f_it;
+        auto p_c = *p_it;
+        auto f_c = *f_it;
 
         if ( ! placeholder_expected) {
             if (p_c == file_char_traits::percent) {
@@ -194,14 +194,14 @@ bool match_pattern(path_string_type const& file_name, path_string_type const& pa
 
                 // This should be the file counter placeholder or some unsupported placeholder
                 default: {
-                    path_string_type::const_iterator p = p_it;
+                    auto p = p_it;
                     unsigned int width = 0;
                     if ( ! parse_counter_placeholder(p, p_end, width)) {
                         BOOST_THROW_EXCEPTION(std::invalid_argument("Unsupported placeholder used in pattern for file scanning"));
                     }
 
                     // Find where the file number ends
-                    path_string_type::const_iterator f = f_it;
+                    auto f = f_it;
                     if ( ! local::scan_digits(f, f_end, width)) {
                         return false;
                     }
@@ -291,7 +291,8 @@ void file_collector::store_file(filesystem::path const& src_path) {
     uintmax_t free_space = min_free_space_ != 0u ?
         filesystem::space(storage_dir_).available : 0;
 
-    auto it = files_.begin(), end = files_.end();
+    auto it = files_.begin();
+    auto end = files_.end();
     while (it != end && (total_size_ + info.size > max_size_ || min_free_space_ > free_space || max_files_ <= files_.size())) {
         file_info& old_info = *it;
         if (filesystem::exists(old_info.path) && filesystem::is_regular_file(old_info.path)) {
@@ -346,7 +347,8 @@ uintmax_t file_collector::scan_for_files(boost::log::sinks::file::scan_method me
             }
 
             file_list files;
-            filesystem::directory_iterator it(dir), end;
+            filesystem::directory_iterator it(dir);
+            filesystem::directory_iterator end;
             uintmax_t total_size = 0;
             for (; it != end; ++it) {
                 file_info info;

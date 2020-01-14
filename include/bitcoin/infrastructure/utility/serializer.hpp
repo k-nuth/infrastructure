@@ -88,7 +88,7 @@ public:
     void write_bytes(data_chunk const& data);
 
     /// Write required size buffer.
-    void write_bytes(const uint8_t* data, size_t size);
+    void write_bytes(uint8_t const* data, size_t size);
 
     /// Write variable length string.
     void write_string(std::string const& value);

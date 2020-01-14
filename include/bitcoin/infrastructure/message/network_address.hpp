@@ -24,11 +24,11 @@
 #include <vector>
 
 #include <bitcoin/infrastructure/define.hpp>
+#include <bitcoin/infrastructure/utility/container_sink.hpp>
+#include <bitcoin/infrastructure/utility/container_source.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/reader.hpp>
 #include <bitcoin/infrastructure/utility/writer.hpp>
-#include <bitcoin/infrastructure/utility/container_sink.hpp>
-#include <bitcoin/infrastructure/utility/container_source.hpp>
 
 namespace libbitcoin {
 namespace message {
@@ -75,15 +75,10 @@ public:
     size_t serialized_size(uint32_t version, bool with_timestamp) const;
 
     bool from_data(uint32_t version, data_chunk const& data, bool with_timestamp);
-    // bool from_data(uint32_t version, std::istream& stream, bool with_timestamp);
     bool from_data(uint32_t version, data_source& stream, bool with_timestamp);
 
-
-
-    // bool from_data(uint32_t version, reader& source, bool with_timestamp);
-
     template <typename R>
-    bool from_data(uint32_t version, R& source, bool with_timestamp) {
+    bool from_data(uint32_t /*version*/, R& source, bool with_timestamp) {
         reset();
 
         if (with_timestamp) {
@@ -103,16 +98,11 @@ public:
         return source;
     }
 
-
-
     data_chunk to_data(uint32_t version, bool with_timestamp) const;
-    // void to_data(uint32_t version, std::ostream& stream, bool with_timestamp) const;
     void to_data(uint32_t version, data_sink& stream, bool with_timestamp) const;
 
-
-    // void to_data(uint32_t version, writer& sink, bool with_timestamp) const;
     template <typename W>
-    void to_data(uint32_t version, W& sink, bool with_timestamp) const {
+    void to_data(uint32_t /*version*/, W& sink, bool with_timestamp) const {
         if (with_timestamp) {
             sink.write_4_bytes_little_endian(timestamp_);
         }
@@ -122,23 +112,14 @@ public:
         sink.write_2_bytes_big_endian(port_);
     }
 
-
     bool is_valid() const;
     void reset();
 
     static 
     network_address factory_from_data(uint32_t version, data_chunk const& data, bool with_timestamp);
     
-    // static 
-    // network_address factory_from_data(uint32_t version, std::istream& stream, bool with_timestamp);
-
     static 
     network_address factory_from_data(uint32_t version, data_source& stream, bool with_timestamp);
-
-
-
-    // static 
-    // network_address factory_from_data(uint32_t version, reader& source, bool with_timestamp);
     
     template <typename R>
     static
@@ -148,10 +129,8 @@ public:
         return instance;
     }
 
-
     static 
     size_t satoshi_fixed_size(uint32_t version, bool with_timestamp);
-
 
 private:
     uint32_t timestamp_{0};

@@ -46,7 +46,7 @@ static void smix(uint8_t*  /*B*/, size_t /*r*/, uint64_t /*N*/, uint8_t* /*V*/, 
 
 static 
 BI_C_INLINE uint32_t le32dec(const void* pp) {
-    const uint8_t* p = (uint8_t const* )pp;
+    uint8_t const* p = (uint8_t const* )pp;
     return ((uint32_t)(p[0]) + ((uint32_t)(p[1]) << 8) +
             ((uint32_t)(p[2]) << 16) + ((uint32_t)(p[3]) << 24));
 }
@@ -62,7 +62,7 @@ BI_C_INLINE void le32enc(void* pp, uint32_t x) {
 
 static 
 BI_C_INLINE uint64_t le64dec(const void* pp) {
-    const uint8_t* p = (uint8_t const* )pp;
+    uint8_t const* p = (uint8_t const* )pp;
 
     return ((uint64_t)(p[0]) + ((uint64_t)(p[1]) << 8) +
             ((uint64_t)(p[2]) << 16) + ((uint64_t)(p[3]) << 24) +
@@ -241,8 +241,8 @@ void smix(uint8_t* B, size_t r, uint64_t N, uint8_t* V, uint8_t* XY) {
  *
  * Return 0 on success; or -1 on error.
  */
-int crypto_scrypt(const uint8_t* passphrase, size_t passphrase_length,
-    const uint8_t* salt, size_t salt_length, uint64_t N,
+int crypto_scrypt(uint8_t const* passphrase, size_t passphrase_length,
+    uint8_t const* salt, size_t salt_length, uint64_t N,
     uint32_t r, uint32_t p, uint8_t* buf, size_t buf_length)
 {
     uint8_t* B;

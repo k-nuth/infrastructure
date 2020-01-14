@@ -73,7 +73,7 @@ public:
      * @return True if the key is initialized.
      */
     // implicit
-    operator bool const() const;    //NOLINT
+    operator bool() const;
 
     /**
      * Overload cast to internal type.

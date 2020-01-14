@@ -64,7 +64,7 @@ extern "C" void sink_write(png_structp png_ptr, png_bytep data,
     auto const size = static_cast<size_t>(length);
 
     auto& sink = *reinterpret_cast<ostream_writer*>(png_get_io_ptr(png_ptr));
-    sink.write_bytes(reinterpret_cast<const uint8_t*>(data), size);
+    sink.write_bytes(reinterpret_cast<uint8_t const*>(data), size);
 }
 
 extern "C" void error_callback(png_structp png_ptr,

@@ -58,8 +58,7 @@
 namespace libbitcoin {
 
 // Maps binary to base 85.
-static char encoder[85 + 1] =
-{
+static char encoder[85 + 1] = {
     "0123456789"
     "abcdefghij"
     "klmnopqrst"
@@ -72,8 +71,7 @@ static char encoder[85 + 1] =
 };
 
 // Maps base 85 to binary.
-static uint8_t decoder[96] =
-{
+static uint8_t decoder[96] = {
     0x00, 0x44, 0x00, 0x54, 0x53, 0x52, 0x48, 0x00,
     0x4B, 0x4C, 0x46, 0x41, 0x00, 0x3F, 0x3E, 0x45,
     0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
@@ -89,12 +87,11 @@ static uint8_t decoder[96] =
 };
 
 // Accepts only byte arrays bounded to 4 bytes.
-bool encode_base85(std::string& out, data_slice in)
-{
+bool encode_base85(std::string& out, data_slice in) {
     size_t const size = in.size();
     if (size % 4 != 0) {
         return false;
-}
+    }
 
     size_t const encoded_size = size * 5 / 4;
     std::string encoded;
@@ -102,15 +99,12 @@ bool encode_base85(std::string& out, data_slice in)
     size_t byte_index = 0;
     uint32_t accumulator = 0;
 
-    for (const uint8_t unencoded_byte: in)
-    {
+    for (uint8_t const unencoded_byte : in) {
         accumulator = accumulator * 256 + unencoded_byte;
-        if (++byte_index % 4 == 0)
-        {
+        if (++byte_index % 4 == 0) {
             for (uint32_t divise = 85 * 85 * 85 * 85; divise > 0; divise /= 85) {
                 encoded.push_back(encoder[accumulator / divise % 85]);
-}
-
+            }
             accumulator = 0;
         }
     }
@@ -121,12 +115,11 @@ bool encode_base85(std::string& out, data_slice in)
 }
 
 // Accepts only strings bounded to 5 characters.
-bool decode_base85(data_chunk& out, std::string const& in)
-{
+bool decode_base85(data_chunk& out, std::string const& in) {
     size_t const length = in.size();
     if (length % 5 != 0) {
         return false;
-}
+    }
 
     size_t const decoded_size = length * 4 / 5;
     data_chunk decoded;
@@ -134,19 +127,17 @@ bool decode_base85(data_chunk& out, std::string const& in)
     size_t char_index = 0;
     uint32_t accumulator = 0;
 
-    for (const uint8_t encoded_character: in)
-    {
+    for (uint8_t const encoded_character : in) {
         auto const position = encoded_character - 32;
         if (position < 0 || position > 96) {
             return false;
-}
+        }
 
         accumulator = accumulator * 85 + decoder[position];
-        if (++char_index % 5 == 0)
-        {
+        if (++char_index % 5 == 0) {
             for (uint32_t divise = 256 * 256 * 256; divise > 0; divise /= 256) {
                 decoded.push_back(accumulator / divise % 256);
-}
+            }
 
             accumulator = 0;
         }

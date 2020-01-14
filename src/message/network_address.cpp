@@ -127,7 +127,7 @@ size_t network_address::serialized_size(uint32_t version, bool with_timestamp) c
     return network_address::satoshi_fixed_size(version, with_timestamp);
 }
 
-size_t network_address::satoshi_fixed_size(uint32_t version, bool with_timestamp) {
+size_t network_address::satoshi_fixed_size(uint32_t /*version*/, bool with_timestamp) {
     size_t result = 26;
 
     if (with_timestamp) {

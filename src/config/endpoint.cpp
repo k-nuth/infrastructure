@@ -83,7 +83,7 @@ std::string endpoint::to_string() const {
     return value.str();
 }
 
-endpoint::operator bool const() const {
+endpoint::operator bool() const {
     // Return true if initialized.
     // TODO: this is a quick hack, along with http/https.
     return ! scheme_.empty();
@@ -102,7 +102,8 @@ std::istream& operator>>(std::istream& input, endpoint& argument) {
     static 
     std::regex const regular(R"(^((tcp|udp|http|https|inproc):\/\/)?(\[([0-9a-f:\.]+)\]|([^:]+))(:([0-9]{1,5}))?$)");
 
-    std::sregex_iterator it(value.begin(), value.end(), regular), end;
+    std::sregex_iterator it(value.begin(), value.end(), regular);
+    std::sregex_iterator end;
     if (it == end) {
         BOOST_THROW_EXCEPTION(invalid_option_value(value));
     }

@@ -85,13 +85,13 @@ asio::ipv6 to_ipv6(asio::address const& ip_address) {
 
 static 
 std::string to_ipv4_hostname(asio::address const& ip_address) {
-    // std::regex requires gcc 4.9, so we are using boost::regex for now.
-    // Knuth: we use std::regex, becase we drop support por GCC<5
+    // Note(knuth): we use std::regex, becase we drop support por GCC<5
     static 
     std::regex const regular("^::ffff:([0-9\\.]+)$");
 
     auto const address = ip_address.to_string();
-    std::sregex_iterator it(address.begin(), address.end(), regular), end;
+    std::sregex_iterator it(address.begin(), address.end(), regular);
+    std::sregex_iterator end;
     if (it == end) {
         return "";
     }
@@ -156,7 +156,7 @@ authority::authority(asio::endpoint const& endpoint)
     : authority(endpoint.address(), endpoint.port())
 {}
 
-authority::operator bool const() const {
+authority::operator bool() const {
     return port_ != 0;
 }
 
@@ -213,7 +213,8 @@ std::istream& operator>>(std::istream& input, authority& argument) {
     static 
     regex const regular(R"(^(([0-9\.]+)|\[([0-9a-f:\.]+)\])(:([0-9]{1,5}))?$)");
 
-    sregex_iterator it(value.begin(), value.end(), regular), end;
+    sregex_iterator it(value.begin(), value.end(), regular);
+    sregex_iterator end;
     if (it == end) {
         BOOST_THROW_EXCEPTION(invalid_option_value(value));
     }

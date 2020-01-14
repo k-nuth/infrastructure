@@ -38,8 +38,7 @@ static constexpr uint8_t compressed_even = 0x02;
 static constexpr uint8_t compressed_odd = 0x03;
 static constexpr uint8_t uncompressed = 0x04;
 
-BC_CONSTFUNC int to_flags(bool compressed)
-{
+constexpr int to_flags(bool compressed) {
     return compressed ? SECP256K1_EC_COMPRESSED : SECP256K1_EC_UNCOMPRESSED;
 }
 
@@ -48,16 +47,12 @@ BC_CONSTFUNC int to_flags(bool compressed)
 // These allow strong typing of private keys without redundant code.
 
 template <size_t Size>
-bool parse(const secp256k1_context* context, secp256k1_pubkey& out,
-    const byte_array<Size>& point)
-{
+bool parse(secp256k1_context const* context, secp256k1_pubkey& out, byte_array<Size> const& point) {
     return secp256k1_ec_pubkey_parse(context, &out, point.data(), Size) == 1;
 }
 
 template <size_t Size>
-bool serialize(const secp256k1_context* context, byte_array<Size>& out,
-    const secp256k1_pubkey point)
-{
+bool serialize(secp256k1_context const* context, byte_array<Size>& out, const secp256k1_pubkey point) {
     auto size = Size;
     auto const flags = to_flags(Size == ec_compressed_size);
     secp256k1_ec_pubkey_serialize(context, out.data(), &size, &point, flags);
@@ -65,9 +60,7 @@ bool serialize(const secp256k1_context* context, byte_array<Size>& out,
 }
 
 template <size_t Size>
-bool ec_add(const secp256k1_context* context, byte_array<Size>& in_out,
-    ec_secret const& secret)
-{
+bool ec_add(secp256k1_context const* context, byte_array<Size>& in_out, ec_secret const& secret) {
     secp256k1_pubkey pubkey;
     return parse(context, pubkey, in_out) &&
         secp256k1_ec_pubkey_tweak_add(context, &pubkey, secret.data()) == 1 &&
@@ -75,9 +68,7 @@ bool ec_add(const secp256k1_context* context, byte_array<Size>& in_out,
 }
 
 template <size_t Size>
-bool ec_multiply(const secp256k1_context* context, byte_array<Size>& in_out,
-    ec_secret const& secret)
-{
+bool ec_multiply(secp256k1_context const* context, byte_array<Size>& in_out, ec_secret const& secret) {
     secp256k1_pubkey pubkey;
     return parse(context, pubkey, in_out) &&
         secp256k1_ec_pubkey_tweak_mul(context, &pubkey, secret.data()) == 1 &&
@@ -85,18 +76,14 @@ bool ec_multiply(const secp256k1_context* context, byte_array<Size>& in_out,
 }
 
 template <size_t Size>
-bool secret_to_public(const secp256k1_context* context, byte_array<Size>& out,
-    ec_secret const& secret)
-{
+bool secret_to_public(secp256k1_context const* context, byte_array<Size>& out, ec_secret const& secret) {
     secp256k1_pubkey pubkey;
     return secp256k1_ec_pubkey_create(context, &pubkey, secret.data()) == 1 &&
         serialize(context, out, pubkey);
 }
 
 template <size_t Size>
-bool recover_public(const secp256k1_context* context, byte_array<Size>& out,
-    const recoverable_signature& recoverable, hash_digest const& hash)
-{
+bool recover_public(secp256k1_context const* context, byte_array<Size>& out, recoverable_signature const& recoverable, hash_digest const& hash) {
     secp256k1_pubkey pubkey;
     secp256k1_ecdsa_recoverable_signature sign;
     auto const recovery_id = safe_to_signed<int>(recoverable.recovery_id);
@@ -107,10 +94,7 @@ bool recover_public(const secp256k1_context* context, byte_array<Size>& out,
             serialize(context, out, pubkey);
 }
 
-bool verify_signature(const secp256k1_context* context,
-    const secp256k1_pubkey point, hash_digest const& hash,
-    const ec_signature& signature)
-{
+bool verify_signature(secp256k1_context const* context, const secp256k1_pubkey point, hash_digest const& hash, ec_signature const& signature) {
     // Copy to avoid exposing external types.
     secp256k1_ecdsa_signature parsed;
     std::copy_n(signature.begin(), ec_signature_size, std::begin(parsed.data));
@@ -125,39 +109,33 @@ bool verify_signature(const secp256k1_context* context,
 // Add and multiply EC values
 // ----------------------------------------------------------------------------
 
-bool ec_add(ec_compressed& point, ec_secret const& secret)
-{
+bool ec_add(ec_compressed& point, ec_secret const& secret) {
     auto const context = verification.context();
     return ec_add(context, point, secret);
 }
 
-bool ec_add(ec_uncompressed& point, ec_secret const& secret)
-{
+bool ec_add(ec_uncompressed& point, ec_secret const& secret) {
     auto const context = verification.context();
     return ec_add(context, point, secret);
 }
 
-bool ec_add(ec_secret& left, ec_secret const& right)
-{
+bool ec_add(ec_secret& left, ec_secret const& right) {
     auto const context = verification.context();
     return secp256k1_ec_privkey_tweak_add(context, left.data(),
         right.data()) == 1;
 }
 
-bool ec_multiply(ec_compressed& point, ec_secret const& secret)
-{
+bool ec_multiply(ec_compressed& point, ec_secret const& secret) {
     auto const context = verification.context();
     return ec_multiply(context, point, secret);
 }
 
-bool ec_multiply(ec_uncompressed& point, ec_secret const& secret)
-{
+bool ec_multiply(ec_uncompressed& point, ec_secret const& secret) {
     auto const context = verification.context();
     return ec_multiply(context, point, secret);
 }
 
-bool ec_multiply(ec_secret& left, ec_secret const& right)
-{
+bool ec_multiply(ec_secret& left, ec_secret const& right) {
     auto const context = verification.context();
     return secp256k1_ec_privkey_tweak_mul(context, left.data(),
         right.data()) == 1;
@@ -166,28 +144,24 @@ bool ec_multiply(ec_secret& left, ec_secret const& right)
 // Convert keys
 // ----------------------------------------------------------------------------
 
-bool compress(ec_compressed& out, const ec_uncompressed& point)
-{
+bool compress(ec_compressed& out, ec_uncompressed const& point) {
     secp256k1_pubkey pubkey;
     auto const context = verification.context();
     return parse(context, pubkey, point) && serialize(context, out, pubkey);
 }
 
-bool decompress(ec_uncompressed& out, const ec_compressed& point)
-{
+bool decompress(ec_uncompressed& out, ec_compressed const& point) {
     secp256k1_pubkey pubkey;
     auto const context = verification.context();
     return parse(context, pubkey, point) && serialize(context, out, pubkey);
 }
 
-bool secret_to_public(ec_compressed& out, ec_secret const& secret)
-{
+bool secret_to_public(ec_compressed& out, ec_secret const& secret) {
     auto const context = signing.context();
     return secret_to_public(context, out, secret);
 }
 
-bool secret_to_public(ec_uncompressed& out, ec_secret const& secret)
-{
+bool secret_to_public(ec_uncompressed& out, ec_secret const& secret) {
     auto const context = signing.context();
     return secret_to_public(context, out, secret);
 }
@@ -195,21 +169,18 @@ bool secret_to_public(ec_uncompressed& out, ec_secret const& secret)
 // Verify keys
 // ----------------------------------------------------------------------------
 
-bool verify(ec_secret const& secret)
-{
+bool verify(ec_secret const& secret) {
     auto const context = verification.context();
     return secp256k1_ec_seckey_verify(context, secret.data()) == 1;
 }
 
-bool verify(const ec_compressed& point)
-{
+bool verify(ec_compressed const& point) {
     secp256k1_pubkey pubkey;
     auto const context = verification.context();
     return parse(context, pubkey, point);
 }
 
-bool verify(const ec_uncompressed& point)
-{
+bool verify(ec_uncompressed const& point) {
     secp256k1_pubkey pubkey;
     auto const context = verification.context();
     return parse(context, pubkey, point);
@@ -218,40 +189,35 @@ bool verify(const ec_uncompressed& point)
 // Detect public keys
 // ----------------------------------------------------------------------------
 
-bool is_compressed_key(data_slice point)
-{
+bool is_compressed_key(data_slice point) {
     auto const size = point.size();
     if (size != ec_compressed_size) {
         return false;
-}
+    }
 
     auto const first = point.data()[0];
     return first == compressed_even || first == compressed_odd;
 }
 
-bool is_uncompressed_key(data_slice point)
-{
+bool is_uncompressed_key(data_slice point) {
     auto const size = point.size();
     if (size != ec_uncompressed_size) {
         return false;
-}
+    }
 
     auto const first = point.data()[0];
     return first == uncompressed;
 }
 
-bool is_public_key(data_slice point)
-{
+bool is_public_key(data_slice point) {
     return is_compressed_key(point) || is_uncompressed_key(point);
 }
 
-bool is_even_key(const ec_compressed& point)
-{
+bool is_even_key(ec_compressed const& point) {
     return point.front() == ec_even_sign;
 }
 
-bool is_endorsement(const endorsement& endorsement)
-{
+bool is_endorsement(const endorsement& endorsement) {
     auto const size = endorsement.size();
     return size >= min_endorsement_size && size <= max_endorsement_size;
 }
@@ -259,12 +225,10 @@ bool is_endorsement(const endorsement& endorsement)
 // DER parse/encode
 // ----------------------------------------------------------------------------
 
-bool parse_endorsement(uint8_t& sighash_type, der_signature& der_signature,
-    endorsement&& endorsement)
-{
+bool parse_endorsement(uint8_t& sighash_type, der_signature& der_signature, endorsement&& endorsement) {
     if (endorsement.empty()) {
         return false;
-}
+    }
 
     sighash_type = endorsement.back();
     endorsement.pop_back();
@@ -272,12 +236,10 @@ bool parse_endorsement(uint8_t& sighash_type, der_signature& der_signature,
     return true;
 }
 
-bool parse_signature(ec_signature& out, const der_signature& der_signature,
-    bool strict)
-{
+bool parse_signature(ec_signature& out, der_signature const& der_signature, bool strict) {
     if (der_signature.empty()) {
         return false;
-}
+    }
 
     bool valid;
     secp256k1_ecdsa_signature parsed;
@@ -289,17 +251,16 @@ bool parse_signature(ec_signature& out, const der_signature& der_signature,
     } else {
         valid = ecdsa_signature_parse_der_lax(context, &parsed,
             der_signature.data(), der_signature.size()) == 1;
-}
+    }
 
     if (valid) {
         std::copy_n(std::begin(parsed.data), ec_signature_size, out.begin());
-}
+    }
 
     return valid;
 }
 
-bool encode_signature(der_signature& out, const ec_signature& signature)
-{
+bool encode_signature(der_signature& out, ec_signature const& signature) {
     // Copy to avoid exposing external types.
     secp256k1_ecdsa_signature sign;
     std::copy_n(signature.begin(), ec_signature_size, std::begin(sign.data));
@@ -308,10 +269,9 @@ bool encode_signature(der_signature& out, const ec_signature& signature)
     auto size = max_der_signature_size;
     out.resize(size);
 
-    if (secp256k1_ecdsa_signature_serialize_der(context, out.data(), &size,
-        &sign) != 1) {
+    if (secp256k1_ecdsa_signature_serialize_der(context, out.data(), &size, &sign) != 1) {
         return false;
-}
+    }
 
     out.resize(size);
     return true;
@@ -320,41 +280,34 @@ bool encode_signature(der_signature& out, const ec_signature& signature)
 // EC sign/verify
 // ----------------------------------------------------------------------------
 
-bool sign(ec_signature& out, ec_secret const& secret, hash_digest const& hash)
-{
+bool sign(ec_signature& out, ec_secret const& secret, hash_digest const& hash) {
     secp256k1_ecdsa_signature signature;
     auto const context = signing.context();
 
     if (secp256k1_ecdsa_sign(context, &signature, hash.data(), secret.data(),
         secp256k1_nonce_function_rfc6979, nullptr) != 1) {
         return false;
-}
+    }
 
     std::copy_n(std::begin(signature.data), out.size(), out.begin());
     return true;
 }
 
-bool verify_signature(const ec_compressed& point, hash_digest const& hash,
-    const ec_signature& signature)
-{
+bool verify_signature(ec_compressed const& point, hash_digest const& hash, ec_signature const& signature) {
     secp256k1_pubkey pubkey;
     auto const context = verification.context();
     return parse(context, pubkey, point) &&
         verify_signature(context, pubkey, hash, signature);
 }
 
-bool verify_signature(const ec_uncompressed& point, hash_digest const& hash,
-    const ec_signature& signature)
-{
+bool verify_signature(ec_uncompressed const& point, hash_digest const& hash, ec_signature const& signature) {
     secp256k1_pubkey pubkey;
     auto const context = verification.context();
     return parse(context, pubkey, point) &&
-        verify_signature(context, pubkey, hash, signature);
+           verify_signature(context, pubkey, hash, signature);
 }
 
-bool verify_signature(data_slice point, hash_digest const& hash,
-    const ec_signature& signature)
-{
+bool verify_signature(data_slice point, hash_digest const& hash, ec_signature const& signature) {
     // Copy to avoid exposing external types.
     secp256k1_ecdsa_signature parsed;
     std::copy_n(signature.begin(), ec_signature_size, std::begin(parsed.data));
@@ -391,16 +344,12 @@ bool sign_recoverable(recoverable_signature& out, ec_secret const& secret, hash_
     return result;
 }
 
-bool recover_public(ec_compressed& out,
-    const recoverable_signature& recoverable, hash_digest const& hash)
-{
+bool recover_public(ec_compressed& out, recoverable_signature const& recoverable, hash_digest const& hash) {
     auto const context = verification.context();
     return recover_public(context, out, recoverable, hash);
 }
 
-bool recover_public(ec_uncompressed& out,
-    const recoverable_signature& recoverable, hash_digest const& hash)
-{
+bool recover_public(ec_uncompressed& out, recoverable_signature const& recoverable, hash_digest const& hash) {
     auto const context = verification.context();
     return recover_public(context, out, recoverable, hash);
 }

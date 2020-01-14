@@ -29,8 +29,8 @@ extern "C"
 /* Password-Based Key Derivation Function 2 (PKCS #5 v2.0). */
 /* Code based on IEEE Std 802.11-2007, Annex H.4.2. */
 /* returns 0 if successful. */
-int pkcs5_pbkdf2(const uint8_t* passphrase, size_t passphrase_length,
-    const uint8_t* salt, size_t salt_length, uint8_t* key, size_t key_length,
+int pkcs5_pbkdf2(uint8_t const* passphrase, size_t passphrase_length,
+    uint8_t const* salt, size_t salt_length, uint8_t* key, size_t key_length,
     size_t iterations);
 
 #ifdef __cplusplus

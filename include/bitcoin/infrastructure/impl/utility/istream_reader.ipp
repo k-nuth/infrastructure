@@ -57,6 +57,6 @@ Integer istream_reader::read_little_endian()
     return from_little_endian_stream_unsafe<Integer>(stream_);
 }
 
-} // libbitcoin
+} // namespace libbitcoin
 
 #endif

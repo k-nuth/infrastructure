@@ -100,7 +100,7 @@ public:
      * @return True if the endpoint is initialized.
      */
     // implicit
-    operator bool const() const;    //NOLINT
+    operator bool() const;
 
     /**
      * Getter.

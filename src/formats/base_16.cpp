@@ -45,7 +45,7 @@ bool is_base16(char c) {
 }
 
 static 
-unsigned from_hex(char c) {
+unsigned int from_hex(char c) {
     if ('A' <= c && c <= 'F') {
         return 10 + c - 'A';
     }
