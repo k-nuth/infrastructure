@@ -25,6 +25,9 @@ from kthbuild import KnuthConanFile
 
 
 class KnuthInfrastructureConan(KnuthConanFile):
+    def recipe_dir(self):
+        return os.path.dirname(os.path.abspath(__file__))
+
     name = "kth-infrastructure"
     # version = get_version()
     license = "http://www.boost.org/users/license.html"
