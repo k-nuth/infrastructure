@@ -36,18 +36,19 @@ class KnuthInfrastructureConan(KnuthConanFile):
 
     options = {"shared": [True, False],
                "fPIC": [True, False],
+
                "with_icu": [True, False],
                "with_png": [True, False],
                "with_qrencode": [True, False],
                "with_tests": [True, False],
                "with_examples": [True, False],
+
                "microarchitecture": "ANY", #["x86_64", "haswell", "ivybridge", "sandybridge", "bulldozer", ...]
                "fix_march": [True, False],
                "verbose": [True, False],
                "cxxflags": "ANY",
                "cflags": "ANY",
                "glibcxx_supports_cxx11_abi": "ANY",
-
     }
 
     default_options = "shared=False", \
@@ -72,7 +73,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
     build_policy = "missing"
 
     def requirements(self):
-        self.requires("boost/1.71.0@kth/stable")
+        self.requires("boost/1.72.0@kth/stable")
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
 
         if self.options.with_png:
@@ -82,15 +83,16 @@ class KnuthInfrastructureConan(KnuthConanFile):
             self.requires("libqrencode/4.0.0@bitprim/stable")
 
     def config_options(self):
-        if self.settings.arch != "x86_64":
-            self.output.info("microarchitecture is disabled for architectures other than x86_64, your architecture: %s" % (self.settings.arch,))
-            self.options.remove("microarchitecture")
-            self.options.remove("fix_march")
+        KnuthConanFile.config_options(self)
+        # if self.settings.arch != "x86_64":
+        #     self.output.info("microarchitecture is disabled for architectures other than x86_64, your architecture: %s" % (self.settings.arch,))
+        #     self.options.remove("microarchitecture")
+        #     self.options.remove("fix_march")
 
-        if self.settings.compiler == "Visual Studio":
-            self.options.remove("fPIC")
-            if self.options.shared and self.msvc_mt_build:
-                self.options.remove("shared")
+        # if self.settings.compiler == "Visual Studio":
+        #     self.options.remove("fPIC")
+        #     if self.options.shared and self.msvc_mt_build:
+        #         self.options.remove("shared")
 
 
     def configure(self):
@@ -112,6 +114,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
 
         self.info.options.with_tests = "ANY"
         self.info.options.with_examples = "ANY"
+
         self.info.options.verbose = "ANY"
         self.info.options.fix_march = "ANY"
         self.info.options.cxxflags = "ANY"
