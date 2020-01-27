@@ -17,9 +17,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 from conans import CMake
-from ci_utils import option_on_off, march_conan_manip, pass_march_to_compiler
-from ci_utils import KnuthConanFile
-
+# from ci_utils import option_on_off, march_conan_manip, pass_march_to_compiler
+# from ci_utils import KnuthConanFile
+from kthbuild import option_on_off, march_conan_manip, pass_march_to_compiler
+from kthbuild import KnuthConanFile
 
 
 
