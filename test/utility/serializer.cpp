@@ -80,7 +80,7 @@ BOOST_AUTO_TEST_CASE(is_exhausted_initialized_nonempty_stream_returns_false)
 
 BOOST_AUTO_TEST_CASE(peek_byte_nonempty_stream_does_not_advance)
 {
-    const uint8_t expected = 0x42;
+    uint8_t const expected = 0x42;
     data_chunk data({ expected, 0x00 });
     auto source = make_safe_deserializer(data.begin(), data.end());
     BOOST_REQUIRE_EQUAL(source.peek_byte(), expected);
@@ -91,7 +91,7 @@ BOOST_AUTO_TEST_CASE(peek_byte_nonempty_stream_does_not_advance)
 
 BOOST_AUTO_TEST_CASE(roundtrip_byte)
 {
-    const uint8_t expected = 0xAA;
+    uint8_t const expected = 0xAA;
     data_chunk data(1);
     auto source = make_safe_deserializer(data.begin(), data.end());
     auto sink = make_unsafe_serializer(data.begin());

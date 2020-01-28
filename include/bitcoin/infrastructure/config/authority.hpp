@@ -107,7 +107,7 @@ public:
      * @return True if the port is non-zero.
      */
     // implicit
-    operator bool const() const;    //NOLINT
+    operator bool() const;
 
     /**
      * Getter.

@@ -67,7 +67,7 @@ hash_digest const& checkpoint::hash() const {
     return hash_;
 }
 
-size_t const checkpoint::height() const {
+size_t checkpoint::height() const {
     return height_;
 }
 
@@ -108,12 +108,13 @@ std::istream& operator>>(std::istream& input, checkpoint& argument) {
     std::string value;
     input >> value;
 
-    // std::regex requires gcc 4.9, so we are using boost::regex for now.
-    // Knuth: we use std::regex, becase we drop support por GCC<5
+    //Note(knuth): we use std::regex, becase we drop support por GCC<5
+    //TODO(fernando): avoid using regex, split the string and parse the two numbers
     static
     std::regex const regular("^([0-9a-f]{64})(:([0-9]{1,20}))?$");
 
-    std::sregex_iterator it(value.begin(), value.end(), regular), end;
+    std::sregex_iterator it(value.begin(), value.end(), regular);
+    std::sregex_iterator end;
     if (it == end) {
         BOOST_THROW_EXCEPTION(invalid_option_value(value));
     }

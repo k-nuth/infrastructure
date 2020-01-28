@@ -46,8 +46,8 @@ extern "C"
  *
  * Return 0 on success; or -1 on error.
  */
-int crypto_scrypt(const uint8_t* passphrase, size_t passphrase_length,
-    const uint8_t* salt, size_t salt_length, uint64_t N, uint32_t r,
+int crypto_scrypt(uint8_t const* passphrase, size_t passphrase_length,
+    uint8_t const* salt, size_t salt_length, uint64_t N, uint32_t r,
     uint32_t p, uint8_t* buf, size_t buf_length);
 
 #ifdef __cplusplus

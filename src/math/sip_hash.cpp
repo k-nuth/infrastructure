@@ -50,10 +50,10 @@ sip_hasher::sip_hasher(uint64_t k0, uint64_t k1)
 {}
 
 sip_hasher& sip_hasher::write(uint64_t data) {
-    uint64_t v0 = v[0], 
-             v1 = v[1], 
-             v2 = v[2], 
-             v3 = v[3];
+    uint64_t v0 = v[0];
+    uint64_t v1 = v[1]; 
+    uint64_t v2 = v[2]; 
+    uint64_t v3 = v[3];
 
     //class invariant
     assert(count % 8 == 0);
@@ -73,10 +73,10 @@ sip_hasher& sip_hasher::write(uint64_t data) {
 }
 
 sip_hasher& sip_hasher::write(uint8_t const* data, size_t size) {
-    uint64_t v0 = v[0], 
-             v1 = v[1], 
-             v2 = v[2], 
-             v3 = v[3];
+    uint64_t v0 = v[0];
+    uint64_t v1 = v[1];
+    uint64_t v2 = v[2]; 
+    uint64_t v3 = v[3];
 
     uint64_t t = tmp;
     int c = count;

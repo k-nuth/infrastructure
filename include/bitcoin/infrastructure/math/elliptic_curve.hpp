@@ -110,10 +110,10 @@ BI_API bool ec_multiply(ec_secret& left, ec_secret const& right);
 // ----------------------------------------------------------------------------
 
 /// Convert an uncompressed public point to compressed.
-BI_API bool compress(ec_compressed& out, const ec_uncompressed& point);
+BI_API bool compress(ec_compressed& out, ec_uncompressed const& point);
 
 /// Convert a compressed public point to decompressed.
-BI_API bool decompress(ec_uncompressed& out, const ec_compressed& point);
+BI_API bool decompress(ec_uncompressed& out, ec_compressed const& point);
 
 /// Convert a secret to a compressed public point.
 BI_API bool secret_to_public(ec_compressed& out, ec_secret const& secret);
@@ -128,16 +128,16 @@ BI_API bool secret_to_public(ec_uncompressed& out, ec_secret const& secret);
 BI_API bool verify(ec_secret const& secret);
 
 /// Verify a point.
-BI_API bool verify(const ec_compressed& point);
+BI_API bool verify(ec_compressed const& point);
 
 /// Verify a point.
-BI_API bool verify(const ec_uncompressed& point);
+BI_API bool verify(ec_uncompressed const& point);
 
 // Detect public keys
 // ----------------------------------------------------------------------------
 
 /// Determine if the compressed public key is even (y-valued).
-bool is_even_key(const ec_compressed& point);
+bool is_even_key(ec_compressed const& point);
 
 /// Fast detection of compressed public key structure.
 bool is_compressed_key(data_slice point);
@@ -161,10 +161,10 @@ BI_API bool parse_endorsement(uint8_t& sighash_type,
 /// Parse a DER encoded signature with optional strict DER enforcement.
 /// Treat an empty DER signature as invalid, in accordance with BIP66.
 BI_API bool parse_signature(ec_signature& out,
-    const der_signature& der_signature, bool strict);
+    der_signature const& der_signature, bool strict);
 
 /// Encode an EC signature as DER (strict).
-BI_API bool encode_signature(der_signature& out, const ec_signature& signature);
+BI_API bool encode_signature(der_signature& out, ec_signature const& signature);
 
 // EC sign/verify
 // ----------------------------------------------------------------------------
@@ -174,16 +174,16 @@ BI_API bool sign(ec_signature& out, ec_secret const& secret,
     hash_digest const& hash);
 
 /// Verify an EC signature using a compressed point.
-BI_API bool verify_signature(const ec_compressed& point,
-    hash_digest const& hash, const ec_signature& signature);
+BI_API bool verify_signature(ec_compressed const& point,
+    hash_digest const& hash, ec_signature const& signature);
 
 /// Verify an EC signature using an uncompressed point.
-BI_API bool verify_signature(const ec_uncompressed& point,
-    hash_digest const& hash, const ec_signature& signature);
+BI_API bool verify_signature(ec_uncompressed const& point,
+    hash_digest const& hash, ec_signature const& signature);
 
 /// Verify an EC signature using a potential point.
 BI_API bool verify_signature(data_slice point, hash_digest const& hash,
-    const ec_signature& signature);
+    ec_signature const& signature);
 
 // Recoverable sign/recover
 // ----------------------------------------------------------------------------
@@ -194,11 +194,11 @@ BI_API bool sign_recoverable(recoverable_signature& out,
 
 /// Recover the compressed point from a recoverable message signature.
 BI_API bool recover_public(ec_compressed& out,
-    const recoverable_signature& recoverable, hash_digest const& hash);
+    recoverable_signature const& recoverable, hash_digest const& hash);
 
 /// Recover the uncompressed point from a recoverable message signature.
 BI_API bool recover_public(ec_uncompressed& out,
-    const recoverable_signature& recoverable, hash_digest const& hash);
+    recoverable_signature const& recoverable, hash_digest const& hash);
 
 } // namespace libbitcoin
 

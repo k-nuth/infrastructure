@@ -59,7 +59,7 @@ static auto const statsd_filter = has_attr(attributes::metric) &&
     (has_attr(attributes::counter) || has_attr(attributes::gauge) ||
         has_attr(attributes::timer));
 
-void statsd_formatter(const record_view& record, formatting_ostream& stream) {
+void statsd_formatter(record_view const& record, formatting_ostream& stream) {
     // Get the LineID attribute value and put it into the stream.
     stream << record[attributes::metric] << ":";
 

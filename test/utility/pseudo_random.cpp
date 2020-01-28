@@ -51,7 +51,7 @@ BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__subminute_ratio_0__maximum
 
 BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__subminute_ratio_1__expected)
 {
-    const uint8_t ratio = 1;
+    uint8_t const ratio = 1;
     int const max_seconds = 42;
     const asio::seconds maximum(max_seconds);
     const asio::seconds minimum(max_seconds - max_seconds / ratio);
@@ -73,7 +73,7 @@ BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__subminute_default_ratio__e
 // Use same (ms) resolution as function to prevent test rounding difference.
 BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__superminute_ratio_255__expected)
 {
-    const uint8_t ratio = 255;
+    uint8_t const ratio = 255;
     int const max_seconds = 420;
     const asio::milliseconds maximum(max_seconds);
     const asio::milliseconds minimum(max_seconds - max_seconds / ratio);

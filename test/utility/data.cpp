@@ -29,7 +29,7 @@ BOOST_AUTO_TEST_SUITE(data_tests)
 
 BOOST_AUTO_TEST_CASE(data__to_byte__value__expected_size_and_value)
 {
-    const uint8_t expected = 42;
+    uint8_t const expected = 42;
     auto const result = to_array(expected);
     BOOST_REQUIRE_EQUAL(result.size(), 1u);
     BOOST_REQUIRE_EQUAL(result[0], expected);
@@ -43,7 +43,7 @@ BOOST_AUTO_TEST_CASE(data__build_chunk__empty__empty)
 
 BOOST_AUTO_TEST_CASE(data__build_chunk__one_slice__expected_size_and_value)
 {
-    const uint8_t expected = 42;
+    uint8_t const expected = 42;
     auto const chunk1 = std::vector<uint8_t>{ 24 };
     auto const chunk2 = std::vector<uint8_t>{ expected };
     auto const chunk3 = std::vector<uint8_t>{ 48 };
@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE(data__build_chunk__three_slices__expected_size_and_value)
     size_t const size1 = 2;
     size_t const size2 = 1;
     size_t const size3 = 3;
-    const uint8_t expected = 42;
+    uint8_t const expected = 42;
     auto const result = build_chunk(
     {
         std::array<uint8_t, size1>{ { 0, 0} },
@@ -74,9 +74,9 @@ BOOST_AUTO_TEST_CASE(data__build_chunk__three_slices__expected_size_and_value)
 
 BOOST_AUTO_TEST_CASE(data__build_chunk__extra_reserve__expected_size_and_capacity)
 {
-    const uint8_t size1 = 2;
-    const uint8_t size2 = 1;
-    const uint8_t size3 = 3;
+    uint8_t const size1 = 2;
+    uint8_t const size2 = 1;
+    uint8_t const size3 = 3;
     auto const reserve = 42;
     auto const result = build_chunk(
     {
@@ -90,7 +90,7 @@ BOOST_AUTO_TEST_CASE(data__build_chunk__extra_reserve__expected_size_and_capacit
 
 BOOST_AUTO_TEST_CASE(data__build_array__empty__true_unchanged)
 {
-    const uint8_t expected = 42;
+    uint8_t const expected = 42;
     std::array<uint8_t, 3> value{ { 0, expected, 0 } };
     auto const result = build_array(value, {});
     BOOST_REQUIRE(result);
@@ -99,9 +99,9 @@ BOOST_AUTO_TEST_CASE(data__build_array__empty__true_unchanged)
 
 BOOST_AUTO_TEST_CASE(data__build_array__under_capacity__true_excess_unchanged)
 {
-    const uint8_t expected1 = 24;
-    const uint8_t expected2 = 42;
-    const uint8_t expected3 = 48;
+    uint8_t const expected1 = 24;
+    uint8_t const expected2 = 42;
+    uint8_t const expected3 = 48;
     std::array<uint8_t, 3> value{ { 0, 0, expected3 } };
     auto const result = build_array(value,
     {
@@ -118,7 +118,7 @@ BOOST_AUTO_TEST_CASE(data__build_array__exact_fill_multiple_slices__true_expecte
     size_t const size1 = 2;
     size_t const size2 = 1;
     size_t const size3 = 3;
-    const uint8_t expected = 42;
+    uint8_t const expected = 42;
     std::array<uint8_t, size1 + size2 + size3> value;
     auto const two_byte_vector = std::vector<uint8_t>{ { expected, expected } };
     auto const result = build_array(value,
@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_CASE(data__build_array__overflow__returns_false)
 
 BOOST_AUTO_TEST_CASE(data__extend_data__twice__expected)
 {
-    const uint8_t expected = 24;
+    uint8_t const expected = 24;
     data_chunk buffer1{ 0 };
     extend_data(buffer1, null_hash);
     data_chunk buffer2{ expected };
@@ -168,7 +168,7 @@ BOOST_AUTO_TEST_CASE(data__slice__empty_selection__compiles)
 
 BOOST_AUTO_TEST_CASE(data__slice__three_bytes_front__expected)
 {
-    const uint8_t expected = 24;
+    uint8_t const expected = 24;
     const byte_array<3> source
     {
         { expected, 42, 42 }
@@ -180,7 +180,7 @@ BOOST_AUTO_TEST_CASE(data__slice__three_bytes_front__expected)
 
 BOOST_AUTO_TEST_CASE(data__slice__three_bytes_middle__expected)
 {
-    const uint8_t expected = 24;
+    uint8_t const expected = 24;
     const byte_array<3> source
     {
         { 42, expected, 42 }
@@ -192,7 +192,7 @@ BOOST_AUTO_TEST_CASE(data__slice__three_bytes_middle__expected)
 
 BOOST_AUTO_TEST_CASE(data__slice__three_bytes_end__expected)
 {
-    const uint8_t expected = 24;
+    uint8_t const expected = 24;
     const byte_array<3> source
     {
         { 42, 42, expected }
@@ -204,8 +204,8 @@ BOOST_AUTO_TEST_CASE(data__slice__three_bytes_end__expected)
 
 BOOST_AUTO_TEST_CASE(data__split__two_bytes__expected)
 {
-    const uint8_t expected_left = 42;
-    const uint8_t expected_right = 24;
+    uint8_t const expected_left = 42;
+    uint8_t const expected_right = 24;
     const byte_array<2> source
     {
         { expected_left, expected_right }
@@ -218,8 +218,8 @@ BOOST_AUTO_TEST_CASE(data__split__two_bytes__expected)
 
 BOOST_AUTO_TEST_CASE(data__split__long_hash__expected)
 {
-    const uint8_t l = 42;
-    const uint8_t u = 24;
+    uint8_t const l = 42;
+    uint8_t const u = 24;
     long_hash source
     {
         {
@@ -237,8 +237,8 @@ BOOST_AUTO_TEST_CASE(data__split__long_hash__expected)
 
 BOOST_AUTO_TEST_CASE(data__splice_two__two_bytes_each__expected)
 {
-    const uint8_t expected_left = 42;
-    const uint8_t expected_right = 24;
+    uint8_t const expected_left = 42;
+    uint8_t const expected_right = 24;
 
     const byte_array<2> left
     {
@@ -257,8 +257,8 @@ BOOST_AUTO_TEST_CASE(data__splice_two__two_bytes_each__expected)
 
 BOOST_AUTO_TEST_CASE(data__splice_three__one_two_three_bytes__expected)
 {
-    const uint8_t expected_left = 42;
-    const uint8_t expected_right = 24;
+    uint8_t const expected_left = 42;
+    uint8_t const expected_right = 24;
 
     const byte_array<1> left
     {
@@ -282,8 +282,8 @@ BOOST_AUTO_TEST_CASE(data__splice_three__one_two_three_bytes__expected)
 
 BOOST_AUTO_TEST_CASE(data__to_array_slice__double_long_hash__expected)
 {
-    const uint8_t l = 42;
-    const uint8_t u = 24;
+    uint8_t const l = 42;
+    uint8_t const u = 24;
     data_chunk const source
     {
         l, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -299,8 +299,8 @@ BOOST_AUTO_TEST_CASE(data__to_array_slice__double_long_hash__expected)
 
 BOOST_AUTO_TEST_CASE(data__to_chunk__long_hash__expected)
 {
-    const uint8_t l = 42;
-    const uint8_t u = 24;
+    uint8_t const l = 42;
+    uint8_t const u = 24;
     const long_hash source
     {
         {

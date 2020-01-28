@@ -32,7 +32,7 @@
 
 static 
 uint64_t be64dec(const void* pp) {
-    const uint8_t* p = (uint8_t const*)pp;
+    uint8_t const* p = (uint8_t const*)pp;
 
     return ((uint64_t)(p[7]) + ((uint64_t)(p[6]) << 8) +
         ((uint64_t)(p[5]) << 16) + ((uint64_t)(p[4]) << 24) +
@@ -107,9 +107,9 @@ unsigned char PAD[SHA512_BLOCK_LENGTH] = {
 
 void SHA512Pad(SHA512CTX* context);
 void SHA512Transform(uint64_t state[SHA512_STATE_LENGTH],
-    const uint8_t block[SHA512_BLOCK_LENGTH]);
+    uint8_t const block[SHA512_BLOCK_LENGTH]);
 
-void SHA512_(const uint8_t* input, size_t length, uint8_t digest[SHA512_DIGEST_LENGTH]) {
+void SHA512_(uint8_t const* input, size_t length, uint8_t digest[SHA512_DIGEST_LENGTH]) {
     SHA512CTX context;
     SHA512Init(&context);
     SHA512Update(&context, input, length);
@@ -129,7 +129,7 @@ void SHA512Init(SHA512CTX* context) {
     context->state[7] = 0x5be0cd19137e2179ULL;
 }
 
-void SHA512Update(SHA512CTX* context, const uint8_t* input, size_t length) {
+void SHA512Update(SHA512CTX* context, uint8_t const* input, size_t length) {
     uint64_t bitlen[2];
     size_t r = (context->count[1] >> 3) & 0x7f;
 
@@ -183,7 +183,7 @@ void SHA512Pad(SHA512CTX* context) {
     SHA512Update(context, len, 16);
 }
 
-void SHA512Transform(uint64_t state[SHA512_STATE_LENGTH], const uint8_t block[SHA512_BLOCK_LENGTH]) {
+void SHA512Transform(uint64_t state[SHA512_STATE_LENGTH], uint8_t const block[SHA512_BLOCK_LENGTH]) {
     int i;
     uint64_t W[80];
     uint64_t S[8];

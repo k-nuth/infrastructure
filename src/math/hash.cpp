@@ -19,9 +19,9 @@
 #include <bitcoin/infrastructure/math/hash.hpp>
 
 #include <algorithm>
+#include <cerrno>
 #include <cstddef>
 #include <cstdint>
-#include <cerrno>
 #include <new>
 #include <stdexcept>
 

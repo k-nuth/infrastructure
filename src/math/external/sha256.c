@@ -32,7 +32,7 @@
 
 static uint32_t be32dec(const void* pp)
 {
-    const uint8_t* p = (uint8_t const*)pp;
+    uint8_t const* p = (uint8_t const*)pp;
 
     return ((uint32_t)(p[3]) + ((uint32_t)(p[2]) << 8) +
         ((uint32_t)(p[1]) << 16) + ((uint32_t)(p[0]) << 24));
@@ -57,7 +57,7 @@ static void be32enc_vect(uint8_t* dst, const uint32_t* src, size_t len)
     }
 }
 
-static void be32dec_vect(uint32_t* dst, const uint8_t* src, size_t len)
+static void be32dec_vect(uint32_t* dst, uint8_t const* src, size_t len)
 {
     size_t i;
     for (i = 0; i < len / 4; i++) 
@@ -98,9 +98,9 @@ static unsigned char PAD[SHA256_BLOCK_LENGTH] =
 
 void SHA256Pad(SHA256CTX* context);
 void SHA256Transform(uint32_t state[SHA256_STATE_LENGTH],
-    const uint8_t block[SHA256_BLOCK_LENGTH]);
+    uint8_t const block[SHA256_BLOCK_LENGTH]);
 
-void SHA256_(const uint8_t* input, size_t length,
+void SHA256_(uint8_t const* input, size_t length,
     uint8_t digest[SHA256_DIGEST_LENGTH])
 {
     SHA256CTX context;
@@ -123,7 +123,7 @@ void SHA256Init(SHA256CTX* context)
     context->state[7] = 0x5BE0CD19;
 }
 
-void SHA256Update(SHA256CTX* context, const uint8_t* input, size_t length)
+void SHA256Update(SHA256CTX* context, uint8_t const* input, size_t length)
 {
     uint32_t bitlen[2];
     uint32_t r = (context->count[1] >> 3) & 0x3f;
@@ -184,7 +184,7 @@ void SHA256Pad(SHA256CTX* context)
 }
 
 void SHA256Transform(uint32_t state[SHA256_STATE_LENGTH],
-    const uint8_t block[SHA256_BLOCK_LENGTH])
+    uint8_t const block[SHA256_BLOCK_LENGTH])
 {
     int i;
     uint32_t W[64];

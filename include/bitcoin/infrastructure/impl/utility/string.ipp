@@ -42,7 +42,7 @@ void deserialize(Value& value, std::string const& text, bool trim) {
 }
 
 template <typename Value>
-void deserialize(std::vector<Value>& collection, std::string const& text, bool trim) {
+void deserialize(std::vector<Value>& collection, std::string const& text, bool /*trim*/) {
     // This had problems with the inclusion of the ideographic (CJK) space
     // (0xe3,0x80, 0x80). Need to infuse the local in bc::split().
     auto const tokens = split(text, " \n\r\t");

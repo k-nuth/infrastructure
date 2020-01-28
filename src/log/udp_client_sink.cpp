@@ -38,7 +38,7 @@ udp_client_sink::udp_client_sink(socket_ptr socket, endpoint_ptr endpoint)
     : socket_(std::move(socket)), endpoint_(std::move(endpoint))
 {}
 
-void udp_client_sink::consume(const record_view& record, std::string const& message) {
+void udp_client_sink::consume(record_view const& /*record*/, std::string const& message) {
     send(message);
 }
 

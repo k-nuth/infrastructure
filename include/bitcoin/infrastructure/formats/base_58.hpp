@@ -40,7 +40,7 @@ bool decode_base58(byte_array<Size>& out, std::string const &in);
  * Converts a base58 string literal to a data array.
  * This would be better as a C++11 user-defined literal,
  * but MSVC doesn't support those.
- * TODO: determine if the sizing function is always accurate.
+ * TODO(libbitcoin): determine if the sizing function is always accurate.
  */
 template <size_t Size>
 byte_array<Size * 733 / 1000> base58_literal(char const(&string)[Size]);

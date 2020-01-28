@@ -39,7 +39,7 @@ BOOST_AUTO_TEST_CASE(collection__distinct__empty__same)
 
 BOOST_AUTO_TEST_CASE(collection__distinct__single__match)
 {
-    const uint8_t expected = 42;
+    uint8_t const expected = 42;
     collection set{ expected };
     auto const& result = distinct(set);
     BOOST_REQUIRE_EQUAL(result.size(), 1u);
@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_CASE(collection__move_append__neither_empty__moved_in_order)
 
 BOOST_AUTO_TEST_CASE(collection__pop__single__empty_and_returns_expected)
 {
-    const uint8_t expected = 42u;
+    uint8_t const expected = 42u;
     collection stack{ expected };
     auto const value = pop(stack);
     BOOST_REQUIRE(stack.empty());
@@ -154,7 +154,7 @@ BOOST_AUTO_TEST_CASE(collection__pop__single__empty_and_returns_expected)
 
 BOOST_AUTO_TEST_CASE(collection__pop__multiple__popped_and_returns_expected)
 {
-    const uint8_t expected = 42u;
+    uint8_t const expected = 42u;
     collection stack{ 0, 1, 2, 3, expected };
     auto const value = pop(stack);
     BOOST_REQUIRE_EQUAL(stack.size(), 4u);

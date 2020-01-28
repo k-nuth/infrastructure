@@ -89,7 +89,7 @@ public:
     checkpoint(hash_digest const& hash, size_t height);
 
     hash_digest const& hash() const;
-    size_t const height() const;
+    size_t height() const;
 
     /**
      * Get the checkpoint as a string.

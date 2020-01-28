@@ -28,24 +28,19 @@
 
 namespace libbitcoin {
 
-const static char pad = '=';
+static char const pad = '=';
+static char const table[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-const static char table[] =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-
-std::string encode_base64(data_slice unencoded)
-{
+std::string encode_base64(data_slice unencoded) {
     std::string encoded;
     auto const size = unencoded.size();
     encoded.reserve(((size / 3) + static_cast<unsigned long>(size % 3 > 0)) * 4);
 
     uint32_t value;
     auto cursor = unencoded.begin();
-    for (size_t position = 0; position < size / 3; position++)
-    {
+    for (size_t position = 0; position < size / 3; position++) {
         // Convert to big endian.
         value = (*cursor++) << 16;
-
         value += (*cursor++) << 8;
         value += (*cursor++);
         encoded.append(1, table[(value & 0x00FC0000) >> 18]);
@@ -54,12 +49,10 @@ std::string encode_base64(data_slice unencoded)
         encoded.append(1, table[(value & 0x0000003F) >> 0]);
     }
 
-    switch (size % 3)
-    {
+    switch (size % 3) {
         case 1:
             // Convert to big endian.
             value = (*cursor++) << 16;
-
             encoded.append(1, table[(value & 0x00FC0000) >> 18]);
             encoded.append(1, table[(value & 0x0003F000) >> 12]);
             encoded.append(2, pad);
@@ -67,7 +60,6 @@ std::string encode_base64(data_slice unencoded)
         case 2:
             // Convert to big endian.
             value = (*cursor++) << 16;
-
             value += (*cursor++) << 8;
             encoded.append(1, table[(value & 0x00FC0000) >> 18]);
             encoded.append(1, table[(value & 0x0003F000) >> 12]);
@@ -79,34 +71,31 @@ std::string encode_base64(data_slice unencoded)
     return encoded;
 }
 
-bool decode_base64(data_chunk& out, std::string const& in)
-{
-    const static uint32_t mask = 0x000000FF;
+bool decode_base64(data_chunk& out, std::string const& in) {
+    static uint32_t const mask = 0x000000FF;
 
     auto const length = in.length();
     if ((length % 4) != 0) {
         return false;
-}
+    }
 
     size_t padding = 0;
-    if (length > 0)
-    {
+    if (length > 0) {
         if (in[length - 1] == pad) {
             padding++;
-}
+        }
+        
         if (in[length - 2] == pad) {
             padding++;
-}
+        }
     }
 
     data_chunk decoded;
     decoded.reserve(((length / 4) * 3) - padding);
 
     uint32_t value = 0;
-    for (auto cursor = in.begin(); cursor < in.end();)
-    {
-        for (size_t position = 0; position < 4; position++)
-        {
+    for (auto cursor = in.begin(); cursor < in.end();) {
+        for (size_t position = 0; position < 4; position++) {
             value <<= 6;
             if (*cursor >= 0x41 && *cursor <= 0x5A) {
                 value |= *cursor - 0x41;
@@ -118,11 +107,9 @@ bool decode_base64(data_chunk& out, std::string const& in)
                 value |= 0x3E;
             } else if (*cursor == 0x2F) {
                 value |= 0x3F;
-            } else if (*cursor == pad)
-            {
+            } else if (*cursor == pad) {
                 // Handle 1 or 2 pad characters.
-                switch (in.end() - cursor)
-                {
+                switch (in.end() - cursor) {
                     case 1:
                         decoded.push_back((value >> 16) & mask);
                         decoded.push_back((value >> 8) & mask);
@@ -135,10 +122,9 @@ bool decode_base64(data_chunk& out, std::string const& in)
                     default:
                         return false;
                 }
-            }
-            else {
+            } else {
                 return false;
-}
+            }
 
             cursor++;
         }

@@ -95,10 +95,10 @@ public:
 
     /// Cast operators.
     // implicit
-    operator bool const() const;    //NOLINT
+    operator bool() const;
     
     explicit
-    operator const ec_compressed&() const;
+    operator ec_compressed const&() const;
 
     /// Serializer.
     std::string encoded() const;
@@ -106,7 +106,7 @@ public:
     /// Accessors.
     const hd_chain_code& chain_code() const;
     hd_lineage const& lineage() const;
-    const ec_compressed& point() const;
+    ec_compressed const& point() const;
 
     /// Methods.
     hd_key to_hd_key() const;
@@ -140,7 +140,7 @@ private:
     static
     hd_public from_string(std::string const& encoded, uint32_t prefix);
 
-    hd_public(const ec_compressed& point, const hd_chain_code& chain_code, hd_lineage const& lineage);
+    hd_public(ec_compressed const& point, const hd_chain_code& chain_code, hd_lineage const& lineage);
 };
 
 } // namespace wallet
