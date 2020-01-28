@@ -20,9 +20,13 @@
 
 // #define LIBBITCOIN_VERSION KNUTH_INFRASTRUCTURE_VERSION
 
-namespace libbitcoin { namespace infrastructure {
+namespace libbitcoin { 
+namespace infrastructure {
+
 char const* version();
-}} /*namespace libbitcoin::infrastructure*/
+
+} /*namespace infrastructure*/
+} /*namespace libbitcoin*/
  
 
 #endif // KNUTH_INFRASTRUCTURE_VERSION_HPP_

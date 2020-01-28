@@ -55,43 +55,43 @@ public:
     void invalidate();
 
     /// Read hashes.
-    hash_digest read_hash();
-    short_hash read_short_hash();
-    mini_hash read_mini_hash();
+    hash_digest read_hash() override;
+    short_hash read_short_hash() override;
+    mini_hash read_mini_hash() override;
 
     /// Read big endian integers.
-    uint16_t read_2_bytes_big_endian();
-    uint32_t read_4_bytes_big_endian();
-    uint64_t read_8_bytes_big_endian();
-    uint64_t read_variable_big_endian();
-    size_t read_size_big_endian();
+    uint16_t read_2_bytes_big_endian() override;
+    uint32_t read_4_bytes_big_endian() override;
+    uint64_t read_8_bytes_big_endian() override;
+    uint64_t read_variable_big_endian() override;
+    size_t read_size_big_endian() override;
 
     /// Read little endian integers.
-    code read_error_code();
-    uint16_t read_2_bytes_little_endian();
-    uint32_t read_4_bytes_little_endian();
-    uint64_t read_8_bytes_little_endian();
-    uint64_t read_variable_little_endian();
-    size_t read_size_little_endian();
+    code read_error_code() override;
+    uint16_t read_2_bytes_little_endian() override;
+    uint32_t read_4_bytes_little_endian() override;
+    uint64_t read_8_bytes_little_endian() override;
+    uint64_t read_variable_little_endian() override;
+    size_t read_size_little_endian() override;
 
     /// Read/peek one byte.
-    uint8_t peek_byte();
-    uint8_t read_byte();
+    uint8_t peek_byte() override;
+    uint8_t read_byte() override;
 
     /// Read all remaining bytes.
-    data_chunk read_bytes();
+    data_chunk read_bytes() override;
 
     /// Read required size buffer.
-    data_chunk read_bytes(size_t size);
+    data_chunk read_bytes(size_t size) override;
 
     /// Read variable length string.
-    std::string read_string();
+    std::string read_string() override;
 
     /// Read required size string and trim nulls.
-    std::string read_string(size_t size);
+    std::string read_string(size_t size) override;
 
     /// Advance iterator without reading.
-    void skip(size_t size);
+    void skip(size_t size) override;
 
 private:
     // The buffer is faulted or at eof.

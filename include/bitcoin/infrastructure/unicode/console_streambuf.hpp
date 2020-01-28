@@ -57,7 +57,6 @@ protected:
     ~console_streambuf() override = default;
 #endif
 
-
     /**
      * Implement alternate console read.
      * @param[in]  buffer  Pointer to the buffer to fill with console reads.

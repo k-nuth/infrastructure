@@ -153,7 +153,7 @@ data_chunk to_utf8(int argc, wchar_t* argv[])
         payload_size += collection[arg].size() + 1;
     }
 
-    // TODO: unsafe multiplication.
+    // TODO(libbitcoin): unsafe multiplication.
     // Determine the index size.
     auto const index_size = safe_add(arg_count, size_t{1}) * sizeof(void*);
 
@@ -316,7 +316,7 @@ size_t to_utf16(wchar_t out[], size_t out_chars, char const in[],
     BITCOIN_ASSERT(out_chars >= in_bytes);
 
     // Calculate a character break offset of 0..4 bytes.
-    truncated = offset_to_terminal_utf8_character(in, in_bytes);
+    out_truncated = offset_to_terminal_utf8_character(in, in_bytes);
 
     if (in_bytes == 0) {
         return 0;
