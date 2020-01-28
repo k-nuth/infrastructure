@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# Copyright (c) 2017-2018 Bitprim Inc.
+# Copyright (c) 2016-2019 Knuth Project.
 #
-# This file is part of Bitprim.
+# This file is part of Knuth Project.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -50,7 +50,7 @@ sudo pip3.6 install --upgrade conan
 # sudo pip3.6 install --upgrade conan_package_tools
 
 conan user
-conan remote add bitprim_temp https://api.bintray.com/conan/bitprim/bitprim
+conan remote add knuth_temp https://api.bintray.com/conan/k-nuth/kth
 
 
 

@@ -70,7 +70,7 @@ public:
      * Initialization constructor.
      * @param[in]  net  The network address (ip and port) to initialize with.
      */
-    // implicit //Note(bitprim): in bitprim-network it is used the implicit convertion
+    // implicit //Note(knuth): in kth-network it is used the implicit convertion
     authority(message::network_address const& address);
 
     /**

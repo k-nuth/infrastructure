@@ -15,8 +15,8 @@
 
 // Modification of boost implementation to alter log file rotation naming.
 
-#ifndef BITPRIM_INFRASTRUCTURE_LOG_FILE_CHAR_TRAITS_HPP
-#define BITPRIM_INFRASTRUCTURE_LOG_FILE_CHAR_TRAITS_HPP
+#ifndef KNUTH_INFRASTRUCTURE_LOG_FILE_CHAR_TRAITS_HPP
+#define KNUTH_INFRASTRUCTURE_LOG_FILE_CHAR_TRAITS_HPP
 
 #include <cctype>
 #include <string>

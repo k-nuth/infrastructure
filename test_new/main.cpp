@@ -1,7 +1,7 @@
 // /**
-//  * Copyright (c) 2016-2018 Bitprim Inc.
+//  * Copyright (c) 2016-2019 Knuth Project.
 //  *
-//  * This file is part of Bitprim.
+//  * This file is part of Knuth Project.
 //  *
 //  * This program is free software: you can redistribute it and/or modify
 //  * it under the terms of the GNU Affero General Public License as published by
@@ -24,13 +24,13 @@
 // //#include <bitcoin/infrastructure/wallet/cashaddr.hpp>
 // // #include <bitcoin/infrastructure/wallet/payment_address.hpp>
 
-// // #include <bitprim/keoken/transaction_extractor.hpp>
-// // #include <bitprim/keoken/message/base.hpp>
-// // #include <bitprim/keoken/message/create_asset.hpp>
-// // #include <bitprim/keoken/message/send_tokens.hpp>
-// // #include <bitprim/keoken/utility.hpp>
+// // #include <knuth/keoken/transaction_extractor.hpp>
+// // #include <knuth/keoken/message/base.hpp>
+// // #include <knuth/keoken/message/create_asset.hpp>
+// // #include <knuth/keoken/message/send_tokens.hpp>
+// // #include <knuth/keoken/utility.hpp>
 
-// // using namespace bitprim::keoken;
+// // using namespace knuth::keoken;
 
 // #include <bitcoin/infrastructure/utility/data.hpp>
 // #include <bitcoin/infrastructure/formats/base_16.hpp>

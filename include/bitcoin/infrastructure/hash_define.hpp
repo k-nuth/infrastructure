@@ -1,7 +1,7 @@
 /**
- * Copyright (c) 2017-2018 Bitprim Inc.
+ * Copyright (c) 2016-2019 Knuth Project.
  *
- * This file is part of Bitprim.
+ * This file is part of Knuth Project.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,8 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef BITPRIM_INFRASTRUCTURE_HASH_DEFINE_HPP
-#define BITPRIM_INFRASTRUCTURE_HASH_DEFINE_HPP
+#ifndef KNUTH_INFRASTRUCTURE_HASH_DEFINE_HPP
+#define KNUTH_INFRASTRUCTURE_HASH_DEFINE_HPP
 
 #include <cstddef>
 #include <string>
@@ -34,12 +34,12 @@
 namespace libbitcoin {
 
 // Common bitcoin hash container sizes.
-static BC_CONSTEXPR size_t hash_size = 32;
-static BC_CONSTEXPR size_t half_hash_size = hash_size / 2;
-static BC_CONSTEXPR size_t quarter_hash_size = half_hash_size / 2;
-static BC_CONSTEXPR size_t long_hash_size = 2 * hash_size;
-static BC_CONSTEXPR size_t short_hash_size = 20;
-static BC_CONSTEXPR size_t mini_hash_size = 6;
+static constexpr size_t hash_size = 32;
+static constexpr size_t half_hash_size = hash_size / 2;
+static constexpr size_t quarter_hash_size = half_hash_size / 2;
+static constexpr size_t long_hash_size = 2 * hash_size;
+static constexpr size_t short_hash_size = 20;
+static constexpr size_t mini_hash_size = 6;
 
 // Common bitcoin hash containers.
 using hash_digest = byte_array<hash_size>;
@@ -62,7 +62,7 @@ using mini_hash_list = std::vector<mini_hash>;
 
 // // Null-valued common bitcoin hashes.
 
-BC_CONSTEXPR hash_digest null_hash
+constexpr hash_digest null_hash
 {
     {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -70,21 +70,21 @@ BC_CONSTEXPR hash_digest null_hash
     }
 };
 
-// BC_CONSTEXPR half_hash null_half_hash
+// constexpr half_hash null_half_hash
 // {
 //     {
 //         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 //     }
 // };
 
-// BC_CONSTEXPR quarter_hash null_quarter_hash
+// constexpr quarter_hash null_quarter_hash
 // {
 //     {
 //         0, 0, 0, 0, 0, 0, 0, 0
 //     }
 // };
 
-// BC_CONSTEXPR long_hash null_long_hash
+// constexpr long_hash null_long_hash
 // {
 //     {
 //         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -94,7 +94,7 @@ BC_CONSTEXPR hash_digest null_hash
 //     }
 // };
 
-// BC_CONSTEXPR short_hash null_short_hash
+// constexpr short_hash null_short_hash
 // {
 //     {
 //         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -102,7 +102,7 @@ BC_CONSTEXPR hash_digest null_hash
 //     }
 // };
 
-// BC_CONSTEXPR mini_hash null_mini_hash
+// constexpr mini_hash null_mini_hash
 // {
 //     {
 //         0, 0, 0, 0, 0, 0
@@ -126,10 +126,10 @@ BC_CONSTEXPR hash_digest null_hash
 // /// Generate a bitcoin hash.
 // BI_API hash_digest bitcoin_hash(data_slice data);
 
-// #ifdef BITPRIM_CURRENCY_LTC
+// #ifdef KNUTH_CURRENCY_LTC
 // /// Generate a litecoin hash.
 // BI_API hash_digest litecoin_hash(data_slice data);
-// #endif //BITPRIM_CURRENCY_LTC
+// #endif //KNUTH_CURRENCY_LTC
 
 // /// Generate a bitcoin short hash.
 // BI_API short_hash bitcoin_short_hash(data_slice data);

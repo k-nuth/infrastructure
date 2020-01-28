@@ -1,7 +1,7 @@
 #
-# Copyright (c) 2017-2018 Bitprim Inc.
+# Copyright (c) 2016-2019 Knuth Project.
 #
-# This file is part of Bitprim.
+# This file is part of Knuth Project.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -18,16 +18,14 @@
 #
 from conans import CMake
 from ci_utils import option_on_off, march_conan_manip, pass_march_to_compiler
-from ci_utils import BitprimConanFile
+from ci_utils import KnuthConanFile
 
 
-
-
-class BitprimInfrastructureConan(BitprimConanFile):
-    name = "bitprim-infrastructure"
+class KnuthInfrastructureConan(KnuthConanFile):
+    name = "kth-infrastructure"
     # version = get_version()
     license = "http://www.boost.org/users/license.html"
-    url = "https://github.com/bitprim/bitprim-infrastructure"
+    url = "https://github.com/knuth/kth-infrastructure"
     description = "Multicrypto Cross-Platform C++ Development Toolkit"
     settings = "os", "compiler", "build_type", "arch"
 
@@ -36,18 +34,19 @@ class BitprimInfrastructureConan(BitprimConanFile):
 
     options = {"shared": [True, False],
                "fPIC": [True, False],
+
                "with_icu": [True, False],
                "with_png": [True, False],
                "with_qrencode": [True, False],
                "with_tests": [True, False],
                "with_examples": [True, False],
+
                "microarchitecture": "ANY", #["x86_64", "haswell", "ivybridge", "sandybridge", "bulldozer", ...]
                "fix_march": [True, False],
                "verbose": [True, False],
                "cxxflags": "ANY",
                "cflags": "ANY",
                "glibcxx_supports_cxx11_abi": "ANY",
-
     }
 
     default_options = "shared=False", \
@@ -67,19 +66,13 @@ class BitprimInfrastructureConan(BitprimConanFile):
 
     generators = "cmake"
     exports = "conan_*", "ci_utils/*"
-    exports_sources = "src/*", "CMakeLists.txt", "cmake/*", "bitprim-infrastructureConfig.cmake.in", "include/*", "test/*", "examples/*", "test_new/*"
-    package_files = "build/lbitprim-infrastructure.a"
+    exports_sources = "src/*", "CMakeLists.txt", "cmake/*", "kth-infrastructureConfig.cmake.in", "include/*", "test/*", "examples/*", "test_new/*"
+    package_files = "build/lkth-infrastructure.a"
     build_policy = "missing"
 
     def requirements(self):
-        self.requires("boost/1.70.0@kth/stable")
+        self.requires("boost/1.72.0@kth/stable")
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
-
-        # if self.options.with_png:
-        #     self.requires("libpng/1.6.34@bitprim/stable")
-            
-        # if self.options.with_qrencode:
-        #     self.requires("libqrencode/4.0.0@bitprim/stable")
 
         if self.options.with_png:
             self.requires("libpng/1.6.34@bitprim/stable")
@@ -88,20 +81,21 @@ class BitprimInfrastructureConan(BitprimConanFile):
             self.requires("libqrencode/4.0.0@bitprim/stable")
 
     def config_options(self):
-        if self.settings.arch != "x86_64":
-            self.output.info("microarchitecture is disabled for architectures other than x86_64, your architecture: %s" % (self.settings.arch,))
-            self.options.remove("microarchitecture")
-            self.options.remove("fix_march")
+        KnuthConanFile.config_options(self)
+        # if self.settings.arch != "x86_64":
+        #     self.output.info("microarchitecture is disabled for architectures other than x86_64, your architecture: %s" % (self.settings.arch,))
+        #     self.options.remove("microarchitecture")
+        #     self.options.remove("fix_march")
 
-        if self.settings.compiler == "Visual Studio":
-            self.options.remove("fPIC")
-            if self.options.shared and self.msvc_mt_build:
-                self.options.remove("shared")
+        # if self.settings.compiler == "Visual Studio":
+        #     self.options.remove("fPIC")
+        #     if self.options.shared and self.msvc_mt_build:
+        #         self.options.remove("shared")
 
 
     def configure(self):
         # self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
-        BitprimConanFile.configure(self)
+        KnuthConanFile.configure(self)
 
         if self.settings.arch == "x86_64" and self.options.microarchitecture == "_DUMMY_":
             del self.options.fix_march
@@ -113,17 +107,18 @@ class BitprimInfrastructureConan(BitprimConanFile):
             self.options["*"].microarchitecture = self.options.microarchitecture
 
     def package_id(self):
-        BitprimConanFile.package_id(self)
+        KnuthConanFile.package_id(self)
         # self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
 
         self.info.options.with_tests = "ANY"
         self.info.options.with_examples = "ANY"
+
         self.info.options.verbose = "ANY"
         self.info.options.fix_march = "ANY"
         self.info.options.cxxflags = "ANY"
         self.info.options.cflags = "ANY"
 
-        # #For Bitprim Packages libstdc++ and libstdc++11 are the same
+        # #For Knuth Packages libstdc++ and libstdc++11 are the same
         # if self.settings.compiler == "gcc" or self.settings.compiler == "clang":
         #     if str(self.settings.compiler.libcxx) == "libstdc++" or str(self.settings.compiler.libcxx) == "libstdc++11":
         #         self.info.settings.compiler.libcxx = "ANY"
@@ -173,7 +168,7 @@ class BitprimInfrastructureConan(BitprimConanFile):
             cmake.definitions["CONAN_CXX_FLAGS"] = cmake.definitions.get("CONAN_CXX_FLAGS", "") + " /DBOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE"
 
         cmake.definitions["MICROARCHITECTURE"] = self.options.microarchitecture
-        cmake.definitions["BITPRIM_PROJECT_VERSION"] = self.version
+        cmake.definitions["KNUTH_PROJECT_VERSION"] = self.version
 
         if self.settings.compiler == "gcc":
             if float(str(self.settings.compiler.version)) >= 5:
@@ -213,7 +208,7 @@ class BitprimInfrastructureConan(BitprimConanFile):
 
     def package_info(self):
         self.cpp_info.includedirs = ['include']
-        self.cpp_info.libs = ["bitprim-infrastructure"]
+        self.cpp_info.libs = ["kth-infrastructure"]
 
         if self.settings.os == "Linux" or self.settings.os == "FreeBSD":
             self.cpp_info.libs.append("pthread")

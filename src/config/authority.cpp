@@ -86,7 +86,7 @@ asio::ipv6 to_ipv6(asio::address const& ip_address) {
 static 
 std::string to_ipv4_hostname(asio::address const& ip_address) {
     // std::regex requires gcc 4.9, so we are using boost::regex for now.
-    // Bitprim: we use std::regex, becase we drop support por GCC<5
+    // Knuth: we use std::regex, becase we drop support por GCC<5
     static 
     std::regex const regular("^::ffff:([0-9\\.]+)$");
 
@@ -209,7 +209,7 @@ std::istream& operator>>(std::istream& input, authority& argument) {
     input >> value;
 
     // std::regex requires gcc 4.9, so we are using boost::regex for now.
-    // Bitprim: we use std::regex, becase we drop support por GCC<5
+    // Knuth: we use std::regex, becase we drop support por GCC<5
     static 
     regex const regular(R"(^(([0-9\.]+)|\[([0-9a-f:\.]+)\])(:([0-9]{1,5}))?$)");
 

@@ -36,11 +36,6 @@ namespace config {
  */
 class BI_API checkpoint {
 public:
-    /**
-     * A list of checkpoints.
-     * This must provide operator<< for ostream in order to be used as a
-     * boost::program_options default_value.
-     */
     using list = std::vector<checkpoint>;
 
     /**
@@ -68,15 +63,7 @@ public:
     static 
     bool validate(hash_digest const& hash, size_t height, list const& checks);
 
-    /**
-     * Default constructor.
-     */
     checkpoint();
-
-    /**
-     * Copy constructor.
-     * @param[in]  other  The object to copy into self on construct.
-     */
     checkpoint(checkpoint const& x);
 
     /**
@@ -101,16 +88,7 @@ public:
      */
     checkpoint(hash_digest const& hash, size_t height);
 
-    /**
-     * Getter.
-     * @return The block hash of the checkpoint.
-     */
     hash_digest const& hash() const;
-
-    /**
-     * Getter.
-     * @return The block height of the checkpoint.
-     */
     size_t const height() const;
 
     /**
@@ -119,27 +97,11 @@ public:
      */
     std::string to_string() const;
 
-    /**
-     * Override the equality operator.
-     * @param[in]  other  The other object with which to compare.
-     */
     bool operator==(checkpoint const& x) const;
 
-    /**
-     * Define stream in. Throws if input is invalid.
-     * @param[in]   input     The input stream to read the value from.
-     * @param[out]  argument  The object to receive the read value.
-     * @return                The input stream reference.
-     */
     friend 
     std::istream& operator>>(std::istream& input, checkpoint& argument);
 
-    /**
-     * Define stream out.
-     * @param[in]   output    The output stream to write the value to.
-     * @param[out]  argument  The object from which to obtain the value.
-     * @return                The output stream reference.
-     */
     friend 
     std::ostream& operator<<(std::ostream& output, checkpoint const& argument);
 

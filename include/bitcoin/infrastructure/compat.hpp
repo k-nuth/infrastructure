@@ -1,7 +1,7 @@
 /**
- * Copyright (c) 2017-2018 Bitprim Inc.
+ * Copyright (c) 2016-2019 Knuth Project.
  *
- * This file is part of Bitprim.
+ * This file is part of Knuth Project.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -16,25 +16,23 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef BITPRIM_INFRASTRUCTURE_COMPAT_HPP
-#define BITPRIM_INFRASTRUCTURE_COMPAT_HPP
+#ifndef KNUTH_INFRASTRUCTURE_COMPAT_HPP
+#define KNUTH_INFRASTRUCTURE_COMPAT_HPP
 
 #include <cstdint>
 #include <limits>
 
-// CTP_Nov2013 implements noexcept but unfortunately VC12 and CTP_Nov2013
-// both identify as _MSC_VER = 1800, otherwise we could include CTP_Nov2013.
-#if defined(_MSC_VER) && (_MSC_VER <= 1800)
-    #define BC_NOEXCEPT _NOEXCEPT
-    #define BC_CONSTEXPR const
-    #define BC_CONSTFUNC inline
-    #define BC_CONSTCTOR
-#else
-    #define BC_NOEXCEPT noexcept
-    #define BC_CONSTEXPR constexpr
-    #define BC_CONSTFUNC constexpr
-    #define BC_CONSTCTOR constexpr
-#endif
+// // CTP_Nov2013 implements noexcept but unfortunately VC12 and CTP_Nov2013
+// // both identify as _MSC_VER = 1800, otherwise we could include CTP_Nov2013.
+// #if defined(_MSC_VER) && (_MSC_VER <= 1800)
+//     #define BC_NOEXCEPT _NOEXCEPT
+//     #define BC_CONSTFUNC inline
+//     #define BC_CONSTCTOR
+// #else
+//     #define BC_NOEXCEPT noexcept
+//     #define BC_CONSTFUNC constexpr
+//     #define BC_CONSTCTOR constexpr
+// #endif
 
 // TODO(libbitcoin): prefix names with BC_
 #ifdef _MSC_VER

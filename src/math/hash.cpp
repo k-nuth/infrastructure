@@ -35,9 +35,9 @@
 #include "../math/external/sha512.h"
 
 //TODO(fernando): see what to do with Currency
-// #ifdef BITPRIM_CURRENCY_LTC
+// #ifdef KNUTH_CURRENCY_LTC
 // #include "../math/external/scrypt.h"
-// #endif //BITPRIM_CURRENCY_LTC
+// #endif //KNUTH_CURRENCY_LTC
 
 namespace libbitcoin {
 
@@ -46,14 +46,14 @@ hash_digest bitcoin_hash(data_slice data)
     return sha256_hash(sha256_hash(data));
 }
 
-// #ifdef BITPRIM_CURRENCY_LTC
+// #ifdef KNUTH_CURRENCY_LTC
 // hash_digest litecoin_hash(data_slice data) {
 //     hash_digest hash;
 //     scrypt_1024_1_1_256(reinterpret_cast<char const*>(data.data()), 
 //                         reinterpret_cast<char*>(hash.data()));
 //     return hash;
 // }
-// #endif //BITPRIM_CURRENCY_LTC
+// #endif //KNUTH_CURRENCY_LTC
 
 short_hash bitcoin_short_hash(data_slice data)
 {
