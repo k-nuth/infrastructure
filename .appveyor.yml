@@ -74,18 +74,30 @@ test_script:
         $a = python ci_utils/set_envvars_and_files.py
         Write-Host $a
         Invoke-Expression $a
+
+        $ErrorActionPreference = 'SilentlyContinue'
         conan remote add kth https://api.bintray.com/conan/k-nuth/kth
+        $ErrorActionPreference = 'Continue'
+
         # conan info . --only None
         # conan info . --only None -s compiler=gcc -s compiler.version=5 -s compiler.libcxx=libstdc++
         python ci_utils/process_conan_reqs.py
+
+        $ErrorActionPreference = 'SilentlyContinue'
         conan remove "*" -f
         conan remote remove kth
+        $ErrorActionPreference = 'Continue'
       }
 
   - ps: |
       If ($env:WAIT_FOR_DEPS -eq 1) {
         conan user
+
+        $ErrorActionPreference = 'SilentlyContinue'
         conan remote add kth_temp https://api.bintray.com/conan/k-nuth/kth
+        $ErrorActionPreference = 'Continue'
+
+
         echo "waiting for secp256k1/0.X@kth/staging ..."
         conan search secp256k1/0.X@kth/staging -r kth_temp > $null
         while($env:lastExitCode -eq 1) {
@@ -99,7 +111,11 @@ test_script:
   - ps: |
       If ($env:WAIT_FOR_DEPS -eq 1) {
         conan user
+
+        $ErrorActionPreference = 'SilentlyContinue'
         conan remote add kth_temp https://api.bintray.com/conan/k-nuth/kth
+        $ErrorActionPreference = 'Continue'
+
         echo "waiting for secp256k1/0.X@kth/staging ..."
         conan search secp256k1/0.X@kth/staging -r kth_temp > $null
         while($env:lastExitCode -eq 1) {
