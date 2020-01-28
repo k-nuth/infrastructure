@@ -41,17 +41,14 @@ class KnuthInfrastructureConan(KnuthConanFile):
 
     options = {"shared": [True, False],
                "fPIC": [True, False],
-
                "with_icu": [True, False],
                "with_png": [True, False],
                "with_qrencode": [True, False],
                "with_tests": [True, False],
                "with_examples": [True, False],
-
                "microarchitecture": "ANY", #["x86_64", "haswell", "ivybridge", "sandybridge", "bulldozer", ...]
                "fix_march": [True, False],
                "march_id": "ANY",
-
                "verbose": [True, False],
                "cxxflags": "ANY",
                "cflags": "ANY",
@@ -65,11 +62,9 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "with_qrencode=False", \
         "with_tests=False", \
         "with_examples=False", \
-
         "microarchitecture=_DUMMY_",  \
         "fix_march=False", \
         "march_id=_DUMMY_",  \
-
         "verbose=False", \
         "cxxflags=_DUMMY_", \
         "cflags=_DUMMY_", \
