@@ -135,8 +135,6 @@ test_script:
 
   - PowerShell .\.appveyor\build.ps1
 
-
-
 for:
   -
     branches:
@@ -149,13 +147,6 @@ for:
       CONAN_VISUAL_VERSIONS: 16
       CONAN_VISUAL_RUNTIMES: MT
       KNUTH_RUN_TESTS: true
-
-      # APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-      # CONAN_VISUAL_VERSIONS: 15
-      # CONAN_VISUAL_RUNTIMES: MT
-      # KNUTH_RUN_TESTS: true
-      # VS150COMNTOOLS: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\Common7\\Tools\\"
-
   -
     branches:
       only:
@@ -166,13 +157,7 @@ for:
           APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
           CONAN_VISUAL_VERSIONS: 16
           CONAN_VISUAL_RUNTIMES: MT
-          # KNUTH_RUN_TESTS: true
-
-        - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-          CONAN_VISUAL_VERSIONS: 15
-          CONAN_VISUAL_RUNTIMES: MT
           KNUTH_RUN_TESTS: true
-
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
           CONAN_VISUAL_VERSIONS: 16
           CONAN_VISUAL_RUNTIMES: MD
@@ -183,23 +168,20 @@ for:
           CONAN_VISUAL_RUNTIMES: MT
           KNUTH_RUN_TESTS: true
           VS150COMNTOOLS: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\Common7\\Tools\\"
-
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
           CONAN_VISUAL_VERSIONS: 15
           CONAN_VISUAL_RUNTIMES: MD
           KNUTH_RUN_TESTS: true
           VS150COMNTOOLS: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\Common7\\Tools\\"
 
-
         # - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
         #   CONAN_VISUAL_VERSIONS: 14
         # - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
         #   CONAN_VISUAL_VERSIONS: 14
 
 
-        - MINGW_CONFIGURATIONS: "9@x86_64@seh@posix"
+        # - MINGW_CONFIGURATIONS: "9@x86_64@seh@posix"
         - MINGW_CONFIGURATIONS: "8@x86_64@seh@posix"
-
         # - MINGW_CONFIGURATIONS: "7@x86_64@seh@posix"
         # - MINGW_CONFIGURATIONS: "6@x86_64@seh@posix"
         # - MINGW_CONFIGURATIONS: "5@x86_64@seh@posix"
