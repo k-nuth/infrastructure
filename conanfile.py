@@ -25,15 +25,12 @@ class KnuthInfrastructureConan(KnuthConanFile):
     def recipe_dir(self):
         return os.path.dirname(os.path.abspath(__file__))
 
-    name = "kth-infrastructure"
+    name = "infrastructure"
     # version = get_version()
     license = "http://www.boost.org/users/license.html"
-    url = "https://github.com/knuth/kth-infrastructure"
+    url = "https://github.com/knuth/infrastructure"
     description = "Multicrypto Cross-Platform C++ Development Toolkit"
     settings = "os", "compiler", "build_type", "arch"
-
-    # if Version(conan_version) < Version(get_conan_req_version()):
-    #     raise Exception ("Conan version should be greater or equal than %s. Detected: %s." % (get_conan_req_version(), conan_version))
 
     options = {"shared": [True, False],
                "fPIC": [True, False],
@@ -65,7 +62,6 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "cxxflags=_DUMMY_", \
         "cflags=_DUMMY_", \
         "glibcxx_supports_cxx11_abi=_DUMMY_"
-
 
     generators = "cmake"
     exports = "conan_*", "ci_utils/*"
