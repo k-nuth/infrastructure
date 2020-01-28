@@ -130,6 +130,11 @@ message( STATUS "Knuth: Compiling for ${MICROARCHITECTURE}")
 set(MARCH_ID "" CACHE STRING "Specify the Microarchitecture ID (x86_64|...).")
 message( STATUS "Knuth: Compiling for Microarchitecture ID ${MARCH_ID}")
 
+message( STATUS "Knuth: CONAN_CXX_FLAGS ${CONAN_CXX_FLAGS}")
+message( STATUS "Knuth: CONAN_C_FLAGS ${CONAN_C_FLAGS}")
+
+
+
 
 # Conan infrastructure
 #==============================================================================
