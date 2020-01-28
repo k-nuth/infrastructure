@@ -285,7 +285,8 @@ jobs:
       python: "3.7"
       services:
         - docker
-      env: CONAN_GCC_VERSIONS=9 CONAN_DOCKER_IMAGE=conanio/gcc9 CONAN_PIP_COMMAND="pip --install-option='--no-remotes=True'"
+      env: CONAN_GCC_VERSIONS=9 CONAN_DOCKER_IMAGE=conanio/gcc9 
+      # CONAN_PIP_COMMAND="pip --install-option='--no-remotes=True'"
 
       # if: branch =~ /^(release|hotfix).+$/    #Just releases
       if: branch =~ /^(release|hotfix|dev|feature).*$/    #Avoid master
