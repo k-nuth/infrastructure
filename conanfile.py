@@ -16,33 +16,32 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+import os
 from conans import CMake
-from ci_utils import option_on_off, march_conan_manip, pass_march_to_compiler
-from ci_utils import KnuthConanFile
-
+from kthbuild import option_on_off, march_conan_manip, pass_march_to_compiler
+from kthbuild import KnuthConanFile
 
 class KnuthInfrastructureConan(KnuthConanFile):
-    name = "kth-infrastructure"
+    def recipe_dir(self):
+        return os.path.dirname(os.path.abspath(__file__))
+
+    name = "infrastructure"
     # version = get_version()
     license = "http://www.boost.org/users/license.html"
-    url = "https://github.com/knuth/kth-infrastructure"
+    url = "https://github.com/knuth/infrastructure"
     description = "Multicrypto Cross-Platform C++ Development Toolkit"
     settings = "os", "compiler", "build_type", "arch"
 
-    # if Version(conan_version) < Version(get_conan_req_version()):
-    #     raise Exception ("Conan version should be greater or equal than %s. Detected: %s." % (get_conan_req_version(), conan_version))
-
     options = {"shared": [True, False],
                "fPIC": [True, False],
-
                "with_icu": [True, False],
                "with_png": [True, False],
                "with_qrencode": [True, False],
                "with_tests": [True, False],
                "with_examples": [True, False],
-
                "microarchitecture": "ANY", #["x86_64", "haswell", "ivybridge", "sandybridge", "bulldozer", ...]
                "fix_march": [True, False],
+               "march_id": "ANY",
                "verbose": [True, False],
                "cxxflags": "ANY",
                "cflags": "ANY",
@@ -58,11 +57,11 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "with_examples=False", \
         "microarchitecture=_DUMMY_",  \
         "fix_march=False", \
+        "march_id=_DUMMY_",  \
         "verbose=False", \
         "cxxflags=_DUMMY_", \
         "cflags=_DUMMY_", \
         "glibcxx_supports_cxx11_abi=_DUMMY_"
-
 
     generators = "cmake"
     exports = "conan_*", "ci_utils/*"
@@ -82,29 +81,10 @@ class KnuthInfrastructureConan(KnuthConanFile):
 
     def config_options(self):
         KnuthConanFile.config_options(self)
-        # if self.settings.arch != "x86_64":
-        #     self.output.info("microarchitecture is disabled for architectures other than x86_64, your architecture: %s" % (self.settings.arch,))
-        #     self.options.remove("microarchitecture")
-        #     self.options.remove("fix_march")
-
-        # if self.settings.compiler == "Visual Studio":
-        #     self.options.remove("fPIC")
-        #     if self.options.shared and self.msvc_mt_build:
-        #         self.options.remove("shared")
-
 
     def configure(self):
         # self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
         KnuthConanFile.configure(self)
-
-        if self.settings.arch == "x86_64" and self.options.microarchitecture == "_DUMMY_":
-            del self.options.fix_march
-            # self.options.remove("fix_march")
-            # raise Exception ("fix_march option is for using together with microarchitecture option.")
-
-        if self.settings.arch == "x86_64":
-            march_conan_manip(self)
-            self.options["*"].microarchitecture = self.options.microarchitecture
 
     def package_id(self):
         KnuthConanFile.package_id(self)
@@ -112,11 +92,6 @@ class KnuthInfrastructureConan(KnuthConanFile):
 
         self.info.options.with_tests = "ANY"
         self.info.options.with_examples = "ANY"
-
-        self.info.options.verbose = "ANY"
-        self.info.options.fix_march = "ANY"
-        self.info.options.cxxflags = "ANY"
-        self.info.options.cflags = "ANY"
 
         # #For Knuth Packages libstdc++ and libstdc++11 are the same
         # if self.settings.compiler == "gcc" or self.settings.compiler == "clang":
@@ -132,66 +107,88 @@ class KnuthInfrastructureConan(KnuthConanFile):
     #     "glibcxx_supports_cxx11_abi=_DUMMY_"
 
     def build(self):
-        # for dep in self.deps_cpp_info.deps:
-        #     # self.output.warn(self.deps_cpp_info["MyLib"].libdirs)
-        #     print(dep)
-        #     print(self.options[dep])
-        #     # self.options["boost"]
-
-        cmake = CMake(self)
-        cmake.definitions["USE_CONAN"] = option_on_off(True)
-        cmake.definitions["NO_CONAN_AT_ALL"] = option_on_off(False)
-        cmake.verbose = self.options.verbose
-        cmake.definitions["ENABLE_SHARED"] = option_on_off(self.is_shared)
-        cmake.definitions["ENABLE_POSITION_INDEPENDENT_CODE"] = option_on_off(self.fPIC_enabled)
-
+        cmake = self.cmake_basis()
         cmake.definitions["WITH_TESTS"] = option_on_off(self.options.with_tests)
         cmake.definitions["WITH_TESTS_NEW"] = option_on_off(self.options.with_tests)
         cmake.definitions["WITH_EXAMPLES"] = option_on_off(self.options.with_examples)
         cmake.definitions["WITH_ICU"] = option_on_off(self.options.with_icu)
         # cmake.definitions["WITH_QRENCODE"] = option_on_off(self.options.with_qrencode)
         # cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_qrencode)
-
         cmake.definitions["WITH_QRENCODE"] = option_on_off(self.options.with_qrencode)
         cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_png)
 
-        if self.options.cxxflags != "_DUMMY_":
-            cmake.definitions["CONAN_CXX_FLAGS"] = cmake.definitions.get("CONAN_CXX_FLAGS", "") + " " + str(self.options.cxxflags)
-        if self.options.cflags != "_DUMMY_":
-            cmake.definitions["CONAN_C_FLAGS"] = cmake.definitions.get("CONAN_C_FLAGS", "") + " " + str(self.options.cflags)
-
-        if self.settings.compiler != "Visual Studio":
-            # cmake.definitions["CONAN_CXX_FLAGS"] += " -Wno-deprecated-declarations"
-            cmake.definitions["CONAN_CXX_FLAGS"] = cmake.definitions.get("CONAN_CXX_FLAGS", "") + " -Wno-deprecated-declarations"
-
-        if self.settings.compiler == "Visual Studio":
-            cmake.definitions["CONAN_CXX_FLAGS"] = cmake.definitions.get("CONAN_CXX_FLAGS", "") + " /DBOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE"
-
-        cmake.definitions["MICROARCHITECTURE"] = self.options.microarchitecture
-        cmake.definitions["KNUTH_PROJECT_VERSION"] = self.version
-
-        if self.settings.compiler == "gcc":
-            if float(str(self.settings.compiler.version)) >= 5:
-                cmake.definitions["NOT_USE_CPP11_ABI"] = option_on_off(False)
-            else:
-                cmake.definitions["NOT_USE_CPP11_ABI"] = option_on_off(True)
-        elif self.settings.compiler == "clang":
-            if str(self.settings.compiler.libcxx) == "libstdc++" or str(self.settings.compiler.libcxx) == "libstdc++11":
-                cmake.definitions["NOT_USE_CPP11_ABI"] = option_on_off(False)
-
-        pass_march_to_compiler(self, cmake)
-
         cmake.configure(source_dir=self.source_folder)
-
-        # self.output.info("CONAN_CXX_FLAGS: %s" % (cmake.definitions["CONAN_CXX_FLAGS"], ))
-        # self.output.info("cmake.command_line: %s" % (cmake.command_line, ))
-
         cmake.build()
 
         #Note: Cmake Tests and Visual Studio doesn't work
         if self.options.with_tests:
             cmake.test()
             # cmake.test(target="tests")
+
+
+    # def build(self):
+    #     # for dep in self.deps_cpp_info.deps:
+    #     #     # self.output.warn(self.deps_cpp_info["MyLib"].libdirs)
+    #     #     print(dep)
+    #     #     print(self.options[dep])
+    #     #     # self.options["boost"]
+
+        # cmake = CMake(self)
+        # cmake.definitions["USE_CONAN"] = option_on_off(True)
+        # cmake.definitions["NO_CONAN_AT_ALL"] = option_on_off(False)
+        # cmake.verbose = self.options.verbose
+        # cmake.definitions["ENABLE_SHARED"] = option_on_off(self.is_shared)
+        # cmake.definitions["ENABLE_POSITION_INDEPENDENT_CODE"] = option_on_off(self.fPIC_enabled)
+
+        # cmake.definitions["WITH_TESTS"] = option_on_off(self.options.with_tests)
+        # cmake.definitions["WITH_TESTS_NEW"] = option_on_off(self.options.with_tests)
+        # cmake.definitions["WITH_EXAMPLES"] = option_on_off(self.options.with_examples)
+        # cmake.definitions["WITH_ICU"] = option_on_off(self.options.with_icu)
+        # # cmake.definitions["WITH_QRENCODE"] = option_on_off(self.options.with_qrencode)
+        # # cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_qrencode)
+
+        # cmake.definitions["WITH_QRENCODE"] = option_on_off(self.options.with_qrencode)
+        # cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_png)
+
+        # if self.options.cxxflags != "_DUMMY_":
+        #     cmake.definitions["CONAN_CXX_FLAGS"] = cmake.definitions.get("CONAN_CXX_FLAGS", "") + " " + str(self.options.cxxflags)
+        # if self.options.cflags != "_DUMMY_":
+        #     cmake.definitions["CONAN_C_FLAGS"] = cmake.definitions.get("CONAN_C_FLAGS", "") + " " + str(self.options.cflags)
+
+        # if self.settings.compiler != "Visual Studio":
+        #     # cmake.definitions["CONAN_CXX_FLAGS"] += " -Wno-deprecated-declarations"
+        #     cmake.definitions["CONAN_CXX_FLAGS"] = cmake.definitions.get("CONAN_CXX_FLAGS", "") + " -Wno-deprecated-declarations"
+
+        # if self.settings.compiler == "Visual Studio":
+        #     cmake.definitions["CONAN_CXX_FLAGS"] = cmake.definitions.get("CONAN_CXX_FLAGS", "") + " /DBOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE"
+
+        # cmake.definitions["MICROARCHITECTURE"] = self.options.microarchitecture
+        # cmake.definitions["MARCH_ID"] = self.options.march_id
+
+        # cmake.definitions["KNUTH_PROJECT_VERSION"] = self.version
+
+        # if self.settings.compiler == "gcc":
+        #     if float(str(self.settings.compiler.version)) >= 5:
+        #         cmake.definitions["NOT_USE_CPP11_ABI"] = option_on_off(False)
+        #     else:
+        #         cmake.definitions["NOT_USE_CPP11_ABI"] = option_on_off(True)
+        # elif self.settings.compiler == "clang":
+        #     if str(self.settings.compiler.libcxx) == "libstdc++" or str(self.settings.compiler.libcxx) == "libstdc++11":
+        #         cmake.definitions["NOT_USE_CPP11_ABI"] = option_on_off(False)
+
+        # pass_march_to_compiler(self, cmake)
+
+        # cmake.configure(source_dir=self.source_folder)
+
+        # # self.output.info("CONAN_CXX_FLAGS: %s" % (cmake.definitions["CONAN_CXX_FLAGS"], ))
+        # # self.output.info("cmake.command_line: %s" % (cmake.command_line, ))
+
+        # cmake.build()
+
+        # #Note: Cmake Tests and Visual Studio doesn't work
+        # if self.options.with_tests:
+        #     cmake.test()
+        #     # cmake.test(target="tests")
 
     def imports(self):
         self.copy("*.h", "", "include")
