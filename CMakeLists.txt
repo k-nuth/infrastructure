@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2016-2019 Knuth Project.
+# Copyright (c) 2016-2020 Knuth Project.
 #
 # This file is part of Knuth Project.
 #
@@ -117,6 +117,8 @@ option(JUST_KNUTH_SOURCES "Just Knuth source code to be linted." OFF)
 if (JUST_KNUTH_SOURCES)
   message(STATUS "Knuth: Just Knuth source code to be linted: enabled")
 endif()
+
+
 
 set(KNUTH_PROJECT_VERSION "-" CACHE STRING "Specify the Knuth Project Version.")
 # message(${KNUTH_PROJECT_VERSION})
