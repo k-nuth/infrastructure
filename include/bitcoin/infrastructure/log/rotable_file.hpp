@@ -41,6 +41,6 @@ struct rotable_file
 };
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -276,4 +276,4 @@ bool hd_lineage::operator!=(hd_lineage const& x) const {
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth

@@ -67,4 +67,4 @@ void prioritized_mutex::unlock_high_priority()
     data_mutex_.unlock();
 }
 
-} // namespace libbitcoin
+} // namespace kth

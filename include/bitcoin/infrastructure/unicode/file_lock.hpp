@@ -275,7 +275,7 @@ inline void file_lock::unlock_sharable()
 }
 
 } // namespace interprocess
-} // namespace libbitcoin
+} // namespace kth
 
 #include <boost/interprocess/detail/config_end.hpp>
 

@@ -25,6 +25,6 @@ namespace kth {
 
 
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

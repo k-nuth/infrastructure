@@ -55,7 +55,7 @@ BI_API std::string encode_base10(uint64_t amount,
 BI_API bool btc_to_satoshi(uint64_t& satoshi, std::string const& btc);
 BI_API std::string satoshi_to_btc(uint64_t satoshi);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

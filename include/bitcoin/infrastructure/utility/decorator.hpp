@@ -54,7 +54,7 @@ decorator(Wrapper&& wrapper, Handler&& handler)
     return { wrapper, handler };
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

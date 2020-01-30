@@ -51,4 +51,4 @@ dispatcher::dispatcher(threadpool& pool, std::string const& name)
 ////    return heap_->combined_backlog();
 ////}
 
-} // namespace libbitcoin
+} // namespace kth

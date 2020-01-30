@@ -101,6 +101,6 @@ private:
 };
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

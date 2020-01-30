@@ -495,6 +495,6 @@ constexpr uint8_t string_terminator = 0x00;
 //     return recursive_money * subsidy_interval(retarget);
 // }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

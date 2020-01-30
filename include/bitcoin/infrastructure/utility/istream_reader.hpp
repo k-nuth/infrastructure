@@ -100,7 +100,7 @@ private:
     std::istream& stream_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/istream_reader.ipp>
 

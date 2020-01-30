@@ -27,7 +27,7 @@
 // #include <bitcoin/infrastructure/utility/assert.hpp>
 // #include <bitcoin/infrastructure/utility/data.hpp>
 
-// namespace libbitcoin {
+// namespace kth {
 // namespace machine {
 
 // static constexpr auto invalid_code = opcode::disabled_xor;
@@ -450,6 +450,6 @@
 // }
 
 // } // namespace machine
-// } // namespace libbitcoin
+// } // namespace kth
 
 // #endif

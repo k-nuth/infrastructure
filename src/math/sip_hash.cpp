@@ -202,4 +202,4 @@ uint64_t sip_hash_uint256_extra(uint64_t k0, uint64_t k1, hash_digest const& val
     return v0 ^ v1 ^ v2 ^ v3;
 }
 
-} // namespace libbitcoin
+} // namespace kth

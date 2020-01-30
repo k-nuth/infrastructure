@@ -157,4 +157,4 @@ bool decode_base85(data_chunk& out, std::string const& in)
     return true;
 }
 
-} // namespace libbitcoin
+} // namespace kth

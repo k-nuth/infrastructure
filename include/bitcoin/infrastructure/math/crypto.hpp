@@ -49,7 +49,7 @@ BI_API void aes256_encrypt(const aes_secret& key, aes_block& block);
  */
 BI_API void aes256_decrypt(const aes_secret& key, aes_block& block);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

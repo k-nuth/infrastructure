@@ -300,4 +300,4 @@ std::ostream& operator<<(std::ostream& out, binary const& of)
     return out;
 }
 
-} // namespace libbitcoin
+} // namespace kth

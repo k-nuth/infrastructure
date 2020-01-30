@@ -67,4 +67,4 @@ secp256k1_verification::secp256k1_verification()
 {
 }
 
-} // namespace libbitcoin
+} // namespace kth

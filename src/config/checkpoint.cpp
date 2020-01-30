@@ -138,4 +138,4 @@ std::ostream& operator<<(std::ostream& output, checkpoint const& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

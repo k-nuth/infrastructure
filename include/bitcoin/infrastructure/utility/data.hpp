@@ -152,7 +152,7 @@ template <size_t Size>
 byte_array<Size> xor_data(data_slice bytes1, data_slice bytes2, size_t offset1,
     size_t offset2);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/data.ipp>
 

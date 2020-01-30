@@ -59,6 +59,6 @@ private:
     std::string const name_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

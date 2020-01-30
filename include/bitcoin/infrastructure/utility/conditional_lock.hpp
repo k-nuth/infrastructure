@@ -39,6 +39,6 @@ private:
     std::shared_ptr<shared_mutex> const mutex_ptr_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif // KNUTH_INFRASTRUCTURE_CONDITIONAL_LOCK_HPP_

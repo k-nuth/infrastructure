@@ -39,4 +39,4 @@ monitor::~monitor()
     trace(--(*counter_), "-");
 }
 
-} // namespace libbitcoin
+} // namespace kth

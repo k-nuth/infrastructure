@@ -86,6 +86,6 @@ boost::log::attribute_set::iterator
 
 } // namespace features
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

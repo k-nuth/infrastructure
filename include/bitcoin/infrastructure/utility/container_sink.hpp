@@ -59,7 +59,7 @@ using byte_sink = container_sink<Container, uint8_t, char>;
 
 using data_sink = boost::iostreams::stream<byte_sink<data_chunk>>;
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

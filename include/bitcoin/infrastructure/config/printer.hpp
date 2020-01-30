@@ -166,6 +166,6 @@ public:
 #undef PROPERTY_GET_REF
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

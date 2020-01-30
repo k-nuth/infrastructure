@@ -200,6 +200,6 @@ BI_API bool recover_public(ec_compressed& out,
 BI_API bool recover_public(ec_uncompressed& out,
     const recoverable_signature& recoverable, hash_digest const& hash);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

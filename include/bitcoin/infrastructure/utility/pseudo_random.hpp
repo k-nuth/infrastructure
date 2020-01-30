@@ -116,6 +116,6 @@ BI_API void pseudo_random_fill(data_chunk& out);
 BI_API asio::duration pseudo_randomize(asio::duration const& expiration,
     uint8_t ratio=2);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

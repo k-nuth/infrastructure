@@ -141,7 +141,7 @@ byte_array<sizeof(Integer)> to_little_endian(Integer value) {
 
 #undef VERIFY_UNSIGNED
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

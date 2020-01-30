@@ -45,4 +45,4 @@ bool minikey_to_secret(ec_secret& out_secret, std::string const& key)
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth

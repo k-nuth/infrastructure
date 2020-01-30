@@ -65,6 +65,6 @@ BI_API size_t thread_default(size_t configured);
 BI_API size_t thread_ceiling(size_t configured);
 BI_API size_t thread_floor(size_t configured);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -317,4 +317,4 @@ std::pair<std::string, data_chunk> decode(std::string const& str, std::string co
 
 } // namespace cashaddr
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth

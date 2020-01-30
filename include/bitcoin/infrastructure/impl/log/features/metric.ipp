@@ -110,6 +110,6 @@ boost::log::record metric_feature<BaseType>::open_record_with_metric_unlocked(
 
 } // namespace features
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -87,6 +87,6 @@ std::array<uint8_t, WRAP_SIZE(Size)> wrap(uint8_t version,
     return out;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

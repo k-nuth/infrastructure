@@ -46,4 +46,4 @@ string_list split(std::string const& sentence, std::string const& delimiter, boo
     return words;
 }
 
-} // namespace libbitcoin
+} // namespace kth

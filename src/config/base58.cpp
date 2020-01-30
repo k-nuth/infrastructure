@@ -73,4 +73,4 @@ std::ostream& operator<<(std::ostream& output, const base58& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

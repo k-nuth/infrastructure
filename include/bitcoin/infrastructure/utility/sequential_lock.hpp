@@ -51,6 +51,6 @@ private:
     std::atomic<size_t> sequence_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -399,6 +399,6 @@ deserializer<Iterator, false> make_unsafe_deserializer(Iterator begin) {
     return deserializer<Iterator, false>(begin);
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -87,7 +87,7 @@ public:
         const color& background, std::ostream& out);
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif // WITH_PNG
 

@@ -148,6 +148,6 @@ private:
 #undef FORWARD_HANDLER
 #undef BIND_HANDLER
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

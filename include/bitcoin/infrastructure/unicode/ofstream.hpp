@@ -43,6 +43,6 @@ public:
     ofstream(std::string const& path, std::ofstream::openmode mode = std::ofstream::out);
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

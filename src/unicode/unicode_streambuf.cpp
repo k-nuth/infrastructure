@@ -143,4 +143,4 @@ int unicode_streambuf::sync() {
     return failure;
 }
 
-} // namespace libbitcoin
+} // namespace kth

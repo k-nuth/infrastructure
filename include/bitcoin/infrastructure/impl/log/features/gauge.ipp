@@ -78,6 +78,6 @@ gauge_feature<BaseType>::add_gauge_unlocked(boost::log::attribute_set& set, boos
 
 } // namespace features
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

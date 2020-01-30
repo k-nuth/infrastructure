@@ -35,4 +35,4 @@ scope_lock::~scope_lock()
     mutex_.unlock();
 }
 
-} // namespace libbitcoin
+} // namespace kth

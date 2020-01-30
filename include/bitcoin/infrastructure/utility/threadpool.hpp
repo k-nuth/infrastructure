@@ -112,7 +112,7 @@ private:
     mutable upgrade_mutex work_mutex_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

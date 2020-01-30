@@ -38,6 +38,6 @@ enum class script_version
 };
 
 } // namespace machine
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

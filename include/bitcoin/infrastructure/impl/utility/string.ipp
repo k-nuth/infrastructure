@@ -61,6 +61,6 @@ std::string serialize(const Value& value, std::string const& fallback) {
     return text.empty() ? fallback : text;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

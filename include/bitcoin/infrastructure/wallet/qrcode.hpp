@@ -74,7 +74,7 @@ public:
 };
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif // WITH_QRENCODE
 

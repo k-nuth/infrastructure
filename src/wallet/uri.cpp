@@ -375,4 +375,4 @@ void uri::encode_query(const query_map& map) {
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth

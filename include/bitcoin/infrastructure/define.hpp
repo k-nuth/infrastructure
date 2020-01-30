@@ -23,7 +23,7 @@
 
 // Create bc namespace alias.
 namespace kth {
-} // namespace libbitcoin
+} // namespace kth
 
 namespace bc = kth;
 

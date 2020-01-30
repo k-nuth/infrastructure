@@ -43,4 +43,4 @@ void aes256_decrypt(const aes_secret& key, aes_block& block)
     aes256_done(&context);
 }
 
-} // namespace libbitcoin
+} // namespace kth

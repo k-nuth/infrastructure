@@ -34,6 +34,6 @@ enum class severity {
 };
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

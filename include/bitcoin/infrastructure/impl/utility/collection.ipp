@@ -101,7 +101,7 @@ T pop(std::vector<T>& stack) {
 ////    return out;
 ////}
 
-} // namespace libbitcoin
+} // namespace kth
 
 namespace std {
 

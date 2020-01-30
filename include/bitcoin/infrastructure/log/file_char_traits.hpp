@@ -66,6 +66,6 @@ struct BI_API file_char_traits
 };
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

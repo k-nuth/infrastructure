@@ -37,7 +37,7 @@
 // // #include <knuth/common.hpp>
 // // #include <knuth/concepts.hpp>
 
-// namespace libbitcoin {
+// namespace kth {
 // namespace machine {
 
 // class BI_API operation {
@@ -214,7 +214,7 @@
 // };
 
 // } // namespace machine
-// } // namespace libbitcoin
+// } // namespace kth
 
 // #include <bitcoin/infrastructure/impl/machine/operation.ipp>
 

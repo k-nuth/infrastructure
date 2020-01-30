@@ -93,7 +93,7 @@ BI_API std::string join(const string_list& words,
 BI_API string_list split(std::string const& sentence,
     std::string const& delimiter=" ", bool trim=true);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/string.ipp>
 

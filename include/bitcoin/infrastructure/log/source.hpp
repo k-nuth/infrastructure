@@ -53,6 +53,6 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source) {
 #define LOG_FATAL(module) BI_LOG_SEVERITY(module, fatal)
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

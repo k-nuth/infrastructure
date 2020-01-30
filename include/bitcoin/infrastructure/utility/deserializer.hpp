@@ -128,7 +128,7 @@ deserializer<Iterator, true> make_safe_deserializer(Iterator begin,
 template <typename Iterator>
 deserializer<Iterator, false> make_unsafe_deserializer(Iterator begin);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/deserializer.ipp>
 

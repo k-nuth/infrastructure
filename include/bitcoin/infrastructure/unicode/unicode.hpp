@@ -244,6 +244,6 @@ BI_API void set_binary_stdin();
  */
 BI_API void set_binary_stdout();
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

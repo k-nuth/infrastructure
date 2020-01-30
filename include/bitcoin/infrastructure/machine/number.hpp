@@ -153,7 +153,7 @@ private:
 };
 
 } // namespace machine
-} // namespace libbitcoin
+} // namespace kth
 
 
 #include <bitcoin/infrastructure/impl/machine/number.ipp>

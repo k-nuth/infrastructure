@@ -245,6 +245,6 @@ private:
 #undef BIND_RACE
 #undef BIND_ELEMENT
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -147,4 +147,4 @@ void initialize_statsd(threadpool& pool, authority const& server) {
 }
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth

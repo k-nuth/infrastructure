@@ -20580,4 +20580,4 @@ const dictionary_list all
 
 } // namespace language
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth

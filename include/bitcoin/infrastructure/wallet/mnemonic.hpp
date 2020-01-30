@@ -88,6 +88,6 @@ BI_API long_hash decode_mnemonic(const word_list& mnemonic,
 #endif
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

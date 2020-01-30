@@ -140,4 +140,4 @@ const asio::service& threadpool::service() const
     return service_;
 }
 
-} // namespace libbitcoin
+} // namespace kth

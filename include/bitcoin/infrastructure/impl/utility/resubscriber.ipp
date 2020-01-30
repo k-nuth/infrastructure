@@ -176,6 +176,6 @@ void resubscriber<Args...>::do_invoke(Args... args)
     ///////////////////////////////////////////////////////////////////////////
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

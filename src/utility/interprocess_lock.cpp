@@ -76,4 +76,4 @@ bool interprocess_lock::unlock()
     return destroy(file_);
 }
 
-} // namespace libbitcoin
+} // namespace kth

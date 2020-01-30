@@ -36,6 +36,6 @@ protected:
     }
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

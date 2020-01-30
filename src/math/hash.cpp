@@ -177,4 +177,4 @@ data_chunk scrypt(data_slice data, data_slice salt, uint64_t N, uint32_t p,
     return output;
 }
 
-} // namespace libbitcoin
+} // namespace kth

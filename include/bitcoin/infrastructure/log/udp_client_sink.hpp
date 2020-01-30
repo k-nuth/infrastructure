@@ -57,6 +57,6 @@ private:
 };
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

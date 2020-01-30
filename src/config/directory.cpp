@@ -45,4 +45,4 @@ std::string windows_config_directory()
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

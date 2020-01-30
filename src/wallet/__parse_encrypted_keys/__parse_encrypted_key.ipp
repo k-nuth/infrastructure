@@ -82,6 +82,6 @@ ek_salt parse_encrypted_key<PrefixSize>::salt() const
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

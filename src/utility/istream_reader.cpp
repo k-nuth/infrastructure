@@ -231,4 +231,4 @@ bool istream_reader::empty() const {
     return stream_.peek() == std::istream::traits_type::eof();
 }
 
-} // namespace libbitcoin
+} // namespace kth

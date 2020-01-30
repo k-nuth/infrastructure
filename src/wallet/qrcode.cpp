@@ -91,6 +91,6 @@ bool qr::encode(std::istream& in, uint32_t version, error_recovery_level level,
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif // WITH_QRENCODE

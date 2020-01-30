@@ -74,7 +74,7 @@ using stream_source = boost::iostreams::stream<byte_source<Container>>;
 
 using data_source = stream_source<data_chunk>;
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

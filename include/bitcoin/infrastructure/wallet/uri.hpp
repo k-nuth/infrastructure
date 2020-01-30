@@ -101,6 +101,6 @@ private:
 };
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -27,5 +27,5 @@ char const* version() {
 }
 
 } // namespace infrastructure
-} // namespace libbitcoin
+} // namespace kth
 

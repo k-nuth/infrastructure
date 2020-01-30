@@ -79,6 +79,6 @@ public:
     void skip(size_t size);
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

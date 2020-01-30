@@ -38,4 +38,4 @@ conditional_lock::~conditional_lock() {
     }
 }
 
-} // namespace libbitcoin
+} // namespace kth

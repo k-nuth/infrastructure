@@ -122,7 +122,7 @@ private:
 template <typename Iterator>
 serializer<Iterator> make_unsafe_serializer(Iterator begin);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/serializer.ipp>
 

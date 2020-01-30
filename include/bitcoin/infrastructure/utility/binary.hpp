@@ -86,7 +86,7 @@ private:
     uint8_t final_block_excess_{0};
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 namespace std {
 

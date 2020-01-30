@@ -35,4 +35,4 @@ ifstream::ifstream(std::string const& path, std::ifstream::openmode mode)
 {
 }
 
-} // namespace libbitcoin
+} // namespace kth

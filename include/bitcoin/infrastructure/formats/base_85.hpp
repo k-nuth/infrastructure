@@ -38,6 +38,6 @@ BI_API bool encode_base85(std::string& out, data_slice in);
  */
 BI_API bool decode_base85(data_chunk& out, std::string const& in);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

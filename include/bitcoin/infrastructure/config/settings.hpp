@@ -32,6 +32,6 @@ enum class settings
 };
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

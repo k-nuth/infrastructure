@@ -152,6 +152,6 @@ public:
 #undef BI_PROPERTY
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

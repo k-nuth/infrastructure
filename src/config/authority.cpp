@@ -241,4 +241,4 @@ std::ostream& operator<<(std::ostream& output, authority const& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

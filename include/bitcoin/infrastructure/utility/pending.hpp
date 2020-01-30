@@ -78,7 +78,7 @@ private:
     mutable upgrade_mutex mutex_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/pending.ipp>
 

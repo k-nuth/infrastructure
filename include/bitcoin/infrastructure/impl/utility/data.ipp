@@ -177,6 +177,6 @@ byte_array<Size> xor_data(data_slice bytes1, data_slice bytes2, size_t offset1,
     return out;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

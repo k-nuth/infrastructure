@@ -64,6 +64,6 @@ namespace language
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

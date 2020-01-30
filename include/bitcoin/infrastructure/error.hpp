@@ -300,7 +300,7 @@ BI_API error_code_t boost_to_error_code(const boost_code& ec);
 BI_API error_code_t posix_to_error_code(int ec);
 
 } // namespace error
-} // namespace libbitcoin
+} // namespace kth
 
 namespace std {
 

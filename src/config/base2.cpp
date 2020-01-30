@@ -66,4 +66,4 @@ std::ostream& operator<<(std::ostream& output, const base2& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

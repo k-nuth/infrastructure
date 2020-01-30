@@ -99,6 +99,6 @@ extern secp256k1_signing signing;
  */
 extern secp256k1_verification verification;
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

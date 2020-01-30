@@ -107,6 +107,6 @@ struct sequence
 #undef BIND_HANDLER
 
 } // namespace delegates
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

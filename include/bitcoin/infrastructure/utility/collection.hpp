@@ -100,7 +100,7 @@ void move_append(std::vector<T>& target, std::vector<T>& source);
 template <typename T>
 T pop(std::vector<T>& stack);
 
-} // namespace libbitcoin
+} // namespace kth
 
 namespace std {
 

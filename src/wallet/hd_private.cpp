@@ -297,4 +297,4 @@ void swap(hd_private& left, hd_private& right) {
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth

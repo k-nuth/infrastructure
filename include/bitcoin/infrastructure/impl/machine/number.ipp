@@ -277,6 +277,6 @@ number& number::operator-=(int64_t value) {
 }
 
 } // namespace machine
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

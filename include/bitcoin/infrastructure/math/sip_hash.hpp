@@ -94,6 +94,6 @@ public:
 uint64_t sip_hash_uint256(uint64_t k0, uint64_t k1, hash_digest const& val);
 uint64_t sip_hash_uint256_extra(uint64_t k0, uint64_t k1, hash_digest const& val, uint32_t extra);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif /* KNUTH_SIP_HASH_HPP_ */

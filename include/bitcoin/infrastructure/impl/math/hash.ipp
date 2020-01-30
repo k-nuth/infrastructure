@@ -34,6 +34,6 @@ byte_array<Size> scrypt(data_slice data, data_slice salt, uint64_t N,
     return to_array<Size>({ out });
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

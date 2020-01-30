@@ -49,5 +49,5 @@ bool verify_checksum(data_slice data)
     return bitcoin_checksum(slice) == checksum;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 

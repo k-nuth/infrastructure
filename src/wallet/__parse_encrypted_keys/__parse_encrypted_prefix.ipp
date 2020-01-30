@@ -60,6 +60,6 @@ void parse_encrypted_prefix<Size>::valid(bool value)
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -91,4 +91,4 @@ void deadline::handle_timer(const boost_code& ec, handler const& handle) const {
     }
 }
 
-} // namespace libbitcoin
+} // namespace kth

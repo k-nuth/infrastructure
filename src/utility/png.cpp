@@ -226,6 +226,6 @@ bool png::write_png(std::istream& in, uint32_t size, uint32_t dots_per_inch,
     return true;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif // WITH_PNG

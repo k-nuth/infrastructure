@@ -98,7 +98,7 @@ private:
     // data_sink& stream_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/ostream_writer.ipp>
 

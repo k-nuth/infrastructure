@@ -112,4 +112,4 @@ std::wstreambuf::int_type console_streambuf::underflow() {
     return traits_type::to_int_type(*gptr());
 }
 
-} // namespace libbitcoin
+} // namespace kth

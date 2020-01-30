@@ -125,4 +125,4 @@ size_t thread_floor(size_t configured)
     return (std::max)(configured, cores());
 }
 
-} // namespace libbitcoin
+} // namespace kth

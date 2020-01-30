@@ -72,6 +72,6 @@ enum class script_pattern
 };
 
 } // namespace machine
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -91,6 +91,6 @@ private:
     mutable shared_mutex mutex_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

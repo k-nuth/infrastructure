@@ -216,4 +216,4 @@ void initialize(const rotable_file& debug_file, const rotable_file& error_file,
 }
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth

@@ -53,6 +53,6 @@ byte_array<(Size - 1) / 2> base16_literal(char const (&string)[Size])
     return out;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -38,7 +38,7 @@ BI_API std::string encode_base64(data_slice unencoded);
  */
 BI_API bool decode_base64(data_chunk& out, std::string const& in);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

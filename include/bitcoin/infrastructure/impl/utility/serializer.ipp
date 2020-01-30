@@ -333,6 +333,6 @@ serializer<Iterator> make_unsafe_serializer(Iterator begin)
     return serializer<Iterator>(begin);
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

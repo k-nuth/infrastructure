@@ -64,7 +64,7 @@ bool array_slice<Iterable>::empty() const
     return end_ == begin_;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

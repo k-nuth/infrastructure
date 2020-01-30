@@ -48,6 +48,6 @@ void initialize(const rotable_file& debug_file, const rotable_file& error_file,
 formatter& operator<<(formatter& stream, severity value);
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

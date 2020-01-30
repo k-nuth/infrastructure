@@ -79,6 +79,6 @@ private:
     std::wstreambuf* wide_buffer_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

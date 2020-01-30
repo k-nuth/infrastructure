@@ -178,6 +178,6 @@ constexpr network_address unspecified_network_address {
 };
 
 } // namespace message
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

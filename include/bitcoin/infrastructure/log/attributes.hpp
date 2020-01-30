@@ -38,6 +38,6 @@ BOOST_LOG_ATTRIBUTE_KEYWORD(channel, "Channel", std::string)
 
 } // namespace attributes
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

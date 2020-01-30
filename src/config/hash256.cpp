@@ -69,4 +69,4 @@ std::ostream& operator<<(std::ostream& output, const hash256& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

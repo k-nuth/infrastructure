@@ -390,4 +390,4 @@ bool recover_public(ec_uncompressed& out,
     return recover_public(context, out, recoverable, hash);
 }
 
-} // namespace libbitcoin
+} // namespace kth

@@ -30,6 +30,6 @@ namespace message {
 BI_API size_t variable_uint_size(uint64_t value);
 
 } // namespace message
-} // namespace libbitcoin
+} // namespace kth
 
 #endif // KNUTH_INFRASTRUCTURE_MESSAGE_TOOLS_HPP_

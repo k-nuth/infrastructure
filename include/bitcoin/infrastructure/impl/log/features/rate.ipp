@@ -80,6 +80,6 @@ rate_feature<BaseType>::add_rate_unlocked(boost::log::attribute_set& set, boost:
 
 } // namespace features
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

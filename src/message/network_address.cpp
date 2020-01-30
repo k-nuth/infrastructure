@@ -200,4 +200,4 @@ network_address network_address::factory_from_data(uint32_t version, data_source
 // }
 
 } // namespace message
-} // namespace libbitcoin
+} // namespace kth

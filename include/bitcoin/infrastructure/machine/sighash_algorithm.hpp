@@ -78,6 +78,6 @@ enum sighash_algorithm : uint32_t
 };
 
 } // namespace machine
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

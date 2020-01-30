@@ -196,6 +196,6 @@ void pending<Element>::close()
     ///////////////////////////////////////////////////////////////////////////
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

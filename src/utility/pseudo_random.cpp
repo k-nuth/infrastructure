@@ -125,4 +125,4 @@ asio::duration pseudo_random::duration(asio::duration const& expiration,
     return milliseconds(expires);
 }
 
-} // namespace libbitcoin
+} // namespace kth

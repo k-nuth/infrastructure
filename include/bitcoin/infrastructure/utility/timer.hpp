@@ -81,6 +81,6 @@ struct timer
     }
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

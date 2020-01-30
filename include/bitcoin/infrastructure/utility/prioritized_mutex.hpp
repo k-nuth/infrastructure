@@ -50,6 +50,6 @@ private:
     shared_mutex wait_mutex_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

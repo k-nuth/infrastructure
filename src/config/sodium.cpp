@@ -90,4 +90,4 @@ std::ostream& operator<<(std::ostream& output, const sodium& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

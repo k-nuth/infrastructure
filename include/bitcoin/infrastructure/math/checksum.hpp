@@ -102,7 +102,7 @@ BI_API uint32_t bitcoin_checksum(data_slice data);
  */
 BI_API bool verify_checksum(data_slice data);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/math/checksum.ipp>
 

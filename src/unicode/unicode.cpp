@@ -414,4 +414,4 @@ void set_binary_stdout()
 
 LCOV_EXCL_STOP()
 
-} // namespace libbitcoin
+} // namespace kth

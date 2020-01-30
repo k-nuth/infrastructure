@@ -113,4 +113,4 @@ bool decode_base16_private(uint8_t* out, size_t out_size, char const* in) {
     return true;
 }
 
-} // namespace libbitcoin
+} // namespace kth

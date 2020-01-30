@@ -152,5 +152,5 @@ bool decode_base64(data_chunk& out, std::string const& in)
     return true;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 

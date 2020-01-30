@@ -54,7 +54,7 @@ private:
 };
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #include "parse_encrypted_key.ipp"
 

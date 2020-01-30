@@ -78,6 +78,6 @@ private:
     wchar_t* buffer_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -82,4 +82,4 @@ bool flush_lock::unlock_shared()
     return !locked_;
 }
 
-} // namespace libbitcoin
+} // namespace kth

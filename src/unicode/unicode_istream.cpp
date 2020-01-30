@@ -39,4 +39,4 @@ unicode_istream::~unicode_istream() {
 }
 #endif
 
-} // namespace libbitcoin
+} // namespace kth

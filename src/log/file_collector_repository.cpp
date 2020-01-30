@@ -86,4 +86,4 @@ boost::shared_ptr<boost::log::sinks::file::collector> make_collector(
 }
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth

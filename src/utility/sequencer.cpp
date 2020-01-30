@@ -103,4 +103,4 @@ void sequencer::unlock() {
     }
 }
 
-} // namespace libbitcoin
+} // namespace kth

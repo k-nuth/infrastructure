@@ -34,7 +34,7 @@
 // #include <bitcoin/infrastructure/utility/ostream_writer.hpp>
 // #include <bitcoin/infrastructure/utility/string.hpp>
 
-// namespace libbitcoin {
+// namespace kth {
 // namespace machine {
 
 // // Deserialization.
@@ -284,4 +284,4 @@
 // }
 
 // } // namespace machine
-// } // namespace libbitcoin
+// } // namespace kth

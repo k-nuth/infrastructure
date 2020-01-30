@@ -71,7 +71,7 @@ private:
     mutable upgrade_mutex subscribe_mutex_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/subscriber.ipp>
 

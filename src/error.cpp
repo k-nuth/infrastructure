@@ -455,4 +455,4 @@ error_code_t posix_to_error_code(int ec) {
 }
 
 } // namespace error
-} // namespace libbitcoin
+} // namespace kth

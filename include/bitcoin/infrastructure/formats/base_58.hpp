@@ -57,7 +57,7 @@ BI_API std::string encode_base58(data_slice unencoded);
  */
 BI_API bool decode_base58(data_chunk& out, std::string const& in);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/formats/base_58.ipp>
 

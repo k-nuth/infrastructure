@@ -69,4 +69,4 @@ uint8_t constexpr number::negative_0; //  = negative_mask | positive_0;
 // uint8_t constexpr number::negative_0 = negative_mask | positive_0;
 
 } // namespace machine
-} // namespace libbitcoin
+} // namespace kth

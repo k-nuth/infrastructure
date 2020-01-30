@@ -51,7 +51,7 @@ private:
     Iterable const* end_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/array_slice.ipp>
 

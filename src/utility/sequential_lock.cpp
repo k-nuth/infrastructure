@@ -51,4 +51,4 @@ bool sequential_lock::end_write()
     return !is_write_locked(++sequence_);
 }
 
-} // namespace libbitcoin
+} // namespace kth

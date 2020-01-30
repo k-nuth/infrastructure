@@ -63,4 +63,4 @@ work::work(threadpool& pool, std::string const& name)
 ////    return ordered_backlog() + unordered_backlog() + concurrent_backlog();
 ////}
 
-} // namespace libbitcoin
+} // namespace kth

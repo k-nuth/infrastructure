@@ -55,6 +55,6 @@ public:
 
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

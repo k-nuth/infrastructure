@@ -70,4 +70,4 @@ std::ostream& operator<<(std::ostream& output, base64 const& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

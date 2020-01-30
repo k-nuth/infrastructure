@@ -59,4 +59,4 @@ void udp_client_sink::handle_send(const boost_code& /*unused*/, size_t /*unused*
 }
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth

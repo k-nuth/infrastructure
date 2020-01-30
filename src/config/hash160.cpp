@@ -61,4 +61,4 @@ std::ostream& operator<<(std::ostream& output, hash160 const& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

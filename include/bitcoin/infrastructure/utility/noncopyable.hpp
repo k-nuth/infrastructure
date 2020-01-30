@@ -33,6 +33,6 @@ protected:
     noncopyable() = default;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

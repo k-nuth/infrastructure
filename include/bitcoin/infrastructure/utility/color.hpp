@@ -33,6 +33,6 @@ struct BI_API color {
     uint8_t alpha;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

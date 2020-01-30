@@ -409,4 +409,4 @@ path_string_type file_collector::filename_string(filesystem::path const& path) {
 }
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
