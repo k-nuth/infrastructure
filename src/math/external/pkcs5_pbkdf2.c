@@ -24,8 +24,8 @@
 #include "hmac_sha512.h"
 #include "zeroize.h"
 
-int pkcs5_pbkdf2(const uint8_t* passphrase, size_t passphrase_length,
-    const uint8_t* salt, size_t salt_length, uint8_t* key, size_t key_length,
+int pkcs5_pbkdf2(uint8_t const* passphrase, size_t passphrase_length,
+    uint8_t const* salt, size_t salt_length, uint8_t* key, size_t key_length,
     size_t iterations)
 {
     uint8_t* asalt;

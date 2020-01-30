@@ -58,8 +58,8 @@ bool qr::encode(std::istream& in, uint32_t version, error_recovery_level level,
         return false;
 
     auto const area = qrcode->width * qrcode->width;
-    auto width_ptr = reinterpret_cast<const uint8_t*>(&qrcode->width);
-    auto version_ptr = reinterpret_cast<const uint8_t*>(&qrcode->version);
+    auto width_ptr = reinterpret_cast<uint8_t const*>(&qrcode->width);
+    auto version_ptr = reinterpret_cast<uint8_t const*>(&qrcode->version);
 
     // Write out raw format of QRcode structure (defined in qrencode.h).
     // Format written is:

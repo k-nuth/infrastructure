@@ -11,12 +11,12 @@
 // // both identify as _MSC_VER = 1800, otherwise we could include CTP_Nov2013.
 // #if defined(_MSC_VER) && (_MSC_VER <= 1800)
 //     #define BC_NOEXCEPT _NOEXCEPT
-//     #define BC_CONSTFUNC inline
-//     #define BC_CONSTCTOR
+//     #define constexpr inline
+//     #define constexpr
 // #else
 //     #define BC_NOEXCEPT noexcept
-//     #define BC_CONSTFUNC constexpr
-//     #define BC_CONSTCTOR constexpr
+//     #define constexpr constexpr
+//     #define constexpr constexpr
 // #endif
 
 // TODO(legacy): prefix names with BC_

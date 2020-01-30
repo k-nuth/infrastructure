@@ -21,7 +21,7 @@
 // We embrace the "utf8 everywhere" design: http://utf8everywhere.org
 // The objective is to use utf8 as the canonical string encoding, pushing
 // wchar_t translation to the edge (stdio, argv, O/S and external API calls).
-// The macro BC_USE_KTH_MAIN does most of the heavy lifting to ensure
+// The macro KTH_USE_MAIN does most of the heavy lifting to ensure
 // that stdio and argv is configured for utf8. The 'to_utf' functions are
 // provided for API translations.
 
@@ -36,7 +36,7 @@
 
 // Regarding Unicode in console applications:
 //
-// BC_USE_KTH_MAIN should be declared prior to bc::main() in a console
+// KTH_USE_MAIN should be declared prior to bc::main() in a console
 // application. This enables Unicode argument and environment processing in
 // Windows. This macro implements main() and forwards to bc::main(), which
 // should be implemented as if it was main() with the expectation that argv
@@ -67,7 +67,7 @@
     #include <boost/filesystem.hpp>
     #include <boost/locale.hpp>
     #include <windows.h>
-    #define BC_USE_KTH_MAIN \
+    #define KTH_USE_MAIN \
         namespace kth { \
         int main(int argc, char* argv[]); \
         } \
@@ -88,7 +88,7 @@
             return kth::main(argc, args); \
         }
 #else
-    #define BC_USE_KTH_MAIN \
+    #define KTH_USE_MAIN \
         namespace kth { \
         int main(int argc, char* argv[]); \
         } \

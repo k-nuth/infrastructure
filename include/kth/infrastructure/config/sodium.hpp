@@ -28,9 +28,7 @@ public:
      */
     using list = std::vector<sodium>;
 
-    /**
-     * Default constructor.
-     */
+
     sodium();
 
     /**

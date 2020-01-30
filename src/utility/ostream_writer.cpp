@@ -169,7 +169,7 @@ void ostream_writer::write_bytes(data_chunk const& data)
 }
 }
 
-void ostream_writer::write_bytes(const uint8_t* data, size_t size)
+void ostream_writer::write_bytes(uint8_t const* data, size_t size)
 {
     auto buffer = reinterpret_cast<char const*>(data);
     stream_.write(buffer, size);
@@ -178,7 +178,7 @@ void ostream_writer::write_bytes(const uint8_t* data, size_t size)
 void ostream_writer::write_string(std::string const& value, size_t size)
 {
     auto const length = std::min(size, value.size());
-    write_bytes(reinterpret_cast<const uint8_t*>(value.data()), length);
+    write_bytes(reinterpret_cast<uint8_t const*>(value.data()), length);
     data_chunk padding(floor_subtract(size, length), string_terminator);
     write_bytes(padding);
 }

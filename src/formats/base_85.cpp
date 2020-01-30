@@ -87,7 +87,7 @@ bool encode_base85(std::string& out, data_slice in)
     size_t byte_index = 0;
     uint32_t accumulator = 0;
 
-    for (const uint8_t unencoded_byte: in)
+    for (uint8_t const unencoded_byte: in)
     {
         accumulator = accumulator * 256 + unencoded_byte;
         if (++byte_index % 4 == 0)
@@ -119,7 +119,7 @@ bool decode_base85(data_chunk& out, std::string const& in)
     size_t char_index = 0;
     uint32_t accumulator = 0;
 
-    for (const uint8_t encoded_character: in)
+    for (uint8_t const encoded_character: in)
     {
         auto const position = encoded_character - 32;
         if (position < 0 || position > 96) {

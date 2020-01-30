@@ -38,11 +38,11 @@ typedef struct SHA1CTX
     size_t index;
 } SHA1CTX;
 
-void SHA1_(const uint8_t* message, size_t length,
+void SHA1_(uint8_t const* message, size_t length,
     uint8_t digest[SHA1_DIGEST_LENGTH]);
 
 void SHA1Init(SHA1CTX* context);
-void SHA1Update(SHA1CTX* context, const uint8_t* message, size_t length);
+void SHA1Update(SHA1CTX* context, uint8_t const* message, size_t length);
 void SHA1Final(SHA1CTX* context, uint8_t digest[SHA1_DIGEST_LENGTH]);
 
 #ifdef __cplusplus

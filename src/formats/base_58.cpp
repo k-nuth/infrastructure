@@ -37,7 +37,7 @@ auto search_first_nonzero(const Data& data) -> decltype(data.cbegin()) {
 size_t count_leading_zeros(data_slice unencoded) {
     // Skip and count leading '1's.
     size_t leading_zeros = 0;
-    for (const uint8_t byte: unencoded) {
+    for (uint8_t const byte: unencoded) {
         if (byte != 0) {
             break;
         }
@@ -95,7 +95,7 @@ std::string encode_base58(data_slice unencoded) {
 size_t count_leading_zeros(std::string const& encoded) {
     // Skip and count leading '1's.
     size_t leading_zeros = 0;
-    for (const uint8_t digit: encoded) {
+    for (uint8_t const digit: encoded) {
         if (digit != base58_chars[0]) {
             break;
     }

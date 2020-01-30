@@ -30,9 +30,7 @@ public:
      */
     using list = std::vector<authority>;
 
-    /**
-     * Default constructor.
-     */
+
     authority() = default;
 
     /**

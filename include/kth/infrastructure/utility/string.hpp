@@ -8,8 +8,8 @@
 #include <vector>
 
 #include <kth/infrastructure/define.hpp>
-// #include <kth/bitcoin/define.hpp>
-// #include <kth/bitcoin/utility/data.hpp>
+// #include <kth/infrastructure/define.hpp>
+// #include <kth/infrastructure/utility/data.hpp>
 // #include <boost/algorithm/string/trim.hpp>
 // #include <boost/lexical_cast.hpp>
 

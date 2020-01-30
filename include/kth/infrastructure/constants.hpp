@@ -104,7 +104,7 @@ constexpr size_t max_push_data_size = 520;
 // constexpr uint32_t proof_of_work_limit = 0x1d00ffff;
 // #endif // KTH_CURRENCY_LTC
 
-// BC_CONSTFUNC uint32_t work_limit(bool retarget=true)
+// constexpr uint32_t work_limit(bool retarget=true)
 // {
 //     return retarget ? retarget_proof_of_work_limit : no_retarget_proof_of_work_limit;
 // }
@@ -143,7 +143,7 @@ constexpr size_t max_push_data_size = 520;
 // // constexpr size_t one_million_bytes_block = 1000000;
 // constexpr size_t sigops_per_million_bytes = 20000;
 
-// BC_CONSTFUNC inline
+// constexpr inline
 // size_t get_allowed_sigops(size_t block_size) {
 //     // return (1 + ((block_size - 1) / one_million_bytes_block)) * sigops_per_million_bytes;
 //     return (block_size - 1) / max_sigops_factor + sigops_per_million_bytes;
@@ -435,21 +435,21 @@ constexpr uint8_t string_terminator = 0x00;
 // // Currency unit constants (uint64_t).
 // //-----------------------------------------------------------------------------
 
-// BC_CONSTFUNC inline
+// constexpr inline
 // uint64_t max_money_recursive(uint64_t money) {
 //     return money > 0 ? money + max_money_recursive(money >> 1) : 0;
 // }
 
 // constexpr uint64_t satoshi_per_bitcoin = 100000000;
 
-// BC_CONSTFUNC inline 
+// constexpr inline 
 // uint64_t bitcoin_to_satoshi(uint64_t bitcoin_uints=1) {
 //     return bitcoin_uints * satoshi_per_bitcoin;
 // }
 
 // constexpr uint64_t initial_block_subsidy_bitcoin = 50;
 
-// BC_CONSTFUNC inline 
+// constexpr inline 
 // uint64_t initial_block_subsidy_satoshi() {
 //     return bitcoin_to_satoshi(initial_block_subsidy_bitcoin);
 // }
@@ -466,12 +466,12 @@ constexpr uint8_t string_terminator = 0x00;
 
 // constexpr uint64_t recursive_money = 0x02540be3f5;
 
-// BC_CONSTFUNC uint64_t subsidy_interval(bool retarget=true)
+// constexpr uint64_t subsidy_interval(bool retarget=true)
 // {
 //     return retarget ? retarget_subsidy_interval : no_retarget_subsidy_interval;
 // }
 
-// BC_CONSTFUNC uint64_t max_money(bool retarget=true)
+// constexpr uint64_t max_money(bool retarget=true)
 // {
 //     ////// Optimize out the derivation of recursive_money.
 //     ////BITCOIN_ASSERT(recursive_money == max_money_recursive(

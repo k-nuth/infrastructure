@@ -31,9 +31,7 @@ public:
      */
     using list = std::vector<endpoint>;
 
-    /**
-     * Default constructor.
-     */
+
     endpoint();
 
     /**

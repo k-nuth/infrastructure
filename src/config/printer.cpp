@@ -442,7 +442,7 @@ void printer::generate_parameters() {
     parameters.clear();
 
     parameter param;
-    for (const auto& option_ptr: options.options()) {
+    for (auto const& option_ptr: options.options()) {
         param.initialize(*option_ptr, argument_names);
 
         // Sort non-positonal parameters (i.e. options).

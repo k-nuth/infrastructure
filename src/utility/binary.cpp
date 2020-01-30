@@ -75,9 +75,9 @@ void binary::resize(size_type size) {
 bool binary::operator[](size_type index) const {
     BITCOIN_ASSERT(index < size());
     size_type const block_index = index / bits_per_block;
-    const uint8_t block = blocks_[block_index];
+    uint8_t const block = blocks_[block_index];
     size_type const offset = index - (block_index * bits_per_block);
-    const uint8_t bitmask = 1 << (bits_per_block - offset - 1);
+    uint8_t const bitmask = 1 << (bits_per_block - offset - 1);
     return (block & bitmask) > 0;
 }
 
@@ -252,7 +252,7 @@ std::istream& operator>>(std::istream& in, binary& to) {
 
         // Set bit to 1
         if (representation == '1') {
-            const uint8_t bitmask = 1 << (bit_iterator - 1);
+            uint8_t const bitmask = 1 << (bit_iterator - 1);
             block |= bitmask;
         }
 

@@ -38,7 +38,7 @@ typedef struct
 } aes256_context; 
 
 void aes256_init(aes256_context* context, 
-    const uint8_t key[AES256_KEY_LENGTH]);
+    uint8_t const key[AES256_KEY_LENGTH]);
 
 void aes256_done(aes256_context* context);
 

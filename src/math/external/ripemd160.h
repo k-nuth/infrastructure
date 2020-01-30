@@ -27,11 +27,11 @@ typedef struct RMD160CTX
     uint32_t chunk[RMD160_CHUNK_LENGTH];
 } RMD160CTX;
 
-void RMD160(const uint8_t* message, size_t length,
+void RMD160(uint8_t const* message, size_t length,
     uint8_t digest[RMD160_DIGEST_LENGTH]);
 
 void RMDInit(RMD160CTX* context);
-void RMDUpdate(RMD160CTX* context, const uint8_t* message, size_t length);
+void RMDUpdate(RMD160CTX* context, uint8_t const* message, size_t length);
 void RMDFinal(RMD160CTX* context, uint8_t digest[RMD160_DIGEST_LENGTH]);
 
 #ifdef __cplusplus
