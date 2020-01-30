@@ -1,9 +1,6 @@
-///////////////////////////////////////////////////////////////////////////////
-// Copyright (c) 2014-2015 libbitcoin developers (see COPYING).
-//
-//        GENERATED SOURCE CODE, DO NOT EDIT EXCEPT EXPERIMENTALLY
-//
-///////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifndef KTH_INFRASTRUCTURE_VERSION_HPP_
 #define KTH_INFRASTRUCTURE_VERSION_HPP_
 
@@ -22,7 +19,7 @@
 
 namespace kth { namespace infrastructure {
 char const* version();
-}} /*namespace libbitcoin::infrastructure*/
+}} /*namespace kth::infrastructure*/
  
 
 #endif // KTH_INFRASTRUCTURE_VERSION_HPP_

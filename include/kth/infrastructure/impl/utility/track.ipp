@@ -12,7 +12,7 @@
 #include <bitcoin/infrastructure/log/source.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
 
-// libbitcoin defines the log and tracking but does not use them.
+// Defines the log and tracking but does not use them.
 // These are defined in bc so that they can be used in network and blockchain.
 
 // Log name.

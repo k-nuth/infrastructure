@@ -83,7 +83,7 @@ public:
             reset();
         }
 
-        // TODO(libbitcoin): add array to reader interface (can't use template).
+        // TODO(legacy): add array to reader interface (can't use template).
         std::move(ip.begin(), ip.end(), ip_.data());
         return source;
     }

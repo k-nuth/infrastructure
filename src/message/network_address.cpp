@@ -14,7 +14,7 @@
 namespace kth {
 namespace message {
 
-// TODO(libbitcoin): create derived address that adds the timestamp.
+// TODO(legacy): create derived address that adds the timestamp.
 
 bool network_address::operator==(network_address const& x) const {
     return (services_ == x.services_) && (port_ == x.port_) && (ip_ == x.ip_);
@@ -70,7 +70,7 @@ bool network_address::from_data(uint32_t version, data_source& stream, bool with
 //         reset();
 //     }
 
-//     // TODO(libbitcoin): add array to reader interface (can't use template).
+//     // TODO(legacy): add array to reader interface (can't use template).
 //     std::move(ip.begin(), ip.end(), ip_.data());
 //     return source;
 // }

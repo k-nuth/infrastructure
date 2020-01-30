@@ -11,7 +11,7 @@ BOOST_AUTO_TEST_SUITE(uri_tests)
 
 BOOST_AUTO_TEST_CASE(uri__parse__http_roundtrip__test)
 {
-    auto const test = "http://github.com/libbitcoin?good=true#nice";
+    auto const test = "http://github.com/k-nuth?good=true#nice";
     uri parsed;
     BOOST_REQUIRE(parsed.decode(test));
 

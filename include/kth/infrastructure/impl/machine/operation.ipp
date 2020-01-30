@@ -135,7 +135,7 @@
 // // Properties (size, accessors, cache).
 // //-----------------------------------------------------------------------------
 
-// // TODO(libbitcoin): consolidate with message implementation into common math utility.
+// // TODO(legacy): consolidate with message implementation into common math utility.
 // // static size_t variable_uint_size(uint64_t value)
 // // {
 // //     if (value < 0xfd)

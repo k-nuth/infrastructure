@@ -19,7 +19,7 @@
 //     #define BC_CONSTCTOR constexpr
 // #endif
 
-// TODO(libbitcoin): prefix names with BC_
+// TODO(legacy): prefix names with BC_
 #ifdef _MSC_VER
     #define MIN_INT64 INT64_MIN
     #define MAX_INT64 INT64_MAX

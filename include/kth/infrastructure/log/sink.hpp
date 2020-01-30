@@ -21,11 +21,11 @@ using file = boost::shared_ptr<bc::ofstream>;
 /// Initializes null (as opposed to default) logging sinks.
 void initialize();
 
-/// Initializes default non-rotable libbitcoin logging sinks and formats.
+/// Initializes default non-rotable logging sinks and formats.
 void initialize(log::file& debug_file, log::file& error_file,
     log::stream& output_stream, log::stream& error_stream, bool verbose);
 
-/// Initializes default rotable libbitcoin logging sinks and formats.
+/// Initializes default rotable logging sinks and formats.
 void initialize(const rotable_file& debug_file, const rotable_file& error_file,
     log::stream& output_stream, log::stream& error_stream, bool verbose);
 

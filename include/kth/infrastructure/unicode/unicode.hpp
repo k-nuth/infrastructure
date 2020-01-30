@@ -18,7 +18,7 @@
 // as wchar_t in C++. Unicode no longer fits in 16 bits and as such these
 // implementations now require variable length character encoding just as utf8.
 //
-// Libbitcoin embraces the "utf8 everywhere" design: http://utf8everywhere.org
+// We embrace the "utf8 everywhere" design: http://utf8everywhere.org
 // The objective is to use utf8 as the canonical string encoding, pushing
 // wchar_t translation to the edge (stdio, argv, O/S and external API calls).
 // The macro BC_USE_KTH_MAIN does most of the heavy lifting to ensure

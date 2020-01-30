@@ -47,6 +47,6 @@ std::string cashaddr_prefix();
 void set_cashaddr_prefix(std::string const& x);
 #endif //KTH_CURRENCY_BCH
 
-} /*namespace libbitcoin*/
+} // namespace kth
 
 #endif /*KTH_MULTI_INFRASTUCTURE_SUPPORT_HPP_*/

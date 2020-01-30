@@ -7,7 +7,6 @@
 
 - 64-bit machine.
 - Python PIP.
-- [Conan](https://www.conan.io/) package manager, version 1.4.0 or newer. See [Conan Installation](http://docs.conan.io/en/latest/installation.html#install-with-pip-recommended).
 
 ## Installation Procedure
 
@@ -15,13 +14,12 @@ The *Knuth* libraries can be installed on Linux, macOS, FreeBSD, Windows and oth
 
 So, for any platform, an installation can be performed in 2 simple steps:
 
-1. Configure the Conan remote:
+1. Install our build system helpers:
 ```
 pip install kthbuild
-conan remote add kth https://api.bintray.com/conan/k-nuth/kth
 ```
 
-2. Install the appropriate library:
+2. Install the library:
 
 ```
 conan install infrastructure/0.X@kth/stable 

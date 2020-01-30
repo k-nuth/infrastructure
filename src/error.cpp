@@ -409,7 +409,7 @@ error_code_t boost_to_error_code(const boost_code& ec) {
 }
 
 error_code_t posix_to_error_code(int ec) {
-    // TODO(libbitcoin): expand mapping for database scenario.
+    // TODO(legacy): expand mapping for database scenario.
     switch (ec) {
         // protocol codes (from zeromq)
         case ENOBUFS:
