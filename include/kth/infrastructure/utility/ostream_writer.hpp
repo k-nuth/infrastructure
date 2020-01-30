@@ -6,9 +6,9 @@
 
 // #include <ostream>
 
-#include <bitcoin/infrastructure/error.hpp>
-#include <bitcoin/infrastructure/utility/container_sink.hpp>
-#include <bitcoin/infrastructure/utility/writer.hpp>
+#include <kth/infrastructure/error.hpp>
+#include <kth/infrastructure/utility/container_sink.hpp>
+#include <kth/infrastructure/utility/writer.hpp>
 
 namespace kth {
 
@@ -85,6 +85,6 @@ private:
 
 } // namespace kth
 
-#include <bitcoin/infrastructure/impl/utility/ostream_writer.ipp>
+#include <kth/infrastructure/impl/utility/ostream_writer.ipp>
 
 #endif

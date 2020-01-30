@@ -8,7 +8,7 @@
 
 #include <secp256k1.h>
 
-#include <bitcoin/infrastructure/define.hpp>
+#include <kth/infrastructure/define.hpp>
 
 namespace kth {
 

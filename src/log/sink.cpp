@@ -1,7 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/log/sink.hpp>
+#include <kth/infrastructure/log/sink.hpp>
 
 #include <map>
 #include <string>
@@ -14,11 +14,11 @@
 #include <boost/log/support/date_time.hpp>
 #include <boost/smart_ptr/make_shared.hpp>
 
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/log/attributes.hpp>
-#include <bitcoin/infrastructure/log/file_collector_repository.hpp>
-#include <bitcoin/infrastructure/log/severity.hpp>
-#include <bitcoin/infrastructure/unicode/ofstream.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/log/attributes.hpp>
+#include <kth/infrastructure/log/file_collector_repository.hpp>
+#include <kth/infrastructure/log/severity.hpp>
+#include <kth/infrastructure/unicode/ofstream.hpp>
 
 namespace kth {
 namespace log {

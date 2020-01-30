@@ -8,10 +8,10 @@
 #include <cstdint>
 #include <string>
 
-#include <bitcoin/infrastructure/define.hpp>
-// #include <bitcoin/infrastructure/math/hash.hpp>
-#include <bitcoin/infrastructure/hash_define.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/define.hpp>
+// #include <kth/infrastructure/math/hash.hpp>
+#include <kth/infrastructure/hash_define.hpp>
+#include <kth/infrastructure/utility/data.hpp>
 
 namespace kth {
 

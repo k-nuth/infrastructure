@@ -1,14 +1,14 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/formats/base_10.hpp>
+#include <kth/infrastructure/formats/base_10.hpp>
 
 #include <iomanip>
 #include <sstream>
 
 #include <boost/algorithm/string.hpp>
 
-#include <bitcoin/infrastructure/constants.hpp>
+#include <kth/infrastructure/constants.hpp>
 
 namespace kth {
 

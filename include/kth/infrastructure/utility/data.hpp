@@ -12,8 +12,8 @@
 #include <queue>
 #include <vector>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/array_slice.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/utility/array_slice.hpp>
 
 namespace kth {
 
@@ -139,6 +139,6 @@ byte_array<Size> xor_data(data_slice bytes1, data_slice bytes2, size_t offset1,
 
 } // namespace kth
 
-#include <bitcoin/infrastructure/impl/utility/data.ipp>
+#include <kth/infrastructure/impl/utility/data.ipp>
 
 #endif

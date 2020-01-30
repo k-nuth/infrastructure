@@ -4,7 +4,7 @@
 #ifndef KTH_INFRASTRUCTURE_NONCOPYABLE_HPP
 #define KTH_INFRASTRUCTURE_NONCOPYABLE_HPP
 
-#include <bitcoin/infrastructure/define.hpp>
+#include <kth/infrastructure/define.hpp>
 
 namespace kth {
 

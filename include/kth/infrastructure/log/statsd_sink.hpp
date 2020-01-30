@@ -6,10 +6,10 @@
 
 #include <boost/asio.hpp>
 
-#include <bitcoin/infrastructure/config/authority.hpp>
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/log/rotable_file.hpp>
-#include <bitcoin/infrastructure/utility/threadpool.hpp>
+#include <kth/infrastructure/config/authority.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/log/rotable_file.hpp>
+#include <kth/infrastructure/utility/threadpool.hpp>
 
 namespace kth {
 namespace log {

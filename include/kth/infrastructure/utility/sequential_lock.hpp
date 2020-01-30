@@ -7,7 +7,7 @@
 #include <atomic>
 #include <cstddef>
 
-#include <bitcoin/infrastructure/define.hpp>
+#include <kth/infrastructure/define.hpp>
 
 namespace kth {
 

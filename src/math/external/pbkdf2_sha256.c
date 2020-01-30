@@ -35,7 +35,7 @@
 #include "hmac_sha256.h"
 #include "zeroize.h"
 
-#include <bitcoin/infrastructure/compat.h>
+#include <kth/infrastructure/compat.h>
 
 static BI_C_INLINE void be32enc(void* pp, uint32_t x)
 {

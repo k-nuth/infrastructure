@@ -10,7 +10,7 @@
 #include <string>
 #include <utility>
 
-#include <bitcoin/infrastructure/define.hpp>
+#include <kth/infrastructure/define.hpp>
 
 // Defines the log and tracking but does not use them.
 // These are defined in bc so that they can be used in network and blockchain.

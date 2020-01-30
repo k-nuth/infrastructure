@@ -8,10 +8,10 @@
 #include <iostream>
 #include <string>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/math/elliptic_curve.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
-// #include <bitcoin/infrastructure/wallet/ec_public.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/math/elliptic_curve.hpp>
+#include <kth/infrastructure/utility/data.hpp>
+// #include <kth/infrastructure/wallet/ec_public.hpp>
 
 namespace kth {
 namespace wallet {

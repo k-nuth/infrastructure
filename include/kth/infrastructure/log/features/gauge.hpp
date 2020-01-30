@@ -74,6 +74,6 @@ BOOST_PARAMETER_KEYWORD(tag, gauge)
 } // namespace log
 } // namespace kth
 
-#include <bitcoin/infrastructure/impl/log/features/gauge.ipp>
+#include <kth/infrastructure/impl/log/features/gauge.ipp>
 
 #endif

@@ -4,7 +4,7 @@
 #ifndef KTH_INFRASTUCTURE_BASE_16_IPP
 #define KTH_INFRASTUCTURE_BASE_16_IPP
 
-#include <bitcoin/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
 
 namespace kth {
 

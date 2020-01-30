@@ -23,8 +23,8 @@
 #include <boost/intrusive/options.hpp>
 #include <boost/log/detail/singleton.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/log/file_collector.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/log/file_collector.hpp>
 
 namespace kth {
 namespace log {

@@ -6,10 +6,10 @@
 
 #include <cstddef>
 
-#include <bitcoin/infrastructure/compat.hpp>
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/math/hash.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/compat.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/math/hash.hpp>
+#include <kth/infrastructure/utility/data.hpp>
 
 namespace kth {
 

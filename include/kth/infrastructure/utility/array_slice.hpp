@@ -38,7 +38,7 @@ private:
 
 } // namespace kth
 
-#include <bitcoin/infrastructure/impl/utility/array_slice.ipp>
+#include <kth/infrastructure/impl/utility/array_slice.ipp>
 
 #endif
 

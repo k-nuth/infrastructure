@@ -10,8 +10,8 @@
 #include <boost/log/sinks/basic_sink_backend.hpp>
 #include <boost/shared_ptr.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/error.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/error.hpp>
 
 namespace kth {
 namespace log {

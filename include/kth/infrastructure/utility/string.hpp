@@ -7,9 +7,9 @@
 #include <string>
 #include <vector>
 
-#include <bitcoin/infrastructure/define.hpp>
-// #include <bitcoin/bitcoin/define.hpp>
-// #include <bitcoin/bitcoin/utility/data.hpp>
+#include <kth/infrastructure/define.hpp>
+// #include <kth/bitcoin/define.hpp>
+// #include <kth/bitcoin/utility/data.hpp>
 // #include <boost/algorithm/string/trim.hpp>
 // #include <boost/lexical_cast.hpp>
 
@@ -80,6 +80,6 @@ BI_API string_list split(std::string const& sentence,
 
 } // namespace kth
 
-#include <bitcoin/infrastructure/impl/utility/string.ipp>
+#include <kth/infrastructure/impl/utility/string.ipp>
 
 #endif

@@ -1,13 +1,13 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/utility/sequencer.hpp>
+#include <kth/infrastructure/utility/sequencer.hpp>
 
 #include <utility>
 
-#include <bitcoin/infrastructure/utility/asio.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
-#include <bitcoin/infrastructure/utility/thread.hpp>
+#include <kth/infrastructure/utility/asio.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/thread.hpp>
 
 namespace kth {
 

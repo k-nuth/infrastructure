@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <cstddef>
 
-#include <bitcoin/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/utility/data.hpp>
 
 namespace kth {
 

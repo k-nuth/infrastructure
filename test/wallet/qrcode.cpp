@@ -4,7 +4,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <cstdint>
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 
 using namespace bc;
 using namespace bc::wallet;

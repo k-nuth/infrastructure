@@ -21,11 +21,11 @@
 
 // #include <cstdint>
 
-// #include <bitcoin/infrastructure/constants.hpp>
-// #include <bitcoin/infrastructure/machine/number.hpp>
-// #include <bitcoin/infrastructure/machine/opcode.hpp>
-// #include <bitcoin/infrastructure/utility/assert.hpp>
-// #include <bitcoin/infrastructure/utility/data.hpp>
+// #include <kth/infrastructure/constants.hpp>
+// #include <kth/infrastructure/machine/number.hpp>
+// #include <kth/infrastructure/machine/opcode.hpp>
+// #include <kth/infrastructure/utility/assert.hpp>
+// #include <kth/infrastructure/utility/data.hpp>
 
 // namespace kth {
 // namespace machine {

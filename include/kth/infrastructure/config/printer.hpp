@@ -11,8 +11,8 @@
 #include <boost/format.hpp>
 #include <boost/program_options.hpp>
 
-#include <bitcoin/infrastructure/config/parameter.hpp>
-#include <bitcoin/infrastructure/define.hpp>
+#include <kth/infrastructure/config/parameter.hpp>
+#include <kth/infrastructure/define.hpp>
 
 namespace kth {
 namespace config {

@@ -9,7 +9,7 @@
 #include <initializer_list>
 #include <iterator>
 
-#include <bitcoin/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
 
 namespace kth {
 

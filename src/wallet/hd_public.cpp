@@ -1,7 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/wallet/hd_public.hpp>
+#include <kth/infrastructure/wallet/hd_public.hpp>
 
 #include <cstdint>
 #include <iostream>
@@ -9,19 +9,19 @@
 
 #include <boost/program_options.hpp>
 
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/formats/base_58.hpp>
-#include <bitcoin/infrastructure/math/checksum.hpp>
-#include <bitcoin/infrastructure/math/elliptic_curve.hpp>
-#include <bitcoin/infrastructure/math/hash.hpp>
-#include <bitcoin/infrastructure/utility/container_source.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
-#include <bitcoin/infrastructure/utility/endian.hpp>
-#include <bitcoin/infrastructure/utility/istream_reader.hpp>
-#include <bitcoin/infrastructure/utility/limits.hpp>
-// #include <bitcoin/infrastructure/wallet/ec_public.hpp>
-#include <bitcoin/infrastructure/wallet/hd_private.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/formats/base_58.hpp>
+#include <kth/infrastructure/math/checksum.hpp>
+#include <kth/infrastructure/math/elliptic_curve.hpp>
+#include <kth/infrastructure/math/hash.hpp>
+#include <kth/infrastructure/utility/container_source.hpp>
+#include <kth/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/utility/endian.hpp>
+#include <kth/infrastructure/utility/istream_reader.hpp>
+#include <kth/infrastructure/utility/limits.hpp>
+// #include <kth/infrastructure/wallet/ec_public.hpp>
+#include <kth/infrastructure/wallet/hd_private.hpp>
 
 namespace kth {
 namespace wallet {

@@ -10,9 +10,9 @@
 #include <memory>
 #include <vector>
 
-#include <bitcoin/infrastructure/error.hpp>
-#include <bitcoin/infrastructure/utility/noncopyable.hpp>
-#include <bitcoin/infrastructure/utility/thread.hpp>
+#include <kth/infrastructure/error.hpp>
+#include <kth/infrastructure/utility/noncopyable.hpp>
+#include <kth/infrastructure/utility/thread.hpp>
 
 namespace kth {
 
@@ -65,6 +65,6 @@ private:
 
 } // namespace kth
 
-#include <bitcoin/infrastructure/impl/utility/pending.ipp>
+#include <kth/infrastructure/impl/utility/pending.ipp>
 
 #endif

@@ -1,7 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 #include <boost/test/unit_test.hpp>
 
 using namespace bc;

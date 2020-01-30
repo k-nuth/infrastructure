@@ -8,10 +8,10 @@
 
 #include <boost/smart_ptr.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/log/rotable_file.hpp>
-#include <bitcoin/infrastructure/log/severity.hpp>
-#include <bitcoin/infrastructure/unicode/ofstream.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/log/rotable_file.hpp>
+#include <kth/infrastructure/log/severity.hpp>
+#include <kth/infrastructure/unicode/ofstream.hpp>
 
 namespace kth {
 namespace log {

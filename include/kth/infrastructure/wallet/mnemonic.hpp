@@ -8,13 +8,13 @@
 #include <string>
 #include <vector>
 
-#include <bitcoin/infrastructure/compat.hpp>
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/math/hash.hpp>
-#include <bitcoin/infrastructure/unicode/unicode.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
-#include <bitcoin/infrastructure/utility/string.hpp>
-#include <bitcoin/infrastructure/wallet/dictionary.hpp>
+#include <kth/infrastructure/compat.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/math/hash.hpp>
+#include <kth/infrastructure/unicode/unicode.hpp>
+#include <kth/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/utility/string.hpp>
+#include <kth/infrastructure/wallet/dictionary.hpp>
 
 namespace kth {
 namespace wallet {

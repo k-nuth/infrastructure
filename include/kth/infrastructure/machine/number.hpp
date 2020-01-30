@@ -6,8 +6,8 @@
 
 #include <cstddef>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/utility/data.hpp>
 
 namespace kth {
 namespace machine {
@@ -141,6 +141,6 @@ private:
 } // namespace kth
 
 
-#include <bitcoin/infrastructure/impl/machine/number.ipp>
+#include <kth/infrastructure/impl/machine/number.ipp>
 
 #endif

@@ -24,15 +24,15 @@
 // #include <iostream>
 // #include <vector>
 
-// // #include <bitcoin/bitcoin/constants.hpp>
-// #include <bitcoin/infrastructure/constants.hpp>
+// // #include <kth/bitcoin/constants.hpp>
+// #include <kth/infrastructure/constants.hpp>
 
-// #include <bitcoin/infrastructure/define.hpp>
-// #include <bitcoin/infrastructure/machine/opcode.hpp>
-// #include <bitcoin/infrastructure/machine/script_pattern.hpp>
-// #include <bitcoin/infrastructure/utility/data.hpp>
-// #include <bitcoin/infrastructure/utility/reader.hpp>
-// #include <bitcoin/infrastructure/utility/writer.hpp>
+// #include <kth/infrastructure/define.hpp>
+// #include <kth/infrastructure/machine/opcode.hpp>
+// #include <kth/infrastructure/machine/script_pattern.hpp>
+// #include <kth/infrastructure/utility/data.hpp>
+// #include <kth/infrastructure/utility/reader.hpp>
+// #include <kth/infrastructure/utility/writer.hpp>
 
 // // #include <knuth/common.hpp>
 // // #include <knuth/concepts.hpp>
@@ -216,6 +216,6 @@
 // } // namespace machine
 // } // namespace kth
 
-// #include <bitcoin/infrastructure/impl/machine/operation.ipp>
+// #include <kth/infrastructure/impl/machine/operation.ipp>
 
 // #endif // KTH_INFRASTUCTURE_MACHINE_OPERATION_HPP_

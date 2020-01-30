@@ -74,6 +74,6 @@ BOOST_PARAMETER_KEYWORD(tag, counter)
 } // namespace log
 } // namespace kth
 
-#include <bitcoin/infrastructure/impl/log/features/counter.ipp>
+#include <kth/infrastructure/impl/log/features/counter.ipp>
 
 #endif

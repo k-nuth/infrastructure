@@ -6,8 +6,8 @@
 
 #include <cstdint>
 
-#include <bitcoin/infrastructure/math/hash.hpp>
-//#include <bitcoin/infrastructure/math/uint256.hpp>
+#include <kth/infrastructure/math/hash.hpp>
+//#include <kth/infrastructure/math/uint256.hpp>
 
 namespace kth {
 

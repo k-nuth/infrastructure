@@ -6,7 +6,7 @@
 
 #include <functional>
 
-#include <bitcoin/infrastructure/error.hpp>
+#include <kth/infrastructure/error.hpp>
 
 namespace kth {
 

@@ -4,8 +4,8 @@
 #ifndef KTH_INFRASTRUCTURE_ISTREAM_READER_IPP
 #define KTH_INFRASTRUCTURE_ISTREAM_READER_IPP
 
-#include <bitcoin/infrastructure/utility/data.hpp>
-#include <bitcoin/infrastructure/utility/endian.hpp>
+#include <kth/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/utility/endian.hpp>
 
 namespace kth {
 

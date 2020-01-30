@@ -1,13 +1,13 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/utility/work.hpp>
+#include <kth/infrastructure/utility/work.hpp>
 
 #include <memory>
 #include <string>
 
-#include <bitcoin/infrastructure/utility/delegates.hpp>
-#include <bitcoin/infrastructure/utility/threadpool.hpp>
+#include <kth/infrastructure/utility/delegates.hpp>
+#include <kth/infrastructure/utility/threadpool.hpp>
 
 namespace kth {
 

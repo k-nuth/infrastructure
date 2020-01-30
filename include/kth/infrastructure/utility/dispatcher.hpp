@@ -10,15 +10,15 @@
 #include <utility>
 #include <vector>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/error.hpp>
-#include <bitcoin/infrastructure/utility/asio.hpp>
-#include <bitcoin/infrastructure/utility/deadline.hpp>
-#include <bitcoin/infrastructure/utility/delegates.hpp>
-#include <bitcoin/infrastructure/utility/noncopyable.hpp>
-#include <bitcoin/infrastructure/utility/synchronizer.hpp>
-#include <bitcoin/infrastructure/utility/threadpool.hpp>
-#include <bitcoin/infrastructure/utility/work.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/error.hpp>
+#include <kth/infrastructure/utility/asio.hpp>
+#include <kth/infrastructure/utility/deadline.hpp>
+#include <kth/infrastructure/utility/delegates.hpp>
+#include <kth/infrastructure/utility/noncopyable.hpp>
+#include <kth/infrastructure/utility/synchronizer.hpp>
+#include <kth/infrastructure/utility/threadpool.hpp>
+#include <kth/infrastructure/utility/work.hpp>
 
 namespace kth {
 

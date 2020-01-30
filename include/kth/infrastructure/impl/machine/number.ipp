@@ -8,10 +8,10 @@
 #include <cstdlib>
 #include <stdexcept>
 
-#include <bitcoin/infrastructure/compat.hpp>
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
-#include <bitcoin/infrastructure/utility/limits.hpp>
+#include <kth/infrastructure/compat.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/limits.hpp>
 
 namespace kth {
 namespace machine {

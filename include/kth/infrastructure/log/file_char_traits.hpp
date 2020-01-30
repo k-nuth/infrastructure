@@ -21,7 +21,7 @@
 #include <cctype>
 #include <string>
 
-#include <bitcoin/infrastructure/define.hpp>
+#include <kth/infrastructure/define.hpp>
 
 namespace kth {
 namespace log {

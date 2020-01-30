@@ -9,10 +9,10 @@
 #include <cstdint>
 #include <iterator>
 
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/error.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
-#include <bitcoin/infrastructure/utility/endian.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/error.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/endian.hpp>
 
 namespace kth {
 

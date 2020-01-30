@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <cstdlib>
 #include <string>
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 
 BC_USE_KTH_MAIN
 

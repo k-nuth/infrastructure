@@ -74,6 +74,6 @@ BOOST_PARAMETER_KEYWORD(tag, timer)
 } // namespace log
 } // namespace kth
 
-#include <bitcoin/infrastructure/impl/log/features/timer.ipp>
+#include <kth/infrastructure/impl/log/features/timer.ipp>
 
 #endif

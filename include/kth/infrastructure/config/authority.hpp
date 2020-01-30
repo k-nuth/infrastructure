@@ -9,9 +9,9 @@
 #include <string>
 #include <vector>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/message/network_address.hpp>
-#include <bitcoin/infrastructure/utility/asio.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/message/network_address.hpp>
+#include <kth/infrastructure/utility/asio.hpp>
 
 namespace kth {
 namespace config {

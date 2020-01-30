@@ -9,8 +9,8 @@
 #include <boost/log/attributes/clock.hpp>
 #include <boost/log/expressions/keyword.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/log/severity.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/log/severity.hpp>
 
 namespace kth {
 namespace log {

@@ -8,8 +8,8 @@
 #include <limits>
 #include <stdexcept>
 
-#include <bitcoin/infrastructure/compat.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/compat.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
 
 namespace kth {
 

@@ -9,8 +9,8 @@
 #include <ctime>
 #include <string>
 
-#include <bitcoin/infrastructure/compat.hpp>
-#include <bitcoin/infrastructure/utility/asio.hpp>
+#include <kth/infrastructure/compat.hpp>
+#include <kth/infrastructure/utility/asio.hpp>
 
 namespace kth {
 

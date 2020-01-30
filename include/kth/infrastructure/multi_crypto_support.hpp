@@ -6,7 +6,7 @@
 
 #include <string>
 
-#include <bitcoin/infrastructure/config/settings.hpp>
+#include <kth/infrastructure/config/settings.hpp>
 
 namespace kth {
 

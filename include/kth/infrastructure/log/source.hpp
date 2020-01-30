@@ -10,9 +10,9 @@
 #include <boost/log/sources/global_logger_storage.hpp>
 #include <boost/log/sources/severity_channel_logger.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/log/attributes.hpp>
-#include <bitcoin/infrastructure/log/severity.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/log/attributes.hpp>
+#include <kth/infrastructure/log/severity.hpp>
 
 namespace kth {
 namespace log {

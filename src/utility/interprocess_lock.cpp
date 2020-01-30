@@ -1,15 +1,15 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/utility/interprocess_lock.hpp>
+#include <kth/infrastructure/utility/interprocess_lock.hpp>
 
 #include <memory>
 #include <string>
 
 #include <boost/filesystem.hpp>
 
-#include <bitcoin/infrastructure/unicode/file_lock.hpp>
-#include <bitcoin/infrastructure/unicode/ofstream.hpp>
+#include <kth/infrastructure/unicode/file_lock.hpp>
+#include <kth/infrastructure/unicode/ofstream.hpp>
 
 namespace kth {
 

@@ -1,11 +1,11 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/config/directory.hpp>
+#include <kth/infrastructure/config/directory.hpp>
 
 #include <string>
 
-#include <bitcoin/infrastructure/unicode/unicode.hpp>
+#include <kth/infrastructure/unicode/unicode.hpp>
 
 #ifdef _MSC_VER
     #include <shlobj.h>

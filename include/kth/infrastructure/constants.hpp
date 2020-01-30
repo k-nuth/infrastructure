@@ -7,13 +7,13 @@
 #include <cstddef>
 #include <cstdint>
 
-#include <bitcoin/infrastructure/compat.hpp>
-// #include <bitcoin/infrastructure/config/checkpoint.hpp>
-#include <bitcoin/infrastructure/define.hpp>
-// #include <bitcoin/infrastructure/math/hash.hpp>
-// #include <bitcoin/infrastructure/message/network_address.hpp>
-// #include <bitcoin/infrastructure/version.hpp>
-#include <bitcoin/infrastructure/hash_define.hpp>
+#include <kth/infrastructure/compat.hpp>
+// #include <kth/infrastructure/config/checkpoint.hpp>
+#include <kth/infrastructure/define.hpp>
+// #include <kth/infrastructure/math/hash.hpp>
+// #include <kth/infrastructure/message/network_address.hpp>
+// #include <kth/infrastructure/version.hpp>
+#include <kth/infrastructure/hash_define.hpp>
 
 namespace kth {
 

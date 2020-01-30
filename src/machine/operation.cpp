@@ -16,23 +16,23 @@
 //  * You should have received a copy of the GNU Affero General Public License
 //  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //  */
-// #include <bitcoin/infrastructure/machine/operation.hpp>
+// #include <kth/infrastructure/machine/operation.hpp>
 
 // #include <string>
 
 // #include <boost/algorithm/string.hpp>
 // #include <boost/lexical_cast.hpp>
 
-// // #include <bitcoin/bitcoin/constants.hpp>
-// #include <bitcoin/infrastructure/formats/base_16.hpp>
-// #include <bitcoin/infrastructure/machine/opcode.hpp>
-// #include <bitcoin/infrastructure/utility/assert.hpp>
-// #include <bitcoin/infrastructure/utility/container_sink.hpp>
-// #include <bitcoin/infrastructure/utility/data.hpp>
-// #include <bitcoin/infrastructure/utility/container_source.hpp>
-// #include <bitcoin/infrastructure/utility/istream_reader.hpp>
-// #include <bitcoin/infrastructure/utility/ostream_writer.hpp>
-// #include <bitcoin/infrastructure/utility/string.hpp>
+// // #include <kth/bitcoin/constants.hpp>
+// #include <kth/infrastructure/formats/base_16.hpp>
+// #include <kth/infrastructure/machine/opcode.hpp>
+// #include <kth/infrastructure/utility/assert.hpp>
+// #include <kth/infrastructure/utility/container_sink.hpp>
+// #include <kth/infrastructure/utility/data.hpp>
+// #include <kth/infrastructure/utility/container_source.hpp>
+// #include <kth/infrastructure/utility/istream_reader.hpp>
+// #include <kth/infrastructure/utility/ostream_writer.hpp>
+// #include <kth/infrastructure/utility/string.hpp>
 
 // namespace kth {
 // namespace machine {

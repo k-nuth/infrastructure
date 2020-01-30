@@ -6,8 +6,8 @@
 
 #include <string>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/math/elliptic_curve.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/math/elliptic_curve.hpp>
 
 namespace kth {
 namespace wallet {

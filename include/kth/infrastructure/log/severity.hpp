@@ -4,7 +4,7 @@
 #ifndef KTH_INFRASTRUCTURE_LOG_SEVERITY_HPP
 #define KTH_INFRASTRUCTURE_LOG_SEVERITY_HPP
 
-#include <bitcoin/infrastructure/define.hpp>
+#include <kth/infrastructure/define.hpp>
 
 namespace kth {
 namespace log {

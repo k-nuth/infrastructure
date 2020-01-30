@@ -6,13 +6,13 @@
 
 #include <memory>
 
-#include <bitcoin/infrastructure/config/authority.hpp>
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/error.hpp>
-#include <bitcoin/infrastructure/utility/asio.hpp>
-#include <bitcoin/infrastructure/utility/noncopyable.hpp>
-#include <bitcoin/infrastructure/utility/thread.hpp>
-#include <bitcoin/infrastructure/utility/threadpool.hpp>
+#include <kth/infrastructure/config/authority.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/error.hpp>
+#include <kth/infrastructure/utility/asio.hpp>
+#include <kth/infrastructure/utility/noncopyable.hpp>
+#include <kth/infrastructure/utility/thread.hpp>
+#include <kth/infrastructure/utility/threadpool.hpp>
 
 namespace kth {
 

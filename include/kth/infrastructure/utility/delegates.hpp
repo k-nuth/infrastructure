@@ -6,7 +6,7 @@
 
 #include <functional>
 
-#include <bitcoin/infrastructure/utility/work.hpp>
+#include <kth/infrastructure/utility/work.hpp>
 
 namespace kth {
 namespace delegates {

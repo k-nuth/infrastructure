@@ -35,7 +35,7 @@
 
 #include "pbkdf2_sha256.h"
 
-#include <bitcoin/infrastructure/compat.h>
+#include <kth/infrastructure/compat.h>
 
 static void blkcpy(uint8_t* /*dest*/, uint8_t const* /*src*/, size_t /*len*/);
 static void blkxor(uint8_t* /*dest*/, uint8_t const* /*src*/, size_t /*len*/);

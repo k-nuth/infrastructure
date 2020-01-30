@@ -11,10 +11,10 @@
 #include <boost/functional/hash_fwd.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
 
-#include <bitcoin/infrastructure/compat.hpp>
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
-#include <bitcoin/infrastructure/utility/endian.hpp>
+#include <kth/infrastructure/compat.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/utility/endian.hpp>
 
 namespace kth {
 
@@ -177,6 +177,6 @@ constexpr hash_digest null_hash
 // };
 // } // namespace boost
 
-// #include <bitcoin/infrastructure/impl/math/hash.ipp>
+// #include <kth/infrastructure/impl/math/hash.ipp>
 
 #endif

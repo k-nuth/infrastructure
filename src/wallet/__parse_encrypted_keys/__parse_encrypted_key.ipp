@@ -7,8 +7,8 @@
 #include <cstdint>
 #include <cstddef>
 
-#include <bitcoin/infrastructure/utility/data.hpp>
-#include <bitcoin/infrastructure/wallet/encrypted_keys.hpp>
+#include <kth/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/wallet/encrypted_keys.hpp>
 
 #include "parse_encrypted_prefix.hpp"
 

@@ -24,7 +24,7 @@
 #include <iterator>
 #include <vector>
 
-#include <bitcoin/infrastructure/define.hpp>
+#include <kth/infrastructure/define.hpp>
 
 /* NOTE: don't declare 'using namespace foo' in headers. */
 
@@ -116,6 +116,6 @@ std::ostream& operator<<(std::ostream& output, std::vector<T> const& list);
 
 } // namespace std
 
-#include <bitcoin/infrastructure/impl/utility/collection.ipp>
+#include <kth/infrastructure/impl/utility/collection.ipp>
 
 #endif

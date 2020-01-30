@@ -7,8 +7,8 @@
 #include <cstdint>
 #include <string>
 
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/utility/data.hpp>
 
 namespace kth {
 

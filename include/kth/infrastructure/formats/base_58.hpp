@@ -6,8 +6,8 @@
 
 #include <string>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/utility/data.hpp>
 
 namespace kth {
 
@@ -44,7 +44,7 @@ BI_API bool decode_base58(data_chunk& out, std::string const& in);
 
 } // namespace kth
 
-#include <bitcoin/infrastructure/impl/formats/base_58.ipp>
+#include <kth/infrastructure/impl/formats/base_58.ipp>
 
 #endif
 

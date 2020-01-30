@@ -1,12 +1,12 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/formats/base_64.hpp>
+#include <kth/infrastructure/formats/base_64.hpp>
 
 #include <cstdint>
 #include <string>
 
-#include <bitcoin/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/utility/data.hpp>
 
 // This implementation derived from public domain:
 // en.wikibooks.org/wiki/Algorithm_Implementation/Miscellaneous/Base64

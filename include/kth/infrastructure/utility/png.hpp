@@ -7,10 +7,10 @@
 #include <cstdint>
 #include <istream>
 
-#include <bitcoin/infrastructure/compat.hpp>
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/color.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/compat.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/utility/color.hpp>
+#include <kth/infrastructure/utility/data.hpp>
 
 #ifdef WITH_PNG
 #include <png.h>

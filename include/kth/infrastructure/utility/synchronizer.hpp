@@ -12,9 +12,9 @@
 #include <type_traits>
 #include <utility>
 
-#include <bitcoin/infrastructure/error.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
-#include <bitcoin/infrastructure/utility/thread.hpp>
+#include <kth/infrastructure/error.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/thread.hpp>
 
 namespace kth {
 

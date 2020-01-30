@@ -7,7 +7,7 @@
 #include <cstdint>
 #include <limits>
 
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 
 // (-2147483647 - 1)  and (-9223372036854775807 - 1) prevent warnings.
 

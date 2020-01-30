@@ -11,12 +11,12 @@
 #include <boost/log/sources/global_logger_storage.hpp>
 #include <boost/log/sources/threading_models.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/log/features/counter.hpp>
-#include <bitcoin/infrastructure/log/features/gauge.hpp>
-#include <bitcoin/infrastructure/log/features/metric.hpp>
-#include <bitcoin/infrastructure/log/features/rate.hpp>
-#include <bitcoin/infrastructure/log/features/timer.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/log/features/counter.hpp>
+#include <kth/infrastructure/log/features/gauge.hpp>
+#include <kth/infrastructure/log/features/metric.hpp>
+#include <kth/infrastructure/log/features/rate.hpp>
+#include <kth/infrastructure/log/features/timer.hpp>
 
 namespace kth {
 namespace log {

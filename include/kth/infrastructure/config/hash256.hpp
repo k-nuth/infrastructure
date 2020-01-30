@@ -7,8 +7,8 @@
 #include <iostream>
 #include <string>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/math/hash.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/math/hash.hpp>
 
 namespace kth {
 namespace config {

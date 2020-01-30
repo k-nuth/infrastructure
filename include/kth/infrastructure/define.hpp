@@ -4,7 +4,7 @@
 #ifndef KTH_INFRASTRUCTURE_DEFINE_HPP
 #define KTH_INFRASTRUCTURE_DEFINE_HPP
 
-#include <bitcoin/infrastructure/compat.hpp>
+#include <kth/infrastructure/compat.hpp>
 
 // Create bc namespace alias.
 namespace kth {

@@ -6,8 +6,8 @@
 
 #include <string>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/utility/data.hpp>
 
 namespace kth {
 

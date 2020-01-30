@@ -8,7 +8,7 @@
 #include <cstdint>
 #include <istream>
 
-#include <bitcoin/infrastructure/utility/reader.hpp>
+#include <kth/infrastructure/utility/reader.hpp>
 
 namespace kth {
 
@@ -87,6 +87,6 @@ private:
 
 } // namespace kth
 
-#include <bitcoin/infrastructure/impl/utility/istream_reader.ipp>
+#include <kth/infrastructure/impl/utility/istream_reader.ipp>
 
 #endif

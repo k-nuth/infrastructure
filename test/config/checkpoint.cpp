@@ -8,8 +8,8 @@
 #include <boost/program_options.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <bitcoin/infrastructure.hpp>
-#include <bitcoin/infrastructure/utility/collection.hpp>
+#include <kth/infrastructure.hpp>
+#include <kth/infrastructure/utility/collection.hpp>
 
 using namespace bc;
 using namespace bc::config;

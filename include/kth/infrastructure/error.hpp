@@ -10,7 +10,7 @@
 
 #include <boost/system/error_code.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
+#include <kth/infrastructure/define.hpp>
 
 namespace kth {
 

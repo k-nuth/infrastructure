@@ -6,8 +6,8 @@
 
 #include <istream>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/utility/data.hpp>
 
 namespace kth {
 
@@ -43,6 +43,6 @@ byte_array<sizeof(Integer)> to_little_endian(Integer value);
 
 } // namespace kth
 
-#include <bitcoin/infrastructure/impl/utility/endian.ipp>
+#include <kth/infrastructure/impl/utility/endian.ipp>
 
 #endif

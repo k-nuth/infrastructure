@@ -7,7 +7,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/log/sources/record_ostream.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
+#include <kth/infrastructure/define.hpp>
 
 namespace kth {
 namespace log {

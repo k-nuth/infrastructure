@@ -6,8 +6,8 @@
 
 #include <cstdint>
 
-#include <bitcoin/infrastructure/compat.hpp>
-#include <bitcoin/infrastructure/define.hpp>
+#include <kth/infrastructure/compat.hpp>
+#include <kth/infrastructure/define.hpp>
 
 namespace kth {
 

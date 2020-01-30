@@ -1,7 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/utility/pseudo_random.hpp>
+#include <kth/infrastructure/utility/pseudo_random.hpp>
 
 #include <chrono>
 #include <cstdint>
@@ -9,9 +9,9 @@
 
 #include <boost/thread.hpp>
 
-#include <bitcoin/infrastructure/utility/asio.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
-#include <bitcoin/infrastructure/utility/thread.hpp>
+#include <kth/infrastructure/utility/asio.hpp>
+#include <kth/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/utility/thread.hpp>
 
 namespace kth {
 

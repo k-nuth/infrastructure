@@ -7,10 +7,10 @@
 #include <cstdint>
 #include <random>
 
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/asio.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/utility/asio.hpp>
+#include <kth/infrastructure/utility/data.hpp>
 
 namespace kth {
 

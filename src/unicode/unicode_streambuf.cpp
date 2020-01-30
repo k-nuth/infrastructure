@@ -1,16 +1,16 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/unicode/unicode_streambuf.hpp>
+#include <kth/infrastructure/unicode/unicode_streambuf.hpp>
 
 #include <cstddef>
 #include <cstring>
 #include <iostream>
 #include <streambuf>
 
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/unicode/unicode.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/unicode/unicode.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
 
 namespace kth {
 

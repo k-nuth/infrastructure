@@ -6,8 +6,8 @@
 
 #include <string>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/math/hash.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/math/hash.hpp>
 
 namespace kth {
 
@@ -65,6 +65,6 @@ BI_API hash_digest hash_literal(char const (&string)[2*hash_size + 1]);
 
 } // namespace kth
 
-#include <bitcoin/infrastructure/impl/formats/base_16.ipp>
+#include <kth/infrastructure/impl/formats/base_16.ipp>
 
 #endif

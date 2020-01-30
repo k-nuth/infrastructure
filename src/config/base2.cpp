@@ -1,7 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/config/base2.hpp>
+#include <kth/infrastructure/config/base2.hpp>
 
 #include <iostream>
 #include <sstream>
@@ -9,8 +9,8 @@
 
 #include <boost/program_options.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/binary.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/utility/binary.hpp>
 
 namespace kth {
 namespace config {

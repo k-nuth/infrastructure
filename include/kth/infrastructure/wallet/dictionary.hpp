@@ -7,7 +7,7 @@
 #include <array>
 #include <vector>
 
-#include <bitcoin/infrastructure/compat.hpp>
+#include <kth/infrastructure/compat.hpp>
 
 namespace kth {
 namespace wallet {

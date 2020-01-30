@@ -9,9 +9,9 @@
 #include <cstdint>
 #include <initializer_list>
 
-#include <bitcoin/infrastructure/compat.hpp>
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/compat.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/utility/data.hpp>
 
 namespace kth {
 
@@ -89,7 +89,7 @@ BI_API bool verify_checksum(data_slice data);
 
 } // namespace kth
 
-#include <bitcoin/infrastructure/impl/math/checksum.ipp>
+#include <kth/infrastructure/impl/math/checksum.ipp>
 
 #endif
 

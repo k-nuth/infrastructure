@@ -422,14 +422,14 @@ set(knuth_infrastructure_sources_just_libbitcoin
         # src/wallet/parse_encrypted_keys/parse_encrypted_private.hpp
         # src/wallet/parse_encrypted_keys/parse_encrypted_public.cpp
         # src/wallet/parse_encrypted_keys/parse_encrypted_public.hpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_token.cpp   # #include <bitcoin/infrastructure/chain/script.hpp>
+        # src/wallet/parse_encrypted_keys/parse_encrypted_token.cpp   # #include <kth/infrastructure/chain/script.hpp>
         # src/wallet/parse_encrypted_keys/parse_encrypted_token.hpp
         # src/wallet/payment_address.cpp
 
-        # src/wallet/select_outputs.cpp   #  #include <bitcoin/infrastructure/chain/points_value.hpp>
-        # src/wallet/stealth_address.cpp    # #include <bitcoin/infrastructure/chain/script.hpp>
-        # src/wallet/stealth_receiver.cpp # #include <bitcoin/infrastructure/chain/script.hpp>
-        # src/wallet/stealth_sender.cpp # #include <bitcoin/infrastructure/chain/script.hpp>
+        # src/wallet/select_outputs.cpp   #  #include <kth/infrastructure/chain/points_value.hpp>
+        # src/wallet/stealth_address.cpp    # #include <kth/infrastructure/chain/script.hpp>
+        # src/wallet/stealth_receiver.cpp # #include <kth/infrastructure/chain/script.hpp>
+        # src/wallet/stealth_sender.cpp # #include <kth/infrastructure/chain/script.hpp>
         src/wallet/uri.cpp
       )
 

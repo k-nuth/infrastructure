@@ -9,8 +9,8 @@
 #include <string>
 #include <vector>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/formats/base_16.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/formats/base_16.hpp>
 
 namespace kth {
 namespace config {

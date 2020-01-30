@@ -20,9 +20,9 @@
 // #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 // #include "doctest.h"
 
-// #include <bitcoin/infrastructure/multi_crypto_support.hpp>
-// //#include <bitcoin/infrastructure/wallet/cashaddr.hpp>
-// // #include <bitcoin/infrastructure/wallet/payment_address.hpp>
+// #include <kth/infrastructure/multi_crypto_support.hpp>
+// //#include <kth/infrastructure/wallet/cashaddr.hpp>
+// // #include <kth/infrastructure/wallet/payment_address.hpp>
 
 // // #include <knuth/keoken/transaction_extractor.hpp>
 // // #include <knuth/keoken/message/base.hpp>
@@ -32,9 +32,9 @@
 
 // // using namespace knuth::keoken;
 
-// #include <bitcoin/infrastructure/utility/data.hpp>
-// #include <bitcoin/infrastructure/formats/base_16.hpp>
-// #include <bitcoin/infrastructure/utility/container_source.hpp>
+// #include <kth/infrastructure/utility/data.hpp>
+// #include <kth/infrastructure/formats/base_16.hpp>
+// #include <kth/infrastructure/utility/container_source.hpp>
 
 // using kth::data_chunk;
 // using kth::to_chunk;

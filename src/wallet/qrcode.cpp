@@ -3,17 +3,17 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifdef WITH_QRENCODE
 
-#include <bitcoin/infrastructure/wallet/qrcode.hpp>
+#include <kth/infrastructure/wallet/qrcode.hpp>
 
 #include <iostream>
 #include <string>
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
-#include <bitcoin/infrastructure/utility/container_sink.hpp>
-#include <bitcoin/infrastructure/utility/container_source.hpp>
-#include <bitcoin/infrastructure/utility/istream_reader.hpp>
-#include <bitcoin/infrastructure/utility/ostream_writer.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/utility/container_sink.hpp>
+#include <kth/infrastructure/utility/container_source.hpp>
+#include <kth/infrastructure/utility/istream_reader.hpp>
+#include <kth/infrastructure/utility/ostream_writer.hpp>
 
 
 namespace kth {

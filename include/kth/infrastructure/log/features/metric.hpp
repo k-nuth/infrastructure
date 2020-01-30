@@ -89,6 +89,6 @@ BOOST_PARAMETER_KEYWORD(tag, metric)
 } // namespace log
 } // namespace kth
 
-#include <bitcoin/infrastructure/impl/log/features/metric.ipp>
+#include <kth/infrastructure/impl/log/features/metric.ipp>
 
 #endif

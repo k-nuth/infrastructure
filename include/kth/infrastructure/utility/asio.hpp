@@ -10,7 +10,7 @@
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
 
-#include <bitcoin/infrastructure/compat.hpp>
+#include <kth/infrastructure/compat.hpp>
 
 // Convenience namespace for commonly used boost asio aliases.
 

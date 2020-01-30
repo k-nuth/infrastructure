@@ -4,7 +4,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <stdexcept>
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 
 //#ifdef _MSC_VER
 #ifdef BOOST_WINDOWS_API

@@ -7,7 +7,7 @@
 #include <type_traits>
 #include <utility>
 
-#include <bitcoin/infrastructure/utility/thread.hpp>
+#include <kth/infrastructure/utility/thread.hpp>
 
 namespace kth {
 
