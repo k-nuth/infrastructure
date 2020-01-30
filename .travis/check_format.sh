@@ -1,6 +1,8 @@
+# clang-format -i -style=file /home/fernando/dev/new-repos/kth-domain/src/chain/transaction.cpp
+
 #!/bin/bash
 #
-# Copyright (c) 2016-2019 Knuth Project.
+# Copyright (c) 2016-2020 Knuth Project.
 #
 # This file is part of Knuth Project.
 #
@@ -50,7 +52,7 @@ sudo pip3.6 install --upgrade conan
 # sudo pip3.6 install --upgrade conan_package_tools
 
 conan user
-conan remote add knuth_temp https://api.bintray.com/conan/k-nuth/kth
+conan remote add kth_temp https://api.bintray.com/conan/k-nuth/kth
 
 
 

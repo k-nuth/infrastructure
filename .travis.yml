@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2016-2019 Knuth Project.
+# Copyright (c) 2016-2020 Knuth Project.
 #
 # This file is part of Knuth Project.
 #
@@ -89,10 +89,10 @@ script:
 
   #   fi
 
-  # - conan remote add knuth https://api.bintray.com/conan/k-nuth/kth
+  # - conan remote add kth https://api.bintray.com/conan/k-nuth/kth
   # - conan info . --only None
   # - conan info . --only None -s compiler=gcc -s compiler.version=5 -s compiler.libcxx=libstdc++
-  # - conan remote remove knuth
+  # - conan remote remove kth
   - |
     if [[ "${CHECK_FORMATTING}" != "true" ]]; then
       echo ${CONAN_STABLE_BRANCH_PATTERN}
@@ -129,7 +129,7 @@ jobs:
       python: "3.7"
       services:
         - docker
-      env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=conanio/gcc9
+      env: CONAN_GCC_VERSIONS=9 CONAN_DOCKER_IMAGE=conanio/gcc9
       if: branch =~ /^(release|hotfix).+$/    #Just releases
       script:
         - |
