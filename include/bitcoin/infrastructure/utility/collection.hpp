@@ -1,6 +1,6 @@
 /**
- * Copyright (c) 2016-2020 Knuth Project.
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
+ * Copyright (c) 2016-2020 Knuth Project developers.
+ * Copyright (c) 2016-2020 Knuth Project developers.
  *
  * This file is part of Knuth Project.
  *
@@ -17,8 +17,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef KNUTH_INFRASTRUCTURE_COLLECTION_HPP
-#define KNUTH_INFRASTRUCTURE_COLLECTION_HPP
+#ifndef KTH_INFRASTRUCTURE_COLLECTION_HPP
+#define KTH_INFRASTRUCTURE_COLLECTION_HPP
 
 #include <iostream>
 #include <iterator>

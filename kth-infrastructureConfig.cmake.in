@@ -1,12 +1,12 @@
-# - Config file for the KNUTH_INFRASTRUCTURE package
+# - Config file for the KTH_INFRASTRUCTURE package
 #
-#  KNUTH_INFRASTRUCTURE_INCLUDE_DIRS - include directories for KNUTH_INFRASTRUCTURE
-#  KNUTH_INFRASTRUCTURE_LIBRARIES    - libraries to link against
+#  KTH_INFRASTRUCTURE_INCLUDE_DIRS - include directories for KTH_INFRASTRUCTURE
+#  KTH_INFRASTRUCTURE_LIBRARIES    - libraries to link against
 
-get_filename_component(KNUTH_INFRASTRUCTURE_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
-set(KNUTH_INFRASTRUCTURE_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+get_filename_component(KTH_INFRASTRUCTURE_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+set(KTH_INFRASTRUCTURE_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
 
-include("${KNUTH_INFRASTRUCTURE_CMAKE_DIR}/kth-infrastructureTargets.cmake")
-set(KNUTH_INFRASTRUCTURE_LIBRARIES kth-infrastructure)
+include("${KTH_INFRASTRUCTURE_CMAKE_DIR}/kth-infrastructureTargets.cmake")
+set(KTH_INFRASTRUCTURE_LIBRARIES kth-infrastructure)
 
 find_package(secp256k1 0 REQUIRED)

@@ -1,21 +1,6 @@
-/**
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
- *
- * This file is part of libbitcoin.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <bitcoin/infrastructure/math/hash.hpp>
 
 #include <algorithm>
@@ -35,9 +20,9 @@
 #include "../math/external/sha512.h"
 
 //TODO(fernando): see what to do with Currency
-// #ifdef KNUTH_CURRENCY_LTC
+// #ifdef KTH_CURRENCY_LTC
 // #include "../math/external/scrypt.h"
-// #endif //KNUTH_CURRENCY_LTC
+// #endif //KTH_CURRENCY_LTC
 
 namespace libbitcoin {
 
@@ -46,14 +31,14 @@ hash_digest bitcoin_hash(data_slice data)
     return sha256_hash(sha256_hash(data));
 }
 
-// #ifdef KNUTH_CURRENCY_LTC
+// #ifdef KTH_CURRENCY_LTC
 // hash_digest litecoin_hash(data_slice data) {
 //     hash_digest hash;
 //     scrypt_1024_1_1_256(reinterpret_cast<char const*>(data.data()), 
 //                         reinterpret_cast<char*>(hash.data()));
 //     return hash;
 // }
-// #endif //KNUTH_CURRENCY_LTC
+// #endif //KTH_CURRENCY_LTC
 
 short_hash bitcoin_short_hash(data_slice data)
 {
