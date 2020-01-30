@@ -78,6 +78,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         KnuthConanFile.package_id(self)
         self.info.options.with_tests = "ANY"
         self.info.options.with_examples = "ANY"
+        self.info.options.cmake_export_compile_commands = "ANY"
 
     # default_options = "shared=False", \
     #     "fPIC=True", \
