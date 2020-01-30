@@ -24,7 +24,7 @@
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 sequencer::sequencer(asio::service& service)
     : service_(service), executing_(false)

@@ -38,7 +38,7 @@
 // #include <bitcoin/infrastructure/wallet/ec_public.hpp>
 #include <bitcoin/infrastructure/wallet/hd_private.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 // const uint32_t hd_public::mainnet = 76067358;

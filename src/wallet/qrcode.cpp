@@ -31,7 +31,7 @@
 #include <bitcoin/infrastructure/utility/ostream_writer.hpp>
 
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 data_chunk qr::encode(data_chunk const& data)

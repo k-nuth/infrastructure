@@ -21,7 +21,7 @@
 #include <mutex>
 #include <secp256k1.h>
 
-namespace libbitcoin {
+namespace kth {
 
 // We do not share contexts because they may or may not both be required.
 secp256k1_signing signing;

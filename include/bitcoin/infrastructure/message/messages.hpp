@@ -28,7 +28,7 @@
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/limits.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace message {
 
 BI_API size_t variable_uint_size(uint64_t value);

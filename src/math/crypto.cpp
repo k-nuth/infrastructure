@@ -25,7 +25,7 @@
 
 #include "../math/external/aes256.h"
 
-namespace libbitcoin {
+namespace kth {
 
 void aes256_encrypt(const aes_secret& key, aes_block& block)
 {

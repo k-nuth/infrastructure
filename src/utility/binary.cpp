@@ -28,7 +28,7 @@
 #include <bitcoin/infrastructure/utility/limits.hpp>
 
 
-namespace libbitcoin {
+namespace kth {
 
 binary::size_type binary::blocks_size(size_type bit_size) {
     return bit_size == 0 ? 0 : (bit_size - 1) / bits_per_block + 1;

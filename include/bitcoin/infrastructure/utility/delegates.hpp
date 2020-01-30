@@ -23,7 +23,7 @@
 
 #include <bitcoin/infrastructure/utility/work.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace delegates {
 
 #define FORWARD_ARGS(args) \

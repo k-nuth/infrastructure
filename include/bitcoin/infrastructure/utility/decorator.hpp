@@ -21,7 +21,7 @@
 
 #include <functional>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Defines a function decorator ala Python

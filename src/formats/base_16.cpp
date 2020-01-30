@@ -26,7 +26,7 @@
 
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 std::string encode_base16(data_slice data) {
     std::stringstream ss;

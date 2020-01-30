@@ -19,7 +19,7 @@
 
 #include <bitcoin/infrastructure/version.hpp>
 
-namespace libbitcoin { 
+namespace kth { 
 namespace infrastructure {
 
 char const* version() {

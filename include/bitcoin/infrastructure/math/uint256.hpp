@@ -21,7 +21,7 @@
 
 #include <boost/multiprecision/cpp_int.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 
 

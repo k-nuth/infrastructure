@@ -29,7 +29,7 @@
 #include <bitcoin/infrastructure/config/parameter.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 /**

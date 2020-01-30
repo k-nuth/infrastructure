@@ -24,7 +24,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 template <typename Integer, typename Iterator>
 constexpr

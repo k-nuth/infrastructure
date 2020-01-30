@@ -31,7 +31,7 @@
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 enum class synchronizer_terminate
 {

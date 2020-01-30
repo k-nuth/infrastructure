@@ -28,7 +28,7 @@
 #include <bitcoin/infrastructure/formats/base_58.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 // base58::base58()

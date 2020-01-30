@@ -22,7 +22,7 @@
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // For support of template implementation only, do not call directly.
 BI_API bool decode_base58_private(uint8_t* out, size_t out_size,

@@ -22,7 +22,7 @@
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/endian.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 template <unsigned Size>
 void ostream_writer::write_forward(const byte_array<Size>& value)

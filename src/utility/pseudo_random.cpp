@@ -28,7 +28,7 @@
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 using namespace bc::asio;
 using namespace std::chrono;

@@ -24,7 +24,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 BI_API bool is_base58(char ch);
 BI_API bool is_base58(std::string const& text);

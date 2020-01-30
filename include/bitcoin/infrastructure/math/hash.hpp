@@ -32,7 +32,7 @@
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/endian.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // // Common bitcoin hash container sizes.
 // static constexpr size_t hash_size = 32;

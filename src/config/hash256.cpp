@@ -28,7 +28,7 @@
 #include <bitcoin/infrastructure/formats/base_16.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 hash256::hash256(std::string const& hexcode)

@@ -28,7 +28,7 @@
 #include <bitcoin/infrastructure/message/network_address.hpp>
 #include <bitcoin/infrastructure/utility/asio.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 /**
@@ -70,7 +70,7 @@ public:
      * Initialization constructor.
      * @param[in]  net  The network address (ip and port) to initialize with.
      */
-    // implicit //Note(knuth): in kth-network it is used the implicit convertion
+    // implicit //Note(fernando): in kth-network it is used the implicit convertion
     authority(message::network_address const& address);
 
     /**

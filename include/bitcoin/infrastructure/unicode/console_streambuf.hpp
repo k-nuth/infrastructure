@@ -24,7 +24,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Class to patch Windows stdin keyboard input, file input is not a problem.

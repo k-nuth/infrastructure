@@ -28,7 +28,7 @@
 // #include <boost/algorithm/string/trim.hpp>
 // #include <boost/lexical_cast.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 using string_list = std::vector<std::string>;
 

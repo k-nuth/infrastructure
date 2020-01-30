@@ -22,7 +22,7 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/lexical_cast.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 template <typename Value>
 Value deserialize(std::string const& text, bool trim) {

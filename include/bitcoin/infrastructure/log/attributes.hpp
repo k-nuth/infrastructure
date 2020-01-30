@@ -27,13 +27,13 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/log/severity.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 namespace attributes {
 
 // severity/channel/timestamp/message log entries
 BOOST_LOG_ATTRIBUTE_KEYWORD(timestamp, "Timestamp", boost::posix_time::ptime)
-BOOST_LOG_ATTRIBUTE_KEYWORD(severity, "Severity", libbitcoin::log::severity)
+BOOST_LOG_ATTRIBUTE_KEYWORD(severity, "Severity", kth::log::severity)
 BOOST_LOG_ATTRIBUTE_KEYWORD(channel, "Channel", std::string)
 
 } // namespace attributes

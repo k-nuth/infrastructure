@@ -29,7 +29,7 @@
 #include <bitcoin/infrastructure/utility/thread.hpp>
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// This class is thread safe but the socket may not be used concurrently.
 class BI_API socket

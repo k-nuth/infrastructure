@@ -22,7 +22,7 @@
 #include <bitcoin/infrastructure/utility/deserializer.hpp>
 #include <bitcoin/infrastructure/utility/endian.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 void append_checksum(data_chunk& data)
 {

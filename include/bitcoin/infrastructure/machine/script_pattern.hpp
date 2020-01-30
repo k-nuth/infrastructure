@@ -19,7 +19,7 @@
 #ifndef LIBBITCOIN_INFRASTUCTURE_MACHINE_SCRIPT_PATTERN_HPP
 #define LIBBITCOIN_INFRASTUCTURE_MACHINE_SCRIPT_PATTERN_HPP
 
-namespace libbitcoin {
+namespace kth {
 namespace machine {
 
 /// Script patterms.

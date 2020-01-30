@@ -24,7 +24,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Class to expose a narrowing input stream.

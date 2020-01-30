@@ -26,7 +26,7 @@
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 #include <utility>
 
-namespace libbitcoin {
+namespace kth {
 
 using std::placeholders::_1;
 

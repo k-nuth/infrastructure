@@ -26,7 +26,7 @@
 #include <bitcoin/infrastructure/math/hash.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// The sign byte value for an even (y-valued) key.
 static constexpr uint8_t ec_even_sign = 2;

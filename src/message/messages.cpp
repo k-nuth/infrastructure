@@ -21,7 +21,7 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace libbitcoin {
+namespace kth {
 namespace message {
 
 size_t variable_uint_size(uint64_t value) {

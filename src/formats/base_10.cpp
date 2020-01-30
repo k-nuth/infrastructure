@@ -25,7 +25,7 @@
 
 #include <bitcoin/infrastructure/constants.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Returns true if a character is one of `[0-9]`.

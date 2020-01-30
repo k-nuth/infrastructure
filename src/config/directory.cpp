@@ -27,7 +27,7 @@
     #include <windows.h>
 #endif
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 // Returns empty string if unable to retrieve (including when not in Windows).

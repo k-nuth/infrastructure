@@ -25,7 +25,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 /**

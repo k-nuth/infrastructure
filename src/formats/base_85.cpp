@@ -55,7 +55,7 @@
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // Maps binary to base 85.
 static char encoder[85 + 1] =

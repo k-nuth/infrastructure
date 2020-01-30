@@ -24,7 +24,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Use bc::ofstream in place of std::ofstream.

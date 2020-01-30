@@ -22,10 +22,10 @@
 #include <bitcoin/infrastructure/compat.hpp>
 
 // Create bc namespace alias.
-namespace libbitcoin {
+namespace kth {
 } // namespace libbitcoin
 
-namespace bc = libbitcoin;
+namespace bc = kth;
 
 // See http://gcc.gnu.org/wiki/Visibility
 

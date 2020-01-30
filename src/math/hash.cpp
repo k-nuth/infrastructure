@@ -39,7 +39,7 @@
 // #include "../math/external/scrypt.h"
 // #endif //KNUTH_CURRENCY_LTC
 
-namespace libbitcoin {
+namespace kth {
 
 hash_digest bitcoin_hash(data_slice data)
 {

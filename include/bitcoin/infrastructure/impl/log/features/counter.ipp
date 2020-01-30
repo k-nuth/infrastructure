@@ -24,7 +24,7 @@
 #include <boost/log/attributes.hpp>
 #include <boost/scope_exit.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 namespace features {
 

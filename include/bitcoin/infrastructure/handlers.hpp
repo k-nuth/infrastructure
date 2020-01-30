@@ -23,7 +23,7 @@
 
 #include <bitcoin/infrastructure/error.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 using handle0 = std::function<void(code const&)>;
 

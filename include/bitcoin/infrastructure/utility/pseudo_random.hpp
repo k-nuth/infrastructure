@@ -27,7 +27,7 @@
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 class BI_API pseudo_random
 {

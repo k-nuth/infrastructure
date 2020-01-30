@@ -287,8 +287,6 @@ jobs:
         - docker
       env: CONAN_GCC_VERSIONS=9 CONAN_DOCKER_IMAGE=conanio/gcc9 
       # CONAN_PIP_COMMAND="pip --install-option='--no-remotes=True'"
-
-      # if: branch =~ /^(release|hotfix).+$/    #Just releases
       if: branch =~ /^(release|hotfix|dev|feature).*$/    #Avoid master
 
     - stage: build and upload binaries
@@ -301,7 +299,6 @@ jobs:
         - docker
       env: CONAN_GCC_VERSIONS=8 CONAN_DOCKER_IMAGE=conanio/gcc8
       if: branch =~ /^(release|hotfix).+$/    #Just releases
-      # if: branch =~ /^(release|hotfix|dev|feature).*$/    #Avoid master
 
     - stage: build and upload binaries
       os: linux
@@ -313,7 +310,6 @@ jobs:
         - docker
       env: CONAN_GCC_VERSIONS=7 CONAN_DOCKER_IMAGE=conanio/gcc7 
            KNUTH_RUN_TESTS=true
-      # if: branch =~ /^(release|hotfix|dev|feature).*$/    #Avoid master
       if: branch =~ /^(release|hotfix).+$/    #Just releases
 
     # - stage: build and upload binaries
@@ -428,6 +424,8 @@ jobs:
     #   env: CONAN_CLANG_VERSIONS=3.9 CONAN_DOCKER_IMAGE=conanio/clang39
 
     # macOS, apple-Clang, libc++ -------------------------------------------------
+
+    #Note: do not run tests on dev for macOS (they are too expensive)
     - stage: build and upload binaries
       os: osx
       language: generic

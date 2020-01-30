@@ -26,7 +26,7 @@
 
 #include <bitcoin/infrastructure/utility/assert.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 inline one_byte to_array(uint8_t byte)
 {

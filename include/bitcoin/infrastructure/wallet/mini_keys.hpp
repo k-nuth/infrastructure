@@ -24,7 +24,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/math/elliptic_curve.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 /**

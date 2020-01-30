@@ -28,7 +28,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 static constexpr size_t checksum_size = sizeof(uint32_t);
 

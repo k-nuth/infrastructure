@@ -30,7 +30,7 @@
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 ////#include <bitcoin/infrastructure/utility/track.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 template <typename... Args>
 class resubscriber

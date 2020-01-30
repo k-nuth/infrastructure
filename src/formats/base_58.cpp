@@ -22,7 +22,7 @@
 
 #include <bitcoin/infrastructure/utility/assert.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 std::string const base58_chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 

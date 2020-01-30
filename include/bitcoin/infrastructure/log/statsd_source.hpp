@@ -33,7 +33,7 @@
 #include <bitcoin/infrastructure/log/features/rate.hpp>
 #include <bitcoin/infrastructure/log/features/timer.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 class BI_API statsd_source

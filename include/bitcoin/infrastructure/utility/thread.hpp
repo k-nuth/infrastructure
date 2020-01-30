@@ -27,7 +27,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 ////// Adapted from: stackoverflow.com/a/18298965/1172329
 ////#ifndef thread_local

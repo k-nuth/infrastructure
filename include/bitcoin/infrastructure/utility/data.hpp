@@ -30,7 +30,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/array_slice.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // Define a byte array of a specified length.
 template <size_t Size>

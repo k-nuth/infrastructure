@@ -28,7 +28,7 @@
 
 /* NOTE: don't declare 'using namespace foo' in headers. */
 
-namespace libbitcoin {
+namespace kth {
 
 #define BI_SENTENCE_DELIMITER " "
 

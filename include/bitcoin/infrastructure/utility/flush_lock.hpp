@@ -26,7 +26,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/unicode/file_lock.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// This class is not thread safe.
 /// Guard a resource that may be corrupted due to an interrupted write.

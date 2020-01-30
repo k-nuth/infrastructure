@@ -27,7 +27,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// Console result codes, positive values are domain-specific.
 enum console_result : int

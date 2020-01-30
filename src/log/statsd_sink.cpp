@@ -42,7 +42,7 @@
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 using namespace bc::config;

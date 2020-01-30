@@ -24,7 +24,7 @@
 #include <boost/log/sources/threading_models.hpp>
 #include <boost/log/utility/strictest_lock.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 namespace attributes {

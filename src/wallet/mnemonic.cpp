@@ -33,7 +33,7 @@
 #include <bitcoin/infrastructure/utility/string.hpp>
 #include <bitcoin/infrastructure/wallet/dictionary.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 // BIP-39 private constants.

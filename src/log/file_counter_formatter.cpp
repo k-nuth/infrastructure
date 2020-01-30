@@ -19,7 +19,7 @@
 
 #include <bitcoin/infrastructure/log/file_char_traits.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 file_counter_formatter::file_counter_formatter(unsigned int width)

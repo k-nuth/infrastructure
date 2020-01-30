@@ -83,13 +83,13 @@
     #include <boost/locale.hpp>
     #include <windows.h>
     #define BC_USE_LIBBITCOIN_MAIN \
-        namespace libbitcoin { \
+        namespace kth { \
         int main(int argc, char* argv[]); \
         } \
         \
         int wmain(int argc, wchar_t* argv[]) \
         { \
-            using namespace libbitcoin; \
+            using namespace kth; \
             boost::locale::generator locale; \
             std::locale::global(locale(BI_LOCALE_UTF8)); \
             boost::filesystem::path::imbue(std::locale()); \
@@ -100,21 +100,21 @@
             auto arguments = to_utf8(argc, argv); \
             auto args = reinterpret_cast<char**>(arguments.data()); \
             \
-            return libbitcoin::main(argc, args); \
+            return kth::main(argc, args); \
         }
 #else
     #define BC_USE_LIBBITCOIN_MAIN \
-        namespace libbitcoin { \
+        namespace kth { \
         int main(int argc, char* argv[]); \
         } \
         \
         int main(int argc, char* argv[]) \
         { \
-            return libbitcoin::main(argc, argv); \
+            return kth::main(argc, argv); \
         }
 #endif
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Use bc::cin in place of std::cin.

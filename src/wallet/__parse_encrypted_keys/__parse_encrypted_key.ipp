@@ -27,7 +27,7 @@
 
 #include "parse_encrypted_prefix.hpp"
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 template <size_t PrefixSize>

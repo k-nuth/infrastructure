@@ -18,7 +18,7 @@
  */
 #include <bitcoin/infrastructure/utility/prioritized_mutex.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 prioritized_mutex::prioritized_mutex(bool prioritize)
   : prioritize_(prioritize)

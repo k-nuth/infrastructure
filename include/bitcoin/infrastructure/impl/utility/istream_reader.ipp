@@ -22,7 +22,7 @@
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/endian.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 template <unsigned Size>
 byte_array<Size> istream_reader::read_forward()

@@ -32,7 +32,7 @@
 #include <bitcoin/infrastructure/utility/sequencer.hpp>
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 #define ORDERED "ordered"
 #define UNORDERED "unordered"

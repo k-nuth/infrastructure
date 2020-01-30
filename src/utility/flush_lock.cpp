@@ -26,7 +26,7 @@
 #include <bitcoin/infrastructure/unicode/ifstream.hpp>
 #include <bitcoin/infrastructure/unicode/ofstream.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // static
 bool flush_lock::create(std::string const& file)

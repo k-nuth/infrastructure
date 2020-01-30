@@ -33,7 +33,7 @@
 #include <bitcoin/infrastructure/utility/istream_reader.hpp>
 #include <bitcoin/infrastructure/utility/ostream_writer.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 bool png::write_png(data_chunk const& data, uint32_t size, std::ostream& out)
 {

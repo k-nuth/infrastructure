@@ -24,7 +24,7 @@
 #include <bitcoin/infrastructure/math/hash.hpp>
 //#include <bitcoin/infrastructure/math/uint256.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 //using uint256_t = boost::multiprecision::uint256_t;
 //

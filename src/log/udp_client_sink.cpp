@@ -27,7 +27,7 @@
 #include <bitcoin/infrastructure/error.hpp>
 #include <utility>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 using namespace std::placeholders;

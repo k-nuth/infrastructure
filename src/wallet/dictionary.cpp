@@ -18,7 +18,7 @@
  */
 #include <bitcoin/infrastructure/wallet/dictionary.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 namespace language {
 

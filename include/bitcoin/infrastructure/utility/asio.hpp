@@ -29,7 +29,7 @@
 
 // Convenience namespace for commonly used boost asio aliases.
 
-namespace libbitcoin {
+namespace kth {
 namespace asio {
 
 namespace error = boost::asio::error;

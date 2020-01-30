@@ -24,7 +24,7 @@
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 #include <bitcoin/infrastructure/utility/work.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 dispatcher::dispatcher(threadpool& pool, std::string const& name)
   : heap_(std::make_shared<work>(pool, name)), pool_(pool)

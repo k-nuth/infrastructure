@@ -30,7 +30,7 @@
 ////#include <bitcoin/infrastructure/utility/noncopyable.hpp>
 #include <bitcoin/infrastructure/utility/writer.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// Writer to wrap arbitrary iterator.
 template <typename Iterator>

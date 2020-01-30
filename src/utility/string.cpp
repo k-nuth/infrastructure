@@ -23,7 +23,7 @@
 
 #include <boost/algorithm/string.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 std::string join(const string_list& words, std::string const& delimiter) {
     return boost::join(words, delimiter);

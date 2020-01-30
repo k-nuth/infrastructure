@@ -30,7 +30,7 @@
 // libbitcoin defines the log and tracking but does not use them.
 // These are defined in bc so that they can be used in network and blockchain.
 
-namespace libbitcoin {
+namespace kth {
 
 /// A reference counting wrapper for closures placed on the asio work heap.
 class BI_API monitor {

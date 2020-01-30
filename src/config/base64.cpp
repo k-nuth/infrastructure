@@ -28,7 +28,7 @@
 #include <bitcoin/infrastructure/formats/base_64.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 base64::base64(std::string const& base64) {

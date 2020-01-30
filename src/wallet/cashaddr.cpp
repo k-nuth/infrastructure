@@ -214,7 +214,7 @@ data_chunk create_checksum(std::string const& prefix, data_chunk const& payload)
 
 } // namespace
 
-namespace libbitcoin { namespace wallet { namespace cashaddr {
+namespace kth { namespace wallet { namespace cashaddr {
 
 /**
  * Encode a cashaddr string.

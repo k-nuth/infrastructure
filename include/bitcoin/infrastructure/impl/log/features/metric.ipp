@@ -19,7 +19,7 @@
 #ifndef KNUTH_INFRASTRUCTURE_LOG_FEATURES_METRIC_IPP
 #define KNUTH_INFRASTRUCTURE_LOG_FEATURES_METRIC_IPP
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 namespace features {
 

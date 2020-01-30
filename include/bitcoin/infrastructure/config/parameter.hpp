@@ -29,7 +29,7 @@
 
 /* NOTE: don't declare 'using namespace foo' in headers. */
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 /**

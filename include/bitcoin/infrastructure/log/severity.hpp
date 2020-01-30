@@ -21,7 +21,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 enum class severity {

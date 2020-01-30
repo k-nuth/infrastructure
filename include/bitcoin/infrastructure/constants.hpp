@@ -30,7 +30,7 @@
 // #include <bitcoin/infrastructure/version.hpp>
 #include <bitcoin/infrastructure/hash_define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // This guards assumptions within the codebase.
 static_assert(sizeof(size_t) >= sizeof(uint32_t), "unsupported size_t");

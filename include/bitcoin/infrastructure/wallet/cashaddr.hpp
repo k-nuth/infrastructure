@@ -31,7 +31,7 @@
 
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin { 
+namespace kth { 
 namespace wallet { 
 namespace cashaddr {
 
@@ -54,7 +54,7 @@ std::pair<std::string, data_chunk> decode(std::string const& str, std::string co
 
 // Unit Tests ----------------------------------------------------
 #ifdef DOCTEST_LIBRARY_INCLUDED
-using namespace libbitcoin::wallet;
+using namespace kth::wallet;
 using namespace std;
 
 static std::pair<std::string, std::vector<uint8_t>>

@@ -26,7 +26,7 @@
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 #define IF(T) std::enable_if<T>
 #define SIGN(T) std::is_signed<T>::value

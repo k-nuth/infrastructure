@@ -29,7 +29,7 @@
 #include <bitcoin/infrastructure/log/attributes.hpp>
 #include <bitcoin/infrastructure/log/severity.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 typedef boost::log::sources::severity_channel_logger_mt<severity, std::string>

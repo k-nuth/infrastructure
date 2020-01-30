@@ -24,7 +24,7 @@
 
 #include <bitcoin/infrastructure/compat.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 /**

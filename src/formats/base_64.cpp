@@ -26,7 +26,7 @@
 // This implementation derived from public domain:
 // en.wikibooks.org/wiki/Algorithm_Implementation/Miscellaneous/Base64
 
-namespace libbitcoin {
+namespace kth {
 
 const static char pad = '=';
 

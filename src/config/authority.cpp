@@ -32,7 +32,7 @@
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/string.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 using namespace boost::program_options;

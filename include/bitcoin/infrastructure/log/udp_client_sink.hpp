@@ -28,7 +28,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/error.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 class BI_API udp_client_sink

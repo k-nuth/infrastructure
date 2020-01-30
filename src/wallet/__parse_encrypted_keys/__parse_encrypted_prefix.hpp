@@ -33,7 +33,7 @@
 // representing an address.... Alt-chain implementers may also change the prefix
 // such that encrypted addresses do not start with "6P".
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 template <size_t Size>

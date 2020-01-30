@@ -29,7 +29,7 @@
 #include <bitcoin/infrastructure/utility/noncopyable.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// A managed collection of object pointers.
 template <typename Element>

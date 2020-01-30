@@ -30,7 +30,7 @@
 #ifdef WITH_PNG
 #include <png.h>
 
-namespace libbitcoin {
+namespace kth {
 
 class BI_API png
 {

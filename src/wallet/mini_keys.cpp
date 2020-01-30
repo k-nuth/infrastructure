@@ -24,7 +24,7 @@
 #include <bitcoin/infrastructure/math/elliptic_curve.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 bool check_minikey(std::string const& minikey)

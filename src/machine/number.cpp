@@ -20,7 +20,7 @@
 
 #include <cstdint>
 
-namespace libbitcoin {
+namespace kth {
 namespace machine {
 
 uint8_t constexpr number::positive_0; // = 0;

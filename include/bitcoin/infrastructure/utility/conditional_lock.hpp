@@ -24,7 +24,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 class BI_API conditional_lock {
 public:

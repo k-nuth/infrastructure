@@ -24,7 +24,7 @@
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 threadpool::threadpool(size_t number_threads, thread_priority priority)
   : size_(0)

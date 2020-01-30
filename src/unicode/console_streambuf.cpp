@@ -40,7 +40,7 @@ LPVOID get_input_handle() {
 }
 #endif
 
-namespace libbitcoin {
+namespace kth {
 
 // This class/mathod is a no-op on non-windows platforms.
 // When working in Windows console set font to "Lucida Console".

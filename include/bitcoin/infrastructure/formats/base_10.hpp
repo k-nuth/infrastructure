@@ -25,7 +25,7 @@
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 constexpr uint8_t btc_decimal_places = 8;
 constexpr uint8_t mbtc_decimal_places = 5;

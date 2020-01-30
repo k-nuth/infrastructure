@@ -24,7 +24,7 @@
 #include <bitcoin/infrastructure/compat.hpp>
 
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 static boost::arg<1> _1;

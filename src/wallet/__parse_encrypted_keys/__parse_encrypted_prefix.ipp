@@ -25,7 +25,7 @@
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/wallet/encrypted_keys.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 template <size_t Size>

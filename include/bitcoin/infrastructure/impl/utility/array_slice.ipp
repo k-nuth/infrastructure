@@ -19,7 +19,7 @@
 #ifndef KNUTH_INFRASTRUCTURE_ARRAY_SLICE_IPP
 #define KNUTH_INFRASTRUCTURE_ARRAY_SLICE_IPP
 
-namespace libbitcoin {
+namespace kth {
 
 template <typename Iterable>
 template <typename Container>

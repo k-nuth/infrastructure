@@ -21,7 +21,7 @@
 
 #include <cstddef>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * An read-only STL-style wrapper for array-style collections.

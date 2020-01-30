@@ -25,7 +25,7 @@
 #include <bitcoin/infrastructure/constants.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 class BI_API binary {
 public:

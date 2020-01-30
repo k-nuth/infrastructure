@@ -32,7 +32,7 @@
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/limits.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 static constexpr uint8_t compressed_even = 0x02;
 static constexpr uint8_t compressed_odd = 0x03;

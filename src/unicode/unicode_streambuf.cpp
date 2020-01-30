@@ -27,7 +27,7 @@
 #include <bitcoin/infrastructure/unicode/unicode.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // Local definition for max number of bytes in a utf8 character.
 constexpr size_t utf8_max_character_size = 4;

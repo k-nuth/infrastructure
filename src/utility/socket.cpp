@@ -25,7 +25,7 @@
 #include <bitcoin/infrastructure/utility/thread.hpp>
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 socket::socket(threadpool& thread)
   : thread_(thread),

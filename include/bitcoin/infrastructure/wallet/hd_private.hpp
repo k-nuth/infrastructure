@@ -30,7 +30,7 @@
 // #include <bitcoin/infrastructure/wallet/ec_public.hpp>
 #include <bitcoin/infrastructure/wallet/hd_public.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 constexpr

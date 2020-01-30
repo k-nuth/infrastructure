@@ -24,7 +24,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// This class is thread safe.
 /// Encapsulation of sequential locking conditions.

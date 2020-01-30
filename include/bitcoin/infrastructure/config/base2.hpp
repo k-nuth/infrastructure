@@ -26,7 +26,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/binary.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 /**

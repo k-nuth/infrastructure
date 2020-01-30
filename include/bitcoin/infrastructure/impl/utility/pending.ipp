@@ -26,7 +26,7 @@
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 template <typename Element>
 pending<Element>::pending(size_t initial_capacity)

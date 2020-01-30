@@ -25,7 +25,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Virtual base class for secp256k1 context management.

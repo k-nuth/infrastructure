@@ -28,7 +28,7 @@
 #include <bitcoin/infrastructure/utility/thread.hpp>
 ////#include <bitcoin/infrastructure/utility/track.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 class sequencer
     : public enable_shared_from_base<sequencer>

@@ -18,7 +18,7 @@
  */
 #include <bitcoin/infrastructure/utility/sequential_lock.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 sequential_lock::sequential_lock()
   : sequence_(0)

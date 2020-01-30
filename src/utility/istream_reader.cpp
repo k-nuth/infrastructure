@@ -22,7 +22,7 @@
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/endian.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 istream_reader::istream_reader(std::istream& stream)
   : stream_(stream)

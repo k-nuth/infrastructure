@@ -24,7 +24,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Returns true if a character is a hexadecimal digit.

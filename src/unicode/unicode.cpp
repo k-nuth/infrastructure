@@ -43,7 +43,7 @@
     #include <io.h>
 #endif
 
-namespace libbitcoin {
+namespace kth {
 
 using namespace boost::locale;
 

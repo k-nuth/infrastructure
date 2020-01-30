@@ -283,7 +283,7 @@ std::error_condition error_category_impl::default_error_condition(int ev) const 
     return {ev, *this};
 }
 
-namespace libbitcoin {
+namespace kth {
 namespace error {
 
 code make_error_code(error_code_t e) {

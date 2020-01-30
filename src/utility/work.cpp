@@ -24,7 +24,7 @@
 #include <bitcoin/infrastructure/utility/delegates.hpp>
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 work::work(threadpool& pool, std::string const& name)
   : name_(name),

@@ -21,7 +21,7 @@
 
 #include <cstdint>
 
-namespace libbitcoin {
+namespace kth {
 namespace machine {
 
 /// Signature hash types.

@@ -25,7 +25,7 @@
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Generate a pseudo random number within the domain.

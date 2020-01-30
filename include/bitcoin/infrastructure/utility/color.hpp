@@ -24,7 +24,7 @@
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 struct BI_API color {
     uint8_t red;

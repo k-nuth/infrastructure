@@ -19,7 +19,7 @@
 #ifndef LIBBITCOIN_INFRASTUCTURE_CONFIG_SETTINGS_HPP
 #define LIBBITCOIN_INFRASTUCTURE_CONFIG_SETTINGS_HPP
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 // For configuration settings initialization in other libraries.

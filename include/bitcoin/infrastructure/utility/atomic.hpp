@@ -24,7 +24,7 @@
 
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 template <typename Type>
 class atomic {

@@ -28,7 +28,7 @@
 #include <bitcoin/infrastructure/log/severity.hpp>
 #include <bitcoin/infrastructure/unicode/ofstream.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 using file = boost::shared_ptr<bc::ofstream>;

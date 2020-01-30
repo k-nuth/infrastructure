@@ -18,7 +18,7 @@
  */
 #include <bitcoin/infrastructure/message/message_tools.hpp>
 
-namespace libbitcoin { 
+namespace kth { 
 namespace message {
 
 size_t variable_uint_size(uint64_t value) {
