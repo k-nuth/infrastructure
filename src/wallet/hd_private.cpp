@@ -26,7 +26,7 @@
 // #include <bitcoin/infrastructure/wallet/ec_private.hpp>
 // #include <bitcoin/infrastructure/wallet/ec_public.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 // uint64_t const hd_private::mainnet = to_prefixes(76066276, hd_public::mainnet);
@@ -282,4 +282,4 @@ void swap(hd_private& left, hd_private& right) {
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth

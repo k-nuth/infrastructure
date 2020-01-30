@@ -10,7 +10,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 static 
@@ -44,6 +44,6 @@ boost::filesystem::path config_default_path() {
 //BI_API std::string windows_config_directory();
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -13,7 +13,7 @@
 #include <bitcoin/infrastructure/formats/base_16.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 hash160::hash160(std::string const& hexcode) {
@@ -46,4 +46,4 @@ std::ostream& operator<<(std::ostream& output, hash160 const& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

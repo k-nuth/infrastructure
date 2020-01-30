@@ -7,7 +7,7 @@
 #include <boost/log/attributes.hpp>
 #include <boost/scope_exit.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 namespace features {
 
@@ -71,6 +71,6 @@ boost::log::attribute_set::iterator
 
 } // namespace features
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

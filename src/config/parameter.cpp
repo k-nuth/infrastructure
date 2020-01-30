@@ -13,7 +13,7 @@
 #include <bitcoin/infrastructure/utility/string.hpp>
 
 namespace po = boost::program_options;
-using namespace libbitcoin::config;
+using namespace kth::config;
 
 int const parameter::not_positional = -1;
 char const parameter::no_short_name = 0x00;

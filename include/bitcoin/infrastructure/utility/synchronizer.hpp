@@ -16,7 +16,7 @@
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 enum class synchronizer_terminate
 {
@@ -135,6 +135,6 @@ synchronizer<Handler> synchronize(Handler&& handler, size_t clearance_count,
         clearance_count, name, mode);
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

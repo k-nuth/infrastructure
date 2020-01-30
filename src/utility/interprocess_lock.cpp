@@ -11,7 +11,7 @@
 #include <bitcoin/infrastructure/unicode/file_lock.hpp>
 #include <bitcoin/infrastructure/unicode/ofstream.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // static
 bool interprocess_lock::create(std::string const& file)
@@ -61,4 +61,4 @@ bool interprocess_lock::unlock()
     return destroy(file_);
 }
 
-} // namespace libbitcoin
+} // namespace kth

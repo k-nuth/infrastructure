@@ -12,7 +12,7 @@
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/utility/asio.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// Current zulu (utc) time using the wall clock.
 /// BUGBUG: en.wikipedia.org/wiki/Year_2038_problem
@@ -66,6 +66,6 @@ struct timer
     }
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

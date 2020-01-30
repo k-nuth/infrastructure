@@ -9,7 +9,7 @@
 #include <bitcoin/infrastructure/math/hash.hpp>
 //#include <bitcoin/infrastructure/math/uint256.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 //using uint256_t = boost::multiprecision::uint256_t;
 //
@@ -79,6 +79,6 @@ public:
 uint64_t sip_hash_uint256(uint64_t k0, uint64_t k1, hash_digest const& val);
 uint64_t sip_hash_uint256_extra(uint64_t k0, uint64_t k1, hash_digest const& val, uint32_t extra);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif /* KTH_SIP_HASH_HPP_ */

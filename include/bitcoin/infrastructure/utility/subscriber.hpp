@@ -15,7 +15,7 @@
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 ////#include <bitcoin/infrastructure/utility/track.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 template <typename... Args>
 class subscriber
@@ -56,7 +56,7 @@ private:
     mutable upgrade_mutex subscribe_mutex_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/subscriber.ipp>
 

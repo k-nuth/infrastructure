@@ -6,7 +6,7 @@
 
 #include <cstdint>
 
-namespace libbitcoin {
+namespace kth {
 namespace machine {
 
 /// Script versions (bip141).
@@ -23,6 +23,6 @@ enum class script_version
 };
 
 } // namespace machine
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

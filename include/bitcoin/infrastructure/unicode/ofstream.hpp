@@ -9,7 +9,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Use bc::ofstream in place of std::ofstream.
@@ -28,6 +28,6 @@ public:
     ofstream(std::string const& path, std::ofstream::openmode mode = std::ofstream::out);
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

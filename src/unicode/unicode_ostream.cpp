@@ -8,7 +8,7 @@
 
 #include <bitcoin/infrastructure/unicode/unicode_streambuf.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 unicode_ostream::unicode_ostream(std::ostream& narrow_stream, std::wostream& wide_stream, size_t size)
 #ifdef _MSC_VER
@@ -24,4 +24,4 @@ unicode_ostream::~unicode_ostream() {
 }
 #endif
 
-} // namespace libbitcoin
+} // namespace kth

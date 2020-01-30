@@ -13,7 +13,7 @@
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 using namespace bc::asio;
 using namespace std::chrono;
@@ -110,4 +110,4 @@ asio::duration pseudo_random::duration(asio::duration const& expiration,
     return milliseconds(expires);
 }
 
-} // namespace libbitcoin
+} // namespace kth

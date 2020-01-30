@@ -14,7 +14,7 @@
 #include <bitcoin/infrastructure/utility/noncopyable.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// A managed collection of object pointers.
 template <typename Element>
@@ -63,7 +63,7 @@ private:
     mutable upgrade_mutex mutex_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/pending.ipp>
 

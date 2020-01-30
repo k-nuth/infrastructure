@@ -14,7 +14,7 @@
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/endian.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // Since the end is not used just use begin.
 template <typename Iterator, bool CheckSafe>
@@ -384,6 +384,6 @@ deserializer<Iterator, false> make_unsafe_deserializer(Iterator begin) {
     return deserializer<Iterator, false>(begin);
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

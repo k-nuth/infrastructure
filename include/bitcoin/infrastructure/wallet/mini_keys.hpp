@@ -9,7 +9,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/math/elliptic_curve.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 /**
@@ -18,6 +18,6 @@ namespace wallet {
 BI_API bool minikey_to_secret(ec_secret& out_secret, std::string const& key);
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

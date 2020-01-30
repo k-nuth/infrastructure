@@ -28,7 +28,7 @@
 #include <type_traits>
 #include <vector>
 
-namespace libbitcoin {
+namespace kth {
 
 template <typename Source, typename Target>
 std::vector<Target> cast(const std::vector<Source>& source) {
@@ -101,7 +101,7 @@ T pop(std::vector<T>& stack) {
 ////    return out;
 ////}
 
-} // namespace libbitcoin
+} // namespace kth
 
 namespace std {
 

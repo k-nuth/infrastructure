@@ -4,7 +4,7 @@
 #ifndef KTH_INFRASTUCTURE_CONFIG_SETTINGS_HPP
 #define KTH_INFRASTUCTURE_CONFIG_SETTINGS_HPP
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 // For configuration settings initialization in other libraries.
@@ -17,6 +17,6 @@ enum class settings
 };
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

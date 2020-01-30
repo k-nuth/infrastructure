@@ -20,7 +20,7 @@
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 #include <bitcoin/infrastructure/utility/work.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 #define FORWARD_ARGS(args) \
     std::forward<Args>(args)...
@@ -230,6 +230,6 @@ private:
 #undef BIND_RACE
 #undef BIND_ELEMENT
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

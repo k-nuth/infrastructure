@@ -15,7 +15,7 @@
 #ifdef WITH_QRENCODE
 #include <qrencode.h>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 class BI_API qr
@@ -59,7 +59,7 @@ public:
 };
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif // WITH_QRENCODE
 

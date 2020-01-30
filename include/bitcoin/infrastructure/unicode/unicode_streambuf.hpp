@@ -10,7 +10,7 @@
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Class to translate internal utf8 iostreams to external utf16 iostreams.
@@ -64,6 +64,6 @@ private:
     std::wstreambuf* wide_buffer_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -10,7 +10,7 @@
 
 #include "../math/external/aes256.h"
 
-namespace libbitcoin {
+namespace kth {
 
 void aes256_encrypt(const aes_secret& key, aes_block& block)
 {
@@ -28,4 +28,4 @@ void aes256_decrypt(const aes_secret& key, aes_block& block)
     aes256_done(&context);
 }
 
-} // namespace libbitcoin
+} // namespace kth

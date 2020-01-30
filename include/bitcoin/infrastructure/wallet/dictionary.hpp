@@ -9,7 +9,7 @@
 
 #include <bitcoin/infrastructure/compat.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 /**
@@ -49,6 +49,6 @@ namespace language
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

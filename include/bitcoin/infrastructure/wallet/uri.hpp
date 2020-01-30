@@ -9,7 +9,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 /**
@@ -86,6 +86,6 @@ private:
 };
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

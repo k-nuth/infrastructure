@@ -19,7 +19,7 @@
 
 #include <bitcoin/infrastructure/log/file_char_traits.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 file_counter_formatter::file_counter_formatter(unsigned int width)
@@ -51,4 +51,4 @@ file_counter_formatter::path_string_type file_counter_formatter::operator()(
 }
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth

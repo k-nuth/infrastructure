@@ -11,7 +11,7 @@
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 #include <utility>
 
-namespace libbitcoin {
+namespace kth {
 
 using std::placeholders::_1;
 
@@ -76,4 +76,4 @@ void deadline::handle_timer(const boost_code& ec, handler const& handle) const {
     }
 }
 
-} // namespace libbitcoin
+} // namespace kth

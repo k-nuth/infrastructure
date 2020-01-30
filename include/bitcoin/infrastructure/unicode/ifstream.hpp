@@ -9,7 +9,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Use bc::ifstream in place of std::ifstream.
@@ -28,6 +28,6 @@ public:
     ifstream(std::string const& path, std::ifstream::openmode mode = std::ifstream::in);
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

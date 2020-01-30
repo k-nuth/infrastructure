@@ -12,7 +12,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/binary.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 base2::base2(std::string const& binary) {
@@ -51,4 +51,4 @@ std::ostream& operator<<(std::ostream& output, const base2& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

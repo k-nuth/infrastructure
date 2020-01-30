@@ -9,7 +9,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Class to expose a widening output stream.
@@ -39,6 +39,6 @@ public:
 
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

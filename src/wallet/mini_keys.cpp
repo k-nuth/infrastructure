@@ -9,7 +9,7 @@
 #include <bitcoin/infrastructure/math/elliptic_curve.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 bool check_minikey(std::string const& minikey)
@@ -30,4 +30,4 @@ bool minikey_to_secret(ec_secret& out_secret, std::string const& key)
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth

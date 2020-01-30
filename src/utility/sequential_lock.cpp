@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <bitcoin/infrastructure/utility/sequential_lock.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 sequential_lock::sequential_lock()
   : sequence_(0)
@@ -36,4 +36,4 @@ bool sequential_lock::end_write()
     return !is_write_locked(++sequence_);
 }
 
-} // namespace libbitcoin
+} // namespace kth

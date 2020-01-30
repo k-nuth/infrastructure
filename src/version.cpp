@@ -4,7 +4,7 @@
 
 #include <bitcoin/infrastructure/version.hpp>
 
-namespace libbitcoin { 
+namespace kth { 
 namespace infrastructure {
 
 char const* version() {
@@ -12,5 +12,5 @@ char const* version() {
 }
 
 } // namespace infrastructure
-} // namespace libbitcoin
+} // namespace kth
 

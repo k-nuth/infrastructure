@@ -4,7 +4,7 @@
 #ifndef KTH_INFRASTRUCTURE_LOG_FEATURES_METRIC_IPP
 #define KTH_INFRASTRUCTURE_LOG_FEATURES_METRIC_IPP
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 namespace features {
 
@@ -95,6 +95,6 @@ boost::log::record metric_feature<BaseType>::open_record_with_metric_unlocked(
 
 } // namespace features
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

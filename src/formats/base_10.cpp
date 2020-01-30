@@ -10,7 +10,7 @@
 
 #include <bitcoin/infrastructure/constants.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Returns true if a character is one of `[0-9]`.
@@ -96,4 +96,4 @@ std::string satoshi_to_btc(uint64_t satoshi) {
     return encode_base10(satoshi, btc_decimal_places);
 }
 
-} // namespace libbitcoin
+} // namespace kth

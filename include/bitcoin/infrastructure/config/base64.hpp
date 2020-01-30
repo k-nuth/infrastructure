@@ -10,7 +10,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 /**
@@ -76,6 +76,6 @@ private:
 };
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

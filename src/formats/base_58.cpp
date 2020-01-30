@@ -7,7 +7,7 @@
 
 #include <bitcoin/infrastructure/utility/assert.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 std::string const base58_chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
@@ -164,4 +164,4 @@ bool decode_base58_private(uint8_t* out, size_t out_size, char const* in) {
     return true;
 }
 
-} // namespace libbitcoin
+} // namespace kth

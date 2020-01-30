@@ -8,7 +8,7 @@
 
 #include <bitcoin/infrastructure/error.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 using handle0 = std::function<void(code const&)>;
 
@@ -21,6 +21,6 @@ using handle2 = std::function<void(code const&, const Type1&, const Type2&)>;
 template <typename Type1, typename Type2, typename Type3>
 using handle3 = std::function<void(code const&, const Type1&, const Type2&, const Type3&)>;
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

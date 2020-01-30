@@ -26,7 +26,7 @@
     #define THREAD_PRIORITY_LOWEST PRIO_MAX
 #endif
 
-namespace libbitcoin {
+namespace kth {
 
 // Privately map the class enum thread priority value to an interger.
 static int get_priority(thread_priority priority)
@@ -110,4 +110,4 @@ size_t thread_floor(size_t configured)
     return (std::max)(configured, cores());
 }
 
-} // namespace libbitcoin
+} // namespace kth

@@ -6,7 +6,7 @@
 
 #include <memory>
 
-namespace libbitcoin {
+namespace kth {
 
 /// Because enable_shared_from_this doesn't support inheritance.
 template <typename Base>
@@ -21,6 +21,6 @@ protected:
     }
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

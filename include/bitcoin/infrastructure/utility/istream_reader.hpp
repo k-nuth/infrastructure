@@ -10,7 +10,7 @@
 
 #include <bitcoin/infrastructure/utility/reader.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 class BI_API istream_reader
     // : public reader
@@ -85,7 +85,7 @@ private:
     std::istream& stream_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/istream_reader.ipp>
 

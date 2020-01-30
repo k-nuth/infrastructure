@@ -7,7 +7,7 @@
 
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 scope_lock::scope_lock(shared_mutex& mutex)
   : mutex_(mutex)
@@ -20,4 +20,4 @@ scope_lock::~scope_lock()
     mutex_.unlock();
 }
 
-} // namespace libbitcoin
+} // namespace kth

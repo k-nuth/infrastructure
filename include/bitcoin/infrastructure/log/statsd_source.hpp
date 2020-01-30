@@ -18,7 +18,7 @@
 #include <bitcoin/infrastructure/log/features/rate.hpp>
 #include <bitcoin/infrastructure/log/features/timer.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 class BI_API statsd_source
@@ -60,6 +60,6 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_DEFAULT(stats, statsd_source);
     BI_STATS_WITH_RATE(name, rate, (bc::log::keywords::timer = (value)))
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

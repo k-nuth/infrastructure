@@ -15,7 +15,7 @@
 ////#include <bitcoin/infrastructure/utility/noncopyable.hpp>
 #include <bitcoin/infrastructure/utility/reader.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// Reader to wrap arbitrary iterator.
 template <typename Iterator, bool CheckSafe>
@@ -113,7 +113,7 @@ deserializer<Iterator, true> make_safe_deserializer(Iterator begin,
 template <typename Iterator>
 deserializer<Iterator, false> make_unsafe_deserializer(Iterator begin);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/deserializer.ipp>
 

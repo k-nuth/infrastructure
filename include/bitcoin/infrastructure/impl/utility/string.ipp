@@ -7,7 +7,7 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/lexical_cast.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 template <typename Value>
 Value deserialize(std::string const& text, bool trim) {
@@ -46,6 +46,6 @@ std::string serialize(const Value& value, std::string const& fallback) {
     return text.empty() ? fallback : text;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

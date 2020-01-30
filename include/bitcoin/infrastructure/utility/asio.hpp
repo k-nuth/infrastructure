@@ -14,7 +14,7 @@
 
 // Convenience namespace for commonly used boost asio aliases.
 
-namespace libbitcoin {
+namespace kth {
 namespace asio {
 
 namespace error = boost::asio::error;
@@ -53,6 +53,6 @@ using socket_ptr = std::shared_ptr<socket>;
 constexpr int max_connections = boost::asio::socket_base::max_connections;
 
 } // namespace asio
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

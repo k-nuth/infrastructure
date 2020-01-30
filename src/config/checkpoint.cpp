@@ -15,7 +15,7 @@
 #include <bitcoin/infrastructure/formats/base_16.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 // using namespace boost;
@@ -123,4 +123,4 @@ std::ostream& operator<<(std::ostream& output, checkpoint const& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

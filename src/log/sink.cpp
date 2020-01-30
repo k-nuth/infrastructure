@@ -20,7 +20,7 @@
 #include <bitcoin/infrastructure/log/severity.hpp>
 #include <bitcoin/infrastructure/unicode/ofstream.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 using namespace boost::log;
@@ -201,4 +201,4 @@ void initialize(const rotable_file& debug_file, const rotable_file& error_file,
 }
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth

@@ -20,7 +20,7 @@
 
 // #define KTH_VERSION KTH_INFRASTRUCTURE_VERSION
 
-namespace libbitcoin { namespace infrastructure {
+namespace kth { namespace infrastructure {
 char const* version();
 }} /*namespace libbitcoin::infrastructure*/
  

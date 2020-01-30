@@ -8,7 +8,7 @@
 
 #include <bitcoin/infrastructure/unicode/unicode.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // Construct bc::ifstream.
 ifstream::ifstream(std::string const& path, std::ifstream::openmode mode)
@@ -20,4 +20,4 @@ ifstream::ifstream(std::string const& path, std::ifstream::openmode mode)
 {
 }
 
-} // namespace libbitcoin
+} // namespace kth

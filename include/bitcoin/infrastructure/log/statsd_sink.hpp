@@ -11,7 +11,7 @@
 #include <bitcoin/infrastructure/log/rotable_file.hpp>
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 void initialize_statsd(const rotable_file& file);
@@ -19,6 +19,6 @@ void initialize_statsd(const rotable_file& file);
 void initialize_statsd(threadpool& pool, const config::authority& server);
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

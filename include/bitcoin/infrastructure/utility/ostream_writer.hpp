@@ -10,7 +10,7 @@
 #include <bitcoin/infrastructure/utility/container_sink.hpp>
 #include <bitcoin/infrastructure/utility/writer.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 class BI_API ostream_writer
     // : public writer
@@ -83,7 +83,7 @@ private:
     // data_sink& stream_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/ostream_writer.ipp>
 

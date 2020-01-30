@@ -11,7 +11,7 @@
 
 #include <bitcoin/infrastructure/utility/assert.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 inline one_byte to_array(uint8_t byte)
 {
@@ -162,6 +162,6 @@ byte_array<Size> xor_data(data_slice bytes1, data_slice bytes2, size_t offset1,
     return out;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

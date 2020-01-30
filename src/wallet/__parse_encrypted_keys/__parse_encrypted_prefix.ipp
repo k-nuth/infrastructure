@@ -10,7 +10,7 @@
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/wallet/encrypted_keys.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 template <size_t Size>
@@ -45,6 +45,6 @@ void parse_encrypted_prefix<Size>::valid(bool value)
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

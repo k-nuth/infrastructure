@@ -16,7 +16,7 @@
 #include <bitcoin/infrastructure/utility/ostream_writer.hpp>
 
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 data_chunk qr::encode(data_chunk const& data)
@@ -76,6 +76,6 @@ bool qr::encode(std::istream& in, uint32_t version, error_recovery_level level,
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif // WITH_QRENCODE

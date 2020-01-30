@@ -11,7 +11,7 @@
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/utility/assert.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 #define IF(T) std::enable_if<T>
 #define SIGN(T) std::is_signed<T>::value
@@ -184,6 +184,6 @@ To range_constrain(From value, To minimum, To maximum)
 #undef UNSIGNED_SIGNED
 #undef UNSIGNED_UNSIGNED
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

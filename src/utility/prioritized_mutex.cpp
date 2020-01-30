@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <bitcoin/infrastructure/utility/prioritized_mutex.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 prioritized_mutex::prioritized_mutex(bool prioritize)
   : prioritize_(prioritize)
@@ -52,4 +52,4 @@ void prioritized_mutex::unlock_high_priority()
     data_mutex_.unlock();
 }
 
-} // namespace libbitcoin
+} // namespace kth

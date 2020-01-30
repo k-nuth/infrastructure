@@ -6,7 +6,7 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace libbitcoin {
+namespace kth {
 namespace message {
 
 size_t variable_uint_size(uint64_t value) {
@@ -26,4 +26,4 @@ size_t variable_uint_size(uint64_t value) {
 }
 
 } // namespace message
-} // namespace libbitcoin
+} // namespace kth

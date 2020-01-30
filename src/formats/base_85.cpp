@@ -40,7 +40,7 @@
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // Maps binary to base 85.
 static char encoder[85 + 1] =
@@ -142,4 +142,4 @@ bool decode_base85(data_chunk& out, std::string const& in)
     return true;
 }
 
-} // namespace libbitcoin
+} // namespace kth

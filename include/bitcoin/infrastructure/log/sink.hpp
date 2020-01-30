@@ -13,7 +13,7 @@
 #include <bitcoin/infrastructure/log/severity.hpp>
 #include <bitcoin/infrastructure/unicode/ofstream.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 using file = boost::shared_ptr<bc::ofstream>;
@@ -33,6 +33,6 @@ void initialize(const rotable_file& debug_file, const rotable_file& error_file,
 formatter& operator<<(formatter& stream, severity value);
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

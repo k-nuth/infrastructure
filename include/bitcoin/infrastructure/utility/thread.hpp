@@ -12,7 +12,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 ////// Adapted from: stackoverflow.com/a/18298965/1172329
 ////#ifndef thread_local
@@ -50,6 +50,6 @@ BI_API size_t thread_default(size_t configured);
 BI_API size_t thread_ceiling(size_t configured);
 BI_API size_t thread_floor(size_t configured);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -7,10 +7,10 @@
 #include <bitcoin/infrastructure/compat.hpp>
 
 // Create bc namespace alias.
-namespace libbitcoin {
-} // namespace libbitcoin
+namespace kth {
+} // namespace kth
 
-namespace bc = libbitcoin;
+namespace bc = kth;
 
 // See http://gcc.gnu.org/wiki/Visibility
 

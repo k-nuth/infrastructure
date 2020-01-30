@@ -12,7 +12,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/unicode/file_lock.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// This class is not thread safe.
 /// Guard a resource againt concurrent use by another instance of this app.
@@ -40,6 +40,6 @@ private:
     std::string const file_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -27,7 +27,7 @@
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 using namespace bc::config;
@@ -132,4 +132,4 @@ void initialize_statsd(threadpool& pool, authority const& server) {
 }
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth

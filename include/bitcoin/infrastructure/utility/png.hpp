@@ -15,7 +15,7 @@
 #ifdef WITH_PNG
 #include <png.h>
 
-namespace libbitcoin {
+namespace kth {
 
 class BI_API png
 {
@@ -72,7 +72,7 @@ public:
         const color& background, std::ostream& out);
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif // WITH_PNG
 

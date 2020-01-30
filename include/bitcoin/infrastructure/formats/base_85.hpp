@@ -9,7 +9,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Encode data as base85 (Z85).
@@ -23,6 +23,6 @@ BI_API bool encode_base85(std::string& out, data_slice in);
  */
 BI_API bool decode_base85(data_chunk& out, std::string const& in);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -23,7 +23,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 // modified from class extracted from boost/log/sinks/text_file_backend.*pp
@@ -66,6 +66,6 @@ struct BI_API file_char_traits
 };
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

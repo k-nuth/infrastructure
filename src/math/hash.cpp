@@ -24,7 +24,7 @@
 // #include "../math/external/scrypt.h"
 // #endif //KTH_CURRENCY_LTC
 
-namespace libbitcoin {
+namespace kth {
 
 hash_digest bitcoin_hash(data_slice data)
 {
@@ -162,4 +162,4 @@ data_chunk scrypt(data_slice data, data_slice salt, uint64_t N, uint32_t p,
     return output;
 }
 
-} // namespace libbitcoin
+} // namespace kth

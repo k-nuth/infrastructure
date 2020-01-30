@@ -21,7 +21,7 @@ BOOST_AUTO_TEST_CASE(uri__parse__http_roundtrip__test)
 
     BOOST_REQUIRE_EQUAL(parsed.scheme(), "http");
     BOOST_REQUIRE_EQUAL(parsed.authority(), "github.com");
-    BOOST_REQUIRE_EQUAL(parsed.path(), "/libbitcoin");
+    BOOST_REQUIRE_EQUAL(parsed.path(), "/kth");
     BOOST_REQUIRE_EQUAL(parsed.query(), "good=true");
     BOOST_REQUIRE_EQUAL(parsed.fragment(), "nice");
 

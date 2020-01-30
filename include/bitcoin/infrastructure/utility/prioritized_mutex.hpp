@@ -9,7 +9,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// This class is thread safe.
 /// Encapsulation of prioritized locking conditions.
@@ -35,6 +35,6 @@ private:
     shared_mutex wait_mutex_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -11,7 +11,7 @@
 // This implementation derived from public domain:
 // en.wikibooks.org/wiki/Algorithm_Implementation/Miscellaneous/Base64
 
-namespace libbitcoin {
+namespace kth {
 
 const static char pad = '=';
 
@@ -137,5 +137,5 @@ bool decode_base64(data_chunk& out, std::string const& in)
     return true;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 

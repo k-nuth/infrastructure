@@ -13,7 +13,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 static constexpr size_t checksum_size = sizeof(uint32_t);
 
@@ -87,7 +87,7 @@ BI_API uint32_t bitcoin_checksum(data_slice data);
  */
 BI_API bool verify_checksum(data_slice data);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/math/checksum.ipp>
 

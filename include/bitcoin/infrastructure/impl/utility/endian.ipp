@@ -6,7 +6,7 @@
 
 #include <type_traits>
 
-namespace libbitcoin {
+namespace kth {
 
 #define VERIFY_UNSIGNED(T) static_assert(std::is_unsigned<T>::value, \
     "The endian functions only work on unsigned types")
@@ -126,7 +126,7 @@ byte_array<sizeof(Integer)> to_little_endian(Integer value) {
 
 #undef VERIFY_UNSIGNED
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

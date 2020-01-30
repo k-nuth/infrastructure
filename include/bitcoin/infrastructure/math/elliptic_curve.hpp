@@ -11,7 +11,7 @@
 #include <bitcoin/infrastructure/math/hash.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// The sign byte value for an even (y-valued) key.
 static constexpr uint8_t ec_even_sign = 2;
@@ -185,6 +185,6 @@ BI_API bool recover_public(ec_compressed& out,
 BI_API bool recover_public(ec_uncompressed& out,
     const recoverable_signature& recoverable, hash_digest const& hash);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

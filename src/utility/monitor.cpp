@@ -11,7 +11,7 @@
 // libbitcoin defines the log and tracking but does not use them.
 // These are defined in bc so that they can be used in network and blockchain.
 
-namespace libbitcoin {
+namespace kth {
 
 monitor::monitor(count_ptr counter, std::string&& name)
   : counter_(std::move(counter)), name_(std::move(name))
@@ -24,4 +24,4 @@ monitor::~monitor()
     trace(--(*counter_), "-");
 }
 
-} // namespace libbitcoin
+} // namespace kth

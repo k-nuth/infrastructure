@@ -9,7 +9,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 using stream = boost::shared_ptr<std::ostream>;
@@ -26,6 +26,6 @@ struct rotable_file
 };
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

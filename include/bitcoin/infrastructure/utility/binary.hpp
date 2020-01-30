@@ -10,7 +10,7 @@
 #include <bitcoin/infrastructure/constants.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 class BI_API binary {
 public:
@@ -71,7 +71,7 @@ private:
     uint8_t final_block_excess_{0};
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 namespace std {
 

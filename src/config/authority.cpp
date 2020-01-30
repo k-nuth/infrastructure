@@ -17,7 +17,7 @@
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/string.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 using namespace boost::program_options;
@@ -226,4 +226,4 @@ std::ostream& operator<<(std::ostream& output, authority const& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

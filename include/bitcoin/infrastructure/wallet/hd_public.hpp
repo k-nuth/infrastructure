@@ -13,7 +13,7 @@
 #include <bitcoin/infrastructure/utility/data.hpp>
 // #include <bitcoin/infrastructure/wallet/ec_public.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 /// A constant used in key derivation.
@@ -129,6 +129,6 @@ private:
 };
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

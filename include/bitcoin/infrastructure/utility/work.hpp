@@ -17,7 +17,7 @@
 #include <bitcoin/infrastructure/utility/sequencer.hpp>
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 #define ORDERED "ordered"
 #define UNORDERED "unordered"
@@ -133,6 +133,6 @@ private:
 #undef FORWARD_HANDLER
 #undef BIND_HANDLER
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

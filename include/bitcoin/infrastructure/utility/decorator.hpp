@@ -6,7 +6,7 @@
 
 #include <functional>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Defines a function decorator ala Python
@@ -39,7 +39,7 @@ decorator(Wrapper&& wrapper, Handler&& handler)
     return { wrapper, handler };
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

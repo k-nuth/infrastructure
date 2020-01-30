@@ -11,7 +11,7 @@
 
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 std::string encode_base16(data_slice data) {
     std::stringstream ss;
@@ -98,4 +98,4 @@ bool decode_base16_private(uint8_t* out, size_t out_size, char const* in) {
     return true;
 }
 
-} // namespace libbitcoin
+} // namespace kth

@@ -11,7 +11,7 @@
 #include <bitcoin/infrastructure/utility/istream_reader.hpp>
 #include <bitcoin/infrastructure/utility/ostream_writer.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace message {
 
 // TODO(libbitcoin): create derived address that adds the timestamp.
@@ -185,4 +185,4 @@ network_address network_address::factory_from_data(uint32_t version, data_source
 // }
 
 } // namespace message
-} // namespace libbitcoin
+} // namespace kth

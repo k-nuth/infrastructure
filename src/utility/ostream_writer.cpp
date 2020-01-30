@@ -13,7 +13,7 @@
 #include <bitcoin/infrastructure/utility/reader.hpp>
 
 
-namespace libbitcoin {
+namespace kth {
 
 ostream_writer::ostream_writer(std::ostream& stream)
   : stream_(stream)
@@ -195,4 +195,4 @@ void ostream_writer::skip(size_t size)
     stream_.seekp(size, std::ios_base::cur);
 }
 
-} // namespace libbitcoin
+} // namespace kth

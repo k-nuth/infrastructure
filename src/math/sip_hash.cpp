@@ -23,7 +23,7 @@
         v2 = ROTL(v2, 32);                                                     \
     } while (0)
 
-namespace libbitcoin {
+namespace kth {
 
 sip_hasher::sip_hasher(uint64_t k0, uint64_t k1) 
     : v { 0x736f6d6570736575ULL ^ k0
@@ -187,4 +187,4 @@ uint64_t sip_hash_uint256_extra(uint64_t k0, uint64_t k1, hash_digest const& val
     return v0 ^ v1 ^ v2 ^ v3;
 }
 
-} // namespace libbitcoin
+} // namespace kth

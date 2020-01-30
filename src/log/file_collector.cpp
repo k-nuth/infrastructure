@@ -27,7 +27,7 @@
 #include <bitcoin/infrastructure/log/file_collector_repository.hpp>
 #include <bitcoin/infrastructure/log/file_counter_formatter.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 namespace filesystem = boost::filesystem;
@@ -409,4 +409,4 @@ path_string_type file_collector::filename_string(filesystem::path const& path) {
 }
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth

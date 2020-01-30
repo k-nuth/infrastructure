@@ -9,7 +9,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 template <typename Integer, typename Iterator>
 constexpr
@@ -41,7 +41,7 @@ byte_array<sizeof(Integer)> to_big_endian(Integer value);
 template <typename Integer>
 byte_array<sizeof(Integer)> to_little_endian(Integer value);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/endian.ipp>
 

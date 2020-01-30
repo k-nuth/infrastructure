@@ -15,7 +15,7 @@
 #include <bitcoin/infrastructure/utility/noncopyable.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * This class and the asio service it exposes are thread safe.
@@ -97,7 +97,7 @@ private:
     mutable upgrade_mutex work_mutex_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

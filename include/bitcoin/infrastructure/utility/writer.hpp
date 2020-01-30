@@ -13,7 +13,7 @@
 #include <bitcoin/infrastructure/hash_define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// Writer interface.
 class BI_API writer
@@ -61,6 +61,6 @@ public:
     void skip(size_t size);
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

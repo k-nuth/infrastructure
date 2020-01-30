@@ -12,7 +12,7 @@
 #include <bitcoin/infrastructure/error.hpp>
 #include <bitcoin/infrastructure/utility/endian.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 template <typename Iterator>
 serializer<Iterator>::serializer(Iterator begin)
@@ -318,6 +318,6 @@ serializer<Iterator> make_unsafe_serializer(Iterator begin)
     return serializer<Iterator>(begin);
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

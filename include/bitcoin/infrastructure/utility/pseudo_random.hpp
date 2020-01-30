@@ -12,7 +12,7 @@
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 class BI_API pseudo_random
 {
@@ -101,6 +101,6 @@ BI_API void pseudo_random_fill(data_chunk& out);
 BI_API asio::duration pseudo_randomize(asio::duration const& expiration,
     uint8_t ratio=2);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

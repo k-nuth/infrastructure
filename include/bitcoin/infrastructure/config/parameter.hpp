@@ -14,7 +14,7 @@
 
 /* NOTE: don't declare 'using namespace foo' in headers. */
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 /**
@@ -137,6 +137,6 @@ public:
 #undef BI_PROPERTY
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

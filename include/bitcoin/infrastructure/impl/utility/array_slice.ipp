@@ -4,7 +4,7 @@
 #ifndef KTH_INFRASTRUCTURE_ARRAY_SLICE_IPP
 #define KTH_INFRASTRUCTURE_ARRAY_SLICE_IPP
 
-namespace libbitcoin {
+namespace kth {
 
 template <typename Iterable>
 template <typename Container>
@@ -49,7 +49,7 @@ bool array_slice<Iterable>::empty() const
     return end_ == begin_;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

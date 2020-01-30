@@ -14,7 +14,7 @@
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/limits.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // modified from boost.iostreams example
 // boost.org/doc/libs/1_55_0/libs/iostreams/doc/tutorial/container_source.html
@@ -59,7 +59,7 @@ using stream_source = boost::iostreams::stream<byte_source<Container>>;
 
 using data_source = stream_source<data_chunk>;
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

@@ -52,8 +52,8 @@
 #define BI_PRINTER_SETTING_REQUIRED_FORMAT "%1% = %2%\n"
 
 namespace po = boost::program_options;
-using namespace libbitcoin;
-using namespace libbitcoin::config;
+using namespace kth;
+using namespace kth::config;
 using boost::format;
 
 int const printer::max_arguments = 256;

@@ -28,7 +28,7 @@
     #include <io.h>
 #endif
 
-namespace libbitcoin {
+namespace kth {
 
 using namespace boost::locale;
 
@@ -399,4 +399,4 @@ void set_binary_stdout()
 
 LCOV_EXCL_STOP()
 
-} // namespace libbitcoin
+} // namespace kth

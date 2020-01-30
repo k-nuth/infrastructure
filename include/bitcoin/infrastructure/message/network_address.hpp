@@ -15,7 +15,7 @@
 #include <bitcoin/infrastructure/utility/container_sink.hpp>
 #include <bitcoin/infrastructure/utility/container_source.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace message {
 
 using ip_address = byte_array<16>;
@@ -163,6 +163,6 @@ constexpr network_address unspecified_network_address {
 };
 
 } // namespace message
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

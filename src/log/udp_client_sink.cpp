@@ -12,7 +12,7 @@
 #include <bitcoin/infrastructure/error.hpp>
 #include <utility>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 using namespace std::placeholders;
@@ -44,4 +44,4 @@ void udp_client_sink::handle_send(const boost_code& /*unused*/, size_t /*unused*
 }
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth

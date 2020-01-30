@@ -4,7 +4,7 @@
 #ifndef KTH_INFRASTUCTURE_MACHINE_SCRIPT_PATTERN_HPP
 #define KTH_INFRASTUCTURE_MACHINE_SCRIPT_PATTERN_HPP
 
-namespace libbitcoin {
+namespace kth {
 namespace machine {
 
 /// Script patterms.
@@ -57,6 +57,6 @@ enum class script_pattern
 };
 
 } // namespace machine
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

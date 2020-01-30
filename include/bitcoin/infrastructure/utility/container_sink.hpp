@@ -12,7 +12,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // modified from boost.iostreams example
 // boost.org/doc/libs/1_55_0/libs/iostreams/doc/tutorial/container_source.html
@@ -44,7 +44,7 @@ using byte_sink = container_sink<Container, uint8_t, char>;
 
 using data_sink = boost::iostreams::stream<byte_sink<data_chunk>>;
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

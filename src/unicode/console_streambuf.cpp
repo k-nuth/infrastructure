@@ -25,7 +25,7 @@ LPVOID get_input_handle() {
 }
 #endif
 
-namespace libbitcoin {
+namespace kth {
 
 // This class/mathod is a no-op on non-windows platforms.
 // When working in Windows console set font to "Lucida Console".
@@ -97,4 +97,4 @@ std::wstreambuf::int_type console_streambuf::underflow() {
     return traits_type::to_int_type(*gptr());
 }
 
-} // namespace libbitcoin
+} // namespace kth

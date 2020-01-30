@@ -16,7 +16,7 @@
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/endian.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // Common bitcoin hash container sizes.
 static constexpr size_t hash_size = 32;
@@ -148,7 +148,7 @@ constexpr hash_digest null_hash
 // BI_API long_hash pkcs5_pbkdf2_hmac_sha512(data_slice passphrase,
 //     data_slice salt, size_t iterations);
 
-} // namespace libbitcoin
+} // namespace kth
 
 // Extend std and boost namespaces with our hash wrappers.
 //-----------------------------------------------------------------------------

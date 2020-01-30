@@ -8,7 +8,7 @@
 
 #include <bitcoin/infrastructure/config/settings.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 namespace netmagic {
 constexpr uint32_t btc_mainnet = 0xd9b4bef9u;

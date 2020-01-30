@@ -6,7 +6,7 @@
 
 #include <bitcoin/infrastructure/utility/assert.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // For template implementation only, do not call directly.
 BI_API bool decode_base16_private(uint8_t* out, size_t out_size,
@@ -38,6 +38,6 @@ byte_array<(Size - 1) / 2> base16_literal(char const (&string)[Size])
     return out;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

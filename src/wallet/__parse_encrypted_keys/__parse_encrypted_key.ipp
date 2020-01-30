@@ -12,7 +12,7 @@
 
 #include "parse_encrypted_prefix.hpp"
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 template <size_t PrefixSize>
@@ -67,6 +67,6 @@ ek_salt parse_encrypted_key<PrefixSize>::salt() const
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -9,7 +9,7 @@
 #include <boost/log/attributes.hpp>
 #include <boost/scope_exit.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 namespace features {
 
@@ -64,6 +64,6 @@ counter_feature<BaseType>::add_counter_unlocked(boost::log::attribute_set& set, 
 
 } // namespace features
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

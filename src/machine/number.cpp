@@ -5,7 +5,7 @@
 
 #include <cstdint>
 
-namespace libbitcoin {
+namespace kth {
 namespace machine {
 
 uint8_t constexpr number::positive_0; // = 0;
@@ -54,4 +54,4 @@ uint8_t constexpr number::negative_0; //  = negative_mask | positive_0;
 // uint8_t constexpr number::negative_0 = negative_mask | positive_0;
 
 } // namespace machine
-} // namespace libbitcoin
+} // namespace kth

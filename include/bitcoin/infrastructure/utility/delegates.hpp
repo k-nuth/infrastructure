@@ -8,7 +8,7 @@
 
 #include <bitcoin/infrastructure/utility/work.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace delegates {
 
 #define FORWARD_ARGS(args) \
@@ -92,6 +92,6 @@ struct sequence
 #undef BIND_HANDLER
 
 } // namespace delegates
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

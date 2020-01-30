@@ -9,7 +9,7 @@
 
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 template <typename Type>
 class atomic {
@@ -62,6 +62,6 @@ private:
     mutable shared_mutex mutex_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

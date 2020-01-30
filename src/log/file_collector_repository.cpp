@@ -24,7 +24,7 @@
 #include <bitcoin/infrastructure/compat.hpp>
 
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 static boost::arg<1> _1;
@@ -86,4 +86,4 @@ boost::shared_ptr<boost::log::sinks::file::collector> make_collector(
 }
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth

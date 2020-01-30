@@ -9,7 +9,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 class BI_API conditional_lock {
 public:
@@ -24,6 +24,6 @@ private:
     std::shared_ptr<shared_mutex> const mutex_ptr_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif // KTH_INFRASTRUCTURE_CONDITIONAL_LOCK_HPP_

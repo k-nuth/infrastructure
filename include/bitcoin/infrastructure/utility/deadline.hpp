@@ -16,7 +16,7 @@
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 ////#include <bitcoin/infrastructure/utility/track.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Class wrapper for boost::asio::deadline_timer, thread safe.
@@ -76,6 +76,6 @@ private:
     mutable shared_mutex mutex_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

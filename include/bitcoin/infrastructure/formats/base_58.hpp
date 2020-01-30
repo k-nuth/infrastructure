@@ -9,7 +9,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 BI_API bool is_base58(char ch);
 BI_API bool is_base58(std::string const& text);
@@ -42,7 +42,7 @@ BI_API std::string encode_base58(data_slice unencoded);
  */
 BI_API bool decode_base58(data_chunk& out, std::string const& in);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/formats/base_58.ipp>
 

@@ -9,7 +9,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// This class is thread safe.
 /// Reserve exclusive access to a resource while this object is in scope.
@@ -29,6 +29,6 @@ private:
     shared_mutex& mutex_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

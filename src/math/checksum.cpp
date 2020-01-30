@@ -7,7 +7,7 @@
 #include <bitcoin/infrastructure/utility/deserializer.hpp>
 #include <bitcoin/infrastructure/utility/endian.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 void append_checksum(data_chunk& data)
 {
@@ -34,5 +34,5 @@ bool verify_checksum(data_slice data)
     return bitcoin_checksum(slice) == checksum;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 

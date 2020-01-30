@@ -10,7 +10,7 @@
 #include <boost/log/sources/threading_models.hpp>
 #include <boost/log/utility/strictest_lock.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 namespace attributes {
 
@@ -72,7 +72,7 @@ BOOST_PARAMETER_KEYWORD(tag, timer)
 } // namespace keywords
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/log/features/timer.ipp>
 

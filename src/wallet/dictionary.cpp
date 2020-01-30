@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <bitcoin/infrastructure/wallet/dictionary.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 namespace language {
 
@@ -20565,4 +20565,4 @@ const dictionary_list all
 
 } // namespace language
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth

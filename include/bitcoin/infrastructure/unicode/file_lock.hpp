@@ -31,7 +31,7 @@
 //!\file
 //!Describes a class that wraps file locking capabilities.
 
-namespace libbitcoin {
+namespace kth {
 namespace interprocess {
 
 //!A file lock, is a mutual exclusion utility similar to a mutex using a
@@ -164,7 +164,7 @@ inline void* CreateFileUTF8(std::string const& name, unsigned long access, unsig
 inline void *create_file(std::string const& name, unsigned long access, unsigned long creation_flags, unsigned long attributes, boost::interprocess::winapi::interprocess_security_attributes *psec)
 {
     for (unsigned int attempt(0); attempt < boost::interprocess::winapi::error_sharing_violation_tries; ++attempt){
-        void * const handle = libbitcoin::interprocess::CreateFileUTF8(name, access,
+        void * const handle = kth::interprocess::CreateFileUTF8(name, access,
             boost::interprocess::winapi::file_share_read | boost::interprocess::winapi::file_share_write | boost::interprocess::winapi::file_share_delete,
             psec, creation_flags, attributes, 0);
         bool const invalid(boost::interprocess::winapi::invalid_handle_value == handle);
@@ -184,7 +184,7 @@ inline boost::interprocess::file_handle_t open_existing_file
 (std::string const& name, boost::interprocess::mode_t mode, bool temporary = false)
 {
     unsigned long attr = temporary ? boost::interprocess::winapi::file_attribute_temporary : 0;
-    return libbitcoin::interprocess::create_file
+    return kth::interprocess::create_file
         (name, (unsigned int)mode, boost::interprocess::winapi::open_existing, attr, 0);
 }
 
@@ -194,7 +194,7 @@ inline boost::interprocess::file_handle_t open_existing_file
 inline file_lock::file_lock(std::string const& name)
 {
 #ifdef _MSC_VER
-    m_file_hnd = libbitcoin::interprocess::open_existing_file(name, boost::interprocess::read_write);
+    m_file_hnd = kth::interprocess::open_existing_file(name, boost::interprocess::read_write);
 #else
     m_file_hnd = boost::interprocess::ipcdetail::open_existing_file(name.c_str(), boost::interprocess::read_write);
 #endif
@@ -275,7 +275,7 @@ inline void file_lock::unlock_sharable()
 }
 
 } // namespace interprocess
-} // namespace libbitcoin
+} // namespace kth
 
 #include <boost/interprocess/detail/config_end.hpp>
 

@@ -9,7 +9,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /// This class is thread safe.
 /// Encapsulation of sequential locking conditions.
@@ -36,6 +36,6 @@ private:
     std::atomic<size_t> sequence_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

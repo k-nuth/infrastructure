@@ -10,7 +10,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Virtual base class for secp256k1 context management.
@@ -84,6 +84,6 @@ extern secp256k1_signing signing;
  */
 extern secp256k1_verification verification;
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

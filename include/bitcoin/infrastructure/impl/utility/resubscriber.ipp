@@ -15,7 +15,7 @@
 #include <bitcoin/infrastructure/utility/threadpool.hpp>
 ////#include <bitcoin/infrastructure/utility/track.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 template <typename... Args>
 resubscriber<Args...>::resubscriber(threadpool& pool,
@@ -161,6 +161,6 @@ void resubscriber<Args...>::do_invoke(Args... args)
     ///////////////////////////////////////////////////////////////////////////
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

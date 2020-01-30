@@ -13,7 +13,7 @@
 #include <bitcoin/infrastructure/formats/base_58.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 // base58::base58()
@@ -58,4 +58,4 @@ std::ostream& operator<<(std::ostream& output, const base58& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

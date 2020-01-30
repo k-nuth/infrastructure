@@ -9,7 +9,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Returns true if a character is a hexadecimal digit.
@@ -63,7 +63,7 @@ BI_API bool decode_hash(hash_digest& out, std::string const& in);
  */
 BI_API hash_digest hash_literal(char const (&string)[2*hash_size + 1]);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/formats/base_16.ipp>
 

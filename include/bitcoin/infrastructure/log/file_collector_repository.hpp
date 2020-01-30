@@ -26,7 +26,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/log/file_collector.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 // modified from class extracted from boost/log/sinks/text_file_backend.*pp
@@ -81,6 +81,6 @@ BI_API boost::shared_ptr<boost::log::sinks::file::collector> make_collector(
 );
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

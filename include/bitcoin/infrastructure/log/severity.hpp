@@ -6,7 +6,7 @@
 
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace log {
 
 enum class severity {
@@ -19,6 +19,6 @@ enum class severity {
 };
 
 } // namespace log
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

@@ -6,7 +6,7 @@
 
 #include <cstddef>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * An read-only STL-style wrapper for array-style collections.
@@ -36,7 +36,7 @@ private:
     Iterable const* end_;
 };
 
-} // namespace libbitcoin
+} // namespace kth
 
 #include <bitcoin/infrastructure/impl/utility/array_slice.ipp>
 

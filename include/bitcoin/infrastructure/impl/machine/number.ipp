@@ -13,7 +13,7 @@
 #include <bitcoin/infrastructure/utility/assert.hpp>
 #include <bitcoin/infrastructure/utility/limits.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace machine {
 
 static uint64_t const negative_bit = number::negative_mask;
@@ -262,6 +262,6 @@ number& number::operator-=(int64_t value) {
 }
 
 } // namespace machine
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

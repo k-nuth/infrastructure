@@ -16,7 +16,7 @@
 #include <bitcoin/infrastructure/utility/string.hpp>
 #include <bitcoin/infrastructure/wallet/dictionary.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 /**
@@ -73,6 +73,6 @@ BI_API long_hash decode_mnemonic(const word_list& mnemonic,
 #endif
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

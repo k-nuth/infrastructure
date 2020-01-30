@@ -10,7 +10,7 @@
 #include <bitcoin/infrastructure/utility/asio.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * Generate a pseudo random number within the domain.
@@ -40,6 +40,6 @@ BI_API void pseudo_random_fill(data_chunk& chunk);
 BI_API asio::duration pseudo_randomize(asio::duration const& maximum,
     uint8_t ratio=2);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

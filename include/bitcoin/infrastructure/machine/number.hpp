@@ -9,7 +9,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace machine {
 
 /**
@@ -138,7 +138,7 @@ private:
 };
 
 } // namespace machine
-} // namespace libbitcoin
+} // namespace kth
 
 
 #include <bitcoin/infrastructure/impl/machine/number.ipp>

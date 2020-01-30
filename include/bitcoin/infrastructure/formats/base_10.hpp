@@ -10,7 +10,7 @@
 #include <bitcoin/infrastructure/compat.hpp>
 #include <bitcoin/infrastructure/define.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 constexpr uint8_t btc_decimal_places = 8;
 constexpr uint8_t mbtc_decimal_places = 5;
@@ -40,7 +40,7 @@ BI_API std::string encode_base10(uint64_t amount,
 BI_API bool btc_to_satoshi(uint64_t& satoshi, std::string const& btc);
 BI_API std::string satoshi_to_btc(uint64_t satoshi);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

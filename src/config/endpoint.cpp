@@ -17,7 +17,7 @@
 #include <bitcoin/infrastructure/formats/base_16.hpp>
 #include <bitcoin/infrastructure/utility/asio.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 using namespace boost::program_options;
@@ -121,4 +121,4 @@ std::ostream& operator<<(std::ostream& output, endpoint const& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

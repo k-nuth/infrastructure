@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <bitcoin/infrastructure/message/message_tools.hpp>
 
-namespace libbitcoin { 
+namespace kth { 
 namespace message {
 
 size_t variable_uint_size(uint64_t value) {
@@ -24,4 +24,4 @@ size_t variable_uint_size(uint64_t value) {
 }
 
 } // namespace message
-} // namespace libbitcoin
+} // namespace kth

@@ -12,7 +12,7 @@
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/endian.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 template <size_t Size>
 bool build_checked_array(byte_array<Size>& out,
@@ -72,6 +72,6 @@ std::array<uint8_t, WRAP_SIZE(Size)> wrap(uint8_t version,
     return out;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif

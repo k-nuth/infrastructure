@@ -17,7 +17,7 @@
 #include <bitcoin/infrastructure/utility/data.hpp>
 #include <bitcoin/infrastructure/utility/limits.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 static constexpr uint8_t compressed_even = 0x02;
 static constexpr uint8_t compressed_odd = 0x03;
@@ -375,4 +375,4 @@ bool recover_public(ec_uncompressed& out,
     return recover_public(context, out, recoverable, hash);
 }
 
-} // namespace libbitcoin
+} // namespace kth

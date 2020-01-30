@@ -7,7 +7,7 @@
 
 #include <bitcoin/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 conditional_lock::conditional_lock(std::shared_ptr<shared_mutex> const& mutex_ptr)
     : mutex_ptr_(mutex_ptr)
@@ -23,4 +23,4 @@ conditional_lock::~conditional_lock() {
     }
 }
 
-} // namespace libbitcoin
+} // namespace kth

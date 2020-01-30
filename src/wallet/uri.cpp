@@ -9,7 +9,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/formats/base_16.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 // These character classification functions correspond to RFC 3986.
@@ -360,4 +360,4 @@ void uri::encode_query(const query_map& map) {
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth

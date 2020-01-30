@@ -10,7 +10,7 @@
 #include <bitcoin/infrastructure/define.hpp>
 #include <bitcoin/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 /**
  * The secret for aes256 block cypher.
@@ -34,7 +34,7 @@ BI_API void aes256_encrypt(const aes_secret& key, aes_block& block);
  */
 BI_API void aes256_decrypt(const aes_secret& key, aes_block& block);
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif
 

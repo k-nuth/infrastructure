@@ -13,7 +13,7 @@
 #include <bitcoin/infrastructure/formats/base_85.hpp>
 #include <bitcoin/infrastructure/math/hash.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 sodium::sodium()
@@ -75,4 +75,4 @@ std::ostream& operator<<(std::ostream& output, const sodium& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth
