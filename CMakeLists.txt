@@ -1,21 +1,6 @@
-#
-# Copyright (c) 2016-2020 Knuth Project.
-#
-# This file is part of Knuth Project.
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright (c) 2016-2020 Knuth Project developers.
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 cmake_minimum_required(VERSION 3.4)
 
@@ -111,23 +96,23 @@ if (WITH_QRENCODE)
 endif()
 
 
-# Implement --JUST_KNUTH_SOURCES for linting.
+# Implement --JUST_KTH_SOURCES for linting.
 #------------------------------------------------------------------------------
-option(JUST_KNUTH_SOURCES "Just Knuth source code to be linted." OFF)
-if (JUST_KNUTH_SOURCES)
+option(JUST_KTH_SOURCES "Just Knuth source code to be linted." OFF)
+if (JUST_KTH_SOURCES)
   message(STATUS "Knuth: Just Knuth source code to be linted: enabled")
 endif()
 
 
 
-set(KNUTH_PROJECT_VERSION "-" CACHE STRING "Specify the Knuth Project Version.")
-# message(${KNUTH_PROJECT_VERSION})
-message( STATUS "Knuth: Compiling version ${KNUTH_PROJECT_VERSION}")
+set(KTH_PROJECT_VERSION "-" CACHE STRING "Specify the Knuth Project Version.")
+# message(${KTH_PROJECT_VERSION})
+message( STATUS "Knuth: Compiling version ${KTH_PROJECT_VERSION}")
 
 set(MICROARCHITECTURE "x86_64" CACHE STRING "Specify the Microarchitecture (x86_64|...).")
 message( STATUS "Knuth: Compiling for ${MICROARCHITECTURE}")
-# add_definitions(-DKNUTH_MICROARCHITECTURE=${MICROARCHITECTURE})
-# add_definitions(-DKNUTH_MICROARCHITECTURE_STR="${MICROARCHITECTURE}")
+# add_definitions(-DKTH_MICROARCHITECTURE=${MICROARCHITECTURE})
+# add_definitions(-DKTH_MICROARCHITECTURE_STR="${MICROARCHITECTURE}")
 
 set(MARCH_ID "" CACHE STRING "Specify the Microarchitecture ID (x86_64|...).")
 message( STATUS "Knuth: Compiling for Microarchitecture ID ${MARCH_ID}")
@@ -476,7 +461,7 @@ set(knuth_infrastructure_sources_just_knuth
     src/wallet/cashaddr.cpp
 )
 
-if (NOT JUST_KNUTH_SOURCES)
+if (NOT JUST_KTH_SOURCES)
   set(knuth_infrastructure_sources 
     ${knuth_infrastructure_sources_just_libbitcoin}
   )
@@ -511,7 +496,7 @@ if (NOT ENABLE_SHARED)
     target_compile_definitions(kth-infrastructure PUBLIC -DBI_STATIC) #TODO(fernando): manage with Conan????
 endif()
 
-target_compile_definitions(kth-infrastructure PUBLIC -DKNUTH_PROJECT_VERSION="${KNUTH_PROJECT_VERSION}") #TODO(fernando): manage with Conan????
+target_compile_definitions(kth-infrastructure PUBLIC -DKTH_PROJECT_VERSION="${KTH_PROJECT_VERSION}") #TODO(fernando): manage with Conan????
 
 target_include_directories(kth-infrastructure SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
 

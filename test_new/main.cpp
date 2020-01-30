@@ -1,5 +1,5 @@
 // /**
-//  * Copyright (c) 2016-2020 Knuth Project.
+//  * Copyright (c) 2016-2020 Knuth Project developers.
 //  *
 //  * This file is part of Knuth Project.
 //  *

@@ -26,8 +26,8 @@
  * This file was originally written by Colin Percival as part of the Tarsnap
  * online backup system.
  */
-#ifndef LIBBITCOIN_CRYPTO_SCRYPT_H
-#define LIBBITCOIN_CRYPTO_SCRYPT_H
+#ifndef KTH_CRYPTO_SCRYPT_H
+#define KTH_CRYPTO_SCRYPT_H
 
 #include <stdint.h>
 #include <stdlib.h>

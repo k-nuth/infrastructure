@@ -1,21 +1,6 @@
-#
-# Copyright (c) 2016-2020 Knuth Project.
-#
-# This file is part of Knuth Project.
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright (c) 2016-2020 Knuth Project developers.
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
 import os
 from conans import CMake
 from kthbuild import option_on_off, march_conan_manip, pass_march_to_compiler
@@ -74,10 +59,10 @@ class KnuthInfrastructureConan(KnuthConanFile):
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
 
         if self.options.with_png:
-            self.requires("libpng/1.6.34@bitprim/stable")
+            self.requires("libpng/1.6.34@kth/stable")
 
         if self.options.with_qrencode:
-            self.requires("libqrencode/4.0.0@bitprim/stable")
+            self.requires("libqrencode/4.0.0@kth/stable")
 
     def config_options(self):
         KnuthConanFile.config_options(self)
@@ -165,7 +150,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         # cmake.definitions["MICROARCHITECTURE"] = self.options.microarchitecture
         # cmake.definitions["MARCH_ID"] = self.options.march_id
 
-        # cmake.definitions["KNUTH_PROJECT_VERSION"] = self.version
+        # cmake.definitions["KTH_PROJECT_VERSION"] = self.version
 
         # if self.settings.compiler == "gcc":
         #     if float(str(self.settings.compiler.version)) >= 5:

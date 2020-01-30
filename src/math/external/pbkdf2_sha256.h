@@ -25,8 +25,8 @@
  *
  * $FreeBSD: src/lib/libmd/sha256.h,v 1.2 2006/01/17 15:35:56 phk Exp $
  */
-#ifndef LIBBITCOIN_CRYPTO_PBKDF2SHA256_H
-#define LIBBITCOIN_CRYPTO_PBKDF2SHA256_H
+#ifndef KTH_CRYPTO_PBKDF2SHA256_H
+#define KTH_CRYPTO_PBKDF2SHA256_H
 
 #include <sys/types.h>
 #include <stdint.h>
