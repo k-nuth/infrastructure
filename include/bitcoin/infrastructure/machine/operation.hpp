@@ -1,7 +1,7 @@
 // /**
-//  * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
+//  * Copyright (c) 2016-2020 Knuth Project developers.
 //  *
-//  * This file is part of libbitcoin.
+//  * This file is part of Knuth Project.
 //  *
 //  * This program is free software: you can redistribute it and/or modify
 //  * it under the terms of the GNU Affero General Public License as published by
@@ -16,8 +16,8 @@
 //  * You should have received a copy of the GNU Affero General Public License
 //  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //  */
-// #ifndef LIBBITCOIN_INFRASTUCTURE_MACHINE_OPERATION_HPP_
-// #define LIBBITCOIN_INFRASTUCTURE_MACHINE_OPERATION_HPP_
+// #ifndef KTH_INFRASTUCTURE_MACHINE_OPERATION_HPP_
+// #define KTH_INFRASTUCTURE_MACHINE_OPERATION_HPP_
 
 // #include <cstddef>
 // #include <cstdint>
@@ -218,4 +218,4 @@
 
 // #include <bitcoin/infrastructure/impl/machine/operation.ipp>
 
-// #endif // LIBBITCOIN_INFRASTUCTURE_MACHINE_OPERATION_HPP_
+// #endif // KTH_INFRASTUCTURE_MACHINE_OPERATION_HPP_

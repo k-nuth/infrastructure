@@ -1,23 +1,8 @@
-/**
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
- *
- * This file is part of libbitcoin.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#ifndef LIBBITCOIN_INFRASTUCTURE_HASH_HPP
-#define LIBBITCOIN_INFRASTUCTURE_HASH_HPP
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#ifndef KTH_INFRASTUCTURE_HASH_HPP
+#define KTH_INFRASTUCTURE_HASH_HPP
 
 #include <cstddef>
 #include <string>
@@ -130,10 +115,10 @@ BI_API data_chunk scrypt(data_slice data, data_slice salt, uint64_t N,
 BI_API hash_digest bitcoin_hash(data_slice data);
 
 //TODO(fernando): see what to do with Currency
-// #ifdef KNUTH_CURRENCY_LTC
+// #ifdef KTH_CURRENCY_LTC
 /// Generate a litecoin hash.
 BI_API hash_digest litecoin_hash(data_slice data);
-// #endif //KNUTH_CURRENCY_LTC
+// #endif //KTH_CURRENCY_LTC
 
 /// Generate a bitcoin short hash.
 BI_API short_hash bitcoin_short_hash(data_slice data);

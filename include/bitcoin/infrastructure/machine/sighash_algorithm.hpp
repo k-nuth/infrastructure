@@ -1,23 +1,8 @@
-/**
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
- *
- * This file is part of libbitcoin.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#ifndef LIBBITCOIN_INFRASTUCTURE_MACHINE_SIGHASH_ALGORITHM_HPP
-#define LIBBITCOIN_INFRASTUCTURE_MACHINE_SIGHASH_ALGORITHM_HPP
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#ifndef KTH_INFRASTUCTURE_MACHINE_SIGHASH_ALGORITHM_HPP
+#define KTH_INFRASTUCTURE_MACHINE_SIGHASH_ALGORITHM_HPP
 
 #include <cstdint>
 
@@ -48,7 +33,7 @@ enum sighash_algorithm : uint32_t
     single = 0x03,
 
     //TODO(fernando): check if we have to cancel the following values for coins not equal to BCH
-// #ifdef KNUTH_CURRENCY_BCH
+// #ifdef KTH_CURRENCY_BCH
     cash_forkid_all = all | 0x40,           //Old name: all_forkid
     cash_forkid_none = none | 0x40,         //Old name: none_forkid
     cash_forkid_single = single | 0x40,     //Old name: single_forkid

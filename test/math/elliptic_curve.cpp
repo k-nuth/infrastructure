@@ -1,21 +1,6 @@
-/**
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
- *
- * This file is part of libbitcoin.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <boost/test/unit_test.hpp>
 #include <bitcoin/infrastructure.hpp>
 
@@ -40,13 +25,13 @@ BOOST_AUTO_TEST_SUITE(elliptic_curve_tests)
 #define EC_SIGNATURE3 "17b7b25c48e4ed2bd43369fa282f608b4329d96409860ce832fd5497b65fe663b901e34dff5291868c4401c8c1c6ed23b1887139cc4cd6884f38b9d936356131"
 #define DER_SIGNATURE3 "3044022063e65fb69754fd32e80c860964d929438b602f28fa6933d42bede4485cb2b717022031613536d9b9384f88d64ccc397188b123edc6c1c801448c869152ff4de301b9"
 
-// #ifdef KNUTH_CURRENCY_BCH
+// #ifdef KTH_CURRENCY_BCH
 // #define EC_SIGNATURE3 "17b7b25c48e4ed2bd43369fa282f608b4329d96409860ce832fd5497b65fe663b901e34dff5291868c4401c8c1c6ed23b1887139cc4cd6884f38b9d936356131"
 // #define DER_SIGNATURE3 "3044022063e65fb69754fd32e80c860964d929438b602f28fa6933d42bede4485cb2b717022031613536d9b9384f88d64ccc397188b123edc6c1c801448c869152ff4de301b9"
 // #else
 // #define EC_SIGNATURE3 "4832febef8b31c7c922a15cb4063a43ab69b099bba765e24facef50dfbb4d057928ed5c6b6886562c2fe6972fd7c7f462e557129067542cce6b37d72e5ea5037"
 // #define DER_SIGNATURE3 "3044022057d0b4fb0df5cefa245e76ba9b099bb63aa46340cb152a927c1cb3f8befe324802203750eae5727db3e6cc4275062971552e467f7cfd7269fec2626588b6c6d58e92"
-// #endif //KNUTH_CURRENCY_BCH
+// #endif //KTH_CURRENCY_BCH
 
 
 BOOST_AUTO_TEST_CASE(elliptic_curve__secret_to_public__positive__test)

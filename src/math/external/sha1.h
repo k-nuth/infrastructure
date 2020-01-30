@@ -15,8 +15,8 @@
  * Adapted:
  *      by Libbitcoin Developers on 7 September 2016
  */
-#ifndef LIBBITCOIN_CRYPTO_SHA1_H
-#define LIBBITCOIN_CRYPTO_SHA1_H
+#ifndef KTH_CRYPTO_SHA1_H
+#define KTH_CRYPTO_SHA1_H
 
 #include <stdint.h>
 #include <stddef.h>

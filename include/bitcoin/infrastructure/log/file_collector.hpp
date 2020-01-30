@@ -15,8 +15,8 @@
 
 // Modification of boost implementation to alter log file rotation naming.
 
-#ifndef KNUTH_INFRASTRUCTURE_LOG_FILE_COLLECTOR_HPP
-#define KNUTH_INFRASTRUCTURE_LOG_FILE_COLLECTOR_HPP
+#ifndef KTH_INFRASTRUCTURE_LOG_FILE_COLLECTOR_HPP
+#define KTH_INFRASTRUCTURE_LOG_FILE_COLLECTOR_HPP
 
 #include <ctime>
 #include <list>

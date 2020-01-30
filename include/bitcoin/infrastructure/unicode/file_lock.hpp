@@ -10,8 +10,8 @@
 
 // Modification of boost header to patch a lack of unicode path support.
 
-#ifndef KNUTH_INFRASTRUCTURE_INTERPROCESS_FILE_LOCK_HPP
-#define KNUTH_INFRASTRUCTURE_INTERPROCESS_FILE_LOCK_HPP
+#ifndef KTH_INFRASTRUCTURE_INTERPROCESS_FILE_LOCK_HPP
+#define KTH_INFRASTRUCTURE_INTERPROCESS_FILE_LOCK_HPP
 
 #include <string>
 
@@ -279,4 +279,4 @@ inline void file_lock::unlock_sharable()
 
 #include <boost/interprocess/detail/config_end.hpp>
 
-#endif // LIBBITCOIN_INTERPROCESS_FILE_LOCK_HPP
+#endif // KTH_INTERPROCESS_FILE_LOCK_HPP

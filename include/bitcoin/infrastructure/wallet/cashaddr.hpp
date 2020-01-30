@@ -1,7 +1,6 @@
 /**
- * Copyright (c) 2016-2020 Knuth Project.
- * Copyright (c) 2017 Pieter Wuille
- * Copyright (c) 2017 The Bitcoin developers
+ * Copyright (c) 2016-2020 Knuth Project developers.
+
  *
  * This file is part of Knuth Project.
  *
@@ -21,8 +20,8 @@
 
 // Cashaddr is an address format inspired by bech32.
 
-#ifndef KNUTH_INFRASTUCTURE_WALLET_CASHADDR_HPP_
-#define KNUTH_INFRASTUCTURE_WALLET_CASHADDR_HPP_
+#ifndef KTH_INFRASTUCTURE_WALLET_CASHADDR_HPP_
+#define KTH_INFRASTUCTURE_WALLET_CASHADDR_HPP_
 
 #include <cstdint>
 #include <string>
@@ -49,7 +48,7 @@ std::pair<std::string, data_chunk> decode(std::string const& str, std::string co
 } // namespace wallet
 } // namespace kth
 
-#endif /* KNUTH_INFRASTUCTURE_WALLET_CASHADDR_HPP_ */
+#endif /* KTH_INFRASTUCTURE_WALLET_CASHADDR_HPP_ */
 
 
 // Unit Tests ----------------------------------------------------
