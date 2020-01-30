@@ -17,20 +17,22 @@ class KnuthInfrastructureConan(KnuthConanFile):
     description = "Multicrypto Cross-Platform C++ Development Toolkit"
     settings = "os", "compiler", "build_type", "arch"
 
-    options = {"shared": [True, False],
-               "fPIC": [True, False],
-               "with_icu": [True, False],
-               "with_png": [True, False],
-               "with_qrencode": [True, False],
-               "with_tests": [True, False],
-               "with_examples": [True, False],
-               "microarchitecture": "ANY", #["x86_64", "haswell", "ivybridge", "sandybridge", "bulldozer", ...]
-               "fix_march": [True, False],
-               "march_id": "ANY",
-               "verbose": [True, False],
-               "cxxflags": "ANY",
-               "cflags": "ANY",
-               "glibcxx_supports_cxx11_abi": "ANY",
+    options = {
+        "shared": [True, False],
+        "fPIC": [True, False],
+        "with_icu": [True, False],
+        "with_png": [True, False],
+        "with_qrencode": [True, False],
+        "with_tests": [True, False],
+        "with_examples": [True, False],
+        "microarchitecture": "ANY", #["x86_64", "haswell", "ivybridge", "sandybridge", "bulldozer", ...]
+        "fix_march": [True, False],
+        "march_id": "ANY",
+        "verbose": [True, False],
+        "cxxflags": "ANY",
+        "cflags": "ANY",
+        "glibcxx_supports_cxx11_abi": "ANY",
+        "cmake_export_compile_commands": [True, False],
     }
 
     default_options = "shared=False", \
@@ -46,7 +48,8 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "verbose=False", \
         "cxxflags=_DUMMY_", \
         "cflags=_DUMMY_", \
-        "glibcxx_supports_cxx11_abi=_DUMMY_"
+        "glibcxx_supports_cxx11_abi=_DUMMY_", \
+        "cmake_export_compile_commands=False"
 
     generators = "cmake"
     exports = "conan_*", "ci_utils/*"
@@ -73,15 +76,8 @@ class KnuthInfrastructureConan(KnuthConanFile):
 
     def package_id(self):
         KnuthConanFile.package_id(self)
-        # self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
-
         self.info.options.with_tests = "ANY"
         self.info.options.with_examples = "ANY"
-
-        # #For Knuth Packages libstdc++ and libstdc++11 are the same
-        # if self.settings.compiler == "gcc" or self.settings.compiler == "clang":
-        #     if str(self.settings.compiler.libcxx) == "libstdc++" or str(self.settings.compiler.libcxx) == "libstdc++11":
-        #         self.info.settings.compiler.libcxx = "ANY"
 
     # default_options = "shared=False", \
     #     "fPIC=True", \
@@ -102,13 +98,18 @@ class KnuthInfrastructureConan(KnuthConanFile):
         cmake.definitions["WITH_QRENCODE"] = option_on_off(self.options.with_qrencode)
         cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_png)
 
-        cmake.configure(source_dir=self.source_folder)
-        cmake.build()
+        if self.options.cmake_export_compile_commands:
+            cmake.definitions["CMAKE_EXPORT_COMPILE_COMMANDS"] = option_on_off(self.options.cmake_export_compile_commands)
 
-        #Note: Cmake Tests and Visual Studio doesn't work
-        if self.options.with_tests:
-            cmake.test()
-            # cmake.test(target="tests")
+        cmake.configure(source_dir=self.source_folder)
+
+        if not self.options.cmake_export_compile_commands:
+            cmake.build()
+
+            #Note: Cmake Tests and Visual Studio doesn't work
+            if self.options.with_tests:
+                cmake.test()
+                # cmake.test(target="tests")
 
 
     # def build(self):
