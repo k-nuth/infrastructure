@@ -1,16 +1,16 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/utility/ostream_writer.hpp>
+#include <kth/infrastructure/utility/ostream_writer.hpp>
 
 #include <algorithm>
 #include <iostream>
 
-#include <bitcoin/infrastructure/constants.hpp>
-// #include <bitcoin/infrastructure/math/limits.hpp>
-#include <bitcoin/infrastructure/utility/endian.hpp>
-#include <bitcoin/infrastructure/utility/limits.hpp>
-#include <bitcoin/infrastructure/utility/reader.hpp>
+#include <kth/infrastructure/constants.hpp>
+// #include <kth/infrastructure/math/limits.hpp>
+#include <kth/infrastructure/utility/endian.hpp>
+#include <kth/infrastructure/utility/limits.hpp>
+#include <kth/infrastructure/utility/reader.hpp>
 
 
 namespace kth {
@@ -169,7 +169,7 @@ void ostream_writer::write_bytes(data_chunk const& data)
 }
 }
 
-void ostream_writer::write_bytes(const uint8_t* data, size_t size)
+void ostream_writer::write_bytes(uint8_t const* data, size_t size)
 {
     auto buffer = reinterpret_cast<char const*>(data);
     stream_.write(buffer, size);
@@ -178,7 +178,7 @@ void ostream_writer::write_bytes(const uint8_t* data, size_t size)
 void ostream_writer::write_string(std::string const& value, size_t size)
 {
     auto const length = std::min(size, value.size());
-    write_bytes(reinterpret_cast<const uint8_t*>(value.data()), length);
+    write_bytes(reinterpret_cast<uint8_t const*>(value.data()), length);
     data_chunk padding(floor_subtract(size, length), string_terminator);
     write_bytes(padding);
 }

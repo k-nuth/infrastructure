@@ -1,15 +1,15 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/unicode/console_streambuf.hpp>
+#include <kth/infrastructure/unicode/console_streambuf.hpp>
 
 #include <cstddef>
 #include <iostream>
 #include <new>
 #include <streambuf>
 
-// #include <bitcoin/infrastructure/math/limits.hpp>
-#include <bitcoin/infrastructure/utility/limits.hpp>
+// #include <kth/infrastructure/math/limits.hpp>
+#include <kth/infrastructure/utility/limits.hpp>
 
 #ifdef _MSC_VER
 #include <windows.h>

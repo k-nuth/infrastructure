@@ -4,7 +4,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <cstdint>
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 
 using namespace bc;
 using namespace bc::wallet;
@@ -15,7 +15,7 @@ BOOST_AUTO_TEST_SUITE(qrcode_tests)
 
 BOOST_AUTO_TEST_CASE(qrcode__invoke__qrencode_data__success)
 {
-    static const uint8_t expected_data[]
+    static uint8_t const expected_data[]
     {
         0x03, 0x00, 0x00, 0x00, 0x1d, 0x00, 0x00, 0x00, 0xc1, 0xc1, 0xc1, 0xc1,
         0xc1, 0xc1, 0xc1, 0xc0, 0x84, 0x02, 0x03, 0x02, 0x03, 0x03, 0x03, 0x02,

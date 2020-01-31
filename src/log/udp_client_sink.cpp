@@ -1,7 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/log/udp_client_sink.hpp>
+#include <kth/infrastructure/log/udp_client_sink.hpp>
 
 #include <cstddef>
 #include <functional>
@@ -9,7 +9,7 @@
 
 #include <boost/make_shared.hpp>
 
-#include <bitcoin/infrastructure/error.hpp>
+#include <kth/infrastructure/error.hpp>
 #include <utility>
 
 namespace kth {

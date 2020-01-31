@@ -2,7 +2,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <boost/test/unit_test.hpp>
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 
 using namespace bc;
 using namespace bc::wallet;
@@ -11,7 +11,7 @@ BOOST_AUTO_TEST_SUITE(uri_tests)
 
 BOOST_AUTO_TEST_CASE(uri__parse__http_roundtrip__test)
 {
-    auto const test = "http://github.com/libbitcoin?good=true#nice";
+    auto const test = "http://github.com/k-nuth?good=true#nice";
     uri parsed;
     BOOST_REQUIRE(parsed.decode(test));
 

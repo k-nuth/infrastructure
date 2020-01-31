@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 
 struct mnemonic_result {
     std::string entropy;

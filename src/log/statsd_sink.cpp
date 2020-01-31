@@ -1,7 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/log/statsd_sink.hpp>
+#include <kth/infrastructure/log/statsd_sink.hpp>
 
 #include <map>
 #include <string>
@@ -14,18 +14,18 @@
 #include <boost/log/support/date_time.hpp>
 #include <boost/log/utility/setup/formatter_parser.hpp>
 
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/log/features/counter.hpp>
-#include <bitcoin/infrastructure/log/features/gauge.hpp>
-#include <bitcoin/infrastructure/log/features/metric.hpp>
-#include <bitcoin/infrastructure/log/features/rate.hpp>
-#include <bitcoin/infrastructure/log/features/timer.hpp>
-#include <bitcoin/infrastructure/log/file_collector_repository.hpp>
-#include <bitcoin/infrastructure/log/severity.hpp>
-#include <bitcoin/infrastructure/log/udp_client_sink.hpp>
-#include <bitcoin/infrastructure/unicode/ofstream.hpp>
-#include <bitcoin/infrastructure/utility/asio.hpp>
-#include <bitcoin/infrastructure/utility/threadpool.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/log/features/counter.hpp>
+#include <kth/infrastructure/log/features/gauge.hpp>
+#include <kth/infrastructure/log/features/metric.hpp>
+#include <kth/infrastructure/log/features/rate.hpp>
+#include <kth/infrastructure/log/features/timer.hpp>
+#include <kth/infrastructure/log/file_collector_repository.hpp>
+#include <kth/infrastructure/log/severity.hpp>
+#include <kth/infrastructure/log/udp_client_sink.hpp>
+#include <kth/infrastructure/unicode/ofstream.hpp>
+#include <kth/infrastructure/utility/asio.hpp>
+#include <kth/infrastructure/utility/threadpool.hpp>
 
 namespace kth {
 namespace log {

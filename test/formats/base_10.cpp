@@ -17,7 +17,7 @@
 //  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //  */
 // #include <boost/test/unit_test.hpp>
-// #include <bitcoin/infrastructure.hpp>
+// #include <kth/infrastructure.hpp>
 
 // using namespace bc;
 

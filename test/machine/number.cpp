@@ -9,7 +9,7 @@
 #include <sstream>
 #include <string>
 #include <boost/format.hpp>
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 #include "number.hpp"
 #ifdef ENABLE_DATAGEN
 #include "big_number.hpp"

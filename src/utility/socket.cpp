@@ -1,14 +1,14 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/utility/socket.hpp>
+#include <kth/infrastructure/utility/socket.hpp>
 
 #include <memory>
 
-#include <bitcoin/infrastructure/config/authority.hpp>
-#include <bitcoin/infrastructure/utility/asio.hpp>
-#include <bitcoin/infrastructure/utility/thread.hpp>
-#include <bitcoin/infrastructure/utility/threadpool.hpp>
+#include <kth/infrastructure/config/authority.hpp>
+#include <kth/infrastructure/utility/asio.hpp>
+#include <kth/infrastructure/utility/thread.hpp>
+#include <kth/infrastructure/utility/threadpool.hpp>
 
 namespace kth {
 

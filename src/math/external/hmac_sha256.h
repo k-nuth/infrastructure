@@ -44,16 +44,16 @@ typedef struct HMACSHA256CTX
     SHA256CTX octx;
 } HMACSHA256CTX;
 
-void HMACSHA256(const uint8_t* input, size_t length, const uint8_t* key,
+void HMACSHA256(uint8_t const* input, size_t length, uint8_t const* key,
     size_t key_length, uint8_t digest[HMACSHA256_DIGEST_LENGTH]);
 
 void HMACSHA256Final(HMACSHA256CTX* context,
     uint8_t digest[HMACSHA256_DIGEST_LENGTH]);
 
-void HMACSHA256Init(HMACSHA256CTX* context, const uint8_t* key,
+void HMACSHA256Init(HMACSHA256CTX* context, uint8_t const* key,
     size_t key_length);
 
-void HMACSHA256Update(HMACSHA256CTX* context, const uint8_t* input,
+void HMACSHA256Update(HMACSHA256CTX* context, uint8_t const* input,
     size_t length);
 
 #ifdef __cplusplus

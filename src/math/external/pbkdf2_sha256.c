@@ -35,7 +35,7 @@
 #include "hmac_sha256.h"
 #include "zeroize.h"
 
-#include <bitcoin/infrastructure/compat.h>
+#include <kth/infrastructure/compat.h>
 
 static BI_C_INLINE void be32enc(void* pp, uint32_t x)
 {
@@ -52,8 +52,8 @@ static BI_C_INLINE void be32enc(void* pp, uint32_t x)
  * Compute pbkdf2(passwd, salt, c, dkLen) using hmac_sha256 as the PRF, and
  * write the output to buf.  The value dkLen must be at most 32 * (2^32 - 1).
  */
-void pbkdf2_sha256(const uint8_t* passphrase, size_t passphrase_length,
-    const uint8_t* salt, size_t salt_length, uint64_t c,
+void pbkdf2_sha256(uint8_t const* passphrase, size_t passphrase_length,
+    uint8_t const* salt, size_t salt_length, uint64_t c,
     uint8_t* buf, size_t dk_length)
 {
     uint8_t ivec[4];

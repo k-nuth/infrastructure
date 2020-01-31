@@ -15,13 +15,13 @@
 
 // Modification of boost implementation to alter log file rotation naming.
 
-#include <bitcoin/infrastructure/log/file_collector_repository.hpp>
+#include <kth/infrastructure/log/file_collector_repository.hpp>
 
 #include <boost/bind.hpp>
 #include <boost/smart_ptr/bad_weak_ptr.hpp>
 #include <boost/smart_ptr/make_shared_object.hpp>
 
-#include <bitcoin/infrastructure/compat.hpp>
+#include <kth/infrastructure/compat.hpp>
 
 
 namespace kth {

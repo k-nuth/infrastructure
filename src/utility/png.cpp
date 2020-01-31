@@ -4,19 +4,19 @@
 
 #ifdef WITH_PNG
 
-#include <bitcoin/infrastructure/utility/png.hpp>
+#include <kth/infrastructure/utility/png.hpp>
 
 #include <cstddef>
 #include <cstdint>
 #include <iostream>
 #include <stdexcept>
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/formats/base_16.hpp>
-#include <bitcoin/infrastructure/utility/color.hpp>
-#include <bitcoin/infrastructure/utility/container_sink.hpp>
-#include <bitcoin/infrastructure/utility/container_source.hpp>
-#include <bitcoin/infrastructure/utility/istream_reader.hpp>
-#include <bitcoin/infrastructure/utility/ostream_writer.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/formats/base_16.hpp>
+#include <kth/infrastructure/utility/color.hpp>
+#include <kth/infrastructure/utility/container_sink.hpp>
+#include <kth/infrastructure/utility/container_source.hpp>
+#include <kth/infrastructure/utility/istream_reader.hpp>
+#include <kth/infrastructure/utility/ostream_writer.hpp>
 
 namespace kth {
 
@@ -49,7 +49,7 @@ extern "C" void sink_write(png_structp png_ptr, png_bytep data,
     auto const size = static_cast<size_t>(length);
 
     auto& sink = *reinterpret_cast<ostream_writer*>(png_get_io_ptr(png_ptr));
-    sink.write_bytes(reinterpret_cast<const uint8_t*>(data), size);
+    sink.write_bytes(reinterpret_cast<uint8_t const*>(data), size);
 }
 
 extern "C" void error_callback(png_structp png_ptr,

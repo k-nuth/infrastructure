@@ -1,9 +1,9 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/error.hpp>
+#include <kth/infrastructure/error.hpp>
 
-#include <bitcoin/infrastructure/compat.hpp>
+#include <kth/infrastructure/compat.hpp>
 #include <boost/asio.hpp>
 #include <boost/system/error_code.hpp>
 
@@ -409,7 +409,7 @@ error_code_t boost_to_error_code(const boost_code& ec) {
 }
 
 error_code_t posix_to_error_code(int ec) {
-    // TODO(libbitcoin): expand mapping for database scenario.
+    // TODO(legacy): expand mapping for database scenario.
     switch (ec) {
         // protocol codes (from zeromq)
         case ENOBUFS:

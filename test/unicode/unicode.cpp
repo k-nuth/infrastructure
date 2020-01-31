@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <vector>
 #include <boost/test/unit_test.hpp>
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 
 using namespace bc;
 

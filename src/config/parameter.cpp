@@ -1,16 +1,16 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/config/parameter.hpp>
+#include <kth/infrastructure/config/parameter.hpp>
 
 #include <iostream>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/program_options.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/collection.hpp>
-#include <bitcoin/infrastructure/utility/string.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/utility/collection.hpp>
+#include <kth/infrastructure/utility/string.hpp>
 
 namespace po = boost::program_options;
 using namespace kth::config;
@@ -44,7 +44,8 @@ char parameter::short_name(const po::option_description& option) const {
     //auto name = option.canonical_display_name(
     //    search_options::dashed_short_prefer_short);
 
-    // This is a substitute that allows us to use boost 1.49 for libbitcoin.
+    //TODO(fernando): check if that is necessary right now (we are using Boost 1.72.0 or newer)
+    // This is a substitute that allows us to use boost 1.49.
     auto const name = split(option.format_name()).front();
     auto is_short_name = name[0] == option_prefix_char && name[1] != option_prefix_char;
     return is_short_name ? name[1] : no_short_name;

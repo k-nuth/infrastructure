@@ -1,7 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/config/checkpoint.hpp>
+#include <kth/infrastructure/config/checkpoint.hpp>
 
 #include <cstddef>
 #include <iostream>
@@ -11,9 +11,9 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/formats/base_16.hpp>
-#include <bitcoin/infrastructure/math/hash.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/formats/base_16.hpp>
+#include <kth/infrastructure/math/hash.hpp>
 
 namespace kth {
 namespace config {

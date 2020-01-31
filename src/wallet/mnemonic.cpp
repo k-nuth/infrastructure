@@ -1,7 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/wallet/mnemonic.hpp>
+#include <kth/infrastructure/wallet/mnemonic.hpp>
 
 #include "../math/external/pkcs5_pbkdf2.h"
 
@@ -10,13 +10,13 @@
 
 #include <boost/locale.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/unicode/unicode.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
-#include <bitcoin/infrastructure/utility/binary.hpp>
-#include <bitcoin/infrastructure/utility/collection.hpp>
-#include <bitcoin/infrastructure/utility/string.hpp>
-#include <bitcoin/infrastructure/wallet/dictionary.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/unicode/unicode.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/binary.hpp>
+#include <kth/infrastructure/utility/collection.hpp>
+#include <kth/infrastructure/utility/string.hpp>
+#include <kth/infrastructure/wallet/dictionary.hpp>
 
 namespace kth {
 namespace wallet {

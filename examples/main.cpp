@@ -3,9 +3,9 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <cstdlib>
 #include <string>
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 
-BC_USE_KTH_MAIN
+KTH_USE_MAIN
 
 int bc::main(int argc, char* argv[]) {
     return 0;
@@ -16,7 +16,7 @@ int bc::main(int argc, char* argv[]) {
 //     data_chunk out;
 //     data_sink ostream(out);
 
-//     const uint8_t raw_input_data[] =
+//     uint8_t const raw_input_data[] =
 //     {
 //         0x03, 0x00, 0x00, 0x00, 0x1d, 0x00, 0x00, 0x00, 0xc1, 0xc1, 0xc1, 0xc1,
 //         0xc1, 0xc1, 0xc1, 0xc0, 0x84, 0x02, 0x03, 0x02, 0x03, 0x03, 0x03, 0x02,
@@ -92,7 +92,7 @@ int bc::main(int argc, char* argv[]) {
 //     };
 //     auto const input_data = to_chunk(raw_input_data);
 
-//     const uint8_t expected_data[] =
+//     uint8_t const expected_data[] =
 //     {
 //         0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 0x00, 0x0d,
 //         0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x21, 0x00, 0x00, 0x00, 0x21,

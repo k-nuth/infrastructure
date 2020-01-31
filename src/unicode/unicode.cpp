@@ -1,7 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/unicode/unicode.hpp>
+#include <kth/infrastructure/unicode/unicode.hpp>
 
 #include <cstddef>
 #include <cstring>
@@ -13,14 +13,14 @@
 
 #include <boost/locale.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
-// #include <bitcoin/infrastructure/math/limits.hpp>
-#include <bitcoin/infrastructure/unicode/console_streambuf.hpp>
-#include <bitcoin/infrastructure/unicode/unicode_istream.hpp>
-#include <bitcoin/infrastructure/unicode/unicode_ostream.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
-#include <bitcoin/infrastructure/utility/limits.hpp>
+#include <kth/infrastructure/define.hpp>
+// #include <kth/infrastructure/math/limits.hpp>
+#include <kth/infrastructure/unicode/console_streambuf.hpp>
+#include <kth/infrastructure/unicode/unicode_istream.hpp>
+#include <kth/infrastructure/unicode/unicode_ostream.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/utility/limits.hpp>
 
 
 #ifdef _MSC_VER

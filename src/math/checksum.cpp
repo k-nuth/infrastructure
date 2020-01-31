@@ -1,11 +1,11 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/math/checksum.hpp>
+#include <kth/infrastructure/math/checksum.hpp>
 
-#include <bitcoin/infrastructure/math/hash.hpp>
-#include <bitcoin/infrastructure/utility/deserializer.hpp>
-#include <bitcoin/infrastructure/utility/endian.hpp>
+#include <kth/infrastructure/math/hash.hpp>
+#include <kth/infrastructure/utility/deserializer.hpp>
+#include <kth/infrastructure/utility/endian.hpp>
 
 namespace kth {
 

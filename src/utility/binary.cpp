@@ -1,16 +1,16 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#include <bitcoin/infrastructure/utility/binary.hpp>
+#include <kth/infrastructure/utility/binary.hpp>
 
 #include <iostream>
 #include <sstream>
 #include <string>
-// #include <bitcoin/infrastructure/math/limits.hpp>
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
-#include <bitcoin/infrastructure/utility/endian.hpp>
-#include <bitcoin/infrastructure/utility/limits.hpp>
+// #include <kth/infrastructure/math/limits.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/endian.hpp>
+#include <kth/infrastructure/utility/limits.hpp>
 
 
 namespace kth {
@@ -75,9 +75,9 @@ void binary::resize(size_type size) {
 bool binary::operator[](size_type index) const {
     BITCOIN_ASSERT(index < size());
     size_type const block_index = index / bits_per_block;
-    const uint8_t block = blocks_[block_index];
+    uint8_t const block = blocks_[block_index];
     size_type const offset = index - (block_index * bits_per_block);
-    const uint8_t bitmask = 1 << (bits_per_block - offset - 1);
+    uint8_t const bitmask = 1 << (bits_per_block - offset - 1);
     return (block & bitmask) > 0;
 }
 
@@ -252,7 +252,7 @@ std::istream& operator>>(std::istream& in, binary& to) {
 
         // Set bit to 1
         if (representation == '1') {
-            const uint8_t bitmask = 1 << (bit_iterator - 1);
+            uint8_t const bitmask = 1 << (bit_iterator - 1);
             block |= bitmask;
         }
 

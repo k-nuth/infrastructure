@@ -4,7 +4,7 @@
 #include "hash.hpp"
 
 #include <boost/test/unit_test.hpp>
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 
 using namespace bc;
 

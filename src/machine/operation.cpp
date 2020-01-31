@@ -16,23 +16,23 @@
 //  * You should have received a copy of the GNU Affero General Public License
 //  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //  */
-// #include <bitcoin/infrastructure/machine/operation.hpp>
+// #include <kth/infrastructure/machine/operation.hpp>
 
 // #include <string>
 
 // #include <boost/algorithm/string.hpp>
 // #include <boost/lexical_cast.hpp>
 
-// // #include <bitcoin/bitcoin/constants.hpp>
-// #include <bitcoin/infrastructure/formats/base_16.hpp>
-// #include <bitcoin/infrastructure/machine/opcode.hpp>
-// #include <bitcoin/infrastructure/utility/assert.hpp>
-// #include <bitcoin/infrastructure/utility/container_sink.hpp>
-// #include <bitcoin/infrastructure/utility/data.hpp>
-// #include <bitcoin/infrastructure/utility/container_source.hpp>
-// #include <bitcoin/infrastructure/utility/istream_reader.hpp>
-// #include <bitcoin/infrastructure/utility/ostream_writer.hpp>
-// #include <bitcoin/infrastructure/utility/string.hpp>
+// // #include <kth/infrastructure/constants.hpp>
+// #include <kth/infrastructure/formats/base_16.hpp>
+// #include <kth/infrastructure/machine/opcode.hpp>
+// #include <kth/infrastructure/utility/assert.hpp>
+// #include <kth/infrastructure/utility/container_sink.hpp>
+// #include <kth/infrastructure/utility/data.hpp>
+// #include <kth/infrastructure/utility/container_source.hpp>
+// #include <kth/infrastructure/utility/istream_reader.hpp>
+// #include <kth/infrastructure/utility/ostream_writer.hpp>
+// #include <kth/infrastructure/utility/string.hpp>
 
 // namespace kth {
 // namespace machine {
@@ -81,7 +81,7 @@
 // inline bool is_valid_data_size(opcode code, size_t size)
 // {
 //     constexpr auto op_75 = static_cast<uint8_t>(opcode::push_size_75);
-//     const auto value = static_cast<uint8_t>(code);
+//     auto const value = static_cast<uint8_t>(code);
 //     return value > op_75 || value == size;
 // }
 
@@ -100,7 +100,7 @@
 //     const std::string& prefix, data_chunk const& data)
 // {
 //     constexpr auto op_75 = static_cast<uint8_t>(opcode::push_size_75);
-//     const auto size = data.size();
+//     auto const size = data.size();
 //     out_code = operation::opcode_from_size(size);
 
 //     if (prefix == "0")
@@ -148,7 +148,7 @@
 //     if (is_push_token(mnemonic))
 //     {
 //         // Data encoding uses single token (with optional non-minimality).
-//         const auto parts = split_push_token(mnemonic);
+//         auto const parts = split_push_token(mnemonic);
 
 //         if (parts.size() == 1)
 //         {
@@ -168,7 +168,7 @@
 //     }
 //     else if (is_text_token(mnemonic))
 //     {
-//         const auto text = trim_token(mnemonic);
+//         auto const text = trim_token(mnemonic);
 //         data_ = data_chunk{ text.begin(), text.end() };
 //         code_ = nominal_opcode_from_data(data_);
 //         valid_ = true;
@@ -212,7 +212,7 @@
 // data_chunk operation::to_data() const
 // {
 //     data_chunk data;
-//     const auto size = serialized_size();
+//     auto const size = serialized_size();
 //     data.reserve(size);
 //     data_sink ostream(data);
 //     to_data(ostream);
@@ -229,7 +229,7 @@
 
 // //void operation::to_data(writer& sink) const
 // //{
-// //    const auto size = data_.size();
+// //    auto const size = data_.size();
 // //
 // //    sink.write_byte(static_cast<uint8_t>(code_));
 // //

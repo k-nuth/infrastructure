@@ -15,17 +15,17 @@
 
 // Modification of boost implementation to alter log file rotation naming.
 
-#include <bitcoin/infrastructure/log/file_collector.hpp>
+#include <kth/infrastructure/log/file_collector.hpp>
 
 #include <boost/bind.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/spirit/home/qi/numeric/numeric_utils.hpp>
 
-#include <bitcoin/infrastructure/compat.hpp>
-#include <bitcoin/infrastructure/log/file_char_traits.hpp>
-#include <bitcoin/infrastructure/log/file_collector_repository.hpp>
-#include <bitcoin/infrastructure/log/file_counter_formatter.hpp>
+#include <kth/infrastructure/compat.hpp>
+#include <kth/infrastructure/log/file_char_traits.hpp>
+#include <kth/infrastructure/log/file_collector_repository.hpp>
+#include <kth/infrastructure/log/file_counter_formatter.hpp>
 
 namespace kth {
 namespace log {

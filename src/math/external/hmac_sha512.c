@@ -31,7 +31,7 @@
 #include "sha512.h"
 #include "zeroize.h"
 
-void HMACSHA512(const uint8_t* input, size_t length, const uint8_t* key,
+void HMACSHA512(uint8_t const* input, size_t length, uint8_t const* key,
     size_t key_length, uint8_t digest[HMACSHA512_DIGEST_LENGTH])
 {
     HMACSHA512CTX context;
@@ -52,7 +52,7 @@ void HMACSHA512Final(HMACSHA512CTX* context,
     zeroize((void*)hash, sizeof hash);
 }
 
-void HMACSHA512Init(HMACSHA512CTX* context, const uint8_t* key, 
+void HMACSHA512Init(HMACSHA512CTX* context, uint8_t const* key, 
     size_t key_length)
 {
     size_t i;
@@ -87,7 +87,7 @@ void HMACSHA512Init(HMACSHA512CTX* context, const uint8_t* key,
     zeroize((void*)key_hash, sizeof key_hash);
 }
 
-void HMACSHA512Update(HMACSHA512CTX* context, const uint8_t* input,
+void HMACSHA512Update(HMACSHA512CTX* context, uint8_t const* input,
     size_t length)
 {
     SHA512Update(&context->ictx, input, length);
