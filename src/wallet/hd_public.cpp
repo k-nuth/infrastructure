@@ -181,7 +181,7 @@ hd_public hd_public::derive_public(uint32_t index) const
     }
 
     auto const data = splice(point_, to_big_endian(index));
-    auto int constermediate = split(hmac_sha512_hash(data, chain_));
+    auto const intermediate = split(hmac_sha512_hash(data, chain_));
 
     // The returned child key Ki is point(parse256(IL)) + Kpar.
     auto combined = point_;

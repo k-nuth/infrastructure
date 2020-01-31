@@ -82,7 +82,7 @@ hd_private hd_private::from_seed(data_slice seed, uint64_t prefixes) {
     // This is a magic constant from BIP32.
     static data_chunk const magic(to_chunk("Bitcoin seed"));
 
-    auto int constermediate = split(hmac_sha512_hash(seed, magic));
+    auto const intermediate = split(hmac_sha512_hash(seed, magic));
 
     // The key is invalid if parse256(IL) >= n or 0:
     if ( ! verify(intermediate.left)) {
@@ -203,7 +203,7 @@ hd_private hd_private::derive_private(uint32_t index) const {
         splice(to_array(depth), secret_, to_big_endian(index)) :
         splice(point_, to_big_endian(index));
 
-    auto int constermediate = split(hmac_sha512_hash(data, chain_));
+    auto const intermediate = split(hmac_sha512_hash(data, chain_));
 
     // The child key ki is (parse256(IL) + kpar) mod n:
     auto child = secret_;
