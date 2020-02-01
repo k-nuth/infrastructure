@@ -21,12 +21,6 @@ if __name__ == "__main__":
                 options["%s:with_tests" % name] = "True"
                 options["%s:with_examples" % name] = "False"
 
-            # if full_build:
-            #     marchs = filter_valid_exts(str(platform.system()), str(settings["compiler"]), float(str(settings["compiler.version"])), ['x86-64', 'haswell', 'skylake'])
-            #     # marchs = ["x86-64"]
-            # else:
-            #     marchs = ["x86-64"]
-            # handle_microarchs("%s:microarchitecture" % name, marchs, filtered_builds, settings, options, env_vars, build_requires)
 
             march_ids = get_base_march_ids()
             handle_microarchs("%s:march_id" % name, march_ids, filtered_builds, settings, options, env_vars, build_requires)
