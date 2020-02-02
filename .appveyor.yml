@@ -49,6 +49,18 @@ test_script:
   # - git describe origin
   # - python ci_utils/print_version.py 
 
+  # - git config core.autocrlf
+  # - python crlf.py
+  # - findstr /r "\r\n" *.py & exit 0
+  # - findstr /r "\r" *.py & exit 0
+
+  # # - dir C:\MinGW
+  # - set PATH=C:\MinGW\bin;%PATH%
+
+  # - IF "%MINGW_CONFIGURATIONS%" NEQ "" (
+  #     gcc --version
+  #   )
+
 
   - ps: |
       If ($env:WAIT_FOR_DEPS -ne 1) {
@@ -98,10 +110,12 @@ test_script:
         conan remote add kth_temp https://api.bintray.com/conan/k-nuth/kth
         $ErrorActionPreference = 'Continue'
 
-        python ci_utils/wait_for_deps.py infrastructure
+        # python ci_utils/wait_for_deps.py domain
+        python ci_utils/wait_for_deps.py
       }
 
-  - PowerShell .\.appveyor\build.ps1
+  #- PowerShell .\.appveyor\build.ps1
+  - python build.py
 
 for:
   -
@@ -144,15 +158,13 @@ for:
 
         # - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
         #   CONAN_VISUAL_VERSIONS: 14
-        # - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-        #   CONAN_VISUAL_VERSIONS: 14
-
 
         # - MINGW_CONFIGURATIONS: "9@x86_64@seh@posix"
         - MINGW_CONFIGURATIONS: "8@x86_64@seh@posix"
         # - MINGW_CONFIGURATIONS: "7@x86_64@seh@posix"
         # - MINGW_CONFIGURATIONS: "6@x86_64@seh@posix"
         # - MINGW_CONFIGURATIONS: "5@x86_64@seh@posix"
+        # - MINGW_CONFIGURATIONS: "4.9@x86_64@seh@posix" 
   -
     branches:
       only:
@@ -161,9 +173,6 @@ for:
       - echo "Stable packages are published in Release branches"
     install: 
       - echo "Stable packages are published in Release branches"
-
-
-# MINGW_CONFIGURATIONS: "4.9@x86_64@seh@posix" 
 
 # matrix:
 #   fast_finish: true     # set this flag to immediately finish build once one of the jobs fails.

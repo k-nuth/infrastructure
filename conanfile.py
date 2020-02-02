@@ -36,21 +36,23 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "cmake_export_compile_commands": [True, False],
     }
 
-    default_options = "shared=False", \
-        "fPIC=True", \
-        "with_icu=False", \
-        "with_png=False", \
-        "with_qrencode=False", \
-        "tests=False", \
-        "examples=False", \
-        "microarchitecture=_DUMMY_",  \
-        "fix_march=False", \
-        "march_id=_DUMMY_",  \
-        "verbose=False", \
-        "cxxflags=_DUMMY_", \
-        "cflags=_DUMMY_", \
-        "glibcxx_supports_cxx11_abi=_DUMMY_", \
-        "cmake_export_compile_commands=False"
+    default_options = {
+        "shared": False,
+        "fPIC": True,
+        "with_icu": False,
+        "with_png": False,
+        "with_qrencode": False,
+        "tests": False,
+        "examples": False,
+        "microarchitecture": "_DUMMY_", 
+        "fix_march": False,
+        "march_id": "_DUMMY_", 
+        "verbose": False,
+        "cxxflags": "_DUMMY_",
+        "cflags": "_DUMMY_",
+        "glibcxx_supports_cxx11_abi": "_DUMMY_",
+        "cmake_export_compile_commands": False
+    }
 
     generators = "cmake"
     exports = "conan_*", "ci_utils/*"
@@ -77,14 +79,6 @@ class KnuthInfrastructureConan(KnuthConanFile):
 
     def package_id(self):
         KnuthConanFile.package_id(self)
-
-    # default_options = "shared=False", \
-    #     "fPIC=True", \
-    #     "with_icu=False", \
-    #     "with_png=False", \
-    #     "with_qrencode=False", \
-    #     "microarchitecture=_DUMMY_",  \
-    #     "glibcxx_supports_cxx11_abi=_DUMMY_"
 
     def build(self):
         cmake = self.cmake_basis()

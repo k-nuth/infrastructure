@@ -184,9 +184,10 @@ jobs:
         - |
           conan user
           conan remote add kth_temp https://api.bintray.com/conan/k-nuth/kth
-          REPO_NAME=$(echo $TRAVIS_REPO_SLUG| cut -d'/' -f 2)
-          echo $REPO_NAME
-          python ci_utils/wait_for_deps.py $REPO_NAME
+          # REPO_NAME=$(echo $TRAVIS_REPO_SLUG| cut -d'/' -f 2)
+          # echo $REPO_NAME
+          # python ci_utils/wait_for_deps.py $REPO_NAME
+          python ci_utils/wait_for_deps.py
 
 
 # Static Checks ------------------------------------------------------
@@ -198,7 +199,9 @@ jobs:
       python: "3.7"
       services:
         - docker
-      if: branch =~ /^(release|hotfix|dev|feature).*$/    #Avoid master
+      # if: branch =~ /^(release|hotfix|dev|feature).*$/    #Avoid master
+      if: branch =~ /^(release|hotfix|dev).*$/ OR type IN (pull_request)
+      
       # install: skip
       install:
 
