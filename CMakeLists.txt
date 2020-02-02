@@ -296,7 +296,7 @@ if (ENABLE_SHARED)
   set(MODE SHARED)
 endif()
 
-set(knuth_infrastructure_sources_just_libbitcoin 
+set(knuth_infrastructure_sources_just_legacy 
         # src/machine/interpreter.cpp
         src/machine/number.cpp        #Fernando: commented for the moment...
         # src/machine/opcode.cpp
@@ -441,15 +441,15 @@ set(knuth_infrastructure_sources_just_libbitcoin
 # endif()
   
 if (WITH_PNG)
-  set(knuth_infrastructure_sources_just_libbitcoin 
-    ${knuth_infrastructure_sources_just_libbitcoin}
+  set(knuth_infrastructure_sources_just_legacy 
+    ${knuth_infrastructure_sources_just_legacy}
     src/utility/png.cpp
   )
 endif()
 
 if (WITH_QRENCODE)
-  set(knuth_infrastructure_sources_just_libbitcoin 
-    ${knuth_infrastructure_sources_just_libbitcoin}
+  set(knuth_infrastructure_sources_just_legacy 
+    ${knuth_infrastructure_sources_just_legacy}
     src/wallet/qrcode.cpp
   )
 endif()
@@ -463,7 +463,7 @@ set(knuth_infrastructure_sources_just_knuth
 
 if (NOT JUST_KTH_SOURCES)
   set(knuth_infrastructure_sources 
-    ${knuth_infrastructure_sources_just_libbitcoin}
+    ${knuth_infrastructure_sources_just_legacy}
   )
 endif()
 
