@@ -16,7 +16,7 @@ sequencer::sequencer(asio::service& service)
 {}
 
 sequencer::~sequencer() {
-    BITCOIN_ASSERT_MSG(actions_.empty(), "sequencer not cleared");
+    KTH_ASSERT_MSG(actions_.empty(), "sequencer not cleared");
 }
 
 // void sequencer::lock(action&& handler) {
@@ -70,7 +70,7 @@ void sequencer::unlock() {
     {
         unique_lock locker(mutex_);
 
-        BITCOIN_ASSERT_MSG(executing_, "called unlock but sequence not locked");
+        KTH_ASSERT_MSG(executing_, "called unlock but sequence not locked");
 
         if (actions_.empty()) {
             executing_ = false;

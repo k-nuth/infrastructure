@@ -56,7 +56,7 @@ void pack_value(data_chunk& indexes, size_t carry) {
         carry /= 58;
     }
 
-    BITCOIN_ASSERT(carry == 0);
+    KTH_ASSERT(carry == 0);
 }
 
 std::string encode_base58(data_slice unencoded) {
@@ -113,7 +113,7 @@ void unpack_char(data_chunk& data, size_t carry) {
         carry /= 256;
     }
 
-    BITCOIN_ASSERT(carry == 0);
+    KTH_ASSERT(carry == 0);
 }
 
 bool decode_base58(data_chunk& out, std::string const& in) {

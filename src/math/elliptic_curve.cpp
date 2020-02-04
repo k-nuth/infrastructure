@@ -356,7 +356,7 @@ bool sign_recoverable(recoverable_signature& out, ec_secret const& secret, hash_
         secp256k1_ecdsa_sign_recoverable(context, &signature, hash.data(), secret.data(), secp256k1_nonce_function_rfc6979, nullptr) == 1 &&
         secp256k1_ecdsa_recoverable_signature_serialize_compact(context, out.signature.data(), &recovery_id, &signature) == 1;
 
-    BITCOIN_ASSERT(recovery_id >= 0 && recovery_id <= 3);
+    KTH_ASSERT(recovery_id >= 0 && recovery_id <= 3);
     out.recovery_id = safe_to_unsigned<uint8_t>(recovery_id);   //NOLINT
     return result;
 }

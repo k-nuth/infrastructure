@@ -28,7 +28,7 @@ subscriber<Args...>::subscriber(threadpool& pool,
 template <typename... Args>
 subscriber<Args...>::~subscriber()
 {
-    BITCOIN_ASSERT_MSG(subscriptions_.empty(), "subscriber not cleared");
+    KTH_ASSERT_MSG(subscriptions_.empty(), "subscriber not cleared");
 }
 
 template <typename... Args>

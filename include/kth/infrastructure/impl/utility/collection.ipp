@@ -71,7 +71,7 @@ void move_append(std::vector<T>& target, std::vector<T>& source) {
 
 template <typename T>
 T pop(std::vector<T>& stack) {
-    BITCOIN_ASSERT(!stack.empty());
+    KTH_ASSERT(!stack.empty());
     auto const element = stack.back();
     stack.pop_back();
     ////stack.shrink_to_fit();

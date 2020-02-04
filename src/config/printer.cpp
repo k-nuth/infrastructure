@@ -233,7 +233,7 @@ std::string printer::format_settings_table() {
     for (auto const& parameter: parameters) {
         split_setting_name(parameter, name, section);
         if (section.empty()) {
-            BITCOIN_ASSERT_MSG(false, "Invalid config setting metadata.");
+            KTH_ASSERT_MSG(false, "Invalid config setting metadata.");
             continue;
         }
 

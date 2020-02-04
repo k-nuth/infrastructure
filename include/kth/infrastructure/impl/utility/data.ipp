@@ -112,7 +112,7 @@ byte_array<Size> to_array(data_slice bytes)
 {
     byte_array<Size> out;
     DEBUG_ONLY(auto const result =) build_array(out, { bytes });
-    BITCOIN_ASSERT(result);
+    KTH_ASSERT(result);
     return out;
 }
 
@@ -150,8 +150,8 @@ template <size_t Size>
 byte_array<Size> xor_data(data_slice bytes1, data_slice bytes2, size_t offset1,
     size_t offset2)
 {
-    BITCOIN_ASSERT(offset1 + Size <= bytes1.size());
-    BITCOIN_ASSERT(offset2 + Size <= bytes2.size());
+    KTH_ASSERT(offset1 + Size <= bytes1.size());
+    KTH_ASSERT(offset2 + Size <= bytes2.size());
     auto const& data1 = bytes1.data();
     auto const& data2 = bytes2.data();
     byte_array<Size> out;

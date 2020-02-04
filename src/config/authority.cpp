@@ -64,7 +64,7 @@ asio::ipv6 to_ipv6(asio::address const& ip_address) {
         return ip_address.to_v6();
     }
 
-    BITCOIN_ASSERT_MSG(ip_address.is_v4(), "The address must be either IPv4 or IPv6.");
+    KTH_ASSERT_MSG(ip_address.is_v4(), "The address must be either IPv4 or IPv6.");
     return to_ipv6(ip_address.to_v4());
 }
 
@@ -109,7 +109,7 @@ authority::authority(message::network_address const& address)
 static 
 asio::ipv6 to_boost_address(message::ip_address const& in) {
     asio::ipv6::bytes_type bytes;
-    BITCOIN_ASSERT(bytes.size() == in.size());
+    KTH_ASSERT(bytes.size() == in.size());
     std::copy_n(in.begin(), in.size(), bytes.begin());
     const asio::ipv6 out(bytes);
     return out;
@@ -119,7 +119,7 @@ static
 message::ip_address to_BI_address(const asio::ipv6& in) {
     message::ip_address out;
     auto const bytes = in.to_bytes();
-    BITCOIN_ASSERT(bytes.size() == out.size());
+    KTH_ASSERT(bytes.size() == out.size());
     std::copy_n(bytes.begin(), bytes.size(), out.begin());
     return out;
 }

@@ -33,7 +33,7 @@ byte_array<Size * 733 / 1000> base58_literal(char const(&string)[Size])
     byte_array<Size * 733 / 1000> out;
     DEBUG_ONLY(auto const success =) decode_base58_private(out.data(),
         out.size(), string);
-    BITCOIN_ASSERT(success);
+    KTH_ASSERT(success);
     return out;
 }
 

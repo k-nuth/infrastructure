@@ -73,7 +73,7 @@ void binary::resize(size_type size) {
 }
 
 bool binary::operator[](size_type index) const {
-    BITCOIN_ASSERT(index < size());
+    KTH_ASSERT(index < size());
     size_type const block_index = index / bits_per_block;
     uint8_t const block = blocks_[block_index];
     size_type const offset = index - (block_index * bits_per_block);

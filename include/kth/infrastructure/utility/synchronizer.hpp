@@ -88,7 +88,7 @@ public:
         mutex_->lock_upgrade();
 
         auto const initial_count = *counter_;
-        BITCOIN_ASSERT(initial_count <= clearance_count_);
+        KTH_ASSERT(initial_count <= clearance_count_);
 
         // Another handler cleared this and shortcircuited the count, ignore.
         if (initial_count == clearance_count_)

@@ -92,7 +92,6 @@ class KnuthInfrastructureConan(KnuthConanFile):
 
         if not self.options.cmake_export_compile_commands:
             cmake.build()
-
             #Note: Cmake Tests and Visual Studio doesn't work
             if self.options.tests:
                 cmake.test()

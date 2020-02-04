@@ -105,8 +105,8 @@ void threadpool::join()
 
     for (auto& thread: threads_)
     {
-        BITCOIN_ASSERT(this_id != thread.get_id());
-        BITCOIN_ASSERT(thread.joinable());
+        KTH_ASSERT(this_id != thread.get_id());
+        KTH_ASSERT(thread.joinable());
         thread.join();
     }
 
