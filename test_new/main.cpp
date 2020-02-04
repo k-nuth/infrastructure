@@ -20,7 +20,6 @@
 // #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 // #include "doctest.h"
 
-// #include <kth/infrastructure/multi_crypto_support.hpp>
 // //#include <kth/infrastructure/wallet/cashaddr.hpp>
 // // #include <kth/infrastructure/wallet/payment_address.hpp>
 

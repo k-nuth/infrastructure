@@ -42,7 +42,7 @@ bool validate_mnemonic(const word_list& words, const dictionary& lexicon) {
     auto const check_bits = total_bits / (entropy_bit_divisor + 1);
     auto const entropy_bits = total_bits - check_bits;
 
-    BITCOIN_ASSERT((entropy_bits % byte_bits) == 0);
+    KTH_ASSERT((entropy_bits % byte_bits) == 0);
 
     size_t bit = 0;
     data_chunk data((total_bits + byte_bits - 1) / byte_bits, 0);
@@ -77,8 +77,8 @@ word_list create_mnemonic(data_slice entropy, const dictionary &lexicon) {
     size_t const total_bits = (entropy_bits + check_bits);
     size_t const word_count = (total_bits / bits_per_word);
 
-    BITCOIN_ASSERT((total_bits % bits_per_word) == 0);
-    BITCOIN_ASSERT((word_count % mnemonic_word_multiple) == 0);
+    KTH_ASSERT((total_bits % bits_per_word) == 0);
+    KTH_ASSERT((word_count % mnemonic_word_multiple) == 0);
 
     auto const data = build_chunk({entropy, sha256_hash(entropy)});
 
@@ -98,11 +98,11 @@ word_list create_mnemonic(data_slice entropy, const dictionary &lexicon) {
             }
         }
 
-        BITCOIN_ASSERT(position < dictionary_size);
+        KTH_ASSERT(position < dictionary_size);
         words.push_back(lexicon[position]);
     }
 
-    BITCOIN_ASSERT(words.size() == ((bit + 1) / bits_per_word));
+    KTH_ASSERT(words.size() == ((bit + 1) / bits_per_word));
     return words;
 }
 

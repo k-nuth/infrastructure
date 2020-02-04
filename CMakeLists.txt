@@ -319,7 +319,6 @@ set(knuth_infrastructure_sources_just_legacy
         src/config/sodium.cpp
 
         src/error.cpp
-        # src/multi_crypto_support.cpp
         src/version.cpp
 
         src/formats/base_10.cpp
@@ -778,7 +777,6 @@ install(TARGETS kth-infrastructure EXPORT kth-infrastructure
 #)
 
 set(_knuth_infrastructure_headers
-    # kth/infrastructure/multi_crypto_support.hpp
     kth/infrastructure/compat.h
     kth/infrastructure/compat.hpp
     kth/infrastructure/constants.hpp

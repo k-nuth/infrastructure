@@ -474,7 +474,7 @@ constexpr uint8_t string_terminator = 0x00;
 // constexpr uint64_t max_money(bool retarget=true)
 // {
 //     ////// Optimize out the derivation of recursive_money.
-//     ////BITCOIN_ASSERT(recursive_money == max_money_recursive(
+//     ////KTH_ASSERT(recursive_money == max_money_recursive(
 //     ////    initial_block_subsidy_satoshi()));
 
 //     return recursive_money * subsidy_interval(retarget);

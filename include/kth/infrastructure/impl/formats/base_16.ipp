@@ -34,7 +34,7 @@ byte_array<(Size - 1) / 2> base16_literal(char const (&string)[Size])
     byte_array<(Size - 1) / 2> out;
     DEBUG_ONLY(auto const success =) decode_base16_private(out.data(),
         out.size(), string);
-    BITCOIN_ASSERT(success);
+    KTH_ASSERT(success);
     return out;
 }
 

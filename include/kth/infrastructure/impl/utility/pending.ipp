@@ -23,7 +23,7 @@ pending<Element>::pending(size_t initial_capacity)
 template <typename Element>
 pending<Element>::~pending()
 {
-    ////BITCOIN_ASSERT_MSG(elements_.empty(), "Pending collection not cleared.");
+    ////KTH_ASSERT_MSG(elements_.empty(), "Pending collection not cleared.");
 }
 
 template <typename Element>

@@ -5,13 +5,13 @@
 #define KTH_INFRASTRUCTURE_ASSERT_HPP
 
 #ifdef NDEBUG
-    #define BITCOIN_ASSERT(expression)
-    #define BITCOIN_ASSERT_MSG(expression, text)
+    #define KTH_ASSERT(expression)
+    #define KTH_ASSERT_MSG(expression, text)
     #define DEBUG_ONLY(expression)
 #else
     #include <cassert>
-    #define BITCOIN_ASSERT(expression) assert(expression)
-    #define BITCOIN_ASSERT_MSG(expression, text) assert((expression)&&(text))
+    #define KTH_ASSERT(expression) assert(expression)
+    #define KTH_ASSERT_MSG(expression, text) assert((expression)&&(text))
     #define DEBUG_ONLY(expression) expression
 #endif
 

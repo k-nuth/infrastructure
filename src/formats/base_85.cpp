@@ -101,7 +101,7 @@ bool encode_base85(std::string& out, data_slice in)
     }
 
     out.assign(encoded.begin(), encoded.end());
-    BITCOIN_ASSERT(out.size() == encoded_size);
+    KTH_ASSERT(out.size() == encoded_size);
     return true;
 }
 
@@ -138,7 +138,7 @@ bool decode_base85(data_chunk& out, std::string const& in)
     }
 
     out.assign(decoded.begin(), decoded.end());
-    BITCOIN_ASSERT(out.size() == decoded_size);
+    KTH_ASSERT(out.size() == decoded_size);
     return true;
 }
 

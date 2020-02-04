@@ -193,7 +193,7 @@ bool number::operator!=(number const& x) const {
 
 inline
 number number::operator+(int64_t value) const {
-    BITCOIN_ASSERT_MSG(value == 0 ||
+    KTH_ASSERT_MSG(value == 0 ||
         (value > 0 && value_ <= max_int64 - value) ||
         (value < 0 && value_ >= min_int64 - value), "overflow");
 
@@ -202,7 +202,7 @@ number number::operator+(int64_t value) const {
 
 inline
 number number::operator-(int64_t value) const {
-    BITCOIN_ASSERT_MSG(value == 0 ||
+    KTH_ASSERT_MSG(value == 0 ||
         (value > 0 && value_ >= min_int64 + value) ||
         (value < 0 && value_ <= max_int64 + value), "underflow");
 
@@ -226,7 +226,7 @@ number number::operator+() const {
 
 inline
 number number::operator-() const {
-    BITCOIN_ASSERT_MSG(value_ != min_int64, "out of range");
+    KTH_ASSERT_MSG(value_ != min_int64, "out of range");
 
     return number(-value_);
 }
@@ -243,7 +243,7 @@ number& number::operator-=(number const& x) {
 
 inline
 number& number::operator+=(int64_t value) {
-    BITCOIN_ASSERT_MSG(value == 0 ||
+    KTH_ASSERT_MSG(value == 0 ||
         (value > 0 && value_ <= max_int64 - value) ||
         (value < 0 && value_ >= min_int64 - value), "overflow");
 
@@ -253,7 +253,7 @@ number& number::operator+=(int64_t value) {
 
 inline
 number& number::operator-=(int64_t value) {
-    BITCOIN_ASSERT_MSG(value == 0 ||
+    KTH_ASSERT_MSG(value == 0 ||
         (value > 0 && value_ >= min_int64 + value) ||
         (value < 0 && value_ <= max_int64 + value), "underflow");
 
