@@ -11,9 +11,6 @@
  *      used in the publication.
  *
  *      Please read the file sha1.c for more information.
- *
- * Adapted:
- *      by Libbitcoin Developers on 7 September 2016
  */
 #ifndef KTH_CRYPTO_SHA1_H
 #define KTH_CRYPTO_SHA1_H
