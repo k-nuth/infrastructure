@@ -5,7 +5,6 @@
 
 > Infrastructure functionality
 
-
 Build steps
 -----------
 
@@ -30,3 +29,16 @@ conan install infrastructure/0.X@kth/stable
 ```
 
 In you want to tune the installation for better performance, please refer to the [documentation](https://kth.github.io/docfx/content/user_guide/installation.html#advanced-installation).
+
+
+<!-- Links -->
+[badge.Travis]: https://travis-ci.org/k-nuth/infrastructure.svg?branch=master
+[badge.Appveyor]: https://ci.appveyor.com/api/projects/status/github/k-nuth/infrastructure?svg=true&branch=master
+[badge.Cirrus]: https://api.cirrus-ci.com/github/k-nuth/infrastructure.svg?branch=master
+[badge.version]: https://badge.fury.io/gh/k-nuth%2Finfrastructure.svg
+[badge.release]: https://img.shields.io/github/release/k-nuth/infrastructure.svg
+
+[badge.telegram]: https://img.shields.io/badge/telegram-badge-blue.svg?logo=telegram
+[badge.slack]: https://img.shields.io/badge/slack-badge-orange.svg?logo=slack
+
+<!-- [badge.Gitter]: https://img.shields.io/badge/gitter-join%20chat-blue.svg -->
