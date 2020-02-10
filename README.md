@@ -1,44 +1,45 @@
-# Knuth Infrastructure <a target="_blank" href="http://semver.org">![Version][badge.version]</a> <a target="_blank" href="https://travis-ci.org/knuth/infrastructure">![Travis status][badge.Travis]</a> <a target="_blank" href="https://ci.appveyor.com/project/knuth/infrastructure">![Appveyor status][badge.Appveyor]</a> <a target="_blank" href="https://gitter.im/knuth/Lobby">![Gitter Chat][badge.Gitter]</a>
+<!-- <a target="_blank" href="http://semver.org">![Version][badge.version]</a> -->
+<!-- <a target="_blank" href="https://cirrus-ci.com/github/k-nuth/infrastructure">![Build Status][badge.Cirrus]</a> -->
+
+# infrastructure <a target="_blank" href="https://github.com/k-nuth/infrastructure/releases">![Github Releases][badge.release]</a> <a target="_blank" href="https://travis-ci.org/k-nuth/infrastructure">![Build status][badge.Travis]</a> <a target="_blank" href="https://ci.appveyor.com/projects/k-nuth/infrastructure">![Build Status][badge.Appveyor]</a> <a href="#">![CPP][badge.cpp]</a> <a target="_blank" href="https://t.me/knuth_cash">![Telegram][badge.telegram]</a> <a target="_blank" href="https://k-nuth.slack.com/">![Slack][badge.slack]</a>
 
 > Infrastructure functionality
 
+## Getting started
 
-## Installation Requirements
+Installing the library is as simple as:
 
-- 64-bit machine.
-- Python PIP.
-
-## Installation Procedure
-
-The *Knuth* libraries can be installed on Linux, macOS, FreeBSD, Windows and others. These binaries are pre-built for the most usual operating system/compiler combinations and hosted in an online repository. If there are no pre-built binaries for your platform, a build from source will be attempted.
-
-So, for any platform, an installation can be performed in 2 simple steps:
-
-1. Install our build system helpers:
+1. Install and configure the Knuth build helper:
 ```
-pip install kthbuild
+$ pip install kthbuild --user --upgrade
+
+$ conan remote add kth https://api.bintray.com/conan/k-nuth/kth
 ```
 
-2. Install the library:
+2. Install the appropriate library:
 
 ```
-conan install infrastructure/0.X@kth/stable 
+$ conan install infrastructure/0.X@kth/stable 
 ```
 
-In you want to tune the installation for better performance, please refer to [this](https://knuth.github.io/docfx/content/user_guide/installation.html#advanced-installation).
+For more more detailed instructions, please refer to our [documentation](https://kth.cash/docs/).
 
+## About this library
+
+This library can be used stand-alone, but it is probably convenient for you to use one of our main projects, [look over here](https://github.com/k-nuth/kth/).
+
+## Issues
+
+Each of our modules has its own Github repository, but in case you want to create an issue, please do so in our [main repository](https://github.com/k-nuth/kth/issues).
 
 <!-- Links -->
-[badge.Appveyor]: https://ci.appveyor.com/api/projects/status/github/knuth/infrastructure?svg=true&branch=dev
-[badge.Gitter]: https://img.shields.io/badge/gitter-join%20chat-blue.svg
-[badge.Travis]: https://travis-ci.org/knuth/infrastructure.svg?branch=master
-[badge.version]: https://badge.fury.io/gh/knuth%2Finfrastructure.svg
+[badge.Travis]: https://travis-ci.org/k-nuth/infrastructure.svg?branch=master
+[badge.Appveyor]: https://ci.appveyor.com/api/projects/status/github/k-nuth/infrastructure?svg=true&branch=master
+[badge.Cirrus]: https://api.cirrus-ci.com/github/k-nuth/infrastructure.svg?branch=master
+[badge.version]: https://badge.fury.io/gh/k-nuth%2Finfrastructure.svg
+[badge.release]: https://img.shields.io/github/release/k-nuth/infrastructure.svg
+[badge.cpp]: https://img.shields.io/badge/C++-17-blue.svg?style=flat&logo=c%2B%2B
+[badge.telegram]: https://img.shields.io/badge/telegram-badge-blue.svg?logo=telegram
+[badge.slack]: https://img.shields.io/badge/slack-badge-orange.svg?logo=slack
 
-[CMake]: http://www.cmake.org
-[Doxygen]: http://www.doxygen.org
-[eRuby]: http://en.wikipedia.org/wiki/ERuby
-[Hana.docs]: http://boostorg.github.io/hana
-[Hana.wiki]: https://github.com/boostorg/hana/wiki
-[Homebrew formula]: https://github.com/Homebrew/homebrew-infrastructure/blob/master/Formula/hana.rb
-
-
+<!-- [badge.Gitter]: https://img.shields.io/badge/gitter-join%20chat-blue.svg -->

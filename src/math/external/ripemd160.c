@@ -4,7 +4,6 @@
  *  TARGET:   any computer with an ANSI C compiler
  *  AUTHOR:   Antoon Bosselaers, Dept. Electrical Eng.-ESAT/COSIC
  *  DATE:     1 March 1996       VERSION:  1.0
-  * ADAPTED:  by Libbitcoin Developers on 7 September 2016
 \********************************************************************/
 #include "ripemd160.h"
 

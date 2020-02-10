@@ -26,9 +26,6 @@
  *      for messages of any number of bits less than 2^64, this
  *      implementation only works with messages with a length that is
  *      a multiple of the size of an 8-bit character.
- *
- * Adapted:
- *      by Libbitcoin Developers on 7 September 2016
  */
 #include "sha1.h"
 
