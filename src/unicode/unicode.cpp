@@ -1,22 +1,7 @@
-/**
- * Copyright (c) 2017-2018 Bitprim Inc.
- *
- * This file is part of Bitprim.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include <bitcoin/infrastructure/unicode/unicode.hpp>
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <kth/infrastructure/unicode/unicode.hpp>
 
 #include <cstddef>
 #include <cstring>
@@ -28,14 +13,14 @@
 
 #include <boost/locale.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
-// #include <bitcoin/infrastructure/math/limits.hpp>
-#include <bitcoin/infrastructure/unicode/console_streambuf.hpp>
-#include <bitcoin/infrastructure/unicode/unicode_istream.hpp>
-#include <bitcoin/infrastructure/unicode/unicode_ostream.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
-#include <bitcoin/infrastructure/utility/limits.hpp>
+#include <kth/infrastructure/define.hpp>
+// #include <kth/infrastructure/math/limits.hpp>
+#include <kth/infrastructure/unicode/console_streambuf.hpp>
+#include <kth/infrastructure/unicode/unicode_istream.hpp>
+#include <kth/infrastructure/unicode/unicode_ostream.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/utility/limits.hpp>
 
 
 #ifdef _MSC_VER
@@ -43,7 +28,7 @@
     #include <io.h>
 #endif
 
-namespace libbitcoin {
+namespace kth {
 
 using namespace boost::locale;
 
@@ -189,9 +174,9 @@ std::string to_utf8(const std::wstring& wide)
 size_t to_utf8(char out[], size_t out_bytes, const wchar_t in[],
     size_t in_chars)
 {
-    BITCOIN_ASSERT(in != nullptr);
-    BITCOIN_ASSERT(out != nullptr);
-    BITCOIN_ASSERT(out_bytes >= utf8_max_character_size * in_chars);
+    KTH_ASSERT(in != nullptr);
+    KTH_ASSERT(out != nullptr);
+    KTH_ASSERT(out_bytes >= utf8_max_character_size * in_chars);
 
     if (in_chars == 0) {
         return 0;
@@ -234,7 +219,7 @@ static bool is_utf8_trailing_byte(char byte)
 // Determine if the full sequence is a valid utf8 character.
 static bool is_utf8_character_sequence(char const sequence[], uint8_t bytes)
 {
-    BITCOIN_ASSERT(bytes <= utf8_max_character_size);
+    KTH_ASSERT(bytes <= utf8_max_character_size);
 
     // See tools.ietf.org/html/rfc3629#section-3 for definition.
     switch (bytes)
@@ -270,7 +255,7 @@ static bool is_utf8_character_sequence(char const sequence[], uint8_t bytes)
 // Determine if the text is terminated by a valid utf8 character.
 static bool is_terminal_utf8_character(char const text[], size_t size)
 {
-    BITCOIN_ASSERT(text != nullptr);
+    KTH_ASSERT(text != nullptr);
 
     // Walk back up to the max length of a utf8 character.
     for (uint8_t length = 1; length <= utf8_max_character_size &&
@@ -292,7 +277,7 @@ static bool is_terminal_utf8_character(char const text[], size_t size)
 // returned offset follows the last byte of a utf8 terminal char if it exists.
 static uint8_t offset_to_terminal_utf8_character(char const text[], size_t size)
 {
-    BITCOIN_ASSERT(text != nullptr);
+    KTH_ASSERT(text != nullptr);
 
     // Walk back up to the max length of a utf8 character.
     for (uint8_t unread = 0; unread < utf8_max_character_size &&
@@ -311,9 +296,9 @@ static uint8_t offset_to_terminal_utf8_character(char const text[], size_t size)
 size_t to_utf16(wchar_t out[], size_t out_chars, char const in[],
     size_t in_bytes, uint8_t& truncated)
 {
-    BITCOIN_ASSERT(in != nullptr);
-    BITCOIN_ASSERT(out != nullptr);
-    BITCOIN_ASSERT(out_chars >= in_bytes);
+    KTH_ASSERT(in != nullptr);
+    KTH_ASSERT(out != nullptr);
+    KTH_ASSERT(out_chars >= in_bytes);
 
     // Calculate a character break offset of 0..4 bytes.
     truncated = offset_to_terminal_utf8_character(in, in_bytes);
@@ -414,4 +399,4 @@ void set_binary_stdout()
 
 LCOV_EXCL_STOP()
 
-} // namespace libbitcoin
+} // namespace kth

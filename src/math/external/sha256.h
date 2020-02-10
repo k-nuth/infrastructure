@@ -23,8 +23,8 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-#ifndef LIBBITCOIN_CRYPTO_SHA256_H
-#define LIBBITCOIN_CRYPTO_SHA256_H
+#ifndef KTH_CRYPTO_SHA256_H
+#define KTH_CRYPTO_SHA256_H
 
 #include <stdint.h>
 #include <stddef.h>
@@ -46,11 +46,11 @@ typedef struct SHA256CTX
     uint8_t buf[SHA256_BLOCK_LENGTH];
 } SHA256CTX;
 
-void SHA256_(const uint8_t* input, size_t length,
+void SHA256_(uint8_t const* input, size_t length,
     uint8_t digest[SHA256_DIGEST_LENGTH]);
 
 void SHA256Init(SHA256CTX* context);
-void SHA256Update(SHA256CTX* context, const uint8_t* input, size_t length);
+void SHA256Update(SHA256CTX* context, uint8_t const* input, size_t length);
 void SHA256Final(SHA256CTX* context, uint8_t digest[SHA256_DIGEST_LENGTH]);
 
 #ifdef __cplusplus

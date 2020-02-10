@@ -1,22 +1,7 @@
-/**
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
- *
- * This file is part of libbitcoin.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include <bitcoin/infrastructure/config/authority.hpp>
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <kth/infrastructure/config/authority.hpp>
 
 #include <algorithm>
 #include <regex>
@@ -27,12 +12,12 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
 
-#include <bitcoin/infrastructure/formats/base_16.hpp>
-#include <bitcoin/infrastructure/utility/asio.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
-#include <bitcoin/infrastructure/utility/string.hpp>
+#include <kth/infrastructure/formats/base_16.hpp>
+#include <kth/infrastructure/utility/asio.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/string.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 using namespace boost::program_options;
@@ -79,14 +64,14 @@ asio::ipv6 to_ipv6(asio::address const& ip_address) {
         return ip_address.to_v6();
     }
 
-    BITCOIN_ASSERT_MSG(ip_address.is_v4(), "The address must be either IPv4 or IPv6.");
+    KTH_ASSERT_MSG(ip_address.is_v4(), "The address must be either IPv4 or IPv6.");
     return to_ipv6(ip_address.to_v4());
 }
 
 static 
 std::string to_ipv4_hostname(asio::address const& ip_address) {
     // std::regex requires gcc 4.9, so we are using boost::regex for now.
-    // Bitprim: we use std::regex, becase we drop support por GCC<5
+    // Knuth: we use std::regex, becase we drop support por GCC<5
     static 
     std::regex const regular("^::ffff:([0-9\\.]+)$");
 
@@ -124,7 +109,7 @@ authority::authority(message::network_address const& address)
 static 
 asio::ipv6 to_boost_address(message::ip_address const& in) {
     asio::ipv6::bytes_type bytes;
-    BITCOIN_ASSERT(bytes.size() == in.size());
+    KTH_ASSERT(bytes.size() == in.size());
     std::copy_n(in.begin(), in.size(), bytes.begin());
     const asio::ipv6 out(bytes);
     return out;
@@ -134,7 +119,7 @@ static
 message::ip_address to_BI_address(const asio::ipv6& in) {
     message::ip_address out;
     auto const bytes = in.to_bytes();
-    BITCOIN_ASSERT(bytes.size() == out.size());
+    KTH_ASSERT(bytes.size() == out.size());
     std::copy_n(bytes.begin(), bytes.size(), out.begin());
     return out;
 }
@@ -209,7 +194,7 @@ std::istream& operator>>(std::istream& input, authority& argument) {
     input >> value;
 
     // std::regex requires gcc 4.9, so we are using boost::regex for now.
-    // Bitprim: we use std::regex, becase we drop support por GCC<5
+    // Knuth: we use std::regex, becase we drop support por GCC<5
     static 
     regex const regular(R"(^(([0-9\.]+)|\[([0-9a-f:\.]+)\])(:([0-9]{1,5}))?$)");
 
@@ -241,4 +226,4 @@ std::ostream& operator<<(std::ostream& output, authority const& argument) {
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

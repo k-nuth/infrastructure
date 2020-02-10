@@ -1,7 +1,7 @@
 // /**
-//  * Copyright (c) 2016-2018 Bitprim Inc.
+//  * Copyright (c) 2016-2020 Knuth Project developers.
 //  *
-//  * This file is part of Bitprim.
+//  * This file is part of the Knuth Project.
 //  *
 //  * This program is free software: you can redistribute it and/or modify
 //  * it under the terms of the GNU Affero General Public License as published by
@@ -20,27 +20,26 @@
 // #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 // #include "doctest.h"
 
-// #include <bitcoin/infrastructure/multi_crypto_support.hpp>
-// //#include <bitcoin/infrastructure/wallet/cashaddr.hpp>
-// // #include <bitcoin/infrastructure/wallet/payment_address.hpp>
+// //#include <kth/infrastructure/wallet/cashaddr.hpp>
+// // #include <kth/infrastructure/wallet/payment_address.hpp>
 
-// // #include <bitprim/keoken/transaction_extractor.hpp>
-// // #include <bitprim/keoken/message/base.hpp>
-// // #include <bitprim/keoken/message/create_asset.hpp>
-// // #include <bitprim/keoken/message/send_tokens.hpp>
-// // #include <bitprim/keoken/utility.hpp>
+// // #include <knuth/keoken/transaction_extractor.hpp>
+// // #include <knuth/keoken/message/base.hpp>
+// // #include <knuth/keoken/message/create_asset.hpp>
+// // #include <knuth/keoken/message/send_tokens.hpp>
+// // #include <knuth/keoken/utility.hpp>
 
-// // using namespace bitprim::keoken;
+// // using namespace knuth::keoken;
 
-// #include <bitcoin/infrastructure/utility/data.hpp>
-// #include <bitcoin/infrastructure/formats/base_16.hpp>
-// #include <bitcoin/infrastructure/utility/container_source.hpp>
+// #include <kth/infrastructure/utility/data.hpp>
+// #include <kth/infrastructure/formats/base_16.hpp>
+// #include <kth/infrastructure/utility/container_source.hpp>
 
-// using libbitcoin::data_chunk;
-// using libbitcoin::to_chunk;
-// using libbitcoin::base16_literal;
-// using libbitcoin::data_source;
-// using libbitcoin::istream_reader;
+// using kth::data_chunk;
+// using kth::to_chunk;
+// using kth::base16_literal;
+// using kth::data_source;
+// using kth::istream_reader;
 
 
 // TEST_CASE("[test_read_null_terminated_string_unlimited] 1") {

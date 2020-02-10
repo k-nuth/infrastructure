@@ -1,28 +1,13 @@
-/**
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
- *
- * This file is part of libbitcoin.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include <bitcoin/infrastructure/formats/base_58.hpp>
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <kth/infrastructure/formats/base_58.hpp>
 
 #include <boost/algorithm/string.hpp>
 
-#include <bitcoin/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 std::string const base58_chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
@@ -52,7 +37,7 @@ auto search_first_nonzero(const Data& data) -> decltype(data.cbegin()) {
 size_t count_leading_zeros(data_slice unencoded) {
     // Skip and count leading '1's.
     size_t leading_zeros = 0;
-    for (const uint8_t byte: unencoded) {
+    for (uint8_t const byte: unencoded) {
         if (byte != 0) {
             break;
         }
@@ -71,7 +56,7 @@ void pack_value(data_chunk& indexes, size_t carry) {
         carry /= 58;
     }
 
-    BITCOIN_ASSERT(carry == 0);
+    KTH_ASSERT(carry == 0);
 }
 
 std::string encode_base58(data_slice unencoded) {
@@ -110,7 +95,7 @@ std::string encode_base58(data_slice unencoded) {
 size_t count_leading_zeros(std::string const& encoded) {
     // Skip and count leading '1's.
     size_t leading_zeros = 0;
-    for (const uint8_t digit: encoded) {
+    for (uint8_t const digit: encoded) {
         if (digit != base58_chars[0]) {
             break;
     }
@@ -128,7 +113,7 @@ void unpack_char(data_chunk& data, size_t carry) {
         carry /= 256;
     }
 
-    BITCOIN_ASSERT(carry == 0);
+    KTH_ASSERT(carry == 0);
 }
 
 bool decode_base58(data_chunk& out, std::string const& in) {
@@ -179,4 +164,4 @@ bool decode_base58_private(uint8_t* out, size_t out_size, char const* in) {
     return true;
 }
 
-} // namespace libbitcoin
+} // namespace kth

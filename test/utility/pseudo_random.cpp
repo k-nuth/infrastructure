@@ -1,22 +1,7 @@
-/**
- * Copyright (c) 2017-2018 Bitprim Inc.
- *
- * This file is part of Bitprim.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include <bitcoin/infrastructure.hpp>
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <kth/infrastructure.hpp>
 #include <boost/test/unit_test.hpp>
 
 using namespace bc;
@@ -51,7 +36,7 @@ BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__subminute_ratio_0__maximum
 
 BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__subminute_ratio_1__expected)
 {
-    const uint8_t ratio = 1;
+    uint8_t const ratio = 1;
     int const max_seconds = 42;
     const asio::seconds maximum(max_seconds);
     const asio::seconds minimum(max_seconds - max_seconds / ratio);
@@ -73,7 +58,7 @@ BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__subminute_default_ratio__e
 // Use same (ms) resolution as function to prevent test rounding difference.
 BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__superminute_ratio_255__expected)
 {
-    const uint8_t ratio = 255;
+    uint8_t const ratio = 255;
     int const max_seconds = 420;
     const asio::milliseconds maximum(max_seconds);
     const asio::milliseconds minimum(max_seconds - max_seconds / ratio);

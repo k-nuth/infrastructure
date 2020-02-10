@@ -4,7 +4,6 @@
  *  TARGET:   any computer with an ANSI C compiler
  *  AUTHOR:   Antoon Bosselaers, Dept. Electrical Eng.-ESAT/COSIC
  *  DATE:     1 March 1996       VERSION:  1.0
-  * ADAPTED:  by Libbitcoin Developers on 7 September 2016
 \********************************************************************/
 #include "ripemd160.h"
 
@@ -91,9 +90,9 @@
 }
 
 void RMDcompress(RMD160CTX* context);
-void RMDfinish(RMD160CTX* context, const uint8_t* message, size_t length);
+void RMDfinish(RMD160CTX* context, uint8_t const* message, size_t length);
 
-void RMD160(const uint8_t* message, size_t length,
+void RMD160(uint8_t const* message, size_t length,
     uint8_t digest[RMD160_DIGEST_LENGTH])
 {
     RMD160CTX context;
@@ -111,7 +110,7 @@ void RMDInit(RMD160CTX* context)
     context->state[4] = 0xc3d2e1f0UL;
 }
 
-void RMDUpdate(RMD160CTX* context, const uint8_t* message, size_t length)
+void RMDUpdate(RMD160CTX* context, uint8_t const* message, size_t length)
 {
     size_t i;
     size_t byte;
@@ -351,7 +350,7 @@ void RMDcompress(RMD160CTX* context)
     state[0] = ddd;
 }
 
-void RMDfinish(RMD160CTX* context, const uint8_t* message, size_t length)
+void RMDfinish(RMD160CTX* context, uint8_t const* message, size_t length)
 {
     uint32_t i;
     uint32_t* chunk = context->chunk;

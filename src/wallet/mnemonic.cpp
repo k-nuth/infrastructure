@@ -1,22 +1,7 @@
-/**
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
- *
- * This file is part of libbitcoin.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include <bitcoin/infrastructure/wallet/mnemonic.hpp>
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <kth/infrastructure/wallet/mnemonic.hpp>
 
 #include "../math/external/pkcs5_pbkdf2.h"
 
@@ -25,15 +10,15 @@
 
 #include <boost/locale.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/unicode/unicode.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
-#include <bitcoin/infrastructure/utility/binary.hpp>
-#include <bitcoin/infrastructure/utility/collection.hpp>
-#include <bitcoin/infrastructure/utility/string.hpp>
-#include <bitcoin/infrastructure/wallet/dictionary.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/unicode/unicode.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/binary.hpp>
+#include <kth/infrastructure/utility/collection.hpp>
+#include <kth/infrastructure/utility/string.hpp>
+#include <kth/infrastructure/wallet/dictionary.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 // BIP-39 private constants.
@@ -57,7 +42,7 @@ bool validate_mnemonic(const word_list& words, const dictionary& lexicon) {
     auto const check_bits = total_bits / (entropy_bit_divisor + 1);
     auto const entropy_bits = total_bits - check_bits;
 
-    BITCOIN_ASSERT((entropy_bits % byte_bits) == 0);
+    KTH_ASSERT((entropy_bits % byte_bits) == 0);
 
     size_t bit = 0;
     data_chunk data((total_bits + byte_bits - 1) / byte_bits, 0);
@@ -92,8 +77,8 @@ word_list create_mnemonic(data_slice entropy, const dictionary &lexicon) {
     size_t const total_bits = (entropy_bits + check_bits);
     size_t const word_count = (total_bits / bits_per_word);
 
-    BITCOIN_ASSERT((total_bits % bits_per_word) == 0);
-    BITCOIN_ASSERT((word_count % mnemonic_word_multiple) == 0);
+    KTH_ASSERT((total_bits % bits_per_word) == 0);
+    KTH_ASSERT((word_count % mnemonic_word_multiple) == 0);
 
     auto const data = build_chunk({entropy, sha256_hash(entropy)});
 
@@ -113,11 +98,11 @@ word_list create_mnemonic(data_slice entropy, const dictionary &lexicon) {
             }
         }
 
-        BITCOIN_ASSERT(position < dictionary_size);
+        KTH_ASSERT(position < dictionary_size);
         words.push_back(lexicon[position]);
     }
 
-    BITCOIN_ASSERT(words.size() == ((bit + 1) / bits_per_word));
+    KTH_ASSERT(words.size() == ((bit + 1) / bits_per_word));
     return words;
 }
 
@@ -149,4 +134,4 @@ long_hash decode_mnemonic(const word_list& mnemonic, std::string const& passphra
 #endif
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth

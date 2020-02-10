@@ -23,8 +23,8 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-#ifndef LIBBITCOIN_CRYPTO_SHA512_H
-#define LIBBITCOIN_CRYPTO_SHA512_H
+#ifndef KTH_CRYPTO_SHA512_H
+#define KTH_CRYPTO_SHA512_H
 
 #include <stdint.h>
 #include <stddef.h>
@@ -46,11 +46,11 @@ typedef struct SHA512CTX
     uint8_t buf[SHA512_BLOCK_LENGTH];
 } SHA512CTX;
 
-void SHA512_(const uint8_t* input, size_t length,
+void SHA512_(uint8_t const* input, size_t length,
     uint8_t digest[SHA512_DIGEST_LENGTH]);
 
 void SHA512Init(SHA512CTX* context);
-void SHA512Update(SHA512CTX* context, const uint8_t* input, size_t length);
+void SHA512Update(SHA512CTX* context, uint8_t const* input, size_t length);
 void SHA512Final(SHA512CTX* context, uint8_t digest[SHA512_DIGEST_LENGTH]);
 
 #ifdef __cplusplus

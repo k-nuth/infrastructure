@@ -26,9 +26,6 @@
  *      for messages of any number of bits less than 2^64, this
  *      implementation only works with messages with a length that is
  *      a multiple of the size of an 8-bit character.
- *
- * Adapted:
- *      by Libbitcoin Developers on 7 September 2016
  */
 #include "sha1.h"
 
@@ -41,7 +38,7 @@
 void SHA1PadMessage(SHA1CTX* context);
 void SHA1ProcessMessageBlock(SHA1CTX* context);
 
-void SHA1_(const uint8_t* message, size_t length,
+void SHA1_(uint8_t const* message, size_t length,
     uint8_t digest[SHA1_DIGEST_LENGTH])
 {
     SHA1CTX context;
@@ -61,7 +58,7 @@ void SHA1Init(SHA1CTX* context)
     context->index = 0;
 }
 
-void SHA1Update(SHA1CTX* context, const uint8_t* message, size_t length)
+void SHA1Update(SHA1CTX* context, uint8_t const* message, size_t length)
 {
     /* Guard against overflow in while loop (returns digest of empty message). */
     if (length > SIZE_MAX / 8) {

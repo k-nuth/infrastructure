@@ -23,8 +23,8 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-#ifndef LIBBITCOIN_CRYPTO_HMACSHA512_H
-#define LIBBITCOIN_CRYPTO_HMACSHA512_H
+#ifndef KTH_CRYPTO_HMACSHA512_H
+#define KTH_CRYPTO_HMACSHA512_H
 
 #include <stdint.h>
 #include <stddef.h>
@@ -43,16 +43,16 @@ typedef struct HMACSHA512CTX
     SHA512CTX octx;
 } HMACSHA512CTX;
 
-void HMACSHA512(const uint8_t* input, size_t length, const uint8_t* key,
+void HMACSHA512(uint8_t const* input, size_t length, uint8_t const* key,
     size_t key_length, uint8_t digest[HMACSHA512_DIGEST_LENGTH]);
 
 void HMACSHA512Final(HMACSHA512CTX* context,
     uint8_t digest[HMACSHA512_DIGEST_LENGTH]);
 
-void HMACSHA512Init(HMACSHA512CTX* context, const uint8_t* key,
+void HMACSHA512Init(HMACSHA512CTX* context, uint8_t const* key,
     size_t key_length);
 
-void HMACSHA512Update(HMACSHA512CTX* context, const uint8_t* input,
+void HMACSHA512Update(HMACSHA512CTX* context, uint8_t const* input,
     size_t length);
 
 #ifdef __cplusplus

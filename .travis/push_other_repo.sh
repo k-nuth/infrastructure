@@ -4,23 +4,23 @@ echo "Travis branch: ${TRAVIS_BRANCH}"
 echo "Travis tag: ${TRAVIS_TAG}"
 
 if [[ ${TRAVIS_BRANCH} == ${TRAVIS_TAG} ]]; then
-    export BITPRIM_PUSH_BRANCH=master
+    export KTH_PUSH_BRANCH=master
 else
-    export BITPRIM_PUSH_BRANCH=${TRAVIS_BRANCH}
+    export KTH_PUSH_BRANCH=${TRAVIS_BRANCH}
 fi
-echo "Bitprim branch: ${BITPRIM_PUSH_BRANCH}"
+echo "Knuth branch: ${KTH_PUSH_BRANCH}"
 
 
 # TODO(fernando): put in another place
-export BITPRIM_PUSH_ACCOUNT=bitprim
+export KTH_PUSH_ACCOUNT=knuth
 
 # ------------------------------------------------------
-export BITPRIM_PUSH_PROJECT=bitprim-consensus
+export KTH_PUSH_PROJECT=kth-consensus
 
 # body="{
-#     \"accountName\": \"bitprim\",
-#     \"projectSlug\": \"bitprim-core\",
-#     \"branch\": \"${BITPRIM_PUSH_BRANCH}\",
+#     \"accountName\": \"knuth\",
+#     \"projectSlug\": \"kth-core\",
+#     \"branch\": \"${KTH_PUSH_BRANCH}\",
 #     \"environmentVariables\": {
 #        \"SKIP_NUGET\": \"true\"
 #     }
@@ -28,9 +28,9 @@ export BITPRIM_PUSH_PROJECT=bitprim-consensus
 
 
 body="{
-    \"accountName\": \"${BITPRIM_PUSH_ACCOUNT}\",
-    \"projectSlug\": \"${BITPRIM_PUSH_PROJECT}\",
-    \"branch\": \"${BITPRIM_PUSH_BRANCH}\"
+    \"accountName\": \"${KTH_PUSH_ACCOUNT}\",
+    \"projectSlug\": \"${KTH_PUSH_PROJECT}\",
+    \"branch\": \"${KTH_PUSH_BRANCH}\"
 }"
 
 curl -s -d "$body" -X POST \
@@ -40,8 +40,8 @@ curl -s -d "$body" -X POST \
 
 body="{
     \"request\": {
-    \"branch\":\"${BITPRIM_PUSH_BRANCH}\",
-    \"message\": \"Force by bitprim-core build: ${TRAVIS_BUILD_NUMBER}\"
+    \"branch\":\"${KTH_PUSH_BRANCH}\",
+    \"message\": \"Force by kth-core build: ${TRAVIS_BUILD_NUMBER}\"
 }}"
 
 curl -s -X POST \
@@ -50,17 +50,17 @@ curl -s -X POST \
    -H "Travis-API-Version: 3" \
    -H "Authorization: token ${TRAVIS_TOKEN}" \
    -d "$body" \
-   https://api.travis-ci.org/repo/${BITPRIM_PUSH_ACCOUNT}%2F${BITPRIM_PUSH_PROJECT}/requests
+   https://api.travis-ci.org/repo/${KTH_PUSH_ACCOUNT}%2F${KTH_PUSH_PROJECT}/requests
 
 
 
 # ------------------------------------------------------
-export BITPRIM_PUSH_PROJECT=bitprim-network
+export KTH_PUSH_PROJECT=kth-network
 
 body="{
-    \"accountName\": \"${BITPRIM_PUSH_ACCOUNT}\",
-    \"projectSlug\": \"${BITPRIM_PUSH_PROJECT}\",
-    \"branch\": \"${BITPRIM_PUSH_BRANCH}\"
+    \"accountName\": \"${KTH_PUSH_ACCOUNT}\",
+    \"projectSlug\": \"${KTH_PUSH_PROJECT}\",
+    \"branch\": \"${KTH_PUSH_BRANCH}\"
 }"
 
 curl -s -d "$body" -X POST \
@@ -70,8 +70,8 @@ curl -s -d "$body" -X POST \
 
 body="{
     \"request\": {
-    \"branch\":\"${BITPRIM_PUSH_BRANCH}\",
-    \"message\": \"Force by bitprim-core build: ${TRAVIS_BUILD_NUMBER}\"
+    \"branch\":\"${KTH_PUSH_BRANCH}\",
+    \"message\": \"Force by kth-core build: ${TRAVIS_BUILD_NUMBER}\"
 }}"
 
 curl -s -X POST \
@@ -80,17 +80,17 @@ curl -s -X POST \
    -H "Travis-API-Version: 3" \
    -H "Authorization: token ${TRAVIS_TOKEN}" \
    -d "$body" \
-   https://api.travis-ci.org/repo/${BITPRIM_PUSH_ACCOUNT}%2F${BITPRIM_PUSH_PROJECT}/requests
+   https://api.travis-ci.org/repo/${KTH_PUSH_ACCOUNT}%2F${KTH_PUSH_PROJECT}/requests
 
 
 
 # ------------------------------------------------------
-export BITPRIM_PUSH_PROJECT=bitprim-database
+export KTH_PUSH_PROJECT=kth-database
 
 body="{
-    \"accountName\": \"${BITPRIM_PUSH_ACCOUNT}\",
-    \"projectSlug\": \"${BITPRIM_PUSH_PROJECT}\",
-    \"branch\": \"${BITPRIM_PUSH_BRANCH}\"
+    \"accountName\": \"${KTH_PUSH_ACCOUNT}\",
+    \"projectSlug\": \"${KTH_PUSH_PROJECT}\",
+    \"branch\": \"${KTH_PUSH_BRANCH}\"
 }"
 
 curl -s -d "$body" -X POST \
@@ -100,8 +100,8 @@ curl -s -d "$body" -X POST \
 
 body="{
     \"request\": {
-    \"branch\":\"${BITPRIM_PUSH_BRANCH}\",
-    \"message\": \"Force by bitprim-core build: ${TRAVIS_BUILD_NUMBER}\"
+    \"branch\":\"${KTH_PUSH_BRANCH}\",
+    \"message\": \"Force by kth-core build: ${TRAVIS_BUILD_NUMBER}\"
 }}"
 
 curl -s -X POST \
@@ -110,5 +110,5 @@ curl -s -X POST \
    -H "Travis-API-Version: 3" \
    -H "Authorization: token ${TRAVIS_TOKEN}" \
    -d "$body" \
-   https://api.travis-ci.org/repo/${BITPRIM_PUSH_ACCOUNT}%2F${BITPRIM_PUSH_PROJECT}/requests
+   https://api.travis-ci.org/repo/${KTH_PUSH_ACCOUNT}%2F${KTH_PUSH_PROJECT}/requests
 

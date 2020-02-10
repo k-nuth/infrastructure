@@ -1,25 +1,10 @@
-/**
- * Copyright (c) 2017-2018 Bitprim Inc.
- *
- * This file is part of Bitprim.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <sstream>
 #include <boost/test/test_tools.hpp>
 #include <boost/test/unit_test_suite.hpp>
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 
 using namespace bc;
 
@@ -41,7 +26,7 @@ BOOST_AUTO_TEST_CASE(is_exhausted_initialized_nonempty_stream_returns_false)
 
 BOOST_AUTO_TEST_CASE(peek_byte_nonempty_stream_does_not_advance)
 {
-    const uint8_t expected = 'a';
+    uint8_t const expected = 'a';
     std::stringstream stream("ab");
     istream_reader source(stream);
     BOOST_REQUIRE_EQUAL(source.peek_byte(), expected);
@@ -52,7 +37,7 @@ BOOST_AUTO_TEST_CASE(peek_byte_nonempty_stream_does_not_advance)
 
 BOOST_AUTO_TEST_CASE(roundtrip_byte)
 {
-    const uint8_t expected = 0xAA;
+    uint8_t const expected = 0xAA;
     std::stringstream stream;
     ostream_writer sink(stream);
     istream_reader source(stream);

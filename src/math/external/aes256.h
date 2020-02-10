@@ -17,8 +17,8 @@
  *   ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
  *   OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
-#ifndef LIBBITCOIN_CRYPTO_AES256_H
-#define LIBBITCOIN_CRYPTO_AES256_H
+#ifndef KTH_CRYPTO_AES256_H
+#define KTH_CRYPTO_AES256_H
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -38,7 +38,7 @@ typedef struct
 } aes256_context; 
 
 void aes256_init(aes256_context* context, 
-    const uint8_t key[AES256_KEY_LENGTH]);
+    uint8_t const key[AES256_KEY_LENGTH]);
 
 void aes256_done(aes256_context* context);
 

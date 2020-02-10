@@ -1,23 +1,8 @@
-/**
- * Copyright (c) 2017-2018 Bitprim Inc.
- *
- * This file is part of Bitprim.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <boost/test/unit_test.hpp>
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 
 using namespace bc;
 
@@ -38,7 +23,7 @@ BOOST_AUTO_TEST_CASE(endian__from_big_endian_stream_unsafe__insufficient_data__s
 
 BOOST_AUTO_TEST_CASE(endian__from_big_endian_stream_unsafe__eof__stream_partial_read)
 {
-    static const uint8_t content = 0xFF;
+    static uint8_t const content = 0xFF;
     static auto const shift = (sizeof(uint32_t) - sizeof(uint8_t)) * bc::byte_bits;
     const uint32_t expected = static_cast<uint32_t>(content) << shift;
     std::stringstream stream;
@@ -76,7 +61,7 @@ BOOST_AUTO_TEST_CASE(endian__from_little_endian_stream_unsafe__insufficient_data
 
 BOOST_AUTO_TEST_CASE(endian__from_little_endian_stream_unsafe__eof__stream_partial_read)
 {
-    static const uint8_t content = 0xFF;
+    static uint8_t const content = 0xFF;
     auto const expected = static_cast<uint32_t>(content);
     std::stringstream stream;
     stream.put(content);
@@ -105,14 +90,14 @@ BOOST_AUTO_TEST_CASE(endian__from_little_endian_stream_unsafe__valid__expected)
 
 BOOST_AUTO_TEST_CASE(endian__from_little_endian_unsafe__one_byte__expected)
 {
-    static const uint8_t expected = 0xff;
+    static uint8_t const expected = 0xff;
     static auto const bytes = data_chunk{ expected };
     BOOST_REQUIRE_EQUAL(from_little_endian_unsafe<uint8_t>(bytes.begin()), expected);
 }
 
 BOOST_AUTO_TEST_CASE(endian__from_big_endian_unsafe__one_byte__expected)
 {
-    static const uint8_t expected = 0xff;
+    static uint8_t const expected = 0xff;
     static auto const bytes = data_chunk{ expected };
     BOOST_REQUIRE_EQUAL(from_big_endian_unsafe<uint8_t>(bytes.begin()), expected);
 }

@@ -1,7 +1,7 @@
 // /**
-//  * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
+//  * Copyright (c) 2016-2020 Knuth Project developers.
 //  *
-//  * This file is part of libbitcoin.
+//  * This file is part of the Knuth Project.
 //  *
 //  * This program is free software: you can redistribute it and/or modify
 //  * it under the terms of the GNU Affero General Public License as published by
@@ -17,7 +17,7 @@
 //  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //  */
 // #include <boost/test/unit_test.hpp>
-// #include <bitcoin/infrastructure.hpp>
+// #include <kth/infrastructure.hpp>
 
 // using namespace bc;
 

@@ -1,27 +1,12 @@
-/**
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
- *
- * This file is part of libbitcoin.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <sstream>
 
 #include <boost/program_options.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 
 using namespace bc;
 using namespace bc::config;
@@ -39,27 +24,27 @@ BOOST_AUTO_TEST_SUITE(authority_tests)
 #define BI_AUTHORITY_IPV6_BOGUS_IPV4_ADDRESS "[::ffff:0:39]:256"
 
 // tools.ietf.org/html/rfc4291#section-2.5.2
-BC_CONSTEXPR message::ip_address test_unspecified_ip_address =
+constexpr message::ip_address test_unspecified_ip_address =
 {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
 // tools.ietf.org/html/rfc4291#section-2.5.5.2
-BC_CONSTEXPR message::ip_address test_mapped_ip_address =
+constexpr message::ip_address test_mapped_ip_address =
 {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0xff, 0xff, 0x01, 0x02, 0xf0, 0x01
 };
 
 // tools.ietf.org/html/rfc4291#section-2.5.5.1
-BC_CONSTEXPR message::ip_address test_compatible_ip_address =
+constexpr message::ip_address test_compatible_ip_address =
 {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0xf0, 0x01
 };
 
-BC_CONSTEXPR message::ip_address test_ipv6_address =
+constexpr message::ip_address test_ipv6_address =
 {
     0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02

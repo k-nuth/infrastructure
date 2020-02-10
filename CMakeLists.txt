@@ -1,27 +1,12 @@
-#
-# Copyright (c) 2017-2018 Bitprim Inc.
-#
-# This file is part of Bitprim.
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
+# Copyright (c) 2016-2020 Knuth Project developers.
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.8)
 
-# bitprim-infrastructure
+# kth-infrastructure
 #==============================================================================
-project(bitprim-infrastructure
+project(kth-infrastructure
   VERSION 0
   LANGUAGES CXX C)
   # VERSION 0.11.0
@@ -46,9 +31,9 @@ project(bitprim-infrastructure
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-# Check for baseline language coverage in the compiler for the C++14 standard.
+# Check for baseline language coverage in the compiler for the C++17 standard.
 #------------------------------------------------------------------------------
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Process options.
@@ -111,32 +96,39 @@ if (WITH_QRENCODE)
 endif()
 
 
-# Implement --JUST_BITPRIM_SOURCES for linting.
+# Implement --JUST_KTH_SOURCES for linting.
 #------------------------------------------------------------------------------
-option(JUST_BITPRIM_SOURCES "Just Bitprim source code to be linted." OFF)
-if (JUST_BITPRIM_SOURCES)
-  message(STATUS "Bitprim: Just Bitprim source code to be linted: enabled")
+option(JUST_KTH_SOURCES "Just Knuth source code to be linted." OFF)
+if (JUST_KTH_SOURCES)
+  message(STATUS "Knuth: Just Knuth source code to be linted: enabled")
 endif()
 
 
 
-set(BITPRIM_PROJECT_VERSION "-" CACHE STRING "Specify the Bitprim Project Version.")
-# message(${BITPRIM_PROJECT_VERSION})
-message( STATUS "Bitprim: Compiling version ${BITPRIM_PROJECT_VERSION}")
+set(KTH_PROJECT_VERSION "-" CACHE STRING "Specify the Knuth Project Version.")
+# message(${KTH_PROJECT_VERSION})
+message( STATUS "Knuth: Compiling version ${KTH_PROJECT_VERSION}")
 
 set(MICROARCHITECTURE "x86_64" CACHE STRING "Specify the Microarchitecture (x86_64|...).")
-message( STATUS "Bitprim: Compiling for ${MICROARCHITECTURE}")
-# add_definitions(-DBITPRIM_MICROARCHITECTURE=${MICROARCHITECTURE})
-# add_definitions(-DBITPRIM_MICROARCHITECTURE_STR="${MICROARCHITECTURE}")
+message( STATUS "Knuth: Compiling for ${MICROARCHITECTURE}")
+# add_definitions(-DKTH_MICROARCHITECTURE=${MICROARCHITECTURE})
+# add_definitions(-DKTH_MICROARCHITECTURE_STR="${MICROARCHITECTURE}")
+
+set(MARCH_ID "" CACHE STRING "Specify the Microarchitecture ID (x86_64|...).")
+message( STATUS "Knuth: Compiling for Microarchitecture ID ${MARCH_ID}")
+
+message( STATUS "Knuth: CONAN_CXX_FLAGS ${CONAN_CXX_FLAGS}")
+message( STATUS "Knuth: CONAN_C_FLAGS ${CONAN_C_FLAGS}")
+
 
 
 
 # Conan infrastructure
 #==============================================================================
-if(EXISTS ${CMAKE_SOURCE_DIR}/ci_utils/cmake/bitprimbuildinfo.cmake)
-    include(${CMAKE_SOURCE_DIR}/ci_utils/cmake/bitprimbuildinfo.cmake)
+if(EXISTS ${CMAKE_SOURCE_DIR}/ci_utils/cmake/knuthbuildinfo.cmake)
+    include(${CMAKE_SOURCE_DIR}/ci_utils/cmake/knuthbuildinfo.cmake)
 else()
-    message( STATUS "bitprimbuildinfo doent exists")
+    message( STATUS "knuthbuildinfo doent exists")
 endif()
 
 
@@ -234,7 +226,7 @@ include(CheckCXXCompilerFlag)
 #------------------------------------------------------------------------------
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/ci_utils/cmake)
 
-include(BitprimTools)
+include(KnuthTools)
 
 
 # Warn on all stuff.
@@ -297,14 +289,14 @@ endif()
 # Build
 #==============================================================================
 
-# src/bitprim-infrastructure.la => ${libdir}
+# src/kth-infrastructure.la => ${libdir}
 #------------------------------------------------------------------------------
 set(MODE STATIC)
 if (ENABLE_SHARED)
   set(MODE SHARED)
 endif()
 
-set(bitprim_infrastructure_sources_just_libbitcoin 
+set(knuth_infrastructure_sources_just_legacy 
         # src/machine/interpreter.cpp
         src/machine/number.cpp        #Fernando: commented for the moment...
         # src/machine/opcode.cpp
@@ -327,7 +319,6 @@ set(bitprim_infrastructure_sources_just_libbitcoin
         src/config/sodium.cpp
 
         src/error.cpp
-        # src/multi_crypto_support.cpp
         src/version.cpp
 
         src/formats/base_10.cpp
@@ -430,99 +421,99 @@ set(bitprim_infrastructure_sources_just_libbitcoin
         # src/wallet/parse_encrypted_keys/parse_encrypted_private.hpp
         # src/wallet/parse_encrypted_keys/parse_encrypted_public.cpp
         # src/wallet/parse_encrypted_keys/parse_encrypted_public.hpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_token.cpp   # #include <bitcoin/infrastructure/chain/script.hpp>
+        # src/wallet/parse_encrypted_keys/parse_encrypted_token.cpp   # #include <kth/infrastructure/chain/script.hpp>
         # src/wallet/parse_encrypted_keys/parse_encrypted_token.hpp
         # src/wallet/payment_address.cpp
 
-        # src/wallet/select_outputs.cpp   #  #include <bitcoin/infrastructure/chain/points_value.hpp>
-        # src/wallet/stealth_address.cpp    # #include <bitcoin/infrastructure/chain/script.hpp>
-        # src/wallet/stealth_receiver.cpp # #include <bitcoin/infrastructure/chain/script.hpp>
-        # src/wallet/stealth_sender.cpp # #include <bitcoin/infrastructure/chain/script.hpp>
+        # src/wallet/select_outputs.cpp   #  #include <kth/infrastructure/chain/points_value.hpp>
+        # src/wallet/stealth_address.cpp    # #include <kth/infrastructure/chain/script.hpp>
+        # src/wallet/stealth_receiver.cpp # #include <kth/infrastructure/chain/script.hpp>
+        # src/wallet/stealth_sender.cpp # #include <kth/infrastructure/chain/script.hpp>
         src/wallet/uri.cpp
       )
 
 # if (${CURRENCY} STREQUAL "LTC")
-#     set(bitprim_domain_sources_just_bitprim 
-#     ${bitprim_domain_sources_just_bitprim}         
+#     set(knuth_domain_sources_just_knuth 
+#     ${knuth_domain_sources_just_knuth}         
 #     src/math/external/scrypt.cpp
 #     src/math/external/scrypt-sse2.cpp)
 # endif()
   
 if (WITH_PNG)
-  set(bitprim_infrastructure_sources_just_libbitcoin 
-    ${bitprim_infrastructure_sources_just_libbitcoin}
+  set(knuth_infrastructure_sources_just_legacy 
+    ${knuth_infrastructure_sources_just_legacy}
     src/utility/png.cpp
   )
 endif()
 
 if (WITH_QRENCODE)
-  set(bitprim_infrastructure_sources_just_libbitcoin 
-    ${bitprim_infrastructure_sources_just_libbitcoin}
+  set(knuth_infrastructure_sources_just_legacy 
+    ${knuth_infrastructure_sources_just_legacy}
     src/wallet/qrcode.cpp
   )
 endif()
 
 
-set(bitprim_infrastructure_sources_just_bitprim
+set(knuth_infrastructure_sources_just_knuth
     # src/math/external/scrypt.cpp
     # src/math/external/scrypt-sse2.cpp
     src/wallet/cashaddr.cpp
 )
 
-if (NOT JUST_BITPRIM_SOURCES)
-  set(bitprim_infrastructure_sources 
-    ${bitprim_infrastructure_sources_just_libbitcoin}
+if (NOT JUST_KTH_SOURCES)
+  set(knuth_infrastructure_sources 
+    ${knuth_infrastructure_sources_just_legacy}
   )
 endif()
 
-set(bitprim_infrastructure_sources 
-  ${bitprim_infrastructure_sources}   
-  ${bitprim_infrastructure_sources_just_bitprim}         
+set(knuth_infrastructure_sources 
+  ${knuth_infrastructure_sources}   
+  ${knuth_infrastructure_sources_just_knuth}         
 )
 
-add_library(bitprim-infrastructure ${MODE} ${bitprim_infrastructure_sources})
+add_library(kth-infrastructure ${MODE} ${knuth_infrastructure_sources})
 
 if (ENABLE_POSITION_INDEPENDENT_CODE)
-    set_property(TARGET bitprim-infrastructure PROPERTY POSITION_INDEPENDENT_CODE ON)
+    set_property(TARGET kth-infrastructure PROPERTY POSITION_INDEPENDENT_CODE ON)
 endif(ENABLE_POSITION_INDEPENDENT_CODE)
 
 
 
-#set_target_properties(bitprim-infrastructure PROPERTIES CXX_VISIBILITY_PRESET hidden)
-#set_target_properties(bitprim-infrastructure PROPERTIES CXX_VISIBILITY_PRESET internal)
+#set_target_properties(kth-infrastructure PROPERTIES CXX_VISIBILITY_PRESET hidden)
+#set_target_properties(kth-infrastructure PROPERTIES CXX_VISIBILITY_PRESET internal)
 
 #-fvisibility=default|internal|hidden|protected
 
-# add_library(bitprim-infrastructure ${MODE}
+# add_library(kth-infrastructure ${MODE}
 #        src/wallet/uri.cpp)
 
-target_include_directories(bitprim-infrastructure PUBLIC
+target_include_directories(kth-infrastructure PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
   
 if (NOT ENABLE_SHARED)
-    target_compile_definitions(bitprim-infrastructure PUBLIC -DBI_STATIC) #TODO(fernando): manage with Conan????
+    target_compile_definitions(kth-infrastructure PUBLIC -DBI_STATIC) #TODO(fernando): manage with Conan????
 endif()
 
-target_compile_definitions(bitprim-infrastructure PUBLIC -DBITPRIM_PROJECT_VERSION="${BITPRIM_PROJECT_VERSION}") #TODO(fernando): manage with Conan????
+target_compile_definitions(kth-infrastructure PUBLIC -DKTH_PROJECT_VERSION="${KTH_PROJECT_VERSION}") #TODO(fernando): manage with Conan????
 
-target_include_directories(bitprim-infrastructure SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(kth-infrastructure SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
 
 # if (${CURRENCY} STREQUAL "LTC")
-#   target_include_directories(bitprim-infrastructure SYSTEM PUBLIC ${OPENSSL_INCLUDE_DIR})
+#   target_include_directories(kth-infrastructure SYSTEM PUBLIC ${OPENSSL_INCLUDE_DIR})
 # endif()
 
 if (NOT NO_CONAN_AT_ALL)
-  target_link_libraries(bitprim-infrastructure PUBLIC ${CONAN_LIBS})
+  target_link_libraries(kth-infrastructure PUBLIC ${CONAN_LIBS})
 else()
   if (MSVC)
-    target_link_libraries(bitprim-infrastructure PUBLIC
+    target_link_libraries(kth-infrastructure PUBLIC
       ${Boost_ATOMIC_LIBRARY}
       ${Boost_LOG_SETUP_LIBRARY}
     )
   endif()
 
-  target_link_libraries(bitprim-infrastructure PUBLIC
+  target_link_libraries(kth-infrastructure PUBLIC
     # ${Boost_CHRONO_LIBRARY}
     ${Boost_DATE_TIME_LIBRARY}
     ${Boost_FILESYSTEM_LIBRARY}
@@ -536,22 +527,22 @@ else()
   )
 endif()
 
-target_link_libraries(bitprim-infrastructure PUBLIC ${CMAKE_THREAD_LIBS_INIT})  #TODO(fernando): manage with Conan????
+target_link_libraries(kth-infrastructure PUBLIC ${CMAKE_THREAD_LIBS_INIT})  #TODO(fernando): manage with Conan????
 
 # if (NO_CONAN_AT_ALL)
     if (MINGW) #(WIN32)
-        target_link_libraries(bitprim-infrastructure PUBLIC ws2_32 wsock32)
+        target_link_libraries(kth-infrastructure PUBLIC ws2_32 wsock32)
     endif()
 # endif()
 
 if (WITH_PNG)
     if (NO_CONAN_AT_ALL)
-        target_link_libraries(bitprim-infrastructure PUBLIC png)
+        target_link_libraries(kth-infrastructure PUBLIC png)
     endif (NO_CONAN_AT_ALL)
 endif()
 
 # if (${CURRENCY} STREQUAL "LTC")
-#   target_link_libraries(bitprim-infrastructure PUBLIC ${OPENSSL_CRYPTO_LIBRARY})  #TODO(fernando): manage with Conan
+#   target_link_libraries(kth-infrastructure PUBLIC ${OPENSSL_CRYPTO_LIBRARY})  #TODO(fernando): manage with Conan
 
 #   # OPENSSL_CRYPTO_LIBRARY
 #   # OPENSSL_SSL_LIBRARY
@@ -559,10 +550,10 @@ endif()
 # endif()
 
 if (NOT USE_CONAN)
-  target_link_libraries(bitprim-infrastructure PUBLIC secp256k1)
+  target_link_libraries(kth-infrastructure PUBLIC secp256k1)
 endif()
 
-_group_sources(bitprim-infrastructure "${CMAKE_CURRENT_LIST_DIR}")
+_group_sources(kth-infrastructure "${CMAKE_CURRENT_LIST_DIR}")
 
 # Tests
 #==============================================================================
@@ -571,11 +562,11 @@ if (WITH_TESTS OR WITH_TESTS_NEW)
   enable_testing()
 endif()
 
-# local: test/bitprim_infrastructure_test
+# local: test/knuth_infrastructure_test
 #------------------------------------------------------------------------------
 if (WITH_TESTS)
 
-  set(bitprim_infrastructure_test_sources
+  set(knuth_infrastructure_test_sources
         test/config/authority.cpp
         test/config/base58.cpp
         test/config/checkpoint.cpp
@@ -628,28 +619,28 @@ if (WITH_TESTS)
 
 
   if (WITH_PNG)
-    set(bitprim_infrastructure_test_sources 
-        ${bitprim_infrastructure_test_sources}
+    set(knuth_infrastructure_test_sources 
+        ${knuth_infrastructure_test_sources}
         src/utility/png.cpp
     )
   endif()
 
   if (WITH_QRENCODE)
-    set(bitprim_infrastructure_test_sources 
-        ${bitprim_infrastructure_test_sources}
+    set(knuth_infrastructure_test_sources 
+        ${knuth_infrastructure_test_sources}
         src/wallet/qrcode.cpp
     )
   endif()
 
-  add_executable(bitprim_infrastructure_test
-                ${bitprim_infrastructure_test_sources}
+  add_executable(knuth_infrastructure_test
+                ${knuth_infrastructure_test_sources}
   )
-  target_link_libraries(bitprim_infrastructure_test PUBLIC bitprim-infrastructure)
+  target_link_libraries(knuth_infrastructure_test PUBLIC kth-infrastructure)
 
-_group_sources(bitprim_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
+_group_sources(knuth_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
 
 #    TODO(fernando): chequear si hay nuevos tests en los makefiles (no Cmake)
-  _add_tests(bitprim_infrastructure_test
+  _add_tests(knuth_infrastructure_test
 
     # address_tests
     # alert_payload_tests
@@ -741,248 +732,247 @@ _group_sources(bitprim_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
   )
 
   if (WITH_PNG)
-    _add_tests(bitprim_infrastructure_test png_tests)
+    _add_tests(knuth_infrastructure_test png_tests)
   endif()
 
   if (WITH_QRENCODE)
-    _add_tests(bitprim_infrastructure_test qrcode_tests)
+    _add_tests(knuth_infrastructure_test qrcode_tests)
   endif()
 endif()
 
 # if (WITH_TESTS_NEW)
-#     add_executable(bitprim_infrastructure_test_new
+#     add_executable(knuth_infrastructure_test_new
 #             test_new/main.cpp
 #     )
-#     target_link_libraries(bitprim_infrastructure_test_new PUBLIC bitprim-infrastructure)
+#     target_link_libraries(knuth_infrastructure_test_new PUBLIC kth-infrastructure)
 
-#     add_test(NAME bitprim_infrastructure_test_new COMMAND bitprim_infrastructure_test_new)
+#     add_test(NAME knuth_infrastructure_test_new COMMAND knuth_infrastructure_test_new)
 # endif()
 
 
 # Examples
 #==============================================================================
-# local: examples/bitprim_infrastructure_examples
+# local: examples/knuth_infrastructure_examples
 #------------------------------------------------------------------------------
 if (WITH_EXAMPLES)
-  add_executable(bitprim_infrastructure_examples
+  add_executable(knuth_infrastructure_examples
     examples/main.cpp)
 
-  target_link_libraries(bitprim_infrastructure_examples PUBLIC bitprim-infrastructure)
+  target_link_libraries(knuth_infrastructure_examples PUBLIC kth-infrastructure)
 
-  _group_sources(bitprim_infrastructure_examples "${CMAKE_CURRENT_LIST_DIR}/examples")
+  _group_sources(knuth_infrastructure_examples "${CMAKE_CURRENT_LIST_DIR}/examples")
 endif()
 
 # Install
 #==============================================================================
-install(TARGETS bitprim-infrastructure EXPORT bitprim-infrastructure
+install(TARGETS kth-infrastructure EXPORT kth-infrastructure
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
     INCLUDES DESTINATION include
 )
 
-#install(EXPORT bitprim-infrastructureTargets
+#install(EXPORT kth-infrastructureTargets
 #
 #)
 
-set(_bitprim_infrastructure_headers
-    # bitcoin/infrastructure/multi_crypto_support.hpp
-    bitcoin/infrastructure/compat.h
-    bitcoin/infrastructure/compat.hpp
-    bitcoin/infrastructure/constants.hpp
-    bitcoin/infrastructure/define.hpp
-    bitcoin/infrastructure/error.hpp
-    bitcoin/infrastructure/handlers.hpp
-    bitcoin/infrastructure/version.hpp
+set(_knuth_infrastructure_headers
+    kth/infrastructure/compat.h
+    kth/infrastructure/compat.hpp
+    kth/infrastructure/constants.hpp
+    kth/infrastructure/define.hpp
+    kth/infrastructure/error.hpp
+    kth/infrastructure/handlers.hpp
+    kth/infrastructure/version.hpp
 
-    bitcoin/infrastructure/machine/interpreter.hpp
-    bitcoin/infrastructure/machine/number.hpp    
-    # bitcoin/infrastructure/machine/opcode.hpp
-    # bitcoin/infrastructure/machine/operation.hpp
-    bitcoin/infrastructure/machine/program.hpp
-    # bitcoin/infrastructure/machine/rule_fork.hpp
-    bitcoin/infrastructure/machine/script_pattern.hpp
-    bitcoin/infrastructure/machine/sighash_algorithm.hpp
-    bitcoin/infrastructure/machine/script_version.hpp
+    kth/infrastructure/machine/interpreter.hpp
+    kth/infrastructure/machine/number.hpp    
+    # kth/infrastructure/machine/opcode.hpp
+    # kth/infrastructure/machine/operation.hpp
+    kth/infrastructure/machine/program.hpp
+    # kth/infrastructure/machine/rule_fork.hpp
+    kth/infrastructure/machine/script_pattern.hpp
+    kth/infrastructure/machine/sighash_algorithm.hpp
+    kth/infrastructure/machine/script_version.hpp
 
-    bitcoin/infrastructure/config/authority.hpp
-    bitcoin/infrastructure/config/base16.hpp
-    bitcoin/infrastructure/config/base2.hpp
-    bitcoin/infrastructure/config/base58.hpp
-    bitcoin/infrastructure/config/base64.hpp
-    bitcoin/infrastructure/config/checkpoint.hpp
-    bitcoin/infrastructure/config/directory.hpp
-    bitcoin/infrastructure/config/endpoint.hpp
-    bitcoin/infrastructure/config/hash160.hpp
-    bitcoin/infrastructure/config/hash256.hpp
-    bitcoin/infrastructure/config/parameter.hpp
-    # bitcoin/infrastructure/config/parser.hpp
-    bitcoin/infrastructure/config/printer.hpp
-    bitcoin/infrastructure/config/settings.hpp
-    bitcoin/infrastructure/config/sodium.hpp
+    kth/infrastructure/config/authority.hpp
+    kth/infrastructure/config/base16.hpp
+    kth/infrastructure/config/base2.hpp
+    kth/infrastructure/config/base58.hpp
+    kth/infrastructure/config/base64.hpp
+    kth/infrastructure/config/checkpoint.hpp
+    kth/infrastructure/config/directory.hpp
+    kth/infrastructure/config/endpoint.hpp
+    kth/infrastructure/config/hash160.hpp
+    kth/infrastructure/config/hash256.hpp
+    kth/infrastructure/config/parameter.hpp
+    # kth/infrastructure/config/parser.hpp
+    kth/infrastructure/config/printer.hpp
+    kth/infrastructure/config/settings.hpp
+    kth/infrastructure/config/sodium.hpp
 
-    bitcoin/infrastructure/config/header.hpp
-    bitcoin/infrastructure/config/input.hpp
-    bitcoin/infrastructure/config/output.hpp
-    bitcoin/infrastructure/config/transaction.hpp
-    bitcoin/infrastructure/config/script.hpp
-    bitcoin/infrastructure/config/ec_private.hpp
-    bitcoin/infrastructure/config/endorsement.hpp
-
+    kth/infrastructure/config/header.hpp
+    kth/infrastructure/config/input.hpp
+    kth/infrastructure/config/output.hpp
+    kth/infrastructure/config/transaction.hpp
+    kth/infrastructure/config/script.hpp
+    kth/infrastructure/config/ec_private.hpp
+    kth/infrastructure/config/endorsement.hpp
 
 
-    bitcoin/infrastructure/formats/base_10.hpp
-    bitcoin/infrastructure/formats/base_16.hpp
-    bitcoin/infrastructure/formats/base_58.hpp
-    bitcoin/infrastructure/formats/base_64.hpp
-    bitcoin/infrastructure/formats/base_85.hpp
 
-    bitcoin/infrastructure/impl/formats/base_16.ipp
-    bitcoin/infrastructure/impl/formats/base_58.ipp
+    kth/infrastructure/formats/base_10.hpp
+    kth/infrastructure/formats/base_16.hpp
+    kth/infrastructure/formats/base_58.hpp
+    kth/infrastructure/formats/base_64.hpp
+    kth/infrastructure/formats/base_85.hpp
+
+    kth/infrastructure/impl/formats/base_16.ipp
+    kth/infrastructure/impl/formats/base_58.ipp
    
-    bitcoin/infrastructure/impl/math/checksum.ipp
-    bitcoin/infrastructure/impl/math/hash.ipp
+    kth/infrastructure/impl/math/checksum.ipp
+    kth/infrastructure/impl/math/hash.ipp
 
-    bitcoin/infrastructure/impl/machine/interpreter.ipp
-    bitcoin/infrastructure/impl/machine/number.ipp
-    # bitcoin/infrastructure/impl/machine/operation.ipp
-    bitcoin/infrastructure/impl/machine/program.ipp
+    kth/infrastructure/impl/machine/interpreter.ipp
+    kth/infrastructure/impl/machine/number.ipp
+    # kth/infrastructure/impl/machine/operation.ipp
+    kth/infrastructure/impl/machine/program.ipp
 
-    bitcoin/infrastructure/math/checksum.hpp
-    bitcoin/infrastructure/math/crypto.hpp
-    bitcoin/infrastructure/math/elliptic_curve.hpp
-    bitcoin/infrastructure/math/hash.hpp
-    # bitcoin/infrastructure/math/limits.hpp
-    bitcoin/infrastructure/math/stealth.hpp
-    bitcoin/infrastructure/math/uint256.hpp
+    kth/infrastructure/math/checksum.hpp
+    kth/infrastructure/math/crypto.hpp
+    kth/infrastructure/math/elliptic_curve.hpp
+    kth/infrastructure/math/hash.hpp
+    # kth/infrastructure/math/limits.hpp
+    kth/infrastructure/math/stealth.hpp
+    kth/infrastructure/math/uint256.hpp
 
-    bitcoin/infrastructure/impl/log/features/counter.ipp
-    bitcoin/infrastructure/impl/log/features/gauge.ipp
-    bitcoin/infrastructure/impl/log/features/metric.ipp
-    bitcoin/infrastructure/impl/log/features/rate.ipp
-    bitcoin/infrastructure/impl/log/features/timer.ipp
+    kth/infrastructure/impl/log/features/counter.ipp
+    kth/infrastructure/impl/log/features/gauge.ipp
+    kth/infrastructure/impl/log/features/metric.ipp
+    kth/infrastructure/impl/log/features/rate.ipp
+    kth/infrastructure/impl/log/features/timer.ipp
 
 
-    bitcoin/infrastructure/impl/utility/array_slice.ipp
-    bitcoin/infrastructure/impl/utility/collection.ipp
-    bitcoin/infrastructure/impl/utility/data.ipp
-    bitcoin/infrastructure/impl/utility/deserializer.ipp
-    bitcoin/infrastructure/impl/utility/endian.ipp
-    bitcoin/infrastructure/impl/utility/istream_reader.ipp
-    bitcoin/infrastructure/impl/utility/ostream_writer.ipp
-    bitcoin/infrastructure/impl/utility/pending.ipp
-    bitcoin/infrastructure/impl/utility/resubscriber.ipp
-    bitcoin/infrastructure/impl/utility/serializer.ipp
-    bitcoin/infrastructure/impl/utility/subscriber.ipp
-    bitcoin/infrastructure/impl/utility/string.ipp
-    bitcoin/infrastructure/impl/utility/track.ipp
+    kth/infrastructure/impl/utility/array_slice.ipp
+    kth/infrastructure/impl/utility/collection.ipp
+    kth/infrastructure/impl/utility/data.ipp
+    kth/infrastructure/impl/utility/deserializer.ipp
+    kth/infrastructure/impl/utility/endian.ipp
+    kth/infrastructure/impl/utility/istream_reader.ipp
+    kth/infrastructure/impl/utility/ostream_writer.ipp
+    kth/infrastructure/impl/utility/pending.ipp
+    kth/infrastructure/impl/utility/resubscriber.ipp
+    kth/infrastructure/impl/utility/serializer.ipp
+    kth/infrastructure/impl/utility/subscriber.ipp
+    kth/infrastructure/impl/utility/string.ipp
+    kth/infrastructure/impl/utility/track.ipp
 
-    bitcoin/infrastructure/log/attributes.hpp
-    bitcoin/infrastructure/log/file_char_traits.hpp
-    bitcoin/infrastructure/log/file_collector.hpp
-    bitcoin/infrastructure/log/file_collector_repository.hpp
-    bitcoin/infrastructure/log/file_counter_formatter.hpp
-    bitcoin/infrastructure/log/rotable_file.hpp    
-    bitcoin/infrastructure/log/severity.hpp
-    bitcoin/infrastructure/log/sink.hpp
-    bitcoin/infrastructure/log/source.hpp
-    bitcoin/infrastructure/log/statsd_sink.hpp
-    bitcoin/infrastructure/log/statsd_source.hpp
-    bitcoin/infrastructure/log/udp_client_sink.hpp
+    kth/infrastructure/log/attributes.hpp
+    kth/infrastructure/log/file_char_traits.hpp
+    kth/infrastructure/log/file_collector.hpp
+    kth/infrastructure/log/file_collector_repository.hpp
+    kth/infrastructure/log/file_counter_formatter.hpp
+    kth/infrastructure/log/rotable_file.hpp    
+    kth/infrastructure/log/severity.hpp
+    kth/infrastructure/log/sink.hpp
+    kth/infrastructure/log/source.hpp
+    kth/infrastructure/log/statsd_sink.hpp
+    kth/infrastructure/log/statsd_source.hpp
+    kth/infrastructure/log/udp_client_sink.hpp
 
-    bitcoin/infrastructure/log/features/counter.hpp
-    bitcoin/infrastructure/log/features/gauge.hpp
-    bitcoin/infrastructure/log/features/metric.hpp
-    bitcoin/infrastructure/log/features/rate.hpp
-    bitcoin/infrastructure/log/features/timer.hpp
+    kth/infrastructure/log/features/counter.hpp
+    kth/infrastructure/log/features/gauge.hpp
+    kth/infrastructure/log/features/metric.hpp
+    kth/infrastructure/log/features/rate.hpp
+    kth/infrastructure/log/features/timer.hpp
 
-    bitcoin/infrastructure/message/message_tools.hpp
+    kth/infrastructure/message/message_tools.hpp
 
-    bitcoin/infrastructure/unicode/console_streambuf.hpp
-    bitcoin/infrastructure/unicode/file_lock.hpp
-    bitcoin/infrastructure/unicode/ifstream.hpp
-    bitcoin/infrastructure/unicode/ofstream.hpp
-    bitcoin/infrastructure/unicode/unicode.hpp
-    bitcoin/infrastructure/unicode/unicode_istream.hpp
-    bitcoin/infrastructure/unicode/unicode_ostream.hpp
-    bitcoin/infrastructure/unicode/unicode_streambuf.hpp
+    kth/infrastructure/unicode/console_streambuf.hpp
+    kth/infrastructure/unicode/file_lock.hpp
+    kth/infrastructure/unicode/ifstream.hpp
+    kth/infrastructure/unicode/ofstream.hpp
+    kth/infrastructure/unicode/unicode.hpp
+    kth/infrastructure/unicode/unicode_istream.hpp
+    kth/infrastructure/unicode/unicode_ostream.hpp
+    kth/infrastructure/unicode/unicode_streambuf.hpp
 
-    bitcoin/infrastructure/utility/array_slice.hpp
-    bitcoin/infrastructure/utility/asio.hpp
-    bitcoin/infrastructure/utility/assert.hpp
-    bitcoin/infrastructure/utility/atomic.hpp
-    bitcoin/infrastructure/utility/binary.hpp
-    bitcoin/infrastructure/utility/collection.hpp
-    bitcoin/infrastructure/utility/color.hpp
-    bitcoin/infrastructure/utility/conditional_lock.hpp
-    bitcoin/infrastructure/utility/container_sink.hpp
-    bitcoin/infrastructure/utility/container_source.hpp
-    bitcoin/infrastructure/utility/data.hpp
-    bitcoin/infrastructure/utility/deadline.hpp
-    bitcoin/infrastructure/utility/decorator.hpp
-    bitcoin/infrastructure/utility/delegates.hpp
-    bitcoin/infrastructure/utility/deserializer.hpp
-    bitcoin/infrastructure/utility/dispatcher.hpp
-    bitcoin/infrastructure/utility/enable_shared_from_base.hpp
-    bitcoin/infrastructure/utility/endian.hpp
-    bitcoin/infrastructure/utility/exceptions.hpp
-    bitcoin/infrastructure/utility/flush_lock.hpp
-    bitcoin/infrastructure/utility/interprocess_lock.hpp
-    bitcoin/infrastructure/utility/istream_reader.hpp
-    bitcoin/infrastructure/utility/monitor.hpp
-    bitcoin/infrastructure/utility/noncopyable.hpp
-    bitcoin/infrastructure/utility/ostream_writer.hpp
-    bitcoin/infrastructure/utility/pending.hpp
-    bitcoin/infrastructure/utility/png.hpp
-    bitcoin/infrastructure/utility/prioritized_mutex.hpp
-    bitcoin/infrastructure/utility/pseudo_random.hpp
-    bitcoin/infrastructure/utility/reader.hpp
-    bitcoin/infrastructure/utility/resubscriber.hpp
-    bitcoin/infrastructure/utility/scope_lock.hpp
-    bitcoin/infrastructure/utility/sequencer.hpp
-    bitcoin/infrastructure/utility/sequential_lock.hpp
-    bitcoin/infrastructure/utility/serializer.hpp
-    bitcoin/infrastructure/utility/socket.hpp    
-    bitcoin/infrastructure/utility/string.hpp
-    bitcoin/infrastructure/utility/subscriber.hpp
-    bitcoin/infrastructure/utility/synchronizer.hpp
-    bitcoin/infrastructure/utility/thread.hpp
-    bitcoin/infrastructure/utility/threadpool.hpp
-    bitcoin/infrastructure/utility/timer.hpp
-    bitcoin/infrastructure/utility/track.hpp
-    bitcoin/infrastructure/utility/work.hpp
-    bitcoin/infrastructure/utility/writer.hpp
+    kth/infrastructure/utility/array_slice.hpp
+    kth/infrastructure/utility/asio.hpp
+    kth/infrastructure/utility/assert.hpp
+    kth/infrastructure/utility/atomic.hpp
+    kth/infrastructure/utility/binary.hpp
+    kth/infrastructure/utility/collection.hpp
+    kth/infrastructure/utility/color.hpp
+    kth/infrastructure/utility/conditional_lock.hpp
+    kth/infrastructure/utility/container_sink.hpp
+    kth/infrastructure/utility/container_source.hpp
+    kth/infrastructure/utility/data.hpp
+    kth/infrastructure/utility/deadline.hpp
+    kth/infrastructure/utility/decorator.hpp
+    kth/infrastructure/utility/delegates.hpp
+    kth/infrastructure/utility/deserializer.hpp
+    kth/infrastructure/utility/dispatcher.hpp
+    kth/infrastructure/utility/enable_shared_from_base.hpp
+    kth/infrastructure/utility/endian.hpp
+    kth/infrastructure/utility/exceptions.hpp
+    kth/infrastructure/utility/flush_lock.hpp
+    kth/infrastructure/utility/interprocess_lock.hpp
+    kth/infrastructure/utility/istream_reader.hpp
+    kth/infrastructure/utility/monitor.hpp
+    kth/infrastructure/utility/noncopyable.hpp
+    kth/infrastructure/utility/ostream_writer.hpp
+    kth/infrastructure/utility/pending.hpp
+    kth/infrastructure/utility/png.hpp
+    kth/infrastructure/utility/prioritized_mutex.hpp
+    kth/infrastructure/utility/pseudo_random.hpp
+    kth/infrastructure/utility/reader.hpp
+    kth/infrastructure/utility/resubscriber.hpp
+    kth/infrastructure/utility/scope_lock.hpp
+    kth/infrastructure/utility/sequencer.hpp
+    kth/infrastructure/utility/sequential_lock.hpp
+    kth/infrastructure/utility/serializer.hpp
+    kth/infrastructure/utility/socket.hpp    
+    kth/infrastructure/utility/string.hpp
+    kth/infrastructure/utility/subscriber.hpp
+    kth/infrastructure/utility/synchronizer.hpp
+    kth/infrastructure/utility/thread.hpp
+    kth/infrastructure/utility/threadpool.hpp
+    kth/infrastructure/utility/timer.hpp
+    kth/infrastructure/utility/track.hpp
+    kth/infrastructure/utility/work.hpp
+    kth/infrastructure/utility/writer.hpp
     
-    # bitcoin/infrastructure/wallet/bitcoin_uri.hpp
+    # kth/infrastructure/wallet/bitcoin_uri.hpp
     
-    bitcoin/infrastructure/wallet/cashaddr.hpp
+    kth/infrastructure/wallet/cashaddr.hpp
 
-    bitcoin/infrastructure/wallet/dictionary.hpp
-    bitcoin/infrastructure/wallet/ec_private.hpp
-    bitcoin/infrastructure/wallet/ec_public.hpp
-    bitcoin/infrastructure/wallet/ek_private.hpp
-    bitcoin/infrastructure/wallet/ek_public.hpp
-    bitcoin/infrastructure/wallet/ek_token.hpp
-    bitcoin/infrastructure/wallet/encrypted_keys.hpp
-    bitcoin/infrastructure/wallet/hd_private.hpp
-    bitcoin/infrastructure/wallet/hd_public.hpp
-    # bitcoin/infrastructure/wallet/message.hpp
-    bitcoin/infrastructure/wallet/mini_keys.hpp
-    bitcoin/infrastructure/wallet/mnemonic.hpp
-    # bitcoin/infrastructure/wallet/payment_address.hpp
-    bitcoin/infrastructure/wallet/qrcode.hpp
-    # bitcoin/infrastructure/wallet/select_outputs.hpp
-    # bitcoin/infrastructure/wallet/stealth_address.hpp
-    # bitcoin/infrastructure/wallet/stealth_receiver.hpp
-    # bitcoin/infrastructure/wallet/stealth_sender.hpp
-    bitcoin/infrastructure/wallet/uri.hpp
-    # bitcoin/infrastructure/wallet/uri_reader.hpp
-    # bitcoin/infrastructure/wallet/transaction_functions.hpp
+    kth/infrastructure/wallet/dictionary.hpp
+    kth/infrastructure/wallet/ec_private.hpp
+    kth/infrastructure/wallet/ec_public.hpp
+    kth/infrastructure/wallet/ek_private.hpp
+    kth/infrastructure/wallet/ek_public.hpp
+    kth/infrastructure/wallet/ek_token.hpp
+    kth/infrastructure/wallet/encrypted_keys.hpp
+    kth/infrastructure/wallet/hd_private.hpp
+    kth/infrastructure/wallet/hd_public.hpp
+    # kth/infrastructure/wallet/message.hpp
+    kth/infrastructure/wallet/mini_keys.hpp
+    kth/infrastructure/wallet/mnemonic.hpp
+    # kth/infrastructure/wallet/payment_address.hpp
+    kth/infrastructure/wallet/qrcode.hpp
+    # kth/infrastructure/wallet/select_outputs.hpp
+    # kth/infrastructure/wallet/stealth_address.hpp
+    # kth/infrastructure/wallet/stealth_receiver.hpp
+    # kth/infrastructure/wallet/stealth_sender.hpp
+    kth/infrastructure/wallet/uri.hpp
+    # kth/infrastructure/wallet/uri_reader.hpp
+    # kth/infrastructure/wallet/transaction_functions.hpp
 
-    bitcoin/infrastructure.hpp
+    kth/infrastructure.hpp
     )
 
-foreach (_header ${_bitprim_infrastructure_headers})
+foreach (_header ${_knuth_infrastructure_headers})
   get_filename_component(_directory "${_header}" DIRECTORY)
   install(FILES "include/${_header}" DESTINATION "include/${_directory}")
 endforeach()
@@ -991,9 +981,9 @@ endforeach()
 #==============================================================================
 include(CMakePackageConfigHelpers)
 
-export(EXPORT bitprim-infrastructure
-  FILE "${CMAKE_CURRENT_BINARY_DIR}/bitprim-infrastructureTargets.cmake")
-export(PACKAGE bitprim-infrastructure)
+export(EXPORT kth-infrastructure
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/kth-infrastructureTargets.cmake")
+export(PACKAGE kth-infrastructure)
 
 if (UNIX)
   set(_config_package_location "lib/cmake")
@@ -1001,21 +991,21 @@ elseif (WIN32)
   set(_config_package_location "cmake")
 endif()
 
-install(EXPORT bitprim-infrastructure
-  FILE bitprim-infrastructureTargets.cmake
+install(EXPORT kth-infrastructure
+  FILE kth-infrastructureTargets.cmake
   DESTINATION ${_config_package_location})
 
-configure_file(bitprim-infrastructureConfig.cmake.in
-  "${CMAKE_CURRENT_BINARY_DIR}/bitprim-infrastructureConfig.cmake"
+configure_file(kth-infrastructureConfig.cmake.in
+  "${CMAKE_CURRENT_BINARY_DIR}/kth-infrastructureConfig.cmake"
   @ONLY)
 
 write_basic_package_version_file(
-  "${CMAKE_CURRENT_BINARY_DIR}/bitprim-infrastructureConfigVersion.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/kth-infrastructureConfigVersion.cmake"
   VERSION ${PROJECT_VERSION}
   COMPATIBILITY AnyNewerVersion)
 
 install(
   FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/bitprim-infrastructureConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/bitprim-infrastructureConfigVersion.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/kth-infrastructureConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/kth-infrastructureConfigVersion.cmake"
   DESTINATION ${_config_package_location})

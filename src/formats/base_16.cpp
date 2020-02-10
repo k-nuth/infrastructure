@@ -1,22 +1,7 @@
-/**
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
- *
- * This file is part of libbitcoin.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include <bitcoin/infrastructure/formats/base_16.hpp>
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <kth/infrastructure/formats/base_16.hpp>
 
 #include <algorithm>
 #include <iomanip>
@@ -24,9 +9,9 @@
 
 #include <boost/algorithm/string.hpp>
 
-#include <bitcoin/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 std::string encode_base16(data_slice data) {
     std::stringstream ss;
@@ -94,7 +79,7 @@ bool decode_hash(hash_digest& out, std::string const& in) {
 hash_digest hash_literal(char const (&string)[2 * hash_size + 1]) {
     hash_digest out;
     DEBUG_ONLY(auto const success =) decode_base16_private(out.data(), out.size(), string);
-    BITCOIN_ASSERT(success);
+    KTH_ASSERT(success);
     std::reverse(out.begin(), out.end());
     return out;
 }
@@ -113,4 +98,4 @@ bool decode_base16_private(uint8_t* out, size_t out_size, char const* in) {
     return true;
 }
 
-} // namespace libbitcoin
+} // namespace kth

@@ -31,7 +31,7 @@
 #include "sha256.h"
 #include "zeroize.h"
 
-void HMACSHA256(const uint8_t* input, size_t length, const uint8_t* key,
+void HMACSHA256(uint8_t const* input, size_t length, uint8_t const* key,
     size_t key_length, uint8_t digest[HMACSHA256_DIGEST_LENGTH])
 {
     HMACSHA256CTX context;
@@ -52,7 +52,7 @@ void HMACSHA256Final(HMACSHA256CTX* context,
     zeroize((void*)hash, sizeof hash);
 }
 
-void HMACSHA256Init(HMACSHA256CTX* context, const uint8_t* key, 
+void HMACSHA256Init(HMACSHA256CTX* context, uint8_t const* key, 
     size_t key_length)
 {
     size_t i;
@@ -87,7 +87,7 @@ void HMACSHA256Init(HMACSHA256CTX* context, const uint8_t* key,
     zeroize((void*)key_hash, sizeof key_hash);
 }
 
-void HMACSHA256Update(HMACSHA256CTX* context, const uint8_t* input,
+void HMACSHA256Update(HMACSHA256CTX* context, uint8_t const* input,
     size_t length)
 {
     SHA256Update(&context->ictx, input, length);

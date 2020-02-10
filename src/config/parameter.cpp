@@ -1,34 +1,19 @@
-/**
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
- *
- * This file is part of libbitcoin.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include <bitcoin/infrastructure/config/parameter.hpp>
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <kth/infrastructure/config/parameter.hpp>
 
 #include <iostream>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/program_options.hpp>
 
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/collection.hpp>
-#include <bitcoin/infrastructure/utility/string.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/utility/collection.hpp>
+#include <kth/infrastructure/utility/string.hpp>
 
 namespace po = boost::program_options;
-using namespace libbitcoin::config;
+using namespace kth::config;
 
 int const parameter::not_positional = -1;
 char const parameter::no_short_name = 0x00;
@@ -59,7 +44,8 @@ char parameter::short_name(const po::option_description& option) const {
     //auto name = option.canonical_display_name(
     //    search_options::dashed_short_prefer_short);
 
-    // This is a substitute that allows us to use boost 1.49 for libbitcoin.
+    //TODO(fernando): check if that is necessary right now (we are using Boost 1.72.0 or newer)
+    // This is a substitute that allows us to use boost 1.49.
     auto const name = split(option.format_name()).front();
     auto is_short_name = name[0] == option_prefix_char && name[1] != option_prefix_char;
     return is_short_name ? name[1] : no_short_name;

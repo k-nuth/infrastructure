@@ -1,21 +1,6 @@
-/**
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
- *
- * This file is part of libbitcoin.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 // This implementation is based on:
 //  --------------------------------------------------------------------------
@@ -46,16 +31,16 @@
 //  DEALINGS IN THE SOFTWARE.
 //  --------------------------------------------------------------------------
 
-#include <bitcoin/infrastructure/formats/base_85.hpp>
+#include <kth/infrastructure/formats/base_85.hpp>
 
 #include <cstddef>
 #include <cstdint>
 #include <string>
 
-#include <bitcoin/infrastructure/utility/assert.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/data.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 // Maps binary to base 85.
 static char encoder[85 + 1] =
@@ -102,7 +87,7 @@ bool encode_base85(std::string& out, data_slice in)
     size_t byte_index = 0;
     uint32_t accumulator = 0;
 
-    for (const uint8_t unencoded_byte: in)
+    for (uint8_t const unencoded_byte: in)
     {
         accumulator = accumulator * 256 + unencoded_byte;
         if (++byte_index % 4 == 0)
@@ -116,7 +101,7 @@ bool encode_base85(std::string& out, data_slice in)
     }
 
     out.assign(encoded.begin(), encoded.end());
-    BITCOIN_ASSERT(out.size() == encoded_size);
+    KTH_ASSERT(out.size() == encoded_size);
     return true;
 }
 
@@ -134,7 +119,7 @@ bool decode_base85(data_chunk& out, std::string const& in)
     size_t char_index = 0;
     uint32_t accumulator = 0;
 
-    for (const uint8_t encoded_character: in)
+    for (uint8_t const encoded_character: in)
     {
         auto const position = encoded_character - 32;
         if (position < 0 || position > 96) {
@@ -153,8 +138,8 @@ bool decode_base85(data_chunk& out, std::string const& in)
     }
 
     out.assign(decoded.begin(), decoded.end());
-    BITCOIN_ASSERT(out.size() == decoded_size);
+    KTH_ASSERT(out.size() == decoded_size);
     return true;
 }
 
-} // namespace libbitcoin
+} // namespace kth

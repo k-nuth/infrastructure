@@ -1,7 +1,7 @@
 // /**
-//  * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
+//  * Copyright (c) 2016-2020 Knuth Project developers.
 //  *
-//  * This file is part of libbitcoin.
+//  * This file is part of the Knuth Project.
 //  *
 //  * This program is free software: you can redistribute it and/or modify
 //  * it under the terms of the GNU Affero General Public License as published by
@@ -16,25 +16,25 @@
 //  * You should have received a copy of the GNU Affero General Public License
 //  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //  */
-// #include <bitcoin/infrastructure/machine/operation.hpp>
+// #include <kth/infrastructure/machine/operation.hpp>
 
 // #include <string>
 
 // #include <boost/algorithm/string.hpp>
 // #include <boost/lexical_cast.hpp>
 
-// // #include <bitcoin/bitcoin/constants.hpp>
-// #include <bitcoin/infrastructure/formats/base_16.hpp>
-// #include <bitcoin/infrastructure/machine/opcode.hpp>
-// #include <bitcoin/infrastructure/utility/assert.hpp>
-// #include <bitcoin/infrastructure/utility/container_sink.hpp>
-// #include <bitcoin/infrastructure/utility/data.hpp>
-// #include <bitcoin/infrastructure/utility/container_source.hpp>
-// #include <bitcoin/infrastructure/utility/istream_reader.hpp>
-// #include <bitcoin/infrastructure/utility/ostream_writer.hpp>
-// #include <bitcoin/infrastructure/utility/string.hpp>
+// // #include <kth/infrastructure/constants.hpp>
+// #include <kth/infrastructure/formats/base_16.hpp>
+// #include <kth/infrastructure/machine/opcode.hpp>
+// #include <kth/infrastructure/utility/assert.hpp>
+// #include <kth/infrastructure/utility/container_sink.hpp>
+// #include <kth/infrastructure/utility/data.hpp>
+// #include <kth/infrastructure/utility/container_source.hpp>
+// #include <kth/infrastructure/utility/istream_reader.hpp>
+// #include <kth/infrastructure/utility/ostream_writer.hpp>
+// #include <kth/infrastructure/utility/string.hpp>
 
-// namespace libbitcoin {
+// namespace kth {
 // namespace machine {
 
 // // Deserialization.
@@ -80,14 +80,14 @@
 
 // inline bool is_valid_data_size(opcode code, size_t size)
 // {
-//     BC_CONSTEXPR auto op_75 = static_cast<uint8_t>(opcode::push_size_75);
-//     const auto value = static_cast<uint8_t>(code);
+//     constexpr auto op_75 = static_cast<uint8_t>(opcode::push_size_75);
+//     auto const value = static_cast<uint8_t>(code);
 //     return value > op_75 || value == size;
 // }
 
 // inline std::string trim_token(const std::string& token)
 // {
-//     BITCOIN_ASSERT(token.size() > 1);
+//     KTH_ASSERT(token.size() > 1);
 //     return std::string(token.begin() + 1, token.end() - 1);
 // }
 
@@ -99,8 +99,8 @@
 // static bool opcode_from_data_prefix(opcode& out_code,
 //     const std::string& prefix, data_chunk const& data)
 // {
-//     BC_CONSTEXPR auto op_75 = static_cast<uint8_t>(opcode::push_size_75);
-//     const auto size = data.size();
+//     constexpr auto op_75 = static_cast<uint8_t>(opcode::push_size_75);
+//     auto const size = data.size();
 //     out_code = operation::opcode_from_size(size);
 
 //     if (prefix == "0")
@@ -148,7 +148,7 @@
 //     if (is_push_token(mnemonic))
 //     {
 //         // Data encoding uses single token (with optional non-minimality).
-//         const auto parts = split_push_token(mnemonic);
+//         auto const parts = split_push_token(mnemonic);
 
 //         if (parts.size() == 1)
 //         {
@@ -168,7 +168,7 @@
 //     }
 //     else if (is_text_token(mnemonic))
 //     {
-//         const auto text = trim_token(mnemonic);
+//         auto const text = trim_token(mnemonic);
 //         data_ = data_chunk{ text.begin(), text.end() };
 //         code_ = nominal_opcode_from_data(data_);
 //         valid_ = true;
@@ -212,12 +212,12 @@
 // data_chunk operation::to_data() const
 // {
 //     data_chunk data;
-//     const auto size = serialized_size();
+//     auto const size = serialized_size();
 //     data.reserve(size);
 //     data_sink ostream(data);
 //     to_data(ostream);
 //     ostream.flush();
-//     BITCOIN_ASSERT(data.size() == size);
+//     KTH_ASSERT(data.size() == size);
 //     return data;
 // }
 
@@ -229,7 +229,7 @@
 
 // //void operation::to_data(writer& sink) const
 // //{
-// //    const auto size = data_.size();
+// //    auto const size = data_.size();
 // //
 // //    sink.write_byte(static_cast<uint8_t>(code_));
 // //
@@ -284,4 +284,4 @@
 // }
 
 // } // namespace machine
-// } // namespace libbitcoin
+// } // namespace kth

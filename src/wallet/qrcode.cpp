@@ -1,37 +1,22 @@
-/**
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
- *
- * This file is part of libbitcoin.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifdef WITH_QRENCODE
 
-#include <bitcoin/infrastructure/wallet/qrcode.hpp>
+#include <kth/infrastructure/wallet/qrcode.hpp>
 
 #include <iostream>
 #include <string>
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
-#include <bitcoin/infrastructure/utility/container_sink.hpp>
-#include <bitcoin/infrastructure/utility/container_source.hpp>
-#include <bitcoin/infrastructure/utility/istream_reader.hpp>
-#include <bitcoin/infrastructure/utility/ostream_writer.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/utility/container_sink.hpp>
+#include <kth/infrastructure/utility/container_source.hpp>
+#include <kth/infrastructure/utility/istream_reader.hpp>
+#include <kth/infrastructure/utility/ostream_writer.hpp>
 
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 data_chunk qr::encode(data_chunk const& data)
@@ -73,8 +58,8 @@ bool qr::encode(std::istream& in, uint32_t version, error_recovery_level level,
         return false;
 
     auto const area = qrcode->width * qrcode->width;
-    auto width_ptr = reinterpret_cast<const uint8_t*>(&qrcode->width);
-    auto version_ptr = reinterpret_cast<const uint8_t*>(&qrcode->version);
+    auto width_ptr = reinterpret_cast<uint8_t const*>(&qrcode->width);
+    auto version_ptr = reinterpret_cast<uint8_t const*>(&qrcode->version);
 
     // Write out raw format of QRcode structure (defined in qrencode.h).
     // Format written is:
@@ -91,6 +76,6 @@ bool qr::encode(std::istream& in, uint32_t version, error_recovery_level level,
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
 
 #endif // WITH_QRENCODE

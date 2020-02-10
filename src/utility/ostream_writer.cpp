@@ -1,34 +1,19 @@
-/**
- * Copyright (c) 2017-2018 Bitprim Inc.
- *
- * This file is part of Bitprim.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include <bitcoin/infrastructure/utility/ostream_writer.hpp>
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <kth/infrastructure/utility/ostream_writer.hpp>
 
 #include <algorithm>
 #include <iostream>
 
-#include <bitcoin/infrastructure/constants.hpp>
-// #include <bitcoin/infrastructure/math/limits.hpp>
-#include <bitcoin/infrastructure/utility/endian.hpp>
-#include <bitcoin/infrastructure/utility/limits.hpp>
-#include <bitcoin/infrastructure/utility/reader.hpp>
+#include <kth/infrastructure/constants.hpp>
+// #include <kth/infrastructure/math/limits.hpp>
+#include <kth/infrastructure/utility/endian.hpp>
+#include <kth/infrastructure/utility/limits.hpp>
+#include <kth/infrastructure/utility/reader.hpp>
 
 
-namespace libbitcoin {
+namespace kth {
 
 ostream_writer::ostream_writer(std::ostream& stream)
   : stream_(stream)
@@ -184,7 +169,7 @@ void ostream_writer::write_bytes(data_chunk const& data)
 }
 }
 
-void ostream_writer::write_bytes(const uint8_t* data, size_t size)
+void ostream_writer::write_bytes(uint8_t const* data, size_t size)
 {
     auto buffer = reinterpret_cast<char const*>(data);
     stream_.write(buffer, size);
@@ -193,7 +178,7 @@ void ostream_writer::write_bytes(const uint8_t* data, size_t size)
 void ostream_writer::write_string(std::string const& value, size_t size)
 {
     auto const length = std::min(size, value.size());
-    write_bytes(reinterpret_cast<const uint8_t*>(value.data()), length);
+    write_bytes(reinterpret_cast<uint8_t const*>(value.data()), length);
     data_chunk padding(floor_subtract(size, length), string_terminator);
     write_bytes(padding);
 }
@@ -210,4 +195,4 @@ void ostream_writer::skip(size_t size)
     stream_.seekp(size, std::ios_base::cur);
 }
 
-} // namespace libbitcoin
+} // namespace kth

@@ -1,28 +1,13 @@
-/**
- * Copyright (c) 2017-2018 Bitprim Inc.
- *
- * This file is part of Bitprim.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include <bitcoin/infrastructure/utility/istream_reader.hpp>
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <kth/infrastructure/utility/istream_reader.hpp>
 
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
-#include <bitcoin/infrastructure/utility/endian.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/endian.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 istream_reader::istream_reader(std::istream& stream)
   : stream_(stream)
@@ -231,4 +216,4 @@ bool istream_reader::empty() const {
     return stream_.peek() == std::istream::traits_type::eof();
 }
 
-} // namespace libbitcoin
+} // namespace kth

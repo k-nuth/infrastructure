@@ -1,37 +1,22 @@
-/**
- * Copyright (c) 2017-2018 Bitprim Inc.
- *
- * This file is part of Bitprim.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include <bitcoin/infrastructure/utility/sequencer.hpp>
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <kth/infrastructure/utility/sequencer.hpp>
 
 #include <utility>
 
-#include <bitcoin/infrastructure/utility/asio.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
-#include <bitcoin/infrastructure/utility/thread.hpp>
+#include <kth/infrastructure/utility/asio.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/thread.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 sequencer::sequencer(asio::service& service)
     : service_(service), executing_(false)
 {}
 
 sequencer::~sequencer() {
-    BITCOIN_ASSERT_MSG(actions_.empty(), "sequencer not cleared");
+    KTH_ASSERT_MSG(actions_.empty(), "sequencer not cleared");
 }
 
 // void sequencer::lock(action&& handler) {
@@ -85,7 +70,7 @@ void sequencer::unlock() {
     {
         unique_lock locker(mutex_);
 
-        BITCOIN_ASSERT_MSG(executing_, "called unlock but sequence not locked");
+        KTH_ASSERT_MSG(executing_, "called unlock but sequence not locked");
 
         if (actions_.empty()) {
             executing_ = false;
@@ -103,4 +88,4 @@ void sequencer::unlock() {
     }
 }
 
-} // namespace libbitcoin
+} // namespace kth

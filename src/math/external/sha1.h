@@ -11,12 +11,9 @@
  *      used in the publication.
  *
  *      Please read the file sha1.c for more information.
- *
- * Adapted:
- *      by Libbitcoin Developers on 7 September 2016
  */
-#ifndef LIBBITCOIN_CRYPTO_SHA1_H
-#define LIBBITCOIN_CRYPTO_SHA1_H
+#ifndef KTH_CRYPTO_SHA1_H
+#define KTH_CRYPTO_SHA1_H
 
 #include <stdint.h>
 #include <stddef.h>
@@ -38,11 +35,11 @@ typedef struct SHA1CTX
     size_t index;
 } SHA1CTX;
 
-void SHA1_(const uint8_t* message, size_t length,
+void SHA1_(uint8_t const* message, size_t length,
     uint8_t digest[SHA1_DIGEST_LENGTH]);
 
 void SHA1Init(SHA1CTX* context);
-void SHA1Update(SHA1CTX* context, const uint8_t* message, size_t length);
+void SHA1Update(SHA1CTX* context, uint8_t const* message, size_t length);
 void SHA1Final(SHA1CTX* context, uint8_t digest[SHA1_DIGEST_LENGTH]);
 
 #ifdef __cplusplus

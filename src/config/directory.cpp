@@ -1,33 +1,18 @@
-/**
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
- *
- * This file is part of libbitcoin.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include <bitcoin/infrastructure/config/directory.hpp>
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <kth/infrastructure/config/directory.hpp>
 
 #include <string>
 
-#include <bitcoin/infrastructure/unicode/unicode.hpp>
+#include <kth/infrastructure/unicode/unicode.hpp>
 
 #ifdef _MSC_VER
     #include <shlobj.h>
     #include <windows.h>
 #endif
 
-namespace libbitcoin {
+namespace kth {
 namespace config {
 
 // Returns empty string if unable to retrieve (including when not in Windows).
@@ -45,4 +30,4 @@ std::string windows_config_directory()
 }
 
 } // namespace config
-} // namespace libbitcoin
+} // namespace kth

@@ -1,34 +1,19 @@
-/**
- * Copyright (c) 2017-2018 Bitprim Inc.
- *
- * This file is part of Bitprim.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include <bitcoin/infrastructure/utility/binary.hpp>
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <kth/infrastructure/utility/binary.hpp>
 
 #include <iostream>
 #include <sstream>
 #include <string>
-// #include <bitcoin/infrastructure/math/limits.hpp>
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
-#include <bitcoin/infrastructure/utility/endian.hpp>
-#include <bitcoin/infrastructure/utility/limits.hpp>
+// #include <kth/infrastructure/math/limits.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/endian.hpp>
+#include <kth/infrastructure/utility/limits.hpp>
 
 
-namespace libbitcoin {
+namespace kth {
 
 binary::size_type binary::blocks_size(size_type bit_size) {
     return bit_size == 0 ? 0 : (bit_size - 1) / bits_per_block + 1;
@@ -88,11 +73,11 @@ void binary::resize(size_type size) {
 }
 
 bool binary::operator[](size_type index) const {
-    BITCOIN_ASSERT(index < size());
+    KTH_ASSERT(index < size());
     size_type const block_index = index / bits_per_block;
-    const uint8_t block = blocks_[block_index];
+    uint8_t const block = blocks_[block_index];
     size_type const offset = index - (block_index * bits_per_block);
-    const uint8_t bitmask = 1 << (bits_per_block - offset - 1);
+    uint8_t const bitmask = 1 << (bits_per_block - offset - 1);
     return (block & bitmask) > 0;
 }
 
@@ -267,7 +252,7 @@ std::istream& operator>>(std::istream& in, binary& to) {
 
         // Set bit to 1
         if (representation == '1') {
-            const uint8_t bitmask = 1 << (bit_iterator - 1);
+            uint8_t const bitmask = 1 << (bit_iterator - 1);
             block |= bitmask;
         }
 
@@ -300,4 +285,4 @@ std::ostream& operator<<(std::ostream& out, binary const& of)
     return out;
 }
 
-} // namespace libbitcoin
+} // namespace kth

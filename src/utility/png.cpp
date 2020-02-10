@@ -1,39 +1,24 @@
-/**
- * Copyright (c) 2017-2018 Bitprim Inc.
- *
- * This file is part of Bitprim.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifdef WITH_PNG
 
-#include <bitcoin/infrastructure/utility/png.hpp>
+#include <kth/infrastructure/utility/png.hpp>
 
 #include <cstddef>
 #include <cstdint>
 #include <iostream>
 #include <stdexcept>
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/formats/base_16.hpp>
-#include <bitcoin/infrastructure/utility/color.hpp>
-#include <bitcoin/infrastructure/utility/container_sink.hpp>
-#include <bitcoin/infrastructure/utility/container_source.hpp>
-#include <bitcoin/infrastructure/utility/istream_reader.hpp>
-#include <bitcoin/infrastructure/utility/ostream_writer.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/formats/base_16.hpp>
+#include <kth/infrastructure/utility/color.hpp>
+#include <kth/infrastructure/utility/container_sink.hpp>
+#include <kth/infrastructure/utility/container_source.hpp>
+#include <kth/infrastructure/utility/istream_reader.hpp>
+#include <kth/infrastructure/utility/ostream_writer.hpp>
 
-namespace libbitcoin {
+namespace kth {
 
 bool png::write_png(data_chunk const& data, uint32_t size, std::ostream& out)
 {
@@ -64,7 +49,7 @@ extern "C" void sink_write(png_structp png_ptr, png_bytep data,
     auto const size = static_cast<size_t>(length);
 
     auto& sink = *reinterpret_cast<ostream_writer*>(png_get_io_ptr(png_ptr));
-    sink.write_bytes(reinterpret_cast<const uint8_t*>(data), size);
+    sink.write_bytes(reinterpret_cast<uint8_t const*>(data), size);
 }
 
 extern "C" void error_callback(png_structp png_ptr,
@@ -226,6 +211,6 @@ bool png::write_png(std::istream& in, uint32_t size, uint32_t dots_per_inch,
     return true;
 }
 
-} // namespace libbitcoin
+} // namespace kth
 
 #endif // WITH_PNG

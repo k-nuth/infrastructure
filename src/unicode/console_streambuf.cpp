@@ -1,30 +1,15 @@
-/**
- * Copyright (c) 2017-2018 Bitprim Inc.
- *
- * This file is part of Bitprim.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include <bitcoin/infrastructure/unicode/console_streambuf.hpp>
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <kth/infrastructure/unicode/console_streambuf.hpp>
 
 #include <cstddef>
 #include <iostream>
 #include <new>
 #include <streambuf>
 
-// #include <bitcoin/infrastructure/math/limits.hpp>
-#include <bitcoin/infrastructure/utility/limits.hpp>
+// #include <kth/infrastructure/math/limits.hpp>
+#include <kth/infrastructure/utility/limits.hpp>
 
 #ifdef _MSC_VER
 #include <windows.h>
@@ -40,7 +25,7 @@ LPVOID get_input_handle() {
 }
 #endif
 
-namespace libbitcoin {
+namespace kth {
 
 // This class/mathod is a no-op on non-windows platforms.
 // When working in Windows console set font to "Lucida Console".
@@ -112,4 +97,4 @@ std::wstreambuf::int_type console_streambuf::underflow() {
     return traits_type::to_int_type(*gptr());
 }
 
-} // namespace libbitcoin
+} // namespace kth

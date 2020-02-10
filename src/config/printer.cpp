@@ -1,22 +1,7 @@
-/**
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
- *
- * This file is part of libbitcoin.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include <bitcoin/infrastructure/config/printer.hpp>
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <kth/infrastructure/config/printer.hpp>
 
 #include <algorithm>
 #include <iostream>
@@ -27,11 +12,11 @@
 #include <boost/format.hpp>
 #include <boost/program_options.hpp>
 
-#include <bitcoin/infrastructure/config/parameter.hpp>
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/utility/assert.hpp>
-#include <bitcoin/infrastructure/utility/collection.hpp>
-#include <bitcoin/infrastructure/utility/string.hpp>
+#include <kth/infrastructure/config/parameter.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/utility/assert.hpp>
+#include <kth/infrastructure/utility/collection.hpp>
+#include <kth/infrastructure/utility/string.hpp>
 
 // We built this because po::options_description.print() sucks.
 
@@ -67,8 +52,8 @@
 #define BI_PRINTER_SETTING_REQUIRED_FORMAT "%1% = %2%\n"
 
 namespace po = boost::program_options;
-using namespace libbitcoin;
-using namespace libbitcoin::config;
+using namespace kth;
+using namespace kth::config;
 using boost::format;
 
 int const printer::max_arguments = 256;
@@ -248,7 +233,7 @@ std::string printer::format_settings_table() {
     for (auto const& parameter: parameters) {
         split_setting_name(parameter, name, section);
         if (section.empty()) {
-            BITCOIN_ASSERT_MSG(false, "Invalid config setting metadata.");
+            KTH_ASSERT_MSG(false, "Invalid config setting metadata.");
             continue;
         }
 
@@ -457,7 +442,7 @@ void printer::generate_parameters() {
     parameters.clear();
 
     parameter param;
-    for (const auto& option_ptr: options.options()) {
+    for (auto const& option_ptr: options.options()) {
         param.initialize(*option_ptr, argument_names);
 
         // Sort non-positonal parameters (i.e. options).

@@ -1,25 +1,10 @@
-/**
- * Copyright (c) 2017-2018 Bitprim Inc.
- *
- * This file is part of Bitprim.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <boost/test/test_tools.hpp>
 #include <boost/test/unit_test_suite.hpp>
 
-#include <bitcoin/infrastructure.hpp>
+#include <kth/infrastructure.hpp>
 
 using namespace bc;
 
@@ -32,7 +17,7 @@ BOOST_AUTO_TEST_CASE(png__size_one__success)
     data_chunk out;
     data_sink ostream(out);
 
-    const uint8_t raw_input_data[] =
+    uint8_t const raw_input_data[] =
     {
         0x03, 0x00, 0x00, 0x00, 0x1d, 0x00, 0x00, 0x00, 0xc1, 0xc1, 0xc1, 0xc1,
         0xc1, 0xc1, 0xc1, 0xc0, 0x84, 0x02, 0x03, 0x02, 0x03, 0x03, 0x03, 0x02,
@@ -108,7 +93,7 @@ BOOST_AUTO_TEST_CASE(png__size_one__success)
     };
     auto const input_data = to_chunk(raw_input_data);
 
-    const uint8_t expected_data[] =
+    uint8_t const expected_data[] =
     {
         0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 0x00, 0x0d,
         0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x21, 0x00, 0x00, 0x00, 0x21,

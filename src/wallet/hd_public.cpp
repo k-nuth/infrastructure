@@ -1,22 +1,7 @@
-/**
- * Copyright (c) 2011-2017 libbitcoin developers (see AUTHORS)
- *
- * This file is part of libbitcoin.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-#include <bitcoin/infrastructure/wallet/hd_public.hpp>
+// Copyright (c) 2016-2020 Knuth Project developers.
+// Distributed under the MIT software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+#include <kth/infrastructure/wallet/hd_public.hpp>
 
 #include <cstdint>
 #include <iostream>
@@ -24,21 +9,21 @@
 
 #include <boost/program_options.hpp>
 
-#include <bitcoin/infrastructure/constants.hpp>
-#include <bitcoin/infrastructure/define.hpp>
-#include <bitcoin/infrastructure/formats/base_58.hpp>
-#include <bitcoin/infrastructure/math/checksum.hpp>
-#include <bitcoin/infrastructure/math/elliptic_curve.hpp>
-#include <bitcoin/infrastructure/math/hash.hpp>
-#include <bitcoin/infrastructure/utility/container_source.hpp>
-#include <bitcoin/infrastructure/utility/data.hpp>
-#include <bitcoin/infrastructure/utility/endian.hpp>
-#include <bitcoin/infrastructure/utility/istream_reader.hpp>
-#include <bitcoin/infrastructure/utility/limits.hpp>
-// #include <bitcoin/infrastructure/wallet/ec_public.hpp>
-#include <bitcoin/infrastructure/wallet/hd_private.hpp>
+#include <kth/infrastructure/constants.hpp>
+#include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/formats/base_58.hpp>
+#include <kth/infrastructure/math/checksum.hpp>
+#include <kth/infrastructure/math/elliptic_curve.hpp>
+#include <kth/infrastructure/math/hash.hpp>
+#include <kth/infrastructure/utility/container_source.hpp>
+#include <kth/infrastructure/utility/data.hpp>
+#include <kth/infrastructure/utility/endian.hpp>
+#include <kth/infrastructure/utility/istream_reader.hpp>
+#include <kth/infrastructure/utility/limits.hpp>
+// #include <kth/infrastructure/wallet/ec_public.hpp>
+#include <kth/infrastructure/wallet/hd_private.hpp>
 
-namespace libbitcoin {
+namespace kth {
 namespace wallet {
 
 // const uint32_t hd_public::mainnet = 76067358;
@@ -276,4 +261,4 @@ bool hd_lineage::operator!=(hd_lineage const& x) const {
 }
 
 } // namespace wallet
-} // namespace libbitcoin
+} // namespace kth
