@@ -68,12 +68,12 @@
 //     return from_data_reader(source);
 // }
 
-// inline bool is_push_token(const std::string& token)
+// inline bool is_push_token(std::string const& token)
 // {
 //     return token.size() > 1 && token.front() == '[' && token.back() == ']';
 // }
 
-// inline bool is_text_token(const std::string& token)
+// inline bool is_text_token(std::string const& token)
 // {
 //     return token.size() > 1 && token.front() == '\'' && token.back() == '\'';
 // }
@@ -85,19 +85,19 @@
 //     return value > op_75 || value == size;
 // }
 
-// inline std::string trim_token(const std::string& token)
+// inline std::string trim_token(std::string const& token)
 // {
 //     KTH_ASSERT(token.size() > 1);
 //     return std::string(token.begin() + 1, token.end() - 1);
 // }
 
-// inline string_list split_push_token(const std::string& token)
+// inline string_list split_push_token(std::string const& token)
 // {
 //     return split(trim_token(token), ".", false);
 // }
 
 // static bool opcode_from_data_prefix(opcode& out_code,
-//     const std::string& prefix, data_chunk const& data)
+//     std::string const& prefix, data_chunk const& data)
 // {
 //     constexpr auto op_75 = static_cast<uint8_t>(opcode::push_size_75);
 //     auto const size = data.size();
@@ -127,7 +127,7 @@
 // }
 
 // static bool data_from_number_token(data_chunk& out_data,
-//     const std::string& token)
+//     std::string const& token)
 // {
 //     try
 //     {
@@ -141,7 +141,7 @@
 // }
 
 // // The removal of spaces in v3 data is a compatability break with our v2.
-// bool operation::from_string(const std::string& mnemonic)
+// bool operation::from_string(std::string const& mnemonic)
 // {
 //     reset();
 
