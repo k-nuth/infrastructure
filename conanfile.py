@@ -34,6 +34,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "cflags": "ANY",
         "glibcxx_supports_cxx11_abi": "ANY",
         "cmake_export_compile_commands": [True, False],
+        "binlog": [True, False],
     }
 
     default_options = {
@@ -51,7 +52,8 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "cxxflags": "_DUMMY_",
         "cflags": "_DUMMY_",
         "glibcxx_supports_cxx11_abi": "_DUMMY_",
-        "cmake_export_compile_commands": False
+        "cmake_export_compile_commands": False,
+        "binlog": False,
     }
 
     generators = "cmake"
@@ -63,6 +65,9 @@ class KnuthInfrastructureConan(KnuthConanFile):
     def requirements(self):
         self.requires("boost/1.72.0@kth/stable")
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
+
+        if self.options.binlog:
+            self.requires("binlog/2020.02.29@kth/stable")
 
         if self.options.with_png:
             self.requires("libpng/1.6.34@kth/stable")

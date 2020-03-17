@@ -3,4 +3,3 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #define BOOST_TEST_MODULE kth_test
 #include <boost/test/unit_test.hpp>
-
