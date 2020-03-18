@@ -12,13 +12,16 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
 
+// #if defined(KTH_USE_BINLOG)
+// #include <binlog/binlog.hpp>
+// #endif
+
 #include <kth/infrastructure/formats/base_16.hpp>
 #include <kth/infrastructure/utility/asio.hpp>
 #include <kth/infrastructure/utility/assert.hpp>
 #include <kth/infrastructure/utility/string.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::config {
 
 using namespace boost::program_options;
 
@@ -225,5 +228,4 @@ std::ostream& operator<<(std::ostream& output, authority const& argument) {
     return output;
 }
 
-} // namespace config
-} // namespace kth
+} // namespace kth::config

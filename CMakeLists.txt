@@ -95,6 +95,13 @@ if (WITH_QRENCODE)
   endif (NO_CONAN_AT_ALL)
 endif()
 
+# Implement --binlog.
+#------------------------------------------------------------------------------
+option(BINLOG "Uses BinLog logging library." OFF)
+if (BINLOG)
+  add_definitions(-DKTH_USE_BINLOG)
+endif()
+
 
 # Implement --JUST_KTH_SOURCES for linting.
 #------------------------------------------------------------------------------
@@ -360,13 +367,6 @@ set(knuth_infrastructure_sources_just_legacy
         src/math/external/sha256.c
         src/math/external/sha512.c
         src/math/external/zeroize.c
-
-        src/log/file_collector.cpp
-        src/log/file_collector_repository.cpp
-        src/log/file_counter_formatter.cpp
-        src/log/sink.cpp
-        src/log/statsd_sink.cpp
-        src/log/udp_client_sink.cpp
         
         src/message/message_tools.cpp
         src/message/messages.cpp
@@ -430,7 +430,19 @@ set(knuth_infrastructure_sources_just_legacy
         # src/wallet/stealth_receiver.cpp # #include <kth/infrastructure/chain/script.hpp>
         # src/wallet/stealth_sender.cpp # #include <kth/infrastructure/chain/script.hpp>
         src/wallet/uri.cpp
-      )
+    )
+
+  if (NOT BINLOG)
+    set(knuth_infrastructure_sources_just_legacy 
+      ${knuth_infrastructure_sources_just_legacy}
+      src/log/file_collector.cpp
+      src/log/file_collector_repository.cpp
+      src/log/file_counter_formatter.cpp
+      src/log/sink.cpp
+      src/log/statsd_sink.cpp
+      src/log/udp_client_sink.cpp
+    )
+  endif()
 
 # if (${CURRENCY} STREQUAL "LTC")
 #     set(knuth_domain_sources_just_knuth 
@@ -820,7 +832,6 @@ set(_knuth_infrastructure_headers
     kth/infrastructure/config/endorsement.hpp
 
 
-
     kth/infrastructure/formats/base_10.hpp
     kth/infrastructure/formats/base_16.hpp
     kth/infrastructure/formats/base_58.hpp
@@ -846,11 +857,6 @@ set(_knuth_infrastructure_headers
     kth/infrastructure/math/stealth.hpp
     kth/infrastructure/math/uint256.hpp
 
-    kth/infrastructure/impl/log/features/counter.ipp
-    kth/infrastructure/impl/log/features/gauge.ipp
-    kth/infrastructure/impl/log/features/metric.ipp
-    kth/infrastructure/impl/log/features/rate.ipp
-    kth/infrastructure/impl/log/features/timer.ipp
 
 
     kth/infrastructure/impl/utility/array_slice.ipp
@@ -866,25 +872,6 @@ set(_knuth_infrastructure_headers
     kth/infrastructure/impl/utility/subscriber.ipp
     kth/infrastructure/impl/utility/string.ipp
     kth/infrastructure/impl/utility/track.ipp
-
-    kth/infrastructure/log/attributes.hpp
-    kth/infrastructure/log/file_char_traits.hpp
-    kth/infrastructure/log/file_collector.hpp
-    kth/infrastructure/log/file_collector_repository.hpp
-    kth/infrastructure/log/file_counter_formatter.hpp
-    kth/infrastructure/log/rotable_file.hpp    
-    kth/infrastructure/log/severity.hpp
-    kth/infrastructure/log/sink.hpp
-    kth/infrastructure/log/source.hpp
-    kth/infrastructure/log/statsd_sink.hpp
-    kth/infrastructure/log/statsd_source.hpp
-    kth/infrastructure/log/udp_client_sink.hpp
-
-    kth/infrastructure/log/features/counter.hpp
-    kth/infrastructure/log/features/gauge.hpp
-    kth/infrastructure/log/features/metric.hpp
-    kth/infrastructure/log/features/rate.hpp
-    kth/infrastructure/log/features/timer.hpp
 
     kth/infrastructure/message/message_tools.hpp
 
@@ -970,7 +957,38 @@ set(_knuth_infrastructure_headers
     # kth/infrastructure/wallet/transaction_functions.hpp
 
     kth/infrastructure.hpp
-    )
+  )
+
+if (NOT BINLOG)
+  set(_knuth_infrastructure_headers 
+    ${_knuth_infrastructure_headers}
+    kth/infrastructure/log/attributes.hpp
+    kth/infrastructure/log/file_char_traits.hpp
+    kth/infrastructure/log/file_collector.hpp
+    kth/infrastructure/log/file_collector_repository.hpp
+    kth/infrastructure/log/file_counter_formatter.hpp
+    kth/infrastructure/log/rotable_file.hpp    
+    kth/infrastructure/log/severity.hpp
+    kth/infrastructure/log/sink.hpp
+    kth/infrastructure/log/source.hpp
+    kth/infrastructure/log/statsd_sink.hpp
+    kth/infrastructure/log/statsd_source.hpp
+    kth/infrastructure/log/udp_client_sink.hpp
+
+    kth/infrastructure/log/features/counter.hpp
+    kth/infrastructure/log/features/gauge.hpp
+    kth/infrastructure/log/features/metric.hpp
+    kth/infrastructure/log/features/rate.hpp
+    kth/infrastructure/log/features/timer.hpp
+
+    kth/infrastructure/impl/log/features/counter.ipp
+    kth/infrastructure/impl/log/features/gauge.ipp
+    kth/infrastructure/impl/log/features/metric.ipp
+    kth/infrastructure/impl/log/features/rate.ipp
+    kth/infrastructure/impl/log/features/timer.ipp
+  )
+endif()
+
 
 foreach (_header ${_knuth_infrastructure_headers})
   get_filename_component(_directory "${_header}" DIRECTORY)

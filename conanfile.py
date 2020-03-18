@@ -92,6 +92,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         # cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_qrencode)
         cmake.definitions["WITH_QRENCODE"] = option_on_off(self.options.with_qrencode)
         cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_png)
+        cmake.definitions["BINLOG"] = option_on_off(self.options.binlog)
 
         cmake.configure(source_dir=self.source_folder)
 
