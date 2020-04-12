@@ -9,8 +9,10 @@
 #include <vector>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
+// #include <boost/format.hpp>
 #include <boost/program_options.hpp>
+
+#include <fmt/core.h>
 
 #include <kth/infrastructure/config/parameter.hpp>
 #include <kth/infrastructure/define.hpp>
@@ -20,41 +22,72 @@
 
 // We built this because po::options_description.print() sucks.
 
+// // TODO: parameterize these localized values.
+// // Various shared localizable strings.
+// #define BI_PRINTER_ARGUMENT_TABLE_HEADER "Arguments (positional):"
+// #define BI_PRINTER_DESCRIPTION_FORMAT "Info: %1%"
+// #define BI_PRINTER_OPTION_TABLE_HEADER "Options (named):"
+// #define BI_PRINTER_USAGE_FORMAT "Usage: %1% %2% %3%"
+// #define BI_PRINTER_VALUE_TEXT "value"
+
+// // Not localizable formatters.
+// #define BI_PRINTER_USAGE_OPTION_MULTIPLE_FORMAT " [--%1% %2%]..."
+// #define BI_PRINTER_USAGE_OPTION_OPTIONAL_FORMAT " [--%1% %2%]"
+// #define BI_PRINTER_USAGE_OPTION_REQUIRED_FORMAT " --%1% %2%"
+// #define BI_PRINTER_USAGE_OPTION_TOGGLE_SHORT_FORMAT " [-%1%]"
+// #define BI_PRINTER_USAGE_OPTION_TOGGLE_LONG_FORMAT " [--%1%]"
+
+// #define BI_PRINTER_USAGE_ARGUMENT_MULTIPLE_FORMAT " [%1%]..."
+// #define BI_PRINTER_USAGE_ARGUMENT_OPTIONAL_FORMAT " [%1%]"
+// #define BI_PRINTER_USAGE_ARGUMENT_REQUIRED_FORMAT " %1%"
+
+// #define BI_PRINTER_TABLE_OPTION_FORMAT "-%1% [--%2%]"
+// #define BI_PRINTER_TABLE_OPTION_LONG_FORMAT "--%1%"
+// #define BI_PRINTER_TABLE_OPTION_SHORT_FORMAT "-%1%"
+
+// #define BI_PRINTER_TABLE_ARGUMENT_FORMAT "%1%"
+
+// #define BI_PRINTER_SETTING_SECTION_FORMAT "[%1%]\n"
+// #define BI_PRINTER_SETTING_COMMENT_FORMAT "# %1%\n"
+// #define BI_PRINTER_SETTING_MULTIPLE_FORMAT "%1% = <%2%>\n%1% = <%2%>\n...\n"
+// #define BI_PRINTER_SETTING_OPTIONAL_FORMAT "%1% = <%2%>\n"
+// #define BI_PRINTER_SETTING_REQUIRED_FORMAT "%1% = %2%\n"
+
 // TODO: parameterize these localized values.
 // Various shared localizable strings.
 #define BI_PRINTER_ARGUMENT_TABLE_HEADER "Arguments (positional):"
-#define BI_PRINTER_DESCRIPTION_FORMAT "Info: %1%"
+#define BI_PRINTER_DESCRIPTION_FORMAT "Info: {}"
 #define BI_PRINTER_OPTION_TABLE_HEADER "Options (named):"
-#define BI_PRINTER_USAGE_FORMAT "Usage: %1% %2% %3%"
+#define BI_PRINTER_USAGE_FORMAT "Usage: {} {} {}"
 #define BI_PRINTER_VALUE_TEXT "value"
 
 // Not localizable formatters.
-#define BI_PRINTER_USAGE_OPTION_MULTIPLE_FORMAT " [--%1% %2%]..."
-#define BI_PRINTER_USAGE_OPTION_OPTIONAL_FORMAT " [--%1% %2%]"
-#define BI_PRINTER_USAGE_OPTION_REQUIRED_FORMAT " --%1% %2%"
-#define BI_PRINTER_USAGE_OPTION_TOGGLE_SHORT_FORMAT " [-%1%]"
-#define BI_PRINTER_USAGE_OPTION_TOGGLE_LONG_FORMAT " [--%1%]"
+#define BI_PRINTER_USAGE_OPTION_MULTIPLE_FORMAT " [--{} {}]..."
+#define BI_PRINTER_USAGE_OPTION_OPTIONAL_FORMAT " [--{} {}]"
+#define BI_PRINTER_USAGE_OPTION_REQUIRED_FORMAT " --{} {}"
+#define BI_PRINTER_USAGE_OPTION_TOGGLE_SHORT_FORMAT " [-{}]"
+#define BI_PRINTER_USAGE_OPTION_TOGGLE_LONG_FORMAT " [--{}]"
 
-#define BI_PRINTER_USAGE_ARGUMENT_MULTIPLE_FORMAT " [%1%]..."
-#define BI_PRINTER_USAGE_ARGUMENT_OPTIONAL_FORMAT " [%1%]"
-#define BI_PRINTER_USAGE_ARGUMENT_REQUIRED_FORMAT " %1%"
+#define BI_PRINTER_USAGE_ARGUMENT_MULTIPLE_FORMAT " [{}]..."
+#define BI_PRINTER_USAGE_ARGUMENT_OPTIONAL_FORMAT " [{}]"
+#define BI_PRINTER_USAGE_ARGUMENT_REQUIRED_FORMAT " {}"
 
-#define BI_PRINTER_TABLE_OPTION_FORMAT "-%1% [--%2%]"
-#define BI_PRINTER_TABLE_OPTION_LONG_FORMAT "--%1%"
-#define BI_PRINTER_TABLE_OPTION_SHORT_FORMAT "-%1%"
+#define BI_PRINTER_TABLE_OPTION_FORMAT "-{} [--{}]"
+#define BI_PRINTER_TABLE_OPTION_LONG_FORMAT "--{}"
+#define BI_PRINTER_TABLE_OPTION_SHORT_FORMAT "-{}"
 
-#define BI_PRINTER_TABLE_ARGUMENT_FORMAT "%1%"
+#define BI_PRINTER_TABLE_ARGUMENT_FORMAT "{}"
 
-#define BI_PRINTER_SETTING_SECTION_FORMAT "[%1%]\n"
-#define BI_PRINTER_SETTING_COMMENT_FORMAT "# %1%\n"
-#define BI_PRINTER_SETTING_MULTIPLE_FORMAT "%1% = <%2%>\n%1% = <%2%>\n...\n"
-#define BI_PRINTER_SETTING_OPTIONAL_FORMAT "%1% = <%2%>\n"
-#define BI_PRINTER_SETTING_REQUIRED_FORMAT "%1% = %2%\n"
+#define BI_PRINTER_SETTING_SECTION_FORMAT "[{}]\n"
+#define BI_PRINTER_SETTING_COMMENT_FORMAT "# {}\n"
+#define BI_PRINTER_SETTING_MULTIPLE_FORMAT "{} = <{}>\n{} = <{}>\n...\n"
+#define BI_PRINTER_SETTING_OPTIONAL_FORMAT "{} = <{}>\n"
+#define BI_PRINTER_SETTING_REQUIRED_FORMAT "{} = {}\n"
 
 namespace po = boost::program_options;
 using namespace kth;
 using namespace kth::config;
-using boost::format;
+// using boost::format;
 
 int const printer::max_arguments = 256;
 
@@ -64,8 +97,7 @@ printer::printer(const po::options_description& options,
     std::string const& command)
   : options_(options), arguments_(arguments), application_(application),
     description_(description), command_(command)
-{
-}
+{}
 
 printer::printer(const po::options_description& settings,
     std::string const& application, std::string const& description)
@@ -119,18 +151,18 @@ std::string format_row_name(const parameter& value) {
     // wants to be upper case but must match in case with the env var option.
 
     if (value.get_position() != parameter::not_positional) {
-        return (format(BI_PRINTER_TABLE_ARGUMENT_FORMAT) % boost::to_upper_copy(value.get_long_name())).str();
+        return fmt::format(BI_PRINTER_TABLE_ARGUMENT_FORMAT, boost::to_upper_copy(value.get_long_name()));
     } 
     
     if (value.get_short_name() == parameter::no_short_name) {
-        return (format(BI_PRINTER_TABLE_OPTION_LONG_FORMAT) % value.get_long_name()).str();
+        return fmt::format(BI_PRINTER_TABLE_OPTION_LONG_FORMAT, value.get_long_name());
     } 
     
     if (value.get_long_name().empty()) {
-        return (format(BI_PRINTER_TABLE_OPTION_SHORT_FORMAT) % value.get_short_name()).str();
+        return fmt::format(BI_PRINTER_TABLE_OPTION_SHORT_FORMAT, value.get_short_name());
     } 
     
-    return (format(BI_PRINTER_TABLE_OPTION_FORMAT) % value.get_short_name() % value.get_long_name()).str();
+    return fmt::format(BI_PRINTER_TABLE_OPTION_FORMAT, value.get_short_name(), value.get_long_name());
     
 }
 
@@ -147,7 +179,7 @@ bool match_positional(bool positional, const parameter& value) {
 std::string printer::format_parameters_table(bool positional) {
     std::stringstream output;
     auto const& parameters = get_parameters();
-    format table_format("%-20s %-52s\n");
+    // format table_format("%-20s %-52s\n");
 
     for (auto const& parameter: parameters) {
         // Skip positional arguments if not positional.
@@ -163,7 +195,8 @@ std::string printer::format_parameters_table(bool positional) {
 
         // If there is no description the command is not output!
         for (auto const& row : rows) {
-            output << table_format % name % row;
+            // output << table_format % name % row;
+            output << fmt::format("%-20s %-52s\n", name, row);
             // The name is only set in the first row.
             name.clear();
         }
@@ -176,12 +209,13 @@ std::string printer::format_parameters_table(bool positional) {
 // GitHub code examples start horizontal scroll after 73 characters.
 std::string printer::format_paragraph(std::string const& paragraph) {
     std::stringstream output;
-    format paragraph_format("%-73s\n");
+    // format paragraph_format("%-73s\n");
 
     auto const lines = columnize(paragraph, 73);
 
     for (auto const& line: lines) {
-        output << paragraph_format % line;
+        // output << paragraph_format % line;
+        output << fmt::format("%-73s\n", line);
     }
 
     return output.str();
@@ -205,7 +239,7 @@ std::string format_setting(const parameter& value, std::string const& name) {
         formatter = BI_PRINTER_SETTING_MULTIPLE_FORMAT;
     }
 
-    return (format(formatter) % name % BI_PRINTER_VALUE_TEXT).str();
+    return fmt::format(formatter,  name, BI_PRINTER_VALUE_TEXT);
 }
 
 // Requires a single period in each setting (i.e. no unnamed sections).
@@ -240,12 +274,12 @@ std::string printer::format_settings_table() {
         if (section != preceding_section) {
             output << std::endl;
             if ( ! section.empty()) {
-                output << format(BI_PRINTER_SETTING_SECTION_FORMAT) % section;
+                output << fmt::format(BI_PRINTER_SETTING_SECTION_FORMAT, section);
                 preceding_section = section;
             }
         }
 
-        output << format(BI_PRINTER_SETTING_COMMENT_FORMAT) % parameter.get_description();
+        output << fmt::format(BI_PRINTER_SETTING_COMMENT_FORMAT, parameter.get_description());
         output << format_setting(parameter, name);
     }
 
@@ -255,17 +289,14 @@ std::string printer::format_settings_table() {
 std::string printer::format_usage() {
     // USAGE: bx COMMAND [-hvt] -n VALUE [-m VALUE] [-w VALUE]... REQUIRED
     // [OPTIONAL] [MULTIPLE]...
-    auto usage = format(BI_PRINTER_USAGE_FORMAT) % get_application() %
-        get_command() % format_usage_parameters();
-
-    return format_paragraph(usage.str());
+    auto usage = fmt::format(BI_PRINTER_USAGE_FORMAT, get_application(), get_command(), format_usage_parameters());
+    return format_paragraph(usage);
 }
 
 std::string printer::format_description() {
     // Info: %1%
-    auto description = format(BI_PRINTER_DESCRIPTION_FORMAT) %
-        get_description();
-    return format_paragraph(description.str());
+    auto description = fmt::format(BI_PRINTER_DESCRIPTION_FORMAT, get_description());
+    return format_paragraph(description);
 }
 
 // 100% component tested.
@@ -329,43 +360,35 @@ std::string printer::format_usage_parameters() {
     std::stringstream usage;
 
     if ( ! toggle_short_options.empty()) {
-        usage << format(BI_PRINTER_USAGE_OPTION_TOGGLE_SHORT_FORMAT) %
-            toggle_short_options;
+        usage << fmt::format(BI_PRINTER_USAGE_OPTION_TOGGLE_SHORT_FORMAT, toggle_short_options);
     }
 
     for (auto const& required_option: required_options) {
-        usage << format(BI_PRINTER_USAGE_OPTION_REQUIRED_FORMAT) %
-            required_option % BI_PRINTER_VALUE_TEXT;
+        usage << fmt::format(BI_PRINTER_USAGE_OPTION_REQUIRED_FORMAT, required_option, BI_PRINTER_VALUE_TEXT);
     }
 
     for (auto const& toggle_long_option: toggle_long_options) {
-        usage << format(BI_PRINTER_USAGE_OPTION_TOGGLE_LONG_FORMAT) %
-            toggle_long_option;
+        usage << fmt::format(BI_PRINTER_USAGE_OPTION_TOGGLE_LONG_FORMAT, toggle_long_option);
     }
 
     for (auto const& optional_option: optional_options) {
-        usage << format(BI_PRINTER_USAGE_OPTION_OPTIONAL_FORMAT) %
-            optional_option % BI_PRINTER_VALUE_TEXT;
+        usage << fmt::format(BI_PRINTER_USAGE_OPTION_OPTIONAL_FORMAT, optional_option, BI_PRINTER_VALUE_TEXT);
     }
 
     for (auto const& multiple_option: multiple_options) {
-        usage << format(BI_PRINTER_USAGE_OPTION_MULTIPLE_FORMAT) %
-            multiple_option % BI_PRINTER_VALUE_TEXT;
+        usage << fmt::format(BI_PRINTER_USAGE_OPTION_MULTIPLE_FORMAT, multiple_option, BI_PRINTER_VALUE_TEXT);
     }
 
     for (auto const& required_argument: required_arguments) {
-        usage << format(BI_PRINTER_USAGE_ARGUMENT_REQUIRED_FORMAT) %
-            required_argument;
+        usage << fmt::format(BI_PRINTER_USAGE_ARGUMENT_REQUIRED_FORMAT, required_argument);
     }
 
     for (auto const& optional_argument: optional_arguments) {
-        usage << format(BI_PRINTER_USAGE_ARGUMENT_OPTIONAL_FORMAT) %
-            optional_argument;
+        usage << fmt::format(BI_PRINTER_USAGE_ARGUMENT_OPTIONAL_FORMAT, optional_argument);
     }
 
     for (auto const& multiple_argument: multiple_arguments) {
-        usage << format(BI_PRINTER_USAGE_ARGUMENT_MULTIPLE_FORMAT) %
-            multiple_argument;
+        usage << fmt::format(BI_PRINTER_USAGE_ARGUMENT_MULTIPLE_FORMAT, multiple_argument);
     }
 
     return boost::trim_copy(usage.str());

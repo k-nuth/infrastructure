@@ -8,9 +8,11 @@
 #include <sstream>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/format.hpp>
+// #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
+
+#include <fmt/core.h>
 
 // #if defined(KTH_USE_BINLOG)
 // #include <binlog/binlog.hpp>
@@ -33,8 +35,9 @@ std::string to_host_name(std::string const& host) {
         return host;
     }
 
-    auto const hostname = boost::format("[%1%]") % host;
-    return hostname.str();
+    // auto const hostname = boost::format("[%1%]") % host;
+    // return hostname.str();
+    return fmt::format("[{}]", host);
 }
 
 // host: [2001:db8::2] or 2001:db8::2 or 1.2.240.1
@@ -75,8 +78,7 @@ static
 std::string to_ipv4_hostname(asio::address const& ip_address) {
     // std::regex requires gcc 4.9, so we are using boost::regex for now.
     // Knuth: we use std::regex, becase we drop support por GCC<5
-    static 
-    std::regex const regular("^::ffff:([0-9\\.]+)$");
+    static std::regex const regular("^::ffff:([0-9\\.]+)$");
 
     auto const address = ip_address.to_string();
     std::sregex_iterator it(address.begin(), address.end(), regular), end;
@@ -91,8 +93,9 @@ std::string to_ipv4_hostname(asio::address const& ip_address) {
 static 
 std::string to_ipv6_hostname(asio::address const& ip_address) {
     // IPv6 URLs use a bracketed IPv6 address, see rfc2732.
-    auto const hostname = boost::format("[%1%]") % to_ipv6(ip_address);
-    return hostname.str();
+    // auto const hostname = boost::format("[%1%]") % to_ipv6(ip_address);
+    // return hostname.str();
+    return fmt::format("[{}]", to_ipv6(ip_address));
 }
 
 authority::authority(authority const& x)

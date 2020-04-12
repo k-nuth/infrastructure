@@ -8,8 +8,12 @@
 #include <limits>
 #include <sstream>
 #include <string>
-#include <boost/format.hpp>
+// #include <boost/format.hpp>
+
+#include <fmt/core.h>
+
 #include <kth/infrastructure.hpp>
+
 #include "number.hpp"
 #ifdef ENABLE_DATAGEN
 #include "big_number.hpp"
@@ -151,13 +155,11 @@ void CheckCompare(int64_t const num1, int64_t const num2, size_t value, size_t o
 // ----------------------------------------------------------------------------
 
 static 
-void RunOperators(int64_t const num1, int64_t num2, size_t value,
-    size_t offset, size_t test)
-{
+void RunOperators(int64_t const num1, int64_t num2, size_t value, size_t offset, size_t test) {
     //// Diagnostics
     //std::stringstream message;
     //std::cout << boost::format(
-    //    ">>> RunOperators: %1% : %2% : %3% : %4% : %5%\n")
+    //    ">>> RunOperators: {} : {} : {} : {} : {}\n")
     //    % num1 % num2 % value % offset % test;
     //BOOST_MESSAGE(message.str());
 
@@ -231,23 +233,24 @@ number_buffer MakeNegate(int64_t const num) {
     return negated;
 }
 
-static number_subtract MakeSubtract(int64_t const num1, int64_t const num2)
-{
+static 
+number_subtract MakeSubtract(int64_t const num1, int64_t const num2) {
     big_number bignum1;
     bignum1.set_int64(num1);
     big_number bignum2;
     bignum2.set_int64(num2);
 
     big_number forward;
-    if ( ! subtract_overflow64(num1, num2))
+    if ( ! subtract_overflow64(num1, num2)) {
         forward = bignum1 - bignum2;
+    }
 
     big_number reverse;
-    if ( ! subtract_overflow64(num2, num1))
+    if ( ! subtract_overflow64(num2, num1)) {
         reverse = bignum2 - bignum1;
+    }
 
-    number const_subtract subtract
-    {
+    number const_subtract subtract {
         { forward.int32(), forward.data() },
         { reverse.int32(), reverse.data() }
     };
@@ -255,15 +258,13 @@ static number_subtract MakeSubtract(int64_t const num1, int64_t const num2)
     return subtract;
 }
 
-static number_compare MakeCompare(int64_t const num1, int64_t const num2)
-{
+static number_compare MakeCompare(int64_t const num1, int64_t const num2) {
     big_number bignum1;
     bignum1.set_int64(num1);
     big_number bignum2;
     bignum2.set_int64(num2);
 
-    number_compare compare
-    {
+    number_compare compare {
         bignum1 == bignum2,
         bignum1 != bignum2,
         bignum1 < bignum2,
@@ -279,30 +280,25 @@ static number_compare MakeCompare(int64_t const num1, int64_t const num2)
 // ----------------------------------------------------------------------------
 
 static 
-void write_bytes(bc::data_chunk chunk, std::ostream& out)
-{
+void write_bytes(bc::data_chunk chunk, std::ostream& out) {
     for (auto const& byte : chunk)
-        out << (boost::format(" 0x%02x, ") % static_cast<uint16_t>(byte));
+        out << fmt::format(" 0x%02x, ", static_cast<uint16_t>(byte));
 }
 
 static 
-void write_buffer(number_buffer buffer, std::ostream& out)
-{
-    out << boost::format("{ %1%, {") % buffer.number;
+void write_buffer(number_buffer buffer, std::ostream& out) {
+    out << fmt::format("{ {}, {", buffer.number);
     write_bytes(buffer.bytes, out);
     out << "} }, ";
 }
 
 static 
-void write_compare(number_compare compare, std::ostream& out)
-{
-    out << boost::format("{ %1%, %2%, %3%, %4%, %5%, %6% }, ") % compare.eq %
-        compare.ne % compare.lt % compare.gt % compare.le % compare.ge;
+void write_compare(number_compare compare, std::ostream& out) {
+    out << fmt::format("{ {}, {}, {}, {}, {}, {} }, ", compare.eq, compare.ne, compare.lt, compare.gt, compare.le, compare.ge);
 }
 
 static 
-void write_subtract(number_subtract subtract, std::ostream& out)
-{
+void write_subtract(number_subtract subtract, std::ostream& out) {
     out << "{ ";
     write_buffer(subtract.forward, out);
     write_buffer(subtract.reverse, out);
@@ -310,11 +306,8 @@ void write_subtract(number_subtract subtract, std::ostream& out)
 }
 
 static 
-void write_names(std::string const& name, size_t count,
-    std::ostream& out)
-{
-    out << boost::format("const %1%[%2%][%3%][%4%]=\n{\n") % name %
-        number_values_count % number_offsets_count % count;
+void write_names(std::string const& name, size_t count, std::ostream& out) {
+    out << fmt::format("const [{}][{}][{}][{}]=\n{\n", name, number_values_count, number_offsets_count, count);
 }
 
 static 

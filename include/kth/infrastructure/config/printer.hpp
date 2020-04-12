@@ -8,14 +8,15 @@
 #include <string>
 #include <vector>
 
-#include <boost/format.hpp>
+// #include <boost/format.hpp>
 #include <boost/program_options.hpp>
+
+// #include <fmt/core.h>
 
 #include <kth/infrastructure/config/parameter.hpp>
 #include <kth/infrastructure/define.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::config {
 
 /**
  * Shorthand for property declarations in printer class.
@@ -150,7 +151,6 @@ public:
 
 #undef PROPERTY_GET_REF
 
-} // namespace config
-} // namespace kth
+} // namespace kth::config
 
 #endif
