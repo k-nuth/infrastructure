@@ -20,8 +20,7 @@
 #include <kth/infrastructure/log/severity.hpp>
 #include <kth/infrastructure/unicode/ofstream.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 using namespace boost::log;
 using namespace boost::log::expressions;
@@ -46,24 +45,26 @@ using namespace boost::posix_time;
 using text_file_sink = synchronous_sink<text_file_backend>;
 using text_stream_sink = synchronous_sink<text_ostream_backend>;
 
-static auto const base_filter =
+static 
+auto const base_filter =
     has_attr(attributes::channel) &&
     has_attr(attributes::severity) &&
     has_attr(attributes::timestamp);
 
-static auto const error_filter = base_filter && (
+static 
+auto const error_filter = base_filter && (
     (attributes::severity == severity::warning) ||
     (attributes::severity == severity::error) ||
     (attributes::severity == severity::fatal));
 
-static auto const info_filter = base_filter &&
-    (attributes::severity == severity::info);
+static 
+auto const info_filter = base_filter && (attributes::severity == severity::info);
 
-static auto const lean_filter = base_filter &&
-    (attributes::severity != severity::verbose);
+static 
+auto const lean_filter = base_filter && (attributes::severity != severity::verbose);
 
-static std::map<severity, std::string> severity_mapping
-{
+static 
+std::map<severity, std::string> severity_mapping {
     { severity::verbose, "VERBOSE" },
     { severity::debug, "DEBUG" },
     { severity::info, "INFO" },
@@ -72,15 +73,13 @@ static std::map<severity, std::string> severity_mapping
     { severity::fatal, "FATAL" }
 };
 
-formatter& operator<<(formatter& stream, severity value)
-{
+formatter& operator<<(formatter& stream, severity value) {
     stream << severity_mapping[value];
     return stream;
 }
 
-static boost::shared_ptr<collector> file_collector(
-    const rotable_file& rotation)
-{
+static 
+boost::shared_ptr<collector> file_collector(rotable_file const& rotation) {
     // rotation_size controls enable/disable so use zero as max sentinel.
     return bc::log::make_collector(
         rotation.archive_directory,
@@ -91,9 +90,8 @@ static boost::shared_ptr<collector> file_collector(
             rotation.maximum_archive_files);
 }
 
-static boost::shared_ptr<text_file_sink> add_text_file_sink(
-    const rotable_file& rotation)
-{
+static 
+boost::shared_ptr<text_file_sink> add_text_file_sink(rotable_file const& rotation) {
     // Construct a log sink.
     auto const sink = boost::make_shared<text_file_sink>();
     auto const backend = sink->locked_backend();
@@ -102,8 +100,7 @@ static boost::shared_ptr<text_file_sink> add_text_file_sink(
     backend->set_file_name_pattern(rotation.original_log);
 
     // Set archival parameters.
-    if (rotation.rotation_size != 0)
-    {
+    if (rotation.rotation_size != 0) {
         backend->set_rotation_size(rotation.rotation_size);
         backend->set_file_collector(file_collector(rotation));
     }
@@ -120,9 +117,8 @@ static boost::shared_ptr<text_file_sink> add_text_file_sink(
 }
 
 template <typename Stream>
-static boost::shared_ptr<text_stream_sink> add_text_stream_sink(
-    boost::shared_ptr<Stream>& stream)
-{
+static 
+boost::shared_ptr<text_stream_sink> add_text_stream_sink(boost::shared_ptr<Stream>& stream) {
     // Construct a log sink.
     auto const sink = boost::make_shared<text_stream_sink>();
     auto const backend = sink->locked_backend();
@@ -142,26 +138,19 @@ static boost::shared_ptr<text_stream_sink> add_text_stream_sink(
 }
 
 
-void initialize()
-{
-    class null_stream
-      : public std::ostream
-    {
+void initialize() {
+    class null_stream : public std::ostream {
     private:
-        class null_buffer
-          : public std::streambuf
-        {
-            public: int overflow(int value) override
-            {
+        class null_buffer : public std::streambuf {
+        public: 
+            int overflow(int value) override {
                 return value;
             }
         } buffer_;
-
     public:
         null_stream()
-          : std::ostream(&buffer_)
-        {
-        }
+            : std::ostream(&buffer_)
+        {}
     };
 
     // Null stream instances used to disable log output.
@@ -172,33 +161,36 @@ void initialize()
     initialize(debug_file, error_file, output_stream, error_stream, false);
 }
 
-void initialize(log::file& debug_file, log::file& error_file,
-    log::stream& output_stream, log::stream& error_stream, bool verbose)
-{
+void initialize(log::file& debug_file, log::file& error_file, bool verbose) {
     if (verbose) {
         add_text_stream_sink(debug_file)->set_filter(base_filter);
     } else {
         add_text_stream_sink(debug_file)->set_filter(lean_filter);
-}
+    }
 
     add_text_stream_sink(error_file)->set_filter(error_filter);
+}
+
+void initialize(log::file& debug_file, log::file& error_file, log::stream& output_stream, log::stream& error_stream, bool verbose) {
+    initialize(debug_file, error_file, verbose);
     add_text_stream_sink(output_stream)->set_filter(info_filter);
     add_text_stream_sink(error_stream)->set_filter(error_filter);
 }
 
-void initialize(const rotable_file& debug_file, const rotable_file& error_file,
-    log::stream& output_stream, log::stream& error_stream, bool verbose)
-{
+void initialize(rotable_file const& debug_file, rotable_file const& error_file, bool verbose) {
     if (verbose) {
         add_text_file_sink(debug_file)->set_filter(base_filter);
     } else {
         add_text_file_sink(debug_file)->set_filter(lean_filter);
-}
+    }
 
     add_text_file_sink(error_file)->set_filter(error_filter);
+}
+
+void initialize(rotable_file const& debug_file, rotable_file const& error_file, log::stream& output_stream, log::stream& error_stream, bool verbose) {
+    initialize(debug_file, error_file, verbose);
     add_text_stream_sink(output_stream)->set_filter(info_filter);
     add_text_stream_sink(error_stream)->set_filter(error_filter);
 }
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
