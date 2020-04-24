@@ -66,7 +66,9 @@ class KnuthInfrastructureConan(KnuthConanFile):
         self.requires("boost/1.72.0@kth/stable")
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
         # self.requires("fmt/6.1.2@")
-        self.requires("fmt/6.2.0@kth/stable")
+        # self.requires("fmt/6.2.0@kth/stable")
+        # self.requires("fmt/6.2.0@")
+
 
         if self.options.binlog:
             self.requires("binlog/2020.02.29@kth/stable")
@@ -83,6 +85,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
     def configure(self):
         # self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
         KnuthConanFile.configure(self)
+        self.options["fmt"].header_only = True
 
     def package_id(self):
         KnuthConanFile.package_id(self)
