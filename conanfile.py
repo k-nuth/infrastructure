@@ -67,7 +67,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
         # self.requires("fmt/6.1.2@")
         # self.requires("fmt/6.2.0@kth/stable")
-        # self.requires("fmt/6.2.0@")
+        self.requires("fmt/6.2.0@")
 
 
         if self.options.binlog:
