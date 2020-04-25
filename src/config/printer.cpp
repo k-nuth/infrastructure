@@ -12,6 +12,7 @@
 // #include <boost/format.hpp>
 #include <boost/program_options.hpp>
 
+#define FMT_HEADER_ONLY
 #include <fmt/core.h>
 
 #include <kth/infrastructure/config/parameter.hpp>

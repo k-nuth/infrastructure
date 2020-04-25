@@ -12,6 +12,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
 
+#define FMT_HEADER_ONLY
 #include <fmt/core.h>
 
 // #if defined(KTH_USE_BINLOG)

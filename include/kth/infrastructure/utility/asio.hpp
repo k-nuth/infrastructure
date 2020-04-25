@@ -53,7 +53,7 @@ constexpr int max_connections = boost::asio::socket_base::max_connections;
 
 } // namespace kth::asio
 
-
+#define FMT_HEADER_ONLY
 #include <fmt/format.h>
 
 template <>
