@@ -35,9 +35,7 @@ metric_feature<BaseType>::metric_feature(Arguments const& arguments)
 }
 
 template <typename BaseType>
-typename metric_feature<BaseType>::metric_type
-    metric_feature<BaseType>::metric() const
-{
+typename metric_feature<BaseType>::metric_type metric_feature<BaseType>::metric() const {
     BOOST_LOG_EXPR_IF_MT(boost::log::aux::shared_lock_guard<
         const threading_model> lock(this->get_threading_model());)
 

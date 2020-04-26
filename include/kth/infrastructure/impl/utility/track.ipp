@@ -28,15 +28,17 @@ track<Shared>::track(std::string const& DEBUG_ONLY(class_name))
 #endif
 {
 #ifndef NDEBUG
-    LOG_DEBUG(LOG_SYSTEM) << class_ << "(" << ++instances << ")";
+    // LOG_DEBUG(LOG_SYSTEM) << class_ << "(" << ++instances << ")";
+    // LOG_DEBUG(LOG_SYSTEM, class_, "(", ++instances, ")");
+    LOG_DEBUG(LOG_SYSTEM, class_);
 #endif
 }
 
 template <typename Shared>
-track<Shared>::~track()
-{
+track<Shared>::~track() {
 #ifndef NDEBUG
-    LOG_DEBUG(LOG_SYSTEM) << "~" << class_ << "(" << --instances << ")";
+    // LOG_DEBUG(LOG_SYSTEM) << "~" << class_ << "(" << --instances << ")";
+    LOG_DEBUG(LOG_SYSTEM, "~", class_, "(", --instances, ")");
 #endif
 }
 

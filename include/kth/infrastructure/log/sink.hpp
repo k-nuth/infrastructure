@@ -13,8 +13,7 @@
 #include <kth/infrastructure/log/severity.hpp>
 #include <kth/infrastructure/unicode/ofstream.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 using file = boost::shared_ptr<bc::ofstream>;
 
@@ -22,17 +21,16 @@ using file = boost::shared_ptr<bc::ofstream>;
 void initialize();
 
 /// Initializes default non-rotable logging sinks and formats.
-void initialize(log::file& debug_file, log::file& error_file,
-    log::stream& output_stream, log::stream& error_stream, bool verbose);
+void initialize(log::file& debug_file, log::file& error_file, log::stream& output_stream, log::stream& error_stream, bool verbose);
+void initialize(log::file& debug_file, log::file& error_file, bool verbose);
 
 /// Initializes default rotable logging sinks and formats.
-void initialize(const rotable_file& debug_file, const rotable_file& error_file,
-    log::stream& output_stream, log::stream& error_stream, bool verbose);
+void initialize(rotable_file const& debug_file, rotable_file const& error_file, log::stream& output_stream, log::stream& error_stream, bool verbose);
+void initialize(rotable_file const& debug_file, rotable_file const& error_file, bool verbose);
 
 /// Log stream operator.
 formatter& operator<<(formatter& stream, severity value);
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #endif

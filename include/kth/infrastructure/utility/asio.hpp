@@ -14,8 +14,7 @@
 
 // Convenience namespace for commonly used boost asio aliases.
 
-namespace kth {
-namespace asio {
+namespace kth::asio {
 
 namespace error = boost::asio::error;
 
@@ -52,7 +51,19 @@ using socket_ptr = std::shared_ptr<socket>;
 
 constexpr int max_connections = boost::asio::socket_base::max_connections;
 
-} // namespace asio
-} // namespace kth
+} // namespace kth::asio
+
+#define FMT_HEADER_ONLY
+#include <fmt/format.h>
+
+template <>
+struct fmt::formatter<kth::asio::ipv6> {
+    constexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }
+
+    template <typename FormatContext>
+    auto format(kth::asio::ipv6 const& addr, FormatContext& ctx) {
+        return format_to(ctx.out(), "{}", addr.to_string());
+    }
+};
 
 #endif
