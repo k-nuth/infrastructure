@@ -7,17 +7,21 @@
 
 #include <string>
 
-#if defined(KTH_USE_BINLOG)
+#if defined(KTH_LOG_LIBRARY_BINLOG)
 #include <binlog/binlog.hpp>
-#else
+#elif defined(KTH_LOG_LIBRARY_BOOST)
 #include <boost/log/attributes/clock.hpp>
 #include <boost/log/sources/global_logger_storage.hpp>
 #include <boost/log/sources/severity_channel_logger.hpp>
-#endif // defined(KTH_USE_BINLOG)
+#else
+#include <boost/preprocessor/repetition/repeat.hpp>
+
+#include <spdlog/spdlog.h>
+#endif // defined(KTH_LOG_LIBRARY_BINLOG)
 
 #include <kth/infrastructure/define.hpp>
 
-#if ! defined(KTH_USE_BINLOG)
+#if defined(KTH_LOG_LIBRARY_BOOST)
 #include <kth/infrastructure/log/attributes.hpp>
 #include <kth/infrastructure/log/severity.hpp>
 
@@ -31,12 +35,32 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source) {
     return logger;
 }
 } // namespace kth::log
-#endif // ! defined(KTH_USE_BINLOG)
+#endif // defined(KTH_LOG_LIBRARY_BOOST)
 
 #define BI_LOG_SEVERITY(id, level) \
     BOOST_LOG_CHANNEL_SEV(bc::log::source::get(), id, bc::log::severity::level)
 
-#if defined(KTH_USE_BINLOG)
+#define KTH_PP_ARG_N( _1, _2, _3, _4, _5, _6, _7, _8, _9,_10,_11,_12,_13,_14,_15,_16,_17,_18,_19,_20, \
+                 _21,_22,_23,_24,_25,_26,_27,_28,_29,_30,_31,_32,_33,_34,_35,_36,_37,_38,_39,_40, \
+                 _41,_42,_43,_44,_45,_46,_47,_48,_49,_50,_51,_52,_53,_54,_55,_56,_57,_58,_59,_60, \
+                 _61,_62,_63,  N, ...) N
+
+#ifdef _MSC_VER // Microsoft compilers
+#define KTH_PP_EXPAND(x) x 
+#define KTH_PP_NARG(...) KTH_PP_EXPAND(KTH_PP_ARG_N(__VA_ARGS__, 63,62,61,60,                                                 \
+                    59,58,57,56,55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40, \
+                    39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20, \
+                    19,18,17,16,15,14,13,12,11,10,9, 8, 7, 6, 5, 4, 3, 2, 1, 0))
+#else // Others
+#define KTH_PP_RSEQ_N() 63,62,61,60,                                                 \
+                    59,58,57,56,55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40, \
+                    39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20, \
+                    19,18,17,16,15,14,13,12,11,10,9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+#define KTH_PP_NARG(...) KTH_PP_NARG_(__VA_ARGS__,KTH_PP_RSEQ_N())
+#define KTH_PP_NARG_(...) KTH_PP_ARG_N(__VA_ARGS__)
+#endif
+
+#if defined(KTH_LOG_LIBRARY_BINLOG)
 //TODO: this is a proof of concept, it is not enabled in production
 
 #include <binlog/binlog.hpp>
@@ -65,7 +89,7 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source) {
 // #define LOG_FATAL(modul,...)   BINLOG_CRITICAL(modul, __VA_ARGS__)
 
 
-#else
+#elif defined(KTH_LOG_LIBRARY_BOOST)
 
 // #define LOG_VERBOSE(modul) BI_LOG_SEVERITY(modul, verbose)
 // #define LOG_DEBUG(modul) BI_LOG_SEVERITY(modul, debug)
@@ -76,26 +100,6 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source) {
 
 #define CONCAT(a, b) a ## b
 #define CONCAT2(a, b) CONCAT(a, b)
-
-#define KTH_PP_ARG_N( _1, _2, _3, _4, _5, _6, _7, _8, _9,_10,_11,_12,_13,_14,_15,_16,_17,_18,_19,_20, \
-                 _21,_22,_23,_24,_25,_26,_27,_28,_29,_30,_31,_32,_33,_34,_35,_36,_37,_38,_39,_40, \
-                 _41,_42,_43,_44,_45,_46,_47,_48,_49,_50,_51,_52,_53,_54,_55,_56,_57,_58,_59,_60, \
-                 _61,_62,_63,  N, ...) N
-
-#ifdef _MSC_VER // Microsoft compilers
-#define KTH_PP_EXPAND(x) x 
-#define KTH_PP_NARG(...) KTH_PP_EXPAND(KTH_PP_ARG_N(__VA_ARGS__, 63,62,61,60,                                                 \
-                    59,58,57,56,55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40, \
-                    39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20, \
-                    19,18,17,16,15,14,13,12,11,10,9, 8, 7, 6, 5, 4, 3, 2, 1, 0))
-#else // Others
-#define KTH_PP_RSEQ_N() 63,62,61,60,                                                 \
-                    59,58,57,56,55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40, \
-                    39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20, \
-                    19,18,17,16,15,14,13,12,11,10,9, 8, 7, 6, 5, 4, 3, 2, 1, 0
-#define KTH_PP_NARG(...) KTH_PP_NARG_(__VA_ARGS__,KTH_PP_RSEQ_N())
-#define KTH_PP_NARG_(...) KTH_PP_ARG_N(__VA_ARGS__)
-#endif
 
 #define KTH_LOG_HELPER_0(modul,severiry) BI_LOG_SEVERITY(modul,severiry)
 #define KTH_LOG_HELPER_1(modul,severiry,A1) BI_LOG_SEVERITY(modul,severiry) << A1
@@ -150,7 +154,18 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source) {
 // #define LOG_ERROR(modul) BI_LOG_SEVERITY(modul, error)
 // #define LOG_FATAL(modul) BI_LOG_SEVERITY(modul, fatal)
 
+#else
 
-#endif
+#define KTH_FOLD(z, n, text)  text
+#define KTH_STRREP(str, n) BOOST_PP_REPEAT(n, KTH_FOLD, str)
+
+#define LOG_VERBOSE(modul,...) spdlog::trace("{} " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_DEBUG(modul,...) spdlog::debug("{} " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_INFO(modul,...) spdlog::info("{} " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_WARNING(modul,...) spdlog::warn("{} " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_ERROR(modul,...) spdlog::error("{} " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_FATAL(modul,...) spdlog::critical("{} " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+
+#endif // defined(KTH_LOG_LIBRARY_BINLOG)
 
 #endif // KTH_INFRASTRUCTURE_LOG_SOURCE_HPP_

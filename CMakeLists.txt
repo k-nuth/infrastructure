@@ -95,12 +95,27 @@ if (WITH_QRENCODE)
   endif (NO_CONAN_AT_ALL)
 endif()
 
-# Implement --binlog.
+# Implement --log_library.
 #------------------------------------------------------------------------------
-option(BINLOG "Uses BinLog logging library." OFF)
-if (BINLOG)
-  add_definitions(-DKTH_USE_BINLOG)
+# option(LOG_LIBRARY "Setting for the logging library." OFF)
+# if (LOG_LIBRARY)
+#   add_definitions(-DKTH_USE_BINLOG)
+# endif()
+
+set(LOG_LIBRARY "boost" CACHE STRING "Setting for the logging library (boost|spdlog|binlog).")
+
+if (${LOG_LIBRARY} STREQUAL "boost")
+  add_definitions(-DKTH_LOG_LIBRARY_BOOST)
+elseif (${LOG_LIBRARY} STREQUAL "spdlog")
+  add_definitions(-DKTH_LOG_LIBRARY_SPDLOG)
+elseif (${LOG_LIBRARY} STREQUAL "binlog")
+  add_definitions(-DKTH_LOG_LIBRARY_BINLOG)
+else()
+  message(FATAL_ERROR "Invalid Logging Library: ${LOG_LIBRARY}")
 endif()
+
+message(STATUS "Knuth: Logging Library: ${LOG_LIBRARY}")
+
 
 
 # Implement --JUST_KTH_SOURCES for linting.
@@ -432,7 +447,7 @@ set(knuth_infrastructure_sources_just_legacy
         src/wallet/uri.cpp
     )
 
-  if (NOT BINLOG)
+  if (${LOG_LIBRARY} STREQUAL "boost")
     set(knuth_infrastructure_sources_just_legacy 
       ${knuth_infrastructure_sources_just_legacy}
       src/log/file_collector.cpp
@@ -593,6 +608,8 @@ if (WITH_TESTS)
         test/formats/base_64.cpp
         test/formats/base_85.cpp
 
+        test/log/log.cpp
+
         test/main.cpp
 
         # test/math/big_number.cpp
@@ -704,6 +721,9 @@ _group_sources(knuth_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
     # input_tests
     # inventory_tests
     # inventory_vector_tests
+
+    log_tests
+
     # memory_pool_tests
     # merkle_block_tests
     # message_tests
@@ -959,7 +979,7 @@ set(_knuth_infrastructure_headers
     kth/infrastructure.hpp
   )
 
-if (NOT BINLOG)
+if (${LOG_LIBRARY} STREQUAL "boost")
   set(_knuth_infrastructure_headers 
     ${_knuth_infrastructure_headers}
     kth/infrastructure/log/attributes.hpp

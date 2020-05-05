@@ -41,7 +41,7 @@
 #include <kth/infrastructure/formats/base_64.hpp>
 #include <kth/infrastructure/formats/base_85.hpp>
 
-#if ! defined(KTH_USE_BINLOG)
+#if defined(KTH_LOG_LIBRARY_BOOST)
 #include <kth/infrastructure/log/attributes.hpp>
 #include <kth/infrastructure/log/file_char_traits.hpp>
 #include <kth/infrastructure/log/file_collector.hpp>
@@ -59,7 +59,7 @@
 #include <kth/infrastructure/log/features/metric.hpp>
 #include <kth/infrastructure/log/features/rate.hpp>
 #include <kth/infrastructure/log/features/timer.hpp>
-#endif // ! defined(KTH_USE_BINLOG)
+#endif // defined(KTH_LOG_LIBRARY_BOOST)
 
 // #include <kth/infrastructure/machine/interpreter.hpp>
 #include <kth/infrastructure/machine/number.hpp>
