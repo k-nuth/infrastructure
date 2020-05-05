@@ -63,8 +63,9 @@
 #define BI_LOCALE_UTF8 "en_US.UTF8"
 
 #ifdef _MSC_VER
+    #include <filesystem>
     #include <locale>
-    #include <boost/filesystem.hpp>
+    //#include <boost/filesystem.hpp>
     #include <boost/locale.hpp>
     #include <windows.h>
     #define KTH_USE_MAIN \

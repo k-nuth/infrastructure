@@ -9,14 +9,12 @@
 
 #include <kth/infrastructure/define.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 using stream = boost::shared_ptr<std::ostream>;
 using formatter = boost::log::formatting_ostream::ostream_type;
 
-struct rotable_file
-{
+struct rotable_file {
     boost::filesystem::path original_log;
     boost::filesystem::path archive_directory;
     size_t rotation_size;
@@ -25,7 +23,6 @@ struct rotable_file
     size_t maximum_archive_files;
 };
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #endif

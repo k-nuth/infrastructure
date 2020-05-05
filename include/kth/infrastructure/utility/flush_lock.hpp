@@ -1,12 +1,14 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_CRASH_LOCK_HPP
 #define KTH_INFRASTRUCTURE_CRASH_LOCK_HPP
 
+#include <filesystem>
 #include <memory>
 
-#include <boost/filesystem.hpp>
+// #include <boost/filesystem.hpp>
 
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/unicode/file_lock.hpp>
@@ -15,10 +17,9 @@ namespace kth {
 
 /// This class is not thread safe.
 /// Guard a resource that may be corrupted due to an interrupted write.
-class BI_API flush_lock
-{
+class BI_API flush_lock {
 public:
-    using path = boost::filesystem::path;
+    using path = std::filesystem::path;
 
     explicit
     flush_lock(path const& file);

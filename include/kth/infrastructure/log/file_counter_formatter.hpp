@@ -18,19 +18,18 @@
 #ifndef KTH_INFRASTRUCTURE_LOG_FILE_COUNTER_FORMATTER_HPP
 #define KTH_INFRASTRUCTURE_LOG_FILE_COUNTER_FORMATTER_HPP
 
+// #include <filesystem>
 #include <sstream>
 
 #include <boost/filesystem/path.hpp>
 
 #include <kth/infrastructure/define.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 // modified from class extracted from boost/log/sinks/text_file_backend.*pp
 //! The functor formats the file counter into the file name
-class BI_API file_counter_formatter
-{
+class BI_API file_counter_formatter {
 public:
     using path_string_type = boost::filesystem::path::string_type;
 
@@ -43,8 +42,7 @@ public:
     file_counter_formatter(file_counter_formatter const& that);
 
     //! The function formats the file counter into the file name
-    path_string_type operator()(path_string_type const& stem,
-        path_string_type const& extension, unsigned int counter) const;
+    path_string_type operator()(path_string_type const& stem, path_string_type const& extension, unsigned int counter) const;
 
     BOOST_DELETED_FUNCTION(file_counter_formatter& operator= (file_counter_formatter const&))
 
@@ -55,7 +53,6 @@ private:
     mutable std::basic_ostringstream<path_string_type::value_type> stream_;
 };
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #endif
