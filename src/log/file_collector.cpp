@@ -45,6 +45,7 @@ inline void move_file(filesystem::path const& from, filesystem::path const& to) 
     filesystem::rename(from, to);
 #else
     // On POSIX rename fails if the target points to a different device
+    // std::error_code ec;
     boost::system::error_code ec;
     filesystem::rename(from, to, ec);
     if (ec) {
@@ -53,8 +54,7 @@ inline void move_file(filesystem::path const& from, filesystem::path const& to) 
             filesystem::copy_file(from, to);
             filesystem::remove(from);
         } else {
-            BOOST_THROW_EXCEPTION(filesystem::filesystem_error(
-                "failed to move file to another location", from, to, ec));
+            BOOST_THROW_EXCEPTION(filesystem::filesystem_error("failed to move file to another location", from, to, ec));
         }
     }
 #endif
