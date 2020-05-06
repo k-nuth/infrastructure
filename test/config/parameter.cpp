@@ -1,10 +1,14 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+#include <filesystem>
 #include <iostream>
 #include <utility>
 #include <vector>
-#include <boost/filesystem.hpp>
+
+// #include <boost/filesystem.hpp>
+
 #include <boost/program_options.hpp>
 #include <boost/test/test_tools.hpp>
 #include <boost/test/unit_test_suite.hpp>
@@ -27,7 +31,7 @@ enum opt {
 
 static 
 void load_test_options(po::options_description& options) {
-    using namespace boost::filesystem;
+    using namespace std::filesystem;
     using namespace boost::program_options;
     options.add_options()
         ("short_long,s", "Long and short name.")

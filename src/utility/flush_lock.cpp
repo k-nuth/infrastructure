@@ -1,11 +1,13 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/utility/flush_lock.hpp>
 
+#include <filesystem>
 #include <memory>
 
-#include <boost/filesystem.hpp>
+// #include <boost/filesystem.hpp>
 
 #include <kth/infrastructure/unicode/file_lock.hpp>
 #include <kth/infrastructure/unicode/ifstream.hpp>
@@ -14,34 +16,28 @@
 namespace kth {
 
 // static
-bool flush_lock::create(std::string const& file)
-{
+bool flush_lock::create(std::string const& file) {
     bc::ofstream stream(file);
     return stream.good();
 }
 
 // static
-bool flush_lock::exists(std::string const& file)
-{
-    bc::ifstream stream(file);
-    return stream.good();
-    ////return boost::filesystem::exists(file);
+bool flush_lock::exists(std::string const& file) {
+    // bc::ifstream stream(file);
+    // return stream.good();
+    return std::filesystem::exists(file);
 }
 
 // static
-bool flush_lock::destroy(std::string const& file)
-{
-    return boost::filesystem::remove(file);
-    ////std::remove(file.c_str());
+bool flush_lock::destroy(std::string const& file) {
+    return std::filesystem::remove(file);
 }
 
 flush_lock::flush_lock(path const& file)
-  : file_(file.string()), locked_(false)
-{
-}
+    : file_(file.string()), locked_(false)
+{}
 
-bool flush_lock::try_lock()
-{
+bool flush_lock::try_lock() {
     return !exists(file_);
 }
 

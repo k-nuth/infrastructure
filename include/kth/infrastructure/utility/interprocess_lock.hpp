@@ -4,10 +4,11 @@
 #ifndef KTH_INFRASTRUCTURE_INTERPROCESS_LOCK_HPP
 #define KTH_INFRASTRUCTURE_INTERPROCESS_LOCK_HPP
 
+#include <filesystem>
 #include <memory>
 #include <string>
 
-#include <boost/filesystem.hpp>
+// #include <boost/filesystem.hpp>
 
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/unicode/file_lock.hpp>
@@ -16,10 +17,9 @@ namespace kth {
 
 /// This class is not thread safe.
 /// Guard a resource againt concurrent use by another instance of this app.
-class BI_API interprocess_lock
-{
+class BI_API interprocess_lock {
 public:
-    using path = boost::filesystem::path;
+    using path = std::filesystem::path;
 
     explicit
     interprocess_lock(path const& file);

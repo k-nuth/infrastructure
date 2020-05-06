@@ -12,8 +12,7 @@
 #include <kth/infrastructure/error.hpp>
 #include <utility>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 using namespace std::placeholders;
 using namespace boost::asio;
@@ -43,5 +42,4 @@ void udp_client_sink::handle_send(const boost_code& /*unused*/, size_t /*unused*
     payload.reset();
 }
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log

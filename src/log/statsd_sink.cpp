@@ -27,8 +27,7 @@
 #include <kth/infrastructure/utility/asio.hpp>
 #include <kth/infrastructure/utility/threadpool.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 using namespace bc::config;
 using namespace boost::asio::ip;
@@ -66,7 +65,7 @@ void statsd_formatter(const record_view& record, formatting_ostream& stream) {
 }
 
 static 
-boost::shared_ptr<collector> file_collector(const rotable_file& rotation) {
+boost::shared_ptr<collector> file_collector(rotable_file const& rotation) {
     // rotation_size controls enable/disable so use zero as max sentinel.
     return bc::log::make_collector(
         rotation.archive_directory,
@@ -76,8 +75,7 @@ boost::shared_ptr<collector> file_collector(const rotable_file& rotation) {
 }
 
 static 
-boost::shared_ptr<text_file_sink> add_text_file_sink(const rotable_file& rotation)
-{
+boost::shared_ptr<text_file_sink> add_text_file_sink(rotable_file const& rotation) {
     // Construct a log sink.
     auto const sink = boost::make_shared<text_file_sink>();
     auto const backend = sink->locked_backend();
@@ -102,7 +100,7 @@ boost::shared_ptr<text_file_sink> add_text_file_sink(const rotable_file& rotatio
     return sink;
 }
 
-void initialize_statsd(const rotable_file& file) {
+void initialize_statsd(rotable_file const& file) {
     add_text_file_sink(file)->set_filter(statsd_filter);
 }
 
@@ -131,5 +129,4 @@ void initialize_statsd(threadpool& pool, authority const& server) {
     }
 }
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log

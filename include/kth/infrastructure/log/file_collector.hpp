@@ -19,6 +19,7 @@
 #define KTH_INFRASTRUCTURE_LOG_FILE_COLLECTOR_HPP
 
 #include <ctime>
+#include <filesystem>
 #include <list>
 #include <string>
 
@@ -37,8 +38,7 @@
 
 #include <kth/infrastructure/define.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 // modified from class extracted from boost/log/sinks/text_file_backend.*pp
 class BI_API file_collector_repository;
@@ -79,8 +79,7 @@ public:
 
 private:
     //! Information about a single stored file
-    struct file_info
-    {
+    struct file_info {
         uintmax_t size;
         std::time_t timestamp;
         boost::filesystem::path path;
@@ -127,7 +126,6 @@ private:
     uintmax_t total_size_;
 };
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #endif

@@ -26,13 +26,11 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/log/file_collector.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 // modified from class extracted from boost/log/sinks/text_file_backend.*pp
 class BI_API file_collector_repository :
-    public boost::log::aux::lazy_singleton<file_collector_repository,
-        boost::shared_ptr<file_collector_repository>>
+    public boost::log::aux::lazy_singleton<file_collector_repository, boost::shared_ptr<file_collector_repository>>
 {
 public:
     //! Finds or creates a file collector
@@ -80,7 +78,6 @@ BI_API boost::shared_ptr<boost::log::sinks::file::collector> make_collector(
     size_t max_files = (std::numeric_limits<size_t>::max)()
 );
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #endif

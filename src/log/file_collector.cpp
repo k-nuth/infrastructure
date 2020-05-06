@@ -17,6 +17,8 @@
 
 #include <kth/infrastructure/log/file_collector.hpp>
 
+// #include <filesystem>
+
 #include <boost/bind.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/filesystem.hpp>
@@ -27,8 +29,7 @@
 #include <kth/infrastructure/log/file_collector_repository.hpp>
 #include <kth/infrastructure/log/file_counter_formatter.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 namespace filesystem = boost::filesystem;
 namespace qi = boost::spirit::qi;
@@ -44,20 +45,16 @@ inline void move_file(filesystem::path const& from, filesystem::path const& to) 
     filesystem::rename(from, to);
 #else
     // On POSIX rename fails if the target points to a different device
+    // std::error_code ec;
     boost::system::error_code ec;
     filesystem::rename(from, to, ec);
-    if (ec)
-    {
-        if (ec.value() == boost::system::errc::cross_device_link)
-        {
+    if (ec) {
+        if (ec.value() == boost::system::errc::cross_device_link) {
             // Attempt to manually move the file instead
             filesystem::copy_file(from, to);
             filesystem::remove(from);
-        }
-        else
-        {
-            BOOST_THROW_EXCEPTION(filesystem::filesystem_error(
-                "failed to move file to another location", from, to, ec));
+        } else {
+            BOOST_THROW_EXCEPTION(filesystem::filesystem_error("failed to move file to another location", from, to, ec));
         }
     }
 #endif
@@ -408,5 +405,4 @@ path_string_type file_collector::filename_string(filesystem::path const& path) {
     return path.filename().string<path_string_type>();
 }
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
