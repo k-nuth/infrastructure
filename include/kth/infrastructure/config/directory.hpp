@@ -22,9 +22,9 @@ std::filesystem::path config_default_path() {
 
 //// Declare config_default_path() via BI_DECLARE_CONFIG_DEFAULT_PATH(relative).
 //#define CONFIG_DEFAULT_PATH(directory, subdirectory) \
-//    static boost::filesystem::path config_default_path() \
+//    static std::filesystem::path config_default_path() \
 //    { \
-//        const boost::filesystem::path folder(directory); \
+//        const std::filesystem::path folder(directory); \
 //        return folder / subdirectory; \
 //    }
 //

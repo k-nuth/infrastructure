@@ -92,6 +92,11 @@ class KnuthInfrastructureConan(KnuthConanFile):
         if self.options.log == "spdlog":
             self.options["spdlog"].header_only = True
 
+        if self.options.log != "boost":
+            self.options["boost"].without_filesystem = True
+            self.options["boost"].without_log = True
+
+
     def package_id(self):
         KnuthConanFile.package_id(self)
 

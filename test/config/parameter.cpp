@@ -31,7 +31,7 @@ enum opt {
 
 static 
 void load_test_options(po::options_description& options) {
-    using namespace boost::filesystem;
+    using namespace std::filesystem;
     using namespace boost::program_options;
     options.add_options()
         ("short_long,s", "Long and short name.")
