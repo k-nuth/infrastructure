@@ -103,19 +103,16 @@ for:
       only:
         - /(dev|feature).*/    # Just development branches
     environment:
-      MINGW_CONFIGURATIONS: "9@x86_64@seh@posix"
-      # APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-      # CONAN_VISUAL_VERSIONS: 16
-      # CONAN_VISUAL_RUNTIMES: MT
-      # KTH_RUN_TESTS: true
+      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      CONAN_VISUAL_VERSIONS: 16
+      CONAN_VISUAL_RUNTIMES: MT
+      KTH_RUN_TESTS: true
   -
     branches:
       only:
         - /(release|hotfix).+/    #Just releases
     environment:
       matrix:
-        - MINGW_CONFIGURATIONS: "9@x86_64@seh@posix"
-
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
           CONAN_VISUAL_VERSIONS: 16
           CONAN_VISUAL_RUNTIMES: MT
@@ -140,6 +137,7 @@ for:
         # - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
         #   CONAN_VISUAL_VERSIONS: 14
 
+        # - MINGW_CONFIGURATIONS: "9@x86_64@seh@posix"
         - MINGW_CONFIGURATIONS: "8@x86_64@seh@posix"
         # - MINGW_CONFIGURATIONS: "7@x86_64@seh@posix"
         # - MINGW_CONFIGURATIONS: "6@x86_64@seh@posix"
