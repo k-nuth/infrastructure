@@ -103,11 +103,11 @@ for:
       only:
         - /(dev|feature).*/    # Just development branches
     environment:
-
-      APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-      CONAN_VISUAL_VERSIONS: 16
-      CONAN_VISUAL_RUNTIMES: MT
-      KTH_RUN_TESTS: true
+      MINGW_CONFIGURATIONS: "9@x86_64@seh@posix"
+      # APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      # CONAN_VISUAL_VERSIONS: 16
+      # CONAN_VISUAL_RUNTIMES: MT
+      # KTH_RUN_TESTS: true
   -
     branches:
       only:
