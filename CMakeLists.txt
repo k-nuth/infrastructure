@@ -695,7 +695,7 @@ _group_sources(knuth_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
     # merkle_block_tests
     # message_tests
     mnemonic_tests
-    # network_address_tests
+    network_address_tests
     # not_found_tests
     # output_tests
     parameter_tests
