@@ -829,18 +829,14 @@ set(_knuth_infrastructure_headers
 
     kth/infrastructure/impl/machine/interpreter.ipp
     kth/infrastructure/impl/machine/number.ipp
-    # kth/infrastructure/impl/machine/operation.ipp
     kth/infrastructure/impl/machine/program.ipp
 
     kth/infrastructure/math/checksum.hpp
     kth/infrastructure/math/crypto.hpp
     kth/infrastructure/math/elliptic_curve.hpp
     kth/infrastructure/math/hash.hpp
-    # kth/infrastructure/math/limits.hpp
     kth/infrastructure/math/stealth.hpp
     kth/infrastructure/math/uint256.hpp
-
-
 
     kth/infrastructure/impl/utility/array_slice.ipp
     kth/infrastructure/impl/utility/collection.ipp
