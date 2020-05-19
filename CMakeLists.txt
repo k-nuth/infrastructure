@@ -319,11 +319,7 @@ if (ENABLE_SHARED)
 endif()
 
 set(knuth_infrastructure_sources_just_legacy 
-        # src/machine/interpreter.cpp
         src/machine/number.cpp        #Fernando: commented for the moment...
-        # src/machine/opcode.cpp
-        # src/machine/operation.cpp
-        # src/machine/program.cpp
 
         src/config/authority.cpp
         src/config/base16.cpp
@@ -336,7 +332,6 @@ set(knuth_infrastructure_sources_just_legacy
         src/config/hash160.cpp
         src/config/hash256.cpp
         src/config/parameter.cpp
-        # src/config/parser.cpp
         src/config/printer.cpp
         src/config/sodium.cpp
 
