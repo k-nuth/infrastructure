@@ -16,7 +16,6 @@ enum class settings
     regtest
 };
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif
