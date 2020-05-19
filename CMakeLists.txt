@@ -351,7 +351,7 @@ set(knuth_infrastructure_sources_just_legacy
         src/math/secp256k1_initializer.cpp
         src/math/secp256k1_initializer.hpp
         src/math/sip_hash.cpp
-        # src/math/stealth.cpp                    #Depends on chain::script
+
         src/math/external/aes256.h
         src/math/external/crypto_scrypt.h
         src/math/external/hmac_sha256.h
