@@ -909,8 +909,6 @@ set(_knuth_infrastructure_headers
     kth/infrastructure/utility/work.hpp
     kth/infrastructure/utility/writer.hpp
     
-    # kth/infrastructure/wallet/bitcoin_uri.hpp
-    
     kth/infrastructure/wallet/cashaddr.hpp
 
     kth/infrastructure/wallet/dictionary.hpp
