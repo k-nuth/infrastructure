@@ -3,4 +3,3 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 import: k-nuth/ci-utils:.travis/travis-common.yml@master
-
