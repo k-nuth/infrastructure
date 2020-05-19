@@ -802,7 +802,6 @@ set(_knuth_infrastructure_headers
     kth/infrastructure/config/hash160.hpp
     kth/infrastructure/config/hash256.hpp
     kth/infrastructure/config/parameter.hpp
-    # kth/infrastructure/config/parser.hpp
     kth/infrastructure/config/printer.hpp
     kth/infrastructure/config/settings.hpp
     kth/infrastructure/config/sodium.hpp
