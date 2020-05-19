@@ -584,17 +584,12 @@ if (WITH_TESTS)
 
         test/main.cpp
 
-        # test/math/big_number.cpp
-        # test/math/big_number.hppcompact
         test/math/checksum.cpp
         test/math/elliptic_curve.cpp
         test/math/hash.cpp
         test/math/hash.hpp
-        # test/math/hash_number.cpp
-        # test/math/limits.cpp
-        # test/math/script_number.cpp
-        # test/math/script_number.hpp
-        # test/math/stealth.cpp
+
+        test/message/network_address.cpp
 
         test/unicode/unicode.cpp
         test/unicode/unicode_istream.cpp
