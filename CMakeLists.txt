@@ -786,10 +786,7 @@ set(_knuth_infrastructure_headers
 
     kth/infrastructure/machine/interpreter.hpp
     kth/infrastructure/machine/number.hpp    
-    # kth/infrastructure/machine/opcode.hpp
-    # kth/infrastructure/machine/operation.hpp
     kth/infrastructure/machine/program.hpp
-    # kth/infrastructure/machine/rule_fork.hpp
     kth/infrastructure/machine/script_pattern.hpp
     kth/infrastructure/machine/sighash_algorithm.hpp
     kth/infrastructure/machine/script_version.hpp
