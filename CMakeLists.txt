@@ -410,35 +410,12 @@ set(knuth_infrastructure_sources_just_legacy
         src/utility/threadpool.cpp
         src/utility/work.cpp
 
-        # src/wallet/bitcoin_uri.cpp      #Depends on wallet::payment_address
         src/wallet/dictionary.cpp
-        # src/wallet/ec_private.cpp       #Depends on wallet::payment_address
-        # src/wallet/ec_public.cpp        #Depends on wallet::payment_address
-        # src/wallet/ek_private.cpp         #Depends on wallet::payment_address
-        # src/wallet/ek_public.cpp
-        # src/wallet/ek_token.cpp
-        # src/wallet/encrypted_keys.cpp
         src/wallet/hd_private.cpp
         src/wallet/hd_public.cpp
-        # src/wallet/message.cpp
         src/wallet/mini_keys.cpp
         src/wallet/mnemonic.cpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_key.hpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_key.ipp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_prefix.hpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_prefix.ipp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_private.cpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_private.hpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_public.cpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_public.hpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_token.cpp   # #include <kth/infrastructure/chain/script.hpp>
-        # src/wallet/parse_encrypted_keys/parse_encrypted_token.hpp
-        # src/wallet/payment_address.cpp
 
-        # src/wallet/select_outputs.cpp   #  #include <kth/infrastructure/chain/points_value.hpp>
-        # src/wallet/stealth_address.cpp    # #include <kth/infrastructure/chain/script.hpp>
-        # src/wallet/stealth_receiver.cpp # #include <kth/infrastructure/chain/script.hpp>
-        # src/wallet/stealth_sender.cpp # #include <kth/infrastructure/chain/script.hpp>
         src/wallet/uri.cpp
     )
 
