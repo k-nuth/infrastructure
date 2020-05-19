@@ -920,18 +920,10 @@ set(_knuth_infrastructure_headers
     kth/infrastructure/wallet/encrypted_keys.hpp
     kth/infrastructure/wallet/hd_private.hpp
     kth/infrastructure/wallet/hd_public.hpp
-    # kth/infrastructure/wallet/message.hpp
     kth/infrastructure/wallet/mini_keys.hpp
     kth/infrastructure/wallet/mnemonic.hpp
-    # kth/infrastructure/wallet/payment_address.hpp
     kth/infrastructure/wallet/qrcode.hpp
-    # kth/infrastructure/wallet/select_outputs.hpp
-    # kth/infrastructure/wallet/stealth_address.hpp
-    # kth/infrastructure/wallet/stealth_receiver.hpp
-    # kth/infrastructure/wallet/stealth_sender.hpp
     kth/infrastructure/wallet/uri.hpp
-    # kth/infrastructure/wallet/uri_reader.hpp
-    # kth/infrastructure/wallet/transaction_functions.hpp
 
     kth/infrastructure.hpp
   )
