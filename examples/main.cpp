@@ -1,17 +1,18 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <cstdlib>
 #include <string>
 #include <kth/infrastructure.hpp>
 
 KTH_USE_MAIN
 
-int bc::main(int argc, char* argv[]) {
+int kth::main(int argc, char* argv[]) {
     return 0;
 }
 
-// int bc::main(int argc, char* argv[]) {
+// int kth::main(int argc, char* argv[]) {
 
 //     data_chunk out;
 //     data_sink ostream(out);
