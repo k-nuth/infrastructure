@@ -42,8 +42,8 @@ std::filesystem::path config_default_path() {
 // * Get the windows configuration directory.
 // * @return Path or empty string if unable to retrieve.
 // */
-//BI_API std::string windows_config_directory();
+//KI_API std::string windows_config_directory();
 
-} // namespace kth::config
+} // namespace kth::infrastructure::config
 
 #endif
