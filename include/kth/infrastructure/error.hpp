@@ -15,8 +15,7 @@
 namespace kth {
 
 /// Console result codes, positive values are domain-specific.
-enum console_result : int
-{
+enum console_result : int {
     failure = -1,
     okay = 0,
     invalid = 1
@@ -31,8 +30,7 @@ using boost_code = boost::system::error_code;
 namespace error {
 
 // The numeric values of these codes may change without notice.
-enum error_code_t
-{
+enum error_code_t {
     // general codes
     success = 0,
     deprecated = 6,
@@ -275,9 +273,7 @@ enum error_code_t
     double_spend_blockchain    
 };
 
-enum error_condition_t
-{
-};
+enum error_condition_t {};
 
 BI_API code make_error_code(error_code_t e);
 BI_API std::error_condition make_error_condition(error_condition_t e);
@@ -292,14 +288,12 @@ namespace std {
 template <>
 struct is_error_code_enum<bc::error::error_code_t>
   : public true_type
-{
-};
+{};
 
 template <>
 struct is_error_condition_enum<bc::error::error_condition_t>
   : public true_type
-{
-};
+{};
 
 } // namespace std
 

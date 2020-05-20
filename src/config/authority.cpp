@@ -8,14 +8,13 @@
 #include <sstream>
 
 #include <boost/algorithm/string.hpp>
-// #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
 
-#define FMT_HEADER_ONLY
+#define FMT_HEADER_ONLY 1
 #include <fmt/core.h>
 
-// #if defined(KTH_USE_BINLOG)
+// #if defined(KTH_LOG_LIBRARY_BINLOG)
 // #include <binlog/binlog.hpp>
 // #endif
 

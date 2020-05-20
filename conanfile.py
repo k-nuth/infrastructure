@@ -34,7 +34,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "cflags": "ANY",
         "glibcxx_supports_cxx11_abi": "ANY",
         "cmake_export_compile_commands": [True, False],
-        "binlog": [True, False],
+        "log": ["boost", "spdlog", "binlog"]
     }
 
     default_options = {
@@ -53,7 +53,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "cflags": "_DUMMY_",
         "glibcxx_supports_cxx11_abi": "_DUMMY_",
         "cmake_export_compile_commands": False,
-        "binlog": False,
+        "log": "boost",
     }
 
     generators = "cmake"
@@ -63,15 +63,17 @@ class KnuthInfrastructureConan(KnuthConanFile):
     build_policy = "missing"
 
     def requirements(self):
-        self.requires("boost/1.72.0@kth/stable")
+        self.requires("boost/1.73.0@kth/stable")
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
         # self.requires("fmt/6.1.2@")
         # self.requires("fmt/6.2.0@kth/stable")
         self.requires("fmt/6.2.0@")
 
 
-        if self.options.binlog:
+        if self.options.log == "binlog":
             self.requires("binlog/2020.02.29@kth/stable")
+        elif self.options.log == "spdlog":
+            self.requires("spdlog/1.5.0@")
 
         if self.options.with_png:
             self.requires("libpng/1.6.34@kth/stable")
@@ -87,6 +89,14 @@ class KnuthInfrastructureConan(KnuthConanFile):
         KnuthConanFile.configure(self)
         self.options["fmt"].header_only = True
 
+        if self.options.log == "spdlog":
+            self.options["spdlog"].header_only = True
+
+        if self.options.log != "boost":
+            self.options["boost"].without_filesystem = True
+            self.options["boost"].without_log = True
+
+
     def package_id(self):
         KnuthConanFile.package_id(self)
 
@@ -97,7 +107,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         # cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_qrencode)
         cmake.definitions["WITH_QRENCODE"] = option_on_off(self.options.with_qrencode)
         cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_png)
-        cmake.definitions["BINLOG"] = option_on_off(self.options.binlog)
+        cmake.definitions["LOG_LIBRARY"] = self.options.log
 
         cmake.configure(source_dir=self.source_folder)
 
