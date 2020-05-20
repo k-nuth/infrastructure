@@ -12,7 +12,7 @@
 
 #include <kth/infrastructure/define.hpp>
 
-namespace kth::config {
+namespace kth::infrastructure::config {
 
 static 
 std::filesystem::path config_default_path() {
