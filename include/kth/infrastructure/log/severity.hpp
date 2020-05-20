@@ -6,8 +6,7 @@
 
 #include <kth/infrastructure/define.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 enum class severity {
     verbose,
@@ -18,7 +17,6 @@ enum class severity {
     fatal
 };
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #endif
