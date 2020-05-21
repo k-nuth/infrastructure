@@ -23,11 +23,10 @@
 
 #include <kth/infrastructure/define.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 // modified from class extracted from boost/log/sinks/text_file_backend.*pp
-struct BI_API file_char_traits
+struct KI_API file_char_traits
 {
 //#ifdef _MSC_VER
 #ifdef BOOST_WINDOWS_API
