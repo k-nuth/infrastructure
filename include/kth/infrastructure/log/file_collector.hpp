@@ -41,7 +41,7 @@
 namespace kth::log {
 
 // modified from class extracted from boost/log/sinks/text_file_backend.*pp
-class BI_API file_collector_repository;
+class KI_API file_collector_repository;
 
 //! The string type compatible with the universal path type
 using path_string_type = boost::filesystem::path::string_type;
