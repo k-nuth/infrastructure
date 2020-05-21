@@ -1,11 +1,11 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_LOG_FEATURES_METRIC_IPP
 #define KTH_INFRASTRUCTURE_LOG_FEATURES_METRIC_IPP
 
-namespace kth {
-namespace log {
+namespace kth::log {
 namespace features {
 
 template <typename BaseType>
