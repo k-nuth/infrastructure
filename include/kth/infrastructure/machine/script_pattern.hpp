@@ -1,11 +1,11 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_MACHINE_SCRIPT_PATTERN_HPP
 #define KTH_INFRASTUCTURE_MACHINE_SCRIPT_PATTERN_HPP
 
-namespace kth {
-namespace machine {
+namespace kth::infrastructure::machine {
 
 /// Script patterms.
 /// Comments from: bitcoin.org/en/developer-guide#signature-hash-types
