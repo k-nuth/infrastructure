@@ -1,18 +1,20 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_BINARY_HPP
 #define KTH_INFRASTRUCTURE_BINARY_HPP
 
 #include <cstdint>
 #include <string>
+#include <utility>
 
 #include <kth/infrastructure/constants.hpp>
 #include <kth/infrastructure/utility/data.hpp>
 
 namespace kth {
 
-class BI_API binary {
+class KI_API binary {
 public:
     using block = uint8_t;
     using size_type = std::size_t;
