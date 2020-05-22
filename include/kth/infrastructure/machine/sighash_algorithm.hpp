@@ -1,13 +1,13 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_MACHINE_SIGHASH_ALGORITHM_HPP
 #define KTH_INFRASTUCTURE_MACHINE_SIGHASH_ALGORITHM_HPP
 
 #include <cstdint>
 
-namespace kth {
-namespace machine {
+namespace kth::infrastructure::machine {
 
 /// Signature hash types.
 /// Comments from: bitcoin.org/en/developer-guide#standard-transactions
