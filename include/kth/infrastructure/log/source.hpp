@@ -37,8 +37,8 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source) {
 } // namespace kth::log
 #endif // defined(KTH_LOG_LIBRARY_BOOST)
 
-#define BI_LOG_SEVERITY(id, level) \
-    BOOST_LOG_CHANNEL_SEV(bc::log::source::get(), id, bc::log::severity::level)
+#define KI_LOG_SEVERITY(id, level) \
+    BOOST_LOG_CHANNEL_SEV(kth::log::source::get(), id, kth::log::severity::level)
 
 #define KTH_PP_ARG_N( _1, _2, _3, _4, _5, _6, _7, _8, _9,_10,_11,_12,_13,_14,_15,_16,_17,_18,_19,_20, \
                  _21,_22,_23,_24,_25,_26,_27,_28,_29,_30,_31,_32,_33,_34,_35,_36,_37,_38,_39,_40, \
