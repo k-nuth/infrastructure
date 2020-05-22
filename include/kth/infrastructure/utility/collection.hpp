@@ -15,7 +15,7 @@
 
 namespace kth {
 
-#define BI_SENTENCE_DELIMITER " "
+#define KI_SENTENCE_DELIMITER " "
 
 /**
  * Cast vector/enumerable elements into a new vector.
