@@ -29,7 +29,7 @@
 namespace kth::log {
 
 // modified from class extracted from boost/log/sinks/text_file_backend.*pp
-class BI_API file_collector_repository :
+class KI_API file_collector_repository :
     public boost::log::aux::lazy_singleton<file_collector_repository, boost::shared_ptr<file_collector_repository>>
 {
 public:
