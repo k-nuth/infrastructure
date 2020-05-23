@@ -2,9 +2,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-
 // Cashaddr is an address format inspired by bech32.
-
 #ifndef KTH_INFRASTUCTURE_WALLET_CASHADDR_HPP_
 #define KTH_INFRASTUCTURE_WALLET_CASHADDR_HPP_
 
