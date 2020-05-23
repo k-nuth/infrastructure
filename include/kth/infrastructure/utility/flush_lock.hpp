@@ -17,7 +17,7 @@ namespace kth {
 
 /// This class is not thread safe.
 /// Guard a resource that may be corrupted due to an interrupted write.
-class BI_API flush_lock {
+class KI_API flush_lock {
 public:
     using path = std::filesystem::path;
 
