@@ -45,14 +45,14 @@ static uint64_t integerify(uint8_t* /*B*/, size_t /*r*/);
 static void smix(uint8_t*  /*B*/, size_t /*r*/, uint64_t /*N*/, uint8_t* /*V*/, uint8_t* /*XY*/);
 
 static 
-BI_C_INLINE uint32_t le32dec(const void* pp) {
+KI_C_INLINE uint32_t le32dec(const void* pp) {
     uint8_t const* p = (uint8_t const* )pp;
     return ((uint32_t)(p[0]) + ((uint32_t)(p[1]) << 8) +
             ((uint32_t)(p[2]) << 16) + ((uint32_t)(p[3]) << 24));
 }
 
 static 
-BI_C_INLINE void le32enc(void* pp, uint32_t x) {
+KI_C_INLINE void le32enc(void* pp, uint32_t x) {
     uint8_t* p = (uint8_t* )pp;
     p[0] = x & 0xff;
     p[1] = (x >> 8) & 0xff;
