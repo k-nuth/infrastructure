@@ -24,8 +24,7 @@
 #include <kth/infrastructure/compat.hpp>
 
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 static boost::arg<1> _1;
 
