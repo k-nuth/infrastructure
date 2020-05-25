@@ -17,7 +17,7 @@ namespace kth {
 
 // static
 bool interprocess_lock::create(std::string const& file) {
-    bc::ofstream stream(file);
+    kth::ofstream stream(file);
     return stream.good();
 }
 
