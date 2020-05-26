@@ -8,7 +8,7 @@
 #include <cstdio>
 #include <boost/preprocessor/repetition/repeat.hpp>
 
-using namespace bc;
+using namespace kth;
 
 BOOST_AUTO_TEST_SUITE(log_tests)
 
