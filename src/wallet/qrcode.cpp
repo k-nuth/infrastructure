@@ -16,8 +16,7 @@
 #include <kth/infrastructure/utility/ostream_writer.hpp>
 
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 data_chunk qr::encode(data_chunk const& data)
 {
