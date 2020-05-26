@@ -15,7 +15,7 @@
 #include <kth/infrastructure.hpp>
 
 namespace po = boost::program_options;
-using namespace bc::config;
+using namespace kth::infrastructure::config;
 
 enum opt {
     short_long = 0,
