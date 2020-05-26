@@ -7,7 +7,7 @@
 #include <boost/test/unit_test.hpp>
 #include <kth/infrastructure.hpp>
 
-using namespace bc;
+using namespace kth;
 
 BOOST_AUTO_TEST_SUITE(unicode_ostream_tests)
 
