@@ -1,12 +1,13 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <boost/test/test_tools.hpp>
 #include <boost/test/unit_test_suite.hpp>
 #include <kth/infrastructure.hpp>
 
-using namespace bc;
-using namespace bc::config;
+using namespace kth;
+using namespace kth::infrastructure::config;
 
 #define BASE58_ENCODED_A "vYxp6yFC7qiVtK1RcGQQt3L6EqTc8YhEDLnSMLqDvp8D"
 #define BASE58_DECODED_A \
