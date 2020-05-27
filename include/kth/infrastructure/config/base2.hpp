@@ -12,14 +12,12 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/utility/binary.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for base2 encoded data.
  */
-class BI_API base2
-{
+class KI_API base2 {
 public:
 
     base2() = default;

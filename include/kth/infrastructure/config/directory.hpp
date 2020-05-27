@@ -20,7 +20,7 @@ std::filesystem::path config_default_path() {
     return folder;
 }
 
-//// Declare config_default_path() via BI_DECLARE_CONFIG_DEFAULT_PATH(relative).
+//// Declare config_default_path() via KI_DECLARE_CONFIG_DEFAULT_PATH(relative).
 //#define CONFIG_DEFAULT_PATH(directory, subdirectory) \
 //    static std::filesystem::path config_default_path() \
 //    { \

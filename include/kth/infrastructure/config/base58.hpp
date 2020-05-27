@@ -11,13 +11,12 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/utility/data.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for base58 encoded text.
  */
-class BI_API base58 {
+class KI_API base58 {
 public:
 
     base58() = default;

@@ -11,13 +11,12 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/utility/data.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for base64 encoded data.
  */
-class BI_API base64 {
+class KI_API base64 {
 public:
 
     base64() = default;

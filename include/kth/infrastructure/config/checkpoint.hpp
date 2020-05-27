@@ -13,14 +13,13 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/formats/base_16.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for a blockchain checkpoint.
  * This is a container for a {block hash, block height} tuple.
  */
-class BI_API checkpoint {
+class KI_API checkpoint {
 public:
     using list = std::vector<checkpoint>;
 
