@@ -9,11 +9,7 @@
 #include <cstdint>
 
 #include <kth/infrastructure/compat.hpp>
-// #include <kth/infrastructure/config/checkpoint.hpp>
 #include <kth/infrastructure/define.hpp>
-// #include <kth/infrastructure/math/hash.hpp>
-// #include <kth/infrastructure/message/network_address.hpp>
-// #include <kth/infrastructure/version.hpp>
 #include <kth/infrastructure/hash_define.hpp>
 
 namespace kth {

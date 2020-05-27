@@ -13,13 +13,12 @@
 #include <kth/infrastructure/math/hash.hpp>
 #include <kth/infrastructure/utility/data.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for base58 sodium keys.
  */
-class BI_API sodium
+class KI_API sodium
 {
 public:
     /**

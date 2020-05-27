@@ -25,8 +25,7 @@ constexpr uint8_t ubtc_decimal_places = 2;
  * or false to round them upwards.
  * @return false for failure.
  */
-BI_API bool decode_base10(uint64_t& out, std::string const& amount,
-    uint8_t decimal_places=0, bool strict=true);
+KI_API bool decode_base10(uint64_t& out, std::string const& amount, uint8_t decimal_places=0, bool strict=true);
 
 /**
  * Writes a Bitcoin amount to a string, following the BIP 21 grammar.

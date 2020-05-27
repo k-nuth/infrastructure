@@ -11,13 +11,12 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/math/hash.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for a bitcoin 256 bit hash.
  */
-class BI_API hash256
+class KI_API hash256
 {
 public:
     /**

@@ -17,25 +17,25 @@
 #include <kth/infrastructure/config/parameter.hpp>
 #include <kth/infrastructure/define.hpp>
 
-namespace kth::config {
+namespace kth::infrastructure::config {
 
 /**
  * Shorthand for property declarations in printer class.
  */
-#define BI_PROPERTY_GET_REF(type, name) \
+#define KI_PROPERTY_GET_REF(type, name) \
     public: type& get_##name() { return name##_; } \
     private: type name##_
 
 /**
  * Class for managing the serialization of command line options and arguments.
  */
-class BI_API printer {
+class KI_API printer {
 public:
 
     /**
      * Number of arguments above which the argument is considered unlimited.
      */
-    BI_API static int const max_arguments;
+    KI_API static int const max_arguments;
 
     /**
      * Construct an instance of the printer class.

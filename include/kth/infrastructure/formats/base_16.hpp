@@ -22,13 +22,13 @@ bool is_base16(char c);
 /**
  * Convert data into a user-readable hex string.
  */
-BI_API std::string encode_base16(data_slice data);
+KI_API std::string encode_base16(data_slice data);
 
 /**
  * Convert a hex string into bytes.
  * @return false if the input is malformed.
  */
-BI_API bool decode_base16(data_chunk& out, std::string const &in);
+KI_API bool decode_base16(data_chunk& out, std::string const &in);
 
 /**
  * Converts a hex string to a number of bytes.

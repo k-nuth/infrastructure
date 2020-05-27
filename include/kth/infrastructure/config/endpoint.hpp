@@ -16,14 +16,13 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/formats/base_16.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for a network endpoint in URI format.
  * This is a container for a {scheme, host, port} tuple.
  */
-class BI_API endpoint {
+class KI_API endpoint {
 public:
     /**
      * A list of endpoints.

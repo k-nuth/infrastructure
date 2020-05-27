@@ -15,13 +15,12 @@
 
 /* NOTE: don't declare 'using namespace foo' in headers. */
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Shorthand for property declarations in parameter class.
  */
-#define BI_PROPERTY(type, name) \
+#define KI_PROPERTY(type, name) \
     public: type get_##name() const { return name##_; } \
     public: void set_##name(type const& value) { name##_ = value; } \
     private: type name##_
