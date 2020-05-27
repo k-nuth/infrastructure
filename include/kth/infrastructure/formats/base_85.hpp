@@ -16,13 +16,13 @@ namespace kth {
  * Encode data as base85 (Z85).
  * @return false if the input is not of base85 size (% 4).
  */
-BI_API bool encode_base85(std::string& out, data_slice in);
+KI_API bool encode_base85(std::string& out, data_slice in);
 
 /**
  * Attempt to decode base85 (Z85) data.
  * @return false if the input contains non-base85 characters or length (% 5).
  */
-BI_API bool decode_base85(data_chunk& out, std::string const& in);
+KI_API bool decode_base85(data_chunk& out, std::string const& in);
 
 } // namespace kth
 
