@@ -14,9 +14,9 @@
 #endif
 
 #ifdef _MSC_VER
-    #define BI_C_INLINE __inline
+    #define KI_C_INLINE __inline
 #else
-    #define BI_C_INLINE inline
+    #define KI_C_INLINE inline
 #endif
 
 #endif

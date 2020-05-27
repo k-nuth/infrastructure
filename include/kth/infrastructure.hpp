@@ -62,12 +62,7 @@
 #include <kth/infrastructure/log/features/timer.hpp>
 #endif // defined(KTH_LOG_LIBRARY_BOOST)
 
-// #include <kth/infrastructure/machine/interpreter.hpp>
 #include <kth/infrastructure/machine/number.hpp>
-// #include <kth/infrastructure/machine/opcode.hpp>
-// #include <kth/infrastructure/machine/operation.hpp>
-// #include <kth/infrastructure/machine/program.hpp>
-// #include <kth/infrastructure/machine/rule_fork.hpp>
 #include <kth/infrastructure/machine/script_pattern.hpp>
 #include <kth/infrastructure/machine/script_version.hpp>
 #include <kth/infrastructure/machine/sighash_algorithm.hpp>

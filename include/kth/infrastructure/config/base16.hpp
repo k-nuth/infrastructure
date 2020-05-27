@@ -13,14 +13,13 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/utility/data.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for base16 encoded data.
  */
 //TODO(fernando): make a generic class for baseX
-class BI_API base16 {
+class KI_API base16 {
 public:
 
     base16() = default;

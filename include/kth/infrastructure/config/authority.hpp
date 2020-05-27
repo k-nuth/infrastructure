@@ -14,13 +14,13 @@
 #include <kth/infrastructure/message/network_address.hpp>
 #include <kth/infrastructure/utility/asio.hpp>
 
-namespace kth::config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for a network authority.
  * This is a container for a {ip address, port} tuple.
  */
-class BI_API authority {
+class KI_API authority {
 public:
     /**
      * A list of authorities.
