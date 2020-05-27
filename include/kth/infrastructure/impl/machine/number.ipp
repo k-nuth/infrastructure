@@ -14,12 +14,11 @@
 #include <kth/infrastructure/utility/assert.hpp>
 #include <kth/infrastructure/utility/limits.hpp>
 
-namespace kth {
-namespace machine {
+namespace kth::infrastructure::machine {
 
 static uint64_t const negative_bit = number::negative_mask;
-static uint64_t const unsigned_max_int64 = bc::max_int64;
-static uint64_t const absolute_min_int64 = bc::min_int64;
+static uint64_t const unsigned_max_int64 = kth::max_int64;
+static uint64_t const absolute_min_int64 = kth::min_int64;
 
 inline 
 bool is_negative(data_chunk const& data) {

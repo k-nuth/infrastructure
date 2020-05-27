@@ -70,7 +70,6 @@ boost::log::attribute_set::iterator
 }
 
 } // namespace features
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #endif

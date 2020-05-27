@@ -10,7 +10,7 @@
 namespace kth {
 
 // For template implementation only, do not call directly.
-BI_API bool decode_base16_private(uint8_t* out, size_t out_size,
+KI_API bool decode_base16_private(uint8_t* out, size_t out_size,
     char const* in);
 
 template <size_t Size>

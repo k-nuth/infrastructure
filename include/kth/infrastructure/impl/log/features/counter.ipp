@@ -10,8 +10,7 @@
 #include <boost/log/attributes.hpp>
 #include <boost/scope_exit.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 namespace features {
 
 template <typename BaseType>
