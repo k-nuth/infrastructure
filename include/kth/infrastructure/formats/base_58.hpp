@@ -12,8 +12,8 @@
 
 namespace kth {
 
-BI_API bool is_base58(char ch);
-BI_API bool is_base58(std::string const& text);
+KI_API bool is_base58(char ch);
+KI_API bool is_base58(std::string const& text);
 
 /**
  * Converts a base58 string to a number of bytes.
