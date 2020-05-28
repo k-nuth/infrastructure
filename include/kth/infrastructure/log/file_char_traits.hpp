@@ -64,7 +64,6 @@ struct KI_API file_char_traits
     }
 };
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #endif

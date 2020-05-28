@@ -13,8 +13,7 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/log/severity.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 namespace attributes {
 
 // severity/channel/timestamp/message log entries

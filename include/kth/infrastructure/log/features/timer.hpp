@@ -11,8 +11,7 @@
 #include <boost/log/sources/threading_models.hpp>
 #include <boost/log/utility/strictest_lock.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 namespace attributes {
 
 BOOST_LOG_ATTRIBUTE_KEYWORD(timer, "Timer", std::chrono::milliseconds)
