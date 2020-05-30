@@ -10,14 +10,12 @@
 
 #include <kth/infrastructure/define.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 /**
  * A parsed URI according to RFC 3986.
  */
-class BI_API uri
-{
+class KI_API uri {
 public:
     /**
      * Decodes a URI from a string.

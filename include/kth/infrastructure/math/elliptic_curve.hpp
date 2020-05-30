@@ -45,7 +45,7 @@ static constexpr size_t max_endorsement_size = 73;
 using endorsement = data_chunk;
 
 /// Recoverable ecdsa signature for message signing:
-struct BI_API recoverable_signature
+struct KI_API recoverable_signature
 {
     ec_signature signature;
     uint8_t recovery_id;

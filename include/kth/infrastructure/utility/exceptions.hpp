@@ -11,7 +11,7 @@
 
 namespace kth {
 
-class BI_API end_of_stream
+class KI_API end_of_stream
     : std::exception
 {};
 

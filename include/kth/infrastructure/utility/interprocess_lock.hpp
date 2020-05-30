@@ -18,7 +18,7 @@ namespace kth {
 
 /// This class is not thread safe.
 /// Guard a resource againt concurrent use by another instance of this app.
-class BI_API interprocess_lock {
+class KI_API interprocess_lock {
 public:
     using path = std::filesystem::path;
 

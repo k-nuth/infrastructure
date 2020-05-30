@@ -17,7 +17,7 @@
 namespace kth {
 
 /// Writer interface.
-class BI_API writer
+class KI_API writer
 {
 public:
     /// Context.

@@ -91,49 +91,49 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source) {
 
 #elif defined(KTH_LOG_LIBRARY_BOOST)
 
-// #define LOG_VERBOSE(modul) BI_LOG_SEVERITY(modul, verbose)
-// #define LOG_DEBUG(modul) BI_LOG_SEVERITY(modul, debug)
-// #define LOG_INFO(modul) BI_LOG_SEVERITY(modul, info)
-// #define LOG_WARNING(modul) BI_LOG_SEVERITY(modul, warning)
-// #define LOG_ERROR(modul) BI_LOG_SEVERITY(modul, error)
-// #define LOG_FATAL(modul) BI_LOG_SEVERITY(modul, fatal)
+// #define LOG_VERBOSE(modul) KI_LOG_SEVERITY(modul, verbose)
+// #define LOG_DEBUG(modul) KI_LOG_SEVERITY(modul, debug)
+// #define LOG_INFO(modul) KI_LOG_SEVERITY(modul, info)
+// #define LOG_WARNING(modul) KI_LOG_SEVERITY(modul, warning)
+// #define LOG_ERROR(modul) KI_LOG_SEVERITY(modul, error)
+// #define LOG_FATAL(modul) KI_LOG_SEVERITY(modul, fatal)
 
 #define CONCAT(a, b) a ## b
 #define CONCAT2(a, b) CONCAT(a, b)
 
-#define KTH_LOG_HELPER_0(modul,severiry) BI_LOG_SEVERITY(modul,severiry)
-#define KTH_LOG_HELPER_1(modul,severiry,A1) BI_LOG_SEVERITY(modul,severiry) << A1
-#define KTH_LOG_HELPER_2(modul,severiry,A1,A2) BI_LOG_SEVERITY(modul,severiry) << A1 << A2
-#define KTH_LOG_HELPER_3(modul,severiry,A1,A2,A3) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3
-#define KTH_LOG_HELPER_4(modul,severiry,A1,A2,A3,A4) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4
-#define KTH_LOG_HELPER_5(modul,severiry,A1,A2,A3,A4,A5) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5
-#define KTH_LOG_HELPER_6(modul,severiry,A1,A2,A3,A4,A5,A6) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6
-#define KTH_LOG_HELPER_7(modul,severiry,A1,A2,A3,A4,A5,A6,A7) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7
-#define KTH_LOG_HELPER_8(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8
-#define KTH_LOG_HELPER_9(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9
-#define KTH_LOG_HELPER_10(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10
-#define KTH_LOG_HELPER_11(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11
-#define KTH_LOG_HELPER_12(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12
-#define KTH_LOG_HELPER_13(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13
-#define KTH_LOG_HELPER_14(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14
-#define KTH_LOG_HELPER_15(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15
-#define KTH_LOG_HELPER_16(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16
-#define KTH_LOG_HELPER_17(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17
-#define KTH_LOG_HELPER_18(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18
-#define KTH_LOG_HELPER_19(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19
-#define KTH_LOG_HELPER_20(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20
-#define KTH_LOG_HELPER_21(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21
-#define KTH_LOG_HELPER_22(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22
-#define KTH_LOG_HELPER_23(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23
-#define KTH_LOG_HELPER_24(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24
-#define KTH_LOG_HELPER_25(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25
-#define KTH_LOG_HELPER_26(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25 << A26
-#define KTH_LOG_HELPER_27(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25 << A26 << A27
-#define KTH_LOG_HELPER_28(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27,A28) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25 << A26 << A27 << A28
-#define KTH_LOG_HELPER_29(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27,A28,A29) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25 << A26 << A27 << A28 << A29
-#define KTH_LOG_HELPER_30(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27,A28,A29,A30) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25 << A26 << A27 << A28 << A29 << A30
-#define KTH_LOG_HELPER_31(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27,A28,A29,A30,A31) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25 << A26 << A27 << A28 << A29 << A30 << A31
-#define KTH_LOG_HELPER_32(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27,A28,A29,A30,A31,A32) BI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25 << A26 << A27 << A28 << A29 << A30 << A31 << A32
+#define KTH_LOG_HELPER_0(modul,severiry) KI_LOG_SEVERITY(modul,severiry)
+#define KTH_LOG_HELPER_1(modul,severiry,A1) KI_LOG_SEVERITY(modul,severiry) << A1
+#define KTH_LOG_HELPER_2(modul,severiry,A1,A2) KI_LOG_SEVERITY(modul,severiry) << A1 << A2
+#define KTH_LOG_HELPER_3(modul,severiry,A1,A2,A3) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3
+#define KTH_LOG_HELPER_4(modul,severiry,A1,A2,A3,A4) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4
+#define KTH_LOG_HELPER_5(modul,severiry,A1,A2,A3,A4,A5) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5
+#define KTH_LOG_HELPER_6(modul,severiry,A1,A2,A3,A4,A5,A6) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6
+#define KTH_LOG_HELPER_7(modul,severiry,A1,A2,A3,A4,A5,A6,A7) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7
+#define KTH_LOG_HELPER_8(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8
+#define KTH_LOG_HELPER_9(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9
+#define KTH_LOG_HELPER_10(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10
+#define KTH_LOG_HELPER_11(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11
+#define KTH_LOG_HELPER_12(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12
+#define KTH_LOG_HELPER_13(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13
+#define KTH_LOG_HELPER_14(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14
+#define KTH_LOG_HELPER_15(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15
+#define KTH_LOG_HELPER_16(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16
+#define KTH_LOG_HELPER_17(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17
+#define KTH_LOG_HELPER_18(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18
+#define KTH_LOG_HELPER_19(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19
+#define KTH_LOG_HELPER_20(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20
+#define KTH_LOG_HELPER_21(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21
+#define KTH_LOG_HELPER_22(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22
+#define KTH_LOG_HELPER_23(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23
+#define KTH_LOG_HELPER_24(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24
+#define KTH_LOG_HELPER_25(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25
+#define KTH_LOG_HELPER_26(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25 << A26
+#define KTH_LOG_HELPER_27(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25 << A26 << A27
+#define KTH_LOG_HELPER_28(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27,A28) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25 << A26 << A27 << A28
+#define KTH_LOG_HELPER_29(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27,A28,A29) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25 << A26 << A27 << A28 << A29
+#define KTH_LOG_HELPER_30(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27,A28,A29,A30) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25 << A26 << A27 << A28 << A29 << A30
+#define KTH_LOG_HELPER_31(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27,A28,A29,A30,A31) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25 << A26 << A27 << A28 << A29 << A30 << A31
+#define KTH_LOG_HELPER_32(modul,severiry,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27,A28,A29,A30,A31,A32) KI_LOG_SEVERITY(modul,severiry) << A1 << A2 << A3 << A4 << A5 << A6 << A7 << A8 << A9 << A10 << A11 << A12 << A13 << A14 << A15 << A16 << A17 << A18 << A19 << A20 << A21 << A22 << A23 << A24 << A25 << A26 << A27 << A28 << A29 << A30 << A31 << A32
 
 
 // Workaround for  MSVC

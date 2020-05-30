@@ -16,14 +16,13 @@
 #include <kth/infrastructure/formats/base_16.hpp>
 #include <kth/infrastructure/math/hash.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 // using namespace boost;
 using namespace boost::program_options;
 
 checkpoint::checkpoint()
-    : hash_(bc::null_hash) 
+    : hash_(kth::null_hash) 
 {}
 
 checkpoint::checkpoint(std::string const& value)

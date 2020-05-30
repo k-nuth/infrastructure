@@ -71,7 +71,7 @@ private:
 //        boost::intrusive::base_hook<file_collector_hook>> collectors_;
 };
 
-BI_API boost::shared_ptr<boost::log::sinks::file::collector> make_collector(
+KI_API boost::shared_ptr<boost::log::sinks::file::collector> make_collector(
     boost::filesystem::path const& target_dir,
     size_t max_size,
     size_t min_free_space,

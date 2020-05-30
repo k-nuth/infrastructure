@@ -14,14 +14,12 @@
 namespace kth {
 
 socket::socket(threadpool& thread)
-  : thread_(thread),
-    socket_(thread_.service())
+    : thread_(thread)
+    , socket_(thread_.service())
     /*, CONSTRUCT_TRACK(socket) */
-{
-}
+{}
 
-config::authority socket::authority() const
-{
+infrastructure::config::authority socket::authority() const {
     boost_code ec;
 
     ///////////////////////////////////////////////////////////////////////////

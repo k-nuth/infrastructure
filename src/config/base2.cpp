@@ -13,8 +13,7 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/utility/binary.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 base2::base2(std::string const& binary) {
     std::stringstream(binary) >> *this;

@@ -11,10 +11,10 @@
 
 namespace kth {
 
-// Construct bc::ofstream.
+// Construct kth::ofstream.
 ofstream::ofstream(std::string const& path, std::ofstream::openmode mode)
 #ifdef _MSC_VER
-  : std::ofstream(bc::to_utf16(path), mode)
+  : std::ofstream(kth::to_utf16(path), mode)
 #else
   : std::ofstream(path, mode)
 #endif

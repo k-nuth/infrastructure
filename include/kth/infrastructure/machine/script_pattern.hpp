@@ -56,7 +56,6 @@ enum class script_pattern
     non_standard
 };
 
-} // namespace machine
-} // namespace kth
+} // namespace kth::infrastructure::machine
 
 #endif

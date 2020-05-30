@@ -16,7 +16,7 @@ namespace kth {
  * Class to expose a narrowing input stream.
  * std::wcin must be patched by console_streambuf if used for Windows input.
  */
-class BI_API unicode_istream
+class KI_API unicode_istream
     : public std::istream
 {
 public:

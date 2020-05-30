@@ -14,8 +14,7 @@
 #include <kth/infrastructure/formats/base_16.hpp>
 #include <kth/infrastructure/utility/data.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 
 base16::base16(std::string const& hexcode) {

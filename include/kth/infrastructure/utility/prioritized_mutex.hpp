@@ -15,7 +15,7 @@ namespace kth {
 /// This class is thread safe.
 /// Encapsulation of prioritized locking conditions.
 /// This is unconcerned with thread priority and is instead explicit.
-class BI_API prioritized_mutex
+class KI_API prioritized_mutex
 {
 public:
     using ptr = std::shared_ptr<prioritized_mutex>;

@@ -12,14 +12,12 @@
 #include <kth/infrastructure/log/rotable_file.hpp>
 #include <kth/infrastructure/utility/threadpool.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 void initialize_statsd(rotable_file const& file);
 
-void initialize_statsd(threadpool& pool, const config::authority& server);
+void initialize_statsd(threadpool& pool, const infrastructure::config::authority& server);
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #endif

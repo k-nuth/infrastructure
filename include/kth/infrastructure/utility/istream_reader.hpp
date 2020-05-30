@@ -13,7 +13,7 @@
 
 namespace kth {
 
-class BI_API istream_reader
+class KI_API istream_reader
     // : public reader
 {
 public:

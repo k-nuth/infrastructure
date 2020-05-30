@@ -16,8 +16,7 @@
 // #include <kth/infrastructure/wallet/ec_public.hpp>
 #include <kth/infrastructure/wallet/hd_public.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 constexpr
 uint64_t to_prefixes(uint32_t private_prefix, uint32_t public_prefix) {

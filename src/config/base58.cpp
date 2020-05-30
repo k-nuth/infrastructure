@@ -14,8 +14,7 @@
 #include <kth/infrastructure/formats/base_58.hpp>
 #include <kth/infrastructure/utility/data.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 // base58::base58()
 // {

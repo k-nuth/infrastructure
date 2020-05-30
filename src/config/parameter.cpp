@@ -14,7 +14,7 @@
 #include <kth/infrastructure/utility/string.hpp>
 
 namespace po = boost::program_options;
-using namespace kth::config;
+using namespace kth::infrastructure::config;
 
 int const parameter::not_positional = -1;
 char const parameter::no_short_name = 0x00;

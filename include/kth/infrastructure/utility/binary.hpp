@@ -54,10 +54,10 @@ public:
     bool is_prefix_of(uint32_t field) const;
     bool is_prefix_of(binary const& field) const;
 
-    bool operator<(binary const& x) const;
+    binary& operator=(binary const& x);
     bool operator==(binary const& x) const;
     bool operator!=(binary const& x) const;
-    binary& operator=(binary const& x);
+    bool operator<(binary const& x) const;
     
     friend 
     std::istream& operator>>(std::istream& in, binary& to);

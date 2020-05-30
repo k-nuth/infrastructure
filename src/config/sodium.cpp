@@ -14,8 +14,7 @@
 #include <kth/infrastructure/formats/base_85.hpp>
 #include <kth/infrastructure/math/hash.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 sodium::sodium()
     : value_(null_hash)

@@ -28,12 +28,12 @@ using aes_block = byte_array<aes256_block_size>;
 /**
  * Perform aes256 encryption on the specified data block.
  */
-BI_API void aes256_encrypt(const aes_secret& key, aes_block& block);
+KI_API void aes256_encrypt(const aes_secret& key, aes_block& block);
 
 /**
  * Perform aes256 decryption on the specified data block.
  */
-BI_API void aes256_decrypt(const aes_secret& key, aes_block& block);
+KI_API void aes256_decrypt(const aes_secret& key, aes_block& block);
 
 } // namespace kth
 

@@ -34,7 +34,7 @@ namespace kth {
 
 /// This  class is thread safe.
 /// boost asio class wrapper to enable work heap management.
-class BI_API work
+class KI_API work
   : noncopyable
 {
 public:

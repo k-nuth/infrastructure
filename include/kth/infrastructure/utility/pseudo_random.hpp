@@ -15,7 +15,7 @@
 
 namespace kth {
 
-class BI_API pseudo_random
+class KI_API pseudo_random
 {
   public:
     /**

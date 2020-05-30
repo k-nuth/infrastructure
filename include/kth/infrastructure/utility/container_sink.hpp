@@ -18,7 +18,7 @@ namespace kth {
 // modified from boost.iostreams example
 // boost.org/doc/libs/1_55_0/libs/iostreams/doc/tutorial/container_source.html
 template <typename Container, typename SinkType, typename CharType> 
-class BI_API container_sink {
+class KI_API container_sink {
 public:
     using char_type = CharType;
     using category = boost::iostreams::sink_tag;

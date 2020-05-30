@@ -13,15 +13,15 @@
 namespace kth {
 
 /**
- * Use bc::ifstream in place of std::ifstream.
+ * Use kth::ifstream in place of std::ifstream.
  * This provides utf8 to utf16 path translation for Windows.
  */
-class BI_API ifstream
+class KI_API ifstream
     : public std::ifstream
 {
 public:
     /**
-     * Construct bc::ifstream.
+     * Construct kth::ifstream.
      * @param[in]  path  The utf8 path to the file.
      * @param[in]  mode  The file opening mode.
      */

@@ -16,7 +16,7 @@ namespace kth {
  * Class to patch Windows stdin keyboard input, file input is not a problem.
  * This class and members are no-ops when called in non-MSVC++ builds.
  */
-class BI_API console_streambuf : public std::wstreambuf
+class KI_API console_streambuf : public std::wstreambuf
 {
 public:
     /**

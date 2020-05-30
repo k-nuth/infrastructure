@@ -30,7 +30,7 @@
 
 namespace kth::log {
 
-using namespace bc::config;
+using namespace kth::infrastructure::config;
 using namespace boost::asio::ip;
 using namespace boost::log;
 using namespace boost::log::expressions;

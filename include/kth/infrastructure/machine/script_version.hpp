@@ -21,7 +21,6 @@ enum class script_version {
     unversioned
 };
 
-} // namespace machine
-} // namespace kth
+} // namespace kth::infrastructure::machine
 
 #endif

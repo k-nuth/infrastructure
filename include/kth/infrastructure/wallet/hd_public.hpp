@@ -14,8 +14,7 @@
 #include <kth/infrastructure/utility/data.hpp>
 // #include <kth/infrastructure/wallet/ec_public.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 /// A constant used in key derivation.
 static constexpr uint32_t hd_first_hardened_key = 1 << 31;

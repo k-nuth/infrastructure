@@ -16,13 +16,12 @@
 #include <kth/infrastructure/utility/container_sink.hpp>
 #include <kth/infrastructure/utility/container_source.hpp>
 
-namespace kth {
-namespace message {
+namespace kth::infrastructure::message {
 
 using ip_address = byte_array<16>;
 constexpr ip_address null_address {{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }};
 
-class BI_API network_address {
+class KI_API network_address {
 public:
     using list = std::vector<network_address>;
 

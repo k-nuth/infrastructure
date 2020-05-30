@@ -19,10 +19,9 @@
 #include <kth/infrastructure/log/features/rate.hpp>
 #include <kth/infrastructure/log/features/timer.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
-class BI_API statsd_source
+class KI_API statsd_source
   : public boost::log::sources::basic_composite_logger<char, statsd_source,
         boost::log::sources::multi_thread_model<boost::log::aux::light_rw_mutex>,
         boost::log::sources::features<features::metric, features::counter,

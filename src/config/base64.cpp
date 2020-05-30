@@ -14,8 +14,7 @@
 #include <kth/infrastructure/formats/base_64.hpp>
 #include <kth/infrastructure/utility/data.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 base64::base64(std::string const& base64) {
     std::stringstream(base64) >> *this;

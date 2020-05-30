@@ -14,8 +14,7 @@
 #include <kth/infrastructure/formats/base_16.hpp>
 #include <kth/infrastructure/math/hash.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 hash160::hash160(std::string const& hexcode) {
     std::stringstream(hexcode) >> *this;

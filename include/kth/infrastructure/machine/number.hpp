@@ -10,8 +10,7 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/utility/data.hpp>
 
-namespace kth {
-namespace machine {
+namespace kth::infrastructure::machine {
 
 /**
  * Numeric opcodes (OP_1ADD, etc) are restricted to operating on

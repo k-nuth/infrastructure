@@ -14,7 +14,7 @@ namespace kth {
 
 /// This class is thread safe.
 /// Encapsulation of sequential locking conditions.
-class BI_API sequential_lock
+class KI_API sequential_lock
 {
 public:
     using handle = size_t;

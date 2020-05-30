@@ -15,7 +15,7 @@ namespace kth {
 /**
  * Class to expose a widening output stream.
  */
-class BI_API unicode_ostream
+class KI_API unicode_ostream
     : public std::ostream
 {
 public:

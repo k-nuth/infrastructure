@@ -26,8 +26,7 @@ static constexpr size_t checksum_size = sizeof(uint32_t);
  * checksum.
  */
 template <size_t Size>
-bool build_checked_array(byte_array<Size>& out,
-    const std::initializer_list<data_slice>& slices);
+bool build_checked_array(byte_array<Size>& out, const std::initializer_list<data_slice>& slices);
 
 /**
  * Appends a four-byte checksum into the end of an array.

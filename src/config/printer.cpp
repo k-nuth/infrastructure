@@ -25,69 +25,69 @@
 
 // // TODO: parameterize these localized values.
 // // Various shared localizable strings.
-// #define BI_PRINTER_ARGUMENT_TABLE_HEADER "Arguments (positional):"
-// #define BI_PRINTER_DESCRIPTION_FORMAT "Info: %1%"
-// #define BI_PRINTER_OPTION_TABLE_HEADER "Options (named):"
-// #define BI_PRINTER_USAGE_FORMAT "Usage: %1% %2% %3%"
-// #define BI_PRINTER_VALUE_TEXT "value"
+// #define KI_PRINTER_ARGUMENT_TABLE_HEADER "Arguments (positional):"
+// #define KI_PRINTER_DESCRIPTION_FORMAT "Info: %1%"
+// #define KI_PRINTER_OPTION_TABLE_HEADER "Options (named):"
+// #define KI_PRINTER_USAGE_FORMAT "Usage: %1% %2% %3%"
+// #define KI_PRINTER_VALUE_TEXT "value"
 
 // // Not localizable formatters.
-// #define BI_PRINTER_USAGE_OPTION_MULTIPLE_FORMAT " [--%1% %2%]..."
-// #define BI_PRINTER_USAGE_OPTION_OPTIONAL_FORMAT " [--%1% %2%]"
-// #define BI_PRINTER_USAGE_OPTION_REQUIRED_FORMAT " --%1% %2%"
-// #define BI_PRINTER_USAGE_OPTION_TOGGLE_SHORT_FORMAT " [-%1%]"
-// #define BI_PRINTER_USAGE_OPTION_TOGGLE_LONG_FORMAT " [--%1%]"
+// #define KI_PRINTER_USAGE_OPTION_MULTIPLE_FORMAT " [--%1% %2%]..."
+// #define KI_PRINTER_USAGE_OPTION_OPTIONAL_FORMAT " [--%1% %2%]"
+// #define KI_PRINTER_USAGE_OPTION_REQUIRED_FORMAT " --%1% %2%"
+// #define KI_PRINTER_USAGE_OPTION_TOGGLE_SHORT_FORMAT " [-%1%]"
+// #define KI_PRINTER_USAGE_OPTION_TOGGLE_LONG_FORMAT " [--%1%]"
 
-// #define BI_PRINTER_USAGE_ARGUMENT_MULTIPLE_FORMAT " [%1%]..."
-// #define BI_PRINTER_USAGE_ARGUMENT_OPTIONAL_FORMAT " [%1%]"
-// #define BI_PRINTER_USAGE_ARGUMENT_REQUIRED_FORMAT " %1%"
+// #define KI_PRINTER_USAGE_ARGUMENT_MULTIPLE_FORMAT " [%1%]..."
+// #define KI_PRINTER_USAGE_ARGUMENT_OPTIONAL_FORMAT " [%1%]"
+// #define KI_PRINTER_USAGE_ARGUMENT_REQUIRED_FORMAT " %1%"
 
-// #define BI_PRINTER_TABLE_OPTION_FORMAT "-%1% [--%2%]"
-// #define BI_PRINTER_TABLE_OPTION_LONG_FORMAT "--%1%"
-// #define BI_PRINTER_TABLE_OPTION_SHORT_FORMAT "-%1%"
+// #define KI_PRINTER_TABLE_OPTION_FORMAT "-%1% [--%2%]"
+// #define KI_PRINTER_TABLE_OPTION_LONG_FORMAT "--%1%"
+// #define KI_PRINTER_TABLE_OPTION_SHORT_FORMAT "-%1%"
 
-// #define BI_PRINTER_TABLE_ARGUMENT_FORMAT "%1%"
+// #define KI_PRINTER_TABLE_ARGUMENT_FORMAT "%1%"
 
-// #define BI_PRINTER_SETTING_SECTION_FORMAT "[%1%]\n"
-// #define BI_PRINTER_SETTING_COMMENT_FORMAT "# %1%\n"
-// #define BI_PRINTER_SETTING_MULTIPLE_FORMAT "%1% = <%2%>\n%1% = <%2%>\n...\n"
-// #define BI_PRINTER_SETTING_OPTIONAL_FORMAT "%1% = <%2%>\n"
-// #define BI_PRINTER_SETTING_REQUIRED_FORMAT "%1% = %2%\n"
+// #define KI_PRINTER_SETTING_SECTION_FORMAT "[%1%]\n"
+// #define KI_PRINTER_SETTING_COMMENT_FORMAT "# %1%\n"
+// #define KI_PRINTER_SETTING_MULTIPLE_FORMAT "%1% = <%2%>\n%1% = <%2%>\n...\n"
+// #define KI_PRINTER_SETTING_OPTIONAL_FORMAT "%1% = <%2%>\n"
+// #define KI_PRINTER_SETTING_REQUIRED_FORMAT "%1% = %2%\n"
 
 // TODO: parameterize these localized values.
 // Various shared localizable strings.
-#define BI_PRINTER_ARGUMENT_TABLE_HEADER "Arguments (positional):"
-#define BI_PRINTER_DESCRIPTION_FORMAT "Info: {}"
-#define BI_PRINTER_OPTION_TABLE_HEADER "Options (named):"
-#define BI_PRINTER_USAGE_FORMAT "Usage: {} {} {}"
-#define BI_PRINTER_VALUE_TEXT "value"
+#define KI_PRINTER_ARGUMENT_TABLE_HEADER "Arguments (positional):"
+#define KI_PRINTER_DESCRIPTION_FORMAT "Info: {}"
+#define KI_PRINTER_OPTION_TABLE_HEADER "Options (named):"
+#define KI_PRINTER_USAGE_FORMAT "Usage: {} {} {}"
+#define KI_PRINTER_VALUE_TEXT "value"
 
 // Not localizable formatters.
-#define BI_PRINTER_USAGE_OPTION_MULTIPLE_FORMAT " [--{} {}]..."
-#define BI_PRINTER_USAGE_OPTION_OPTIONAL_FORMAT " [--{} {}]"
-#define BI_PRINTER_USAGE_OPTION_REQUIRED_FORMAT " --{} {}"
-#define BI_PRINTER_USAGE_OPTION_TOGGLE_SHORT_FORMAT " [-{}]"
-#define BI_PRINTER_USAGE_OPTION_TOGGLE_LONG_FORMAT " [--{}]"
+#define KI_PRINTER_USAGE_OPTION_MULTIPLE_FORMAT " [--{} {}]..."
+#define KI_PRINTER_USAGE_OPTION_OPTIONAL_FORMAT " [--{} {}]"
+#define KI_PRINTER_USAGE_OPTION_REQUIRED_FORMAT " --{} {}"
+#define KI_PRINTER_USAGE_OPTION_TOGGLE_SHORT_FORMAT " [-{}]"
+#define KI_PRINTER_USAGE_OPTION_TOGGLE_LONG_FORMAT " [--{}]"
 
-#define BI_PRINTER_USAGE_ARGUMENT_MULTIPLE_FORMAT " [{}]..."
-#define BI_PRINTER_USAGE_ARGUMENT_OPTIONAL_FORMAT " [{}]"
-#define BI_PRINTER_USAGE_ARGUMENT_REQUIRED_FORMAT " {}"
+#define KI_PRINTER_USAGE_ARGUMENT_MULTIPLE_FORMAT " [{}]..."
+#define KI_PRINTER_USAGE_ARGUMENT_OPTIONAL_FORMAT " [{}]"
+#define KI_PRINTER_USAGE_ARGUMENT_REQUIRED_FORMAT " {}"
 
-#define BI_PRINTER_TABLE_OPTION_FORMAT "-{} [--{}]"
-#define BI_PRINTER_TABLE_OPTION_LONG_FORMAT "--{}"
-#define BI_PRINTER_TABLE_OPTION_SHORT_FORMAT "-{}"
+#define KI_PRINTER_TABLE_OPTION_FORMAT "-{} [--{}]"
+#define KI_PRINTER_TABLE_OPTION_LONG_FORMAT "--{}"
+#define KI_PRINTER_TABLE_OPTION_SHORT_FORMAT "-{}"
 
-#define BI_PRINTER_TABLE_ARGUMENT_FORMAT "{}"
+#define KI_PRINTER_TABLE_ARGUMENT_FORMAT "{}"
 
-#define BI_PRINTER_SETTING_SECTION_FORMAT "[{}]\n"
-#define BI_PRINTER_SETTING_COMMENT_FORMAT "# {}\n"
-#define BI_PRINTER_SETTING_MULTIPLE_FORMAT "{} = <{}>\n{} = <{}>\n...\n"
-#define BI_PRINTER_SETTING_OPTIONAL_FORMAT "{} = <{}>\n"
-#define BI_PRINTER_SETTING_REQUIRED_FORMAT "{} = {}\n"
+#define KI_PRINTER_SETTING_SECTION_FORMAT "[{}]\n"
+#define KI_PRINTER_SETTING_COMMENT_FORMAT "# {}\n"
+#define KI_PRINTER_SETTING_MULTIPLE_FORMAT "{} = <{}>\n{} = <{}>\n...\n"
+#define KI_PRINTER_SETTING_OPTIONAL_FORMAT "{} = <{}>\n"
+#define KI_PRINTER_SETTING_REQUIRED_FORMAT "{} = {}\n"
 
 namespace po = boost::program_options;
 using namespace kth;
-using namespace kth::config;
+using namespace kth::infrastructure::config;
 // using boost::format;
 
 int const printer::max_arguments = 256;

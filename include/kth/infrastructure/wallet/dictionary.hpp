@@ -10,8 +10,7 @@
 
 #include <kth/infrastructure/compat.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 /**
  * A valid mnemonic dictionary has exactly this many words.

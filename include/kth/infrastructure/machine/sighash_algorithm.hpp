@@ -62,7 +62,6 @@ enum sighash_algorithm : uint32_t
     mask = 0x1f
 };
 
-} // namespace machine
-} // namespace kth
+} // namespace kth::infrastructure::machine
 
 #endif

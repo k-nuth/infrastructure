@@ -45,11 +45,11 @@ using shared_lock = boost::shared_lock<shared_mutex>;
 using shared_mutex_ptr = std::shared_ptr<boost::shared_mutex>;
 using upgrade_mutex_ptr = std::shared_ptr<boost::upgrade_mutex>;
 
-BI_API void set_priority(thread_priority priority);
-BI_API thread_priority priority(bool priority);
-BI_API size_t thread_default(size_t configured);
-BI_API size_t thread_ceiling(size_t configured);
-BI_API size_t thread_floor(size_t configured);
+KI_API void set_priority(thread_priority priority);
+KI_API thread_priority priority(bool priority);
+KI_API size_t thread_default(size_t configured);
+KI_API size_t thread_ceiling(size_t configured);
+KI_API size_t thread_floor(size_t configured);
 
 } // namespace kth
 

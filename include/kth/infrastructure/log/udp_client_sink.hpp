@@ -14,10 +14,9 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/error.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
-class BI_API udp_client_sink
+class KI_API udp_client_sink
   : public boost::log::sinks::basic_formatted_sink_backend<char,
         boost::log::sinks::synchronized_feeding>
 {

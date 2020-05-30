@@ -24,7 +24,7 @@ namespace kth {
  * This simplifies invocation, eliminates boost-specific error handling and
  * makes timer firing and cancellation conditions safer.
  */
-class BI_API deadline
+class KI_API deadline
     : public enable_shared_from_base<deadline>
     , noncopyable
     /*, track<deadline>*/

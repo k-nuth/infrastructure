@@ -16,7 +16,7 @@
 
 namespace kth::log {
 
-using file = boost::shared_ptr<bc::ofstream>;
+using file = boost::shared_ptr<kth::ofstream>;
 
 /// Initializes null (as opposed to default) logging sinks.
 void initialize();

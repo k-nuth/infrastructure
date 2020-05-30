@@ -18,8 +18,7 @@
 #include <kth/infrastructure/formats/base_16.hpp>
 #include <kth/infrastructure/utility/asio.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 using namespace boost::program_options;
 

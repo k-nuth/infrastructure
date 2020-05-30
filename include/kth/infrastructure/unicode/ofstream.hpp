@@ -13,15 +13,15 @@
 namespace kth {
 
 /**
- * Use bc::ofstream in place of std::ofstream.
+ * Use kth::ofstream in place of std::ofstream.
  * This provides utf8 to utf16 path translation for Windows.
  */
-class BI_API ofstream
+class KI_API ofstream
     : public std::ofstream
 {
 public:
     /**
-     * Construct bc::ofstream.
+     * Construct kth::ofstream.
      * @param[in]  path  The utf8 path to the file.
      * @param[in]  mode  The file opening mode.
      */

@@ -45,7 +45,7 @@ static std::once_flag io_mutex;
 // Ensure validate_localization is called only once.
 static std::once_flag icu_mutex;
 
-// Static initializer for bc::cin.
+// Static initializer for kth::cin.
 static std::istream& cin_stream()
 {
     std::call_once(io_mutex, console_streambuf::initialize, utf16_buffer_size);

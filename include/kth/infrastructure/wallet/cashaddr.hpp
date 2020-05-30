@@ -13,9 +13,7 @@
 
 #include <kth/infrastructure/utility/data.hpp>
 
-namespace kth { 
-namespace wallet { 
-namespace cashaddr {
+namespace kth::infrastructure::wallet::cashaddr { 
 
 /**
  * Encode a cashaddr string. Returns the empty string in case of failure.

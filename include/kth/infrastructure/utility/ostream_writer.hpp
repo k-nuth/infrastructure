@@ -13,7 +13,7 @@
 
 namespace kth {
 
-class BI_API ostream_writer
+class KI_API ostream_writer
     // : public writer
 {
 public:

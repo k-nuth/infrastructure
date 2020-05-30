@@ -18,7 +18,7 @@
 
 namespace kth {
 
-class BI_API png
+class KI_API png
 {
 public:
     static constexpr uint32_t margin = 2;

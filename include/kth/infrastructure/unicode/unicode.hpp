@@ -37,9 +37,9 @@
 
 // Regarding Unicode in console applications:
 //
-// KTH_USE_MAIN should be declared prior to bc::main() in a console
+// KTH_USE_MAIN should be declared prior to kth::main() in a console
 // application. This enables Unicode argument and environment processing in
-// Windows. This macro implements main() and forwards to bc::main(), which
+// Windows. This macro implements main() and forwards to kth::main(), which
 // should be implemented as if it was main() with the expectation that argv
 // is utf8.
 //

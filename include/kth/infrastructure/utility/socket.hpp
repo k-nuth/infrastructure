@@ -18,7 +18,7 @@
 namespace kth {
 
 /// This class is thread safe but the socket may not be used concurrently.
-class BI_API socket
+class KI_API socket
     : noncopyable
     /*, public track<socket>*/
 {

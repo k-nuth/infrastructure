@@ -16,7 +16,7 @@
 
 namespace kth {
 
-using namespace bc::asio;
+using namespace kth::asio;
 using namespace std::chrono;
 
 // DO NOT USE srand() and rand() on MSVC as srand must be called per thread.

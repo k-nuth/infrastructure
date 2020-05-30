@@ -53,5 +53,4 @@ uint8_t constexpr number::negative_0; //  = negative_mask | positive_0;
 // uint8_t constexpr number::negative_1 = negative_mask | positive_1;
 // uint8_t constexpr number::negative_0 = negative_mask | positive_0;
 
-} // namespace machine
-} // namespace kth
+} // namespace kth::infrastructure::machine

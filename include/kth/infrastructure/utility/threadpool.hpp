@@ -22,7 +22,7 @@ namespace kth {
  * This class and the asio service it exposes are thread safe.
  * A collection of threads which can be passed operations through io_service.
  */
-class BI_API threadpool
+class KI_API threadpool
     : noncopyable
 {
 public:

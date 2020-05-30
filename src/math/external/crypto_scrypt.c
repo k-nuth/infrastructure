@@ -61,7 +61,7 @@ KI_C_INLINE void le32enc(void* pp, uint32_t x) {
 }
 
 static 
-BI_C_INLINE uint64_t le64dec(const void* pp) {
+KI_C_INLINE uint64_t le64dec(const void* pp) {
     uint8_t const* p = (uint8_t const* )pp;
 
     return ((uint64_t)(p[0]) + ((uint64_t)(p[1]) << 8) +

@@ -17,7 +17,7 @@
 namespace kth {
 
 /// Reader interface.
-class BI_API reader {
+class KI_API reader {
 public:
     /// Context.
     operator bool() const;

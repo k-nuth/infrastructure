@@ -24,7 +24,7 @@
 #include <kth/infrastructure/utility/assert.hpp>
 #include <kth/infrastructure/utility/string.hpp>
 
-namespace kth::config {
+namespace kth::infrastructure::config {
 
 using namespace boost::program_options;
 

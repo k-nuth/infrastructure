@@ -12,8 +12,7 @@
 #include <kth/infrastructure/utility/istream_reader.hpp>
 #include <kth/infrastructure/utility/ostream_writer.hpp>
 
-namespace kth {
-namespace message {
+namespace kth::infrastructure::message {
 
 // TODO(legacy): create derived address that adds the timestamp.
 

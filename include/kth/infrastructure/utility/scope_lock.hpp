@@ -14,7 +14,7 @@ namespace kth {
 
 /// This class is thread safe.
 /// Reserve exclusive access to a resource while this object is in scope.
-class BI_API scope_lock
+class KI_API scope_lock
 {
 public:
     using ptr = std::shared_ptr<scope_lock>;

@@ -49,5 +49,4 @@ file_counter_formatter::path_string_type file_counter_formatter::operator()(
 
 }
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log

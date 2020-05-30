@@ -25,5 +25,4 @@ size_t variable_uint_size(uint64_t value) {
     return 9;
 }
 
-} // namespace message
-} // namespace kth
+} // namespace kth::infrastructure::message

@@ -18,9 +18,11 @@
 
 // #define KTH_VERSION KTH_INFRASTRUCTURE_VERSION
 
-namespace kth { namespace infrastructure {
+namespace kth::infrastructure {
+
 char const* version();
-}} /*namespace kth::infrastructure*/
+
+} // namespace kth::infrastructure
  
 
 #endif // KTH_INFRASTRUCTURE_VERSION_HPP_

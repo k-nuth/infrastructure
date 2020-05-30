@@ -14,12 +14,10 @@
 #include <kth/infrastructure/utility/data.hpp>
 #include <kth/infrastructure/utility/limits.hpp>
 
-namespace kth {
-namespace message {
+namespace kth::infrastructure::message {
 
-BI_API size_t variable_uint_size(uint64_t value);
+KI_API size_t variable_uint_size(uint64_t value);
 
-} // namespace message
-} // namespace kth
+} // namespace kth::infrastructure::message
 
 #endif

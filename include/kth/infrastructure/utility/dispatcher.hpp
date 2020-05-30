@@ -40,7 +40,7 @@ namespace kth {
 
 /// This  class is thread safe.
 /// If the ios service is stopped jobs will not be dispatched.
-class BI_API dispatcher : noncopyable {
+class KI_API dispatcher : noncopyable {
 public:
     using delay_handler = std::function<void (code const &)>;
 

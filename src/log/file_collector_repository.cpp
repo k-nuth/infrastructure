@@ -84,5 +84,4 @@ boost::shared_ptr<boost::log::sinks::file::collector> make_collector(
         max_size, min_free_space, max_files);
 }
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log

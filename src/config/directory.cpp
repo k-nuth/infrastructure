@@ -13,8 +13,7 @@
     #include <windows.h>
 #endif
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 // Returns empty string if unable to retrieve (including when not in Windows).
 std::string windows_config_directory()

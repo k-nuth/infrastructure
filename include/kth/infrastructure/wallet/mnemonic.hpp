@@ -17,8 +17,7 @@
 #include <kth/infrastructure/utility/string.hpp>
 #include <kth/infrastructure/wallet/dictionary.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 /**
  * A valid mnemonic word count is evenly divisible by this number.

@@ -13,8 +13,7 @@
 
 #include "parse_encrypted_prefix.hpp"
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 template <size_t PrefixSize>
 parse_encrypted_key<PrefixSize>::parse_encrypted_key(

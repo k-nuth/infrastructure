@@ -19,7 +19,7 @@ namespace kth {
  * the given mutex. This can be assigned to a static or otherwise. It lazily
  * inits the context once and destroys the context on destruct as necessary.
  */
-class BI_API secp256k1_initializer
+class KI_API secp256k1_initializer
 {
 private:
     static void set_context(secp256k1_context** context, int flags);

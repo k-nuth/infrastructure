@@ -9,7 +9,7 @@
 
 namespace kth {
 
-class BI_API noncopyable
+class KI_API noncopyable
 {
 public:
     noncopyable(const noncopyable&) = delete;

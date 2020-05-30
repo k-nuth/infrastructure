@@ -16,10 +16,9 @@
 #ifdef WITH_QRENCODE
 #include <qrencode.h>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
-class BI_API qr
+class KI_API qr
 {
 public:
     typedef QRencodeMode encode_mode;

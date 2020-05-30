@@ -28,7 +28,7 @@ int8_t const CHARSET_REV[128] = {
 /**
  * Concatenate two byte arrays.
  */
-bc::data_chunk cat(data_chunk x, data_chunk const& y) {
+kth::data_chunk cat(data_chunk x, data_chunk const& y) {
     x.insert(x.end(), y.begin(), y.end());
     return x;
 }

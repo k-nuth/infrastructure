@@ -17,19 +17,19 @@ namespace kth {
  * Generate a pseudo random number within the domain.
  * @return  The 64 bit number.
  */
-BI_API uint64_t pseudo_random();
+KI_API uint64_t pseudo_random();
 
 /**
  * Generate a pseudo random number within [begin, end].
  * @return  The 64 bit number.
  */
-BI_API uint64_t pseudo_random(uint64_t begin, uint64_t end);
+KI_API uint64_t pseudo_random(uint64_t begin, uint64_t end);
 
 /**
  * Fill a buffer with randomness using the default random engine.
  * @param[in]  chunk  The buffer to fill with randomness.
  */
-BI_API void pseudo_random_fill(data_chunk& chunk);
+KI_API void pseudo_random_fill(data_chunk& chunk);
 
 /**
  * Convert a time duration to a value in the range [max/ratio, max].
