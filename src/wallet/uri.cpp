@@ -10,8 +10,7 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/formats/base_16.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 // These character classification functions correspond to RFC 3986.
 // They avoid C standard library character classification functions,
