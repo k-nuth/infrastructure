@@ -16,7 +16,7 @@ BOOST_AUTO_TEST_SUITE(hash256__construct)
 BOOST_AUTO_TEST_CASE(hash256__construct__default__null_hash)
 {
     const hash256 uninitialized_hash;
-    auto const expectation = encode_hash(bc::null_hash);
+    auto const expectation = encode_hash(kth::null_hash);
     auto const result = encode_hash(uninitialized_hash);
     BOOST_REQUIRE_EQUAL(expectation, result);
 }
