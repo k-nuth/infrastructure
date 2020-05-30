@@ -12,8 +12,8 @@
 #include <kth/infrastructure.hpp>
 #include <kth/infrastructure/utility/collection.hpp>
 
-using namespace bc;
-using namespace bc::config;
+using namespace kth;
+using namespace kth::infrastructure::config;
 using namespace boost::program_options;
 
 BOOST_AUTO_TEST_SUITE(checkpoint_tests)
