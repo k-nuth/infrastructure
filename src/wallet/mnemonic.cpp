@@ -19,8 +19,7 @@
 #include <kth/infrastructure/utility/string.hpp>
 #include <kth/infrastructure/wallet/dictionary.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 // BIP-39 private constants.
 static constexpr size_t bits_per_word = 11;
