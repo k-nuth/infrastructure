@@ -24,8 +24,7 @@
 // #include <kth/infrastructure/wallet/ec_public.hpp>
 #include <kth/infrastructure/wallet/hd_private.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 // const uint32_t hd_public::mainnet = 76067358;
 // const uint32_t hd_public::testnet = 70617039;
