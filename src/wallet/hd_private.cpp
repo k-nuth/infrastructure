@@ -27,8 +27,7 @@
 // #include <kth/infrastructure/wallet/ec_private.hpp>
 // #include <kth/infrastructure/wallet/ec_public.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 // uint64_t const hd_private::mainnet = to_prefixes(76066276, hd_public::mainnet);
 // uint64_t const hd_private::testnet = to_prefixes(70615956, hd_public::testnet);
