@@ -9,7 +9,7 @@
 #include <vector>
 #include <kth/infrastructure.hpp>
 
-using namespace bc;
+using namespace kth;
 
 BOOST_AUTO_TEST_SUITE(data_tests)
 
