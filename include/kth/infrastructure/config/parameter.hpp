@@ -45,7 +45,7 @@ using parameter_list = std::vector<parameter>;
  * Normalized storage for command line arguments and options.
  * TEST: option_metadata does not provide virtual methods so must wrap to mock.
  */
-class BI_API parameter {
+class KI_API parameter {
 private:
 
     /**
