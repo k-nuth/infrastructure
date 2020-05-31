@@ -35,13 +35,13 @@ byte_array<Size * 733 / 1000> base58_literal(char const(&string)[Size]);
  * Encode data as base58.
  * @return the base58 encoded string.
  */
-BI_API std::string encode_base58(data_slice unencoded);
+KI_API std::string encode_base58(data_slice unencoded);
 
 /**
  * Attempt to decode base58 data.
  * @return false if the input contains non-base58 characters.
  */
-BI_API bool decode_base58(data_chunk& out, std::string const& in);
+KI_API bool decode_base58(data_chunk& out, std::string const& in);
 
 } // namespace kth
 
