@@ -74,7 +74,6 @@ private:
     binary value_;
 };
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif
