@@ -86,8 +86,7 @@ BOOST_PARAMETER_KEYWORD(tag, metric)
 
 } // namespace keywords
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #include <kth/infrastructure/impl/log/features/metric.ipp>
 
