@@ -71,7 +71,6 @@ private:
     data_chunk value_;
 };
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif
