@@ -95,7 +95,6 @@ private:
     size_t height_{0};
 };
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif
