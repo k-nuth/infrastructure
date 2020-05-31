@@ -57,7 +57,6 @@ private:
     short_hash value_{null_short_hash};
 };
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif
