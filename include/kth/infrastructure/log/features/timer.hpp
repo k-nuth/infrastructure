@@ -71,8 +71,7 @@ BOOST_PARAMETER_KEYWORD(tag, timer)
 
 } // namespace keywords
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #include <kth/infrastructure/impl/log/features/timer.ipp>
 
