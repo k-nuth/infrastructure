@@ -33,12 +33,12 @@ KI_API bool decode_base10(uint64_t& out, std::string const& amount, uint8_t deci
  * @param decmial_places the location of the decimal point.
  * The default is 0, which treats the input as a normal integer.
  */
-BI_API std::string encode_base10(uint64_t amount,
+KI_API std::string encode_base10(uint64_t amount,
     uint8_t decimal_places=0);
 
 // Old names:
-BI_API bool btc_to_satoshi(uint64_t& satoshi, std::string const& btc);
-BI_API std::string satoshi_to_btc(uint64_t satoshi);
+KI_API bool btc_to_satoshi(uint64_t& satoshi, std::string const& btc);
+KI_API std::string satoshi_to_btc(uint64_t satoshi);
 
 } // namespace kth
 
