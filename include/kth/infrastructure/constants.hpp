@@ -17,8 +17,6 @@ namespace kth {
 // This guards assumptions within the codebase.
 static_assert(sizeof(size_t) >= sizeof(uint32_t), "unsupported size_t");
 
-// #define BI_USER_AGENT "/knuth:" KTH_VERSION "/"
-
 // Generic constants.
 //-----------------------------------------------------------------------------
 
