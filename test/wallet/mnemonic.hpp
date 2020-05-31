@@ -15,7 +15,7 @@ struct mnemonic_result {
     std::string mnemonic;
     std::string passphrase;
     std::string seed;
-    bc::wallet::dictionary language;
+    kth::infrastructure::wallet::dictionary language;
 };
 
 typedef std::vector<mnemonic_result> mnemonic_result_list;
