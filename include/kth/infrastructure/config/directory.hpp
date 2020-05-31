@@ -31,10 +31,10 @@ std::filesystem::path config_default_path() {
 //// The SYSCONFDIR symbol must be defined at compile for the project.
 //// Therefore this must be compiled directly into the relevant project(s).
 //#ifdef _MSC_VER
-//    #define BI_DECLARE_CONFIG_DEFAULT_PATH(relative) \
-//        CONFIG_DEFAULT_PATH(bc::config::windows_config_directory(), relative)
+//    #define KI_DECLARE_CONFIG_DEFAULT_PATH(relative) \
+//        CONFIG_DEFAULT_PATH(kth::infrastructure::config::windows_config_directory(), relative)
 //#else
-//    #define BI_DECLARE_CONFIG_DEFAULT_PATH(relative) \
+//    #define KI_DECLARE_CONFIG_DEFAULT_PATH(relative) \
 //        CONFIG_DEFAULT_PATH(SYSCONFDIR, relative)
 //#endif
 //
