@@ -72,8 +72,7 @@ BOOST_PARAMETER_KEYWORD(tag, rate)
 
 } // namespace keywords
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #include <kth/infrastructure/impl/log/features/rate.ipp>
 
