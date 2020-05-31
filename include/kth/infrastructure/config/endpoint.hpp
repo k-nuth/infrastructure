@@ -140,7 +140,6 @@ private:
     uint16_t port_;
 };
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif
