@@ -22,7 +22,6 @@ BOOST_LOG_ATTRIBUTE_KEYWORD(severity, "Severity", kth::log::severity)
 BOOST_LOG_ATTRIBUTE_KEYWORD(channel, "Channel", std::string)
 
 } // namespace attributes
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #endif

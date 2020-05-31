@@ -71,8 +71,7 @@ BOOST_PARAMETER_KEYWORD(tag, counter)
 
 } // namespace keywords
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #include <kth/infrastructure/impl/log/features/counter.ipp>
 
