@@ -261,7 +261,6 @@ number& number::operator-=(int64_t value) {
     return *this;
 }
 
-} // namespace machine
-} // namespace kth
+} // namespace kth::infrastructure::machine
 
 #endif
