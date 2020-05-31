@@ -104,7 +104,6 @@ private:
     hash_digest value_;
 };
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif

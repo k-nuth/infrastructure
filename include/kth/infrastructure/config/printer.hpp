@@ -137,21 +137,21 @@ public:
     /**
      * Virtual property declarations, passed on construct.
      */
-    BI_PROPERTY_GET_REF(boost::program_options::options_description, options);
-    BI_PROPERTY_GET_REF(boost::program_options::positional_options_description, arguments);
-    BI_PROPERTY_GET_REF(std::string, application);
-    BI_PROPERTY_GET_REF(std::string, description);
-    BI_PROPERTY_GET_REF(std::string, command);
+    KI_PROPERTY_GET_REF(boost::program_options::options_description, options);
+    KI_PROPERTY_GET_REF(boost::program_options::positional_options_description, arguments);
+    KI_PROPERTY_GET_REF(std::string, application);
+    KI_PROPERTY_GET_REF(std::string, description);
+    KI_PROPERTY_GET_REF(std::string, command);
 
     /**
      * Virtual property declarations, generated from metadata.
      */
-    BI_PROPERTY_GET_REF(argument_list, argument_names);
-    BI_PROPERTY_GET_REF(parameter_list, parameters);
+    KI_PROPERTY_GET_REF(argument_list, argument_names);
+    KI_PROPERTY_GET_REF(parameter_list, parameters);
 };
 
 #undef PROPERTY_GET_REF
 
-} // namespace kth::config
+} // namespace kth::infrastructure::config
 
 #endif
