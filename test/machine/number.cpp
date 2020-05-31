@@ -22,8 +22,8 @@
 
 BOOST_AUTO_TEST_SUITE(number_tests)
 
-using namespace bc;
-using namespace bc::machine;
+using namespace kth;
+using namespace kth::infrastructure::machine;
 
 // Helpers
 // ----------------------------------------------------------------------------
