@@ -53,7 +53,7 @@ sizeof(number_offsets) / sizeof(number_offsets[0]);
 struct number_buffer
 {
     int32_t number;
-    bc::data_chunk bytes;
+    kth::data_chunk bytes;
 };
 
 struct number_subtract
