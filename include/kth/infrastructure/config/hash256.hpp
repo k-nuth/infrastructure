@@ -85,7 +85,6 @@ private:
     hash_digest value_{null_hash};
 };
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif
