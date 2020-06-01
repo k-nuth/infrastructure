@@ -76,7 +76,7 @@ KI_API std::string join(const string_list& words,
  * @param[in]  trim       Trim the sentence for whitespace, defaults to true.
  * @return                The list of resulting strings.
  */
-BI_API string_list split(std::string const& sentence,
+KI_API string_list split(std::string const& sentence,
     std::string const& delimiter=" ", bool trim=true);
 
 } // namespace kth
