@@ -53,13 +53,12 @@ public:
      * A method that takes an input stream and writes the encoded qr data
      * to the output stream with the specified parameter values.
      */
-    BI_API static bool encode(std::istream& in, uint32_t version,
+    KI_API static bool encode(std::istream& in, uint32_t version,
         error_recovery_level level, encode_mode mode, bool case_sensitive,
         std::ostream& out);
 };
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif // WITH_QRENCODE
 

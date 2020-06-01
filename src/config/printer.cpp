@@ -130,7 +130,7 @@ std::vector<std::string> printer::columnize(std::string const& paragraph,
     {
         if ( ! fragment.empty() && (word.length() + fragment.length() < width))
         {
-            fragment += BI_SENTENCE_DELIMITER + word;
+            fragment += KI_SENTENCE_DELIMITER + word;
             continue;
         }
 
@@ -152,18 +152,18 @@ std::string format_row_name(const parameter& value) {
     // wants to be upper case but must match in case with the env var option.
 
     if (value.get_position() != parameter::not_positional) {
-        return fmt::format(BI_PRINTER_TABLE_ARGUMENT_FORMAT, boost::to_upper_copy(value.get_long_name()));
+        return fmt::format(KI_PRINTER_TABLE_ARGUMENT_FORMAT, boost::to_upper_copy(value.get_long_name()));
     } 
     
     if (value.get_short_name() == parameter::no_short_name) {
-        return fmt::format(BI_PRINTER_TABLE_OPTION_LONG_FORMAT, value.get_long_name());
+        return fmt::format(KI_PRINTER_TABLE_OPTION_LONG_FORMAT, value.get_long_name());
     } 
     
     if (value.get_long_name().empty()) {
-        return fmt::format(BI_PRINTER_TABLE_OPTION_SHORT_FORMAT, value.get_short_name());
+        return fmt::format(KI_PRINTER_TABLE_OPTION_SHORT_FORMAT, value.get_short_name());
     } 
     
-    return fmt::format(BI_PRINTER_TABLE_OPTION_FORMAT, value.get_short_name(), value.get_long_name());
+    return fmt::format(KI_PRINTER_TABLE_OPTION_FORMAT, value.get_short_name(), value.get_long_name());
     
 }
 
@@ -233,14 +233,14 @@ std::string format_setting(const parameter& value, std::string const& name) {
 
     std::string formatter;
     if (required) {
-        formatter = BI_PRINTER_SETTING_REQUIRED_FORMAT;
+        formatter = KI_PRINTER_SETTING_REQUIRED_FORMAT;
     } else if (optional) {
-        formatter = BI_PRINTER_SETTING_OPTIONAL_FORMAT;
+        formatter = KI_PRINTER_SETTING_OPTIONAL_FORMAT;
     } else {
-        formatter = BI_PRINTER_SETTING_MULTIPLE_FORMAT;
+        formatter = KI_PRINTER_SETTING_MULTIPLE_FORMAT;
     }
 
-    return fmt::format(formatter,  name, BI_PRINTER_VALUE_TEXT);
+    return fmt::format(formatter,  name, KI_PRINTER_VALUE_TEXT);
 }
 
 // Requires a single period in each setting (i.e. no unnamed sections).
@@ -275,12 +275,12 @@ std::string printer::format_settings_table() {
         if (section != preceding_section) {
             output << std::endl;
             if ( ! section.empty()) {
-                output << fmt::format(BI_PRINTER_SETTING_SECTION_FORMAT, section);
+                output << fmt::format(KI_PRINTER_SETTING_SECTION_FORMAT, section);
                 preceding_section = section;
             }
         }
 
-        output << fmt::format(BI_PRINTER_SETTING_COMMENT_FORMAT, parameter.get_description());
+        output << fmt::format(KI_PRINTER_SETTING_COMMENT_FORMAT, parameter.get_description());
         output << format_setting(parameter, name);
     }
 
@@ -290,13 +290,13 @@ std::string printer::format_settings_table() {
 std::string printer::format_usage() {
     // USAGE: bx COMMAND [-hvt] -n VALUE [-m VALUE] [-w VALUE]... REQUIRED
     // [OPTIONAL] [MULTIPLE]...
-    auto usage = fmt::format(BI_PRINTER_USAGE_FORMAT, get_application(), get_command(), format_usage_parameters());
+    auto usage = fmt::format(KI_PRINTER_USAGE_FORMAT, get_application(), get_command(), format_usage_parameters());
     return format_paragraph(usage);
 }
 
 std::string printer::format_description() {
     // Info: %1%
-    auto description = fmt::format(BI_PRINTER_DESCRIPTION_FORMAT, get_description());
+    auto description = fmt::format(KI_PRINTER_DESCRIPTION_FORMAT, get_description());
     return format_paragraph(description);
 }
 
@@ -361,35 +361,35 @@ std::string printer::format_usage_parameters() {
     std::stringstream usage;
 
     if ( ! toggle_short_options.empty()) {
-        usage << fmt::format(BI_PRINTER_USAGE_OPTION_TOGGLE_SHORT_FORMAT, toggle_short_options);
+        usage << fmt::format(KI_PRINTER_USAGE_OPTION_TOGGLE_SHORT_FORMAT, toggle_short_options);
     }
 
     for (auto const& required_option: required_options) {
-        usage << fmt::format(BI_PRINTER_USAGE_OPTION_REQUIRED_FORMAT, required_option, BI_PRINTER_VALUE_TEXT);
+        usage << fmt::format(KI_PRINTER_USAGE_OPTION_REQUIRED_FORMAT, required_option, KI_PRINTER_VALUE_TEXT);
     }
 
     for (auto const& toggle_long_option: toggle_long_options) {
-        usage << fmt::format(BI_PRINTER_USAGE_OPTION_TOGGLE_LONG_FORMAT, toggle_long_option);
+        usage << fmt::format(KI_PRINTER_USAGE_OPTION_TOGGLE_LONG_FORMAT, toggle_long_option);
     }
 
     for (auto const& optional_option: optional_options) {
-        usage << fmt::format(BI_PRINTER_USAGE_OPTION_OPTIONAL_FORMAT, optional_option, BI_PRINTER_VALUE_TEXT);
+        usage << fmt::format(KI_PRINTER_USAGE_OPTION_OPTIONAL_FORMAT, optional_option, KI_PRINTER_VALUE_TEXT);
     }
 
     for (auto const& multiple_option: multiple_options) {
-        usage << fmt::format(BI_PRINTER_USAGE_OPTION_MULTIPLE_FORMAT, multiple_option, BI_PRINTER_VALUE_TEXT);
+        usage << fmt::format(KI_PRINTER_USAGE_OPTION_MULTIPLE_FORMAT, multiple_option, KI_PRINTER_VALUE_TEXT);
     }
 
     for (auto const& required_argument: required_arguments) {
-        usage << fmt::format(BI_PRINTER_USAGE_ARGUMENT_REQUIRED_FORMAT, required_argument);
+        usage << fmt::format(KI_PRINTER_USAGE_ARGUMENT_REQUIRED_FORMAT, required_argument);
     }
 
     for (auto const& optional_argument: optional_arguments) {
-        usage << fmt::format(BI_PRINTER_USAGE_ARGUMENT_OPTIONAL_FORMAT, optional_argument);
+        usage << fmt::format(KI_PRINTER_USAGE_ARGUMENT_OPTIONAL_FORMAT, optional_argument);
     }
 
     for (auto const& multiple_argument: multiple_arguments) {
-        usage << fmt::format(BI_PRINTER_USAGE_ARGUMENT_MULTIPLE_FORMAT, multiple_argument);
+        usage << fmt::format(KI_PRINTER_USAGE_ARGUMENT_MULTIPLE_FORMAT, multiple_argument);
     }
 
     return boost::trim_copy(usage.str());
@@ -491,8 +491,8 @@ void printer::commandline(std::ostream& output) {
     auto const& argument_table = format_parameters_table(true);
 
     // Don't write a header if a table is empty.
-    std::string option_table_header(option_table.empty() ? "" : BI_PRINTER_OPTION_TABLE_HEADER "\n");
-    std::string argument_table_header(argument_table.empty() ? "" : BI_PRINTER_ARGUMENT_TABLE_HEADER "\n");
+    std::string option_table_header(option_table.empty() ? "" : KI_PRINTER_OPTION_TABLE_HEADER "\n");
+    std::string argument_table_header(argument_table.empty() ? "" : KI_PRINTER_ARGUMENT_TABLE_HEADER "\n");
 
     output
         << std::endl << format_usage()

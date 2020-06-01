@@ -74,7 +74,6 @@ bool qr::encode(std::istream& in, uint32_t version, error_recovery_level level,
     return true;
 }
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif // WITH_QRENCODE

@@ -52,7 +52,7 @@ private:
 /**
  * Create and hold this class to initialize signing context on first use.
  */
-class BI_API secp256k1_signing
+class KI_API secp256k1_signing
   : public secp256k1_initializer
 {
 public:
@@ -65,7 +65,7 @@ public:
 /**
  * Create and hold this class to initialize verification context on first use.
  */
-class BI_API secp256k1_verification
+class KI_API secp256k1_verification
   : public secp256k1_initializer
 {
 public:
@@ -76,12 +76,12 @@ public:
 };
 
 /**
- * Use bc::signing.context() to obtain the secp256k1 signing context.
+ * Use kth::signing.context() to obtain the secp256k1 signing context.
  */
 extern secp256k1_signing signing;
 
 /**
- * Use bc::verification.context() to obtain the secp256k1 verification context.
+ * Use kth::verification.context() to obtain the secp256k1 verification context.
  */
 extern secp256k1_verification verification;
 

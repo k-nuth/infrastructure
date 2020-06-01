@@ -50,5 +50,4 @@ std::ostream& operator<<(std::ostream& output, const base2& argument) {
     return output;
 }
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config

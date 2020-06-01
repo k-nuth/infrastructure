@@ -62,8 +62,8 @@
 
 // TEST_CASE("[test_read_null_terminated_string_unlimited] 3") {
 //     data_chunk data = {};
-//     bc::data_source ds(data);
-//     bc::istream_reader source(ds);
+//     kth::data_source ds(data);
+//     kth::istream_reader source(ds);
 
 //     auto ret = read_null_terminated_string_unlimited(source);
 //     REQUIRE(ret == ""); 
@@ -72,8 +72,8 @@
 
 // TEST_CASE("[test_read_null_terminated_string] 1") {
 //     data_chunk data = {'A', 'B', 'C', 0};
-//     bc::data_source ds(data);
-//     bc::istream_reader source(ds);
+//     kth::data_source ds(data);
+//     kth::istream_reader source(ds);
 
 //     auto ret = read_null_terminated_string(source, 4);
 //     REQUIRE(bool(ret));
@@ -82,8 +82,8 @@
 
 // TEST_CASE("[test_read_null_terminated_string] 2") {
 //     data_chunk data = {'A', 'B', 'C', 0};
-//     bc::data_source ds(data);
-//     bc::istream_reader source(ds);
+//     kth::data_source ds(data);
+//     kth::istream_reader source(ds);
 
 //     auto ret = read_null_terminated_string(source, 5);
 //     REQUIRE(bool(ret));
@@ -92,8 +92,8 @@
 
 // TEST_CASE("[test_read_null_terminated_string] 3") {
 //     data_chunk data = {'A', 'B', 'C', 0};
-//     bc::data_source ds(data);
-//     bc::istream_reader source(ds);
+//     kth::data_source ds(data);
+//     kth::istream_reader source(ds);
 
 //     auto ret = read_null_terminated_string(source, 3);
 //     REQUIRE(! bool(ret));
@@ -101,8 +101,8 @@
 
 // TEST_CASE("[test_read_null_terminated_string] 4") {
 //     data_chunk data = {'A', 'B', 'C', 0};
-//     bc::data_source ds(data);
-//     bc::istream_reader source(ds);
+//     kth::data_source ds(data);
+//     kth::istream_reader source(ds);
 
 //     auto ret = read_null_terminated_string(source, 2);
 //     REQUIRE(! bool(ret));
@@ -110,8 +110,8 @@
 
 // TEST_CASE("[test_read_null_terminated_string] 5") {
 //     data_chunk data = {'A', 'B', 'C', 0};
-//     bc::data_source ds(data);
-//     bc::istream_reader source(ds);
+//     kth::data_source ds(data);
+//     kth::istream_reader source(ds);
 
 //     auto ret = read_null_terminated_string(source, 1);
 //     REQUIRE(! bool(ret));
@@ -119,8 +119,8 @@
 
 // TEST_CASE("[test_read_null_terminated_string] 6") {
 //     data_chunk data = {'A', 'B', 'C', 0};
-//     bc::data_source ds(data);
-//     bc::istream_reader source(ds);
+//     kth::data_source ds(data);
+//     kth::istream_reader source(ds);
 
 //     auto ret = read_null_terminated_string(source, 0);
 //     REQUIRE(! bool(ret));
@@ -128,8 +128,8 @@
 
 // TEST_CASE("[test_read_null_terminated_string] 7") {
 //     data_chunk data = {0};
-//     bc::data_source ds(data);
-//     bc::istream_reader source(ds);
+//     kth::data_source ds(data);
+//     kth::istream_reader source(ds);
 
 //     auto ret = read_null_terminated_string(source, 0);
 //     REQUIRE(! bool(ret));
@@ -137,8 +137,8 @@
 
 // TEST_CASE("[test_read_null_terminated_string] 8") {
 //     data_chunk data = {0};
-//     bc::data_source ds(data);
-//     bc::istream_reader source(ds);
+//     kth::data_source ds(data);
+//     kth::istream_reader source(ds);
 
 //     auto ret = read_null_terminated_string(source, 1);
 //     REQUIRE(bool(ret));
@@ -147,8 +147,8 @@
 
 // TEST_CASE("[test_read_null_terminated_string] 9") {
 //     data_chunk data = {};
-//     bc::data_source ds(data);
-//     bc::istream_reader source(ds);
+//     kth::data_source ds(data);
+//     kth::istream_reader source(ds);
 
 //     auto ret = read_null_terminated_string(source, 1);
 //     REQUIRE(! bool(ret));

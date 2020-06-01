@@ -198,7 +198,7 @@ data_chunk create_checksum(std::string const& prefix, data_chunk const& payload)
 
 } // namespace
 
-namespace kth { namespace wallet { namespace cashaddr {
+namespace kth::infrastructure::wallet::cashaddr {
 
 /**
  * Encode a cashaddr string.
@@ -299,6 +299,4 @@ std::pair<std::string, data_chunk> decode(std::string const& str, std::string co
     return {std::move(prefix), data_chunk(values.begin(), values.end() - 8)};
 }
 
-} // namespace cashaddr
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet::cashaddr

@@ -124,19 +124,18 @@ public:
      * Virtual property declarations.
      */
     //TODO(fernando): remove these macros
-    BI_PROPERTY(int, position);
-    BI_PROPERTY(bool, required);
-    BI_PROPERTY(char, short_name);
-    BI_PROPERTY(unsigned, args_limit);
-    BI_PROPERTY(std::string, long_name);
-    BI_PROPERTY(std::string, description);
-    BI_PROPERTY(std::string, format_name);
-    BI_PROPERTY(std::string, format_parameter);
+    KI_PROPERTY(int, position);
+    KI_PROPERTY(bool, required);
+    KI_PROPERTY(char, short_name);
+    KI_PROPERTY(unsigned, args_limit);
+    KI_PROPERTY(std::string, long_name);
+    KI_PROPERTY(std::string, description);
+    KI_PROPERTY(std::string, format_name);
+    KI_PROPERTY(std::string, format_parameter);
 };
 
-#undef BI_PROPERTY
+#undef KI_PROPERTY
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif

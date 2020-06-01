@@ -157,7 +157,7 @@ asio::ipv6 authority::asio_ip() const {
 }
 
 message::ip_address authority::ip() const {
-    return to_BI_address(ip_);
+    return to_KI_address(ip_);
 }
 
 uint16_t authority::port() const {
@@ -232,4 +232,4 @@ std::ostream& operator<<(std::ostream& output, authority const& argument) {
     return output;
 }
 
-} // namespace kth::config
+} // namespace kth::infrastructure::config

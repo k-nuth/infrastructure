@@ -66,7 +66,6 @@ ek_salt parse_encrypted_key<PrefixSize>::salt() const
     return salt_;
 }
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif

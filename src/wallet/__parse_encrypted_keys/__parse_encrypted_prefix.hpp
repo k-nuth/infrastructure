@@ -45,8 +45,7 @@ private:
     bool valid_;
 };
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #include "parse_encrypted_prefix.ipp"
 

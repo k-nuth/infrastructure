@@ -29,5 +29,4 @@ bool minikey_to_secret(ec_secret& out_secret, std::string const& key)
     return true;
 }
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet

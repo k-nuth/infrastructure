@@ -260,5 +260,4 @@ bool hd_lineage::operator!=(hd_lineage const& x) const {
     return !(*this == x);
 }
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet

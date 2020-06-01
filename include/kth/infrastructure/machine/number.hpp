@@ -137,8 +137,7 @@ private:
     int64_t value_;
 };
 
-} // namespace machine
-} // namespace kth
+} // namespace kth::infrastructure::machine
 
 
 #include <kth/infrastructure/impl/machine/number.ipp>

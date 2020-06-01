@@ -44,7 +44,6 @@ void parse_encrypted_prefix<Size>::valid(bool value)
     valid_ = value;
 }
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif

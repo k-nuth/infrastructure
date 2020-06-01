@@ -24,7 +24,7 @@
     #define THREAD_PRIORITY_LOWEST PRIO_MAX
 #endif
 
-using namespace bc;
+using namespace kth;
 
 BOOST_AUTO_TEST_SUITE(thread_tests)
 

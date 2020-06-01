@@ -41,7 +41,7 @@ struct KI_API hd_lineage {
 class hd_private;
 
 /// An extended public key, as defined by BIP 32.
-class BI_API hd_public {
+class KI_API hd_public {
 public:
     static constexpr uint32_t mainnet = 76067358;
     static constexpr uint32_t testnet = 70617039;
@@ -128,7 +128,6 @@ private:
     hd_public(const ec_compressed& point, const hd_chain_code& chain_code, hd_lineage const& lineage);
 };
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif

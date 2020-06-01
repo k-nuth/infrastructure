@@ -20,8 +20,7 @@ monitor::monitor(count_ptr counter, std::string&& name)
     trace(++(*counter_), "+");
 }
 
-monitor::~monitor()
-{
+monitor::~monitor() {
     trace(--(*counter_), "-");
 }
 

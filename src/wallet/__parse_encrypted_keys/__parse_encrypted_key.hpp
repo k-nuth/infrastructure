@@ -38,8 +38,7 @@ private:
     const ek_entropy entropy_;
 };
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #include "parse_encrypted_key.ipp"
 

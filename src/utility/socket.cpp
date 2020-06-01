@@ -31,11 +31,10 @@ infrastructure::config::authority socket::authority() const {
     mutex_.unlock_shared();
     ///////////////////////////////////////////////////////////////////////////
 
-    return ec ? config::authority() : config::authority(endpoint);
+    return ec ? infrastructure::config::authority() : infrastructure::config::authority(endpoint);
 }
 
-asio::socket& socket::get()
-{
+asio::socket& socket::get() {
     ///////////////////////////////////////////////////////////////////////////
     // Critical Section.
     shared_lock lock(mutex_);
@@ -44,8 +43,7 @@ asio::socket& socket::get()
     ///////////////////////////////////////////////////////////////////////////
 }
 
-void socket::stop()
-{
+void socket::stop() {
     // Handling socket error codes creates exception safety.
     boost_code ignore;
 

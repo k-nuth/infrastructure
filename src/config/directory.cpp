@@ -29,5 +29,4 @@ std::string windows_config_directory()
     return "";
 }
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config

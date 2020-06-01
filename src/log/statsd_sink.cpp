@@ -68,7 +68,7 @@ void statsd_formatter(const record_view& record, formatting_ostream& stream) {
 static 
 boost::shared_ptr<collector> file_collector(rotable_file const& rotation) {
     // rotation_size controls enable/disable so use zero as max sentinel.
-    return bc::log::make_collector(
+    return kth::log::make_collector(
         rotation.archive_directory,
         rotation.maximum_archive_size == 0 ? max_size_t : rotation.maximum_archive_size,
         rotation.minimum_free_space,

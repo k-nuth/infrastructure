@@ -47,19 +47,19 @@ KI_API word_list create_mnemonic(data_slice entropy,
  * words are spelled correctly and the checksum matches.
  * The words must have been created using mnemonic encoding.
  */
-BI_API bool validate_mnemonic(const word_list& words,
+KI_API bool validate_mnemonic(const word_list& words,
     const dictionary &lexicon);
 
 /**
  * Checks that a mnemonic is valid in at least one of the provided languages.
  */
-BI_API bool validate_mnemonic(const word_list& mnemonic,
+KI_API bool validate_mnemonic(const word_list& mnemonic,
     const dictionary_list& lexicons=language::all);
 
 /**
  * Convert a mnemonic with no passphrase to a wallet-generation seed.
  */
-BI_API long_hash decode_mnemonic(const word_list& mnemonic);
+KI_API long_hash decode_mnemonic(const word_list& mnemonic);
 
 #ifdef WITH_ICU
 
@@ -67,12 +67,11 @@ BI_API long_hash decode_mnemonic(const word_list& mnemonic);
  * Convert a mnemonic and passphrase to a wallet-generation seed.
  * Any passphrase can be used and will change the resulting seed.
  */
-BI_API long_hash decode_mnemonic(const word_list& mnemonic,
+KI_API long_hash decode_mnemonic(const word_list& mnemonic,
     std::string const& passphrase);
 
 #endif
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif

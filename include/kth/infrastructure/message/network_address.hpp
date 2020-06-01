@@ -61,8 +61,6 @@ public:
     // bool from_data(uint32_t version, std::istream& stream, bool with_timestamp);
     bool from_data(uint32_t version, data_source& stream, bool with_timestamp);
 
-
-
     // bool from_data(uint32_t version, reader& source, bool with_timestamp);
 
     template <typename R>
@@ -86,12 +84,9 @@ public:
         return source;
     }
 
-
-
     data_chunk to_data(uint32_t version, bool with_timestamp) const;
     // void to_data(uint32_t version, std::ostream& stream, bool with_timestamp) const;
     void to_data(uint32_t version, data_sink& stream, bool with_timestamp) const;
-
 
     // void to_data(uint32_t version, writer& sink, bool with_timestamp) const;
     template <typename W>
@@ -105,7 +100,6 @@ public:
         sink.write_2_bytes_big_endian(port_);
     }
 
-
     bool is_valid() const;
     void reset();
 
@@ -118,8 +112,6 @@ public:
     static 
     network_address factory_from_data(uint32_t version, data_source& stream, bool with_timestamp);
 
-
-
     // static 
     // network_address factory_from_data(uint32_t version, reader& source, bool with_timestamp);
     
@@ -130,7 +122,6 @@ public:
         instance.from_data(version, source, with_timestamp);
         return instance;
     }
-
 
     static 
     size_t satoshi_fixed_size(uint32_t version, bool with_timestamp);
@@ -160,7 +151,6 @@ constexpr network_address unspecified_network_address {
     unspecified_ip_port
 };
 
-} // namespace message
-} // namespace kth
+} // namespace kth::infrastructure::message
 
 #endif

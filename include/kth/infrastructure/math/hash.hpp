@@ -126,25 +126,19 @@ KI_API long_hash pkcs5_pbkdf2_hmac_sha512(data_slice passphrase,
 // Extend std and boost namespaces with our hash wrappers.
 //-----------------------------------------------------------------------------
 
-namespace std
-{
+namespace std {
 template <size_t Size>
-struct hash<bc::byte_array<Size>>
-{
-    size_t operator()(const bc::byte_array<Size>& hash) const
-    {
+struct hash<kth::byte_array<Size>> {
+    size_t operator()(const kth::byte_array<Size>& hash) const {
         return boost::hash_range(hash.begin(), hash.end());
     }
 };
 } // namespace std
 
-namespace boost
-{
+namespace boost {
 template <size_t Size>
-struct hash<bc::byte_array<Size>>
-{
-    size_t operator()(const bc::byte_array<Size>& hash) const
-    {
+struct hash<kth::byte_array<Size>> {
+    size_t operator()(const kth::byte_array<Size>& hash) const {
         return boost::hash_range(hash.begin(), hash.end());
     }
 };

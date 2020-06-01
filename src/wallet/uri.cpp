@@ -359,5 +359,4 @@ void uri::encode_query(const query_map& map) {
     query_ = query.str();
 }
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet

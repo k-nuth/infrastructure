@@ -99,7 +99,7 @@ KI_API void pseudo_random_fill(data_chunk& out);
  *                      portion of the maximum duration.
  * @return              The randomized duration.
  */
-BI_API asio::duration pseudo_randomize(asio::duration const& expiration,
+KI_API asio::duration pseudo_randomize(asio::duration const& expiration,
     uint8_t ratio=2);
 
 } // namespace kth

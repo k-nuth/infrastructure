@@ -107,7 +107,6 @@ private:
     ec_secret secret_ {null_hash};
 };
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif

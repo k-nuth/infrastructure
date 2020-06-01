@@ -46,7 +46,7 @@ unicode_streambuf::~unicode_streambuf() {
 // initialized with a patched std::wcin when std::wcin is used.
 std::streambuf::int_type unicode_streambuf::underflow() {
     // streamsize is signed.
-    KTH_ASSERT(wide_size_ > 0 && wide_size_ <= bc::max_int64);
+    KTH_ASSERT(wide_size_ > 0 && wide_size_ <= kth::max_int64);
     auto const size = static_cast<std::streamsize>(wide_size_);
 
     // Read from the wide input buffer.

@@ -141,49 +141,49 @@ bool is_endorsement(const endorsement& endorsement);
 // ----------------------------------------------------------------------------
 
 /// Parse an endorsement into signature hash type and DER signature.
-BI_API bool parse_endorsement(uint8_t& sighash_type,
+KI_API bool parse_endorsement(uint8_t& sighash_type,
     der_signature& der_signature, endorsement&& endorsement);
 
 /// Parse a DER encoded signature with optional strict DER enforcement.
 /// Treat an empty DER signature as invalid, in accordance with BIP66.
-BI_API bool parse_signature(ec_signature& out,
+KI_API bool parse_signature(ec_signature& out,
     const der_signature& der_signature, bool strict);
 
 /// Encode an EC signature as DER (strict).
-BI_API bool encode_signature(der_signature& out, const ec_signature& signature);
+KI_API bool encode_signature(der_signature& out, const ec_signature& signature);
 
 // EC sign/verify
 // ----------------------------------------------------------------------------
 
 /// Create a deterministic ECDSA signature using a private key.
-BI_API bool sign(ec_signature& out, ec_secret const& secret,
+KI_API bool sign(ec_signature& out, ec_secret const& secret,
     hash_digest const& hash);
 
 /// Verify an EC signature using a compressed point.
-BI_API bool verify_signature(const ec_compressed& point,
+KI_API bool verify_signature(const ec_compressed& point,
     hash_digest const& hash, const ec_signature& signature);
 
 /// Verify an EC signature using an uncompressed point.
-BI_API bool verify_signature(const ec_uncompressed& point,
+KI_API bool verify_signature(const ec_uncompressed& point,
     hash_digest const& hash, const ec_signature& signature);
 
 /// Verify an EC signature using a potential point.
-BI_API bool verify_signature(data_slice point, hash_digest const& hash,
+KI_API bool verify_signature(data_slice point, hash_digest const& hash,
     const ec_signature& signature);
 
 // Recoverable sign/recover
 // ----------------------------------------------------------------------------
 
 /// Create a recoverable signature for use in message signing.
-BI_API bool sign_recoverable(recoverable_signature& out,
+KI_API bool sign_recoverable(recoverable_signature& out,
     ec_secret const& secret, hash_digest const& hash);
 
 /// Recover the compressed point from a recoverable message signature.
-BI_API bool recover_public(ec_compressed& out,
+KI_API bool recover_public(ec_compressed& out,
     const recoverable_signature& recoverable, hash_digest const& hash);
 
 /// Recover the uncompressed point from a recoverable message signature.
-BI_API bool recover_public(ec_uncompressed& out,
+KI_API bool recover_public(ec_uncompressed& out,
     const recoverable_signature& recoverable, hash_digest const& hash);
 
 } // namespace kth

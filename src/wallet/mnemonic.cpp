@@ -133,5 +133,4 @@ long_hash decode_mnemonic(const word_list& mnemonic, std::string const& passphra
 
 #endif
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet

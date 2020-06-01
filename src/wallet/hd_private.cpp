@@ -281,5 +281,4 @@ void swap(hd_private& left, hd_private& right) {
     swap(left.secret_, right.secret_);
 }
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
