@@ -25,16 +25,14 @@ std::string encode(std::string const& prefix, data_chunk const& payload);
  */
 std::pair<std::string, data_chunk> decode(std::string const& str, std::string const& default_prefix);
 
-} // namespace cashaddr 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet::cashaddr
 
 #endif /* KTH_INFRASTUCTURE_WALLET_CASHADDR_HPP_ */
 
 
 // Unit Tests ----------------------------------------------------
 #ifdef DOCTEST_LIBRARY_INCLUDED
-using namespace kth::wallet;
+using namespace kth::infrastructure::wallet;
 using namespace std;
 
 static std::pair<std::string, std::vector<uint8_t>>
