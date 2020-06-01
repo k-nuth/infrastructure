@@ -72,20 +72,20 @@ std::array<uint8_t, WRAP_SIZE(Size)> wrap(uint8_t version,
 /**
  * Appends a four-byte checksum of a data chunk to itself.
  */
-BI_API void append_checksum(data_chunk& data);
+KI_API void append_checksum(data_chunk& data);
 
 /**
  * Generate a bitcoin hash checksum. Last 4 bytes of sha256(sha256(data))
  *
  * int(sha256(sha256(data))[-4:])
  */
-BI_API uint32_t bitcoin_checksum(data_slice data);
+KI_API uint32_t bitcoin_checksum(data_slice data);
 
 /**
  * Verifies the last four bytes of a data chunk are a valid checksum of the
  * earlier bytes. This is typically used to verify base58 data.
  */
-BI_API bool verify_checksum(data_slice data);
+KI_API bool verify_checksum(data_slice data);
 
 } // namespace kth
 
