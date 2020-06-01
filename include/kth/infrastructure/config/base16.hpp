@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_CONFIG_BASE16_HPP
 #define KTH_INFRASTUCTURE_CONFIG_BASE16_HPP
 
@@ -12,14 +13,13 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/utility/data.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for base16 encoded data.
  */
 //TODO(fernando): make a generic class for baseX
-class BI_API base16 {
+class KI_API base16 {
 public:
 
     base16() = default;
@@ -83,7 +83,6 @@ private:
     data_chunk value_;
 };
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif

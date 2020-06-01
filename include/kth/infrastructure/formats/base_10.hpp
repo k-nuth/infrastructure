@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_BASE_10_HPP
 #define KTH_INFRASTUCTURE_BASE_10_HPP
 
@@ -24,8 +25,7 @@ constexpr uint8_t ubtc_decimal_places = 2;
  * or false to round them upwards.
  * @return false for failure.
  */
-BI_API bool decode_base10(uint64_t& out, std::string const& amount,
-    uint8_t decimal_places=0, bool strict=true);
+KI_API bool decode_base10(uint64_t& out, std::string const& amount, uint8_t decimal_places=0, bool strict=true);
 
 /**
  * Writes a Bitcoin amount to a string, following the BIP 21 grammar.
@@ -33,12 +33,12 @@ BI_API bool decode_base10(uint64_t& out, std::string const& amount,
  * @param decmial_places the location of the decimal point.
  * The default is 0, which treats the input as a normal integer.
  */
-BI_API std::string encode_base10(uint64_t amount,
+KI_API std::string encode_base10(uint64_t amount,
     uint8_t decimal_places=0);
 
 // Old names:
-BI_API bool btc_to_satoshi(uint64_t& satoshi, std::string const& btc);
-BI_API std::string satoshi_to_btc(uint64_t satoshi);
+KI_API bool btc_to_satoshi(uint64_t& satoshi, std::string const& btc);
+KI_API std::string satoshi_to_btc(uint64_t satoshi);
 
 } // namespace kth
 

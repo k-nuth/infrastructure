@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_DEADLINE_HPP
 #define KTH_INFRASTRUCTURE_DEADLINE_HPP
 
@@ -23,7 +24,7 @@ namespace kth {
  * This simplifies invocation, eliminates boost-specific error handling and
  * makes timer firing and cancellation conditions safer.
  */
-class BI_API deadline
+class KI_API deadline
     : public enable_shared_from_base<deadline>
     , noncopyable
     /*, track<deadline>*/

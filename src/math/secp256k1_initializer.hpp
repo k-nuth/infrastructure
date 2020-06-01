@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_CRYPTO_SECP256K1_INITIALIZER_HPP
 #define KTH_CRYPTO_SECP256K1_INITIALIZER_HPP
 
@@ -18,7 +19,7 @@ namespace kth {
  * the given mutex. This can be assigned to a static or otherwise. It lazily
  * inits the context once and destroys the context on destruct as necessary.
  */
-class BI_API secp256k1_initializer
+class KI_API secp256k1_initializer
 {
 private:
     static void set_context(secp256k1_context** context, int flags);
@@ -51,7 +52,7 @@ private:
 /**
  * Create and hold this class to initialize signing context on first use.
  */
-class BI_API secp256k1_signing
+class KI_API secp256k1_signing
   : public secp256k1_initializer
 {
 public:
@@ -64,7 +65,7 @@ public:
 /**
  * Create and hold this class to initialize verification context on first use.
  */
-class BI_API secp256k1_verification
+class KI_API secp256k1_verification
   : public secp256k1_initializer
 {
 public:
@@ -75,12 +76,12 @@ public:
 };
 
 /**
- * Use bc::signing.context() to obtain the secp256k1 signing context.
+ * Use kth::signing.context() to obtain the secp256k1 signing context.
  */
 extern secp256k1_signing signing;
 
 /**
- * Use bc::verification.context() to obtain the secp256k1 verification context.
+ * Use kth::verification.context() to obtain the secp256k1 verification context.
  */
 extern secp256k1_verification verification;
 

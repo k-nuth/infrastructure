@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_CRYPTO_PARSE_ENCRYPTED_PREFIX_HPP
 #define KTH_CRYPTO_PARSE_ENCRYPTED_PREFIX_HPP
 
@@ -18,8 +19,7 @@
 // representing an address.... Alt-chain implementers may also change the prefix
 // such that encrypted addresses do not start with "6P".
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 template <size_t Size>
 class parse_encrypted_prefix
@@ -45,8 +45,7 @@ private:
     bool valid_;
 };
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #include "parse_encrypted_prefix.ipp"
 

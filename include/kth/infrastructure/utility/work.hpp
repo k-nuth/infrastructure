@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_WORK_HPP
 #define KTH_INFRASTRUCTURE_WORK_HPP
 
@@ -33,7 +34,7 @@ namespace kth {
 
 /// This  class is thread safe.
 /// boost asio class wrapper to enable work heap management.
-class BI_API work
+class KI_API work
   : noncopyable
 {
 public:

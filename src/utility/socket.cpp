@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/utility/socket.hpp>
 
 #include <memory>
@@ -13,14 +14,12 @@
 namespace kth {
 
 socket::socket(threadpool& thread)
-  : thread_(thread),
-    socket_(thread_.service())
+    : thread_(thread)
+    , socket_(thread_.service())
     /*, CONSTRUCT_TRACK(socket) */
-{
-}
+{}
 
-config::authority socket::authority() const
-{
+infrastructure::config::authority socket::authority() const {
     boost_code ec;
 
     ///////////////////////////////////////////////////////////////////////////
@@ -32,11 +31,10 @@ config::authority socket::authority() const
     mutex_.unlock_shared();
     ///////////////////////////////////////////////////////////////////////////
 
-    return ec ? config::authority() : config::authority(endpoint);
+    return ec ? infrastructure::config::authority() : infrastructure::config::authority(endpoint);
 }
 
-asio::socket& socket::get()
-{
+asio::socket& socket::get() {
     ///////////////////////////////////////////////////////////////////////////
     // Critical Section.
     shared_lock lock(mutex_);
@@ -45,8 +43,7 @@ asio::socket& socket::get()
     ///////////////////////////////////////////////////////////////////////////
 }
 
-void socket::stop()
-{
+void socket::stop() {
     // Handling socket error codes creates exception safety.
     boost_code ignore;
 

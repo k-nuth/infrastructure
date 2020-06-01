@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/config/directory.hpp>
 
 #include <string>
@@ -12,8 +13,7 @@
     #include <windows.h>
 #endif
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 // Returns empty string if unable to retrieve (including when not in Windows).
 std::string windows_config_directory()
@@ -29,5 +29,4 @@ std::string windows_config_directory()
     return "";
 }
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config

@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/config/authority.hpp>
 
 #include <algorithm>
@@ -23,7 +24,7 @@
 #include <kth/infrastructure/utility/assert.hpp>
 #include <kth/infrastructure/utility/string.hpp>
 
-namespace kth::config {
+namespace kth::infrastructure::config {
 
 using namespace boost::program_options;
 
@@ -122,7 +123,7 @@ asio::ipv6 to_boost_address(message::ip_address const& in) {
 }
 
 static 
-message::ip_address to_BI_address(const asio::ipv6& in) {
+message::ip_address to_bc_address(const asio::ipv6& in) {
     message::ip_address out;
     auto const bytes = in.to_bytes();
     KTH_ASSERT(bytes.size() == out.size());
@@ -156,7 +157,7 @@ asio::ipv6 authority::asio_ip() const {
 }
 
 message::ip_address authority::ip() const {
-    return to_BI_address(ip_);
+    return to_bc_address(ip_);
 }
 
 uint16_t authority::port() const {
@@ -231,4 +232,4 @@ std::ostream& operator<<(std::ostream& output, authority const& argument) {
     return output;
 }
 
-} // namespace kth::config
+} // namespace kth::infrastructure::config

@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_BASE_58_HPP
 #define KTH_INFRASTUCTURE_BASE_58_HPP
 
@@ -11,8 +12,8 @@
 
 namespace kth {
 
-BI_API bool is_base58(char ch);
-BI_API bool is_base58(std::string const& text);
+KI_API bool is_base58(char ch);
+KI_API bool is_base58(std::string const& text);
 
 /**
  * Converts a base58 string to a number of bytes.
@@ -34,13 +35,13 @@ byte_array<Size * 733 / 1000> base58_literal(char const(&string)[Size]);
  * Encode data as base58.
  * @return the base58 encoded string.
  */
-BI_API std::string encode_base58(data_slice unencoded);
+KI_API std::string encode_base58(data_slice unencoded);
 
 /**
  * Attempt to decode base58 data.
  * @return false if the input contains non-base58 characters.
  */
-BI_API bool decode_base58(data_chunk& out, std::string const& in);
+KI_API bool decode_base58(data_chunk& out, std::string const& in);
 
 } // namespace kth
 

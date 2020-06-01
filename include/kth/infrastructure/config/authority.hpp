@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_CONFIG_AUTHORITY_HPP
 #define KTH_INFRASTUCTURE_CONFIG_AUTHORITY_HPP
 
@@ -13,13 +14,13 @@
 #include <kth/infrastructure/message/network_address.hpp>
 #include <kth/infrastructure/utility/asio.hpp>
 
-namespace kth::config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for a network authority.
  * This is a container for a {ip address, port} tuple.
  */
-class BI_API authority {
+class KI_API authority {
 public:
     /**
      * A list of authorities.
@@ -165,6 +166,6 @@ private:
     uint16_t port_{0};
 };
 
-} // namespace kth::config
+} // namespace kth::infrastructure::config
 
 #endif

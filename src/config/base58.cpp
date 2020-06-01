@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/config/base58.hpp>
 
 #include <iostream>
@@ -13,8 +14,7 @@
 #include <kth/infrastructure/formats/base_58.hpp>
 #include <kth/infrastructure/utility/data.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 // base58::base58()
 // {
@@ -57,5 +57,4 @@ std::ostream& operator<<(std::ostream& output, const base58& argument) {
     return output;
 }
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config

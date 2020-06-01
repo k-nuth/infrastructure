@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_CONFIG_HASH160_HPP
 #define KTH_INFRASTUCTURE_CONFIG_HASH160_HPP
 
@@ -10,13 +11,12 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/math/hash.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for a bitcoin 160 bit hash.
  */
-class BI_API hash160 {
+class KI_API hash160 {
 public:
 
     hash160() = default;
@@ -57,7 +57,6 @@ private:
     short_hash value_{null_short_hash};
 };
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif

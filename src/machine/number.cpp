@@ -1,12 +1,12 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/machine/number.hpp>
 
 #include <cstdint>
 
-namespace kth {
-namespace machine {
+namespace kth::infrastructure::machine {
 
 uint8_t constexpr number::positive_0; // = 0;
 uint8_t constexpr number::positive_1; //  = 1;
@@ -53,5 +53,4 @@ uint8_t constexpr number::negative_0; //  = negative_mask | positive_0;
 // uint8_t constexpr number::negative_1 = negative_mask | positive_1;
 // uint8_t constexpr number::negative_0 = negative_mask | positive_0;
 
-} // namespace machine
-} // namespace kth
+} // namespace kth::infrastructure::machine

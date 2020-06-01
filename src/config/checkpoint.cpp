@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/config/checkpoint.hpp>
 
 #include <cstddef>
@@ -15,14 +16,13 @@
 #include <kth/infrastructure/formats/base_16.hpp>
 #include <kth/infrastructure/math/hash.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 // using namespace boost;
 using namespace boost::program_options;
 
 checkpoint::checkpoint()
-    : hash_(bc::null_hash) 
+    : hash_(kth::null_hash) 
 {}
 
 checkpoint::checkpoint(std::string const& value)
@@ -62,7 +62,7 @@ std::string checkpoint::to_string() const {
     return value.str();
 }
 
-config::checkpoint::list checkpoint::sort(list const& checks) {
+infrastructure::config::checkpoint::list checkpoint::sort(list const& checks) {
     auto const comparitor = [](checkpoint const& left, checkpoint const& right) {
         return left.height() < right.height();
     };
@@ -77,7 +77,7 @@ bool checkpoint::covered(size_t height, list const& checks) {
 }
 
 bool checkpoint::validate(hash_digest const& hash, size_t height, list const& checks) {
-    auto const match_invalid = [&height, &hash](const config::checkpoint& item) {
+    auto const match_invalid = [&height, &hash](const infrastructure::config::checkpoint& item) {
         return height == item.height() && hash != item.hash();
     };
 
@@ -122,5 +122,4 @@ std::ostream& operator<<(std::ostream& output, checkpoint const& argument) {
     return output;
 }
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config

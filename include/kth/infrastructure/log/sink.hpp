@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_LOG_SINK_HPP
 #define KTH_INFRASTRUCTURE_LOG_SINK_HPP
 
@@ -15,7 +16,7 @@
 
 namespace kth::log {
 
-using file = boost::shared_ptr<bc::ofstream>;
+using file = boost::shared_ptr<kth::ofstream>;
 
 /// Initializes null (as opposed to default) logging sinks.
 void initialize();

@@ -319,11 +319,7 @@ if (ENABLE_SHARED)
 endif()
 
 set(knuth_infrastructure_sources_just_legacy 
-        # src/machine/interpreter.cpp
         src/machine/number.cpp        #Fernando: commented for the moment...
-        # src/machine/opcode.cpp
-        # src/machine/operation.cpp
-        # src/machine/program.cpp
 
         src/config/authority.cpp
         src/config/base16.cpp
@@ -336,7 +332,6 @@ set(knuth_infrastructure_sources_just_legacy
         src/config/hash160.cpp
         src/config/hash256.cpp
         src/config/parameter.cpp
-        # src/config/parser.cpp
         src/config/printer.cpp
         src/config/sodium.cpp
 
@@ -356,7 +351,7 @@ set(knuth_infrastructure_sources_just_legacy
         src/math/secp256k1_initializer.cpp
         src/math/secp256k1_initializer.hpp
         src/math/sip_hash.cpp
-        # src/math/stealth.cpp                    #Depends on chain::script
+
         src/math/external/aes256.h
         src/math/external/crypto_scrypt.h
         src/math/external/hmac_sha256.h
@@ -415,35 +410,12 @@ set(knuth_infrastructure_sources_just_legacy
         src/utility/threadpool.cpp
         src/utility/work.cpp
 
-        # src/wallet/bitcoin_uri.cpp      #Depends on wallet::payment_address
         src/wallet/dictionary.cpp
-        # src/wallet/ec_private.cpp       #Depends on wallet::payment_address
-        # src/wallet/ec_public.cpp        #Depends on wallet::payment_address
-        # src/wallet/ek_private.cpp         #Depends on wallet::payment_address
-        # src/wallet/ek_public.cpp
-        # src/wallet/ek_token.cpp
-        # src/wallet/encrypted_keys.cpp
         src/wallet/hd_private.cpp
         src/wallet/hd_public.cpp
-        # src/wallet/message.cpp
         src/wallet/mini_keys.cpp
         src/wallet/mnemonic.cpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_key.hpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_key.ipp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_prefix.hpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_prefix.ipp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_private.cpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_private.hpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_public.cpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_public.hpp
-        # src/wallet/parse_encrypted_keys/parse_encrypted_token.cpp   # #include <kth/infrastructure/chain/script.hpp>
-        # src/wallet/parse_encrypted_keys/parse_encrypted_token.hpp
-        # src/wallet/payment_address.cpp
 
-        # src/wallet/select_outputs.cpp   #  #include <kth/infrastructure/chain/points_value.hpp>
-        # src/wallet/stealth_address.cpp    # #include <kth/infrastructure/chain/script.hpp>
-        # src/wallet/stealth_receiver.cpp # #include <kth/infrastructure/chain/script.hpp>
-        # src/wallet/stealth_sender.cpp # #include <kth/infrastructure/chain/script.hpp>
         src/wallet/uri.cpp
     )
 
@@ -519,7 +491,7 @@ target_include_directories(kth-infrastructure PUBLIC
   $<INSTALL_INTERFACE:include>)
   
 if (NOT ENABLE_SHARED)
-    target_compile_definitions(kth-infrastructure PUBLIC -DBI_STATIC) #TODO(fernando): manage with Conan????
+    target_compile_definitions(kth-infrastructure PUBLIC -DKI_STATIC) #TODO(fernando): manage with Conan????
 endif()
 
 target_compile_definitions(kth-infrastructure PUBLIC -DKTH_PROJECT_VERSION="${KTH_PROJECT_VERSION}") #TODO(fernando): manage with Conan????
@@ -612,17 +584,12 @@ if (WITH_TESTS)
 
         test/main.cpp
 
-        # test/math/big_number.cpp
-        # test/math/big_number.hppcompact
         test/math/checksum.cpp
         test/math/elliptic_curve.cpp
         test/math/hash.cpp
         test/math/hash.hpp
-        # test/math/hash_number.cpp
-        # test/math/limits.cpp
-        # test/math/script_number.cpp
-        # test/math/script_number.hpp
-        # test/math/stealth.cpp
+
+        test/message/network_address.cpp
 
         test/unicode/unicode.cpp
         test/unicode/unicode_istream.cpp
@@ -728,7 +695,7 @@ _group_sources(knuth_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
     # merkle_block_tests
     # message_tests
     mnemonic_tests
-    # network_address_tests
+    network_address_tests
     # not_found_tests
     # output_tests
     parameter_tests
@@ -819,10 +786,7 @@ set(_knuth_infrastructure_headers
 
     kth/infrastructure/machine/interpreter.hpp
     kth/infrastructure/machine/number.hpp    
-    # kth/infrastructure/machine/opcode.hpp
-    # kth/infrastructure/machine/operation.hpp
     kth/infrastructure/machine/program.hpp
-    # kth/infrastructure/machine/rule_fork.hpp
     kth/infrastructure/machine/script_pattern.hpp
     kth/infrastructure/machine/sighash_algorithm.hpp
     kth/infrastructure/machine/script_version.hpp
@@ -838,7 +802,6 @@ set(_knuth_infrastructure_headers
     kth/infrastructure/config/hash160.hpp
     kth/infrastructure/config/hash256.hpp
     kth/infrastructure/config/parameter.hpp
-    # kth/infrastructure/config/parser.hpp
     kth/infrastructure/config/printer.hpp
     kth/infrastructure/config/settings.hpp
     kth/infrastructure/config/sodium.hpp
@@ -866,18 +829,14 @@ set(_knuth_infrastructure_headers
 
     kth/infrastructure/impl/machine/interpreter.ipp
     kth/infrastructure/impl/machine/number.ipp
-    # kth/infrastructure/impl/machine/operation.ipp
     kth/infrastructure/impl/machine/program.ipp
 
     kth/infrastructure/math/checksum.hpp
     kth/infrastructure/math/crypto.hpp
     kth/infrastructure/math/elliptic_curve.hpp
     kth/infrastructure/math/hash.hpp
-    # kth/infrastructure/math/limits.hpp
     kth/infrastructure/math/stealth.hpp
     kth/infrastructure/math/uint256.hpp
-
-
 
     kth/infrastructure/impl/utility/array_slice.ipp
     kth/infrastructure/impl/utility/collection.ipp
@@ -950,8 +909,6 @@ set(_knuth_infrastructure_headers
     kth/infrastructure/utility/work.hpp
     kth/infrastructure/utility/writer.hpp
     
-    # kth/infrastructure/wallet/bitcoin_uri.hpp
-    
     kth/infrastructure/wallet/cashaddr.hpp
 
     kth/infrastructure/wallet/dictionary.hpp
@@ -963,18 +920,10 @@ set(_knuth_infrastructure_headers
     kth/infrastructure/wallet/encrypted_keys.hpp
     kth/infrastructure/wallet/hd_private.hpp
     kth/infrastructure/wallet/hd_public.hpp
-    # kth/infrastructure/wallet/message.hpp
     kth/infrastructure/wallet/mini_keys.hpp
     kth/infrastructure/wallet/mnemonic.hpp
-    # kth/infrastructure/wallet/payment_address.hpp
     kth/infrastructure/wallet/qrcode.hpp
-    # kth/infrastructure/wallet/select_outputs.hpp
-    # kth/infrastructure/wallet/stealth_address.hpp
-    # kth/infrastructure/wallet/stealth_receiver.hpp
-    # kth/infrastructure/wallet/stealth_sender.hpp
     kth/infrastructure/wallet/uri.hpp
-    # kth/infrastructure/wallet/uri_reader.hpp
-    # kth/infrastructure/wallet/transaction_functions.hpp
 
     kth/infrastructure.hpp
   )

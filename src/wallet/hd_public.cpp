@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/wallet/hd_public.hpp>
 
 #include <cstdint>
@@ -23,8 +24,7 @@
 // #include <kth/infrastructure/wallet/ec_public.hpp>
 #include <kth/infrastructure/wallet/hd_private.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 // const uint32_t hd_public::mainnet = 76067358;
 // const uint32_t hd_public::testnet = 70617039;
@@ -260,5 +260,4 @@ bool hd_lineage::operator!=(hd_lineage const& x) const {
     return !(*this == x);
 }
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet

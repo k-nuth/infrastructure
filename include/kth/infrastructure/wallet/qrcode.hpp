@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_QRENCODE_HPP
 #define KTH_INFRASTUCTURE_QRENCODE_HPP
 
@@ -15,10 +16,9 @@
 #ifdef WITH_QRENCODE
 #include <qrencode.h>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
-class BI_API qr
+class KI_API qr
 {
 public:
     typedef QRencodeMode encode_mode;
@@ -33,19 +33,19 @@ public:
      * A method that takes an input stream and writes the encoded qr data
      * to the specified output stream with default parameter values.
      */
-    BI_API static bool encode(std::istream& in, std::ostream& out);
+    KI_API static bool encode(std::istream& in, std::ostream& out);
 
     /**
      * A method that takes a data chunk and returns the encoded qr data as
      * a data_chunk with default parameter values.
      */
-    BI_API static data_chunk encode(data_chunk const& data);
+    KI_API static data_chunk encode(data_chunk const& data);
 
     /**
      * A method that takes a data chunk and returns the encoded qr data as
      * a data chunk with the specified parameter values.
      */
-    BI_API static data_chunk encode(data_chunk const& data,
+    KI_API static data_chunk encode(data_chunk const& data,
         uint32_t version, const error_recovery_level level,
         encode_mode mode, bool case_sensitive);
 
@@ -53,13 +53,12 @@ public:
      * A method that takes an input stream and writes the encoded qr data
      * to the output stream with the specified parameter values.
      */
-    BI_API static bool encode(std::istream& in, uint32_t version,
+    KI_API static bool encode(std::istream& in, uint32_t version,
         error_recovery_level level, encode_mode mode, bool case_sensitive,
         std::ostream& out);
 };
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif // WITH_QRENCODE
 

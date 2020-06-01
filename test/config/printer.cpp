@@ -14,7 +14,7 @@
 #include <kth/infrastructure.hpp>
 
 namespace po = boost::program_options;
-using namespace bc::config;
+using namespace kth::infrastructure::config;
 
 BOOST_AUTO_TEST_SUITE(printer_tests)
 

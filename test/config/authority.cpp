@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <sstream>
 
 #include <boost/program_options.hpp>
@@ -8,8 +9,9 @@
 
 #include <kth/infrastructure.hpp>
 
-using namespace bc;
-using namespace bc::config;
+using namespace kth;
+using namespace kth::infrastructure;
+using namespace kth::infrastructure::config;
 using namespace boost::program_options;
 
 BOOST_AUTO_TEST_SUITE(authority_tests)
@@ -24,18 +26,16 @@ BOOST_AUTO_TEST_SUITE(authority_tests)
 #define BI_AUTHORITY_IPV6_BOGUS_IPV4_ADDRESS "[::ffff:0:39]:256"
 
 // tools.ietf.org/html/rfc4291#section-2.5.2
-constexpr message::ip_address test_unspecified_ip_address =
-{
+constexpr 
+message::ip_address test_unspecified_ip_address = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-};
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 // tools.ietf.org/html/rfc4291#section-2.5.5.2
-constexpr message::ip_address test_mapped_ip_address =
-{
+constexpr 
+message::ip_address test_mapped_ip_address = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0xff, 0xff, 0x01, 0x02, 0xf0, 0x01
-};
+    0x00, 0x00, 0xff, 0xff, 0x01, 0x02, 0xf0, 0x01};
 
 // tools.ietf.org/html/rfc4291#section-2.5.5.1
 constexpr message::ip_address test_compatible_ip_address =

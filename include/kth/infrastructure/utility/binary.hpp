@@ -1,18 +1,20 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_BINARY_HPP
 #define KTH_INFRASTRUCTURE_BINARY_HPP
 
 #include <cstdint>
 #include <string>
+#include <utility>
 
 #include <kth/infrastructure/constants.hpp>
 #include <kth/infrastructure/utility/data.hpp>
 
 namespace kth {
 
-class BI_API binary {
+class KI_API binary {
 public:
     using block = uint8_t;
     using size_type = std::size_t;
@@ -52,10 +54,10 @@ public:
     bool is_prefix_of(uint32_t field) const;
     bool is_prefix_of(binary const& field) const;
 
-    bool operator<(binary const& x) const;
+    binary& operator=(binary const& x);
     bool operator==(binary const& x) const;
     bool operator!=(binary const& x) const;
-    binary& operator=(binary const& x);
+    bool operator<(binary const& x) const;
     
     friend 
     std::istream& operator>>(std::istream& in, binary& to);
@@ -76,9 +78,9 @@ private:
 namespace std {
 
 template <>
-struct hash<bc::binary> {
-    size_t operator()(const bc::binary& value) const {
-        return std::hash<std::string>()(value.encoded());
+struct hash<kth::binary> {
+    size_t operator()(kth::binary const& x) const {
+        return std::hash<std::string>()(x.encoded());
     }
 };
 

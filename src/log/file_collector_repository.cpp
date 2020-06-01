@@ -24,8 +24,7 @@
 #include <kth/infrastructure/compat.hpp>
 
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 static boost::arg<1> _1;
 
@@ -85,5 +84,4 @@ boost::shared_ptr<boost::log::sinks::file::collector> make_collector(
         max_size, min_free_space, max_files);
 }
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log

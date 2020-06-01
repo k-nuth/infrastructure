@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_SOCKET_HPP
 #define KTH_INFRASTRUCTURE_SOCKET_HPP
 
@@ -17,7 +18,7 @@
 namespace kth {
 
 /// This class is thread safe but the socket may not be used concurrently.
-class BI_API socket
+class KI_API socket
     : noncopyable
     /*, public track<socket>*/
 {
@@ -29,7 +30,7 @@ public:
     socket(threadpool& thread);
 
     /// Obtain the authority of the remote endpoint.
-    config::authority authority() const;
+    infrastructure::config::authority authority() const;
 
     /// The underlying socket.
     asio::socket& get();

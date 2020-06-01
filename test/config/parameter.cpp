@@ -15,7 +15,7 @@
 #include <kth/infrastructure.hpp>
 
 namespace po = boost::program_options;
-using namespace bc::config;
+using namespace kth::infrastructure::config;
 
 enum opt {
     short_long = 0,
@@ -63,13 +63,13 @@ void load_test_arguments(argument_list& arguments) {
     argument_list names; \
     load_test_arguments(names); \
     auto option = *(options.options()[index]); \
-    bc::config::parameter parameter
+    kth::infrastructure::config::parameter parameter
 
 #define CONFIG_TEST_PARAMETER_OPTIONS_SETUP(index) \
     po::options_description options; \
     load_test_options(options); \
     auto option = *(options.options()[index]); \
-    bc::config::parameter parameter
+    kth::infrastructure::config::parameter parameter
 
 BOOST_AUTO_TEST_SUITE(parameter_tests)
 

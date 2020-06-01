@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_CONDITIONAL_LOCK_HPP_
 #define KTH_INFRASTRUCTURE_CONDITIONAL_LOCK_HPP_
 
@@ -11,7 +12,7 @@
 
 namespace kth {
 
-class BI_API conditional_lock {
+class KI_API conditional_lock {
 public:
     /// Conditional lock using specified mutex pointer.
     explicit

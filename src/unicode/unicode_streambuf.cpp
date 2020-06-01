@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/unicode/unicode_streambuf.hpp>
 
 #include <cstddef>
@@ -22,7 +23,7 @@ unicode_streambuf::unicode_streambuf(std::wstreambuf* wide_buffer, size_t size)
     , narrow_(new char[narrow_size_]), wide_(new wchar_t[narrow_size_])
     , wide_buffer_(wide_buffer)
 {
-    if (wide_size_ > (bc::max_uint64 / utf8_max_character_size)) {
+    if (wide_size_ > (kth::max_uint64 / utf8_max_character_size)) {
         throw std::ios_base::failure("Wide buffer must be no more than one fourth of max uint64.");
     }
 
@@ -45,7 +46,7 @@ unicode_streambuf::~unicode_streambuf() {
 // initialized with a patched std::wcin when std::wcin is used.
 std::streambuf::int_type unicode_streambuf::underflow() {
     // streamsize is signed.
-    KTH_ASSERT(wide_size_ > 0 && wide_size_ <= bc::max_int64);
+    KTH_ASSERT(wide_size_ > 0 && wide_size_ <= kth::max_int64);
     auto const size = static_cast<std::streamsize>(wide_size_);
 
     // Read from the wide input buffer.

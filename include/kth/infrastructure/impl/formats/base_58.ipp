@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_BASE_58_IPP
 #define KTH_INFRASTUCTURE_BASE_58_IPP
 
@@ -10,7 +11,7 @@
 namespace kth {
 
 // For support of template implementation only, do not call directly.
-BI_API bool decode_base58_private(uint8_t* out, size_t out_size,
+KI_API bool decode_base58_private(uint8_t* out, size_t out_size,
     char const* in);
 
 template <size_t Size>

@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/config/sodium.hpp>
 
 #include <iostream>
@@ -13,8 +14,7 @@
 #include <kth/infrastructure/formats/base_85.hpp>
 #include <kth/infrastructure/math/hash.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 sodium::sodium()
     : value_(null_hash)
@@ -74,5 +74,4 @@ std::ostream& operator<<(std::ostream& output, const sodium& argument) {
     return output;
 }
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config

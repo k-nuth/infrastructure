@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_COMPAT_H
 #define KTH_INFRASTRUCTURE_COMPAT_H
 
@@ -13,9 +14,9 @@
 #endif
 
 #ifdef _MSC_VER
-    #define BI_C_INLINE __inline
+    #define KI_C_INLINE __inline
 #else
-    #define BI_C_INLINE inline
+    #define KI_C_INLINE inline
 #endif
 
 #endif

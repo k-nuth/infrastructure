@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_LOG_STATSD_SINK_HPP
 #define KTH_INFRASTRUCTURE_LOG_STATSD_SINK_HPP
 
@@ -11,14 +12,12 @@
 #include <kth/infrastructure/log/rotable_file.hpp>
 #include <kth/infrastructure/utility/threadpool.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 void initialize_statsd(rotable_file const& file);
 
-void initialize_statsd(threadpool& pool, const config::authority& server);
+void initialize_statsd(threadpool& pool, const infrastructure::config::authority& server);
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #endif

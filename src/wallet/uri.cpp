@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/wallet/uri.hpp>
 
 #include <iomanip>
@@ -9,8 +10,7 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/formats/base_16.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 // These character classification functions correspond to RFC 3986.
 // They avoid C standard library character classification functions,
@@ -359,5 +359,4 @@ void uri::encode_query(const query_map& map) {
     query_ = query.str();
 }
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet

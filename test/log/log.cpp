@@ -8,7 +8,7 @@
 #include <cstdio>
 #include <boost/preprocessor/repetition/repeat.hpp>
 
-using namespace bc;
+using namespace kth;
 
 BOOST_AUTO_TEST_SUITE(log_tests)
 
@@ -21,11 +21,8 @@ BOOST_AUTO_TEST_CASE(log_general__debug) {
     // spdlog::debug(KTH_STRREP("{} ", 3 + 1), LOG_SYSTEM, "hello", "world", 1);
     // spdlog::debug("{} {} {} {}", LOG_SYSTEM, "hello", "world", 1);
 
-    spdlog::debug("{} " KTH_STRREP("{} ", 3), LOG_SYSTEM, "hello", "world", 1);
-    LOG_DEBUG(LOG_SYSTEM, "hello", "world", 1);
-
-
-
+    // spdlog::debug("{} " KTH_STRREP("{} ", 3), LOG_SYSTEM, "hello", "world", 1);
+    // LOG_DEBUG(LOG_SYSTEM, "hello", "world", 1);
 
     // #define Fold(z, n, text)  text
     // #define STRREP(str, n) BOOST_PP_REPEAT(n, Fold, str)

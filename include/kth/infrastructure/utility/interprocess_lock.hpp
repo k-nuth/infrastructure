@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_INTERPROCESS_LOCK_HPP
 #define KTH_INFRASTRUCTURE_INTERPROCESS_LOCK_HPP
 
@@ -17,7 +18,7 @@ namespace kth {
 
 /// This class is not thread safe.
 /// Guard a resource againt concurrent use by another instance of this app.
-class BI_API interprocess_lock {
+class KI_API interprocess_lock {
 public:
     using path = std::filesystem::path;
 

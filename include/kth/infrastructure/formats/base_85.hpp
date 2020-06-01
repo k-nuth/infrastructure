@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_BASE_85_HPP
 #define KTH_INFRASTUCTURE_BASE_85_HPP
 
@@ -15,13 +16,13 @@ namespace kth {
  * Encode data as base85 (Z85).
  * @return false if the input is not of base85 size (% 4).
  */
-BI_API bool encode_base85(std::string& out, data_slice in);
+KI_API bool encode_base85(std::string& out, data_slice in);
 
 /**
  * Attempt to decode base85 (Z85) data.
  * @return false if the input contains non-base85 characters or length (% 5).
  */
-BI_API bool decode_base85(data_chunk& out, std::string const& in);
+KI_API bool decode_base85(data_chunk& out, std::string const& in);
 
 } // namespace kth
 

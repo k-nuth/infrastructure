@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_LOG_UDP_CLIENT_SINK_HPP
 #define KTH_INFRASTRUCTURE_LOG_UDP_CLIENT_SINK_HPP
 
@@ -13,10 +14,9 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/error.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
-class BI_API udp_client_sink
+class KI_API udp_client_sink
   : public boost::log::sinks::basic_formatted_sink_backend<char,
         boost::log::sinks::synchronized_feeding>
 {
@@ -41,7 +41,6 @@ private:
     endpoint_ptr const endpoint_;
 };
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #endif

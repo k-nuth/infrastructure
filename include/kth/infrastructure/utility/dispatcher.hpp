@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_DISPATCHER_HPP
 #define KTH_INFRASTRUCTURE_DISPATCHER_HPP
 
@@ -39,7 +40,7 @@ namespace kth {
 
 /// This  class is thread safe.
 /// If the ios service is stopped jobs will not be dispatched.
-class BI_API dispatcher : noncopyable {
+class KI_API dispatcher : noncopyable {
 public:
     using delay_handler = std::function<void (code const &)>;
 

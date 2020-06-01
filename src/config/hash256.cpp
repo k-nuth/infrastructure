@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/config/hash256.hpp>
 
 #include <iostream>
@@ -13,8 +14,7 @@
 #include <kth/infrastructure/formats/base_16.hpp>
 #include <kth/infrastructure/math/hash.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 hash256::hash256(std::string const& hexcode)
     : hash256()
@@ -53,5 +53,4 @@ std::ostream& operator<<(std::ostream& output, const hash256& argument) {
     return output;
 }
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config

@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_CONFIG_SODIUM_HPP
 #define KTH_INFRASTUCTURE_CONFIG_SODIUM_HPP
 
@@ -12,13 +13,12 @@
 #include <kth/infrastructure/math/hash.hpp>
 #include <kth/infrastructure/utility/data.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for base58 sodium keys.
  */
-class BI_API sodium
+class KI_API sodium
 {
 public:
     /**
@@ -104,7 +104,6 @@ private:
     hash_digest value_;
 };
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif

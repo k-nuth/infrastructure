@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_MONITOR_HPP
 #define KTH_INFRASTRUCTURE_MONITOR_HPP
 
@@ -13,12 +14,12 @@
 #include <kth/infrastructure/define.hpp>
 
 // Defines the log and tracking but does not use them.
-// These are defined in bc so that they can be used in network and blockchain.
+// These are defined in kth so that they can be used in network and blockchain.
 
 namespace kth {
 
 /// A reference counting wrapper for closures placed on the asio work heap.
-class BI_API monitor {
+class KI_API monitor {
 public:
     using count = std::atomic<size_t>;
     using count_ptr = std::shared_ptr<count>;

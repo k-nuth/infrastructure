@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/utility/pseudo_random.hpp>
 
 #include <chrono>
@@ -15,7 +16,7 @@
 
 namespace kth {
 
-using namespace bc::asio;
+using namespace kth::asio;
 using namespace std::chrono;
 
 // DO NOT USE srand() and rand() on MSVC as srand must be called per thread.

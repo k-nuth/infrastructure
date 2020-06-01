@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_INFRASTRUCTURE_HPP_
 #define KTH_INFRASTRUCTURE_INFRASTRUCTURE_HPP_
 
@@ -61,12 +62,7 @@
 #include <kth/infrastructure/log/features/timer.hpp>
 #endif // defined(KTH_LOG_LIBRARY_BOOST)
 
-// #include <kth/infrastructure/machine/interpreter.hpp>
 #include <kth/infrastructure/machine/number.hpp>
-// #include <kth/infrastructure/machine/opcode.hpp>
-// #include <kth/infrastructure/machine/operation.hpp>
-// #include <kth/infrastructure/machine/program.hpp>
-// #include <kth/infrastructure/machine/rule_fork.hpp>
 #include <kth/infrastructure/machine/script_pattern.hpp>
 #include <kth/infrastructure/machine/script_version.hpp>
 #include <kth/infrastructure/machine/sighash_algorithm.hpp>

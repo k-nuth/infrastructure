@@ -16,8 +16,7 @@
 #include <kth/infrastructure/utility/ostream_writer.hpp>
 
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 data_chunk qr::encode(data_chunk const& data)
 {
@@ -54,7 +53,7 @@ bool qr::encode(std::istream& in, uint32_t version, error_recovery_level level,
     if (qrcode == nullptr)
         return false;
 
-    if (bc::max_size_t / qrcode->width < qrcode->width)
+    if (kth::max_size_t / qrcode->width < qrcode->width)
         return false;
 
     auto const area = qrcode->width * qrcode->width;
@@ -75,7 +74,6 @@ bool qr::encode(std::istream& in, uint32_t version, error_recovery_level level,
     return true;
 }
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif // WITH_QRENCODE

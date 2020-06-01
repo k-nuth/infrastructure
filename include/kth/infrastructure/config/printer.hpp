@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_CONFIG_PRINTER_HPP
 #define KTH_INFRASTUCTURE_CONFIG_PRINTER_HPP
 
@@ -16,25 +17,25 @@
 #include <kth/infrastructure/config/parameter.hpp>
 #include <kth/infrastructure/define.hpp>
 
-namespace kth::config {
+namespace kth::infrastructure::config {
 
 /**
  * Shorthand for property declarations in printer class.
  */
-#define BI_PROPERTY_GET_REF(type, name) \
+#define KI_PROPERTY_GET_REF(type, name) \
     public: type& get_##name() { return name##_; } \
     private: type name##_
 
 /**
  * Class for managing the serialization of command line options and arguments.
  */
-class BI_API printer {
+class KI_API printer {
 public:
 
     /**
      * Number of arguments above which the argument is considered unlimited.
      */
-    BI_API static int const max_arguments;
+    KI_API static int const max_arguments;
 
     /**
      * Construct an instance of the printer class.
@@ -136,21 +137,21 @@ public:
     /**
      * Virtual property declarations, passed on construct.
      */
-    BI_PROPERTY_GET_REF(boost::program_options::options_description, options);
-    BI_PROPERTY_GET_REF(boost::program_options::positional_options_description, arguments);
-    BI_PROPERTY_GET_REF(std::string, application);
-    BI_PROPERTY_GET_REF(std::string, description);
-    BI_PROPERTY_GET_REF(std::string, command);
+    KI_PROPERTY_GET_REF(boost::program_options::options_description, options);
+    KI_PROPERTY_GET_REF(boost::program_options::positional_options_description, arguments);
+    KI_PROPERTY_GET_REF(std::string, application);
+    KI_PROPERTY_GET_REF(std::string, description);
+    KI_PROPERTY_GET_REF(std::string, command);
 
     /**
      * Virtual property declarations, generated from metadata.
      */
-    BI_PROPERTY_GET_REF(argument_list, argument_names);
-    BI_PROPERTY_GET_REF(parameter_list, parameters);
+    KI_PROPERTY_GET_REF(argument_list, argument_names);
+    KI_PROPERTY_GET_REF(parameter_list, parameters);
 };
 
 #undef PROPERTY_GET_REF
 
-} // namespace kth::config
+} // namespace kth::infrastructure::config
 
 #endif

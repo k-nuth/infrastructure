@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_CONFIG_BASE64_HPP
 #define KTH_INFRASTUCTURE_CONFIG_BASE64_HPP
 
@@ -10,13 +11,12 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/utility/data.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for base64 encoded data.
  */
-class BI_API base64 {
+class KI_API base64 {
 public:
 
     base64() = default;
@@ -75,7 +75,6 @@ private:
     data_chunk value_;
 };
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif

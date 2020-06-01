@@ -19,8 +19,7 @@
 
 #include <kth/infrastructure/log/file_char_traits.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 file_counter_formatter::file_counter_formatter(unsigned int width)
   : width_(width)
@@ -50,5 +49,4 @@ file_counter_formatter::path_string_type file_counter_formatter::operator()(
 
 }
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log

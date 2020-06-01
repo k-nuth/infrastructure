@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_STRING_HPP
 #define KTH_INFRASTRUCTURE_STRING_HPP
 
@@ -64,7 +65,7 @@ std::string serialize(const Value& value, std::string const& fallback="");
  * @param[in]  delimiter  The delimiter, defaults to " ".
  * @return                The resulting string.
  */
-BI_API std::string join(const string_list& words,
+KI_API std::string join(const string_list& words,
     std::string const& delimiter=" ");
 
 /**
@@ -75,7 +76,7 @@ BI_API std::string join(const string_list& words,
  * @param[in]  trim       Trim the sentence for whitespace, defaults to true.
  * @return                The list of resulting strings.
  */
-BI_API string_list split(std::string const& sentence,
+KI_API string_list split(std::string const& sentence,
     std::string const& delimiter=" ", bool trim=true);
 
 } // namespace kth

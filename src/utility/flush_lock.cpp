@@ -17,13 +17,13 @@ namespace kth {
 
 // static
 bool flush_lock::create(std::string const& file) {
-    bc::ofstream stream(file);
+    kth::ofstream stream(file);
     return stream.good();
 }
 
 // static
 bool flush_lock::exists(std::string const& file) {
-    // bc::ifstream stream(file);
+    // kth::ifstream stream(file);
     // return stream.good();
     return std::filesystem::exists(file);
 }
