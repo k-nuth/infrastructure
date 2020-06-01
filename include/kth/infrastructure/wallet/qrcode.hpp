@@ -33,19 +33,19 @@ public:
      * A method that takes an input stream and writes the encoded qr data
      * to the specified output stream with default parameter values.
      */
-    BI_API static bool encode(std::istream& in, std::ostream& out);
+    KI_API static bool encode(std::istream& in, std::ostream& out);
 
     /**
      * A method that takes a data chunk and returns the encoded qr data as
      * a data_chunk with default parameter values.
      */
-    BI_API static data_chunk encode(data_chunk const& data);
+    KI_API static data_chunk encode(data_chunk const& data);
 
     /**
      * A method that takes a data chunk and returns the encoded qr data as
      * a data chunk with the specified parameter values.
      */
-    BI_API static data_chunk encode(data_chunk const& data,
+    KI_API static data_chunk encode(data_chunk const& data,
         uint32_t version, const error_recovery_level level,
         encode_mode mode, bool case_sensitive);
 
