@@ -70,54 +70,54 @@ static constexpr ec_uncompressed null_uncompressed_point =
 
 /// Compute the sum a += G*b, where G is the curve's generator point.
 /// return false on failure (such as infinity or zero).
-BI_API bool ec_add(ec_compressed& point, ec_secret const& secret);
+KI_API bool ec_add(ec_compressed& point, ec_secret const& secret);
 
 /// Compute the sum a += G*b, where G is the curve's generator point.
 /// return false on failure (such as infinity or zero).
-BI_API bool ec_add(ec_uncompressed& point, ec_secret const& secret);
+KI_API bool ec_add(ec_uncompressed& point, ec_secret const& secret);
 
 /// Compute the sum a = (a + b) % n, where n is the curve order.
 /// return false on failure (such as a zero result).
-BI_API bool ec_add(ec_secret& left, ec_secret const& right);
+KI_API bool ec_add(ec_secret& left, ec_secret const& right);
 
 /// Compute the product point *= secret.
 /// return false on failure (such as infinity or zero).
-BI_API bool ec_multiply(ec_compressed& point, ec_secret const& secret);
+KI_API bool ec_multiply(ec_compressed& point, ec_secret const& secret);
 
 /// Compute the product point *= secret.
 /// return false on failure (such as infinity or zero).
-BI_API bool ec_multiply(ec_uncompressed& point, ec_secret const& secret);
+KI_API bool ec_multiply(ec_uncompressed& point, ec_secret const& secret);
 
 /// Compute the product a = (a * b) % n, where n is the curve order.
 /// return false on failure (such as a zero result).
-BI_API bool ec_multiply(ec_secret& left, ec_secret const& right);
+KI_API bool ec_multiply(ec_secret& left, ec_secret const& right);
 
 // Convert keys
 // ----------------------------------------------------------------------------
 
 /// Convert an uncompressed public point to compressed.
-BI_API bool compress(ec_compressed& out, const ec_uncompressed& point);
+KI_API bool compress(ec_compressed& out, const ec_uncompressed& point);
 
 /// Convert a compressed public point to decompressed.
-BI_API bool decompress(ec_uncompressed& out, const ec_compressed& point);
+KI_API bool decompress(ec_uncompressed& out, const ec_compressed& point);
 
 /// Convert a secret to a compressed public point.
-BI_API bool secret_to_public(ec_compressed& out, ec_secret const& secret);
+KI_API bool secret_to_public(ec_compressed& out, ec_secret const& secret);
 
 /// Convert a secret parameter to an uncompressed public point.
-BI_API bool secret_to_public(ec_uncompressed& out, ec_secret const& secret);
+KI_API bool secret_to_public(ec_uncompressed& out, ec_secret const& secret);
 
 // Verify keys
 // ----------------------------------------------------------------------------
 
 /// Verify a secret.
-BI_API bool verify(ec_secret const& secret);
+KI_API bool verify(ec_secret const& secret);
 
 /// Verify a point.
-BI_API bool verify(const ec_compressed& point);
+KI_API bool verify(const ec_compressed& point);
 
 /// Verify a point.
-BI_API bool verify(const ec_uncompressed& point);
+KI_API bool verify(const ec_uncompressed& point);
 
 // Detect public keys
 // ----------------------------------------------------------------------------
