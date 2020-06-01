@@ -24,7 +24,7 @@ uint64_t to_prefixes(uint32_t private_prefix, uint32_t public_prefix) {
 }
 
 /// An extended private key, as defined by BIP 32.
-class BI_API hd_private : public hd_public {
+class KI_API hd_private : public hd_public {
 public:
     // static constexpr
     // uint64_t to_prefixes(uint32_t private_prefix, uint32_t public_prefix) {
