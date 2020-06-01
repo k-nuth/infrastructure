@@ -30,7 +30,7 @@ public:
     socket(threadpool& thread);
 
     /// Obtain the authority of the remote endpoint.
-    config::authority authority() const;
+    infrastructure::config::authority authority() const;
 
     /// The underlying socket.
     asio::socket& get();
