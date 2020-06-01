@@ -77,48 +77,48 @@ byte_array<Size> scrypt(data_slice data, data_slice salt, uint64_t N,
     uint32_t p, uint32_t r);
 
 /// Generate a scrypt hash of specified length.
-BI_API data_chunk scrypt(data_slice data, data_slice salt, uint64_t N,
+KI_API data_chunk scrypt(data_slice data, data_slice salt, uint64_t N,
     uint32_t p, uint32_t r, size_t length);
 
 /// Generate a bitcoin hash.
-BI_API hash_digest bitcoin_hash(data_slice data);
+KI_API hash_digest bitcoin_hash(data_slice data);
 
 //TODO(fernando): see what to do with Currency
 // #ifdef KTH_CURRENCY_LTC
 /// Generate a litecoin hash.
-BI_API hash_digest litecoin_hash(data_slice data);
+KI_API hash_digest litecoin_hash(data_slice data);
 // #endif //KTH_CURRENCY_LTC
 
 /// Generate a bitcoin short hash.
-BI_API short_hash bitcoin_short_hash(data_slice data);
+KI_API short_hash bitcoin_short_hash(data_slice data);
 
 /// Generate a ripemd160 hash
-BI_API short_hash ripemd160_hash(data_slice data);
-BI_API data_chunk ripemd160_hash_chunk(data_slice data);
+KI_API short_hash ripemd160_hash(data_slice data);
+KI_API data_chunk ripemd160_hash_chunk(data_slice data);
 
 /// Generate a sha1 hash.
-BI_API short_hash sha1_hash(data_slice data);
-BI_API data_chunk sha1_hash_chunk(data_slice data);
+KI_API short_hash sha1_hash(data_slice data);
+KI_API data_chunk sha1_hash_chunk(data_slice data);
 
 /// Generate a sha256 hash.
-BI_API hash_digest sha256_hash(data_slice data);
-BI_API data_chunk sha256_hash_chunk(data_slice data);
+KI_API hash_digest sha256_hash(data_slice data);
+KI_API data_chunk sha256_hash_chunk(data_slice data);
 
 /// Generate a sha256 hash.
 /// This hash function was used in electrum seed stretching (obsoleted).
-BI_API hash_digest sha256_hash(data_slice first, data_slice second);
+KI_API hash_digest sha256_hash(data_slice first, data_slice second);
 
 // Generate a hmac sha256 hash.
-BI_API hash_digest hmac_sha256_hash(data_slice data, data_slice key);
+KI_API hash_digest hmac_sha256_hash(data_slice data, data_slice key);
 
 /// Generate a sha512 hash.
-BI_API long_hash sha512_hash(data_slice data);
+KI_API long_hash sha512_hash(data_slice data);
 
 /// Generate a hmac sha512 hash.
-BI_API long_hash hmac_sha512_hash(data_slice data, data_slice key);
+KI_API long_hash hmac_sha512_hash(data_slice data, data_slice key);
 
 /// Generate a pkcs5 pbkdf2 hmac sha512 hash.
-BI_API long_hash pkcs5_pbkdf2_hmac_sha512(data_slice passphrase,
+KI_API long_hash pkcs5_pbkdf2_hmac_sha512(data_slice passphrase,
     data_slice salt, size_t iterations);
 
 } // namespace kth
