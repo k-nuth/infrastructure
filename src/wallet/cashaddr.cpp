@@ -1,9 +1,10 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/wallet/cashaddr.hpp>
 
-using data_chunk = bc::data_chunk;
+using data_chunk = kth::data_chunk;
 
 namespace {
 
@@ -27,7 +28,7 @@ int8_t const CHARSET_REV[128] = {
 /**
  * Concatenate two byte arrays.
  */
-bc::data_chunk cat(data_chunk x, data_chunk const& y) {
+kth::data_chunk cat(data_chunk x, data_chunk const& y) {
     x.insert(x.end(), y.begin(), y.end());
     return x;
 }
@@ -197,7 +198,7 @@ data_chunk create_checksum(std::string const& prefix, data_chunk const& payload)
 
 } // namespace
 
-namespace kth { namespace wallet { namespace cashaddr {
+namespace kth::infrastructure::wallet::cashaddr {
 
 /**
  * Encode a cashaddr string.
@@ -298,6 +299,4 @@ std::pair<std::string, data_chunk> decode(std::string const& str, std::string co
     return {std::move(prefix), data_chunk(values.begin(), values.end() - 8)};
 }
 
-} // namespace cashaddr
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet::cashaddr

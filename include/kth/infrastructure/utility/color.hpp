@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_COLOR_HPP
 #define KTH_INFRASTRUCTURE_COLOR_HPP
 
@@ -11,7 +12,7 @@
 
 namespace kth {
 
-struct BI_API color {
+struct KI_API color {
     uint8_t red;
     uint8_t green;
     uint8_t blue;

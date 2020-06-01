@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/message/network_address.hpp>
 
 #include <algorithm>
@@ -11,8 +12,7 @@
 #include <kth/infrastructure/utility/istream_reader.hpp>
 #include <kth/infrastructure/utility/ostream_writer.hpp>
 
-namespace kth {
-namespace message {
+namespace kth::infrastructure::message {
 
 // TODO(legacy): create derived address that adds the timestamp.
 
@@ -184,5 +184,4 @@ network_address network_address::factory_from_data(uint32_t version, data_source
 //     return instance;
 // }
 
-} // namespace message
-} // namespace kth
+} // namespace kth::infrastructure::message

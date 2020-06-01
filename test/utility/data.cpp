@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <boost/test/test_tools.hpp>
 #include <boost/test/unit_test_suite.hpp>
 
@@ -8,7 +9,7 @@
 #include <vector>
 #include <kth/infrastructure.hpp>
 
-using namespace bc;
+using namespace kth;
 
 BOOST_AUTO_TEST_SUITE(data_tests)
 

@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_WALLET_MNEMONIC_HPP
 #define KTH_INFRASTUCTURE_WALLET_MNEMONIC_HPP
 
@@ -16,8 +17,7 @@
 #include <kth/infrastructure/utility/string.hpp>
 #include <kth/infrastructure/wallet/dictionary.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 /**
  * A valid mnemonic word count is evenly divisible by this number.
@@ -39,7 +39,7 @@ using word_list = string_list;
  * selection. The mnemonic can later be converted to a seed for use in wallet
  * creation. Entropy byte count must be evenly divisible by 4.
  */
-BI_API word_list create_mnemonic(data_slice entropy,
+KI_API word_list create_mnemonic(data_slice entropy,
     const dictionary &lexicon=language::en);
 
 /**
@@ -47,19 +47,19 @@ BI_API word_list create_mnemonic(data_slice entropy,
  * words are spelled correctly and the checksum matches.
  * The words must have been created using mnemonic encoding.
  */
-BI_API bool validate_mnemonic(const word_list& words,
+KI_API bool validate_mnemonic(const word_list& words,
     const dictionary &lexicon);
 
 /**
  * Checks that a mnemonic is valid in at least one of the provided languages.
  */
-BI_API bool validate_mnemonic(const word_list& mnemonic,
+KI_API bool validate_mnemonic(const word_list& mnemonic,
     const dictionary_list& lexicons=language::all);
 
 /**
  * Convert a mnemonic with no passphrase to a wallet-generation seed.
  */
-BI_API long_hash decode_mnemonic(const word_list& mnemonic);
+KI_API long_hash decode_mnemonic(const word_list& mnemonic);
 
 #ifdef WITH_ICU
 
@@ -67,12 +67,11 @@ BI_API long_hash decode_mnemonic(const word_list& mnemonic);
  * Convert a mnemonic and passphrase to a wallet-generation seed.
  * Any passphrase can be used and will change the resulting seed.
  */
-BI_API long_hash decode_mnemonic(const word_list& mnemonic,
+KI_API long_hash decode_mnemonic(const word_list& mnemonic,
     std::string const& passphrase);
 
 #endif
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif

@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <sstream>
 #include <string>
 
@@ -11,8 +12,8 @@
 #include <kth/infrastructure.hpp>
 #include <kth/infrastructure/utility/collection.hpp>
 
-using namespace bc;
-using namespace bc::config;
+using namespace kth;
+using namespace kth::infrastructure::config;
 using namespace boost::program_options;
 
 BOOST_AUTO_TEST_SUITE(checkpoint_tests)
@@ -54,7 +55,7 @@ BOOST_AUTO_TEST_CASE(checkpoint__construct__digest__expected)
     size_t const expected_height = 42;
     auto const expected_hash = CHECKPOINT_HASH_A;
     hash_digest digest;
-    bc::decode_hash(digest, expected_hash);
+    kth::decode_hash(digest, expected_hash);
     checkpoint const genesis(digest, expected_height);
     BOOST_REQUIRE_EQUAL(genesis.height(), expected_height);
     BOOST_REQUIRE_EQUAL(encode_hash(genesis.hash()), expected_hash);

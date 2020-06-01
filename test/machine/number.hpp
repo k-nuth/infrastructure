@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_CRYPTO_TEST_MACHINE_NUMBER_HPP
 #define KTH_CRYPTO_TEST_MACHINE_NUMBER_HPP
 
@@ -52,7 +53,7 @@ sizeof(number_offsets) / sizeof(number_offsets[0]);
 struct number_buffer
 {
     int32_t number;
-    bc::data_chunk bytes;
+    kth::data_chunk bytes;
 };
 
 struct number_subtract

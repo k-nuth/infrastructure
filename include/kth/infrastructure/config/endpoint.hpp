@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_CONFIG_ENDPOINT_HPP
 #define KTH_INFRASTUCTURE_CONFIG_ENDPOINT_HPP
 
@@ -15,14 +16,13 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/formats/base_16.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for a network endpoint in URI format.
  * This is a container for a {scheme, host, port} tuple.
  */
-class BI_API endpoint {
+class KI_API endpoint {
 public:
     /**
      * A list of endpoints.
@@ -140,7 +140,6 @@ private:
     uint16_t port_;
 };
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif

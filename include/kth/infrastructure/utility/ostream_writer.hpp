@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_OSTREAM_WRITER_HPP
 #define KTH_INFRASTRUCTURE_OSTREAM_WRITER_HPP
 
@@ -12,7 +13,7 @@
 
 namespace kth {
 
-class BI_API ostream_writer
+class KI_API ostream_writer
     // : public writer
 {
 public:

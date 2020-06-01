@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <boost/test/unit_test.hpp>
 
 #include <cstdint>
@@ -21,8 +22,8 @@
 
 BOOST_AUTO_TEST_SUITE(number_tests)
 
-using namespace bc;
-using namespace bc::machine;
+using namespace kth;
+using namespace kth::infrastructure::machine;
 
 // Helpers
 // ----------------------------------------------------------------------------
@@ -280,7 +281,7 @@ static number_compare MakeCompare(int64_t const num1, int64_t const num2) {
 // ----------------------------------------------------------------------------
 
 static 
-void write_bytes(bc::data_chunk chunk, std::ostream& out) {
+void write_bytes(kth::data_chunk chunk, std::ostream& out) {
     for (auto const& byte : chunk)
         out << fmt::format(" 0x%02x, ", static_cast<uint16_t>(byte));
 }

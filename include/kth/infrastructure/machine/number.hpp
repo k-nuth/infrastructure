@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_MACHINE_NUMBER_HPP
 #define KTH_INFRASTUCTURE_MACHINE_NUMBER_HPP
 
@@ -9,8 +10,7 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/utility/data.hpp>
 
-namespace kth {
-namespace machine {
+namespace kth::infrastructure::machine {
 
 /**
  * Numeric opcodes (OP_1ADD, etc) are restricted to operating on
@@ -23,7 +23,7 @@ namespace machine {
  * bytes but throwing an exception if arithmetic is done or the result is
  * interpreted as an integer.
  */
-class BI_API number {
+class KI_API number {
 public:
     // static constexpr uint8_t negative_1;
     // static constexpr uint8_t negative_0;
@@ -137,8 +137,7 @@ private:
     int64_t value_;
 };
 
-} // namespace machine
-} // namespace kth
+} // namespace kth::infrastructure::machine
 
 
 #include <kth/infrastructure/impl/machine/number.ipp>

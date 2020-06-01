@@ -29,7 +29,7 @@ namespace kth::log {
 
 // modified from class extracted from boost/log/sinks/text_file_backend.*pp
 //! The functor formats the file counter into the file name
-class BI_API file_counter_formatter {
+class KI_API file_counter_formatter {
 public:
     using path_string_type = boost::filesystem::path::string_type;
 

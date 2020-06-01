@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_THREADPOOL_HPP
 #define KTH_INFRASTRUCTURE_THREADPOOL_HPP
 
@@ -21,7 +22,7 @@ namespace kth {
  * This class and the asio service it exposes are thread safe.
  * A collection of threads which can be passed operations through io_service.
  */
-class BI_API threadpool
+class KI_API threadpool
     : noncopyable
 {
 public:

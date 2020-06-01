@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_LOG_FEATURES_RATE_HPP
 #define KTH_INFRASTRUCTURE_LOG_FEATURES_RATE_HPP
 
@@ -8,8 +9,7 @@
 #include <boost/log/sources/threading_models.hpp>
 #include <boost/log/utility/strictest_lock.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 
 namespace attributes {
 
@@ -72,8 +72,7 @@ BOOST_PARAMETER_KEYWORD(tag, rate)
 
 } // namespace keywords
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #include <kth/infrastructure/impl/log/features/rate.ipp>
 

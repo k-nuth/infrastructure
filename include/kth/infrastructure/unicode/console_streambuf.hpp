@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_CONSOLE_STREAMBUF_HPP
 #define KTH_INFRASTRUCTURE_CONSOLE_STREAMBUF_HPP
 
@@ -15,7 +16,7 @@ namespace kth {
  * Class to patch Windows stdin keyboard input, file input is not a problem.
  * This class and members are no-ops when called in non-MSVC++ builds.
  */
-class BI_API console_streambuf : public std::wstreambuf
+class KI_API console_streambuf : public std::wstreambuf
 {
 public:
     /**

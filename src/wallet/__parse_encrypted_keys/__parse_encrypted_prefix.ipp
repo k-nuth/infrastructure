@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_CRYPTO_PARSE_ENCRYPTED_PREFIX_IPP
 #define KTH_CRYPTO_PARSE_ENCRYPTED_PREFIX_IPP
 
@@ -10,8 +11,7 @@
 #include <kth/infrastructure/utility/data.hpp>
 #include <kth/infrastructure/wallet/encrypted_keys.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 template <size_t Size>
 parse_encrypted_prefix<Size>::parse_encrypted_prefix(
@@ -44,7 +44,6 @@ void parse_encrypted_prefix<Size>::valid(bool value)
     valid_ = value;
 }
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif

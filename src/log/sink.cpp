@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/log/sink.hpp>
 
 #include <map>
@@ -81,7 +82,7 @@ formatter& operator<<(formatter& stream, severity value) {
 static 
 boost::shared_ptr<collector> file_collector(rotable_file const& rotation) {
     // rotation_size controls enable/disable so use zero as max sentinel.
-    return bc::log::make_collector(
+    return kth::log::make_collector(
         rotation.archive_directory,
         rotation.maximum_archive_size == 0 ? max_size_t :
             rotation.maximum_archive_size,
@@ -154,8 +155,8 @@ void initialize() {
     };
 
     // Null stream instances used to disable log output.
-    static auto debug_file = boost::make_shared<bc::ofstream>("/dev/null");
-    static auto error_file = boost::make_shared<bc::ofstream>("/dev/null");
+    static auto debug_file = boost::make_shared<kth::ofstream>("/dev/null");
+    static auto error_file = boost::make_shared<kth::ofstream>("/dev/null");
     static log::stream output_stream = boost::make_shared<null_stream>();
     static log::stream error_stream = boost::make_shared<null_stream>();
     initialize(debug_file, error_file, output_stream, error_stream, false);

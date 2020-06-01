@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_CONFIG_BASE2_HPP
 #define KTH_INFRASTUCTURE_CONFIG_BASE2_HPP
 
@@ -11,14 +12,12 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/utility/binary.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Serialization helper for base2 encoded data.
  */
-class BI_API base2
-{
+class KI_API base2 {
 public:
 
     base2() = default;
@@ -75,7 +74,6 @@ private:
     binary value_;
 };
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif

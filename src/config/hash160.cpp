@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/config/hash160.hpp>
 
 #include <iostream>
@@ -13,8 +14,7 @@
 #include <kth/infrastructure/formats/base_16.hpp>
 #include <kth/infrastructure/math/hash.hpp>
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 hash160::hash160(std::string const& hexcode) {
     std::stringstream(hexcode) >> *this;
@@ -45,5 +45,4 @@ std::ostream& operator<<(std::ostream& output, hash160 const& argument) {
     return output;
 }
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config

@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/log/statsd_sink.hpp>
 
 #include <map>
@@ -29,7 +30,7 @@
 
 namespace kth::log {
 
-using namespace bc::config;
+using namespace kth::infrastructure::config;
 using namespace boost::asio::ip;
 using namespace boost::log;
 using namespace boost::log::expressions;
@@ -67,7 +68,7 @@ void statsd_formatter(const record_view& record, formatting_ostream& stream) {
 static 
 boost::shared_ptr<collector> file_collector(rotable_file const& rotation) {
     // rotation_size controls enable/disable so use zero as max sentinel.
-    return bc::log::make_collector(
+    return kth::log::make_collector(
         rotation.archive_directory,
         rotation.maximum_archive_size == 0 ? max_size_t : rotation.maximum_archive_size,
         rotation.minimum_free_space,

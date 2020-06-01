@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_CONTAINER_SINK_HPP
 #define KTH_INFRASTRUCTURE_CONTAINER_SINK_HPP
 
@@ -17,7 +18,7 @@ namespace kth {
 // modified from boost.iostreams example
 // boost.org/doc/libs/1_55_0/libs/iostreams/doc/tutorial/container_source.html
 template <typename Container, typename SinkType, typename CharType> 
-class BI_API container_sink {
+class KI_API container_sink {
 public:
     using char_type = CharType;
     using category = boost::iostreams::sink_tag;

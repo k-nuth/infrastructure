@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_ERROR_HPP
 #define KTH_INFRASTRUCTURE_ERROR_HPP
 
@@ -275,10 +276,10 @@ enum error_code_t {
 
 enum error_condition_t {};
 
-BI_API code make_error_code(error_code_t e);
-BI_API std::error_condition make_error_condition(error_condition_t e);
-BI_API error_code_t boost_to_error_code(const boost_code& ec);
-BI_API error_code_t posix_to_error_code(int ec);
+KI_API code make_error_code(error_code_t e);
+KI_API std::error_condition make_error_condition(error_condition_t e);
+KI_API error_code_t boost_to_error_code(const boost_code& ec);
+KI_API error_code_t posix_to_error_code(int ec);
 
 } // namespace error
 } // namespace kth
@@ -286,12 +287,12 @@ BI_API error_code_t posix_to_error_code(int ec);
 namespace std {
 
 template <>
-struct is_error_code_enum<bc::error::error_code_t>
+struct is_error_code_enum<kth::error::error_code_t>
   : public true_type
 {};
 
 template <>
-struct is_error_condition_enum<bc::error::error_condition_t>
+struct is_error_condition_enum<kth::error::error_condition_t>
   : public true_type
 {};
 

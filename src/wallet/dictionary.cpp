@@ -1,10 +1,10 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/wallet/dictionary.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 namespace language {
 
 const dictionary en =
@@ -20564,5 +20564,4 @@ const dictionary_list all
 };
 
 } // namespace language
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet

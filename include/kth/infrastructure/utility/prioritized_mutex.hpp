@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_PRIORITIZED_MUTEX_HPP
 #define KTH_INFRASTRUCTURE_PRIORITIZED_MUTEX_HPP
 
@@ -14,7 +15,7 @@ namespace kth {
 /// This class is thread safe.
 /// Encapsulation of prioritized locking conditions.
 /// This is unconcerned with thread priority and is instead explicit.
-class BI_API prioritized_mutex
+class KI_API prioritized_mutex
 {
 public:
     using ptr = std::shared_ptr<prioritized_mutex>;

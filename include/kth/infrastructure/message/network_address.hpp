@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_MESSAGE_NETWORK_ADDRESS_HPP
 #define KTH_INFRASTUCTURE_MESSAGE_NETWORK_ADDRESS_HPP
 
@@ -15,13 +16,12 @@
 #include <kth/infrastructure/utility/container_sink.hpp>
 #include <kth/infrastructure/utility/container_source.hpp>
 
-namespace kth {
-namespace message {
+namespace kth::infrastructure::message {
 
 using ip_address = byte_array<16>;
 constexpr ip_address null_address {{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }};
 
-class BI_API network_address {
+class KI_API network_address {
 public:
     using list = std::vector<network_address>;
 
@@ -35,13 +35,11 @@ public:
         , port_(port)
     {}
 
-
     network_address(network_address const& x) = default;
     network_address& operator=(network_address const& x) = default;
 
     bool operator==(network_address const& x) const;
     bool operator!=(network_address const& x) const;
-
 
     // Starting version 31402, addresses are prefixed with a timestamp.
     uint32_t timestamp() const;
@@ -62,8 +60,6 @@ public:
     bool from_data(uint32_t version, data_chunk const& data, bool with_timestamp);
     // bool from_data(uint32_t version, std::istream& stream, bool with_timestamp);
     bool from_data(uint32_t version, data_source& stream, bool with_timestamp);
-
-
 
     // bool from_data(uint32_t version, reader& source, bool with_timestamp);
 
@@ -88,12 +84,9 @@ public:
         return source;
     }
 
-
-
     data_chunk to_data(uint32_t version, bool with_timestamp) const;
     // void to_data(uint32_t version, std::ostream& stream, bool with_timestamp) const;
     void to_data(uint32_t version, data_sink& stream, bool with_timestamp) const;
-
 
     // void to_data(uint32_t version, writer& sink, bool with_timestamp) const;
     template <typename W>
@@ -107,7 +100,6 @@ public:
         sink.write_2_bytes_big_endian(port_);
     }
 
-
     bool is_valid() const;
     void reset();
 
@@ -120,8 +112,6 @@ public:
     static 
     network_address factory_from_data(uint32_t version, data_source& stream, bool with_timestamp);
 
-
-
     // static 
     // network_address factory_from_data(uint32_t version, reader& source, bool with_timestamp);
     
@@ -132,7 +122,6 @@ public:
         instance.from_data(version, source, with_timestamp);
         return instance;
     }
-
 
     static 
     size_t satoshi_fixed_size(uint32_t version, bool with_timestamp);
@@ -162,7 +151,6 @@ constexpr network_address unspecified_network_address {
     unspecified_ip_port
 };
 
-} // namespace message
-} // namespace kth
+} // namespace kth::infrastructure::message
 
 #endif

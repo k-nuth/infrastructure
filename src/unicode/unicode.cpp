@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/unicode/unicode.hpp>
 
 #include <cstddef>
@@ -44,7 +45,7 @@ static std::once_flag io_mutex;
 // Ensure validate_localization is called only once.
 static std::once_flag icu_mutex;
 
-// Static initializer for bc::cin.
+// Static initializer for kth::cin.
 static std::istream& cin_stream()
 {
     std::call_once(io_mutex, console_streambuf::initialize, utf16_buffer_size);
@@ -52,7 +53,7 @@ static std::istream& cin_stream()
     return input;
 }
 
-// Static initializer for bc::cout.
+// Static initializer for kth::cout.
 static std::ostream& cout_stream()
 {
     std::call_once(io_mutex, console_streambuf::initialize, utf16_buffer_size);
@@ -60,7 +61,7 @@ static std::ostream& cout_stream()
     return output;
 }
 
-// Static initializer for bc::cerr.
+// Static initializer for kth::cerr.
 static std::ostream& cerr_stream()
 {
     std::call_once(io_mutex, console_streambuf::initialize, utf16_buffer_size);
@@ -68,7 +69,7 @@ static std::ostream& cerr_stream()
     return error;
 }
 
-// Use bc::cin in place of std::cin, etc.
+// Use kth::cin in place of std::cin, etc.
 std::istream& cin = cin_stream();
 std::ostream& cout = cout_stream();
 std::ostream& cerr = cerr_stream();
@@ -79,9 +80,9 @@ std::ostream& cerr = cerr_stream();
 static std::string normal_form(std::string const& value, norm_type form)
 {
     auto backend = localization_backend_manager::global();
-    backend.select(BI_LOCALE_BACKEND);
+    backend.select(KI_LOCALE_BACKEND);
     const generator locale(backend);
-    return normalize(value, form, locale(BI_LOCALE_UTF8));
+    return normalize(value, form, locale(KI_LOCALE_UTF8));
 }
 
 // One time verifier of the localization backend manager. This is

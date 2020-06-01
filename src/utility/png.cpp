@@ -69,7 +69,7 @@ bool png::write_png(std::istream& in, uint32_t size, uint32_t dots_per_inch,
     auto version = source.read_4_bytes_little_endian();
     auto width = source.read_4_bytes_little_endian();
 
-    if (bc::max_size_t / width < width)
+    if (kth::max_size_t / width < width)
         return false;
 
     auto const area = width * width;

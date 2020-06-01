@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_WRITER_HPP
 #define KTH_INFRASTRUCTURE_WRITER_HPP
 
@@ -16,7 +17,7 @@
 namespace kth {
 
 /// Writer interface.
-class BI_API writer
+class KI_API writer
 {
 public:
     /// Context.

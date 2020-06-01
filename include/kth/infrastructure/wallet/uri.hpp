@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_WALLET_URI_HPP
 #define KTH_INFRASTUCTURE_WALLET_URI_HPP
 
@@ -9,14 +10,12 @@
 
 #include <kth/infrastructure/define.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 /**
  * A parsed URI according to RFC 3986.
  */
-class BI_API uri
-{
+class KI_API uri {
 public:
     /**
      * Decodes a URI from a string.
@@ -85,7 +84,6 @@ private:
     bool has_fragment_ = false;
 };
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif

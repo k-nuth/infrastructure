@@ -12,7 +12,7 @@
 
 #include <kth/infrastructure/define.hpp>
 
-namespace kth::config {
+namespace kth::infrastructure::config {
 
 static 
 std::filesystem::path config_default_path() {
@@ -20,7 +20,7 @@ std::filesystem::path config_default_path() {
     return folder;
 }
 
-//// Declare config_default_path() via BI_DECLARE_CONFIG_DEFAULT_PATH(relative).
+//// Declare config_default_path() via KI_DECLARE_CONFIG_DEFAULT_PATH(relative).
 //#define CONFIG_DEFAULT_PATH(directory, subdirectory) \
 //    static std::filesystem::path config_default_path() \
 //    { \
@@ -31,10 +31,10 @@ std::filesystem::path config_default_path() {
 //// The SYSCONFDIR symbol must be defined at compile for the project.
 //// Therefore this must be compiled directly into the relevant project(s).
 //#ifdef _MSC_VER
-//    #define BI_DECLARE_CONFIG_DEFAULT_PATH(relative) \
-//        CONFIG_DEFAULT_PATH(bc::config::windows_config_directory(), relative)
+//    #define KI_DECLARE_CONFIG_DEFAULT_PATH(relative) \
+//        CONFIG_DEFAULT_PATH(kth::infrastructure::config::windows_config_directory(), relative)
 //#else
-//    #define BI_DECLARE_CONFIG_DEFAULT_PATH(relative) \
+//    #define KI_DECLARE_CONFIG_DEFAULT_PATH(relative) \
 //        CONFIG_DEFAULT_PATH(SYSCONFDIR, relative)
 //#endif
 //
@@ -42,8 +42,8 @@ std::filesystem::path config_default_path() {
 // * Get the windows configuration directory.
 // * @return Path or empty string if unable to retrieve.
 // */
-//BI_API std::string windows_config_directory();
+//KI_API std::string windows_config_directory();
 
-} // namespace kth::config
+} // namespace kth::infrastructure::config
 
 #endif

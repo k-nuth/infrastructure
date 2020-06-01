@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/wallet/hd_private.hpp>
 
 #include <cstdint>
@@ -26,8 +27,7 @@
 // #include <kth/infrastructure/wallet/ec_private.hpp>
 // #include <kth/infrastructure/wallet/ec_public.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 // uint64_t const hd_private::mainnet = to_prefixes(76066276, hd_public::mainnet);
 // uint64_t const hd_private::testnet = to_prefixes(70615956, hd_public::testnet);
@@ -281,5 +281,4 @@ void swap(hd_private& left, hd_private& right) {
     swap(left.secret_, right.secret_);
 }
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet

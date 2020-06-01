@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_WALLET_HD_PRIVATE_KEY_HPP
 #define KTH_INFRASTUCTURE_WALLET_HD_PRIVATE_KEY_HPP
 
@@ -15,8 +16,7 @@
 // #include <kth/infrastructure/wallet/ec_public.hpp>
 #include <kth/infrastructure/wallet/hd_public.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 constexpr
 uint64_t to_prefixes(uint32_t private_prefix, uint32_t public_prefix) {
@@ -24,7 +24,7 @@ uint64_t to_prefixes(uint32_t private_prefix, uint32_t public_prefix) {
 }
 
 /// An extended private key, as defined by BIP 32.
-class BI_API hd_private : public hd_public {
+class KI_API hd_private : public hd_public {
 public:
     // static constexpr
     // uint64_t to_prefixes(uint32_t private_prefix, uint32_t public_prefix) {
@@ -107,7 +107,6 @@ private:
     ec_secret secret_ {null_hash};
 };
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif

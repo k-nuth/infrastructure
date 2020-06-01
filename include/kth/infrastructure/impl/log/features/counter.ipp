@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_LOG_FEATURES_COUNTER_IPP
 #define KTH_INFRASTRUCTURE_LOG_FEATURES_COUNTER_IPP
 
@@ -9,8 +10,7 @@
 #include <boost/log/attributes.hpp>
 #include <boost/scope_exit.hpp>
 
-namespace kth {
-namespace log {
+namespace kth::log {
 namespace features {
 
 template <typename BaseType>
@@ -63,7 +63,6 @@ counter_feature<BaseType>::add_counter_unlocked(boost::log::attribute_set& set, 
 }
 
 } // namespace features
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #endif

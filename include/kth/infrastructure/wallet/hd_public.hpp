@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_WALLET_HD_PUBLIC_KEY_HPP
 #define KTH_INFRASTUCTURE_WALLET_HD_PUBLIC_KEY_HPP
 
@@ -13,8 +14,7 @@
 #include <kth/infrastructure/utility/data.hpp>
 // #include <kth/infrastructure/wallet/ec_public.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 /// A constant used in key derivation.
 static constexpr uint32_t hd_first_hardened_key = 1 << 31;
@@ -28,7 +28,7 @@ static constexpr size_t hd_key_size = 82;
 using hd_key = byte_array<hd_key_size>;
 
 /// Key derivation information used in the serialization format.
-struct BI_API hd_lineage {
+struct KI_API hd_lineage {
     uint64_t prefixes;
     uint8_t depth;
     uint32_t parent_fingerprint;
@@ -41,7 +41,7 @@ struct BI_API hd_lineage {
 class hd_private;
 
 /// An extended public key, as defined by BIP 32.
-class BI_API hd_public {
+class KI_API hd_public {
 public:
     static constexpr uint32_t mainnet = 76067358;
     static constexpr uint32_t testnet = 70617039;
@@ -128,7 +128,6 @@ private:
     hd_public(const ec_compressed& point, const hd_chain_code& chain_code, hd_lineage const& lineage);
 };
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif

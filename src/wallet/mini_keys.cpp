@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/wallet/mini_keys.hpp>
 
 #include <cstdint>
@@ -9,8 +10,7 @@
 #include <kth/infrastructure/math/elliptic_curve.hpp>
 #include <kth/infrastructure/math/hash.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 bool check_minikey(std::string const& minikey)
 {
@@ -29,5 +29,4 @@ bool minikey_to_secret(ec_secret& out_secret, std::string const& key)
     return true;
 }
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet

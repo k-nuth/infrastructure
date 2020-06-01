@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_PNG_HPP
 #define KTH_INFRASTRUCTURE_PNG_HPP
 
@@ -17,7 +18,7 @@
 
 namespace kth {
 
-class BI_API png
+class KI_API png
 {
 public:
     static constexpr uint32_t margin = 2;

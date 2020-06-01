@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_SCOPE_LOCK_HPP
 #define KTH_INFRASTRUCTURE_SCOPE_LOCK_HPP
 
@@ -13,7 +14,7 @@ namespace kth {
 
 /// This class is thread safe.
 /// Reserve exclusive access to a resource while this object is in scope.
-class BI_API scope_lock
+class KI_API scope_lock
 {
 public:
     using ptr = std::shared_ptr<scope_lock>;

@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTUCTURE_CONFIG_PARAMETER_HPP
 #define KTH_INFRASTUCTURE_CONFIG_PARAMETER_HPP
 
@@ -14,13 +15,12 @@
 
 /* NOTE: don't declare 'using namespace foo' in headers. */
 
-namespace kth {
-namespace config {
+namespace kth::infrastructure::config {
 
 /**
  * Shorthand for property declarations in parameter class.
  */
-#define BI_PROPERTY(type, name) \
+#define KI_PROPERTY(type, name) \
     public: type get_##name() const { return name##_; } \
     public: void set_##name(type const& value) { name##_ = value; } \
     private: type name##_
@@ -45,7 +45,7 @@ using parameter_list = std::vector<parameter>;
  * Normalized storage for command line arguments and options.
  * TEST: option_metadata does not provide virtual methods so must wrap to mock.
  */
-class BI_API parameter {
+class KI_API parameter {
 private:
 
     /**
@@ -124,19 +124,18 @@ public:
      * Virtual property declarations.
      */
     //TODO(fernando): remove these macros
-    BI_PROPERTY(int, position);
-    BI_PROPERTY(bool, required);
-    BI_PROPERTY(char, short_name);
-    BI_PROPERTY(unsigned, args_limit);
-    BI_PROPERTY(std::string, long_name);
-    BI_PROPERTY(std::string, description);
-    BI_PROPERTY(std::string, format_name);
-    BI_PROPERTY(std::string, format_parameter);
+    KI_PROPERTY(int, position);
+    KI_PROPERTY(bool, required);
+    KI_PROPERTY(char, short_name);
+    KI_PROPERTY(unsigned, args_limit);
+    KI_PROPERTY(std::string, long_name);
+    KI_PROPERTY(std::string, description);
+    KI_PROPERTY(std::string, format_name);
+    KI_PROPERTY(std::string, format_parameter);
 };
 
-#undef BI_PROPERTY
+#undef KI_PROPERTY
 
-} // namespace config
-} // namespace kth
+} // namespace kth::infrastructure::config
 
 #endif

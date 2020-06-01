@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_SEQUENTIAL_LOCK_HPP
 #define KTH_INFRASTRUCTURE_SEQUENTIAL_LOCK_HPP
 
@@ -13,7 +14,7 @@ namespace kth {
 
 /// This class is thread safe.
 /// Encapsulation of sequential locking conditions.
-class BI_API sequential_lock
+class KI_API sequential_lock
 {
 public:
     using handle = size_t;

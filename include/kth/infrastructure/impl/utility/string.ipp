@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_STRING_IPP
 #define KTH_STRING_IPP
 
@@ -29,7 +30,7 @@ void deserialize(Value& value, std::string const& text, bool trim) {
 template <typename Value>
 void deserialize(std::vector<Value>& collection, std::string const& text, bool trim) {
     // This had problems with the inclusion of the ideographic (CJK) space
-    // (0xe3,0x80, 0x80). Need to infuse the local in bc::split().
+    // (0xe3,0x80, 0x80). Need to infuse the local in kth::split().
     auto const tokens = split(text, " \n\r\t");
     for (auto const& token: tokens) {
         Value value;

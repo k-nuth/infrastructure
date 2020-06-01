@@ -1,6 +1,7 @@
 // Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #include <kth/infrastructure/wallet/mnemonic.hpp>
 
 #include "../math/external/pkcs5_pbkdf2.h"
@@ -18,8 +19,7 @@
 #include <kth/infrastructure/utility/string.hpp>
 #include <kth/infrastructure/wallet/dictionary.hpp>
 
-namespace kth {
-namespace wallet {
+namespace kth::infrastructure::wallet {
 
 // BIP-39 private constants.
 static constexpr size_t bits_per_word = 11;
@@ -133,5 +133,4 @@ long_hash decode_mnemonic(const word_list& mnemonic, std::string const& passphra
 
 #endif
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet

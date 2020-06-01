@@ -37,7 +37,7 @@
 
 #include <kth/infrastructure/compat.h>
 
-static BI_C_INLINE void be32enc(void* pp, uint32_t x)
+static KI_C_INLINE void be32enc(void* pp, uint32_t x)
 {
     uint8_t* p = (uint8_t*)pp;
 

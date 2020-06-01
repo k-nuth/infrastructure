@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_UNICODE_OSTREAM_HPP
 #define KTH_INFRASTRUCTURE_UNICODE_OSTREAM_HPP
 
@@ -14,7 +15,7 @@ namespace kth {
 /**
  * Class to expose a widening output stream.
  */
-class BI_API unicode_ostream
+class KI_API unicode_ostream
     : public std::ostream
 {
 public:

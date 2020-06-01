@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_UNICODE_STREAMBUF_HPP
 #define KTH_INFRASTRUCTURE_UNICODE_STREAMBUF_HPP
 
@@ -18,7 +19,7 @@ namespace kth {
  * However because of utf8-utf16 conversion ratios of up to 4:1 the effective
  * wide output buffering may be reduced to as much as 256 characters.
  */
-class BI_API unicode_streambuf : public std::streambuf {
+class KI_API unicode_streambuf : public std::streambuf {
 public:
     /**
      * Construct unicode stream buffer from a weak reference to a wide buffer.

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) 2016-2020 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 #ifndef KTH_INFRASTRUCTURE_UNICODE_ISTREAM_HPP
 #define KTH_INFRASTRUCTURE_UNICODE_ISTREAM_HPP
 
@@ -15,7 +16,7 @@ namespace kth {
  * Class to expose a narrowing input stream.
  * std::wcin must be patched by console_streambuf if used for Windows input.
  */
-class BI_API unicode_istream
+class KI_API unicode_istream
     : public std::istream
 {
 public:
