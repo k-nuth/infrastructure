@@ -35,13 +35,11 @@ public:
         , port_(port)
     {}
 
-
     network_address(network_address const& x) = default;
     network_address& operator=(network_address const& x) = default;
 
     bool operator==(network_address const& x) const;
     bool operator!=(network_address const& x) const;
-
 
     // Starting version 31402, addresses are prefixed with a timestamp.
     uint32_t timestamp() const;
