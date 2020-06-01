@@ -48,7 +48,6 @@ namespace language
     extern const dictionary_list all;
 }
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif
