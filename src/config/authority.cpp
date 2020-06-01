@@ -123,7 +123,7 @@ asio::ipv6 to_boost_address(message::ip_address const& in) {
 }
 
 static 
-message::ip_address to_KI_address(const asio::ipv6& in) {
+message::ip_address to_bc_address(const asio::ipv6& in) {
     message::ip_address out;
     auto const bytes = in.to_bytes();
     KTH_ASSERT(bytes.size() == out.size());
@@ -157,7 +157,7 @@ asio::ipv6 authority::asio_ip() const {
 }
 
 message::ip_address authority::ip() const {
-    return to_KI_address(ip_);
+    return to_bc_address(ip_);
 }
 
 uint16_t authority::port() const {
