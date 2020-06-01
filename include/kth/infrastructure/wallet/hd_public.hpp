@@ -28,7 +28,7 @@ static constexpr size_t hd_key_size = 82;
 using hd_key = byte_array<hd_key_size>;
 
 /// Key derivation information used in the serialization format.
-struct BI_API hd_lineage {
+struct KI_API hd_lineage {
     uint64_t prefixes;
     uint8_t depth;
     uint32_t parent_fingerprint;
