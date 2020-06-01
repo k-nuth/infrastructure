@@ -23,7 +23,7 @@ namespace kth::infrastructure::machine {
  * bytes but throwing an exception if arithmetic is done or the result is
  * interpreted as an integer.
  */
-class BI_API number {
+class KI_API number {
 public:
     // static constexpr uint8_t negative_1;
     // static constexpr uint8_t negative_0;
