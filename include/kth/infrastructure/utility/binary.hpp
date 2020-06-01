@@ -78,9 +78,9 @@ private:
 namespace std {
 
 template <>
-struct hash<bc::binary> {
-    size_t operator()(const bc::binary& value) const {
-        return std::hash<std::string>()(value.encoded());
+struct hash<kth::binary> {
+    size_t operator()(kth::binary const& x) const {
+        return std::hash<std::string>()(x.encoded());
     }
 };
 
