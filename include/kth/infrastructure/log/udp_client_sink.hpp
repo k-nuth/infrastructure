@@ -41,7 +41,6 @@ private:
     endpoint_ptr const endpoint_;
 };
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #endif

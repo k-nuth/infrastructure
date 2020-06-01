@@ -32,34 +32,33 @@ class KI_API statsd_source
 
 BOOST_LOG_INLINE_GLOBAL_LOGGER_DEFAULT(stats, statsd_source);
 
-#define BI_STATS_SIMPLE(name, sequence) \
-    BOOST_LOG_WITH_PARAMS(bc::log::stats::get(), \
-        (bc::log::keywords::metric = (name))sequence)
+#define KI_STATS_SIMPLE(name, sequence) \
+    BOOST_LOG_WITH_PARAMS(kth::log::stats::get(), \
+        (kth::log::keywords::metric = (name))sequence)
 
-#define BI_STATS_WITH_RATE(name, rate, sequence) \
-    BOOST_LOG_WITH_PARAMS(bc::log::stats::get(), \
-        (bc::log::keywords::metric = (name)) \
-        (bc::log::keywords::rate = (rate))sequence)
+#define KI_STATS_WITH_RATE(name, rate, sequence) \
+    BOOST_LOG_WITH_PARAMS(kth::log::stats::get(), \
+        (kth::log::keywords::metric = (name)) \
+        (kth::log::keywords::rate = (rate))sequence)
 
-#define BI_STATS_COUNTER(name, value) \
-    BI_STATS_SIMPLE(name, (bc::log::keywords::counter = (value)))
+#define KI_STATS_COUNTER(name, value) \
+    KI_STATS_SIMPLE(name, (kth::log::keywords::counter = (value)))
 
-#define BI_STATS_COUNTER_RATE(name, value, rate) \
-    BI_STATS_WITH_RATE(name, rate, (bc::log::keywords::counter = (value)))
+#define KI_STATS_COUNTER_RATE(name, value, rate) \
+    KI_STATS_WITH_RATE(name, rate, (kth::log::keywords::counter = (value)))
 
-#define BI_STATS_GAUGE(name, value) \
-    BI_STATS_SIMPLE(name, (bc::log::keywords::gauge = (value)))
+#define KI_STATS_GAUGE(name, value) \
+    KI_STATS_SIMPLE(name, (kth::log::keywords::gauge = (value)))
 
-#define BI_STATS_GAUGE_RATE(name, value, rate) \
-    BI_STATS_WITH_RATE(name, rate, (bc::log::keywords::gauge = (value)))
+#define KI_STATS_GAUGE_RATE(name, value, rate) \
+    KI_STATS_WITH_RATE(name, rate, (kth::log::keywords::gauge = (value)))
 
-#define BI_STATS_TIMER(name, value) \
-    BI_STATS_SIMPLE(name, (bc::log::keywords::timer = (value)))
+#define KI_STATS_TIMER(name, value) \
+    KI_STATS_SIMPLE(name, (kth::log::keywords::timer = (value)))
 
-#define BI_STATS_TIMER_RATE(name, value, rate) \
-    BI_STATS_WITH_RATE(name, rate, (bc::log::keywords::timer = (value)))
+#define KI_STATS_TIMER_RATE(name, value, rate) \
+    KI_STATS_WITH_RATE(name, rate, (kth::log::keywords::timer = (value)))
 
-} // namespace log
-} // namespace kth
+} // namespace kth::log
 
 #endif
