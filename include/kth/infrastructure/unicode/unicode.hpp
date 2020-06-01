@@ -60,8 +60,8 @@
 // static path object must be imbued with the utf8 locale or paths will be
 // incorrectly translated.
 
-#define BI_LOCALE_BACKEND "icu"
-#define BI_LOCALE_UTF8 "en_US.UTF8"
+#define KI_LOCALE_BACKEND "icu"
+#define KI_LOCALE_UTF8 "en_US.UTF8"
 
 #ifdef _MSC_VER
     #include <filesystem>
