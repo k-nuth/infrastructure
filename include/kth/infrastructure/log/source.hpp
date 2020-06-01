@@ -147,12 +147,12 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source) {
 #define LOG_ERROR(modul,...) KTH_LOG_HELPER(modul, error, __VA_ARGS__)
 #define LOG_FATAL(modul,...) KTH_LOG_HELPER(modul, fatal, __VA_ARGS__)
 
-// #define LOG_VERBOSE(modul) BI_LOG_SEVERITY(modul, verbose)
-// #define LOG_DEBUG(modul) BI_LOG_SEVERITY(modul, debug)
-// #define LOG_INFO(modul) BI_LOG_SEVERITY(modul, info)
-// #define LOG_WARNING(modul) BI_LOG_SEVERITY(modul, warning)
-// #define LOG_ERROR(modul) BI_LOG_SEVERITY(modul, error)
-// #define LOG_FATAL(modul) BI_LOG_SEVERITY(modul, fatal)
+// #define LOG_VERBOSE(modul) KI_LOG_SEVERITY(modul, verbose)
+// #define LOG_DEBUG(modul) KI_LOG_SEVERITY(modul, debug)
+// #define LOG_INFO(modul) KI_LOG_SEVERITY(modul, info)
+// #define LOG_WARNING(modul) KI_LOG_SEVERITY(modul, warning)
+// #define LOG_ERROR(modul) KI_LOG_SEVERITY(modul, error)
+// #define LOG_FATAL(modul) KI_LOG_SEVERITY(modul, fatal)
 
 #else
 

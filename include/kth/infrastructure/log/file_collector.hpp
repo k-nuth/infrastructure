@@ -49,7 +49,7 @@ using path_string_type = boost::filesystem::path::string_type;
 //! Type of the hook used for sequencing file collectors
 using file_collector_hook = boost::intrusive::list_base_hook<boost::intrusive::link_mode<boost::intrusive::safe_link> >;
 
-class BI_API file_collector :
+class KI_API file_collector :
     public boost::log::sinks::file::collector,
     public file_collector_hook,
     public boost::enable_shared_from_this<file_collector>
