@@ -84,7 +84,6 @@ private:
     bool has_fragment_ = false;
 };
 
-} // namespace wallet
-} // namespace kth
+} // namespace kth::infrastructure::wallet
 
 #endif
