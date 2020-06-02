@@ -8,8 +8,6 @@
 #include <filesystem>
 #include <string>
 
-// #include <boost/filesystem.hpp>
-
 #include <kth/infrastructure/define.hpp>
 
 namespace kth::infrastructure::config {
