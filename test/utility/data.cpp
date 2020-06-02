@@ -105,47 +105,43 @@ TEST_CASE("data  build array  exact fill multiple slices  true expected values",
         std::array<uint8_t, size2>{ { expected } },
         std::array<uint8_t, size3>{ { expected, 0, 0 } }
     });
-    BOOST_REQUIRE(result);
-    BOOST_REQUIRE_EQUAL(value[size1], expected);
-    BOOST_REQUIRE_EQUAL(value[size1 + size2], expected);
+    REQUIRE(result);
+    REQUIRE(value[size1] == expected);
+    REQUIRE(value[size1 + size2] == expected);
 }
 
-BOOST_AUTO_TEST_CASE(data__build_array__overflow__returns_false)
-{
+TEST_CASE("data  build array  overflow  returns false", "[data tests]") {
     std::array<uint8_t, 2> value;
     auto const result = build_array(value,
     {
         std::array<uint8_t, 2>{ { 1, 2 } },
         std::array<uint8_t, 2>{ { 3, 4 } }
     });
-    BOOST_REQUIRE(!result);
+    REQUIRE(!result);
 }
 
-BOOST_AUTO_TEST_CASE(data__extend_data__twice__expected)
-{
+TEST_CASE("data  extend data  twice  expected", "[data tests]") {
     uint8_t const expected = 24;
     data_chunk buffer1{ 0 };
     extend_data(buffer1, null_hash);
     data_chunk buffer2{ expected };
     extend_data(buffer1, buffer2);
     extend_data(buffer1, null_hash);
-    BOOST_REQUIRE_EQUAL(buffer1.size(), 2u * hash_size + 2u);
-    BOOST_REQUIRE_EQUAL(buffer1[hash_size + 1], expected);
+    REQUIRE(buffer1.size() == 2u * hash_size + 2u);
+    REQUIRE(buffer1[hash_size + 1] == expected);
 }
 
-BOOST_AUTO_TEST_CASE(data__slice__empty_selection__compiles)
-{
+TEST_CASE("data  slice  empty selection  compiles", "[data tests]") {
     const byte_array<3> source
     {
         { 0, 0, 0 }
     };
 
     slice<2, 2>(source);
-    BOOST_REQUIRE(true);
+    REQUIRE(true);
 }
 
-BOOST_AUTO_TEST_CASE(data__slice__three_bytes_front__expected)
-{
+TEST_CASE("data  slice  three bytes front  expected", "[data tests]") {
     uint8_t const expected = 24;
     const byte_array<3> source
     {
