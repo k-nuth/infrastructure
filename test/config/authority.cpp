@@ -14,16 +14,16 @@ using namespace kth::infrastructure;
 using namespace kth::infrastructure::config;
 using namespace boost::program_options;
 
-BOOST_AUTO_TEST_SUITE(authority_tests)
+// Start Boost Suite: authority tests
 
 // tools.ietf.org/html/rfc4291#section-2.2
-#define BI_AUTHORITY_IPV4_ADDRESS "1.2.240.1"
-#define BI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS "::"
-#define BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "2001:db8::2"
-#define BI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS "::0102:f001"
-#define BI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "::1.2.240.1"
-#define BI_AUTHORITY_IPV4_BOGUS_ADDRESS "0.0.0.57:256"
-#define BI_AUTHORITY_IPV6_BOGUS_IPV4_ADDRESS "[::ffff:0:39]:256"
+#define KI_AUTHORITY_IPV4_ADDRESS "1.2.240.1"
+#define KI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS "::"
+#define KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "2001:db8::2"
+#define KI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS "::0102:f001"
+#define KI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "::1.2.240.1"
+#define KI_AUTHORITY_IPV4_BOGUS_ADDRESS "0.0.0.57:256"
+#define KI_AUTHORITY_IPV6_BOGUS_IPV4_ADDRESS "[::ffff:0:39]:256"
 
 // tools.ietf.org/html/rfc4291#section-2.5.2
 constexpr 
