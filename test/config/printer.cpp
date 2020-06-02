@@ -234,7 +234,7 @@ TEST_CASE("printer  format parameters table  positional three options two matchi
     arguments.add("THIRD", -1));
     CONFIG_PRINTER_INITIALIZE(3u, 3u);
     auto table = help.format_parameters_table(true);
-    BOOST_REQUIRE_EQUAL(table,
+    REQUIRE(table ==
         "SECOND               Lorem ipsum dolor sit amet, consectetur adipiscing  \n"
         "                     elit, sed do eiusmod tempor incididunt ut labore et \n"
         "                     dolore magna aliqua. Ut enim ad minim veniam, quis  \n"
