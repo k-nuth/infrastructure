@@ -3403,7 +3403,7 @@ number_buffer const number_negates[11][9][12] =
     ////},
 };
 
-number const_subtract number_subtracts[11][9][12] =
+number_subtract const number_subtracts[11][9][12] =
 {
     {
         {
