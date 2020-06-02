@@ -60,7 +60,6 @@ option(ENABLE_POSITION_INDEPENDENT_CODE "Enable POSITION_INDEPENDENT_CODE proper
 # Implement --with-tests and declare WITH_TESTS.
 #------------------------------------------------------------------------------
 option(WITH_TESTS "Compile with unit tests." ON)
-option(WITH_TESTS_NEW "Compile with unit tests." OFF)
 
 # Implement --with-examples and declare WITH_EXAMPLES.
 #------------------------------------------------------------------------------
@@ -318,7 +317,7 @@ if (ENABLE_SHARED)
   set(MODE SHARED)
 endif()
 
-set(knuth_infrastructure_sources_just_legacy 
+set(kth_infrastructure_sources_just_legacy 
         src/machine/number.cpp        #Fernando: commented for the moment...
 
         src/config/authority.cpp
@@ -420,8 +419,8 @@ set(knuth_infrastructure_sources_just_legacy
     )
 
   if (${LOG_LIBRARY} STREQUAL "boost")
-    set(knuth_infrastructure_sources_just_legacy 
-      ${knuth_infrastructure_sources_just_legacy}
+    set(kth_infrastructure_sources_just_legacy 
+      ${kth_infrastructure_sources_just_legacy}
       src/log/file_collector.cpp
       src/log/file_collector_repository.cpp
       src/log/file_counter_formatter.cpp
@@ -439,38 +438,38 @@ set(knuth_infrastructure_sources_just_legacy
 # endif()
   
 if (WITH_PNG)
-  set(knuth_infrastructure_sources_just_legacy 
-    ${knuth_infrastructure_sources_just_legacy}
+  set(kth_infrastructure_sources_just_legacy 
+    ${kth_infrastructure_sources_just_legacy}
     src/utility/png.cpp
   )
 endif()
 
 if (WITH_QRENCODE)
-  set(knuth_infrastructure_sources_just_legacy 
-    ${knuth_infrastructure_sources_just_legacy}
+  set(kth_infrastructure_sources_just_legacy 
+    ${kth_infrastructure_sources_just_legacy}
     src/wallet/qrcode.cpp
   )
 endif()
 
 
-set(knuth_infrastructure_sources_just_knuth
+set(kth_infrastructure_sources_just_knuth
     # src/math/external/scrypt.cpp
     # src/math/external/scrypt-sse2.cpp
     src/wallet/cashaddr.cpp
 )
 
 if (NOT JUST_KTH_SOURCES)
-  set(knuth_infrastructure_sources 
-    ${knuth_infrastructure_sources_just_legacy}
+  set(kth_infrastructure_sources 
+    ${kth_infrastructure_sources_just_legacy}
   )
 endif()
 
-set(knuth_infrastructure_sources 
-  ${knuth_infrastructure_sources}   
-  ${knuth_infrastructure_sources_just_knuth}         
+set(kth_infrastructure_sources 
+  ${kth_infrastructure_sources}   
+  ${kth_infrastructure_sources_just_knuth}         
 )
 
-add_library(kth-infrastructure ${MODE} ${knuth_infrastructure_sources})
+add_library(kth-infrastructure ${MODE} ${kth_infrastructure_sources})
 
 if (ENABLE_POSITION_INDEPENDENT_CODE)
     set_property(TARGET kth-infrastructure PROPERTY POSITION_INDEPENDENT_CODE ON)
@@ -557,209 +556,210 @@ _group_sources(kth-infrastructure "${CMAKE_CURRENT_LIST_DIR}")
 # Tests
 #==============================================================================
 
-if (WITH_TESTS OR WITH_TESTS_NEW)
+if (WITH_TESTS)
   enable_testing()
 endif()
 
-# local: test/knuth_infrastructure_test
+# local: test/kth_infrastructure_test
 #------------------------------------------------------------------------------
 if (WITH_TESTS)
 
-  set(knuth_infrastructure_test_sources
-        test/config/authority.cpp
-        test/config/base58.cpp
-        test/config/checkpoint.cpp
-        test/config/endpoint.cpp
-        test/config/hash256.cpp
-        test/config/parameter.cpp
-        test/config/printer.cpp
+  set(kth_infrastructure_test_sources
 
-        test/formats/base_10.cpp
-        test/formats/base_16.cpp
-        test/formats/base_58.cpp
-        test/formats/base_64.cpp
-        test/formats/base_85.cpp
+    test/config/authority.cpp
+    test/config/base58.cpp
+    test/config/checkpoint.cpp
+    test/config/endpoint.cpp
+    test/config/hash256.cpp
+    test/config/parameter.cpp
+    test/config/printer.cpp
 
-        test/log/log.cpp
+    test/formats/base_10.cpp
+    test/formats/base_16.cpp
+    test/formats/base_58.cpp
+    test/formats/base_64.cpp
+    test/formats/base_85.cpp
 
-        test/main.cpp
+    test/log/log.cpp
 
-        test/math/checksum.cpp
-        test/math/elliptic_curve.cpp
-        test/math/hash.cpp
-        test/math/hash.hpp
+    test/machine/number.cpp
 
-        test/message/network_address.cpp
+    test/math/checksum.cpp
+    test/math/elliptic_curve.cpp
+    test/math/hash.cpp
+    test/math/uint256.cpp
 
-        test/unicode/unicode.cpp
-        test/unicode/unicode_istream.cpp
-        test/unicode/unicode_ostream.cpp
-        
-        test/utility/binary.cpp
-        test/utility/collection.cpp
-        test/utility/data.cpp
-        test/utility/endian.cpp
-        test/utility/png.cpp
-        test/utility/pseudo_random.cpp
-        test/utility/serializer.cpp
-        test/utility/stream.cpp
-        test/utility/thread.cpp
+    test/network_address.cpp
 
-        test/wallet/hd_private.cpp
-        test/wallet/hd_public.cpp
-        test/wallet/mnemonic.cpp
-        test/wallet/mnemonic.hpp
-        test/wallet/qrcode.cpp
-        test/wallet/uri.cpp  
+    test/unicode/unicode.cpp
+    test/unicode/unicode_istream.cpp
+    test/unicode/unicode_ostream.cpp
+
+    test/utility/binary.cpp
+    test/utility/collection.cpp
+    test/utility/data.cpp
+    test/utility/endian.cpp
+    test/utility/pseudo_random.cpp
+    test/utility/serializer.cpp
+    test/utility/stream.cpp
+    test/utility/thread.cpp
+
+    test/wallet/hd_private.cpp
+    test/wallet/hd_public.cpp
+    test/wallet/mnemonic.cpp
+    test/wallet/uri.cpp
+
+    test/main.cpp
   )
 
 
   if (WITH_PNG)
-    set(knuth_infrastructure_test_sources 
-        ${knuth_infrastructure_test_sources}
+    set(kth_infrastructure_test_sources 
+        ${kth_infrastructure_test_sources}
         src/utility/png.cpp
     )
   endif()
 
   if (WITH_QRENCODE)
-    set(knuth_infrastructure_test_sources 
-        ${knuth_infrastructure_test_sources}
+    set(kth_infrastructure_test_sources 
+        ${kth_infrastructure_test_sources}
         src/wallet/qrcode.cpp
     )
   endif()
 
-  add_executable(knuth_infrastructure_test
-                ${knuth_infrastructure_test_sources}
-  )
-  target_link_libraries(knuth_infrastructure_test PUBLIC kth-infrastructure)
-
-_group_sources(knuth_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
-
-#    TODO(fernando): chequear si hay nuevos tests en los makefiles (no Cmake)
-  _add_tests(knuth_infrastructure_test
-
-    # address_tests
-    # alert_payload_tests
-    # alert_tests
-    authority_tests
-    # base_10_tests
-    base_16_tests
-    base_58_tests
-    base_64_tests
-    base_85_tests
-    base58_tests
-
-    binary_tests
-    # bitcoin_uri_tests
-    # chain_block_tests
-    # message_block_tests
-    # block_transactions_tests
-    checkpoint_tests
-    checksum_tests
-    collection_tests
-    # compact_block_tests
-    data_tests
-
-    # ec_private_tests
-    # ec_public_tests # no test cases
-    elliptic_curve_tests
-    # encrypted_tests
-    endian_tests
-
-    endpoint_tests
-
-
-    # fee_filter_tests
-    # filter_add_tests
-    # filter_clear_tests
-    # filter_load_tests
-    # get_address_tests
-    # get_block_transactions_tests
-    # get_blocks_tests
-    # get_data_tests
-    # get_headers_tests
-    # hash_number_tests
-    hash_tests
-    hd_private_tests
-    hd_public_tests
-    # chain_header_tests
-    # headers_tests
-    # heading_tests
-    # input_tests
-    # inventory_tests
-    # inventory_vector_tests
-
-    log_tests
-
-    # memory_pool_tests
-    # merkle_block_tests
-    # message_tests
-    mnemonic_tests
-    network_address_tests
-    # not_found_tests
-    # output_tests
-    parameter_tests
-    # payment_address_tests
-    # ping_tests
-    # point_tests
-    # pong_tests
-    # prefilled_transaction_tests
-    printer_tests
-    pseudo_random_tests
-
-    # reject_tests
-    # script_number_tests
-    # script_tests
-    # send_compact_blocks_tests
-    # send_headers_tests
-
-    serializer_tests
-    # stealth_address_tests
-    # stealth_tests
-    stream_tests
-    thread_tests
-    # chain_transaction_tests
-    # message_transaction_tests
-    unicode_istream_tests
-    unicode_ostream_tests
-    unicode_tests
-    # uri_reader_tests
-    uri_tests
-    # verack_tests
-    # version_tests
-    # transaction_functions_tests
+  add_executable(kth_infrastructure_test
+                ${kth_infrastructure_test_sources}
   )
 
-  if (WITH_PNG)
-    _add_tests(knuth_infrastructure_test png_tests)
+  target_include_directories(kth_infrastructure_test PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/test>)
+
+  target_link_libraries(kth_infrastructure_test PUBLIC kth-infrastructure)
+
+  if (WITH_TESTS)
+    include(CTest)
+    include(Catch)
+    catch_discover_tests(kth_infrastructure_test)
   endif()
 
-  if (WITH_QRENCODE)
-    _add_tests(knuth_infrastructure_test qrcode_tests)
-  endif()
+
+#   _group_sources(kth_infrastructure_test "${CMAKE_CURRENT_LIST_DIR}/test")
+
+# #    TODO(fernando): chequear si hay nuevos tests en los makefiles (no Cmake)
+#   _add_tests(kth_infrastructure_test
+
+#     # address_tests
+#     # alert_payload_tests
+#     # alert_tests
+#     authority_tests
+#     # base_10_tests
+#     base_16_tests
+#     base_58_tests
+#     base_64_tests
+#     base_85_tests
+#     base58_tests
+
+#     binary_tests
+#     # bitcoin_uri_tests
+#     # chain_block_tests
+#     # message_block_tests
+#     # block_transactions_tests
+#     checkpoint_tests
+#     checksum_tests
+#     collection_tests
+#     # compact_block_tests
+#     data_tests
+
+#     # ec_private_tests
+#     # ec_public_tests # no test cases
+#     elliptic_curve_tests
+#     # encrypted_tests
+#     endian_tests
+
+#     endpoint_tests
+
+
+#     # fee_filter_tests
+#     # filter_add_tests
+#     # filter_clear_tests
+#     # filter_load_tests
+#     # get_address_tests
+#     # get_block_transactions_tests
+#     # get_blocks_tests
+#     # get_data_tests
+#     # get_headers_tests
+#     # hash_number_tests
+#     hash_tests
+#     hd_private_tests
+#     hd_public_tests
+#     # chain_header_tests
+#     # headers_tests
+#     # heading_tests
+#     # input_tests
+#     # inventory_tests
+#     # inventory_vector_tests
+
+#     log_tests
+
+#     # memory_pool_tests
+#     # merkle_block_tests
+#     # message_tests
+#     mnemonic_tests
+#     network_address_tests
+#     # not_found_tests
+#     # output_tests
+#     parameter_tests
+#     # payment_address_tests
+#     # ping_tests
+#     # point_tests
+#     # pong_tests
+#     # prefilled_transaction_tests
+#     printer_tests
+#     pseudo_random_tests
+
+#     # reject_tests
+#     # script_number_tests
+#     # script_tests
+#     # send_compact_blocks_tests
+#     # send_headers_tests
+
+#     serializer_tests
+#     # stealth_address_tests
+#     # stealth_tests
+#     stream_tests
+#     thread_tests
+#     # chain_transaction_tests
+#     # message_transaction_tests
+#     unicode_istream_tests
+#     unicode_ostream_tests
+#     unicode_tests
+#     # uri_reader_tests
+#     uri_tests
+#     # verack_tests
+#     # version_tests
+#     # transaction_functions_tests
+#   )
+
+  # if (WITH_PNG)
+  #   _add_tests(kth_infrastructure_test png_tests)
+  # endif()
+
+  # if (WITH_QRENCODE)
+  #   _add_tests(kth_infrastructure_test qrcode_tests)
+  # endif()
 endif()
-
-# if (WITH_TESTS_NEW)
-#     add_executable(knuth_infrastructure_test_new
-#             test_new/main.cpp
-#     )
-#     target_link_libraries(knuth_infrastructure_test_new PUBLIC kth-infrastructure)
-
-#     add_test(NAME knuth_infrastructure_test_new COMMAND knuth_infrastructure_test_new)
-# endif()
-
 
 # Examples
 #==============================================================================
-# local: examples/knuth_infrastructure_examples
+# local: examples/kth_infrastructure_examples
 #------------------------------------------------------------------------------
 if (WITH_EXAMPLES)
-  add_executable(knuth_infrastructure_examples
+  add_executable(kth_infrastructure_examples
     examples/main.cpp)
 
-  target_link_libraries(knuth_infrastructure_examples PUBLIC kth-infrastructure)
+  target_link_libraries(kth_infrastructure_examples PUBLIC kth-infrastructure)
 
-  _group_sources(knuth_infrastructure_examples "${CMAKE_CURRENT_LIST_DIR}/examples")
+  _group_sources(kth_infrastructure_examples "${CMAKE_CURRENT_LIST_DIR}/examples")
 endif()
 
 # Install
@@ -775,7 +775,7 @@ install(TARGETS kth-infrastructure EXPORT kth-infrastructure
 #
 #)
 
-set(_knuth_infrastructure_headers
+set(_kth_infrastructure_headers
     kth/infrastructure/compat.h
     kth/infrastructure/compat.hpp
     kth/infrastructure/constants.hpp
@@ -929,8 +929,8 @@ set(_knuth_infrastructure_headers
   )
 
 if (${LOG_LIBRARY} STREQUAL "boost")
-  set(_knuth_infrastructure_headers 
-    ${_knuth_infrastructure_headers}
+  set(_kth_infrastructure_headers 
+    ${_kth_infrastructure_headers}
     kth/infrastructure/log/attributes.hpp
     kth/infrastructure/log/file_char_traits.hpp
     kth/infrastructure/log/file_collector.hpp
@@ -959,7 +959,7 @@ if (${LOG_LIBRARY} STREQUAL "boost")
 endif()
 
 
-foreach (_header ${_knuth_infrastructure_headers})
+foreach (_header ${_kth_infrastructure_headers})
   get_filename_component(_directory "${_header}" DIRECTORY)
   install(FILES "include/${_header}" DESTINATION "include/${_directory}")
 endforeach()
