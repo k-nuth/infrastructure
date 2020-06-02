@@ -143,13 +143,12 @@ TEST_CASE("unicode  to utf16 array  non ascii  test", "[unicode tests]") {
     uint8_t truncated;
     auto const size = to_utf16(utf16, sizeof(utf16), utf8.c_str(), (int)utf8.size(), truncated);
 
-    BOOST_REQUIRE_EQUAL(utf16, expected_utf16.c_str());
-    BOOST_REQUIRE_EQUAL(size, expected_utf16.size());
-    BOOST_REQUIRE_EQUAL(truncated, 0);
+    REQUIRE(utf16 == expected_utf16.c_str());
+    REQUIRE(size == expected_utf16.size());
+    REQUIRE(truncated == 0);
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf16_array__non_ascii_truncation1__test)
-{
+TEST_CASE("unicode  to utf16 array  non ascii truncation1  test", "[unicode tests]") {
     wchar_t utf16[36];
 
     // Text buffer provides null termination for test comparison.
