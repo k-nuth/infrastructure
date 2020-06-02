@@ -170,7 +170,7 @@ void RunOperators(int64_t const num1, int64_t num2, size_t value, size_t offset,
 	CheckCompare(num1, num2, value, offset, test);
 }
 
-BOOST_AUTO_TEST_CASE(check_operators) {
+TEST_CASE("check operators", "[number tests]") {
     for (size_t i = 0; i < number_values_count; ++i) {
         for (size_t j = 0; j < number_offsets_count; ++j) {
             auto a = number_values[i];
