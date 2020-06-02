@@ -62,6 +62,7 @@
 #include <kth/infrastructure/log/features/timer.hpp>
 #endif // defined(KTH_LOG_LIBRARY_BOOST)
 
+
 #include <kth/infrastructure/machine/number.hpp>
 #include <kth/infrastructure/machine/script_pattern.hpp>
 #include <kth/infrastructure/machine/script_version.hpp>
