@@ -197,24 +197,22 @@ TEST_CASE("unicode  to utf16 array  non ascii truncation2  test", "[unicode test
     uint8_t truncated;
     auto const size = to_utf16(utf16, sizeof(utf16), utf8.c_str(), (int)utf8.size(), truncated);
 
-    BOOST_REQUIRE_EQUAL(truncated, expected_truncated);
-    BOOST_REQUIRE_EQUAL(utf16, expected_utf16.c_str());
-    BOOST_REQUIRE_EQUAL(size, expected_utf16.size());
+    REQUIRE(truncated == expected_truncated);
+    REQUIRE(utf16 == expected_utf16.c_str());
+    REQUIRE(size == expected_utf16.size());
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_environment__ascii__test)
-{
+TEST_CASE("unicode  to utf8 environment  ascii  test", "[unicode tests]") {
     std::vector<const wchar_t*> wide_environment = { L"ascii", nullptr };
 
     auto variables = const_cast<wchar_t**>(&wide_environment[0]);
     auto buffer = to_utf8(variables);
     auto narrow_environment = reinterpret_cast<char**>(&buffer[0]);
 
-    BOOST_REQUIRE_EQUAL(narrow_environment[0], "ascii");
+    REQUIRE(narrow_environment[0] == "ascii");
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_environment__utf16__test)
-{
+TEST_CASE("unicode  to utf8 environment  utf16  test", "[unicode tests]") {
     // We cannot use L for literal encoding of non-ascii text on Windows.
     auto utf16 = to_utf16("テスト");
     auto non_literal_utf16 = utf16.c_str();
