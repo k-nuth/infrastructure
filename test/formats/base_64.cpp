@@ -2,13 +2,13 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 
-BOOST_AUTO_TEST_SUITE(base_64_tests)
+// Start Boost Suite: base 64 tests
 
 #define BASE64_MURRAY "TXVycmF5IFJvdGhiYXJk"
 #define BASE64_DATA_MURRAY \
