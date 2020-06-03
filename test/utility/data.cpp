@@ -149,11 +149,10 @@ TEST_CASE("data  slice  three bytes front  expected", "[data tests]") {
     };
 
     auto const result = slice<0, 3>(source)[0];
-    BOOST_REQUIRE_EQUAL(result, expected);
+    REQUIRE(result == expected);
 }
 
-BOOST_AUTO_TEST_CASE(data__slice__three_bytes_middle__expected)
-{
+TEST_CASE("data  slice  three bytes middle  expected", "[data tests]") {
     uint8_t const expected = 24;
     const byte_array<3> source
     {
