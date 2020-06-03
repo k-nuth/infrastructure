@@ -5071,7 +5071,7 @@ number_subtract const number_subtracts[11][9][12] =
     ////},
 };
 
-number const_compare number_compares[11][9][12] =
+number_compare const number_compares[11][9][12] =
 {
     {
         {
