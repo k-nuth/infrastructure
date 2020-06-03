@@ -14,8 +14,7 @@
 
 // DO NOT TEST WITH MACRO VALUES BELOW THAT VARY BY PLATFORM,
 // SUCH AS LONG_MIN, LONG_MAX.
-int64_t const number_values[] =
-{
+int64_t const number_values[] = {
     0,
     1,
     INT8_MIN,
