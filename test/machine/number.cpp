@@ -208,7 +208,7 @@ number_buffer MakeAdd(int64_t const num1, int64_t const num2) {
     bignum2.set_int64(num2);
 
     auto sum = bignum1 + bignum2;
-    number const_buffer add {
+    number_buffer const add {
         sum.int32(),
         sum.data()
     };
