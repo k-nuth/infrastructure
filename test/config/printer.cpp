@@ -262,11 +262,10 @@ TEST_CASE("printer  format usage parameters  unsorted two options one arg  sorte
         arguments.add("SECOND", 42);
         arguments.add("THIRD", -1));
     CONFIG_PRINTER_INITIALIZE(3u, 3u);
-    BOOST_REQUIRE_EQUAL(help.format_usage_parameters(), "[-fx] [THIRD]...");
+    REQUIRE(help.format_usage_parameters() == "[-fx] [THIRD]...");
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_usage_parameters__unsorted_multiple_parameters__sorted_parameters)
-{
+TEST_CASE("printer  format usage parameters  unsorted multiple parameters  sorted parameters", "[printer  format usage parameters]") {
     using namespace std::filesystem;
     using namespace boost::program_options;
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
