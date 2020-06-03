@@ -124,16 +124,15 @@ TEST_CASE("stream - roundtrip 4 bytes big endian", "[stream tests]") {
     sink.write_4_bytes_big_endian(expected);
     auto const result = source.read_4_bytes_big_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE(stream);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE(stream);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_8_bytes_big_endian)
-{
+TEST_CASE("stream - roundtrip 8 bytes big endian", "[stream tests]") {
     uint64_t const expected = 0xd4b14be5d8f02abe;
     std::stringstream stream;
     ostream_writer sink(stream);
