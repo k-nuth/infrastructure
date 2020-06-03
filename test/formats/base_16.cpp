@@ -2,15 +2,14 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 
-BOOST_AUTO_TEST_SUITE(base_16_tests)
+// Start Boost Suite: base 16 tests
 
-BOOST_AUTO_TEST_CASE(base16_literal_test)
-{
+TEST_CASE("base16 literal test", "[base 16 tests]") {
     auto result = base16_literal("01ff42bc");
     const byte_array<4> expected
     {
