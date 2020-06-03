@@ -248,13 +248,12 @@ TEST_CASE("printer  format parameters table  positional three options two matchi
     );
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
-BOOST_AUTO_TEST_SUITE(printer__format_usage_parameters)
+// Start Boost Suite: printer  format usage parameters
 
-BOOST_AUTO_TEST_CASE(printer__format_usage_parameters__unsorted_two_options_one_arg__sorted)
-{
+TEST_CASE("printer  format usage parameters  unsorted two options one arg  sorted", "[printer  format usage parameters]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("second,x", "Second option description.")
         ("first,f", "First option description.")
