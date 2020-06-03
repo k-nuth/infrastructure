@@ -6,17 +6,15 @@
 #include <iostream>
 #include <vector>
 
-// #include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
-#include <boost/test/test_tools.hpp>
-#include <boost/test/unit_test_suite.hpp>
 
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 namespace po = boost::program_options;
 using namespace kth::infrastructure::config;
 
-BOOST_AUTO_TEST_SUITE(printer_tests)
+// Start Boost Suite: printer tests
 
 #define CONFIG_APPLICATION "APP"
 #define CONFIG_DESCRIPTION "DESCRIPTION"
