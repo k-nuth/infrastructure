@@ -7,7 +7,7 @@
 
 #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 
 #include <kth/infrastructure.hpp>
 #include <kth/infrastructure/utility/collection.hpp>
