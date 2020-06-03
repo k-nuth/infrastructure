@@ -21,21 +21,21 @@
 
 // using namespace kth;
 
-// BOOST_AUTO_TEST_SUITE(base_10_tests)
+// Start Boost Suite: base 10 tests
 
 // #define TEST_AMOUNT(NAME, EXPECTED, ...) \
 // BOOST_AUTO_TEST_CASE(parse_amount_##NAME##_test) \
 // { \
 //     uint64_t result, expected = EXPECTED; \
-//     BOOST_REQUIRE(decode_base10(result, __VA_ARGS__)); \
-//     BOOST_REQUIRE_EQUAL(result, expected); \
+//     REQUIRE(decode_base10(result, __VA_ARGS__));
+//     REQUIRE(result == expected);
 // }
 
 // #define TEST_AMOUNT_NEGATIVE(NAME, ...) \
 // BOOST_AUTO_TEST_CASE(parse_amount_##NAME##_test) \
 // { \
 //     uint64_t result; \
-//     BOOST_REQUIRE(!decode_base10(result, __VA_ARGS__)); \
+     REQUIRE(!decode_base10(result, __VA_ARGS__));
 // }
 
 // #define TEST_FORMAT(NAME, EXPECTED, ...) \
