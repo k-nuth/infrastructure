@@ -2,24 +2,22 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 
-BOOST_AUTO_TEST_SUITE(base_58_tests)
+// Start Boost Suite: base 58 tests
 
-void encdec_test(std::string const& hex, std::string const& encoded)
-{
+void encdec_test(std::string const& hex, std::string const& encoded) {
     data_chunk data, decoded;
-    BOOST_REQUIRE(decode_base16(data, hex));
-    BOOST_REQUIRE_EQUAL(encode_base58(data), encoded);
-    BOOST_REQUIRE(decode_base58(decoded, encoded));
-    BOOST_REQUIRE(decoded == data);
+    REQUIRE(decode_base16(data, hex));
+    REQUIRE(encode_base58(data) == encoded);
+    REQUIRE(decode_base58(decoded, encoded));
+    REQUIRE(decoded == data);
 }
 
-BOOST_AUTO_TEST_CASE(base58_test)
-{
+TEST_CASE("base58 test", "[base 58 tests]") {
     encdec_test("", "");
     encdec_test("61", "2g");
     encdec_test("626262", "a3gV");
