@@ -226,7 +226,7 @@ number_buffer MakeNegate(int64_t const num) {
     bignum.set_int64(num);
 
     auto negative = -bignum;
-    number const_buffer negated {
+    number_buffer const negated {
         negative.int32(),
         negative.data()
     };
