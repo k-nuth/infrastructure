@@ -5,7 +5,7 @@
 #include <sstream>
 
 #include <boost/program_options.hpp>
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 
 #include <kth/infrastructure.hpp>
 
