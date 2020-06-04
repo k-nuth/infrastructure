@@ -4,16 +4,15 @@
 
 #include <string>
 #include <sstream>
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 
-BOOST_AUTO_TEST_SUITE(unicode_istream_tests)
+// Start Boost Suite: unicode istream tests
 
 // Use of L is not recommended as it will only work for ascii.
-BOOST_AUTO_TEST_CASE(unicode_istream__conditional__test)
-{
+TEST_CASE("unicode istream  conditional  test", "[unicode istream tests]") {
     std::wstringstream wide_stream(L"windows ...");
     std::stringstream narrow_stream("linux ...");
 
