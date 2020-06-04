@@ -251,7 +251,7 @@ number_subtract MakeSubtract(int64_t const num1, int64_t const num2) {
         reverse = bignum2 - bignum1;
     }
 
-    number const_subtract subtract {
+    number_subtract const subtract {
         { forward.int32(), forward.data() },
         { reverse.int32(), reverse.data() }
     };
