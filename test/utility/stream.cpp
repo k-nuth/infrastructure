@@ -3,42 +3,39 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <sstream>
-#include <boost/test/test_tools.hpp>
-#include <boost/test/unit_test_suite.hpp>
+
+#include <test_helpers.hpp>
+
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 using namespace kth::infrastructure;
 
-BOOST_AUTO_TEST_SUITE(stream_tests)
+// Start Boost Suite: stream tests
 
-BOOST_AUTO_TEST_CASE(is_exhausted_initialized_empty_stream_returns_true)
-{
+TEST_CASE("stream - is exhausted initialized empty stream returns true", "[stream tests]") {
     std::stringstream stream;
     istream_reader source(stream);
-    BOOST_REQUIRE(source.is_exhausted());
+    REQUIRE(source.is_exhausted());
 }
 
-BOOST_AUTO_TEST_CASE(is_exhausted_initialized_nonempty_stream_returns_false)
-{
+TEST_CASE("stream - is exhausted initialized nonempty stream returns false", "[stream tests]") {
     std::stringstream stream("abc");
     istream_reader source(stream);
-    BOOST_REQUIRE(!source.is_exhausted());
+    REQUIRE(!source.is_exhausted());
 }
 
-BOOST_AUTO_TEST_CASE(peek_byte_nonempty_stream_does_not_advance)
-{
+TEST_CASE("stream - peek byte nonempty stream does not advance", "[stream tests]") {
     uint8_t const expected = 'a';
     std::stringstream stream("ab");
     istream_reader source(stream);
-    BOOST_REQUIRE_EQUAL(source.peek_byte(), expected);
-    BOOST_REQUIRE_EQUAL(source.peek_byte(), expected);
-    BOOST_REQUIRE_EQUAL(source.peek_byte(), expected);
-    BOOST_REQUIRE((bool)source);
+    REQUIRE(source.peek_byte() == expected);
+    REQUIRE(source.peek_byte() == expected);
+    REQUIRE(source.peek_byte() == expected);
+    REQUIRE((bool)source);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_byte)
-{
+TEST_CASE("stream - roundtrip byte", "[stream tests]") {
     uint8_t const expected = 0xAA;
     std::stringstream stream;
     ostream_writer sink(stream);
