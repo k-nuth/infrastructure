@@ -209,7 +209,7 @@ TEST_CASE("mnemonic  dictionary  zh Hans Hant  intersection", "[mnemonic tests]"
             intersection++;
     }
 
-    BOOST_REQUIRE_EQUAL(intersection, 1275u);
+    REQUIRE(intersection == 1275u);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
