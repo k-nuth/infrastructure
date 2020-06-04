@@ -2,19 +2,17 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <boost/test/test_tools.hpp>
-#include <boost/test/unit_test_suite.hpp>
+#include <test_helpers.hpp>
 
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 
-BOOST_AUTO_TEST_SUITE(png_tests)
+// Start Boost Suite: png tests
 
 #ifdef WITH_PNG
 
-BOOST_AUTO_TEST_CASE(png__size_one__success)
-{
+TEST_CASE("png  size one  success", "[png tests]") {
     data_chunk out;
     data_sink ostream(out);
 
