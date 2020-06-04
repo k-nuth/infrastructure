@@ -183,12 +183,11 @@ TEST_CASE("data  split  two bytes  expected", "[data tests]") {
     };
 
     auto const parts = split(source);
-    BOOST_REQUIRE_EQUAL(parts.left[0], expected_left);
-    BOOST_REQUIRE_EQUAL(parts.right[0], expected_right);
+    REQUIRE(parts.left[0] == expected_left);
+    REQUIRE(parts.right[0] == expected_right);
 }
 
-BOOST_AUTO_TEST_CASE(data__split__long_hash__expected)
-{
+TEST_CASE("data  split  long hash  expected", "[data tests]") {
     uint8_t const l = 42;
     uint8_t const u = 24;
     long_hash source
