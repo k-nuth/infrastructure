@@ -171,11 +171,10 @@ TEST_CASE("data  slice  three bytes end  expected", "[data tests]") {
     };
 
     auto const result = slice<2, 3>(source)[0];
-    BOOST_REQUIRE_EQUAL(result, expected);
+    REQUIRE(result == expected);
 }
 
-BOOST_AUTO_TEST_CASE(data__split__two_bytes__expected)
-{
+TEST_CASE("data  split  two bytes  expected", "[data tests]") {
     uint8_t const expected_left = 42;
     uint8_t const expected_right = 24;
     const byte_array<2> source
