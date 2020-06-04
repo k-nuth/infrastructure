@@ -2,33 +2,30 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <boost/test/test_tools.hpp>
-#include <boost/test/unit_test_suite.hpp>
-
 #include <map>
 #include <vector>
+
+#include <test_helpers.hpp>
+
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 
-BOOST_AUTO_TEST_SUITE(data_tests)
+// Start Boost Suite: data tests
 
-BOOST_AUTO_TEST_CASE(data__to_byte__value__expected_size_and_value)
-{
+TEST_CASE("data  to byte  value  expected size and value", "[data tests]") {
     uint8_t const expected = 42;
     auto const result = to_array(expected);
-    BOOST_REQUIRE_EQUAL(result.size(), 1u);
-    BOOST_REQUIRE_EQUAL(result[0], expected);
+    REQUIRE(result.size() == 1u);
+    REQUIRE(result[0] == expected);
 }
 
-BOOST_AUTO_TEST_CASE(data__build_chunk__empty__empty)
-{
+TEST_CASE("data  build chunk  empty  empty", "[data tests]") {
     auto const result = build_chunk({});
-    BOOST_REQUIRE(result.empty());
+    REQUIRE(result.empty());
 }
 
-BOOST_AUTO_TEST_CASE(data__build_chunk__one_slice__expected_size_and_value)
-{
+TEST_CASE("data  build chunk  one slice  expected size and value", "[data tests]") {
     uint8_t const expected = 42;
     auto const chunk1 = std::vector<uint8_t>{ 24 };
     auto const chunk2 = std::vector<uint8_t>{ expected };
