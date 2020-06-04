@@ -222,12 +222,11 @@ TEST_CASE("unicode  to utf8 environment  utf16  test", "[unicode tests]") {
     auto buffer = to_utf8(variables);
     auto narrow_environment = reinterpret_cast<char**>(&buffer[0]);
 
-    BOOST_REQUIRE_EQUAL(narrow_environment[0], "ascii");
-    BOOST_REQUIRE_EQUAL(narrow_environment[1], "テスト");
+    REQUIRE(narrow_environment[0] == "ascii");
+    REQUIRE(narrow_environment[1] == "テスト");
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_environment__null_termination__test)
-{
+TEST_CASE("unicode  to utf8 environment  null termination  test", "[unicode tests]") {
     std::vector<const wchar_t*> wide_environment = { L"ascii", nullptr };
 
     auto variables = const_cast<wchar_t**>(&wide_environment[0]);
