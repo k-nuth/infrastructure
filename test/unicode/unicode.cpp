@@ -5,74 +5,67 @@
 #include <cstring>
 #include <stdexcept>
 #include <vector>
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 
-BOOST_AUTO_TEST_SUITE(unicode_tests)
+// Start Boost Suite: unicode tests
 
 #ifdef WITH_ICU
 
 // github.com/bitcoin/bips/blob/master/bip-0038.mediawiki
-BOOST_AUTO_TEST_CASE(unicode__to_normal_nfc_form__validate__test)
-{
+TEST_CASE("unicode  to normal nfc form  validate  test", "[unicode tests]") {
     data_chunk original;
-    BOOST_REQUIRE(decode_base16(original, "cf92cc8100f0909080f09f92a9"));
+    REQUIRE(decode_base16(original, "cf92cc8100f0909080f09f92a9"));
     std::string original_string(original.begin(), original.end());
 
     data_chunk normal;
-    BOOST_REQUIRE(decode_base16(normal, "cf9300f0909080f09f92a9"));
+    REQUIRE(decode_base16(normal, "cf9300f0909080f09f92a9"));
     std::string expected_normal_string(normal.begin(), normal.end());
 
     auto const derived_normal_string = kth::to_normal_nfc_form(original_string);
-    BOOST_REQUIRE_EQUAL(expected_normal_string, derived_normal_string);
+    REQUIRE(expected_normal_string == derived_normal_string);
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_normal_nfkd_form__validate__test)
-{
+TEST_CASE("unicode  to normal nfkd form  validate  test", "[unicode tests]") {
     auto const ascii_space_sandwich = "space-> <-space";
     auto const ideographic_space_sandwich = "space->　<-space";
     auto const normalized = to_normal_nfkd_form(ideographic_space_sandwich);
-    BOOST_REQUIRE_EQUAL(normalized.c_str(), ascii_space_sandwich);
+    REQUIRE(normalized.c_str() == ascii_space_sandwich);
 }
 
 #endif
 
 // Use of L is not recommended as it will only work for ascii.
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_string__ascii__test)
-{
+TEST_CASE("unicode  to utf8 string  ascii  test", "[unicode tests]") {
     auto const utf8_ascii = "ascii";
     auto const utf16_ascii = L"ascii";
     auto const converted = to_utf8(utf16_ascii);
-    BOOST_REQUIRE_EQUAL(converted, utf8_ascii);
+    REQUIRE(converted == utf8_ascii);
 }
 
 // Use of L is not recommended as it will only work for ascii.
-BOOST_AUTO_TEST_CASE(unicode__to_utf16_string__ascii__test)
-{
+TEST_CASE("unicode  to utf16 string  ascii  test", "[unicode tests]") {
     auto const utf8_ascii = "ascii";
     auto const utf16_ascii = L"ascii";
     auto const converted = to_utf16(utf8_ascii);
-    BOOST_REQUIRE_EQUAL(converted.c_str(), utf16_ascii);
+    REQUIRE(converted.c_str() == utf16_ascii);
 }
 
-BOOST_AUTO_TEST_CASE(unicode__string_round_trip__ascii__test)
-{
+TEST_CASE("unicode  string round trip  ascii  test", "[unicode tests]") {
     auto const utf8_ascii = "ascii";
     auto const narrowed = to_utf8(to_utf16(utf8_ascii));
-    BOOST_REQUIRE_EQUAL(narrowed, utf8_ascii);
+    REQUIRE(narrowed == utf8_ascii);
 }
 
-BOOST_AUTO_TEST_CASE(unicode__string_round_trip__utf8__test)
-{
+TEST_CASE("unicode  string round trip  utf8  test", "[unicode tests]") {
     auto const utf8 = "テスト";
     auto const narrowed = to_utf8(to_utf16(utf8));
-    BOOST_REQUIRE_EQUAL(narrowed, utf8);
+    REQUIRE(narrowed == utf8);
 }
 
-BOOST_AUTO_TEST_CASE(unicode__string_round_trip__wide_literal__test)
-{
+TEST_CASE("unicode  string round trip  wide literal  test", "[unicode tests]") {
     auto const utf8 = "テスト";
     auto const utf16 = L"テスト";
 
