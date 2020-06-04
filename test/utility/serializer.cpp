@@ -2,16 +2,15 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 using namespace kth::infrastructure;
 
-BOOST_AUTO_TEST_SUITE(serializer_tests)
+// Start Boost Suite: serializer tests
 
-BOOST_AUTO_TEST_CASE(roundtrip_serialize_deserialize)
-{
+TEST_CASE("serializer - roundtrip serialize deserialize", "[serializer tests]") {
     data_chunk data(1 + 2 + 4 + 8 + 4 + 4 + 3 + 7);
     auto writer = make_unsafe_serializer(data.begin());
     writer.write_byte(0x80);
