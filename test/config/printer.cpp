@@ -283,25 +283,23 @@ TEST_CASE("printer  format usage parameters  unsorted multiple parameters  sorte
         arguments.add("SIMPLE", 1);
         arguments.add("ARRAY", -1));
     CONFIG_PRINTER_INITIALIZE(10u, 3u);
-    BOOST_REQUIRE_EQUAL(help.format_usage_parameters(), "[-mst] --longy value [--untoggled] [--defaulty value] [--multy value]... REQUIRED [SIMPLE] [ARRAY]...");
+    REQUIRE(help.format_usage_parameters() == "[-mst] --longy value [--untoggled] [--defaulty value] [--multy value]... REQUIRED [SIMPLE] [ARRAY]...");
 }
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
-BOOST_AUTO_TEST_SUITE(printer__generate_argument_names)
+// Start Boost Suite: printer  generate argument names
 
 #define BX_PRINTER_GENERATE_ARGUMENT_NAMES(number_of_names) \
     help.generate_argument_names(); \
-    BOOST_REQUIRE_EQUAL(help.get_argument_names().size(), number_of_names)
+    REQUIRE(help.get_argument_names().size() == number_of_names)
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__empty_arguments_empty_options__empty)
-{
+TEST_CASE("printer  generate argument names  empty arguments empty options  empty", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP();
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(0u);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__empty_arguments_multiple_options__empty)
-{
+TEST_CASE("printer  generate argument names  empty arguments multiple options  empty", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("long", "Long name only.")
         ("short_long,s", "Long and short name.")
