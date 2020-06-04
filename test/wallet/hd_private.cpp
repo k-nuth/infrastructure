@@ -2,30 +2,28 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 using namespace kth::infrastructure::wallet;
 
-BOOST_AUTO_TEST_SUITE(hd_private_tests)
+// Start Boost Suite: hd private tests
 
 // TODO: test altchain
 
 #define SHORT_SEED "000102030405060708090a0b0c0d0e0f"
 #define LONG_SEED "fffcf9f6f3f0edeae7e4e1dedbd8d5d2cfccc9c6c3c0bdbab7b4b1aeaba8a5a29f9c999693908d8a8784817e7b7875726f6c696663605d5a5754514e4b484542"
 
-BOOST_AUTO_TEST_CASE(hd_private__encoded__round_trip__expected)
-{
+TEST_CASE("hd private  encoded  round trip  expected", "[hd private tests]") {
     static auto const encoded = "xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi";
     hd_private const key(encoded);
-    BOOST_REQUIRE_EQUAL(key.encoded(), encoded);
+    REQUIRE(key.encoded() == encoded);
 }
 
-BOOST_AUTO_TEST_CASE(hd_private__derive_private__short_seed__expected)
-{
+TEST_CASE("hd private  derive private  short seed  expected", "[hd private tests]") {
     data_chunk seed;
-    BOOST_REQUIRE(decode_base16(seed, SHORT_SEED));
+    REQUIRE(decode_base16(seed, SHORT_SEED));
 
     hd_private const m(seed, hd_private::mainnet);
     auto const m0h = m.derive_private(hd_first_hardened_key);
