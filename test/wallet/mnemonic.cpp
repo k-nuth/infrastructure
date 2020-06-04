@@ -194,11 +194,10 @@ TEST_CASE("mnemonic  dictionary  cs uk  no intersection", "[mnemonic tests]") {
             intersection++;
     }
 
-    BOOST_REQUIRE_EQUAL(intersection, 0u);
+    REQUIRE(intersection == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(mnemonic__dictionary__zh_Hans_Hant__intersection)
-{
+TEST_CASE("mnemonic  dictionary  zh Hans Hant  intersection", "[mnemonic tests]") {
     auto const& simplified = language::zh_Hans;
     auto const& traditional = language::zh_Hant;
     size_t intersection = 0;
