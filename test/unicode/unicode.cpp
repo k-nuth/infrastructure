@@ -238,15 +238,14 @@ TEST_CASE("unicode  to utf8 environment  null termination  test", "[unicode test
     // Each argument is a null terminated string.
     auto const length = strlen(narrow_environment[0]);
     auto variable_terminator = narrow_environment[0][length];
-    BOOST_REQUIRE_EQUAL(variable_terminator, '\0');
+    REQUIRE(variable_terminator == '\0');
 
     // The argument vector is a null terminated array.
     auto environment_terminator = narrow_environment[expected_count];
-    BOOST_REQUIRE_EQUAL(environment_terminator, static_cast<char*>(nullptr));
+    REQUIRE(environment_terminator == static_cast<char*>(nullptr));
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_main__ascii__test)
-{
+TEST_CASE("unicode  to utf8 main  ascii  test", "[unicode tests]") {
     std::vector<const wchar_t*> wide_args = { L"ascii", nullptr };
 
     auto argv = const_cast<wchar_t**>(&wide_args[0]);
