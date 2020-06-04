@@ -2,40 +2,37 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 using namespace kth::infrastructure::wallet;
 
-BOOST_AUTO_TEST_SUITE(hd_public_tests)
+// Start Boost Suite: hd public tests
 
 // TODO: test altchain
 
 #define SHORT_SEED "000102030405060708090a0b0c0d0e0f"
 #define LONG_SEED "fffcf9f6f3f0edeae7e4e1dedbd8d5d2cfccc9c6c3c0bdbab7b4b1aeaba8a5a29f9c999693908d8a8784817e7b7875726f6c696663605d5a5754514e4b484542"
 
-BOOST_AUTO_TEST_CASE(hd_public__derive_public__invalid__false)
-{
+TEST_CASE("hd public  derive public  invalid  false", "[hd public tests]") {
     data_chunk seed;
-    BOOST_REQUIRE(decode_base16(seed, SHORT_SEED));
+    REQUIRE(decode_base16(seed, SHORT_SEED));
 
     hd_private const m(seed, hd_private::mainnet);
     hd_public const m_pub = m;
-    BOOST_REQUIRE(!m_pub.derive_public(hd_first_hardened_key));
+    REQUIRE(!m_pub.derive_public(hd_first_hardened_key));
 }
 
-BOOST_AUTO_TEST_CASE(hd_public__encoded__round_trip__expected)
-{
+TEST_CASE("hd public  encoded  round trip  expected", "[hd public tests]") {
     static auto const encoded = "xpub661MyMwAqRbcFtXgS5sYJABqqG9YLmC4Q1Rdap9gSE8NqtwybGhePY2gZ29ESFjqJoCu1Rupje8YtGqsefD265TMg7usUDFdp6W1EGMcet8";
     hd_public const key(encoded);
-    BOOST_REQUIRE_EQUAL(key.encoded(), encoded);
+    REQUIRE(key.encoded() == encoded);
 }
 
-BOOST_AUTO_TEST_CASE(hd_public__derive_public__short_seed__expected)
-{
+TEST_CASE("hd public  derive public  short seed  expected", "[hd public tests]") {
     data_chunk seed;
-    BOOST_REQUIRE(decode_base16(seed, SHORT_SEED));
+    REQUIRE(decode_base16(seed, SHORT_SEED));
 
     hd_private const m(seed, hd_private::mainnet);
     auto const m0h = m.derive_private(hd_first_hardened_key);
