@@ -2,389 +2,374 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <kth/domain.hpp>
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
+#include <kth/infrastructure.hpp>
 
-using namespace kd;
+using namespace kth;
+using namespace kth::infrastructure;
 
-bool equal(const message::network_address& x, const message::network_address& y, bool with_timestamp) {
+using message::network_address;
+
+//This is defined in Domain <kth/domain/message/version.hpp>
+constexpr uint32_t version_level_minimum = 31402;
+
+bool equal(network_address const& x, network_address const& y, bool with_timestamp) {
     bool matches_timestamp = with_timestamp ? (x.timestamp() == y.timestamp()) : true;
     return matches_timestamp && (x == y);
 }
 
-BOOST_AUTO_TEST_SUITE(network_address_tests)
+// Start Boost Suite: network address tests
 
-BOOST_AUTO_TEST_CASE(network_address__constructor_1__always__invalid) {
-    message::network_address instance;
-    BOOST_REQUIRE_EQUAL(false, instance.is_valid());
+TEST_CASE("network address  constructor 1  always  invalid", "[network address tests]") {
+    network_address instance;
+    REQUIRE( ! instance.is_valid());
 }
 
-BOOST_AUTO_TEST_CASE(network_address__constructor_2__always__equals_params) {
+TEST_CASE("network address  constructor 2  always  equals params", "[network address tests]") {
     uint32_t timestamp = 734678u;
     uint64_t services = 5357534u;
     uint16_t port = 123u;
     const message::ip_address ip = base16_literal("127544abcdefa7b6d3e91486c57000aa");
 
-    message::network_address instance(timestamp, services, ip, port);
-    BOOST_REQUIRE(instance.is_valid());
-    BOOST_REQUIRE(ip == instance.ip());
-    BOOST_REQUIRE_EQUAL(port, instance.port());
-    BOOST_REQUIRE_EQUAL(services, instance.services());
-    BOOST_REQUIRE_EQUAL(timestamp, instance.timestamp());
+    network_address instance(timestamp, services, ip, port);
+    REQUIRE(instance.is_valid());
+    REQUIRE(ip == instance.ip());
+    REQUIRE(port == instance.port());
+    REQUIRE(services == instance.services());
+    REQUIRE(timestamp == instance.timestamp());
 }
 
-BOOST_AUTO_TEST_CASE(network_address__constructor_3__always__equals_params) {
+TEST_CASE("network address  constructor 3  always  equals params", "[network address tests]") {
     uint32_t timestamp = 734678u;
     uint64_t services = 5357534u;
     uint16_t port = 123u;
 
-    message::network_address instance(timestamp, services,
-                                      base16_literal("127544abcdefa7b6d3e91486c57000aa"), port);
+    network_address instance(timestamp, services, base16_literal("127544abcdefa7b6d3e91486c57000aa"), port);
 
-    BOOST_REQUIRE(instance.is_valid());
+    REQUIRE(instance.is_valid());
 }
 
-BOOST_AUTO_TEST_CASE(network_address__constructor_4__always__equals_params) {
-    const message::network_address expected{
+TEST_CASE("network address  constructor 4  always  equals params", "[network address tests]") {
+    network_address const expected{
         734678u,
         5357534u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         123u};
 
-    BOOST_REQUIRE(expected.is_valid());
+    REQUIRE(expected.is_valid());
 
-    message::network_address instance(expected);
-    BOOST_REQUIRE(instance.is_valid());
-    BOOST_REQUIRE(expected == instance);
+    network_address instance(expected);
+    REQUIRE(instance.is_valid());
+    REQUIRE(expected == instance);
 }
 
-BOOST_AUTO_TEST_CASE(network_address__constructor_5__always__equals_params) {
-    message::network_address expected{
+TEST_CASE("network address  constructor 5  always  equals params", "[network address tests]") {
+    network_address expected{
         734678u,
         5357534u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         123u};
 
-    BOOST_REQUIRE(expected.is_valid());
+    REQUIRE(expected.is_valid());
 
-    message::network_address instance(std::move(expected));
-    BOOST_REQUIRE(instance.is_valid());
+    network_address instance(std::move(expected));
+    REQUIRE(instance.is_valid());
 }
 
-BOOST_AUTO_TEST_CASE(network_address__from_data__insufficient_bytes__failure) {
+TEST_CASE("network address  from data  insufficient bytes  failure", "[network address tests]") {
     data_chunk const raw{1};
-    message::network_address instance{};
+    network_address instance{};
 
-    BOOST_REQUIRE_EQUAL(false, instance.from_data(
-                                   message::version::level::minimum, raw, false));
+    REQUIRE( ! instance.from_data(version_level_minimum, raw, false));
 }
 
-BOOST_AUTO_TEST_CASE(network_address__factory_from_data_1__without_timestamp__success) {
-    const message::network_address expected{
+TEST_CASE("network address  factory from data 1  without timestamp  success", "[network address tests]") {
+    network_address const expected{
         734678u,
         5357534u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         123u};
 
-    auto const data = expected.to_data(message::version::level::minimum, false);
-    auto const result = message::infrastructure::message::network_address::factory_from_data(
-        message::version::level::minimum, data, false);
+    auto const data = expected.to_data(version_level_minimum, false);
+    auto const result = network_address::factory_from_data(version_level_minimum, data, false);
 
-    BOOST_REQUIRE(result.is_valid());
-    BOOST_REQUIRE(equal(expected, result, false));
-    BOOST_REQUIRE_EQUAL(data.size(),
-                        result.serialized_size(message::version::level::minimum, false));
-    BOOST_REQUIRE_EQUAL(expected.serialized_size(message::version::level::minimum, false),
-                        result.serialized_size(message::version::level::minimum, false));
+    REQUIRE(result.is_valid());
+    REQUIRE(equal(expected, result, false));
+    REQUIRE(data.size() == result.serialized_size(version_level_minimum, false));
+    REQUIRE(expected.serialized_size(version_level_minimum, false) == result.serialized_size(version_level_minimum, false));
 }
 
-BOOST_AUTO_TEST_CASE(network_address__factory_from_data_2__without_timestamp__success) {
-    const message::network_address expected{
+TEST_CASE("network address  factory from data 2  without timestamp  success", "[network address tests]") {
+    network_address const expected{
         734678u,
         5357534u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         123u};
 
-    auto const data = expected.to_data(message::version::level::minimum, false);
+    auto const data = expected.to_data(version_level_minimum, false);
     data_source istream(data);
-    auto const result = message::infrastructure::message::network_address::factory_from_data(
-        message::version::level::minimum, istream, false);
+    auto const result = network_address::factory_from_data(version_level_minimum, istream, false);
 
-    BOOST_REQUIRE(result.is_valid());
-    BOOST_REQUIRE(equal(expected, result, false));
-    BOOST_REQUIRE_EQUAL(data.size(),
-                        result.serialized_size(message::version::level::minimum, false));
-    BOOST_REQUIRE_EQUAL(expected.serialized_size(message::version::level::minimum, false),
-                        result.serialized_size(message::version::level::minimum, false));
+    REQUIRE(result.is_valid());
+    REQUIRE(equal(expected, result, false));
+    REQUIRE(data.size() == result.serialized_size(version_level_minimum, false));
+    REQUIRE(expected.serialized_size(version_level_minimum, false) == result.serialized_size(version_level_minimum, false));
 }
 
-BOOST_AUTO_TEST_CASE(network_address__factory_from_data_3__without_timestamp__success) {
-    const message::network_address expected{
+TEST_CASE("network address  factory from data 3  without timestamp  success", "[network address tests]") {
+    network_address const expected{
         734678u,
         5357534u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         123u};
 
-    auto const data = expected.to_data(message::version::level::minimum, false);
+    auto const data = expected.to_data(version_level_minimum, false);
     data_source istream(data);
     istream_reader source(istream);
-    auto const result = message::infrastructure::message::network_address::factory_from_data(
-        message::version::level::minimum, source, false);
+    auto const result = network_address::factory_from_data(version_level_minimum, source, false);
 
-    BOOST_REQUIRE(result.is_valid());
-    BOOST_REQUIRE(equal(expected, result, false));
-    BOOST_REQUIRE_EQUAL(data.size(),
-                        result.serialized_size(message::version::level::minimum, false));
-    BOOST_REQUIRE_EQUAL(expected.serialized_size(message::version::level::minimum, false),
-                        result.serialized_size(message::version::level::minimum, false));
+    REQUIRE(result.is_valid());
+    REQUIRE(equal(expected, result, false));
+    REQUIRE(data.size() == result.serialized_size(version_level_minimum, false));
+    REQUIRE(expected.serialized_size(version_level_minimum, false) == result.serialized_size(version_level_minimum, false));
 }
 
-BOOST_AUTO_TEST_CASE(network_address__factory_from_data_1__with_timestamp__success) {
-    const message::network_address expected{
+TEST_CASE("network address  factory from data 1  with timestamp  success", "[network address tests]") {
+    network_address const expected{
         734678u,
         5357534u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         123u};
 
-    auto const data = expected.to_data(message::version::level::minimum, true);
-    auto const result = message::infrastructure::message::network_address::factory_from_data(
-        message::version::level::minimum, data, true);
+    auto const data = expected.to_data(version_level_minimum, true);
+    auto const result = network_address::factory_from_data(version_level_minimum, data, true);
 
-    BOOST_REQUIRE(result.is_valid());
-    BOOST_REQUIRE(equal(expected, result, true));
-    BOOST_REQUIRE_EQUAL(data.size(),
-                        result.serialized_size(message::version::level::minimum, true));
-    BOOST_REQUIRE_EQUAL(expected.serialized_size(message::version::level::minimum, true),
-                        result.serialized_size(message::version::level::minimum, true));
+    REQUIRE(result.is_valid());
+    REQUIRE(equal(expected, result, true));
+    REQUIRE(data.size() == result.serialized_size(version_level_minimum, true));
+    REQUIRE(expected.serialized_size(version_level_minimum, true) == result.serialized_size(version_level_minimum, true));
 }
 
-BOOST_AUTO_TEST_CASE(network_address__factory_from_data_2__with_timestamp__success) {
-    const message::network_address expected{
+TEST_CASE("network address  factory from data 2  with timestamp  success", "[network address tests]") {
+    network_address const expected{
         734678u,
         5357534u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         123u};
 
-    auto const data = expected.to_data(message::version::level::minimum, true);
+    auto const data = expected.to_data(version_level_minimum, true);
     data_source istream(data);
-    auto const result = message::infrastructure::message::network_address::factory_from_data(
-        message::version::level::minimum, istream, true);
+    auto const result = network_address::factory_from_data(version_level_minimum, istream, true);
 
-    BOOST_REQUIRE(result.is_valid());
-    BOOST_REQUIRE(equal(expected, result, true));
-    BOOST_REQUIRE_EQUAL(data.size(),
-                        result.serialized_size(message::version::level::minimum, true));
-    BOOST_REQUIRE_EQUAL(expected.serialized_size(message::version::level::minimum, true),
-                        result.serialized_size(message::version::level::minimum, true));
+    REQUIRE(result.is_valid());
+    REQUIRE(equal(expected, result, true));
+    REQUIRE(data.size() == result.serialized_size(version_level_minimum, true));
+    REQUIRE(expected.serialized_size(version_level_minimum, true) == result.serialized_size(version_level_minimum, true));
 }
 
-BOOST_AUTO_TEST_CASE(network_address__factory_from_data_3__with_timestamp__success) {
-    const message::network_address expected{
+TEST_CASE("network address  factory from data 3  with timestamp  success", "[network address tests]") {
+    network_address const expected{
         734678u,
         5357534u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         123u};
 
-    auto const data = expected.to_data(message::version::level::minimum, true);
+    auto const data = expected.to_data(version_level_minimum, true);
     data_source istream(data);
     istream_reader source(istream);
-    auto const result = message::infrastructure::message::network_address::factory_from_data(
-        message::version::level::minimum, source, true);
+    auto const result = network_address::factory_from_data(version_level_minimum, source, true);
 
-    BOOST_REQUIRE(result.is_valid());
-    BOOST_REQUIRE(equal(expected, result, true));
-    BOOST_REQUIRE_EQUAL(data.size(),
-                        result.serialized_size(message::version::level::minimum, true));
-    BOOST_REQUIRE_EQUAL(expected.serialized_size(message::version::level::minimum, true),
-                        result.serialized_size(message::version::level::minimum, true));
+    REQUIRE(result.is_valid());
+    REQUIRE(equal(expected, result, true));
+    REQUIRE(data.size() == result.serialized_size(version_level_minimum, true));
+    REQUIRE(expected.serialized_size(version_level_minimum, true) == result.serialized_size(version_level_minimum, true));
 }
 
-BOOST_AUTO_TEST_CASE(network_address__timestamp_accessor__always__returns_initialized_value) {
+TEST_CASE("network address  timestamp accessor  always  returns initialized value", "[network address tests]") {
     uint32_t const timestamp = 734678u;
-    message::network_address instance(
+    network_address instance(
         timestamp,
         5357534u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         123u);
 
-    BOOST_REQUIRE(timestamp == instance.timestamp());
+    REQUIRE(timestamp == instance.timestamp());
 }
 
-BOOST_AUTO_TEST_CASE(network_address__timestamp_setter__roundtrip__success) {
+TEST_CASE("network address  timestamp setter  roundtrip  success", "[network address tests]") {
     uint32_t const timestamp = 734678u;
-    message::network_address instance;
-    BOOST_REQUIRE(timestamp != instance.timestamp());
+    network_address instance;
+    REQUIRE(timestamp != instance.timestamp());
     instance.set_timestamp(timestamp);
-    BOOST_REQUIRE(timestamp == instance.timestamp());
+    REQUIRE(timestamp == instance.timestamp());
 }
 
-BOOST_AUTO_TEST_CASE(network_address__services_accessor__always__returns_initialized_value) {
+TEST_CASE("network address  services accessor  always  returns initialized value", "[network address tests]") {
     uint32_t const services = 5357534u;
-    message::network_address instance(
+    network_address instance(
         734678u,
         services,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         123u);
 
-    BOOST_REQUIRE(services == instance.services());
+    REQUIRE(services == instance.services());
 }
 
-BOOST_AUTO_TEST_CASE(network_address__services_setter__roundtrip__success) {
+TEST_CASE("network address  services setter  roundtrip  success", "[network address tests]") {
     uint64_t const services = 6842368u;
-    message::network_address instance;
-    BOOST_REQUIRE(services != instance.services());
+    network_address instance;
+    REQUIRE(services != instance.services());
     instance.set_services(services);
-    BOOST_REQUIRE(services == instance.services());
+    REQUIRE(services == instance.services());
 }
 
-BOOST_AUTO_TEST_CASE(network_address__ip_accessor__always__returns_initialized_value) {
+TEST_CASE("network address  ip accessor  always  returns initialized value", "[network address tests]") {
     const message::ip_address ip = base16_literal("127544abcdefa7b6d3e91486c57000aa");
 
-    message::network_address instance(
+    network_address instance(
         734678u,
         5357534u,
         ip,
         123u);
 
-    BOOST_REQUIRE(ip == instance.ip());
+    REQUIRE(ip == instance.ip());
 }
 
-BOOST_AUTO_TEST_CASE(network_address__ip_setter_1__roundtrip__success) {
+TEST_CASE("network address  ip setter 1  roundtrip  success", "[network address tests]") {
     const message::ip_address ip = base16_literal("127544abcdefa7b6d3e91486c57000aa");
 
-    message::network_address instance;
-    BOOST_REQUIRE(ip != instance.ip());
+    network_address instance;
+    REQUIRE(ip != instance.ip());
     instance.set_ip(ip);
-    BOOST_REQUIRE(ip == instance.ip());
+    REQUIRE(ip == instance.ip());
 }
 
-BOOST_AUTO_TEST_CASE(network_address__ip_setter_2__roundtrip__success) {
+TEST_CASE("network address  ip setter 2  roundtrip  success", "[network address tests]") {
     const message::ip_address ip = base16_literal("127544abcdefa7b6d3e91486c57000aa");
 
-    message::network_address instance;
-    BOOST_REQUIRE(ip != instance.ip());
+    network_address instance;
+    REQUIRE(ip != instance.ip());
     instance.set_ip(base16_literal("127544abcdefa7b6d3e91486c57000aa"));
-    BOOST_REQUIRE(ip == instance.ip());
+    REQUIRE(ip == instance.ip());
 }
 
-BOOST_AUTO_TEST_CASE(network_address__port_accessor__always__returns_initialized_value) {
+TEST_CASE("network address  port accessor  always  returns initialized value", "[network address tests]") {
     uint16_t const port = 123u;
-    message::network_address instance(
+    network_address instance(
         734678u,
         5357534u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         port);
 
-    BOOST_REQUIRE(port == instance.port());
+    REQUIRE(port == instance.port());
 }
 
-BOOST_AUTO_TEST_CASE(network_address__port_setter__roundtrip__success) {
+TEST_CASE("network address  port setter  roundtrip  success", "[network address tests]") {
     uint16_t const port = 853u;
-    message::network_address instance;
-    BOOST_REQUIRE(port != instance.port());
+    network_address instance;
+    REQUIRE(port != instance.port());
     instance.set_port(port);
-    BOOST_REQUIRE(port == instance.port());
+    REQUIRE(port == instance.port());
 }
 
-BOOST_AUTO_TEST_CASE(network_address__operator_assign_equals_1__always__matches_equivalent) {
-    message::network_address value(
+TEST_CASE("network address  operator assign equals 1  always  matches equivalent", "[network address tests]") {
+    network_address value(
         14356u,
         54676843u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         1500u);
 
-    BOOST_REQUIRE(value.is_valid());
+    REQUIRE(value.is_valid());
 
-    message::network_address instance;
-    BOOST_REQUIRE_EQUAL(false, instance.is_valid());
+    network_address instance;
+    REQUIRE( ! instance.is_valid());
 
     instance = std::move(value);
-    BOOST_REQUIRE(instance.is_valid());
+    REQUIRE(instance.is_valid());
 }
 
-BOOST_AUTO_TEST_CASE(network_address__operator_assign_equals_2__always__matches_equivalent) {
-    const message::network_address value(
+TEST_CASE("network address  operator assign equals 2  always  matches equivalent", "[network address tests]") {
+    network_address const value(
         14356u,
         54676843u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         1500u);
 
-    BOOST_REQUIRE(value.is_valid());
+    REQUIRE(value.is_valid());
 
-    message::network_address instance;
-    BOOST_REQUIRE_EQUAL(false, instance.is_valid());
+    network_address instance;
+    REQUIRE( ! instance.is_valid());
 
     instance = value;
-    BOOST_REQUIRE(instance.is_valid());
-    BOOST_REQUIRE(value == instance);
+    REQUIRE(instance.is_valid());
+    REQUIRE(value == instance);
 }
 
-BOOST_AUTO_TEST_CASE(network_address__operator_boolean_equals__duplicates__returns_true) {
-    const message::network_address expected(
+TEST_CASE("network address  operator boolean equals  duplicates  returns true", "[network address tests]") {
+    network_address const expected(
         14356u,
         54676843u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         1500u);
 
-    message::network_address instance(expected);
-    BOOST_REQUIRE(instance == expected);
+    network_address instance(expected);
+    REQUIRE(instance == expected);
 }
 
-BOOST_AUTO_TEST_CASE(network_address__operator_boolean_equals__differs_timestamp__returns_true) {
-    const message::network_address expected(
+TEST_CASE("network address  operator boolean equals  differs timestamp  returns true", "[network address tests]") {
+    network_address const expected(
         14356u,
         54676843u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         1500u);
 
-    message::network_address instance(643u, expected.services(),
+    network_address instance(643u, expected.services(),
                                       expected.ip(), expected.port());
-    BOOST_REQUIRE(instance == expected);
+    REQUIRE(instance == expected);
 }
 
-BOOST_AUTO_TEST_CASE(network_address__operator_boolean_equals__differs__returns_false) {
-    const message::network_address expected(
+TEST_CASE("network address  operator boolean equals  differs  returns false", "[network address tests]") {
+    network_address const expected(
         14356u,
         54676843u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         1500u);
 
-    message::network_address instance;
-    BOOST_REQUIRE_EQUAL(false, instance == expected);
+    network_address instance;
+    REQUIRE(instance != expected);
 }
 
-BOOST_AUTO_TEST_CASE(network_address__operator_boolean_not_equals__duplicates__returns_false) {
-    const message::network_address expected(
+TEST_CASE("network address  operator boolean not equals  duplicates  returns false", "[network address tests]") {
+    network_address const expected(
         14356u,
         54676843u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         1500u);
 
-    message::network_address instance(expected);
-    BOOST_REQUIRE_EQUAL(false, instance != expected);
+    network_address instance(expected);
+    REQUIRE(instance == expected);
 }
 
-BOOST_AUTO_TEST_CASE(network_address__operator_boolean_not_equals__differs_timestamp__returns_false) {
-    const message::network_address expected(
+TEST_CASE("network address  operator boolean not equals  differs timestamp  returns false", "[network address tests]") {
+    network_address const expected(
         14356u,
         54676843u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         1500u);
 
-    message::network_address instance(643u, expected.services(),
-                                      expected.ip(), expected.port());
-    BOOST_REQUIRE_EQUAL(false, instance != expected);
+    network_address instance(643u, expected.services(), expected.ip(), expected.port());
+    REQUIRE(instance == expected);
 }
 
-BOOST_AUTO_TEST_CASE(network_address__operator_boolean_not_equals__differs__returns_true) {
-    const message::network_address expected(
+TEST_CASE("network address  operator boolean not equals  differs  returns true", "[network address tests]") {
+    network_address const expected(
         14356u,
         54676843u,
         base16_literal("127544abcdefa7b6d3e91486c57000aa"),
         1500u);
 
-    message::network_address instance;
-    BOOST_REQUIRE(instance != expected);
+    network_address instance;
+    REQUIRE(instance != expected);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
