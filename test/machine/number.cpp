@@ -334,8 +334,7 @@ void replace(std::string& buffer, std::string const& find, std::string const& re
 static 
 void MakeOperators(int64_t const num1, int64_t const num2,
     std::ostream& add_out, std::ostream& neg_out, std::ostream& sub_out,
-    std::ostream& cmp_out)
-{
+    std::ostream& cmp_out) {
     write("\n              ", add_out, neg_out, sub_out, cmp_out);
 
     auto add = MakeAdd(num1, num2);
