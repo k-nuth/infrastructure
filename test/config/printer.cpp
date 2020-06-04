@@ -307,124 +307,113 @@ TEST_CASE("printer  generate argument names  empty arguments multiple options  e
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(0u);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__one_argument_1__one_name_1)
-{
+TEST_CASE("printer  generate argument names  one argument 1  one name 1", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(arguments.add("one", 1));
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(1u);
     auto& names = help.get_argument_names();
-    BOOST_REQUIRE_EQUAL(names[0].first, "one");
-    BOOST_REQUIRE_EQUAL(names[0].second, 1);
+    REQUIRE(names[0].first == "one");
+    REQUIRE(names[0].second == 1);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__one_argument_42__one_name_42)
-{
+TEST_CASE("printer  generate argument names  one argument 42  one name 42", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(arguments.add("forty-two", 42));
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(1u);
     auto& names = help.get_argument_names();
-    BOOST_REQUIRE_EQUAL(names[0].first, "forty-two");
-    BOOST_REQUIRE_EQUAL(names[0].second, 42);
+    REQUIRE(names[0].first == "forty-two");
+    REQUIRE(names[0].second == 42);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__one_argument_max_arguments__one_name_max_arguments)
-{
+TEST_CASE("printer  generate argument names  one argument max arguments  one name max arguments", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(arguments.add("max_arguments", printer::max_arguments));
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(1u);
     auto& names = help.get_argument_names();
-    BOOST_REQUIRE_EQUAL(names[0].first, "max_arguments");
-    BOOST_REQUIRE_EQUAL(names[0].second, printer::max_arguments);
+    REQUIRE(names[0].first == "max_arguments");
+    REQUIRE(names[0].second == printer::max_arguments);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__one_argument_max_arguments_plus_1__one_name_negative_1)
-{
+TEST_CASE("printer  generate argument names  one argument max arguments plus 1  one name negative 1", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(arguments.add("max_arguments+1", printer::max_arguments + 1));
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(1u);
     auto& names = help.get_argument_names();
-    BOOST_REQUIRE_EQUAL(names[0].first, "max_arguments+1");
-    BOOST_REQUIRE_EQUAL(names[0].second, -1);
+    REQUIRE(names[0].first == "max_arguments+1");
+    REQUIRE(names[0].second == -1);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__one_argument_negative_1__one_name_negative_1)
-{
+TEST_CASE("printer  generate argument names  one argument negative 1  one name negative 1", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(arguments.add("negative-one", -1));
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(1u);
     auto& names = help.get_argument_names();
-    BOOST_REQUIRE_EQUAL(names[0].first, "negative-one");
-    BOOST_REQUIRE_EQUAL(names[0].second, -1);
+    REQUIRE(names[0].first == "negative-one");
+    REQUIRE(names[0].second == -1);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__multiple_arguments__expected_names)
-{
+TEST_CASE("printer  generate argument names  multiple arguments  expected names", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(
         arguments.add("forty-two", 42);
         arguments.add("max_arguments", printer::max_arguments));
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(2u);
     auto& names = help.get_argument_names();
-    BOOST_REQUIRE_EQUAL(names[0].first, "forty-two");
-    BOOST_REQUIRE_EQUAL(names[0].second, 42);
-    BOOST_REQUIRE_EQUAL(names[1].first, "max_arguments");
-    BOOST_REQUIRE_EQUAL(names[1].second, printer::max_arguments);
+    REQUIRE(names[0].first == "forty-two");
+    REQUIRE(names[0].second == 42);
+    REQUIRE(names[1].first == "max_arguments");
+    REQUIRE(names[1].second == printer::max_arguments);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__multiple_arguments_negative_1__expected_names)
-{
+TEST_CASE("printer  generate argument names  multiple arguments negative 1  expected names", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(
         arguments.add("forty-two", 42);
         arguments.add("max_arguments", printer::max_arguments);
         arguments.add("negative-one", -1));
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(3u);
     auto& names = help.get_argument_names();
-    BOOST_REQUIRE_EQUAL(names[0].first, "forty-two");
-    BOOST_REQUIRE_EQUAL(names[0].second, 42);
-    BOOST_REQUIRE_EQUAL(names[1].first, "max_arguments");
-    BOOST_REQUIRE_EQUAL(names[1].second, printer::max_arguments);
-    BOOST_REQUIRE_EQUAL(names[2].first, "negative-one");
-    BOOST_REQUIRE_EQUAL(names[2].second, -1);
+    REQUIRE(names[0].first == "forty-two");
+    REQUIRE(names[0].second == 42);
+    REQUIRE(names[1].first == "max_arguments");
+    REQUIRE(names[1].second == printer::max_arguments);
+    REQUIRE(names[2].first == "negative-one");
+    REQUIRE(names[2].second == -1);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
-BOOST_AUTO_TEST_SUITE(printer__generate_parameters)
+// Start Boost Suite: printer  generate parameters
 
 #define BX_PRINTER_GENERATE_PARAMETERS(number_of_parameters) \
     help.generate_parameters(); \
-    BOOST_REQUIRE_EQUAL(help.get_parameters().size(), number_of_parameters)
+    REQUIRE(help.get_parameters().size() == number_of_parameters)
 
-BOOST_AUTO_TEST_CASE(printer__generate_parameters__empty__empty_parameters)
-{
+TEST_CASE("printer  generate parameters  empty  empty parameters", "[printer  generate parameters]") {
     CONFIG_PRINTER_SETUP();
     BX_PRINTER_GENERATE_PARAMETERS(0u);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_parameters__one_option__expected_parameter)
-{
+TEST_CASE("printer  generate parameters  one option  expected parameter", "[printer  generate parameters]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("foo_bar,f", "Foobar option name."));
     BX_PRINTER_GENERATE_PARAMETERS(1u);
     auto& parameters = help.get_parameters();
-    BOOST_REQUIRE_EQUAL(parameters[0].get_short_name(), 'f');
+    REQUIRE(parameters[0].get_short_name() == 'f');
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_parameters__unsorted_three_options__expected_sorted_parameters)
-{
+TEST_CASE("printer  generate parameters  unsorted three options  expected sorted parameters", "[printer  generate parameters]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("first,f", "First option description.")
         ("second,x", "Second option description.")
         ("third", "Third option description."));
     BX_PRINTER_GENERATE_PARAMETERS(3u);
     auto& parameters = help.get_parameters();
-    BOOST_REQUIRE_EQUAL(parameters[0].get_long_name(), "third");
-    BOOST_REQUIRE_EQUAL(parameters[1].get_short_name(), 'f');
-    BOOST_REQUIRE_EQUAL(parameters[2].get_description(), "Second option description.");
+    REQUIRE(parameters[0].get_long_name() == "third");
+    REQUIRE(parameters[1].get_short_name() == 'f');
+    REQUIRE(parameters[2].get_description() == "Second option description.");
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
-BOOST_AUTO_TEST_SUITE(printer__initialize)
+// Start Boost Suite: printer  initialize
 
-BOOST_AUTO_TEST_CASE(printer__initialize__unsorted_multitple_options__expected_sorted_parameters)
-{
+TEST_CASE("printer  initialize  unsorted multitple options  expected sorted parameters", "[printer  initialize]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("first,f", "First option description.")
         ("second,x", "Second option description.")
