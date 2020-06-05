@@ -244,12 +244,11 @@ TEST_CASE("data  splice three  one two three bytes  expected", "[data tests]") {
     };
 
     auto const combined = splice(left, middle, right);
-    BOOST_REQUIRE_EQUAL(combined[0], expected_left);
-    BOOST_REQUIRE_EQUAL(combined[5], expected_right);
+    REQUIRE(combined[0] == expected_left);
+    REQUIRE(combined[5] == expected_right);
 }
 
-BOOST_AUTO_TEST_CASE(data__to_array_slice__double_long_hash__expected)
-{
+TEST_CASE("data  to array slice  double long hash  expected", "[data tests]") {
     uint8_t const l = 42;
     uint8_t const u = 24;
     data_chunk const source
