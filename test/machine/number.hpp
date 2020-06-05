@@ -30,8 +30,7 @@ int64_t const number_values[] = {
     ////LLONG_MAX
 };
 
-int64_t const number_offsets[] =
-{
+int64_t const number_offsets[] = {
     1,
     0x79,
     0x80,
