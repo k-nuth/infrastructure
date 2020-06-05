@@ -17,22 +17,20 @@ TEST_CASE("base16 literal test", "[base 16 tests]") {
             0x01, 0xff, 0x42, 0xbc
         }
     };
-    BOOST_REQUIRE(result == expected);
+    REQUIRE(result == expected);
 }
 
-BOOST_AUTO_TEST_CASE(base16_odd_length_invalid_test)
-{
+TEST_CASE("base16 odd length invalid test", "[base 16 tests]") {
     auto const& hex_str = "10a7fd15cb45bda9e90e19a15";
     data_chunk data;
-    BOOST_REQUIRE(!decode_base16(data, hex_str));
+    REQUIRE(!decode_base16(data, hex_str));
 }
 
-BOOST_AUTO_TEST_CASE(base16_short_hash_test)
-{
+TEST_CASE("base16 short hash test", "[base 16 tests]") {
     auto const& hex_str = "f85beb6356d0813ddb0dbb14230a249fe931a135";
     short_hash hash;
-    BOOST_REQUIRE(decode_base16(hash, hex_str));
-    BOOST_REQUIRE_EQUAL(encode_base16(hash), hex_str);
+    REQUIRE(decode_base16(hash, hex_str));
+    REQUIRE(encode_base16(hash) == hex_str);
     short_hash const expected
     {
         {
