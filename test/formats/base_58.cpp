@@ -32,8 +32,7 @@ TEST_CASE("base58 test", "[base 58 tests]") {
     encdec_test("00000000000000000000", "1111111111");
 }
 
-BOOST_AUTO_TEST_CASE(base58_address_test)
-{
+TEST_CASE("base58 address test", "[base 58 tests]") {
     data_chunk const pubkey
     {
         {
