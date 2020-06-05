@@ -285,11 +285,11 @@ TEST_CASE("unicode  to utf8 main  null termination  test", "[unicode tests]") {
     // Each argument is a null terminated string.
     auto const length = strlen(narrow_args[0]);
     auto arg_terminator = narrow_args[0][length];
-    BOOST_REQUIRE_EQUAL(arg_terminator, '\0');
+    REQUIRE(arg_terminator == '\0');
 
     // The argument vector is a null terminated array.
     auto argv_terminator = narrow_args[argc];
-    BOOST_REQUIRE_EQUAL(argv_terminator, static_cast<char*>(nullptr));
+    REQUIRE(argv_terminator == static_cast<char*>(nullptr));
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
