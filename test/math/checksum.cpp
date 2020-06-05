@@ -53,15 +53,14 @@ TEST_CASE("checksum  build checked array  empty  valid", "[checksum tests]") {
     {
         data
     });
-    BOOST_REQUIRE(result);
-    BOOST_REQUIRE_EQUAL(out[checksum++], 0x5du);
-    BOOST_REQUIRE_EQUAL(out[checksum++], 0xf6u);
-    BOOST_REQUIRE_EQUAL(out[checksum++], 0xe0u);
-    BOOST_REQUIRE_EQUAL(out[checksum++], 0xe2u);
+    REQUIRE(result);
+    REQUIRE(out[checksum++] == 0x5du);
+    REQUIRE(out[checksum++] == 0xf6u);
+    REQUIRE(out[checksum++] == 0xe0u);
+    REQUIRE(out[checksum++] == 0xe2u);
 }
 
-BOOST_AUTO_TEST_CASE(checksum__build_checked_array__not_empty__valid)
-{
+TEST_CASE("checksum  build checked array  not empty  valid", "[checksum tests]") {
     data_chunk data = { 0, 0, 0, 0, 0 };
     auto checksum = data.size();
     byte_array<checksum_size + 5> out;
