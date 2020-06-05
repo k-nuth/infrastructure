@@ -254,11 +254,10 @@ TEST_CASE("unicode  to utf8 main  ascii  test", "[unicode tests]") {
     auto buffer = to_utf8(argc, argv);
     auto narrow_args = reinterpret_cast<char**>(&buffer[0]);
 
-    BOOST_REQUIRE_EQUAL(narrow_args[0], "ascii");
+    REQUIRE(narrow_args[0] == "ascii");
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_main__utf16__test)
-{
+TEST_CASE("unicode  to utf8 main  utf16  test", "[unicode tests]") {
     // We cannot use L for literal encoding of non-ascii text on Windows.
     auto utf16 = to_utf16("テスト");
     auto non_literal_utf16 = utf16.c_str();
