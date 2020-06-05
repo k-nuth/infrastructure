@@ -220,12 +220,11 @@ TEST_CASE("data  splice two  two bytes each  expected", "[data tests]") {
     };
 
     auto const combined = splice(left, right);
-    BOOST_REQUIRE_EQUAL(combined[0], expected_left);
-    BOOST_REQUIRE_EQUAL(combined[3], expected_right);
+    REQUIRE(combined[0] == expected_left);
+    REQUIRE(combined[3] == expected_right);
 }
 
-BOOST_AUTO_TEST_CASE(data__splice_three__one_two_three_bytes__expected)
-{
+TEST_CASE("data  splice three  one two three bytes  expected", "[data tests]") {
     uint8_t const expected_left = 42;
     uint8_t const expected_right = 24;
 
