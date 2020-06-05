@@ -20,7 +20,7 @@
 #include "big_number.hpp"
 #endif
 
-BOOST_AUTO_TEST_SUITE(number_tests)
+// Start Boost Suite: number tests
 
 using namespace kth;
 using namespace kth::infrastructure::machine;
