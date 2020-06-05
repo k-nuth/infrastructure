@@ -409,4 +409,4 @@ TEST_CASE("make operator expectations", "[number tests]") {
 }
 #endif
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
