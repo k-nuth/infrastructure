@@ -201,12 +201,11 @@ TEST_CASE("data  split  long hash  expected", "[data tests]") {
     };
 
     auto const parts = split(source);
-    BOOST_REQUIRE_EQUAL(parts.left[0], l);
-    BOOST_REQUIRE_EQUAL(parts.right[0], u);
+    REQUIRE(parts.left[0] == l);
+    REQUIRE(parts.right[0] == u);
 }
 
-BOOST_AUTO_TEST_CASE(data__splice_two__two_bytes_each__expected)
-{
+TEST_CASE("data  splice two  two bytes each  expected", "[data tests]") {
     uint8_t const expected_left = 42;
     uint8_t const expected_right = 24;
 
