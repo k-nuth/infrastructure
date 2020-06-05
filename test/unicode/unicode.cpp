@@ -269,12 +269,11 @@ TEST_CASE("unicode  to utf8 main  utf16  test", "[unicode tests]") {
     auto buffer = to_utf8(argc, argv);
     auto narrow_args = reinterpret_cast<char**>(&buffer[0]);
 
-    BOOST_REQUIRE_EQUAL(narrow_args[0], "ascii");
-    BOOST_REQUIRE_EQUAL(narrow_args[1], "テスト");
+    REQUIRE(narrow_args[0] == "ascii");
+    REQUIRE(narrow_args[1] == "テスト");
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_main__null_termination__test)
-{
+TEST_CASE("unicode  to utf8 main  null termination  test", "[unicode tests]") {
     std::vector<const wchar_t*> wide_args = { L"ascii", nullptr };
 
     auto argv = const_cast<wchar_t**>(&wide_args[0]);
