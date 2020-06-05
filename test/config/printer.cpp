@@ -423,15 +423,15 @@ TEST_CASE("printer  initialize  unsorted multitple options  expected sorted para
     CONFIG_PRINTER_INITIALIZE(3u, 2u);
     auto& names = help.get_argument_names();
     auto& parameters = help.get_parameters();
-    BOOST_REQUIRE_EQUAL(names[0].first, "forty-two");
-    BOOST_REQUIRE_EQUAL(names[0].second, 42);
-    BOOST_REQUIRE_EQUAL(names[1].first, "negative-one");
-    BOOST_REQUIRE_EQUAL(names[1].second, -1);
-    BOOST_REQUIRE_EQUAL(parameters[0].get_long_name(), "third");
-    BOOST_REQUIRE_EQUAL(parameters[1].get_short_name(), 'f');
-    BOOST_REQUIRE_EQUAL(parameters[2].get_description(), "Second option description.");
+    REQUIRE(names[0].first == "forty-two");
+    REQUIRE(names[0].second == 42);
+    REQUIRE(names[1].first == "negative-one");
+    REQUIRE(names[1].second == -1);
+    REQUIRE(parameters[0].get_long_name() == "third");
+    REQUIRE(parameters[1].get_short_name() == 'f');
+    REQUIRE(parameters[2].get_description() == "Second option description.");
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
