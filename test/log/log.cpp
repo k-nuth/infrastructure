@@ -10,11 +10,11 @@
 
 using namespace kth;
 
-BOOST_AUTO_TEST_SUITE(log_tests)
+// Start Boost Suite: log tests
 
-BOOST_AUTO_TEST_SUITE(log__general)
+// Start Boost Suite: log  general
 
-BOOST_AUTO_TEST_CASE(log_general__debug) {
+//TEST_CASE("log general  debug", "[log  general]") {
 
     // LOG_DEBUG(LOG_SYSTEM, "hello", "world", 1);
     // spdlog::debug(KTH_STRREP("{} ", KTH_PP_NARG("hello", "world", 1) + 1), LOG_SYSTEM, "hello", "world", 1);
