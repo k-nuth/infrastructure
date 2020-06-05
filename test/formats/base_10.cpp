@@ -43,7 +43,7 @@
 // { \
 //     std::string expected = EXPECTED; \
 //     std::string result = encode_base10(__VA_ARGS__); \
-//     BOOST_REQUIRE_EQUAL(result, expected); \
+//     REQUIRE(result == expected);
 // }
 
 // // Limits:
