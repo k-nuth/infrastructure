@@ -32,136 +32,124 @@ using namespace kth::infrastructure::config;
 
 #define CONFIG_PRINTER_INITIALIZE(number_of_parameters, number_of_names) \
     help.initialize(); \
-    BOOST_REQUIRE_EQUAL(help.get_parameters().size(), number_of_parameters); \
-    BOOST_REQUIRE_EQUAL(help.get_argument_names().size(), number_of_names)
+    REQUIRE(help.get_parameters().size() == number_of_parameters); \
+    REQUIRE(help.get_argument_names().size() == number_of_names)
 
 // ------------------------------------------------------------------------- //
-BOOST_AUTO_TEST_SUITE(printer__columnize)
+// Start Boost Suite: printer  columnize
 
-BOOST_AUTO_TEST_CASE(printer__columnize__paragraph_empty_width_0__empty)
-{
+TEST_CASE("printer  columnize  paragraph empty width 0  empty", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("", 0);
-    BOOST_REQUIRE_EQUAL(rows.size(), 0u);
+    REQUIRE(rows.size() == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__paragraph_empty_width_1__empty)
-{
+TEST_CASE("printer  columnize  paragraph empty width 1  empty", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("", 1);
-    BOOST_REQUIRE_EQUAL(rows.size(), 0u);
+    REQUIRE(rows.size() == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__short_word_width_10__one_word_row)
-{
+TEST_CASE("printer  columnize  short word width 10  one word row", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("foo", 10);
-    BOOST_REQUIRE_EQUAL(rows.size(), 1u);
-    BOOST_REQUIRE_EQUAL(rows.front(), "foo");
+    REQUIRE(rows.size() == 1u);
+    REQUIRE(rows.front() == "foo");
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__two_short_words_width_10__two_word_row)
-{
+TEST_CASE("printer  columnize  two short words width 10  two word row", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("foo bar", 10);
-    BOOST_REQUIRE_EQUAL(rows.size(), 1u);
-    BOOST_REQUIRE_EQUAL(rows.front(), "foo bar");
+    REQUIRE(rows.size() == 1u);
+    REQUIRE(rows.front() == "foo bar");
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__overflow_width_10__two_rows)
-{
+TEST_CASE("printer  columnize  overflow width 10  two rows", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("foo bar overflow", 10);
-    BOOST_REQUIRE_EQUAL(rows.size(), 2u);
-    BOOST_REQUIRE_EQUAL(rows[0], "foo bar");
-    BOOST_REQUIRE_EQUAL(rows[1], "overflow");
+    REQUIRE(rows.size() == 2u);
+    REQUIRE(rows[0] == "foo bar");
+    REQUIRE(rows[1] == "overflow");
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__first_word_overflow_width_10__two_rows)
-{
+TEST_CASE("printer  columnize  first word overflow width 10  two rows", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("morethantenchars foo bar", 10);
-    BOOST_REQUIRE_EQUAL(rows.size(), 2u);
-    BOOST_REQUIRE_EQUAL(rows[0], "morethantenchars");
-    BOOST_REQUIRE_EQUAL(rows[1], "foo bar");
+    REQUIRE(rows.size() == 2u);
+    REQUIRE(rows[0] == "morethantenchars");
+    REQUIRE(rows[1] == "foo bar");
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__middle_word_overflow_width_10__three_rows)
-{
+TEST_CASE("printer  columnize  middle word overflow width 10  three rows", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("foo bar morethantenchars test", 10);
-    BOOST_REQUIRE_EQUAL(rows.size(), 3u);
-    BOOST_REQUIRE_EQUAL(rows[0], "foo bar");
-    BOOST_REQUIRE_EQUAL(rows[1], "morethantenchars");
-    BOOST_REQUIRE_EQUAL(rows[2], "test");
+    REQUIRE(rows.size() == 3u);
+    REQUIRE(rows[0] == "foo bar");
+    REQUIRE(rows[1] == "morethantenchars");
+    REQUIRE(rows[2] == "test");
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__last_word_overflow_width_10__two_rows)
-{
+TEST_CASE("printer  columnize  last word overflow width 10  two rows", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("foo bar morethantenchars", 10);
-    BOOST_REQUIRE_EQUAL(rows.size(), 2u);
-    BOOST_REQUIRE_EQUAL(rows[0], "foo bar");
-    BOOST_REQUIRE_EQUAL(rows[1], "morethantenchars");
+    REQUIRE(rows.size() == 2u);
+    REQUIRE(rows[0] == "foo bar");
+    REQUIRE(rows[1] == "morethantenchars");
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__excess_whitespace_width_10__space_removed)
-{
+TEST_CASE("printer  columnize  excess whitespace width 10  space removed", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("  \tfoo   bar \n\n  morethantenchars\r\n  ", 10);
-    BOOST_REQUIRE_EQUAL(rows.size(), 3u);
-    BOOST_REQUIRE_EQUAL(rows[0], "\tfoo bar");
-    BOOST_REQUIRE_EQUAL(rows[1], "\n\n");
-    BOOST_REQUIRE_EQUAL(rows[2], "morethantenchars\r\n");
+    REQUIRE(rows.size() == 3u);
+    REQUIRE(rows[0] == "\tfoo bar");
+    REQUIRE(rows[1] == "\n\n");
+    REQUIRE(rows[2] == "morethantenchars\r\n");
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
-BOOST_AUTO_TEST_SUITE(printer__format_parameters_table)
+// Start Boost Suite: printer  format parameters table
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__positional_empty__empty)
-{
+TEST_CASE("printer  format parameters table  positional empty  empty", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP();
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(true), "");
+    REQUIRE(help.format_parameters_table(true) == "");
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__named_empty__empty)
-{
+TEST_CASE("printer  format parameters table  named empty  empty", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP();
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(false), "");
+    REQUIRE(help.format_parameters_table(false) == "");
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__named_three_options__three_options)
-{
+TEST_CASE("printer  format parameters table  named three options  three options", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("long", "Long name only.")
         (",m", "Short name only.")
         ("short_long,s", "Long and short name."));
+
     CONFIG_PRINTER_INITIALIZE(3u, 0u);
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(false),
+
+    REQUIRE(help.format_parameters_table(false) ==
         "--long               Long name only.                                     \n"
         "-m                   Short name only.                                    \n"
         "-s [--short_long]    Long and short name.                                \n"
     );
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__reversed_named_three_options__three_sorted_options)
-{
+TEST_CASE("printer  format parameters table  reversed named three options  three sorted options", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("short_long,s", "Long and short name.")
         (",m", "Short name only.")
         ("long", "Long name only."));
     CONFIG_PRINTER_INITIALIZE(3u, 0u);
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(false),
+    REQUIRE(help.format_parameters_table(false) ==
         "--long               Long name only.                                     \n"
         "-m                   Short name only.                                    \n"
         "-s [--short_long]    Long and short name.                                \n"
     );
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__unsorted_named_three_options_no_matching_arguments__three_sorted_options)
-{
+TEST_CASE("printer  format parameters table  unsorted named three options no matching arguments  three sorted options", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("first,f", "First option description.")
         ("second,x", "Second option description.")
