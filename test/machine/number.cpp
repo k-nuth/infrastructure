@@ -354,8 +354,7 @@ void MakeOperators(int64_t const num1, int64_t const num2,
     write_compare(compare, cmp_out);
 }
 
-BOOST_AUTO_TEST_CASE(make_operator_expectations)
-{
+TEST_CASE("make operator expectations", "[number tests]") {
     std::stringstream add_out;
     std::stringstream neg_out;
     std::stringstream sub_out;
