@@ -26,83 +26,77 @@ using namespace boost::program_options;
 
 // ------------------------------------------------------------------------- //
 
-BOOST_AUTO_TEST_SUITE(checkpoint__construct)
+// Start Boost Suite: checkpoint  construct
 
-BOOST_AUTO_TEST_CASE(checkpoint__construct__default__null_hash)
-{
+TEST_CASE("checkpoint  construct  default  null hash", "[checkpoint  construct]") {
     checkpoint const check;
-    BOOST_REQUIRE(check.hash() == null_hash);
-    BOOST_REQUIRE_EQUAL(check.height(), 0u);
+    REQUIRE(check.hash() == null_hash);
+    REQUIRE(check.height() == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(checkpoint__construct__copy__expected)
-{
+TEST_CASE("checkpoint  construct  copy  expected", "[checkpoint  construct]") {
     checkpoint const check1(CHECKPOINT_C);
     checkpoint const check2(check1);
-    BOOST_REQUIRE_EQUAL(check2.height(), check1.height());
-    BOOST_REQUIRE_EQUAL(encode_hash(check2.hash()), encode_hash(check1.hash()));
+    REQUIRE(check2.height() == check1.height());
+    REQUIRE(encode_hash(check2.hash()) == encode_hash(check1.hash()));
 }
 
-BOOST_AUTO_TEST_CASE(checkpoint__construct__string__expected)
-{
+TEST_CASE("checkpoint  construct  string  expected", "[checkpoint  construct]") {
     checkpoint const genesis(CHECKPOINT_B);
-    BOOST_REQUIRE_EQUAL(genesis.height(), 11111u);
-    BOOST_REQUIRE_EQUAL(genesis.to_string(), CHECKPOINT_B);
+    REQUIRE(genesis.height() == 11111u);
+    REQUIRE(genesis.to_string() == CHECKPOINT_B);
 }
 
-BOOST_AUTO_TEST_CASE(checkpoint__construct__digest__expected)
-{
+TEST_CASE("checkpoint  construct  digest  expected", "[checkpoint  construct]") {
     size_t const expected_height = 42;
     auto const expected_hash = CHECKPOINT_HASH_A;
     hash_digest digest;
     kth::decode_hash(digest, expected_hash);
     checkpoint const genesis(digest, expected_height);
-    BOOST_REQUIRE_EQUAL(genesis.height(), expected_height);
-    BOOST_REQUIRE_EQUAL(encode_hash(genesis.hash()), expected_hash);
+    REQUIRE(genesis.height() == expected_height);
+    REQUIRE(encode_hash(genesis.hash()) == expected_hash);
 }
 
-BOOST_AUTO_TEST_CASE(checkpoint__construct__invalid_height_value__throws_invalid_option_value)
-{
+TEST_CASE("checkpoint  construct  invalid height value  throws invalid option value", "[checkpoint  construct]") {
     // 2^64
-    BOOST_REQUIRE_THROW(checkpoint(CHECKPOINT_HASH_A ":18446744073709551616"), invalid_option_value);
+    REQUIRE_THROWS_AS([](){checkpoint(CHECKPOINT_HASH_A ":18446744073709551616");}, invalid_option_value);
 }
 
-BOOST_AUTO_TEST_CASE(checkpoint__construct__invalid_height_characters__throws_invalid_option_value)
-{
+TEST_CASE("checkpoint  construct  invalid height characters  throws invalid option value", "[checkpoint  construct]") {
     // 21 characters
-    BOOST_REQUIRE_THROW(checkpoint(CHECKPOINT_HASH_A ":1000000000100000000001"), invalid_option_value);
+    REQUIRE_THROWS_AS([](){checkpoint(CHECKPOINT_HASH_A ":1000000000100000000001");}, invalid_option_value);
 }
 
-BOOST_AUTO_TEST_CASE(checkpoint__construct__bogus_height_characters__throws_invalid_option_value) {
-    BOOST_REQUIRE_THROW(checkpoint(CHECKPOINT_HASH_A ":xxx"), invalid_option_value);
+TEST_CASE("checkpoint  construct  bogus height characters  throws invalid option value", "[checkpoint  construct]") {
+    REQUIRE_THROWS_AS([](){checkpoint(CHECKPOINT_HASH_A ":xxx");}, invalid_option_value);
 }
 
-BOOST_AUTO_TEST_CASE(checkpoint__construct__bogus_line_hash__throws_invalid_option_value) {
-    BOOST_REQUIRE_THROW(checkpoint("bogus:42"), invalid_option_value);
+TEST_CASE("checkpoint  construct  bogus line hash  throws invalid option value", "[checkpoint  construct]") {
+    REQUIRE_THROWS_AS([](){checkpoint("bogus:42");}, invalid_option_value);
 }
 
-BOOST_AUTO_TEST_CASE(checkpoint__construct__bogus_hash__throws_invalid_option_value) {
-    BOOST_REQUIRE_THROW(checkpoint("bogus", 42), invalid_option_value);
+TEST_CASE("checkpoint  construct  bogus hash  throws invalid option value", "[checkpoint  construct]") {
+    REQUIRE_THROWS_AS([](){checkpoint("bogus", 42);}, invalid_option_value);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
 
-BOOST_AUTO_TEST_SUITE(checkpoint__istream)
+// Start Boost Suite: checkpoint  istream
 
-BOOST_AUTO_TEST_CASE(checkpoint__istream__empty__expected) {
+TEST_CASE("checkpoint  istream  empty  expected", "[checkpoint  istream]") {
     checkpoint deserialized;
     std::stringstream serialized(CHECKPOINT_A);
     serialized >> deserialized;
-    BOOST_REQUIRE_EQUAL(deserialized.to_string(), CHECKPOINT_A);
+    REQUIRE(deserialized.to_string() == CHECKPOINT_A);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
 
-BOOST_AUTO_TEST_SUITE(checkpoint__ostream)
+// Start Boost Suite: checkpoint  ostream
 
 static 
 checkpoint::list const test_checkpoints_list({
