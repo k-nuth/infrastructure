@@ -23,60 +23,55 @@ TEST_CASE("serializer - roundtrip serialize deserialize", "[serializer tests]") 
     writer.write_string("hello");
 
     auto reader = make_safe_deserializer(data.begin(), data.end());
-    BOOST_REQUIRE_EQUAL(reader.read_byte(), 0x80u);
-    BOOST_REQUIRE_EQUAL(reader.read_2_bytes_little_endian(), 0x8040u);
-    BOOST_REQUIRE_EQUAL(reader.read_4_bytes_little_endian(), 0x80402010u);
-    BOOST_REQUIRE_EQUAL(reader.read_8_bytes_little_endian(), 0x8040201011223344u);
-    BOOST_REQUIRE_EQUAL(reader.read_4_bytes_big_endian(), 0x80402010u);
-    BOOST_REQUIRE_EQUAL(reader.read_variable_little_endian(), 1234u);
-    BOOST_REQUIRE_EQUAL(from_little_endian_unsafe<uint32_t>(reader.read_bytes(4).begin()), 0xbadf00du);
-    BOOST_REQUIRE_EQUAL(reader.read_string(), "hello");
-    BOOST_REQUIRE_EQUAL(reader.read_byte(), 0u);
-    BOOST_REQUIRE(reader.is_exhausted());
+    REQUIRE(reader.read_byte() == 0x80u);
+    REQUIRE(reader.read_2_bytes_little_endian() == 0x8040u);
+    REQUIRE(reader.read_4_bytes_little_endian() == 0x80402010u);
+    REQUIRE(reader.read_8_bytes_little_endian() == 0x8040201011223344u);
+    REQUIRE(reader.read_4_bytes_big_endian() == 0x80402010u);
+    REQUIRE(reader.read_variable_little_endian() == 1234u);
+    REQUIRE(from_little_endian_unsafe<uint32_t>(reader.read_bytes(4).begin()) == 0xbadf00du);
+    REQUIRE(reader.read_string() == "hello");
+    REQUIRE(reader.read_byte() == 0u);
+    REQUIRE(reader.is_exhausted());
 }
 
-BOOST_AUTO_TEST_CASE(deserializer_exhaustion)
-{
+TEST_CASE("serializer - deserializer exhaustion", "[serializer tests]") {
     data_chunk data(42);
     auto reader = make_safe_deserializer(data.begin(), data.end());
     reader.read_bytes(42);
-    BOOST_REQUIRE(reader);
-    BOOST_REQUIRE(reader.is_exhausted());
-    BOOST_REQUIRE_EQUAL(reader.read_byte(), 0u);
-    BOOST_REQUIRE(!reader);
+    REQUIRE(reader);
+    REQUIRE(reader.is_exhausted());
+    REQUIRE(reader.read_byte() == 0u);
+    REQUIRE(!reader);
 }
 
-BOOST_AUTO_TEST_CASE(is_exhausted_initialized_empty_stream_returns_true)
-{
+TEST_CASE("serializer - is exhausted initialized empty stream returns true", "[serializer tests]") {
     data_chunk data(0);
     auto source = make_safe_deserializer(data.begin(), data.end());
-    BOOST_REQUIRE(source.is_exhausted());
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(source.is_exhausted());
+    REQUIRE((bool)source);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(is_exhausted_initialized_nonempty_stream_returns_false)
-{
+TEST_CASE("serializer - is exhausted initialized nonempty stream returns false", "[serializer tests]") {
     data_chunk data(1);
     auto source = make_safe_deserializer(data.begin(), data.end());
-    BOOST_REQUIRE(!source.is_exhausted());
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(!source.is_exhausted());
+    REQUIRE((bool)source);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(peek_byte_nonempty_stream_does_not_advance)
-{
+TEST_CASE("serializer - peek byte nonempty stream does not advance", "[serializer tests]") {
     uint8_t const expected = 0x42;
     data_chunk data({ expected, 0x00 });
     auto source = make_safe_deserializer(data.begin(), data.end());
-    BOOST_REQUIRE_EQUAL(source.peek_byte(), expected);
-    BOOST_REQUIRE_EQUAL(source.peek_byte(), expected);
-    BOOST_REQUIRE_EQUAL(source.peek_byte(), expected);
-    BOOST_REQUIRE((bool)source);
+    REQUIRE(source.peek_byte() == expected);
+    REQUIRE(source.peek_byte() == expected);
+    REQUIRE(source.peek_byte() == expected);
+    REQUIRE((bool)source);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_byte)
-{
+TEST_CASE("serializer - roundtrip byte", "[serializer tests]") {
     uint8_t const expected = 0xAA;
     data_chunk data(1);
     auto source = make_safe_deserializer(data.begin(), data.end());
