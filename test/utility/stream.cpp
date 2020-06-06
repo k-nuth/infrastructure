@@ -439,16 +439,16 @@ TEST_CASE("stream - read bytes to eof", "[stream tests]") {
     istream_reader source(stream);
     sink.write_bytes(expected);
 
-    BOOST_REQUIRE_EQUAL(stream.str().length(), expected.size());
+    REQUIRE(stream.str().length() == expected.size());
 
     auto const result = source.read_bytes();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE(stream);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE(stream);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
