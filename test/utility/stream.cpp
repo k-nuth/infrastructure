@@ -412,20 +412,19 @@ TEST_CASE("stream - roundtrip string", "[stream tests]") {
     istream_reader source(stream);
     sink.write_string(expected);
 
-    BOOST_REQUIRE_EQUAL(stream.str().length(), (expected.length() + message::variable_uint_size(expected.length())));
+    REQUIRE(stream.str().length() == (expected.length() + message::variable_uint_size(expected.length())));
 
     auto const result = source.read_string();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE(stream);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE(stream);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(read_bytes_to_eof)
-{
+TEST_CASE("stream - read bytes to eof", "[stream tests]") {
     data_chunk const expected
     {
         {
