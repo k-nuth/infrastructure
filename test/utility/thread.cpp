@@ -26,10 +26,9 @@
 
 using namespace kth;
 
-BOOST_AUTO_TEST_SUITE(thread_tests)
+// Start Boost Suite: thread tests
 
-static int get_thread_priority_test()
-{
+static int get_thread_priority_test() {
 #if defined(_WIN32)
     return GetThreadPriority(GetCurrentThread());
 #elif defined(PRIO_THREAD)
