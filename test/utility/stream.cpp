@@ -372,20 +372,19 @@ TEST_CASE("stream - roundtrip short hash", "[stream tests]") {
     istream_reader source(stream);
     sink.write_short_hash(expected);
 
-    BOOST_REQUIRE_EQUAL(stream.str().length(), expected.size());
+    REQUIRE(stream.str().length() == expected.size());
 
     auto const result = source.read_short_hash();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE(stream);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE(stream);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_fixed_string)
-{
+TEST_CASE("stream - roundtrip fixed string", "[stream tests]") {
     std::string const expected = "my string data";
 
     std::stringstream stream;
