@@ -104,11 +104,10 @@ TEST_CASE("mnemonic  dictionary  en es  no intersection", "[mnemonic tests]") {
             intersection++;
     }
 
-    BOOST_REQUIRE_EQUAL(intersection, 0u);
+    REQUIRE(intersection == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(mnemonic__dictionary__en_it__no_intersection)
-{
+TEST_CASE("mnemonic  dictionary  en it  no intersection", "[mnemonic tests]") {
     auto const& english = language::en;
     auto const& italian = language::it;
     size_t intersection = 0;
