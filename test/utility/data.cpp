@@ -35,12 +35,11 @@ TEST_CASE("data  build chunk  one slice  expected size and value", "[data tests]
         // Inline initialization doesn't work with vector (?).
         chunk1, chunk2, chunk3
     });
-    BOOST_REQUIRE_EQUAL(result.size(), 3);
-    BOOST_REQUIRE_EQUAL(result[1], expected);
+    REQUIRE(result.size() == 3);
+    REQUIRE(result[1] == expected);
 }
 
-BOOST_AUTO_TEST_CASE(data__build_chunk__three_slices__expected_size_and_value)
-{
+TEST_CASE("data  build chunk  three slices  expected size and value", "[data tests]") {
     size_t const size1 = 2;
     size_t const size2 = 1;
     size_t const size3 = 3;
