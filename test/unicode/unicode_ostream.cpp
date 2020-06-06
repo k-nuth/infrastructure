@@ -21,16 +21,15 @@ TEST_CASE("unicode ostream  conditional  test", "[unicode ostream tests]") {
     output.flush();
 
 #ifdef _MSC_VER
-    BOOST_REQUIRE(narrow_stream.str().empty());
-    BOOST_REQUIRE_EQUAL(wide_stream.str().c_str(), L"ascii");
+    REQUIRE(narrow_stream.str().empty());
+    REQUIRE(wide_stream.str().c_str() == L"ascii");
 #else
-    BOOST_REQUIRE(wide_stream.str().empty());
-    BOOST_REQUIRE_EQUAL(narrow_stream.str(), "ascii");
+    REQUIRE(wide_stream.str().empty());
+    REQUIRE(narrow_stream.str() == "ascii");
 #endif
 }
 
-BOOST_AUTO_TEST_CASE(unicode_ostream__non_ascii__test)
-{
+TEST_CASE("unicode ostream  non ascii  test", "[unicode ostream tests]") {
     auto const utf8 = "テスト";
     auto const utf16 = to_utf16(utf8);
 
