@@ -124,10 +124,10 @@ TEST_CASE("png  size one  success", "[png tests]") {
     constexpr uint32_t size = 1;
     /* result */ png::write_png(input_data, size, ostream);
 
-    BOOST_REQUIRE_EQUAL(out.size(), expected_data_length);
-    BOOST_REQUIRE_EQUAL(std::memcmp(out.data(), expected_data, expected_data_length), 0);
+    REQUIRE(out.size() == expected_data_length);
+    REQUIRE(std::memcmp(out.data() == expected_data, expected_data_length), 0);
 }
 
 #endif // WITH_PNG
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
