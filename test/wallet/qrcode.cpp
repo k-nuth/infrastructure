@@ -10,12 +10,11 @@
 using namespace kth;
 using namespace kth::infrastructure::wallet;
 
-BOOST_AUTO_TEST_SUITE(qrcode_tests)
+// Start Boost Suite: qrcode tests
 
 #ifdef WITH_QRENCODE
 
-BOOST_AUTO_TEST_CASE(qrcode__invoke__qrencode_data__success)
-{
+TEST_CASE("qrcode  invoke  qrencode data  success", "[qrcode tests]") {
     static uint8_t const expected_data[]
     {
         0x03, 0x00, 0x00, 0x00, 0x1d, 0x00, 0x00, 0x00, 0xc1, 0xc1, 0xc1, 0xc1,
