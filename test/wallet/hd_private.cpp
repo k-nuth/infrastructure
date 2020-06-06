@@ -32,18 +32,17 @@ TEST_CASE("hd private  derive private  short seed  expected", "[hd private tests
     auto const m0h12h2 = m0h12h.derive_private(2);
     auto const m0h12h2x = m0h12h2.derive_private(1000000000);
 
-    BOOST_REQUIRE_EQUAL(m.encoded(), "xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi");
-    BOOST_REQUIRE_EQUAL(m0h.encoded(), "xprv9uHRZZhk6KAJC1avXpDAp4MDc3sQKNxDiPvvkX8Br5ngLNv1TxvUxt4cV1rGL5hj6KCesnDYUhd7oWgT11eZG7XnxHrnYeSvkzY7d2bhkJ7");
-    BOOST_REQUIRE_EQUAL(m0h1.encoded(), "xprv9wTYmMFdV23N2TdNG573QoEsfRrWKQgWeibmLntzniatZvR9BmLnvSxqu53Kw1UmYPxLgboyZQaXwTCg8MSY3H2EU4pWcQDnRnrVA1xe8fs");
-    BOOST_REQUIRE_EQUAL(m0h12h.encoded(), "xprv9z4pot5VBttmtdRTWfWQmoH1taj2axGVzFqSb8C9xaxKymcFzXBDptWmT7FwuEzG3ryjH4ktypQSAewRiNMjANTtpgP4mLTj34bhnZX7UiM");
-    BOOST_REQUIRE_EQUAL(m0h12h2.encoded(), "xprvA2JDeKCSNNZky6uBCviVfJSKyQ1mDYahRjijr5idH2WwLsEd4Hsb2Tyh8RfQMuPh7f7RtyzTtdrbdqqsunu5Mm3wDvUAKRHSC34sJ7in334");
-    BOOST_REQUIRE_EQUAL(m0h12h2x.encoded(), "xprvA41z7zogVVwxVSgdKUHDy1SKmdb533PjDz7J6N6mV6uS3ze1ai8FHa8kmHScGpWmj4WggLyQjgPie1rFSruoUihUZREPSL39UNdE3BBDu76");
+    REQUIRE(m.encoded() == "xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi");
+    REQUIRE(m0h.encoded() == "xprv9uHRZZhk6KAJC1avXpDAp4MDc3sQKNxDiPvvkX8Br5ngLNv1TxvUxt4cV1rGL5hj6KCesnDYUhd7oWgT11eZG7XnxHrnYeSvkzY7d2bhkJ7");
+    REQUIRE(m0h1.encoded() == "xprv9wTYmMFdV23N2TdNG573QoEsfRrWKQgWeibmLntzniatZvR9BmLnvSxqu53Kw1UmYPxLgboyZQaXwTCg8MSY3H2EU4pWcQDnRnrVA1xe8fs");
+    REQUIRE(m0h12h.encoded() == "xprv9z4pot5VBttmtdRTWfWQmoH1taj2axGVzFqSb8C9xaxKymcFzXBDptWmT7FwuEzG3ryjH4ktypQSAewRiNMjANTtpgP4mLTj34bhnZX7UiM");
+    REQUIRE(m0h12h2.encoded() == "xprvA2JDeKCSNNZky6uBCviVfJSKyQ1mDYahRjijr5idH2WwLsEd4Hsb2Tyh8RfQMuPh7f7RtyzTtdrbdqqsunu5Mm3wDvUAKRHSC34sJ7in334");
+    REQUIRE(m0h12h2x.encoded() == "xprvA41z7zogVVwxVSgdKUHDy1SKmdb533PjDz7J6N6mV6uS3ze1ai8FHa8kmHScGpWmj4WggLyQjgPie1rFSruoUihUZREPSL39UNdE3BBDu76");
 }
 
-BOOST_AUTO_TEST_CASE(hd_private__derive_public__short_seed__expected)
-{
+TEST_CASE("hd private  derive public  short seed  expected", "[hd private tests]") {
     data_chunk seed;
-    BOOST_REQUIRE(decode_base16(seed, SHORT_SEED));
+    REQUIRE(decode_base16(seed, SHORT_SEED));
 
     hd_private const m(seed, hd_private::mainnet);
     auto const m0h = m.derive_private(hd_first_hardened_key);
