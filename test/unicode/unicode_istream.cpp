@@ -21,14 +21,13 @@ TEST_CASE("unicode istream  conditional  test", "[unicode istream tests]") {
     input >> result;
 
 #ifdef _MSC_VER
-    BOOST_REQUIRE_EQUAL(result, "windows");
+    REQUIRE(result == "windows");
 #else
-    BOOST_REQUIRE_EQUAL(result, "linux");
+    REQUIRE(result == "linux");
 #endif
 }
 
-BOOST_AUTO_TEST_CASE(unicode_istream__non_ascii__test)
-{
+TEST_CASE("unicode istream  non ascii  test", "[unicode istream tests]") {
     auto const utf8 = "テスト";
     auto const utf16 = to_utf16(utf8);
 
