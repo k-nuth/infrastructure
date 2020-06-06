@@ -392,20 +392,19 @@ TEST_CASE("stream - roundtrip fixed string", "[stream tests]") {
     istream_reader source(stream);
     sink.write_string(expected, 10);
 
-    BOOST_REQUIRE_EQUAL(stream.str().length(), 10u);
+    REQUIRE(stream.str().length() == 10u);
 
     auto const result = source.read_string(10);
 
-    BOOST_REQUIRE(expected.substr(0, 10) == result);
-    BOOST_REQUIRE(stream);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected.substr(0, 10) == result);
+    REQUIRE(stream);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_string)
-{
+TEST_CASE("stream - roundtrip string", "[stream tests]") {
     std::string const expected = "my string data";
 
     std::stringstream stream;
