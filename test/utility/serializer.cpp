@@ -262,15 +262,14 @@ TEST_CASE("serializer - roundtrip variable uint little endian 8 bytes", "[serial
 
     auto const result = source.read_variable_little_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_1_byte)
-{
+TEST_CASE("serializer - roundtrip variable uint big endian 1 byte", "[serializer tests]") {
     uint64_t const expected = 0xAA;
     data_chunk data(1);
     auto source = make_safe_deserializer(data.begin(), data.end());
