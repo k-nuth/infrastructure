@@ -78,13 +78,12 @@ TEST_CASE("unicode  string round trip  wide literal  test", "[unicode tests]") {
     BOOST_REQUIRE_NE(widened.c_str(), utf16);
     BOOST_REQUIRE_NE(narrowed, utf8);
 #else
-    BOOST_REQUIRE_EQUAL(widened.c_str(), utf16);
-    BOOST_REQUIRE_EQUAL(narrowed, utf8);
+    REQUIRE(widened.c_str() == utf16);
+    REQUIRE(narrowed == utf8);
 #endif
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_array__ascii__test)
-{
+TEST_CASE("unicode  to utf8 array  ascii  test", "[unicode tests]") {
     char utf8[20];
 
     // Text buffer provides null termination for test comparison.
