@@ -260,12 +260,11 @@ TEST_CASE("data  to array slice  double long hash  expected", "[data tests]") {
     };
 
     auto const result = to_array<long_hash_size>(source);
-    BOOST_REQUIRE_EQUAL(result[0], l);
-    BOOST_REQUIRE_EQUAL(result[long_hash_size / 2], u);
+    REQUIRE(result[0] == l);
+    REQUIRE(result[long_hash_size / 2] == u);
 }
 
-BOOST_AUTO_TEST_CASE(data__to_chunk__long_hash__expected)
-{
+TEST_CASE("data  to chunk  long hash  expected", "[data tests]") {
     uint8_t const l = 42;
     uint8_t const u = 24;
     const long_hash source
