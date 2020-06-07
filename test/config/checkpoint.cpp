@@ -105,23 +105,23 @@ checkpoint::list const test_checkpoints_list({
     checkpoint{CHECKPOINT_C}
 });
 
-BOOST_AUTO_TEST_CASE(checkpoint__ostream__empty__expected) {
+TEST_CASE("checkpoint  ostream  empty  expected", "[checkpoint  ostream]") {
     std::stringstream serialized;
     serialized << checkpoint::list();
-    BOOST_REQUIRE_EQUAL(serialized.str(), "");
+    REQUIRE(serialized.str() == "");
 }
 
-BOOST_AUTO_TEST_CASE(checkpoint__ostream__populated__expected) {
+TEST_CASE("checkpoint  ostream  populated  expected", "[checkpoint  ostream]") {
     std::stringstream serialized;
     serialized << test_checkpoints_list;
-    BOOST_REQUIRE_EQUAL(serialized.str(), CHECKPOINT_ABC);
+    REQUIRE(serialized.str() == CHECKPOINT_ABC);
 }
 
-BOOST_AUTO_TEST_CASE(checkpoint__ostream__boost_lexical_cast__expected) {
+TEST_CASE("checkpoint  ostream  boost lexical cast  expected", "[checkpoint  ostream]") {
     auto const serialized = boost::lexical_cast<std::string>(test_checkpoints_list);
-    BOOST_REQUIRE_EQUAL(serialized, CHECKPOINT_ABC);
+    REQUIRE(serialized == CHECKPOINT_ABC);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
