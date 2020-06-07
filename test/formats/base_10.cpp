@@ -103,4 +103,4 @@
 // TEST_FORMAT(leading_zero, "0.42", 42000, mbtc_decimal_places)
 // TEST_FORMAT(internal_leading_zero, "0.042", 4200, mbtc_decimal_places)
 
-// BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
