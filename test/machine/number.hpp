@@ -48,20 +48,17 @@ sizeof(number_values) / sizeof(number_values[0]);
 constexpr size_t number_offsets_count =
 sizeof(number_offsets) / sizeof(number_offsets[0]);
 
-struct number_buffer
-{
+struct number_buffer {
     int32_t number;
     kth::data_chunk bytes;
 };
 
-struct number_subtract
-{
+struct number_subtract {
     number_buffer forward;
     number_buffer reverse;
 };
 
-struct number_compare
-{
+struct number_compare {
     bool eq;
     bool ne;
     bool lt;
