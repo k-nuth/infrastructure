@@ -28,8 +28,8 @@ using namespace kth::infrastructure::machine;
 // Helpers
 // ----------------------------------------------------------------------------
 
-#define BI_SCRIPT_NUMBER_CHECK_EQ(buffer_num, script_num, value, offset, test) \
-    BOOST_CHECK_MESSAGE( \
+#define KI_SCRIPT_NUMBER_CHECK_EQ(buffer_num, script_num, value, offset, test) \
+    CHECK_MESSAGE( \
     	encode_base16((buffer_num).bytes) == encode_base16((script_num).data()), \
     	"\n\tvalue index : " << value << \
 		"\n\tvalue       : " << number_values[value] << \
