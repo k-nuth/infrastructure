@@ -94,12 +94,11 @@ TEST_CASE("unicode  to utf8 array  ascii  test", "[unicode tests]") {
     std::string const expected_utf8("ascii");
 
     auto const size = to_utf8(utf8, sizeof(utf8), utf16.c_str(), (int)utf16.size());
-    BOOST_REQUIRE_EQUAL(utf8, expected_utf8);
-    BOOST_REQUIRE_EQUAL(size, expected_utf8.size());
+    REQUIRE(utf8 == expected_utf8);
+    REQUIRE(size == expected_utf8.size());
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_array__non_ascii__test)
-{
+TEST_CASE("unicode  to utf8 array  non ascii  test", "[unicode tests]") {
     char utf8[36];
 
     // Text buffer provides null termination for test comparison.
