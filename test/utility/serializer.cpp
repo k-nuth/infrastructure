@@ -400,15 +400,14 @@ TEST_CASE("serializer - roundtrip short hash", "[serializer tests]") {
 
     auto const result = source.read_short_hash();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_fixed_string)
-{
+TEST_CASE("serializer - roundtrip fixed string", "[serializer tests]") {
     std::string const expected = "my string data";
 
     data_chunk data(expected.size());
