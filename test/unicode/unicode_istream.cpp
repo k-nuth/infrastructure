@@ -38,11 +38,10 @@ TEST_CASE("unicode istream  non ascii  test", "[unicode istream tests]") {
     std::string result;
     input >> result;
 
-    BOOST_REQUIRE_EQUAL(result, utf8);
+    REQUIRE(result == utf8);
 }
 
-BOOST_AUTO_TEST_CASE(unicode_istream__tokenization__test)
-{
+TEST_CASE("unicode istream  tokenization  test", "[unicode istream tests]") {
     auto const utf8 = "テスト\rス\nト\tテス スト";
     auto const utf16 = to_utf16(utf8);
 
