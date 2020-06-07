@@ -355,15 +355,14 @@ TEST_CASE("serializer - roundtrip data chunk", "[serializer tests]") {
 
     auto const result = source.read_bytes(expected.size());
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_hash)
-{
+TEST_CASE("serializer - roundtrip hash", "[serializer tests]") {
     static hash_digest const expected
     {
         0x4d, 0xc9, 0x32, 0x18, 0x4d, 0x86, 0xa0, 0xb2, 0xe4, 0xba, 0x65, 0xa8,
