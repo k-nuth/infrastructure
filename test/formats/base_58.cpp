@@ -43,34 +43,32 @@ TEST_CASE("base58 address test", "[base 58 tests]") {
         }
     };
     std::string address = "19TbMSWwHvnxAKy12iNm3KdbGfzfaMFViT";
-    BOOST_REQUIRE(encode_base58(pubkey) == address);
+    REQUIRE(encode_base58(pubkey) == address);
     data_chunk decoded;
-    BOOST_REQUIRE(decode_base58(decoded, address));
-    BOOST_REQUIRE(decoded == pubkey);
+    REQUIRE(decode_base58(decoded, address));
+    REQUIRE(decoded == pubkey);
 }
 
-BOOST_AUTO_TEST_CASE(is_b58)
-{
+TEST_CASE("is b58", "[base 58 tests]") {
     std::string const base58_chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
     for (char ch: base58_chars)
     {
-        BOOST_REQUIRE(is_base58(ch));
+        REQUIRE(is_base58(ch));
     }
 
     std::string const non_base58_chars = "0OIl+- //#";
     for (char ch: non_base58_chars)
     {
-        BOOST_REQUIRE(!is_base58(ch));
+        REQUIRE(!is_base58(ch));
     }
 
-    BOOST_REQUIRE(is_base58("abcdjkk11"));
-    BOOST_REQUIRE(!is_base58("abcdjkk011"));
+    REQUIRE(is_base58("abcdjkk11"));
+    REQUIRE(!is_base58("abcdjkk011"));
 }
 
-BOOST_AUTO_TEST_CASE(base58_array_test)
-{
+TEST_CASE("base58 array test", "[base 58 tests]") {
     byte_array<25> converted;
-    BOOST_REQUIRE(decode_base58(converted, "19TbMSWwHvnxAKy12iNm3KdbGfzfaMFViT"));
+    REQUIRE(decode_base58(converted, "19TbMSWwHvnxAKy12iNm3KdbGfzfaMFViT"));
     const byte_array<25> expected
     {
         {
