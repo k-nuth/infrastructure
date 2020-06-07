@@ -157,15 +157,14 @@ TEST_CASE("printer  format parameters table  unsorted named three options no mat
         arguments.add("forty-two", 42);
         arguments.add("THIRD", -1));
     CONFIG_PRINTER_INITIALIZE(3u, 2u);
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(false),
+    REQUIRE(help.format_parameters_table(false) ==
         "--third              Third option description.                           \n"
         "-f [--first]         First option description.                           \n"
         "-x [--second]        Second option description.                          \n"
     );
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__named_three_options_two_matching_arguments__one_option)
-{
+TEST_CASE("printer  format parameters table  named three options two matching arguments  one option", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("first,f", "First option description.")
         ("second,x", "Second option description.")
