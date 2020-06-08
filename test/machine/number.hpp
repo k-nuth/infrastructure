@@ -67,7 +67,7 @@ struct number_compare {
     bool ge;
 };
 
-number const_buffer number_adds[11][9][12] =
+number_buffer const number_adds[11][9][12] =
 {
     {
         {
