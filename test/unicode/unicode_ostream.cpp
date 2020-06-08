@@ -41,16 +41,15 @@ TEST_CASE("unicode ostream  non ascii  test", "[unicode ostream tests]") {
     output.flush();
 
 #ifdef _MSC_VER
-    BOOST_REQUIRE(narrow_stream.str().empty());
-    BOOST_REQUIRE_EQUAL(wide_stream.str().c_str(), utf16.c_str());
+    REQUIRE(narrow_stream.str().empty());
+    REQUIRE(wide_stream.str().c_str() == utf16.c_str());
 #else
-    BOOST_REQUIRE(wide_stream.str().empty());
-    BOOST_REQUIRE_EQUAL(narrow_stream.str(), utf8);
+    REQUIRE(wide_stream.str().empty());
+    REQUIRE(narrow_stream.str() == utf8);
 #endif
 }
 
-BOOST_AUTO_TEST_CASE(unicode_ostream__overflow__test)
-{
+TEST_CASE("unicode ostream  overflow  test", "[unicode ostream tests]") {
     // This is a 20x10 matrix of 3 bytes per character triples (1800 bytes).
     // The buffer is 256 (wide) and 1024 (narrow), resulting in a potential
     // character split because 256 is not a multiple of 3. The overflow
