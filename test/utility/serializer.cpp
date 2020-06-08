@@ -80,15 +80,14 @@ TEST_CASE("serializer - roundtrip byte", "[serializer tests]") {
     sink.write_byte(expected);
     auto const result = source.read_byte();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_error_code)
-{
+TEST_CASE("serializer - roundtrip error code", "[serializer tests]") {
     code const expected(error::futuristic_timestamp);
     data_chunk data(4);
     auto source = make_safe_deserializer(data.begin(), data.end());
