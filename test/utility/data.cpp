@@ -50,12 +50,11 @@ TEST_CASE("data  build chunk  three slices  expected size and value", "[data tes
         std::array<uint8_t, size2>{ { expected } },
         std::array<uint8_t, size3>{ { 0, 0, 0 } }
     });
-    BOOST_REQUIRE_EQUAL(result.size(), size1 + size2 + size3);
-    BOOST_REQUIRE_EQUAL(result[size1], expected);
+    REQUIRE(result.size() == size1 + size2 + size3);
+    REQUIRE(result[size1] == expected);
 }
 
-BOOST_AUTO_TEST_CASE(data__build_chunk__extra_reserve__expected_size_and_capacity)
-{
+TEST_CASE("data  build chunk  extra reserve  expected size and capacity", "[data tests]") {
     uint8_t const size1 = 2;
     uint8_t const size2 = 1;
     uint8_t const size3 = 3;
