@@ -38,7 +38,7 @@ using namespace kth::infrastructure::machine;
 		"\n\ttest        : " << test << \
 		"\n\tFAILURE     : [" << encode_base16((buffer_num).bytes) << " != " << \
 		encode_base16((script_num).data()) << "]"); \
-    BOOST_CHECK_MESSAGE((buffer_num).number == (script_num).int32(), \
+    CHECK_MESSAGE((buffer_num).number == (script_num).int32(), \
        	"\n\tvalue index : " << value << \
    		"\n\tvalue       : " << number_values[value] << \
    		"\n\toffset index: " << offset << \
