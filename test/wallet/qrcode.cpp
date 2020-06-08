@@ -94,10 +94,10 @@ TEST_CASE("qrcode  invoke  qrencode data  success", "[qrcode tests]") {
     static std::string const address = "bitcoin:1L4M4obtbpexxuKpLrDimMEYWB2Rx2yzus";
     auto const encoded_qrcode = qr::encode(to_chunk(address));
 
-    BOOST_REQUIRE_EQUAL(encoded_qrcode.size(), expected_data_length);
-    BOOST_REQUIRE(std::memcmp(encoded_qrcode.data(), expected_data, expected_data_length) == 0);
+    REQUIRE(encoded_qrcode.size() == expected_data_length);
+    REQUIRE(std::memcmp(encoded_qrcode.data(), expected_data, expected_data_length) == 0);
 }
 
 #endif // WITH_QRENCODE
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
