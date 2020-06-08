@@ -173,23 +173,21 @@ TEST_CASE("printer  format parameters table  named three options two matching ar
         arguments.add("second", 42);
         arguments.add("THIRD", -1));
     CONFIG_PRINTER_INITIALIZE(3u, 3u);
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(false),
+    REQUIRE(help.format_parameters_table(false) ==
         "-f [--first]         First option description.                           \n"
     );
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__positional_three_options__empty)
-{
+TEST_CASE("printer  format parameters table  positional three options  empty", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("long", "Long name only.")
         ("short_long,s", "Long and short name.")
         (",m", "Short name only."));
     CONFIG_PRINTER_INITIALIZE(3u, 0u);
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(true), "");
+    REQUIRE(help.format_parameters_table(true) == "");
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__positional_three_options_one_matching_argument__one_argument)
-{
+TEST_CASE("printer  format parameters table  positional three options one matching argument  one argument", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("first,f", "First option description.")
         ("second,x", "Second option description.")
