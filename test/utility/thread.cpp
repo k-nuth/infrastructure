@@ -38,8 +38,7 @@ static int get_thread_priority_test() {
 #endif
 }
 
-void set_thread_priority_test(int priority)
-{
+void set_thread_priority_test(int priority) {
 #if defined(_WIN32)
     SetThreadPriority(GetCurrentThread(), priority);
 #elif defined(PRIO_THREAD)
