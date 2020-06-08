@@ -78,7 +78,7 @@ TEST_CASE("base58 array test", "[base 58 tests]") {
             0x64
         }
     };
-    BOOST_REQUIRE(converted == expected);
+    REQUIRE(converted == expected);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
