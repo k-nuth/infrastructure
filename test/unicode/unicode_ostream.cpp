@@ -88,12 +88,12 @@ TEST_CASE("unicode ostream  overflow  test", "[unicode ostream tests]") {
     output.flush();
 
 #ifdef _MSC_VER
-    BOOST_REQUIRE(narrow_stream.str().empty());
-    BOOST_REQUIRE_EQUAL(wide_stream.str().c_str(), utf16_600_chars.c_str());
+    REQUIRE(narrow_stream.str().empty());
+    REQUIRE(wide_stream.str().c_str() == utf16_600_chars.c_str());
 #else
-    BOOST_REQUIRE(wide_stream.str().empty());
-    BOOST_REQUIRE_EQUAL(narrow_stream.str(), utf8_1800_bytes);
+    REQUIRE(wide_stream.str().empty());
+    REQUIRE(narrow_stream.str() == utf8_1800_bytes);
 #endif
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
