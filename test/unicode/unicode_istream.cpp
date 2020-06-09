@@ -52,19 +52,18 @@ TEST_CASE("unicode istream  tokenization  test", "[unicode istream tests]") {
     std::string result;
 
     input >> result;
-    BOOST_REQUIRE_EQUAL(result, "テスト");
+    REQUIRE(result == "テスト");
     input >> result;
-    BOOST_REQUIRE_EQUAL(result, "ス");
+    REQUIRE(result == "ス");
     input >> result;
-    BOOST_REQUIRE_EQUAL(result, "ト");
+    REQUIRE(result == "ト");
     input >> result;
-    BOOST_REQUIRE_EQUAL(result, "テス");
+    REQUIRE(result == "テス");
     input >> result;
-    BOOST_REQUIRE_EQUAL(result, "スト");
+    REQUIRE(result == "スト");
 }
 
-BOOST_AUTO_TEST_CASE(unicode_istream__overflow__test)
-{
+TEST_CASE("unicode istream  overflow  test", "[unicode istream tests]") {
     // This is a 20x10 matrix of 3 bytes per character triples (1800 bytes).
     // The buffer is 256 (wide) and 1024 (narrow), resulting in a potential
     // character split because 256 is not a multiple of 3. However sgetn()
