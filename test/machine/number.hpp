@@ -1735,7 +1735,7 @@ number_buffer const number_adds[11][9][12] =
     ////},
 };
 
-number const_buffer number_negates[11][9][12] =
+number_buffer const number_negates[11][9][12] =
 {
     {
         {
