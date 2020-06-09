@@ -77,77 +77,77 @@ bool negate_overflow64(int64_t const number) {
 
 static 
 void CheckAdd(int64_t const num1, int64_t const num2, size_t value, size_t offset, size_t test) {
-	number const_buffer& add = number_adds[value][offset][test];
+	number_buffer const& add = number_adds[value][offset][test];
     number const scriptnum1(num1);
     number const scriptnum2(num2);
 
     if ( ! add_overflow64(num1, num2)) {
-        BI_SCRIPT_NUMBER_CHECK_EQ(add, scriptnum1 + scriptnum2, value, offset, test);
-        BI_SCRIPT_NUMBER_CHECK_EQ(add, scriptnum1 + num2, value, offset, test);
-        BI_SCRIPT_NUMBER_CHECK_EQ(add, scriptnum2 + num1, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(add, scriptnum1 + scriptnum2, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(add, scriptnum1 + num2, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(add, scriptnum2 + num1, value, offset, test);
     }
 }
 
 static 
 void CheckNegate(int64_t const num, size_t value, size_t offset, size_t test) {
-	number const_buffer& negated = number_negates[value][offset][test];
+	number_buffer const& negated = number_negates[value][offset][test];
     number const scriptnum(num);
 
     if ( ! negate_overflow64(num)) {
-        BI_SCRIPT_NUMBER_CHECK_EQ(negated, -scriptnum, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(negated, -scriptnum, value, offset, test);
     }
 }
 
 static 
 void CheckSubtract(int64_t const num1, int64_t const num2, size_t value, size_t offset, size_t test) {
-	number const_subtract& subtract = number_subtracts[value][offset][test];
+	number_subtract const& subtract = number_subtracts[value][offset][test];
     number const scriptnum1(num1);
     number const scriptnum2(num2);
 
     if ( ! subtract_overflow64(num1, num2)) {
-        BI_SCRIPT_NUMBER_CHECK_EQ(subtract.forward, scriptnum1 - scriptnum2, value, offset, test);
-        BI_SCRIPT_NUMBER_CHECK_EQ(subtract.forward, scriptnum1 - num2, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(subtract.forward, scriptnum1 - scriptnum2, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(subtract.forward, scriptnum1 - num2, value, offset, test);
     }
 
     if ( ! subtract_overflow64(num2, num1)) {
-        BI_SCRIPT_NUMBER_CHECK_EQ(subtract.reverse, scriptnum2 - scriptnum1, value, offset, test);
-        BI_SCRIPT_NUMBER_CHECK_EQ(subtract.reverse, scriptnum2 - num1, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(subtract.reverse, scriptnum2 - scriptnum1, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(subtract.reverse, scriptnum2 - num1, value, offset, test);
     }
 }
 
 static 
 void CheckCompare(int64_t const num1, int64_t const num2, size_t value, size_t offset, size_t test) {
-    number const_compare& compare = number_compares[value][offset][test];
+    number_compare const& compare = number_compares[value][offset][test];
     number const scriptnum1(num1);
     number const scriptnum2(num2);
 
-    BOOST_CHECK(scriptnum1 == scriptnum1);
-    BOOST_CHECK(scriptnum1 >= scriptnum1);
-    BOOST_CHECK(scriptnum1 <= scriptnum1);
-    BOOST_CHECK(!(scriptnum1 != scriptnum1));
-    BOOST_CHECK(!(scriptnum1 < scriptnum1));
-    BOOST_CHECK(!(scriptnum1 > scriptnum1));
+    CHECK(scriptnum1 == scriptnum1);
+    CHECK(scriptnum1 >= scriptnum1);
+    CHECK(scriptnum1 <= scriptnum1);
+    CHECK(!(scriptnum1 != scriptnum1));
+    CHECK(!(scriptnum1 < scriptnum1));
+    CHECK(!(scriptnum1 > scriptnum1));
 
-    BOOST_CHECK(scriptnum1 == num1);
-    BOOST_CHECK(scriptnum1 >= num1);
-    BOOST_CHECK(scriptnum1 <= num1);
-    BOOST_CHECK(!(scriptnum1 != num1));
-    BOOST_CHECK(!(scriptnum1 < num1));
-    BOOST_CHECK(!(scriptnum1 > num1));
+    CHECK(scriptnum1 == num1);
+    CHECK(scriptnum1 >= num1);
+    CHECK(scriptnum1 <= num1);
+    CHECK(!(scriptnum1 != num1));
+    CHECK(!(scriptnum1 < num1));
+    CHECK(!(scriptnum1 > num1));
 
-    BOOST_CHECK_EQUAL(is(compare.eq), (scriptnum1 == scriptnum2));
-    BOOST_CHECK_EQUAL(is(compare.ge), (scriptnum1 >= scriptnum2));
-    BOOST_CHECK_EQUAL(is(compare.le), (scriptnum1 <= scriptnum2));
-    BOOST_CHECK_EQUAL(is(compare.ne), (scriptnum1 != scriptnum2));
-    BOOST_CHECK_EQUAL(is(compare.lt), (scriptnum1 < scriptnum2));
-    BOOST_CHECK_EQUAL(is(compare.gt), (scriptnum1 > scriptnum2));
+    CHECK(is(compare.eq) == (scriptnum1 == scriptnum2));
+    CHECK(is(compare.ge) == (scriptnum1 >= scriptnum2));
+    CHECK(is(compare.le) == (scriptnum1 <= scriptnum2));
+    CHECK(is(compare.ne) == (scriptnum1 != scriptnum2));
+    CHECK(is(compare.lt) == (scriptnum1 < scriptnum2));
+    CHECK(is(compare.gt) == (scriptnum1 > scriptnum2));
 
-    BOOST_CHECK_EQUAL(is(compare.eq), (scriptnum1 == num2));
-    BOOST_CHECK_EQUAL(is(compare.ge), (scriptnum1 >= num2));
-    BOOST_CHECK_EQUAL(is(compare.le), (scriptnum1 <= num2));
-    BOOST_CHECK_EQUAL(is(compare.ne), (scriptnum1 != num2));
-    BOOST_CHECK_EQUAL(is(compare.lt), (scriptnum1 < num2));
-    BOOST_CHECK_EQUAL(is(compare.gt), (scriptnum1 > num2));
+    CHECK(is(compare.eq) == (scriptnum1 == num2));
+    CHECK(is(compare.ge) == (scriptnum1 >= num2));
+    CHECK(is(compare.le) == (scriptnum1 <= num2));
+    CHECK(is(compare.ne) == (scriptnum1 != num2));
+    CHECK(is(compare.lt) == (scriptnum1 < num2));
+    CHECK(is(compare.gt) == (scriptnum1 > num2));
 }
 
 #ifndef ENABLE_DATAGEN
