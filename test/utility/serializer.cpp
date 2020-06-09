@@ -96,15 +96,14 @@ TEST_CASE("serializer - roundtrip error code", "[serializer tests]") {
     sink.write_error_code(expected);
     auto const result = source.read_error_code();
 
-    BOOST_REQUIRE_EQUAL(expected, result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_2_bytes_little_endian)
-{
+TEST_CASE("serializer - roundtrip 2 bytes little endian", "[serializer tests]") {
     const uint16_t expected = 43707;
     data_chunk data(2);
     auto source = make_safe_deserializer(data.begin(), data.end());
