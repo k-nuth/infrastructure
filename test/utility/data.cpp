@@ -65,21 +65,19 @@ TEST_CASE("data  build chunk  extra reserve  expected size and capacity", "[data
         std::array<uint8_t, size2>{ { 0 } },
         std::array<uint8_t, size3>{ { 0, 0, 0 } }
     }, reserve);
-    BOOST_REQUIRE_EQUAL(result.size(), size1 + size2 + size3);
-    BOOST_REQUIRE_EQUAL(result.capacity(), size1 + size2 + size3 + reserve);
+    REQUIRE(result.size() == size1 + size2 + size3);
+    REQUIRE(result.capacity() == size1 + size2 + size3 + reserve);
 }
 
-BOOST_AUTO_TEST_CASE(data__build_array__empty__true_unchanged)
-{
+TEST_CASE("data  build array  empty  true unchanged", "[data tests]") {
     uint8_t const expected = 42;
     std::array<uint8_t, 3> value{ { 0, expected, 0 } };
     auto const result = build_array(value, {});
-    BOOST_REQUIRE(result);
-    BOOST_REQUIRE_EQUAL(value[1], expected);
+    REQUIRE(result);
+    REQUIRE(value[1] == expected);
 }
 
-BOOST_AUTO_TEST_CASE(data__build_array__under_capacity__true_excess_unchanged)
-{
+TEST_CASE("data  build array  under capacity  true excess unchanged", "[data tests]") {
     uint8_t const expected1 = 24;
     uint8_t const expected2 = 42;
     uint8_t const expected3 = 48;
