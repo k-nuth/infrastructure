@@ -196,13 +196,12 @@ TEST_CASE("printer  format parameters table  positional three options one matchi
         arguments.add("SECOND", 42);
         arguments.add("THIRD", -1));
     CONFIG_PRINTER_INITIALIZE(3u, 3u);
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(true),
+    REQUIRE(help.format_parameters_table(true) ==
         "THIRD                Third option description.                           \n"
     );
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__reverse_positional_three_options_three_matching_arguments__three_unsorted_arguments)
-{
+TEST_CASE("printer  format parameters table  reverse positional three options three matching arguments  three unsorted arguments", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("third", "Third option description.")
         ("SECOND", "Second option description.")
