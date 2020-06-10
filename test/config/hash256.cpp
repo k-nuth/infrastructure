@@ -2,25 +2,24 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 #include <boost/program_options.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 using namespace kth::infrastructure::config;
 
-BOOST_AUTO_TEST_SUITE(hash256_tests)
+// Start Boost Suite: hash256 tests
 
-BOOST_AUTO_TEST_SUITE(hash256__construct)
+// Start Boost Suite: hash256  construct
 
-BOOST_AUTO_TEST_CASE(hash256__construct__default__null_hash)
-{
+TEST_CASE("hash256  construct  default  null hash", "[hash256  construct]") {
     const hash256 uninitialized_hash;
     auto const expectation = encode_hash(kth::null_hash);
     auto const result = encode_hash(uninitialized_hash);
-    BOOST_REQUIRE_EQUAL(expectation, result);
+    REQUIRE(expectation == result);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite

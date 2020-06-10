@@ -5,7 +5,7 @@
 #include <sstream>
 
 #include <boost/program_options.hpp>
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 
 #include <kth/infrastructure.hpp>
 
@@ -14,16 +14,16 @@ using namespace kth::infrastructure;
 using namespace kth::infrastructure::config;
 using namespace boost::program_options;
 
-BOOST_AUTO_TEST_SUITE(authority_tests)
+// Start Boost Suite: authority tests
 
 // tools.ietf.org/html/rfc4291#section-2.2
-#define BI_AUTHORITY_IPV4_ADDRESS "1.2.240.1"
-#define BI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS "::"
-#define BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "2001:db8::2"
-#define BI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS "::0102:f001"
-#define BI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "::1.2.240.1"
-#define BI_AUTHORITY_IPV4_BOGUS_ADDRESS "0.0.0.57:256"
-#define BI_AUTHORITY_IPV6_BOGUS_IPV4_ADDRESS "[::ffff:0:39]:256"
+#define KI_AUTHORITY_IPV4_ADDRESS "1.2.240.1"
+#define KI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS "::"
+#define KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "2001:db8::2"
+#define KI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS "::0102:f001"
+#define KI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "::1.2.240.1"
+#define KI_AUTHORITY_IPV4_BOGUS_ADDRESS "0.0.0.57:256"
+#define KI_AUTHORITY_IPV6_BOGUS_IPV4_ADDRESS "[::ffff:0:39]:256"
 
 // tools.ietf.org/html/rfc4291#section-2.5.2
 constexpr 
@@ -38,517 +38,447 @@ message::ip_address test_mapped_ip_address = {
     0x00, 0x00, 0xff, 0xff, 0x01, 0x02, 0xf0, 0x01};
 
 // tools.ietf.org/html/rfc4291#section-2.5.5.1
-constexpr message::ip_address test_compatible_ip_address =
-{
+constexpr message::ip_address test_compatible_ip_address = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0xf0, 0x01
 };
 
-constexpr message::ip_address test_ipv6_address =
-{
+constexpr message::ip_address test_ipv6_address = {
     0x20, 0x01, 0x0d, 0xb8, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02
 };
 
-static bool ip_equal(message::ip_address const& left,
-    message::ip_address const& right)
-{
-    return std::equal(left.begin(), left.end(), right.begin());
+static bool ip_equal(message::ip_address const& a, message::ip_address const& b) {
+    return std::equal(a.begin(), a.end(), b.begin());
 }
 
-static bool net_equal(message::network_address const& left,
-    message::network_address const& right)
-{
-    return ip_equal(left.ip(), right.ip()) && (left.port() == right.port());
+static bool net_equal(message::network_address const& a, message::network_address const& b) {
+    return ip_equal(a.ip(), b.ip()) && (a.port() == b.port());
 }
 
 // ------------------------------------------------------------------------- //
 
-BOOST_AUTO_TEST_SUITE(authority__port)
+// Start Boost Suite: authority  port
 
-BOOST_AUTO_TEST_CASE(authority__port__default__zero)
-{
+TEST_CASE("authority  port  default  zero", "[authority  port]") {
     const authority host;
-    BOOST_REQUIRE_EQUAL(host.port(), 0u);
+    REQUIRE(host.port() == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(authority__port__copy__expected)
-{
+TEST_CASE("authority  port  copy  expected", "[authority  port]") {
     const uint16_t expected_port = 42;
     const authority other(test_ipv6_address, expected_port);
     const authority host(other);
-    BOOST_REQUIRE_EQUAL(host.port(), expected_port);
+    REQUIRE(host.port() == expected_port);
 }
 
-BOOST_AUTO_TEST_CASE(authority__port__ipv4_authority__expected)
-{
+TEST_CASE("authority  port  ipv4 authority  expected", "[authority  port]") {
     const uint16_t expected_port = 42;
     std::stringstream address;
-    address << BI_AUTHORITY_IPV4_ADDRESS ":" << expected_port;
+    address << KI_AUTHORITY_IPV4_ADDRESS ":" << expected_port;
     const authority host(address.str());
-    BOOST_REQUIRE_EQUAL(host.port(), expected_port);
+    REQUIRE(host.port() == expected_port);
 }
 
-BOOST_AUTO_TEST_CASE(authority__port__ipv6_authority__expected)
-{
+TEST_CASE("authority  port  ipv6 authority  expected", "[authority  port]") {
     const uint16_t expected_port = 42;
     std::stringstream address;
-    address << "[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]:" << expected_port;
+    address << "[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]:" << expected_port;
     const authority host(address.str());
-    BOOST_REQUIRE_EQUAL(host.port(), expected_port);
+    REQUIRE(host.port() == expected_port);
 }
 
-BOOST_AUTO_TEST_CASE(authority__port__network_address__expected)
-{
+TEST_CASE("authority  port  network address  expected", "[authority  port]") {
     const uint16_t expected_port = 42;
-    const message::network_address address
-    {
+    message::network_address const address {
         0, 0, test_ipv6_address, expected_port
     };
 
     const authority host(address);
-    BOOST_REQUIRE_EQUAL(host.port(), expected_port);
+    REQUIRE(host.port() == expected_port);
 }
 
-BOOST_AUTO_TEST_CASE(authority__port__ip_address__expected)
-{
+TEST_CASE("authority  port  ip address  expected", "[authority  port]") {
     const uint16_t expected_port = 42;
     const authority host(test_ipv6_address, expected_port);
-    BOOST_REQUIRE_EQUAL(host.port(), expected_port);
+    REQUIRE(host.port() == expected_port);
 }
 
-BOOST_AUTO_TEST_CASE(authority__port__hostname__expected)
-{
+TEST_CASE("authority  port  hostname  expected", "[authority  port]") {
     const uint16_t expected_port = 42;
-    const authority host(BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS, expected_port);
-    BOOST_REQUIRE_EQUAL(host.port(), expected_port);
+    const authority host(KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS, expected_port);
+    REQUIRE(host.port() == expected_port);
 }
 
-BOOST_AUTO_TEST_CASE(authority__port__boost_address__expected)
-{
+TEST_CASE("authority  port  boost address  expected", "[authority  port]") {
     const uint16_t expected_port = 42;
-    auto const address = asio::address::from_string(BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
+    auto const address = asio::address::from_string(KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
     const authority host(address, expected_port);
-    BOOST_REQUIRE_EQUAL(host.port(), expected_port);
+    REQUIRE(host.port() == expected_port);
 }
 
-BOOST_AUTO_TEST_CASE(authority__port__boost_endpoint__expected)
-{
+TEST_CASE("authority  port  boost endpoint  expected", "[authority  port]") {
     const uint16_t expected_port = 42;
-    auto const address = asio::address::from_string(BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
+    auto const address = asio::address::from_string(KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
     asio::endpoint tcp_endpoint(address, expected_port);
     const authority host(tcp_endpoint);
-    BOOST_REQUIRE_EQUAL(host.port(), expected_port);
+    REQUIRE(host.port() == expected_port);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
 
-BOOST_AUTO_TEST_SUITE(authority__ip)
+// Start Boost Suite: authority  ip
 
-BOOST_AUTO_TEST_CASE(authority__bool__default__false)
-{
+TEST_CASE("authority  bool  default  false", "[authority  ip]") {
     const authority host;
-    BOOST_REQUIRE(!host);
+    REQUIRE(!host);
 }
 
-BOOST_AUTO_TEST_CASE(authority__bool__zero_port__false)
-{
+TEST_CASE("authority  bool  zero port  false", "[authority  ip]") {
     const authority host(test_ipv6_address, 0);
-    BOOST_REQUIRE(!host);
+    REQUIRE(!host);
 }
 
-BOOST_AUTO_TEST_CASE(authority__bool__nonzero_port__true)
-{
+TEST_CASE("authority  bool  nonzero port  true", "[authority  ip]") {
     const authority host(test_ipv6_address, 42);
-    BOOST_REQUIRE(host);
+    REQUIRE(host);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
 
-BOOST_AUTO_TEST_SUITE(authority__ip)
+// Start Boost Suite: authority  ip
 
-BOOST_AUTO_TEST_CASE(authority__ip__default__unspecified)
-{
+TEST_CASE("authority  ip  default  unspecified", "[authority  ip]") {
     const authority host;
-    BOOST_REQUIRE(ip_equal(host.ip(), test_unspecified_ip_address));
+    REQUIRE(ip_equal(host.ip(), test_unspecified_ip_address));
 }
 
-BOOST_AUTO_TEST_CASE(authority__ip__copy__expected)
-{
+TEST_CASE("authority  ip  copy  expected", "[authority  ip]") {
     auto const& expected_ip = test_ipv6_address;
     const authority other(expected_ip, 42);
     const authority host(other);
-    BOOST_REQUIRE(ip_equal(host.ip(), expected_ip));
+    REQUIRE(ip_equal(host.ip(), expected_ip));
 }
 
-BOOST_AUTO_TEST_CASE(authority__ip__ipv4_authority__expected)
-{
-    const authority host(BI_AUTHORITY_IPV4_ADDRESS ":42");
-    BOOST_REQUIRE(ip_equal(host.ip(), test_mapped_ip_address));
+TEST_CASE("authority  ip  ipv4 authority  expected", "[authority  ip]") {
+    const authority host(KI_AUTHORITY_IPV4_ADDRESS ":42");
+    REQUIRE(ip_equal(host.ip(), test_mapped_ip_address));
 }
 
-BOOST_AUTO_TEST_CASE(authority__ip__ipv6_authority__expected)
-{
-    const authority host("[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]:42");
-    BOOST_REQUIRE(ip_equal(host.ip(), test_ipv6_address));
+TEST_CASE("authority  ip  ipv6 authority  expected", "[authority  ip]") {
+    const authority host("[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]:42");
+    REQUIRE(ip_equal(host.ip(), test_ipv6_address));
 }
 
-BOOST_AUTO_TEST_CASE(authority__ip__ipv6_compatible_authority__expected)
-{
-    // BI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS A|B variants are equivalent.
-    const authority host("[" BI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS "]:42");
-    BOOST_REQUIRE(ip_equal(host.ip(), test_compatible_ip_address));
+TEST_CASE("authority  ip  ipv6 compatible authority  expected", "[authority  ip]") {
+    // KI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS A|B variants are equivalent.
+    const authority host("[" KI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS "]:42");
+    REQUIRE(ip_equal(host.ip(), test_compatible_ip_address));
 }
 
-BOOST_AUTO_TEST_CASE(authority__ip__ipv6_compatible_alternative_authority__expected)
-{
-    // BI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS A|B variants are equivalent.
-    const authority host("[" BI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]:42");
-    BOOST_REQUIRE(ip_equal(host.ip(), test_compatible_ip_address));
+TEST_CASE("authority  ip  ipv6 compatible alternative authority  expected", "[authority  ip]") {
+    // KI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS A|B variants are equivalent.
+    const authority host("[" KI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]:42");
+    REQUIRE(ip_equal(host.ip(), test_compatible_ip_address));
 }
 
-BOOST_AUTO_TEST_CASE(authority__ip__network_address__expected)
-{
+TEST_CASE("authority  ip  network address  expected", "[authority  ip]") {
     auto const& expected_ip = test_ipv6_address;
-    const message::network_address address
-    {
+    message::network_address const address {
         0, 0, test_ipv6_address, 42
     };
 
     const authority host(address);
-    BOOST_REQUIRE(ip_equal(host.ip(), test_ipv6_address));
+    REQUIRE(ip_equal(host.ip(), test_ipv6_address));
 }
 
-BOOST_AUTO_TEST_CASE(authority__ip__ip_address__expected)
-{
+TEST_CASE("authority  ip  ip address  expected", "[authority  ip]") {
     auto const& expected_ip = test_ipv6_address;
     const authority host(expected_ip, 42);
-    BOOST_REQUIRE(ip_equal(host.ip(), expected_ip));
+    REQUIRE(ip_equal(host.ip(), expected_ip));
 }
 
-BOOST_AUTO_TEST_CASE(authority__ip__ipv4_hostname__expected)
-{
-    const authority host(BI_AUTHORITY_IPV4_ADDRESS, 42);
-    BOOST_REQUIRE(ip_equal(host.ip(), test_mapped_ip_address));
+TEST_CASE("authority  ip  ipv4 hostname  expected", "[authority  ip]") {
+    const authority host(KI_AUTHORITY_IPV4_ADDRESS, 42);
+    REQUIRE(ip_equal(host.ip(), test_mapped_ip_address));
 }
 
-BOOST_AUTO_TEST_CASE(authority__ip__ipv6_host__expected)
-{
-    const authority host(BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS, 42);
-    BOOST_REQUIRE(ip_equal(host.ip(), test_ipv6_address));
+TEST_CASE("authority  ip  ipv6 host  expected", "[authority  ip]") {
+    const authority host(KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS, 42);
+    REQUIRE(ip_equal(host.ip(), test_ipv6_address));
 }
 
-BOOST_AUTO_TEST_CASE(authority__ip__ipv6_hostname__expected)
-{
-    const authority host("[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]", 42);
-    BOOST_REQUIRE(ip_equal(host.ip(), test_ipv6_address));
+TEST_CASE("authority  ip  ipv6 hostname  expected", "[authority  ip]") {
+    const authority host("[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]", 42);
+    REQUIRE(ip_equal(host.ip(), test_ipv6_address));
 }
 
-BOOST_AUTO_TEST_CASE(authority__ip__boost_address__expected)
-{
-    auto const address = asio::address::from_string(BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
+TEST_CASE("authority  ip  boost address  expected", "[authority  ip]") {
+    auto const address = asio::address::from_string(KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
     const authority host(address, 42);
-    BOOST_REQUIRE(ip_equal(host.ip(), test_ipv6_address));
+    REQUIRE(ip_equal(host.ip(), test_ipv6_address));
 }
 
-BOOST_AUTO_TEST_CASE(authority__ip__boost_endpoint__expected)
-{
-    auto const address = asio::address::from_string(BI_AUTHORITY_IPV4_ADDRESS);
+TEST_CASE("authority  ip  boost endpoint  expected", "[authority  ip]") {
+    auto const address = asio::address::from_string(KI_AUTHORITY_IPV4_ADDRESS);
     asio::endpoint tcp_endpoint(address, 42);
     const authority host(tcp_endpoint);
-    BOOST_REQUIRE(ip_equal(host.ip(), test_mapped_ip_address));
+    REQUIRE(ip_equal(host.ip(), test_mapped_ip_address));
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
 
-BOOST_AUTO_TEST_SUITE(authority__to_hostname)
+// Start Boost Suite: authority  to hostname
 
-BOOST_AUTO_TEST_CASE(authority__to_hostname__default__ipv6_unspecified)
-{
+TEST_CASE("authority  to hostname  default  ipv6 unspecified", "[authority  to hostname]") {
     const authority host;
-    BOOST_REQUIRE_EQUAL(host.to_hostname(), "[" BI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS "]");
+    REQUIRE(host.to_hostname() == "[" KI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS "]");
 }
 
-BOOST_AUTO_TEST_CASE(authority__to_hostname__ipv4_mapped_ip_address__ipv4)
-{
+TEST_CASE("authority  to hostname  ipv4 mapped ip address  ipv4", "[authority  to hostname]") {
     // A mapped ip address serializes as IPv4.
     const authority host(test_mapped_ip_address, 0);
-    BOOST_REQUIRE_EQUAL(host.to_hostname(), BI_AUTHORITY_IPV4_ADDRESS);
+    REQUIRE(host.to_hostname() == KI_AUTHORITY_IPV4_ADDRESS);
 }
 
-BOOST_AUTO_TEST_CASE(authority__to_hostname__ipv4_compatible_ip_address__ipv6_alternative)
-{
+TEST_CASE("authority  to hostname  ipv4 compatible ip address  ipv6 alternative", "[authority  to hostname]") {
     // A compatible ip address serializes as alternative notation IPv6.
     const authority host(test_compatible_ip_address, 0);
-    BOOST_REQUIRE_EQUAL(host.to_hostname(), "[" BI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]");
+    REQUIRE(host.to_hostname() == "[" KI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]");
 }
 
-BOOST_AUTO_TEST_CASE(authority__to_hostname__ipv6_address__ipv6_compressed)
-{
+TEST_CASE("authority  to hostname  ipv6 address  ipv6 compressed", "[authority  to hostname]") {
     // An ipv6 address serializes using compression.
     const authority host(test_ipv6_address, 0);
-    BOOST_REQUIRE_EQUAL(host.to_hostname(), "[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
+    REQUIRE(host.to_hostname() == "[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
 
-BOOST_AUTO_TEST_SUITE(authority__to_network_address)
+// Start Boost Suite: authority  to network address
 
-BOOST_AUTO_TEST_CASE(authority__to_network_address__default__ipv6_unspecified)
-{
-    const message::network_address expected_address
-    {
+TEST_CASE("authority  to network address  default  ipv6 unspecified", "[authority  to network address]") {
+    message::network_address const expected_address {
         0, 0, test_unspecified_ip_address, 0,
     };
 
     const authority host;
-    BOOST_REQUIRE(net_equal(host.to_network_address(), expected_address));
+    REQUIRE(net_equal(host.to_network_address(), expected_address));
 }
 
-BOOST_AUTO_TEST_CASE(authority__to_network_address__ipv4_mapped_ip_address__ipv4)
-{
-    const message::network_address expected_address
-    {
+TEST_CASE("authority  to network address  ipv4 mapped ip address  ipv4", "[authority  to network address]") {
+    message::network_address const expected_address {
         0, 0, test_mapped_ip_address, 42,
     };
 
     const authority host(expected_address.ip(), expected_address.port());
-    BOOST_REQUIRE(net_equal(host.to_network_address(), expected_address));
+    REQUIRE(net_equal(host.to_network_address(), expected_address));
 }
 
-BOOST_AUTO_TEST_CASE(authority__to_network_address__ipv4_compatible_ip_address__ipv6_alternative)
-{
-    const message::network_address expected_address
-    {
+TEST_CASE("authority  to network address  ipv4 compatible ip address  ipv6 alternative", "[authority  to network address]") {
+    message::network_address const expected_address {
         0, 0, test_compatible_ip_address, 42,
     };
 
     const authority host(expected_address.ip(), expected_address.port());
-    BOOST_REQUIRE(net_equal(host.to_network_address(), expected_address));
+    REQUIRE(net_equal(host.to_network_address(), expected_address));
 }
 
-BOOST_AUTO_TEST_CASE(authority__to_network_address__ipv6_address__ipv6_compressed)
-{
-    const message::network_address expected_address
-    {
+TEST_CASE("authority  to network address  ipv6 address  ipv6 compressed", "[authority  to network address]") {
+    message::network_address const expected_address {
         0, 0, test_ipv6_address, 42,
     };
 
     const authority host(expected_address.ip(), expected_address.port());
-    BOOST_REQUIRE(net_equal(host.to_network_address(), expected_address));
+    REQUIRE(net_equal(host.to_network_address(), expected_address));
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
 
-BOOST_AUTO_TEST_SUITE(authority__to_string)
+// Start Boost Suite: authority  to string
 
-BOOST_AUTO_TEST_CASE(authority__to_string__default__unspecified)
-{
+TEST_CASE("authority  to string  default  unspecified", "[authority  to string]") {
     const authority host;
-    BOOST_REQUIRE_EQUAL(host.to_string(), "[" BI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS "]");
+    REQUIRE(host.to_string() == "[" KI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS "]");
 }
 
-BOOST_AUTO_TEST_CASE(authority__to_string__unspecified__unspecified)
-{
-    auto const line = "[" BI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS "]";
+TEST_CASE("authority  to string  unspecified  unspecified", "[authority  to string]") {
+    auto const line = "[" KI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS "]";
     const authority host(line);
-    BOOST_REQUIRE_EQUAL(host.to_string(), line);
+    REQUIRE(host.to_string() == line);
 }
 
 // These results vary by Boost version, so these tests are disabled.
-////BOOST_AUTO_TEST_CASE(authority__to_string__bogus_ipv4__ipv4)
+////TEST_CASE("authority  to string  bogus ipv4  ipv4", "[authority  to string]")
 ////{
-////    authority host(BI_AUTHORITY_IPV4_BOGUS_ADDRESS);
-////    BOOST_REQUIRE_EQUAL(host.to_string(), BI_AUTHORITY_IPV4_BOGUS_ADDRESS);
+////    authority host(KI_AUTHORITY_IPV4_BOGUS_ADDRESS);
+////    REQUIRE(host.to_string() == KI_AUTHORITY_IPV4_BOGUS_ADDRESS);
 ////}
-////BOOST_AUTO_TEST_CASE(authority__to_string__bogus_ipv4__ipv6_compatible)
+////TEST_CASE("authority  to string  bogus ipv4  ipv6 compatible", "[authority  to string]")
 ////{
-////    authority host(BI_AUTHORITY_IPV4_BOGUS_ADDRESS);
-////    BOOST_REQUIRE_EQUAL(host.to_string(), BI_AUTHORITY_IPV6_BOGUS_IPV4_ADDRESS);
+////    authority host(KI_AUTHORITY_IPV4_BOGUS_ADDRESS);
+////    REQUIRE(host.to_string() == KI_AUTHORITY_IPV6_BOGUS_IPV4_ADDRESS);
 ////}
 
-BOOST_AUTO_TEST_CASE(authority__to_string__ipv4__expected)
-{
-    auto const line = BI_AUTHORITY_IPV4_ADDRESS;
+TEST_CASE("authority  to string  ipv4  expected", "[authority  to string]") {
+    auto const line = KI_AUTHORITY_IPV4_ADDRESS;
     const authority host(line);
-    BOOST_REQUIRE_EQUAL(host.to_string(), line);
+    REQUIRE(host.to_string() == line);
 }
 
-BOOST_AUTO_TEST_CASE(authority__to_string__ipv4_port__expected)
-{
-    auto const line = BI_AUTHORITY_IPV4_ADDRESS ":42";
+TEST_CASE("authority  to string  ipv4 port  expected", "[authority  to string]") {
+    auto const line = KI_AUTHORITY_IPV4_ADDRESS ":42";
     const authority host(line);
-    BOOST_REQUIRE_EQUAL(host.to_string(), line);
+    REQUIRE(host.to_string() == line);
 }
 
-BOOST_AUTO_TEST_CASE(authority__to_string__ipv6__expected)
-{
-    auto const line = "[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]";
+TEST_CASE("authority  to string  ipv6  expected", "[authority  to string]") {
+    auto const line = "[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]";
     const authority host(line);
-    BOOST_REQUIRE_EQUAL(host.to_string(), line);
+    REQUIRE(host.to_string() == line);
 }
 
-BOOST_AUTO_TEST_CASE(authority__to_string__ipv6_port__expected)
-{
-    auto const line = "[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]:42";
+TEST_CASE("authority  to string  ipv6 port  expected", "[authority  to string]") {
+    auto const line = "[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]:42";
     const authority host(line);
-    BOOST_REQUIRE_EQUAL(host.to_string(), line);
+    REQUIRE(host.to_string() == line);
 }
 
-BOOST_AUTO_TEST_CASE(authority__to_string__ipv6_compatible__expected)
-{
+TEST_CASE("authority  to string  ipv6 compatible  expected", "[authority  to string]") {
     // A compatible ip address serializes as alternative notation IPv6.
-    const authority host("[" BI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS "]");
-    BOOST_REQUIRE_EQUAL(host.to_string(), "[" BI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]");
+    const authority host("[" KI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS "]");
+    REQUIRE(host.to_string() == "[" KI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]");
 }
 
-BOOST_AUTO_TEST_CASE(authority__to_string__ipv6_alternative_compatible_port__expected)
-{
+TEST_CASE("authority  to string  ipv6 alternative compatible port  expected", "[authority  to string]") {
     // A compatible ip address serializes as alternative notation IPv6.
-    const authority host("[" BI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS "]:42");
-    BOOST_REQUIRE_EQUAL(host.to_string(), "[" BI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]:42");
+    const authority host("[" KI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS "]:42");
+    REQUIRE(host.to_string() == "[" KI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]:42");
 }
 
-BOOST_AUTO_TEST_CASE(authority__to_string__ipv6_alternative_compatible__expected)
-{
-    auto const line = "[" BI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]";
+TEST_CASE("authority  to string  ipv6 alternative compatible  expected", "[authority  to string]") {
+    auto const line = "[" KI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]";
     const authority host(line);
-    BOOST_REQUIRE_EQUAL(host.to_string(), line);
+    REQUIRE(host.to_string() == line);
 }
 
-BOOST_AUTO_TEST_CASE(authority__to_string__ipv6_compatible_port__expected)
-{
-    auto const line = "[" BI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]:42";
+TEST_CASE("authority  to string  ipv6 compatible port  expected", "[authority  to string]") {
+    auto const line = "[" KI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]:42";
     const authority host(line);
-    BOOST_REQUIRE_EQUAL(host.to_string(), line);
+    REQUIRE(host.to_string() == line);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
 
-BOOST_AUTO_TEST_SUITE(authority__equality)
+// Start Boost Suite: authority  equality
 
-BOOST_AUTO_TEST_CASE(authority__equality__default_default__true)
-{
+TEST_CASE("authority  equality  default default  true", "[authority  equality]") {
     const authority host1;
     const authority host2;
-    BOOST_REQUIRE(host1 == host2);
+    REQUIRE(host1 == host2);
 }
 
-BOOST_AUTO_TEST_CASE(authority__equality__default_unspecified_port__false)
-{
+TEST_CASE("authority  equality  default unspecified port  false", "[authority  equality]") {
     const authority host1;
-    const authority host2(BI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS, 42);
-    BOOST_REQUIRE(!(host1 == host2));
+    const authority host2(KI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS, 42);
+    REQUIRE(!(host1 == host2));
 }
 
-BOOST_AUTO_TEST_CASE(authority__equality__ipv4_ipv4__true)
-{
-    const authority host1(BI_AUTHORITY_IPV4_ADDRESS);
-    const authority host2(BI_AUTHORITY_IPV4_ADDRESS);
-    BOOST_REQUIRE(host1 == host2);
+TEST_CASE("authority  equality  ipv4 ipv4  true", "[authority  equality]") {
+    const authority host1(KI_AUTHORITY_IPV4_ADDRESS);
+    const authority host2(KI_AUTHORITY_IPV4_ADDRESS);
+    REQUIRE(host1 == host2);
 }
 
-BOOST_AUTO_TEST_CASE(authority__equality__ipv4_ipv4_port__true)
-{
-    const authority host1(BI_AUTHORITY_IPV4_ADDRESS);
-    const authority host2(BI_AUTHORITY_IPV4_ADDRESS, 42);
-    BOOST_REQUIRE(!(host1 == host2));
+TEST_CASE("authority  equality  ipv4 ipv4 port  true", "[authority  equality]") {
+    const authority host1(KI_AUTHORITY_IPV4_ADDRESS);
+    const authority host2(KI_AUTHORITY_IPV4_ADDRESS, 42);
+    REQUIRE(!(host1 == host2));
 }
 
-BOOST_AUTO_TEST_CASE(authority__equality__ipv4_ipv6__false)
-{
-    const authority host1(BI_AUTHORITY_IPV4_ADDRESS);
-    const authority host2("[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
-    BOOST_REQUIRE(!(host1 == host2));
+TEST_CASE("authority  equality  ipv4 ipv6  false", "[authority  equality]") {
+    const authority host1(KI_AUTHORITY_IPV4_ADDRESS);
+    const authority host2("[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
+    REQUIRE(!(host1 == host2));
 }
 
-BOOST_AUTO_TEST_CASE(authority__equality__ipv6_ipv6__true)
-{
-    const authority host1("[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
-    const authority host2("[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
-    BOOST_REQUIRE(host1 == host2);
+TEST_CASE("authority  equality  ipv6 ipv6  true", "[authority  equality]") {
+    const authority host1("[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
+    const authority host2("[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
+    REQUIRE(host1 == host2);
 }
 
-BOOST_AUTO_TEST_CASE(authority__equality__ipv6_ipv6_port__false)
-{
-    const authority host1("[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
-    const authority host2(BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS, 42);
-    BOOST_REQUIRE(!(host1 == host2));
+TEST_CASE("authority  equality  ipv6 ipv6 port  false", "[authority  equality]") {
+    const authority host1("[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
+    const authority host2(KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS, 42);
+    REQUIRE(!(host1 == host2));
 }
 
-BOOST_AUTO_TEST_CASE(authority__equality__compatible_alternative__true)
-{
+TEST_CASE("authority  equality  compatible alternative  true", "[authority  equality]") {
     // A compatible ip address is equivalent to its alternative addressing.
-    const authority host1("[" BI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS "]");
-    const authority host2("[" BI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]");
-    BOOST_REQUIRE(host1 == host2);
+    const authority host1("[" KI_AUTHORITY_IPV6_COMPATIBLE_ADDRESS "]");
+    const authority host2("[" KI_AUTHORITY_IPV6_ALTERNATIVE_COMPATIBLE_ADDRESS "]");
+    REQUIRE(host1 == host2);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
 
-BOOST_AUTO_TEST_SUITE(authority__inequality)
+// Start Boost Suite: authority  inequality
 
-BOOST_AUTO_TEST_CASE(authority__inequality__default_default__false)
-{
+TEST_CASE("authority  inequality  default default  false", "[authority  inequality]") {
     const authority host1;
     const authority host2;
-    BOOST_REQUIRE(!(host1 != host2));
+    REQUIRE(!(host1 != host2));
 }
 
-BOOST_AUTO_TEST_CASE(authority__inequality__default_unspecified_port__true)
-{
+TEST_CASE("authority  inequality  default unspecified port  true", "[authority  inequality]") {
     const authority host1;
-    const authority host2(BI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS, 42);
-    BOOST_REQUIRE(host1 != host2);
+    const authority host2(KI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS, 42);
+    REQUIRE(host1 != host2);
 }
 
-BOOST_AUTO_TEST_CASE(authority__inequality__ipv6_ipv6__false)
-{
-    const authority host1("[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
-    const authority host2("[" BI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
-    BOOST_REQUIRE(!(host1 != host2));
+TEST_CASE("authority  inequality  ipv6 ipv6  false", "[authority  inequality]") {
+    const authority host1("[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
+    const authority host2("[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
+    REQUIRE(!(host1 != host2));
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
 
-BOOST_AUTO_TEST_SUITE(authority__construct)
+// Start Boost Suite: authority  construct
 
-BOOST_AUTO_TEST_CASE(authority__construct__bogus_ip__throws_invalid_option)
-{
-    BOOST_REQUIRE_THROW(authority host("bogus"), invalid_option_value);
+TEST_CASE("authority  construct  bogus ip  throws invalid option", "[authority  construct]") {
+    REQUIRE_THROWS_AS([](){authority host("bogus");}(), invalid_option_value);
 }
 
-BOOST_AUTO_TEST_CASE(authority__construct__invalid_ipv4__throws_invalid_option)
-{
-    BOOST_REQUIRE_THROW(authority host("999.999.999.999"), invalid_option_value);
+TEST_CASE("authority  construct  invalid ipv4  throws invalid option", "[authority  construct]") {
+    REQUIRE_THROWS_AS([](){authority host("999.999.999.999");}(), invalid_option_value);
 }
 
-BOOST_AUTO_TEST_CASE(authority__construct__invalid_ipv6__throws_invalid_option)
-{
-    BOOST_REQUIRE_THROW(authority host("[:::]"), invalid_option_value);
+TEST_CASE("authority  construct  invalid ipv6  throws invalid option", "[authority  construct]") {
+    REQUIRE_THROWS_AS([](){authority host("[:::]");}(), invalid_option_value);
 }
 
-BOOST_AUTO_TEST_CASE(authority__construct__invalid_port__throws_invalid_option)
-{
-    BOOST_REQUIRE_THROW(authority host("[::]:12345678901"), invalid_option_value);
+TEST_CASE("authority  construct  invalid port  throws invalid option", "[authority  construct]") {
+    REQUIRE_THROWS_AS([](){authority host("[::]:12345678901");}(), invalid_option_value);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite

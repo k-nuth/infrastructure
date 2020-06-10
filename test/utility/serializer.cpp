@@ -2,16 +2,15 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 using namespace kth::infrastructure;
 
-BOOST_AUTO_TEST_SUITE(serializer_tests)
+// Start Boost Suite: serializer tests
 
-BOOST_AUTO_TEST_CASE(roundtrip_serialize_deserialize)
-{
+TEST_CASE("serializer - roundtrip serialize deserialize", "[serializer tests]") {
     data_chunk data(1 + 2 + 4 + 8 + 4 + 4 + 3 + 7);
     auto writer = make_unsafe_serializer(data.begin());
     writer.write_byte(0x80);
@@ -24,60 +23,55 @@ BOOST_AUTO_TEST_CASE(roundtrip_serialize_deserialize)
     writer.write_string("hello");
 
     auto reader = make_safe_deserializer(data.begin(), data.end());
-    BOOST_REQUIRE_EQUAL(reader.read_byte(), 0x80u);
-    BOOST_REQUIRE_EQUAL(reader.read_2_bytes_little_endian(), 0x8040u);
-    BOOST_REQUIRE_EQUAL(reader.read_4_bytes_little_endian(), 0x80402010u);
-    BOOST_REQUIRE_EQUAL(reader.read_8_bytes_little_endian(), 0x8040201011223344u);
-    BOOST_REQUIRE_EQUAL(reader.read_4_bytes_big_endian(), 0x80402010u);
-    BOOST_REQUIRE_EQUAL(reader.read_variable_little_endian(), 1234u);
-    BOOST_REQUIRE_EQUAL(from_little_endian_unsafe<uint32_t>(reader.read_bytes(4).begin()), 0xbadf00du);
-    BOOST_REQUIRE_EQUAL(reader.read_string(), "hello");
-    BOOST_REQUIRE_EQUAL(reader.read_byte(), 0u);
-    BOOST_REQUIRE(reader.is_exhausted());
+    REQUIRE(reader.read_byte() == 0x80u);
+    REQUIRE(reader.read_2_bytes_little_endian() == 0x8040u);
+    REQUIRE(reader.read_4_bytes_little_endian() == 0x80402010u);
+    REQUIRE(reader.read_8_bytes_little_endian() == 0x8040201011223344u);
+    REQUIRE(reader.read_4_bytes_big_endian() == 0x80402010u);
+    REQUIRE(reader.read_variable_little_endian() == 1234u);
+    REQUIRE(from_little_endian_unsafe<uint32_t>(reader.read_bytes(4).begin()) == 0xbadf00du);
+    REQUIRE(reader.read_string() == "hello");
+    REQUIRE(reader.read_byte() == 0u);
+    REQUIRE(reader.is_exhausted());
 }
 
-BOOST_AUTO_TEST_CASE(deserializer_exhaustion)
-{
+TEST_CASE("serializer - deserializer exhaustion", "[serializer tests]") {
     data_chunk data(42);
     auto reader = make_safe_deserializer(data.begin(), data.end());
     reader.read_bytes(42);
-    BOOST_REQUIRE(reader);
-    BOOST_REQUIRE(reader.is_exhausted());
-    BOOST_REQUIRE_EQUAL(reader.read_byte(), 0u);
-    BOOST_REQUIRE(!reader);
+    REQUIRE(reader);
+    REQUIRE(reader.is_exhausted());
+    REQUIRE(reader.read_byte() == 0u);
+    REQUIRE(!reader);
 }
 
-BOOST_AUTO_TEST_CASE(is_exhausted_initialized_empty_stream_returns_true)
-{
+TEST_CASE("serializer - is exhausted initialized empty stream returns true", "[serializer tests]") {
     data_chunk data(0);
     auto source = make_safe_deserializer(data.begin(), data.end());
-    BOOST_REQUIRE(source.is_exhausted());
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(source.is_exhausted());
+    REQUIRE((bool)source);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(is_exhausted_initialized_nonempty_stream_returns_false)
-{
+TEST_CASE("serializer - is exhausted initialized nonempty stream returns false", "[serializer tests]") {
     data_chunk data(1);
     auto source = make_safe_deserializer(data.begin(), data.end());
-    BOOST_REQUIRE(!source.is_exhausted());
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(!source.is_exhausted());
+    REQUIRE((bool)source);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(peek_byte_nonempty_stream_does_not_advance)
-{
+TEST_CASE("serializer - peek byte nonempty stream does not advance", "[serializer tests]") {
     uint8_t const expected = 0x42;
     data_chunk data({ expected, 0x00 });
     auto source = make_safe_deserializer(data.begin(), data.end());
-    BOOST_REQUIRE_EQUAL(source.peek_byte(), expected);
-    BOOST_REQUIRE_EQUAL(source.peek_byte(), expected);
-    BOOST_REQUIRE_EQUAL(source.peek_byte(), expected);
-    BOOST_REQUIRE((bool)source);
+    REQUIRE(source.peek_byte() == expected);
+    REQUIRE(source.peek_byte() == expected);
+    REQUIRE(source.peek_byte() == expected);
+    REQUIRE((bool)source);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_byte)
-{
+TEST_CASE("serializer - roundtrip byte", "[serializer tests]") {
     uint8_t const expected = 0xAA;
     data_chunk data(1);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -86,15 +80,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_byte)
     sink.write_byte(expected);
     auto const result = source.read_byte();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_error_code)
-{
+TEST_CASE("serializer - roundtrip error code", "[serializer tests]") {
     code const expected(error::futuristic_timestamp);
     data_chunk data(4);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -103,15 +96,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_error_code)
     sink.write_error_code(expected);
     auto const result = source.read_error_code();
 
-    BOOST_REQUIRE_EQUAL(expected, result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_2_bytes_little_endian)
-{
+TEST_CASE("serializer - roundtrip 2 bytes little endian", "[serializer tests]") {
     const uint16_t expected = 43707;
     data_chunk data(2);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -120,16 +112,15 @@ BOOST_AUTO_TEST_CASE(roundtrip_2_bytes_little_endian)
     sink.write_2_bytes_little_endian(expected);
     auto const result = source.read_2_bytes_little_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_4_bytes_little_endian)
-{
+TEST_CASE("serializer - roundtrip 4 bytes little endian", "[serializer tests]") {
     const uint32_t expected = 2898120443;
     data_chunk data(4);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -138,15 +129,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_4_bytes_little_endian)
     sink.write_4_bytes_little_endian(expected);
     auto const result = source.read_4_bytes_little_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_8_bytes_little_endian)
-{
+TEST_CASE("serializer - roundtrip 8 bytes little endian", "[serializer tests]") {
     uint64_t const expected = 0xd4b14be5d8f02abe;
     data_chunk data(8);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -155,15 +145,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_8_bytes_little_endian)
     sink.write_8_bytes_little_endian(expected);
     auto const result = source.read_8_bytes_little_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_2_bytes_big_endian)
-{
+TEST_CASE("serializer - roundtrip 2 bytes big endian", "[serializer tests]") {
     const uint16_t expected = 43707;
     data_chunk data(2);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -172,15 +161,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_2_bytes_big_endian)
     sink.write_2_bytes_big_endian(expected);
     auto const result = source.read_2_bytes_big_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_4_bytes_big_endian)
-{
+TEST_CASE("serializer - roundtrip 4 bytes big endian", "[serializer tests]") {
     const uint32_t expected = 2898120443;
     data_chunk data(4);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -189,15 +177,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_4_bytes_big_endian)
     sink.write_4_bytes_big_endian(expected);
     auto const result = source.read_4_bytes_big_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_8_bytes_big_endian)
-{
+TEST_CASE("serializer - roundtrip 8 bytes big endian", "[serializer tests]") {
     uint64_t const expected = 0xd4b14be5d8f02abe;
     data_chunk data(8);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -206,16 +193,15 @@ BOOST_AUTO_TEST_CASE(roundtrip_8_bytes_big_endian)
     sink.write_8_bytes_big_endian(expected);
     auto const result = source.read_8_bytes_big_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
 
-BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_1_byte)
-{
+TEST_CASE("serializer - roundtrip variable uint little endian 1 byte", "[serializer tests]") {
     uint64_t const expected = 0xAA;
     data_chunk data(1);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -225,15 +211,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_1_byte)
 
     auto const result = source.read_variable_little_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_2_bytes)
-{
+TEST_CASE("serializer - roundtrip variable uint little endian 2 bytes", "[serializer tests]") {
     uint64_t const expected = 43707;
     data_chunk data(3);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -243,15 +228,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_2_bytes)
 
     auto const result = source.read_variable_little_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_4_bytes)
-{
+TEST_CASE("serializer - roundtrip variable uint little endian 4 bytes", "[serializer tests]") {
     uint64_t const expected = 2898120443;
     data_chunk data(sizeof(uint32_t) + 1);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -261,15 +245,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_4_bytes)
 
     auto const result = source.read_variable_little_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_8_bytes)
-{
+TEST_CASE("serializer - roundtrip variable uint little endian 8 bytes", "[serializer tests]") {
     uint64_t const expected = 0xd4b14be5d8f02abe;
     data_chunk data(sizeof(uint64_t) + 1);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -279,15 +262,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_little_endian_8_bytes)
 
     auto const result = source.read_variable_little_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_1_byte)
-{
+TEST_CASE("serializer - roundtrip variable uint big endian 1 byte", "[serializer tests]") {
     uint64_t const expected = 0xAA;
     data_chunk data(1);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -297,15 +279,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_1_byte)
 
     auto const result = source.read_variable_big_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_2_bytes)
-{
+TEST_CASE("serializer - roundtrip variable uint big endian 2 bytes", "[serializer tests]") {
     uint64_t const expected = 43707;
     data_chunk data(sizeof(uint16_t) + 1);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -315,15 +296,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_2_bytes)
 
     auto const result = source.read_variable_big_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_4_bytes)
-{
+TEST_CASE("serializer - roundtrip variable uint big endian 4 bytes", "[serializer tests]") {
     uint64_t const expected = 2898120443;
     data_chunk data(sizeof(uint32_t) + 1);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -333,15 +313,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_4_bytes)
 
     auto const result = source.read_variable_big_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_8_bytes)
-{
+TEST_CASE("serializer - roundtrip variable uint big endian 8 bytes", "[serializer tests]") {
     uint64_t const expected = 0xd4b14be5d8f02abe;
     data_chunk data(sizeof(uint64_t) + 1);
     auto source = make_safe_deserializer(data.begin(), data.end());
@@ -351,15 +330,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_variable_uint_big_endian_8_bytes)
 
     auto const result = source.read_variable_big_endian();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_data_chunk)
-{
+TEST_CASE("serializer - roundtrip data chunk", "[serializer tests]") {
     static data_chunk const expected
     {
         0xfb, 0x44, 0x68, 0x84, 0xc6, 0xbf, 0x33, 0xc6, 0x27, 0x54, 0x73, 0x92,
@@ -377,15 +355,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_data_chunk)
 
     auto const result = source.read_bytes(expected.size());
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_hash)
-{
+TEST_CASE("serializer - roundtrip hash", "[serializer tests]") {
     static hash_digest const expected
     {
         0x4d, 0xc9, 0x32, 0x18, 0x4d, 0x86, 0xa0, 0xb2, 0xe4, 0xba, 0x65, 0xa8,
@@ -401,15 +378,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_hash)
 
     auto const result = source.read_hash();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_short_hash)
-{
+TEST_CASE("serializer - roundtrip short hash", "[serializer tests]") {
     static short_hash const expected
     {
         0xed, 0x36, 0x48, 0xaf, 0x53, 0xc2, 0x8a, 0x79, 0x90, 0xab, 0x62, 0x04,
@@ -424,15 +400,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_short_hash)
 
     auto const result = source.read_short_hash();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_fixed_string)
-{
+TEST_CASE("serializer - roundtrip fixed string", "[serializer tests]") {
     std::string const expected = "my string data";
 
     data_chunk data(expected.size());
@@ -443,15 +418,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_fixed_string)
 
     auto const result = source.read_string(10);
 
-    BOOST_REQUIRE(expected.substr(0, 10) == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected.substr(0, 10) == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(roundtrip_string)
-{
+TEST_CASE("serializer - roundtrip string", "[serializer tests]") {
     std::string const expected = "my string data";
 
     data_chunk data((expected.length() + message::variable_uint_size(expected.length())));
@@ -462,15 +436,14 @@ BOOST_AUTO_TEST_CASE(roundtrip_string)
 
     auto const result = source.read_string();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_CASE(read_bytes_to_eof)
-{
+TEST_CASE("serializer - read bytes to eof", "[serializer tests]") {
     static data_chunk const expected
     {
         0x4d, 0xc9, 0x32, 0x18, 0x4d, 0x86, 0xa0, 0xb2, 0xe4, 0xba, 0x65, 0xa8,
@@ -486,11 +459,11 @@ BOOST_AUTO_TEST_CASE(read_bytes_to_eof)
 
     auto const result = source.read_bytes();
 
-    BOOST_REQUIRE(expected == result);
-    BOOST_REQUIRE((bool)sink);
-    BOOST_REQUIRE((bool)source);
-    BOOST_REQUIRE_EQUAL(false, !sink);
-    BOOST_REQUIRE_EQUAL(false, !source);
+    REQUIRE(expected == result);
+    REQUIRE((bool)sink);
+    REQUIRE((bool)source);
+    REQUIRE(!sink == false);
+    REQUIRE(!source == false);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite

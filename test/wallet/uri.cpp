@@ -2,154 +2,146 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 using namespace kth::infrastructure::wallet;
 
-BOOST_AUTO_TEST_SUITE(uri_tests)
+// Start Boost Suite: uri tests
 
-BOOST_AUTO_TEST_CASE(uri__parse__http_roundtrip__test)
-{
+TEST_CASE("uri  parse  http roundtrip  test", "[uri tests]") {
     auto const test = "http://github.com/k-nuth?good=true#nice";
     uri parsed;
-    BOOST_REQUIRE(parsed.decode(test));
+    REQUIRE(parsed.decode(test));
 
-    BOOST_REQUIRE(parsed.has_authority());
-    BOOST_REQUIRE(parsed.has_query());
-    BOOST_REQUIRE(parsed.has_fragment());
+    REQUIRE(parsed.has_authority());
+    REQUIRE(parsed.has_query());
+    REQUIRE(parsed.has_fragment());
 
-    BOOST_REQUIRE_EQUAL(parsed.scheme(), "http");
-    BOOST_REQUIRE_EQUAL(parsed.authority(), "github.com");
-    BOOST_REQUIRE_EQUAL(parsed.path(), "/kth");
-    BOOST_REQUIRE_EQUAL(parsed.query(), "good=true");
-    BOOST_REQUIRE_EQUAL(parsed.fragment(), "nice");
+    REQUIRE(parsed.scheme() == "http");
+    REQUIRE(parsed.authority() == "github.com");
+    REQUIRE(parsed.path() == "/kth");
+    REQUIRE(parsed.query() == "good=true");
+    REQUIRE(parsed.fragment() == "nice");
 
-    BOOST_REQUIRE_EQUAL(parsed.encoded(), test);
+    REQUIRE(parsed.encoded() == test);
 }
 
-BOOST_AUTO_TEST_CASE(uri__parse__messy_roundtrip__test)
-{
+TEST_CASE("uri  parse  messy roundtrip  test", "[uri tests]") {
     auto const test = "TEST:%78?%79#%7a";
     uri parsed;
-    BOOST_REQUIRE(parsed.decode(test));
+    REQUIRE(parsed.decode(test));
 
-    BOOST_REQUIRE(!parsed.has_authority());
-    BOOST_REQUIRE(parsed.has_query());
-    BOOST_REQUIRE(parsed.has_fragment());
+    REQUIRE(!parsed.has_authority());
+    REQUIRE(parsed.has_query());
+    REQUIRE(parsed.has_fragment());
 
-    BOOST_REQUIRE_EQUAL(parsed.scheme(), "test");
-    BOOST_REQUIRE_EQUAL(parsed.path(), "x");
-    BOOST_REQUIRE_EQUAL(parsed.query(), "y");
-    BOOST_REQUIRE_EQUAL(parsed.fragment(), "z");
+    REQUIRE(parsed.scheme() == "test");
+    REQUIRE(parsed.path() == "x");
+    REQUIRE(parsed.query() == "y");
+    REQUIRE(parsed.fragment() == "z");
 
-    BOOST_REQUIRE_EQUAL(parsed.encoded(), test);
+    REQUIRE(parsed.encoded() == test);
 }
 
-BOOST_AUTO_TEST_CASE(uri__parse__scheme__test)
-{
+TEST_CASE("uri  parse  scheme  test", "[uri tests]") {
     uri parsed;
-    BOOST_REQUIRE(!parsed.decode(""));
-    BOOST_REQUIRE(!parsed.decode(":"));
-    BOOST_REQUIRE(!parsed.decode("1:"));
-    BOOST_REQUIRE(!parsed.decode("%78:"));
+    REQUIRE(!parsed.decode(""));
+    REQUIRE(!parsed.decode(":"));
+    REQUIRE(!parsed.decode("1:"));
+    REQUIRE(!parsed.decode("%78:"));
 
-    BOOST_REQUIRE(parsed.decode("x:"));
-    BOOST_REQUIRE_EQUAL(parsed.scheme(), "x");
+    REQUIRE(parsed.decode("x:"));
+    REQUIRE(parsed.scheme() == "x");
 
-    BOOST_REQUIRE(parsed.decode("x::"));
-    BOOST_REQUIRE_EQUAL(parsed.scheme(), "x");
-    BOOST_REQUIRE_EQUAL(parsed.path(), ":");
+    REQUIRE(parsed.decode("x::"));
+    REQUIRE(parsed.scheme() == "x");
+    REQUIRE(parsed.path() == ":");
 }
 
-BOOST_AUTO_TEST_CASE(uri__parsing__non_strict__test)
-{
+TEST_CASE("uri  parsing  non strict  test", "[uri tests]") {
     uri parsed;
-    BOOST_REQUIRE(!parsed.decode("test:?テスト"));
+    REQUIRE(!parsed.decode("test:?テスト"));
 
-    BOOST_REQUIRE(parsed.decode("test:テスト", false));
-    BOOST_REQUIRE_EQUAL(parsed.scheme(), "test");
-    BOOST_REQUIRE_EQUAL(parsed.path(), "テスト");
+    REQUIRE(parsed.decode("test:テスト", false));
+    REQUIRE(parsed.scheme() == "test");
+    REQUIRE(parsed.path() == "テスト");
 }
 
-BOOST_AUTO_TEST_CASE(uri__parse__authority__test)
-{
+TEST_CASE("uri  parse  authority  test", "[uri tests]") {
     uri parsed;
-    BOOST_REQUIRE(parsed.decode("test:/"));
-    BOOST_REQUIRE(!parsed.has_authority());
-    BOOST_REQUIRE_EQUAL(parsed.path(), "/");
+    REQUIRE(parsed.decode("test:/"));
+    REQUIRE(!parsed.has_authority());
+    REQUIRE(parsed.path() == "/");
 
-    BOOST_REQUIRE(parsed.decode("test://"));
-    BOOST_REQUIRE(parsed.has_authority());
-    BOOST_REQUIRE_EQUAL(parsed.authority(), "");
-    BOOST_REQUIRE_EQUAL(parsed.path(), "");
+    REQUIRE(parsed.decode("test://"));
+    REQUIRE(parsed.has_authority());
+    REQUIRE(parsed.authority() == "");
+    REQUIRE(parsed.path() == "");
 
-    BOOST_REQUIRE(parsed.decode("test:///"));
-    BOOST_REQUIRE(parsed.has_authority());
-    BOOST_REQUIRE_EQUAL(parsed.authority(), "");
-    BOOST_REQUIRE_EQUAL(parsed.path(), "/");
+    REQUIRE(parsed.decode("test:///"));
+    REQUIRE(parsed.has_authority());
+    REQUIRE(parsed.authority() == "");
+    REQUIRE(parsed.path() == "/");
 
-    BOOST_REQUIRE(parsed.decode("test:/x//"));
-    BOOST_REQUIRE(!parsed.has_authority());
-    BOOST_REQUIRE_EQUAL(parsed.path(), "/x//");
+    REQUIRE(parsed.decode("test:/x//"));
+    REQUIRE(!parsed.has_authority());
+    REQUIRE(parsed.path() == "/x//");
 
-    BOOST_REQUIRE(parsed.decode("ssh://git@github.com:22/path/"));
-    BOOST_REQUIRE(parsed.has_authority());
-    BOOST_REQUIRE_EQUAL(parsed.authority(), "git@github.com:22");
-    BOOST_REQUIRE_EQUAL(parsed.path(), "/path/");
+    REQUIRE(parsed.decode("ssh://git@github.com:22/path/"));
+    REQUIRE(parsed.has_authority());
+    REQUIRE(parsed.authority() == "git@github.com:22");
+    REQUIRE(parsed.path() == "/path/");
 }
 
-BOOST_AUTO_TEST_CASE(uri__parse__query__test)
-{
+TEST_CASE("uri  parse  query  test", "[uri tests]") {
     uri parsed;
-    BOOST_REQUIRE(parsed.decode("test:#?"));
-    BOOST_REQUIRE(!parsed.has_query());
+    REQUIRE(parsed.decode("test:#?"));
+    REQUIRE(!parsed.has_query());
 
-    BOOST_REQUIRE(parsed.decode("test:?&&x=y&z"));
-    BOOST_REQUIRE(parsed.has_query());
-    BOOST_REQUIRE_EQUAL(parsed.query(), "&&x=y&z");
+    REQUIRE(parsed.decode("test:?&&x=y&z"));
+    REQUIRE(parsed.has_query());
+    REQUIRE(parsed.query() == "&&x=y&z");
 
     auto map = parsed.decode_query();
-    BOOST_REQUIRE(map.end() != map.find(""));
-    BOOST_REQUIRE(map.end() != map.find("x"));
-    BOOST_REQUIRE(map.end() != map.find("z"));
-    BOOST_REQUIRE(map.end() == map.find("y"));
+    REQUIRE(map.end() != map.find(""));
+    REQUIRE(map.end() != map.find("x"));
+    REQUIRE(map.end() != map.find("z"));
+    REQUIRE(map.end() == map.find("y"));
 
-    BOOST_REQUIRE_EQUAL(map[""], "");
-    BOOST_REQUIRE_EQUAL(map["x"], "y");
-    BOOST_REQUIRE_EQUAL(map["z"], "");
+    REQUIRE(map[""] == "");
+    REQUIRE(map["x"] == "y");
+    REQUIRE(map["z"] == "");
 }
 
-BOOST_AUTO_TEST_CASE(uri__parse__fragment__test)
-{
+TEST_CASE("uri  parse  fragment  test", "[uri tests]") {
     uri parsed;
-    BOOST_REQUIRE(parsed.decode("test:?"));
-    BOOST_REQUIRE(!parsed.has_fragment());
+    REQUIRE(parsed.decode("test:?"));
+    REQUIRE(!parsed.has_fragment());
 
-    BOOST_REQUIRE(parsed.decode("test:#"));
-    BOOST_REQUIRE(parsed.has_fragment());
-    BOOST_REQUIRE_EQUAL(parsed.fragment(), "");
+    REQUIRE(parsed.decode("test:#"));
+    REQUIRE(parsed.has_fragment());
+    REQUIRE(parsed.fragment() == "");
 
-    BOOST_REQUIRE(parsed.decode("test:#?"));
-    BOOST_REQUIRE(parsed.has_fragment());
-    BOOST_REQUIRE_EQUAL(parsed.fragment(), "?");
+    REQUIRE(parsed.decode("test:#?"));
+    REQUIRE(parsed.has_fragment());
+    REQUIRE(parsed.fragment() == "?");
 }
 
-BOOST_AUTO_TEST_CASE(uri__encode__positive__test)
-{
+TEST_CASE("uri  encode  positive  test", "[uri tests]") {
     uri out;
     out.set_scheme("test");
     out.set_authority("user@hostname");
     out.set_path("/some/path/?/#");
     out.set_query("tacos=yummy");
     out.set_fragment("good evening");
-    BOOST_REQUIRE_EQUAL(out.encoded(), "test://user@hostname/some/path/%3F/%23?tacos=yummy#good%20evening");
+    REQUIRE(out.encoded() == "test://user@hostname/some/path/%3F/%23?tacos=yummy#good%20evening");
 
     out.remove_authority();
     out.remove_query();
     out.remove_fragment();
-    BOOST_REQUIRE_EQUAL(out.encoded(), "test:/some/path/%3F/%23");
+    REQUIRE(out.encoded() == "test:/some/path/%3F/%23");
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite

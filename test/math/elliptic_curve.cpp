@@ -2,12 +2,12 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 
-BOOST_AUTO_TEST_SUITE(elliptic_curve_tests)
+// Start Boost Suite: elliptic curve tests
 
 // Scenario 1
 #define SECRET1 "8010b1bb119ad37d4b65a1022a314897b1b3614b345974332cb1b9582cf03536"
@@ -35,137 +35,126 @@ BOOST_AUTO_TEST_SUITE(elliptic_curve_tests)
 // #endif //KTH_CURRENCY_BCH
 
 
-BOOST_AUTO_TEST_CASE(elliptic_curve__secret_to_public__positive__test)
-{
+TEST_CASE("elliptic curve  secret to public  positive  test", "[elliptic curve tests]") {
     ec_compressed point;
-    BOOST_REQUIRE(secret_to_public(point, base16_literal(SECRET1)));
-    BOOST_REQUIRE_EQUAL(encode_base16(point), COMPRESSED1);
+    REQUIRE(secret_to_public(point, base16_literal(SECRET1)));
+    REQUIRE(encode_base16(point) == COMPRESSED1);
 }
 
-BOOST_AUTO_TEST_CASE(elliptic_curve__decompress__positive__test)
-{
+TEST_CASE("elliptic curve  decompress  positive  test", "[elliptic curve tests]") {
     ec_uncompressed uncompressed;
-    BOOST_REQUIRE(decompress(uncompressed, base16_literal(COMPRESSED1)));
-    BOOST_REQUIRE_EQUAL(encode_base16(uncompressed), UNCOMPRESSED1);
+    REQUIRE(decompress(uncompressed, base16_literal(COMPRESSED1)));
+    REQUIRE(encode_base16(uncompressed) == UNCOMPRESSED1);
 }
 
-BOOST_AUTO_TEST_CASE(elliptic_curve__sign__positive__test)
-{
+TEST_CASE("elliptic curve  sign  positive  test", "[elliptic curve tests]") {
     ec_signature signature;
     ec_secret const secret = hash_literal(SECRET3);
     hash_digest const sighash = hash_literal(SIGHASH3);
-    BOOST_REQUIRE(sign(signature, secret, sighash));
+    REQUIRE(sign(signature, secret, sighash));
 
     auto const result = encode_base16(signature);
-    BOOST_REQUIRE_EQUAL(result, EC_SIGNATURE3);
+    REQUIRE(result == EC_SIGNATURE3);
 }
 
-BOOST_AUTO_TEST_CASE(elliptic_curve__encode_signature__positive__test)
-{
+TEST_CASE("elliptic curve  encode signature  positive  test", "[elliptic curve tests]") {
     der_signature out;
     const ec_signature signature = base16_literal(EC_SIGNATURE3);
-    BOOST_REQUIRE(encode_signature(out, signature));
+    REQUIRE(encode_signature(out, signature));
 
     auto const result = encode_base16(out);
-    BOOST_REQUIRE_EQUAL(result, DER_SIGNATURE3);
+    REQUIRE(result == DER_SIGNATURE3);
 }
 
-BOOST_AUTO_TEST_CASE(elliptic_curve__sign__round_trip_positive__test)
-{
+TEST_CASE("elliptic curve  sign  round trip positive  test", "[elliptic curve tests]") {
     ec_compressed point;
     ec_signature signature;
     data_chunk const data{ 'd', 'a', 't', 'a' };
     hash_digest const hash = bitcoin_hash(data);
     ec_secret const secret = hash_literal(SECRET1);
-    BOOST_REQUIRE(secret_to_public(point, secret));
-    BOOST_REQUIRE(sign(signature, secret, hash));
-    BOOST_REQUIRE(verify_signature(point, hash, signature));
+    REQUIRE(secret_to_public(point, secret));
+    REQUIRE(sign(signature, secret, hash));
+    REQUIRE(verify_signature(point, hash, signature));
 }
 
-BOOST_AUTO_TEST_CASE(elliptic_curve__sign__round_trip_negative__test)
-{
+TEST_CASE("elliptic curve  sign  round trip negative  test", "[elliptic curve tests]") {
     ec_compressed point;
     ec_signature signature;
     data_chunk const data{ 'd', 'a', 't', 'a' };
     hash_digest hash = bitcoin_hash(data);
     ec_secret const secret = base16_literal(SECRET1);
-    BOOST_REQUIRE(secret_to_public(point, secret));
-    BOOST_REQUIRE(sign(signature, secret, hash));
+    REQUIRE(secret_to_public(point, secret));
+    REQUIRE(sign(signature, secret, hash));
 
     // Invalidate the positive test.
     hash[0] = 0;
-    BOOST_REQUIRE(!verify_signature(point, hash, signature));
+    REQUIRE(!verify_signature(point, hash, signature));
 }
 
-BOOST_AUTO_TEST_CASE(elliptic_curve__verify_signature__positive__test)
-{
+TEST_CASE("elliptic curve  verify signature  positive  test", "[elliptic curve tests]") {
     ec_signature signature;
     static auto const strict = false;
     hash_digest const sighash = hash_literal(SIGHASH2);
     const ec_compressed point = base16_literal(COMPRESSED2);
     der_signature distinguished;
-    BOOST_REQUIRE(decode_base16(distinguished, SIGNATURE2));
-    BOOST_REQUIRE(parse_signature(signature, distinguished, strict));
-    BOOST_REQUIRE(verify_signature(point, sighash, signature));
+    REQUIRE(decode_base16(distinguished, SIGNATURE2));
+    REQUIRE(parse_signature(signature, distinguished, strict));
+    REQUIRE(verify_signature(point, sighash, signature));
 }
 
-BOOST_AUTO_TEST_CASE(elliptic_curve__verify_signature__negative__test)
-{
+TEST_CASE("elliptic curve  verify signature  negative  test", "[elliptic curve tests]") {
     ec_signature signature;
     static auto const strict = false;
     hash_digest const sighash = hash_literal(SIGHASH2);
     const ec_compressed point = base16_literal(COMPRESSED2);
     der_signature distinguished;
-    BOOST_REQUIRE(decode_base16(distinguished, SIGNATURE2));
-    BOOST_REQUIRE(parse_signature(signature, distinguished, strict));
+    REQUIRE(decode_base16(distinguished, SIGNATURE2));
+    REQUIRE(parse_signature(signature, distinguished, strict));
 
     // Invalidate the positive test.
     signature[10] = 110;
-    BOOST_REQUIRE(!verify_signature(point, sighash, signature));
+    REQUIRE(!verify_signature(point, sighash, signature));
 }
 
-BOOST_AUTO_TEST_CASE(elliptic_curve__ec_add__positive__test)
-{
+TEST_CASE("elliptic curve  ec add  positive  test", "[elliptic curve tests]") {
     ec_secret secret1{ { 1, 2, 3 } };
     ec_secret const secret2{ { 3, 2, 1 } };
     ec_compressed public1;
-    BOOST_REQUIRE(secret_to_public(public1, secret1));
-    BOOST_REQUIRE(ec_add(secret1, secret2));
-    BOOST_REQUIRE_EQUAL(encode_base16(secret1), "0404040000000000000000000000000000000000000000000000000000000000");
+    REQUIRE(secret_to_public(public1, secret1));
+    REQUIRE(ec_add(secret1, secret2));
+    REQUIRE(encode_base16(secret1) == "0404040000000000000000000000000000000000000000000000000000000000");
 
     ec_compressed public2;
-    BOOST_REQUIRE(secret_to_public(public2, secret1));
-    BOOST_REQUIRE(ec_add(public1, secret2));
-    BOOST_REQUIRE(std::equal(public1.begin(), public1.end(), public2.begin()));
+    REQUIRE(secret_to_public(public2, secret1));
+    REQUIRE(ec_add(public1, secret2));
+    REQUIRE(std::equal(public1.begin(), public1.end(), public2.begin()));
 }
 
-BOOST_AUTO_TEST_CASE(elliptic_curve__ec_add__negative__test)
-{
+TEST_CASE("elliptic curve  ec add  negative  test", "[elliptic curve tests]") {
     // = n - 1
     ec_secret secret1 = base16_literal("fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364140");
     ec_secret secret2{ { 0 } };
     secret2[31] = 1;
     ec_compressed public1;
-    BOOST_REQUIRE(secret_to_public(public1, secret1));
-    BOOST_REQUIRE(!ec_add(secret1, secret2));
-    BOOST_REQUIRE(!ec_add(public1, secret2));
+    REQUIRE(secret_to_public(public1, secret1));
+    REQUIRE(!ec_add(secret1, secret2));
+    REQUIRE(!ec_add(public1, secret2));
 }
 
-BOOST_AUTO_TEST_CASE(elliptic_curve__ec_multiply_test)
-{
+TEST_CASE("elliptic curve  ec multiply test", "[elliptic curve tests]") {
     ec_secret secret1{{0}};
     ec_secret secret2{{0}};
     secret1[31] = 11;
     secret2[31] = 22;
     ec_compressed public1;
-    BOOST_REQUIRE(secret_to_public(public1, secret1));
-    BOOST_REQUIRE(ec_multiply(secret1, secret2));
-    BOOST_REQUIRE_EQUAL(secret1[31], 242u);
-    BOOST_REQUIRE(ec_multiply(public1, secret2));
+    REQUIRE(secret_to_public(public1, secret1));
+    REQUIRE(ec_multiply(secret1, secret2));
+    REQUIRE(secret1[31] == 242u);
+    REQUIRE(ec_multiply(public1, secret2));
 
     ec_compressed public2;
-    BOOST_REQUIRE(secret_to_public(public2, secret1));
-    BOOST_REQUIRE(std::equal(public1.begin(), public1.end(), public2.begin()));
+    REQUIRE(secret_to_public(public2, secret1));
+    REQUIRE(std::equal(public1.begin(), public1.end(), public2.begin()));
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite

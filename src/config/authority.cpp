@@ -172,11 +172,11 @@ std::string authority::to_hostname() const {
 message::network_address authority::to_network_address() const {
     static constexpr uint32_t services = 0;
     static constexpr uint32_t timestamp = 0;
-    const message::network_address network_address {
+    message::network_address const addr {
         timestamp, services, ip(), port(),
     };
 
-    return network_address;
+    return addr;
 }
 
 std::string authority::to_string() const {

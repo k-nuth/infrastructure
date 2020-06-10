@@ -6,17 +6,15 @@
 #include <iostream>
 #include <vector>
 
-// #include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
-#include <boost/test/test_tools.hpp>
-#include <boost/test/unit_test_suite.hpp>
 
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 namespace po = boost::program_options;
 using namespace kth::infrastructure::config;
 
-BOOST_AUTO_TEST_SUITE(printer_tests)
+// Start Boost Suite: printer tests
 
 #define CONFIG_APPLICATION "APP"
 #define CONFIG_DESCRIPTION "DESCRIPTION"
@@ -34,136 +32,124 @@ BOOST_AUTO_TEST_SUITE(printer_tests)
 
 #define CONFIG_PRINTER_INITIALIZE(number_of_parameters, number_of_names) \
     help.initialize(); \
-    BOOST_REQUIRE_EQUAL(help.get_parameters().size(), number_of_parameters); \
-    BOOST_REQUIRE_EQUAL(help.get_argument_names().size(), number_of_names)
+    REQUIRE(help.get_parameters().size() == number_of_parameters); \
+    REQUIRE(help.get_argument_names().size() == number_of_names)
 
 // ------------------------------------------------------------------------- //
-BOOST_AUTO_TEST_SUITE(printer__columnize)
+// Start Boost Suite: printer  columnize
 
-BOOST_AUTO_TEST_CASE(printer__columnize__paragraph_empty_width_0__empty)
-{
+TEST_CASE("printer  columnize  paragraph empty width 0  empty", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("", 0);
-    BOOST_REQUIRE_EQUAL(rows.size(), 0u);
+    REQUIRE(rows.size() == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__paragraph_empty_width_1__empty)
-{
+TEST_CASE("printer  columnize  paragraph empty width 1  empty", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("", 1);
-    BOOST_REQUIRE_EQUAL(rows.size(), 0u);
+    REQUIRE(rows.size() == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__short_word_width_10__one_word_row)
-{
+TEST_CASE("printer  columnize  short word width 10  one word row", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("foo", 10);
-    BOOST_REQUIRE_EQUAL(rows.size(), 1u);
-    BOOST_REQUIRE_EQUAL(rows.front(), "foo");
+    REQUIRE(rows.size() == 1u);
+    REQUIRE(rows.front() == "foo");
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__two_short_words_width_10__two_word_row)
-{
+TEST_CASE("printer  columnize  two short words width 10  two word row", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("foo bar", 10);
-    BOOST_REQUIRE_EQUAL(rows.size(), 1u);
-    BOOST_REQUIRE_EQUAL(rows.front(), "foo bar");
+    REQUIRE(rows.size() == 1u);
+    REQUIRE(rows.front() == "foo bar");
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__overflow_width_10__two_rows)
-{
+TEST_CASE("printer  columnize  overflow width 10  two rows", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("foo bar overflow", 10);
-    BOOST_REQUIRE_EQUAL(rows.size(), 2u);
-    BOOST_REQUIRE_EQUAL(rows[0], "foo bar");
-    BOOST_REQUIRE_EQUAL(rows[1], "overflow");
+    REQUIRE(rows.size() == 2u);
+    REQUIRE(rows[0] == "foo bar");
+    REQUIRE(rows[1] == "overflow");
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__first_word_overflow_width_10__two_rows)
-{
+TEST_CASE("printer  columnize  first word overflow width 10  two rows", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("morethantenchars foo bar", 10);
-    BOOST_REQUIRE_EQUAL(rows.size(), 2u);
-    BOOST_REQUIRE_EQUAL(rows[0], "morethantenchars");
-    BOOST_REQUIRE_EQUAL(rows[1], "foo bar");
+    REQUIRE(rows.size() == 2u);
+    REQUIRE(rows[0] == "morethantenchars");
+    REQUIRE(rows[1] == "foo bar");
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__middle_word_overflow_width_10__three_rows)
-{
+TEST_CASE("printer  columnize  middle word overflow width 10  three rows", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("foo bar morethantenchars test", 10);
-    BOOST_REQUIRE_EQUAL(rows.size(), 3u);
-    BOOST_REQUIRE_EQUAL(rows[0], "foo bar");
-    BOOST_REQUIRE_EQUAL(rows[1], "morethantenchars");
-    BOOST_REQUIRE_EQUAL(rows[2], "test");
+    REQUIRE(rows.size() == 3u);
+    REQUIRE(rows[0] == "foo bar");
+    REQUIRE(rows[1] == "morethantenchars");
+    REQUIRE(rows[2] == "test");
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__last_word_overflow_width_10__two_rows)
-{
+TEST_CASE("printer  columnize  last word overflow width 10  two rows", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("foo bar morethantenchars", 10);
-    BOOST_REQUIRE_EQUAL(rows.size(), 2u);
-    BOOST_REQUIRE_EQUAL(rows[0], "foo bar");
-    BOOST_REQUIRE_EQUAL(rows[1], "morethantenchars");
+    REQUIRE(rows.size() == 2u);
+    REQUIRE(rows[0] == "foo bar");
+    REQUIRE(rows[1] == "morethantenchars");
 }
 
-BOOST_AUTO_TEST_CASE(printer__columnize__excess_whitespace_width_10__space_removed)
-{
+TEST_CASE("printer  columnize  excess whitespace width 10  space removed", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
     auto rows = help.columnize("  \tfoo   bar \n\n  morethantenchars\r\n  ", 10);
-    BOOST_REQUIRE_EQUAL(rows.size(), 3u);
-    BOOST_REQUIRE_EQUAL(rows[0], "\tfoo bar");
-    BOOST_REQUIRE_EQUAL(rows[1], "\n\n");
-    BOOST_REQUIRE_EQUAL(rows[2], "morethantenchars\r\n");
+    REQUIRE(rows.size() == 3u);
+    REQUIRE(rows[0] == "\tfoo bar");
+    REQUIRE(rows[1] == "\n\n");
+    REQUIRE(rows[2] == "morethantenchars\r\n");
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
-BOOST_AUTO_TEST_SUITE(printer__format_parameters_table)
+// Start Boost Suite: printer  format parameters table
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__positional_empty__empty)
-{
+TEST_CASE("printer  format parameters table  positional empty  empty", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP();
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(true), "");
+    REQUIRE(help.format_parameters_table(true) == "");
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__named_empty__empty)
-{
+TEST_CASE("printer  format parameters table  named empty  empty", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP();
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(false), "");
+    REQUIRE(help.format_parameters_table(false) == "");
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__named_three_options__three_options)
-{
+TEST_CASE("printer  format parameters table  named three options  three options", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("long", "Long name only.")
         (",m", "Short name only.")
         ("short_long,s", "Long and short name."));
+
     CONFIG_PRINTER_INITIALIZE(3u, 0u);
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(false),
+
+    REQUIRE(help.format_parameters_table(false) ==
         "--long               Long name only.                                     \n"
         "-m                   Short name only.                                    \n"
         "-s [--short_long]    Long and short name.                                \n"
     );
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__reversed_named_three_options__three_sorted_options)
-{
+TEST_CASE("printer  format parameters table  reversed named three options  three sorted options", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("short_long,s", "Long and short name.")
         (",m", "Short name only.")
         ("long", "Long name only."));
     CONFIG_PRINTER_INITIALIZE(3u, 0u);
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(false),
+    REQUIRE(help.format_parameters_table(false) ==
         "--long               Long name only.                                     \n"
         "-m                   Short name only.                                    \n"
         "-s [--short_long]    Long and short name.                                \n"
     );
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__unsorted_named_three_options_no_matching_arguments__three_sorted_options)
-{
+TEST_CASE("printer  format parameters table  unsorted named three options no matching arguments  three sorted options", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("first,f", "First option description.")
         ("second,x", "Second option description.")
@@ -171,15 +157,14 @@ BOOST_AUTO_TEST_CASE(printer__format_parameters_table__unsorted_named_three_opti
         arguments.add("forty-two", 42);
         arguments.add("THIRD", -1));
     CONFIG_PRINTER_INITIALIZE(3u, 2u);
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(false),
+    REQUIRE(help.format_parameters_table(false) ==
         "--third              Third option description.                           \n"
         "-f [--first]         First option description.                           \n"
         "-x [--second]        Second option description.                          \n"
     );
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__named_three_options_two_matching_arguments__one_option)
-{
+TEST_CASE("printer  format parameters table  named three options two matching arguments  one option", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("first,f", "First option description.")
         ("second,x", "Second option description.")
@@ -188,23 +173,21 @@ BOOST_AUTO_TEST_CASE(printer__format_parameters_table__named_three_options_two_m
         arguments.add("second", 42);
         arguments.add("THIRD", -1));
     CONFIG_PRINTER_INITIALIZE(3u, 3u);
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(false),
+    REQUIRE(help.format_parameters_table(false) ==
         "-f [--first]         First option description.                           \n"
     );
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__positional_three_options__empty)
-{
+TEST_CASE("printer  format parameters table  positional three options  empty", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("long", "Long name only.")
         ("short_long,s", "Long and short name.")
         (",m", "Short name only."));
     CONFIG_PRINTER_INITIALIZE(3u, 0u);
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(true), "");
+    REQUIRE(help.format_parameters_table(true) == "");
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__positional_three_options_one_matching_argument__one_argument)
-{
+TEST_CASE("printer  format parameters table  positional three options one matching argument  one argument", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("first,f", "First option description.")
         ("second,x", "Second option description.")
@@ -213,13 +196,12 @@ BOOST_AUTO_TEST_CASE(printer__format_parameters_table__positional_three_options_
         arguments.add("SECOND", 42);
         arguments.add("THIRD", -1));
     CONFIG_PRINTER_INITIALIZE(3u, 3u);
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(true),
+    REQUIRE(help.format_parameters_table(true) ==
         "THIRD                Third option description.                           \n"
     );
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__reverse_positional_three_options_three_matching_arguments__three_unsorted_arguments)
-{
+TEST_CASE("printer  format parameters table  reverse positional three options three matching arguments  three unsorted arguments", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("third", "Third option description.")
         ("SECOND", "Second option description.")
@@ -228,15 +210,14 @@ BOOST_AUTO_TEST_CASE(printer__format_parameters_table__reverse_positional_three_
         arguments.add("SECOND", 42);
         arguments.add("third", -1));
     CONFIG_PRINTER_INITIALIZE(3u, 3u);
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(true),
+    REQUIRE(help.format_parameters_table(true) ==
         "THIRD                Third option description.                           \n"
         "SECOND               Second option description.                          \n"
         "FIRST                First option description.                           \n"
     );
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__positional_three_options_two_matching_arguments_overflow__two_arguments_overflow)
-{
+TEST_CASE("printer  format parameters table  positional three options two matching arguments overflow  two arguments overflow", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("first,f", "First option description.")
         ("SECOND,x",
@@ -253,7 +234,7 @@ BOOST_AUTO_TEST_CASE(printer__format_parameters_table__positional_three_options_
     arguments.add("THIRD", -1));
     CONFIG_PRINTER_INITIALIZE(3u, 3u);
     auto table = help.format_parameters_table(true);
-    BOOST_REQUIRE_EQUAL(table,
+    REQUIRE(table ==
         "SECOND               Lorem ipsum dolor sit amet, consectetur adipiscing  \n"
         "                     elit, sed do eiusmod tempor incididunt ut labore et \n"
         "                     dolore magna aliqua. Ut enim ad minim veniam, quis  \n"
@@ -267,13 +248,12 @@ BOOST_AUTO_TEST_CASE(printer__format_parameters_table__positional_three_options_
     );
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
-BOOST_AUTO_TEST_SUITE(printer__format_usage_parameters)
+// Start Boost Suite: printer  format usage parameters
 
-BOOST_AUTO_TEST_CASE(printer__format_usage_parameters__unsorted_two_options_one_arg__sorted)
-{
+TEST_CASE("printer  format usage parameters  unsorted two options one arg  sorted", "[printer  format usage parameters]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("second,x", "Second option description.")
         ("first,f", "First option description.")
@@ -282,11 +262,10 @@ BOOST_AUTO_TEST_CASE(printer__format_usage_parameters__unsorted_two_options_one_
         arguments.add("SECOND", 42);
         arguments.add("THIRD", -1));
     CONFIG_PRINTER_INITIALIZE(3u, 3u);
-    BOOST_REQUIRE_EQUAL(help.format_usage_parameters(), "[-fx] [THIRD]...");
+    REQUIRE(help.format_usage_parameters() == "[-fx] [THIRD]...");
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_usage_parameters__unsorted_multiple_parameters__sorted_parameters)
-{
+TEST_CASE("printer  format usage parameters  unsorted multiple parameters  sorted parameters", "[printer  format usage parameters]") {
     using namespace std::filesystem;
     using namespace boost::program_options;
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
@@ -304,25 +283,23 @@ BOOST_AUTO_TEST_CASE(printer__format_usage_parameters__unsorted_multiple_paramet
         arguments.add("SIMPLE", 1);
         arguments.add("ARRAY", -1));
     CONFIG_PRINTER_INITIALIZE(10u, 3u);
-    BOOST_REQUIRE_EQUAL(help.format_usage_parameters(), "[-mst] --longy value [--untoggled] [--defaulty value] [--multy value]... REQUIRED [SIMPLE] [ARRAY]...");
+    REQUIRE(help.format_usage_parameters() == "[-mst] --longy value [--untoggled] [--defaulty value] [--multy value]... REQUIRED [SIMPLE] [ARRAY]...");
 }
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
-BOOST_AUTO_TEST_SUITE(printer__generate_argument_names)
+// Start Boost Suite: printer  generate argument names
 
 #define BX_PRINTER_GENERATE_ARGUMENT_NAMES(number_of_names) \
     help.generate_argument_names(); \
-    BOOST_REQUIRE_EQUAL(help.get_argument_names().size(), number_of_names)
+    REQUIRE(help.get_argument_names().size() == number_of_names)
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__empty_arguments_empty_options__empty)
-{
+TEST_CASE("printer  generate argument names  empty arguments empty options  empty", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP();
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(0u);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__empty_arguments_multiple_options__empty)
-{
+TEST_CASE("printer  generate argument names  empty arguments multiple options  empty", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("long", "Long name only.")
         ("short_long,s", "Long and short name.")
@@ -330,124 +307,113 @@ BOOST_AUTO_TEST_CASE(printer__generate_argument_names__empty_arguments_multiple_
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(0u);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__one_argument_1__one_name_1)
-{
+TEST_CASE("printer  generate argument names  one argument 1  one name 1", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(arguments.add("one", 1));
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(1u);
     auto& names = help.get_argument_names();
-    BOOST_REQUIRE_EQUAL(names[0].first, "one");
-    BOOST_REQUIRE_EQUAL(names[0].second, 1);
+    REQUIRE(names[0].first == "one");
+    REQUIRE(names[0].second == 1);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__one_argument_42__one_name_42)
-{
+TEST_CASE("printer  generate argument names  one argument 42  one name 42", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(arguments.add("forty-two", 42));
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(1u);
     auto& names = help.get_argument_names();
-    BOOST_REQUIRE_EQUAL(names[0].first, "forty-two");
-    BOOST_REQUIRE_EQUAL(names[0].second, 42);
+    REQUIRE(names[0].first == "forty-two");
+    REQUIRE(names[0].second == 42);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__one_argument_max_arguments__one_name_max_arguments)
-{
+TEST_CASE("printer  generate argument names  one argument max arguments  one name max arguments", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(arguments.add("max_arguments", printer::max_arguments));
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(1u);
     auto& names = help.get_argument_names();
-    BOOST_REQUIRE_EQUAL(names[0].first, "max_arguments");
-    BOOST_REQUIRE_EQUAL(names[0].second, printer::max_arguments);
+    REQUIRE(names[0].first == "max_arguments");
+    REQUIRE(names[0].second == printer::max_arguments);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__one_argument_max_arguments_plus_1__one_name_negative_1)
-{
+TEST_CASE("printer  generate argument names  one argument max arguments plus 1  one name negative 1", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(arguments.add("max_arguments+1", printer::max_arguments + 1));
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(1u);
     auto& names = help.get_argument_names();
-    BOOST_REQUIRE_EQUAL(names[0].first, "max_arguments+1");
-    BOOST_REQUIRE_EQUAL(names[0].second, -1);
+    REQUIRE(names[0].first == "max_arguments+1");
+    REQUIRE(names[0].second == -1);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__one_argument_negative_1__one_name_negative_1)
-{
+TEST_CASE("printer  generate argument names  one argument negative 1  one name negative 1", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(arguments.add("negative-one", -1));
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(1u);
     auto& names = help.get_argument_names();
-    BOOST_REQUIRE_EQUAL(names[0].first, "negative-one");
-    BOOST_REQUIRE_EQUAL(names[0].second, -1);
+    REQUIRE(names[0].first == "negative-one");
+    REQUIRE(names[0].second == -1);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__multiple_arguments__expected_names)
-{
+TEST_CASE("printer  generate argument names  multiple arguments  expected names", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(
         arguments.add("forty-two", 42);
         arguments.add("max_arguments", printer::max_arguments));
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(2u);
     auto& names = help.get_argument_names();
-    BOOST_REQUIRE_EQUAL(names[0].first, "forty-two");
-    BOOST_REQUIRE_EQUAL(names[0].second, 42);
-    BOOST_REQUIRE_EQUAL(names[1].first, "max_arguments");
-    BOOST_REQUIRE_EQUAL(names[1].second, printer::max_arguments);
+    REQUIRE(names[0].first == "forty-two");
+    REQUIRE(names[0].second == 42);
+    REQUIRE(names[1].first == "max_arguments");
+    REQUIRE(names[1].second == printer::max_arguments);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_argument_names__multiple_arguments_negative_1__expected_names)
-{
+TEST_CASE("printer  generate argument names  multiple arguments negative 1  expected names", "[printer  generate argument names]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(
         arguments.add("forty-two", 42);
         arguments.add("max_arguments", printer::max_arguments);
         arguments.add("negative-one", -1));
     BX_PRINTER_GENERATE_ARGUMENT_NAMES(3u);
     auto& names = help.get_argument_names();
-    BOOST_REQUIRE_EQUAL(names[0].first, "forty-two");
-    BOOST_REQUIRE_EQUAL(names[0].second, 42);
-    BOOST_REQUIRE_EQUAL(names[1].first, "max_arguments");
-    BOOST_REQUIRE_EQUAL(names[1].second, printer::max_arguments);
-    BOOST_REQUIRE_EQUAL(names[2].first, "negative-one");
-    BOOST_REQUIRE_EQUAL(names[2].second, -1);
+    REQUIRE(names[0].first == "forty-two");
+    REQUIRE(names[0].second == 42);
+    REQUIRE(names[1].first == "max_arguments");
+    REQUIRE(names[1].second == printer::max_arguments);
+    REQUIRE(names[2].first == "negative-one");
+    REQUIRE(names[2].second == -1);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
-BOOST_AUTO_TEST_SUITE(printer__generate_parameters)
+// Start Boost Suite: printer  generate parameters
 
 #define BX_PRINTER_GENERATE_PARAMETERS(number_of_parameters) \
     help.generate_parameters(); \
-    BOOST_REQUIRE_EQUAL(help.get_parameters().size(), number_of_parameters)
+    REQUIRE(help.get_parameters().size() == number_of_parameters)
 
-BOOST_AUTO_TEST_CASE(printer__generate_parameters__empty__empty_parameters)
-{
+TEST_CASE("printer  generate parameters  empty  empty parameters", "[printer  generate parameters]") {
     CONFIG_PRINTER_SETUP();
     BX_PRINTER_GENERATE_PARAMETERS(0u);
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_parameters__one_option__expected_parameter)
-{
+TEST_CASE("printer  generate parameters  one option  expected parameter", "[printer  generate parameters]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("foo_bar,f", "Foobar option name."));
     BX_PRINTER_GENERATE_PARAMETERS(1u);
     auto& parameters = help.get_parameters();
-    BOOST_REQUIRE_EQUAL(parameters[0].get_short_name(), 'f');
+    REQUIRE(parameters[0].get_short_name() == 'f');
 }
 
-BOOST_AUTO_TEST_CASE(printer__generate_parameters__unsorted_three_options__expected_sorted_parameters)
-{
+TEST_CASE("printer  generate parameters  unsorted three options  expected sorted parameters", "[printer  generate parameters]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("first,f", "First option description.")
         ("second,x", "Second option description.")
         ("third", "Third option description."));
     BX_PRINTER_GENERATE_PARAMETERS(3u);
     auto& parameters = help.get_parameters();
-    BOOST_REQUIRE_EQUAL(parameters[0].get_long_name(), "third");
-    BOOST_REQUIRE_EQUAL(parameters[1].get_short_name(), 'f');
-    BOOST_REQUIRE_EQUAL(parameters[2].get_description(), "Second option description.");
+    REQUIRE(parameters[0].get_long_name() == "third");
+    REQUIRE(parameters[1].get_short_name() == 'f');
+    REQUIRE(parameters[2].get_description() == "Second option description.");
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
-BOOST_AUTO_TEST_SUITE(printer__initialize)
+// Start Boost Suite: printer  initialize
 
-BOOST_AUTO_TEST_CASE(printer__initialize__unsorted_multitple_options__expected_sorted_parameters)
-{
+TEST_CASE("printer  initialize  unsorted multitple options  expected sorted parameters", "[printer  initialize]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("first,f", "First option description.")
         ("second,x", "Second option description.")
@@ -457,15 +423,15 @@ BOOST_AUTO_TEST_CASE(printer__initialize__unsorted_multitple_options__expected_s
     CONFIG_PRINTER_INITIALIZE(3u, 2u);
     auto& names = help.get_argument_names();
     auto& parameters = help.get_parameters();
-    BOOST_REQUIRE_EQUAL(names[0].first, "forty-two");
-    BOOST_REQUIRE_EQUAL(names[0].second, 42);
-    BOOST_REQUIRE_EQUAL(names[1].first, "negative-one");
-    BOOST_REQUIRE_EQUAL(names[1].second, -1);
-    BOOST_REQUIRE_EQUAL(parameters[0].get_long_name(), "third");
-    BOOST_REQUIRE_EQUAL(parameters[1].get_short_name(), 'f');
-    BOOST_REQUIRE_EQUAL(parameters[2].get_description(), "Second option description.");
+    REQUIRE(names[0].first == "forty-two");
+    REQUIRE(names[0].second == 42);
+    REQUIRE(names[1].first == "negative-one");
+    REQUIRE(names[1].second == -1);
+    REQUIRE(parameters[0].get_long_name() == "third");
+    REQUIRE(parameters[1].get_short_name() == 'f');
+    REQUIRE(parameters[2].get_description() == "Second option description.");
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite

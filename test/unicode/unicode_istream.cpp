@@ -4,16 +4,15 @@
 
 #include <string>
 #include <sstream>
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 
-BOOST_AUTO_TEST_SUITE(unicode_istream_tests)
+// Start Boost Suite: unicode istream tests
 
 // Use of L is not recommended as it will only work for ascii.
-BOOST_AUTO_TEST_CASE(unicode_istream__conditional__test)
-{
+TEST_CASE("unicode istream  conditional  test", "[unicode istream tests]") {
     std::wstringstream wide_stream(L"windows ...");
     std::stringstream narrow_stream("linux ...");
 
@@ -22,14 +21,13 @@ BOOST_AUTO_TEST_CASE(unicode_istream__conditional__test)
     input >> result;
 
 #ifdef _MSC_VER
-    BOOST_REQUIRE_EQUAL(result, "windows");
+    REQUIRE(result == "windows");
 #else
-    BOOST_REQUIRE_EQUAL(result, "linux");
+    REQUIRE(result == "linux");
 #endif
 }
 
-BOOST_AUTO_TEST_CASE(unicode_istream__non_ascii__test)
-{
+TEST_CASE("unicode istream  non ascii  test", "[unicode istream tests]") {
     auto const utf8 = "テスト";
     auto const utf16 = to_utf16(utf8);
 
@@ -40,11 +38,10 @@ BOOST_AUTO_TEST_CASE(unicode_istream__non_ascii__test)
     std::string result;
     input >> result;
 
-    BOOST_REQUIRE_EQUAL(result, utf8);
+    REQUIRE(result == utf8);
 }
 
-BOOST_AUTO_TEST_CASE(unicode_istream__tokenization__test)
-{
+TEST_CASE("unicode istream  tokenization  test", "[unicode istream tests]") {
     auto const utf8 = "テスト\rス\nト\tテス スト";
     auto const utf16 = to_utf16(utf8);
 
@@ -55,19 +52,18 @@ BOOST_AUTO_TEST_CASE(unicode_istream__tokenization__test)
     std::string result;
 
     input >> result;
-    BOOST_REQUIRE_EQUAL(result, "テスト");
+    REQUIRE(result == "テスト");
     input >> result;
-    BOOST_REQUIRE_EQUAL(result, "ス");
+    REQUIRE(result == "ス");
     input >> result;
-    BOOST_REQUIRE_EQUAL(result, "ト");
+    REQUIRE(result == "ト");
     input >> result;
-    BOOST_REQUIRE_EQUAL(result, "テス");
+    REQUIRE(result == "テス");
     input >> result;
-    BOOST_REQUIRE_EQUAL(result, "スト");
+    REQUIRE(result == "スト");
 }
 
-BOOST_AUTO_TEST_CASE(unicode_istream__overflow__test)
-{
+TEST_CASE("unicode istream  overflow  test", "[unicode istream tests]") {
     // This is a 20x10 matrix of 3 bytes per character triples (1800 bytes).
     // The buffer is 256 (wide) and 1024 (narrow), resulting in a potential
     // character split because 256 is not a multiple of 3. However sgetn()
@@ -103,7 +99,7 @@ BOOST_AUTO_TEST_CASE(unicode_istream__overflow__test)
     std::string result;
     input >> result;
 
-    BOOST_REQUIRE_EQUAL(result, utf8_1800_bytes);
+    REQUIRE(result == utf8_1800_bytes);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite

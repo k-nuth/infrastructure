@@ -9,8 +9,6 @@
 #include <memory>
 #include <string>
 
-// #include <boost/filesystem.hpp>
-
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/unicode/file_lock.hpp>
 

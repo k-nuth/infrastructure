@@ -66,7 +66,6 @@
 #ifdef _MSC_VER
     #include <filesystem>
     #include <locale>
-    //#include <boost/filesystem.hpp>
     #include <boost/locale.hpp>
     #include <windows.h>
     #define KTH_USE_MAIN \

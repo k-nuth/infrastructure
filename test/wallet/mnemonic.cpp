@@ -4,104 +4,95 @@
 
 #include "mnemonic.hpp"
 
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 using namespace kth::infrastructure::wallet;
 
-BOOST_AUTO_TEST_SUITE(mnemonic_tests)
+// Start Boost Suite: mnemonic tests
 
-BOOST_AUTO_TEST_CASE(mnemonic__decode_mnemonic__no_passphrase)
-{
+TEST_CASE("mnemonic  decode mnemonic  no passphrase", "[mnemonic tests]") {
     for (auto const& vector: mnemonic_no_passphrase)
     {
         auto const words = split(vector.mnemonic, ",");
-        BOOST_REQUIRE(validate_mnemonic(words, vector.language));
+        REQUIRE(validate_mnemonic(words, vector.language));
         auto const seed = decode_mnemonic(words);
-        BOOST_REQUIRE_EQUAL(encode_base16(seed), vector.seed);
+        REQUIRE(encode_base16(seed) == vector.seed);
     }
 }
 
 #ifdef WITH_ICU
 
-BOOST_AUTO_TEST_CASE(mnemonic__decode_mnemonic__trezor)
-{
+TEST_CASE("mnemonic  decode mnemonic  trezor", "[mnemonic tests]") {
     for (auto const& vector: mnemonic_trezor_vectors)
     {
         auto const words = split(vector.mnemonic, ",");
-        BOOST_REQUIRE(validate_mnemonic(words));
+        REQUIRE(validate_mnemonic(words));
         auto const seed = decode_mnemonic(words, vector.passphrase);
-        BOOST_REQUIRE_EQUAL(encode_base16(seed), vector.seed);
+        REQUIRE(encode_base16(seed) == vector.seed);
     }
 }
 
-BOOST_AUTO_TEST_CASE(mnemonic__decode_mnemonic__bx)
-{
+TEST_CASE("mnemonic  decode mnemonic  bx", "[mnemonic tests]") {
     for (auto const& vector: mnemonic_bx_to_seed_vectors)
     {
         auto const words = split(vector.mnemonic, ",");
-        BOOST_REQUIRE(validate_mnemonic(words));
+        REQUIRE(validate_mnemonic(words));
         auto const seed = decode_mnemonic(words, vector.passphrase);
-        BOOST_REQUIRE_EQUAL(encode_base16(seed), vector.seed);
+        REQUIRE(encode_base16(seed) == vector.seed);
     }
 }
 
 #endif
 
-BOOST_AUTO_TEST_CASE(mnemonic__create_mnemonic__trezor)
-{
+TEST_CASE("mnemonic  create mnemonic  trezor", "[mnemonic tests]") {
     for (const mnemonic_result& vector: mnemonic_trezor_vectors)
     {
         data_chunk entropy;
         decode_base16(entropy, vector.entropy);
         auto const mnemonic = create_mnemonic(entropy, vector.language);
-        BOOST_REQUIRE(mnemonic.size() > 0);
-        BOOST_REQUIRE_EQUAL(join(mnemonic, ","), vector.mnemonic);
-        BOOST_REQUIRE(validate_mnemonic(mnemonic));
+        REQUIRE(mnemonic.size() > 0);
+        REQUIRE(join(mnemonic, ",") == vector.mnemonic);
+        REQUIRE(validate_mnemonic(mnemonic));
     }
 }
 
-BOOST_AUTO_TEST_CASE(mnemonic__create_mnemonic__bx)
-{
+TEST_CASE("mnemonic  create mnemonic  bx", "[mnemonic tests]") {
     for (const mnemonic_result& vector: mnemonic_bx_new_vectors)
     {
         data_chunk entropy;
         decode_base16(entropy, vector.entropy);
         auto const mnemonic = create_mnemonic(entropy, vector.language);
-        BOOST_REQUIRE(mnemonic.size() > 0);
-        BOOST_REQUIRE_EQUAL(join(mnemonic, ","), vector.mnemonic);
-        BOOST_REQUIRE(validate_mnemonic(mnemonic));
+        REQUIRE(mnemonic.size() > 0);
+        REQUIRE(join(mnemonic, ",") == vector.mnemonic);
+        REQUIRE(validate_mnemonic(mnemonic));
     }
 }
 
-BOOST_AUTO_TEST_CASE(mnemonic__validate_mnemonic__invalid)
-{
+TEST_CASE("mnemonic  validate mnemonic  invalid", "[mnemonic tests]") {
     for (auto const& mnemonic: invalid_mnemonic_tests)
     {
         auto const words = split(mnemonic, ",");
-        BOOST_REQUIRE(!validate_mnemonic(words));
+        REQUIRE(!validate_mnemonic(words));
     }
 }
 
-BOOST_AUTO_TEST_CASE(mnemonic__create_mnemonic__tiny)
-{
+TEST_CASE("mnemonic  create mnemonic  tiny", "[mnemonic tests]") {
     data_chunk const entropy(4, 0xa9);
     auto const mnemonic = create_mnemonic(entropy);
-    BOOST_REQUIRE_EQUAL(mnemonic.size(), 3u);
-    BOOST_REQUIRE(validate_mnemonic(mnemonic));
+    REQUIRE(mnemonic.size() == 3u);
+    REQUIRE(validate_mnemonic(mnemonic));
 }
 
-BOOST_AUTO_TEST_CASE(mnemonic__create_mnemonic__giant)
-{
+TEST_CASE("mnemonic  create mnemonic  giant", "[mnemonic tests]") {
     data_chunk const entropy(1024, 0xa9);
     auto const mnemonic = create_mnemonic(entropy);
-    BOOST_REQUIRE_EQUAL(mnemonic.size(), 768u);
-    BOOST_REQUIRE(validate_mnemonic(mnemonic));
+    REQUIRE(mnemonic.size() == 768u);
+    REQUIRE(validate_mnemonic(mnemonic));
 }
 
-BOOST_AUTO_TEST_CASE(mnemonic__dictionary__en_es__no_intersection)
-{
+TEST_CASE("mnemonic  dictionary  en es  no intersection", "[mnemonic tests]") {
     auto const& english = language::en;
     auto const& spanish = language::es;
     size_t intersection = 0;
@@ -113,11 +104,10 @@ BOOST_AUTO_TEST_CASE(mnemonic__dictionary__en_es__no_intersection)
             intersection++;
     }
 
-    BOOST_REQUIRE_EQUAL(intersection, 0u);
+    REQUIRE(intersection == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(mnemonic__dictionary__en_it__no_intersection)
-{
+TEST_CASE("mnemonic  dictionary  en it  no intersection", "[mnemonic tests]") {
     auto const& english = language::en;
     auto const& italian = language::it;
     size_t intersection = 0;
@@ -129,11 +119,10 @@ BOOST_AUTO_TEST_CASE(mnemonic__dictionary__en_it__no_intersection)
             intersection++;
     }
 
-    BOOST_REQUIRE_EQUAL(intersection, 0u);
+    REQUIRE(intersection == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(mnemonic__dictionary__fr_es__no_intersection)
-{
+TEST_CASE("mnemonic  dictionary  fr es  no intersection", "[mnemonic tests]") {
     auto const& french = language::fr;
     auto const& spanish = language::es;
     size_t intersection = 0;
@@ -145,11 +134,10 @@ BOOST_AUTO_TEST_CASE(mnemonic__dictionary__fr_es__no_intersection)
             intersection++;
     }
 
-    BOOST_REQUIRE_EQUAL(intersection, 0u);
+    REQUIRE(intersection == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(mnemonic__dictionary__it_es__no_intersection)
-{
+TEST_CASE("mnemonic  dictionary  it es  no intersection", "[mnemonic tests]") {
     auto const& italian = language::it;
     auto const& spanish = language::es;
     size_t intersection = 0;
@@ -161,11 +149,10 @@ BOOST_AUTO_TEST_CASE(mnemonic__dictionary__it_es__no_intersection)
             intersection++;
     }
 
-    BOOST_REQUIRE_EQUAL(intersection, 0u);
+    REQUIRE(intersection == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(mnemonic__dictionary__fr_it__no_intersection)
-{
+TEST_CASE("mnemonic  dictionary  fr it  no intersection", "[mnemonic tests]") {
     auto const& french = language::fr;
     auto const& italian = language::it;
     size_t intersection = 0;
@@ -177,11 +164,10 @@ BOOST_AUTO_TEST_CASE(mnemonic__dictionary__fr_it__no_intersection)
             intersection++;
     }
 
-    BOOST_REQUIRE_EQUAL(intersection, 0u);
+    REQUIRE(intersection == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(mnemonic__dictionary__cs_ru__no_intersection)
-{
+TEST_CASE("mnemonic  dictionary  cs ru  no intersection", "[mnemonic tests]") {
     auto const& czech = language::cs;
     auto const& russian = language::ru;
     size_t intersection = 0;
@@ -193,11 +179,10 @@ BOOST_AUTO_TEST_CASE(mnemonic__dictionary__cs_ru__no_intersection)
             intersection++;
     }
 
-    BOOST_REQUIRE_EQUAL(intersection, 0u);
+    REQUIRE(intersection == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(mnemonic__dictionary__cs_uk__no_intersection)
-{
+TEST_CASE("mnemonic  dictionary  cs uk  no intersection", "[mnemonic tests]") {
     auto const& czech = language::cs;
     auto const& ukranian = language::uk;
     size_t intersection = 0;
@@ -209,11 +194,10 @@ BOOST_AUTO_TEST_CASE(mnemonic__dictionary__cs_uk__no_intersection)
             intersection++;
     }
 
-    BOOST_REQUIRE_EQUAL(intersection, 0u);
+    REQUIRE(intersection == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(mnemonic__dictionary__zh_Hans_Hant__intersection)
-{
+TEST_CASE("mnemonic  dictionary  zh Hans Hant  intersection", "[mnemonic tests]") {
     auto const& simplified = language::zh_Hans;
     auto const& traditional = language::zh_Hant;
     size_t intersection = 0;
@@ -225,7 +209,7 @@ BOOST_AUTO_TEST_CASE(mnemonic__dictionary__zh_Hans_Hant__intersection)
             intersection++;
     }
 
-    BOOST_REQUIRE_EQUAL(intersection, 1275u);
+    REQUIRE(intersection == 1275u);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
