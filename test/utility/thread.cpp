@@ -90,9 +90,8 @@ TEST_CASE("thread  set thread priorites  all  set as expected", "[thread tests]"
 
 #endif
 
-BOOST_AUTO_TEST_CASE(thread__set_thread_priority__invalid__throws_invalid_argument)
-{
-    BOOST_REQUIRE_THROW(set_priority(static_cast<thread_priority>(42)), std::invalid_argument);
+TEST_CASE("thread  set thread priority  invalid  throws invalid argument", "[thread tests]") {
+    REQUIRE_THROWS_AS(set_priority(static_cast<thread_priority>(42)), std::invalid_argument);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
