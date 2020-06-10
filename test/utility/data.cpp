@@ -86,14 +86,13 @@ TEST_CASE("data  build array  under capacity  true excess unchanged", "[data tes
     {
         std::array<uint8_t, 2>{ { expected1, expected2 } }
     });
-    BOOST_REQUIRE(result);
-    BOOST_REQUIRE_EQUAL(value[0], expected1);
-    BOOST_REQUIRE_EQUAL(value[1], expected2);
-    BOOST_REQUIRE_EQUAL(value[2], expected3);
+    REQUIRE(result);
+    REQUIRE(value[0] == expected1);
+    REQUIRE(value[1] == expected2);
+    REQUIRE(value[2] == expected3);
 }
 
-BOOST_AUTO_TEST_CASE(data__build_array__exact_fill_multiple_slices__true_expected_values)
-{
+TEST_CASE("data  build array  exact fill multiple slices  true expected values", "[data tests]") {
     size_t const size1 = 2;
     size_t const size2 = 1;
     size_t const size3 = 3;
