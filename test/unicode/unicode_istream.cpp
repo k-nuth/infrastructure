@@ -99,7 +99,7 @@ TEST_CASE("unicode istream  overflow  test", "[unicode istream tests]") {
     std::string result;
     input >> result;
 
-    BOOST_REQUIRE_EQUAL(result, utf8_1800_bytes);
+    REQUIRE(result == utf8_1800_bytes);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
