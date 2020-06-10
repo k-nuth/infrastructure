@@ -210,15 +210,14 @@ TEST_CASE("printer  format parameters table  reverse positional three options th
         arguments.add("SECOND", 42);
         arguments.add("third", -1));
     CONFIG_PRINTER_INITIALIZE(3u, 3u);
-    BOOST_REQUIRE_EQUAL(help.format_parameters_table(true),
+    REQUIRE(help.format_parameters_table(true) ==
         "THIRD                Third option description.                           \n"
         "SECOND               Second option description.                          \n"
         "FIRST                First option description.                           \n"
     );
 }
 
-BOOST_AUTO_TEST_CASE(printer__format_parameters_table__positional_three_options_two_matching_arguments_overflow__two_arguments_overflow)
-{
+TEST_CASE("printer  format parameters table  positional three options two matching arguments overflow  two arguments overflow", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("first,f", "First option description.")
         ("SECOND,x",
