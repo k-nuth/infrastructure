@@ -4,16 +4,15 @@
 
 #include <string>
 #include <sstream>
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 
-BOOST_AUTO_TEST_SUITE(unicode_ostream_tests)
+// Start Boost Suite: unicode ostream tests
 
 // Use of L is not recommended as it will only work for ascii.
-BOOST_AUTO_TEST_CASE(unicode_ostream__conditional__test)
-{
+TEST_CASE("unicode ostream  conditional  test", "[unicode ostream tests]") {
     std::wstringstream wide_stream;
     std::stringstream narrow_stream;
 
@@ -22,16 +21,15 @@ BOOST_AUTO_TEST_CASE(unicode_ostream__conditional__test)
     output.flush();
 
 #ifdef _MSC_VER
-    BOOST_REQUIRE(narrow_stream.str().empty());
-    BOOST_REQUIRE_EQUAL(wide_stream.str().c_str(), L"ascii");
+    REQUIRE(narrow_stream.str().empty());
+    REQUIRE(wide_stream.str().c_str() == L"ascii");
 #else
-    BOOST_REQUIRE(wide_stream.str().empty());
-    BOOST_REQUIRE_EQUAL(narrow_stream.str(), "ascii");
+    REQUIRE(wide_stream.str().empty());
+    REQUIRE(narrow_stream.str() == "ascii");
 #endif
 }
 
-BOOST_AUTO_TEST_CASE(unicode_ostream__non_ascii__test)
-{
+TEST_CASE("unicode ostream  non ascii  test", "[unicode ostream tests]") {
     auto const utf8 = "テスト";
     auto const utf16 = to_utf16(utf8);
 
@@ -43,16 +41,15 @@ BOOST_AUTO_TEST_CASE(unicode_ostream__non_ascii__test)
     output.flush();
 
 #ifdef _MSC_VER
-    BOOST_REQUIRE(narrow_stream.str().empty());
-    BOOST_REQUIRE_EQUAL(wide_stream.str().c_str(), utf16.c_str());
+    REQUIRE(narrow_stream.str().empty());
+    REQUIRE(wide_stream.str().c_str() == utf16.c_str());
 #else
-    BOOST_REQUIRE(wide_stream.str().empty());
-    BOOST_REQUIRE_EQUAL(narrow_stream.str(), utf8);
+    REQUIRE(wide_stream.str().empty());
+    REQUIRE(narrow_stream.str() == utf8);
 #endif
 }
 
-BOOST_AUTO_TEST_CASE(unicode_ostream__overflow__test)
-{
+TEST_CASE("unicode ostream  overflow  test", "[unicode ostream tests]") {
     // This is a 20x10 matrix of 3 bytes per character triples (1800 bytes).
     // The buffer is 256 (wide) and 1024 (narrow), resulting in a potential
     // character split because 256 is not a multiple of 3. The overflow
@@ -91,12 +88,12 @@ BOOST_AUTO_TEST_CASE(unicode_ostream__overflow__test)
     output.flush();
 
 #ifdef _MSC_VER
-    BOOST_REQUIRE(narrow_stream.str().empty());
-    BOOST_REQUIRE_EQUAL(wide_stream.str().c_str(), utf16_600_chars.c_str());
+    REQUIRE(narrow_stream.str().empty());
+    REQUIRE(wide_stream.str().c_str() == utf16_600_chars.c_str());
 #else
-    BOOST_REQUIRE(wide_stream.str().empty());
-    BOOST_REQUIRE_EQUAL(narrow_stream.str(), utf8_1800_bytes);
+    REQUIRE(wide_stream.str().empty());
+    REQUIRE(narrow_stream.str() == utf8_1800_bytes);
 #endif
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite

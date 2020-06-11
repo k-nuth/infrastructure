@@ -14,8 +14,7 @@
 
 // DO NOT TEST WITH MACRO VALUES BELOW THAT VARY BY PLATFORM,
 // SUCH AS LONG_MIN, LONG_MAX.
-int64_t const number_values[] =
-{
+int64_t const number_values[] = {
     0,
     1,
     INT8_MIN,
@@ -31,8 +30,7 @@ int64_t const number_values[] =
     ////LLONG_MAX
 };
 
-int64_t const number_offsets[] =
-{
+int64_t const number_offsets[] = {
     1,
     0x79,
     0x80,
@@ -50,20 +48,17 @@ sizeof(number_values) / sizeof(number_values[0]);
 constexpr size_t number_offsets_count =
 sizeof(number_offsets) / sizeof(number_offsets[0]);
 
-struct number_buffer
-{
+struct number_buffer {
     int32_t number;
     kth::data_chunk bytes;
 };
 
-struct number_subtract
-{
+struct number_subtract {
     number_buffer forward;
     number_buffer reverse;
 };
 
-struct number_compare
-{
+struct number_compare {
     bool eq;
     bool ne;
     bool lt;
@@ -72,7 +67,7 @@ struct number_compare
     bool ge;
 };
 
-number const_buffer number_adds[11][9][12] =
+number_buffer const number_adds[11][9][12] =
 {
     {
         {
@@ -1740,7 +1735,7 @@ number const_buffer number_adds[11][9][12] =
     ////},
 };
 
-number const_buffer number_negates[11][9][12] =
+number_buffer const number_negates[11][9][12] =
 {
     {
         {
@@ -3408,7 +3403,7 @@ number const_buffer number_negates[11][9][12] =
     ////},
 };
 
-number const_subtract number_subtracts[11][9][12] =
+number_subtract const number_subtracts[11][9][12] =
 {
     {
         {
@@ -5076,7 +5071,7 @@ number const_subtract number_subtracts[11][9][12] =
     ////},
 };
 
-number const_compare number_compares[11][9][12] =
+number_compare const number_compares[11][9][12] =
 {
     {
         {

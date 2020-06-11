@@ -5,74 +5,67 @@
 #include <cstring>
 #include <stdexcept>
 #include <vector>
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 
-BOOST_AUTO_TEST_SUITE(unicode_tests)
+// Start Boost Suite: unicode tests
 
 #ifdef WITH_ICU
 
 // github.com/bitcoin/bips/blob/master/bip-0038.mediawiki
-BOOST_AUTO_TEST_CASE(unicode__to_normal_nfc_form__validate__test)
-{
+TEST_CASE("unicode  to normal nfc form  validate  test", "[unicode tests]") {
     data_chunk original;
-    BOOST_REQUIRE(decode_base16(original, "cf92cc8100f0909080f09f92a9"));
+    REQUIRE(decode_base16(original, "cf92cc8100f0909080f09f92a9"));
     std::string original_string(original.begin(), original.end());
 
     data_chunk normal;
-    BOOST_REQUIRE(decode_base16(normal, "cf9300f0909080f09f92a9"));
+    REQUIRE(decode_base16(normal, "cf9300f0909080f09f92a9"));
     std::string expected_normal_string(normal.begin(), normal.end());
 
     auto const derived_normal_string = kth::to_normal_nfc_form(original_string);
-    BOOST_REQUIRE_EQUAL(expected_normal_string, derived_normal_string);
+    REQUIRE(expected_normal_string == derived_normal_string);
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_normal_nfkd_form__validate__test)
-{
+TEST_CASE("unicode  to normal nfkd form  validate  test", "[unicode tests]") {
     auto const ascii_space_sandwich = "space-> <-space";
     auto const ideographic_space_sandwich = "space->　<-space";
     auto const normalized = to_normal_nfkd_form(ideographic_space_sandwich);
-    BOOST_REQUIRE_EQUAL(normalized.c_str(), ascii_space_sandwich);
+    REQUIRE(normalized.c_str() == ascii_space_sandwich);
 }
 
 #endif
 
 // Use of L is not recommended as it will only work for ascii.
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_string__ascii__test)
-{
+TEST_CASE("unicode  to utf8 string  ascii  test", "[unicode tests]") {
     auto const utf8_ascii = "ascii";
     auto const utf16_ascii = L"ascii";
     auto const converted = to_utf8(utf16_ascii);
-    BOOST_REQUIRE_EQUAL(converted, utf8_ascii);
+    REQUIRE(converted == utf8_ascii);
 }
 
 // Use of L is not recommended as it will only work for ascii.
-BOOST_AUTO_TEST_CASE(unicode__to_utf16_string__ascii__test)
-{
+TEST_CASE("unicode  to utf16 string  ascii  test", "[unicode tests]") {
     auto const utf8_ascii = "ascii";
     auto const utf16_ascii = L"ascii";
     auto const converted = to_utf16(utf8_ascii);
-    BOOST_REQUIRE_EQUAL(converted.c_str(), utf16_ascii);
+    REQUIRE(converted.c_str() == utf16_ascii);
 }
 
-BOOST_AUTO_TEST_CASE(unicode__string_round_trip__ascii__test)
-{
+TEST_CASE("unicode  string round trip  ascii  test", "[unicode tests]") {
     auto const utf8_ascii = "ascii";
     auto const narrowed = to_utf8(to_utf16(utf8_ascii));
-    BOOST_REQUIRE_EQUAL(narrowed, utf8_ascii);
+    REQUIRE(narrowed == utf8_ascii);
 }
 
-BOOST_AUTO_TEST_CASE(unicode__string_round_trip__utf8__test)
-{
+TEST_CASE("unicode  string round trip  utf8  test", "[unicode tests]") {
     auto const utf8 = "テスト";
     auto const narrowed = to_utf8(to_utf16(utf8));
-    BOOST_REQUIRE_EQUAL(narrowed, utf8);
+    REQUIRE(narrowed == utf8);
 }
 
-BOOST_AUTO_TEST_CASE(unicode__string_round_trip__wide_literal__test)
-{
+TEST_CASE("unicode  string round trip  wide literal  test", "[unicode tests]") {
     auto const utf8 = "テスト";
     auto const utf16 = L"テスト";
 
@@ -85,13 +78,12 @@ BOOST_AUTO_TEST_CASE(unicode__string_round_trip__wide_literal__test)
     BOOST_REQUIRE_NE(widened.c_str(), utf16);
     BOOST_REQUIRE_NE(narrowed, utf8);
 #else
-    BOOST_REQUIRE_EQUAL(widened.c_str(), utf16);
-    BOOST_REQUIRE_EQUAL(narrowed, utf8);
+    REQUIRE(widened.c_str() == utf16);
+    REQUIRE(narrowed == utf8);
 #endif
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_array__ascii__test)
-{
+TEST_CASE("unicode  to utf8 array  ascii  test", "[unicode tests]") {
     char utf8[20];
 
     // Text buffer provides null termination for test comparison.
@@ -102,12 +94,11 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf8_array__ascii__test)
     std::string const expected_utf8("ascii");
 
     auto const size = to_utf8(utf8, sizeof(utf8), utf16.c_str(), (int)utf16.size());
-    BOOST_REQUIRE_EQUAL(utf8, expected_utf8);
-    BOOST_REQUIRE_EQUAL(size, expected_utf8.size());
+    REQUIRE(utf8 == expected_utf8);
+    REQUIRE(size == expected_utf8.size());
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_array__non_ascii__test)
-{
+TEST_CASE("unicode  to utf8 array  non ascii  test", "[unicode tests]") {
     char utf8[36];
 
     // Text buffer provides null termination for test comparison.
@@ -118,12 +109,11 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf8_array__non_ascii__test)
 
     auto const size = to_utf8(utf8, sizeof(utf8), utf16.c_str(), (int)utf16.size());
 
-    BOOST_REQUIRE_EQUAL(utf8, expected_utf8);
-    BOOST_REQUIRE_EQUAL(size, expected_utf8.size());
+    REQUIRE(utf8 == expected_utf8);
+    REQUIRE(size == expected_utf8.size());
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf16_array__ascii__test)
-{
+TEST_CASE("unicode  to utf16 array  ascii  test", "[unicode tests]") {
     wchar_t utf16[20];
 
     // Text buffer provides null termination for test comparison.
@@ -136,13 +126,12 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf16_array__ascii__test)
     uint8_t truncated;
     auto const size = to_utf16(utf16, sizeof(utf16), utf8.c_str(), (int)utf8.size(), truncated);
 
-    BOOST_REQUIRE_EQUAL(utf16, expected_utf16.c_str());
-    BOOST_REQUIRE_EQUAL(size, expected_utf16.size());
-    BOOST_REQUIRE_EQUAL(truncated, 0);
+    REQUIRE(utf16 == expected_utf16.c_str());
+    REQUIRE(size == expected_utf16.size());
+    REQUIRE(truncated == 0);
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf16_array__non_ascii__test)
-{
+TEST_CASE("unicode  to utf16 array  non ascii  test", "[unicode tests]") {
     wchar_t utf16[36];
 
     // Text buffer provides null termination for test comparison.
@@ -154,13 +143,12 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf16_array__non_ascii__test)
     uint8_t truncated;
     auto const size = to_utf16(utf16, sizeof(utf16), utf8.c_str(), (int)utf8.size(), truncated);
 
-    BOOST_REQUIRE_EQUAL(utf16, expected_utf16.c_str());
-    BOOST_REQUIRE_EQUAL(size, expected_utf16.size());
-    BOOST_REQUIRE_EQUAL(truncated, 0);
+    REQUIRE(utf16 == expected_utf16.c_str());
+    REQUIRE(size == expected_utf16.size());
+    REQUIRE(truncated == 0);
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf16_array__non_ascii_truncation1__test)
-{
+TEST_CASE("unicode  to utf16 array  non ascii truncation1  test", "[unicode tests]") {
     wchar_t utf16[36];
 
     // Text buffer provides null termination for test comparison.
@@ -182,13 +170,12 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf16_array__non_ascii_truncation1__test)
     uint8_t truncated;
     auto const size = to_utf16(utf16, sizeof(utf16), utf8.c_str(), (int)utf8.size(), truncated);
 
-    BOOST_REQUIRE_EQUAL(truncated, expected_truncated);
-    BOOST_REQUIRE_EQUAL(utf16, expected_utf16.c_str());
-    BOOST_REQUIRE_EQUAL(size, expected_utf16.size());
+    REQUIRE(truncated == expected_truncated);
+    REQUIRE(utf16 == expected_utf16.c_str());
+    REQUIRE(size == expected_utf16.size());
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf16_array__non_ascii_truncation2__test)
-{
+TEST_CASE("unicode  to utf16 array  non ascii truncation2  test", "[unicode tests]") {
     wchar_t utf16[36];
 
     // Text buffer provides null termination for test comparison.
@@ -210,24 +197,22 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf16_array__non_ascii_truncation2__test)
     uint8_t truncated;
     auto const size = to_utf16(utf16, sizeof(utf16), utf8.c_str(), (int)utf8.size(), truncated);
 
-    BOOST_REQUIRE_EQUAL(truncated, expected_truncated);
-    BOOST_REQUIRE_EQUAL(utf16, expected_utf16.c_str());
-    BOOST_REQUIRE_EQUAL(size, expected_utf16.size());
+    REQUIRE(truncated == expected_truncated);
+    REQUIRE(utf16 == expected_utf16.c_str());
+    REQUIRE(size == expected_utf16.size());
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_environment__ascii__test)
-{
+TEST_CASE("unicode  to utf8 environment  ascii  test", "[unicode tests]") {
     std::vector<const wchar_t*> wide_environment = { L"ascii", nullptr };
 
     auto variables = const_cast<wchar_t**>(&wide_environment[0]);
     auto buffer = to_utf8(variables);
     auto narrow_environment = reinterpret_cast<char**>(&buffer[0]);
 
-    BOOST_REQUIRE_EQUAL(narrow_environment[0], "ascii");
+    REQUIRE(narrow_environment[0] == "ascii");
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_environment__utf16__test)
-{
+TEST_CASE("unicode  to utf8 environment  utf16  test", "[unicode tests]") {
     // We cannot use L for literal encoding of non-ascii text on Windows.
     auto utf16 = to_utf16("テスト");
     auto non_literal_utf16 = utf16.c_str();
@@ -237,12 +222,11 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf8_environment__utf16__test)
     auto buffer = to_utf8(variables);
     auto narrow_environment = reinterpret_cast<char**>(&buffer[0]);
 
-    BOOST_REQUIRE_EQUAL(narrow_environment[0], "ascii");
-    BOOST_REQUIRE_EQUAL(narrow_environment[1], "テスト");
+    REQUIRE(narrow_environment[0] == "ascii");
+    REQUIRE(narrow_environment[1] == "テスト");
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_environment__null_termination__test)
-{
+TEST_CASE("unicode  to utf8 environment  null termination  test", "[unicode tests]") {
     std::vector<const wchar_t*> wide_environment = { L"ascii", nullptr };
 
     auto variables = const_cast<wchar_t**>(&wide_environment[0]);
@@ -254,15 +238,14 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf8_environment__null_termination__test)
     // Each argument is a null terminated string.
     auto const length = strlen(narrow_environment[0]);
     auto variable_terminator = narrow_environment[0][length];
-    BOOST_REQUIRE_EQUAL(variable_terminator, '\0');
+    REQUIRE(variable_terminator == '\0');
 
     // The argument vector is a null terminated array.
     auto environment_terminator = narrow_environment[expected_count];
-    BOOST_REQUIRE_EQUAL(environment_terminator, static_cast<char*>(nullptr));
+    REQUIRE(environment_terminator == static_cast<char*>(nullptr));
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_main__ascii__test)
-{
+TEST_CASE("unicode  to utf8 main  ascii  test", "[unicode tests]") {
     std::vector<const wchar_t*> wide_args = { L"ascii", nullptr };
 
     auto argv = const_cast<wchar_t**>(&wide_args[0]);
@@ -271,11 +254,10 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf8_main__ascii__test)
     auto buffer = to_utf8(argc, argv);
     auto narrow_args = reinterpret_cast<char**>(&buffer[0]);
 
-    BOOST_REQUIRE_EQUAL(narrow_args[0], "ascii");
+    REQUIRE(narrow_args[0] == "ascii");
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_main__utf16__test)
-{
+TEST_CASE("unicode  to utf8 main  utf16  test", "[unicode tests]") {
     // We cannot use L for literal encoding of non-ascii text on Windows.
     auto utf16 = to_utf16("テスト");
     auto non_literal_utf16 = utf16.c_str();
@@ -287,12 +269,11 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf8_main__utf16__test)
     auto buffer = to_utf8(argc, argv);
     auto narrow_args = reinterpret_cast<char**>(&buffer[0]);
 
-    BOOST_REQUIRE_EQUAL(narrow_args[0], "ascii");
-    BOOST_REQUIRE_EQUAL(narrow_args[1], "テスト");
+    REQUIRE(narrow_args[0] == "ascii");
+    REQUIRE(narrow_args[1] == "テスト");
 }
 
-BOOST_AUTO_TEST_CASE(unicode__to_utf8_main__null_termination__test)
-{
+TEST_CASE("unicode  to utf8 main  null termination  test", "[unicode tests]") {
     std::vector<const wchar_t*> wide_args = { L"ascii", nullptr };
 
     auto argv = const_cast<wchar_t**>(&wide_args[0]);
@@ -304,11 +285,11 @@ BOOST_AUTO_TEST_CASE(unicode__to_utf8_main__null_termination__test)
     // Each argument is a null terminated string.
     auto const length = strlen(narrow_args[0]);
     auto arg_terminator = narrow_args[0][length];
-    BOOST_REQUIRE_EQUAL(arg_terminator, '\0');
+    REQUIRE(arg_terminator == '\0');
 
     // The argument vector is a null terminated array.
     auto argv_terminator = narrow_args[argc];
-    BOOST_REQUIRE_EQUAL(argv_terminator, static_cast<char*>(nullptr));
+    REQUIRE(argv_terminator == static_cast<char*>(nullptr));
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite

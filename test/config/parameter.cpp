@@ -7,11 +7,8 @@
 #include <utility>
 #include <vector>
 
-// #include <boost/filesystem.hpp>
-
 #include <boost/program_options.hpp>
-#include <boost/test/test_tools.hpp>
-#include <boost/test/unit_test_suite.hpp>
+#include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 namespace po = boost::program_options;
@@ -71,230 +68,209 @@ void load_test_arguments(argument_list& arguments) {
     auto option = *(options.options()[index]); \
     kth::infrastructure::config::parameter parameter
 
-BOOST_AUTO_TEST_SUITE(parameter_tests)
+// Start Boost Suite: parameter tests
 
 // ------------------------------------------------------------------------- //
-BOOST_AUTO_TEST_SUITE(parameter__position)
+// Start Boost Suite: parameter  position
 
-BOOST_AUTO_TEST_CASE(parameter__position__short_and_long__returns_not_positional)
-{
+TEST_CASE("parameter  position  short and long  returns not positional", "[parameter  position]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::short_long);
-    BOOST_REQUIRE_EQUAL(parameter.position(option, names), parameter::not_positional);
+    REQUIRE(parameter.position(option, names) == parameter::not_positional);
 }
 
-BOOST_AUTO_TEST_CASE(parameter__position__short_only__returns_not_positional)
-{
+TEST_CASE("parameter  position  short only  returns not positional", "[parameter  position]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::shorty);
-    BOOST_REQUIRE_EQUAL(parameter.position(option, names), parameter::not_positional);
+    REQUIRE(parameter.position(option, names) == parameter::not_positional);
 }
 
-BOOST_AUTO_TEST_CASE(parameter__position__long_only__returns_expected_position)
-{
+TEST_CASE("parameter  position  long only  returns expected position", "[parameter  position]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::longy);
-    BOOST_REQUIRE_EQUAL(parameter.position(option, names), 0);
+    REQUIRE(parameter.position(option, names) == 0);
 }
 
-BOOST_AUTO_TEST_CASE(parameter__position__simple__returns_expected_position)
-{
+TEST_CASE("parameter  position  simple  returns expected position", "[parameter  position]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::simple);
-    BOOST_REQUIRE_EQUAL(parameter.position(option, names), 1);
+    REQUIRE(parameter.position(option, names) == 1);
 }
 
-BOOST_AUTO_TEST_CASE(parameter__position__defaulty__returns_expected_position)
-{
+TEST_CASE("parameter  position  defaulty  returns expected position", "[parameter  position]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::defaulty);
-    BOOST_REQUIRE_EQUAL(parameter.position(option, names), 2);
+    REQUIRE(parameter.position(option, names) == 2);
 }
 
-BOOST_AUTO_TEST_CASE(parameter__position__required__returns_expected_position)
-{
+TEST_CASE("parameter  position  required  returns expected position", "[parameter  position]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::required);
-    BOOST_REQUIRE_EQUAL(parameter.position(option, names), 3);
+    REQUIRE(parameter.position(option, names) == 3);
 }
 
-BOOST_AUTO_TEST_CASE(parameter__position__toggled__returns_not_positional)
-{
+TEST_CASE("parameter  position  toggled  returns not positional", "[parameter  position]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::toggled);
-    BOOST_REQUIRE_EQUAL(parameter.position(option, names), parameter::not_positional);
+    REQUIRE(parameter.position(option, names) == parameter::not_positional);
 }
 
-BOOST_AUTO_TEST_CASE(parameter__position__vector__returns_expected_position)
-{
+TEST_CASE("parameter  position  vector  returns expected position", "[parameter  position]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::vector);
-    BOOST_REQUIRE_EQUAL(parameter.position(option, names), 4);
+    REQUIRE(parameter.position(option, names) == 4);
 }
 
-BOOST_AUTO_TEST_CASE(parameter__position__multitoken__returns_expected_position)
-{
+TEST_CASE("parameter  position  multitoken  returns expected position", "[parameter  position]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::multitoken);
-    BOOST_REQUIRE_EQUAL(parameter.position(option, names), 5);
+    REQUIRE(parameter.position(option, names) == 5);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
-BOOST_AUTO_TEST_SUITE(parameter__initialize)
+// Start Boost Suite: parameter  initialize
 
-BOOST_AUTO_TEST_CASE(parameter__initialize__short_long__sets_limit_0)
-{
+TEST_CASE("parameter  initialize  short long  sets limit 0", "[parameter  initialize]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::short_long);
     parameter.initialize(option, names);
-    BOOST_REQUIRE_EQUAL(parameter.get_position(), parameter::not_positional);
-    BOOST_REQUIRE_EQUAL(parameter.get_args_limit(), 0u);
-    BOOST_REQUIRE_EQUAL(parameter.get_required(), false);
-    BOOST_REQUIRE_EQUAL(parameter.get_short_name(), 's');
-    BOOST_REQUIRE_EQUAL(parameter.get_long_name(), "short_long");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_name(), "-s [ --short_long ]");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_parameter(), "");
-    BOOST_REQUIRE_EQUAL(parameter.get_description(), "Long and short name.");
+    REQUIRE(parameter.get_position() == parameter::not_positional);
+    REQUIRE(parameter.get_args_limit() == 0u);
+    REQUIRE(parameter.get_required() == false);
+    REQUIRE(parameter.get_short_name() == 's');
+    REQUIRE(parameter.get_long_name() == "short_long");
+    REQUIRE(parameter.get_format_name() == "-s [ --short_long ]");
+    REQUIRE(parameter.get_format_parameter() == "");
+    REQUIRE(parameter.get_description() == "Long and short name.");
 }
 
-BOOST_AUTO_TEST_CASE(parameter__initialize__short_only__sets_limit_0)
-{
+TEST_CASE("parameter  initialize  short only  sets limit 0", "[parameter  initialize]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::shorty);
     parameter.initialize(option, names);
-    BOOST_REQUIRE_EQUAL(parameter.get_position(), parameter::not_positional);
-    BOOST_REQUIRE_EQUAL(parameter.get_args_limit(), 0u);
-    BOOST_REQUIRE_EQUAL(parameter.get_required(), false);
-    BOOST_REQUIRE_EQUAL(parameter.get_short_name(), 'm');
-    BOOST_REQUIRE_EQUAL(parameter.get_long_name(), "");
+    REQUIRE(parameter.get_position() == parameter::not_positional);
+    REQUIRE(parameter.get_args_limit() == 0u);
+    REQUIRE(parameter.get_required() == false);
+    REQUIRE(parameter.get_short_name() == 'm');
+    REQUIRE(parameter.get_long_name() == "");
     // A boost 1.49 bug causes this test failure:
     // parameter.get_format_name() == "-m" failed [-m [ -- ] != -m]
     // But this behavior is not critical to operations, so we overlook it.
-    // BOOST_REQUIRE_EQUAL(parameter.get_format_name(), "-m");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_parameter(), "");
-    BOOST_REQUIRE_EQUAL(parameter.get_description(), "Short name only.");
+    REQUIRE(parameter.get_format_name() == "-m");
+    REQUIRE(parameter.get_format_parameter() == "");
+    REQUIRE(parameter.get_description() == "Short name only.");
 }
 
-BOOST_AUTO_TEST_CASE(parameter__initialize__long_only__sets_limit_0)
-{
+TEST_CASE("parameter  initialize  long only  sets limit 0", "[parameter  initialize]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::longy);
     parameter.initialize(option, names);
-    BOOST_REQUIRE_EQUAL(parameter.get_position(), 0);
-    BOOST_REQUIRE_EQUAL(parameter.get_args_limit(), 1u);
-    BOOST_REQUIRE_EQUAL(parameter.get_required(), true);
-    BOOST_REQUIRE_EQUAL(parameter.get_short_name(), '\0');
-    BOOST_REQUIRE_EQUAL(parameter.get_long_name(), "longy");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_name(), "--longy");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_parameter(), "arg");
-    BOOST_REQUIRE_EQUAL(parameter.get_description(), "Long name only.");
+    REQUIRE(parameter.get_position() == 0);
+    REQUIRE(parameter.get_args_limit() == 1u);
+    REQUIRE(parameter.get_required() == true);
+    REQUIRE(parameter.get_short_name() == '\0');
+    REQUIRE(parameter.get_long_name() == "longy");
+    REQUIRE(parameter.get_format_name() == "--longy");
+    REQUIRE(parameter.get_format_parameter() == "arg");
+    REQUIRE(parameter.get_description() == "Long name only.");
 }
 
-BOOST_AUTO_TEST_CASE(parameter__initialize__simple__sets_limit_2)
-{
+TEST_CASE("parameter  initialize  simple  sets limit 2", "[parameter  initialize]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::simple);
     parameter.initialize(option, names);
-    BOOST_REQUIRE_EQUAL(parameter.get_position(), 1);
-    BOOST_REQUIRE_EQUAL(parameter.get_args_limit(), 2u);
-    BOOST_REQUIRE_EQUAL(parameter.get_required(), false);
-    BOOST_REQUIRE_EQUAL(parameter.get_short_name(), '\0');
-    BOOST_REQUIRE_EQUAL(parameter.get_long_name(), "simple");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_name(), "--simple");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_parameter(), "arg");
-    BOOST_REQUIRE_EQUAL(parameter.get_description(), "Simple string.");
+    REQUIRE(parameter.get_position() == 1);
+    REQUIRE(parameter.get_args_limit() == 2u);
+    REQUIRE(parameter.get_required() == false);
+    REQUIRE(parameter.get_short_name() == '\0');
+    REQUIRE(parameter.get_long_name() == "simple");
+    REQUIRE(parameter.get_format_name() == "--simple");
+    REQUIRE(parameter.get_format_parameter() == "arg");
+    REQUIRE(parameter.get_description() == "Simple string.");
 }
 
-BOOST_AUTO_TEST_CASE(parameter__initialize__defaulted__sets_limit_3)
-{
+TEST_CASE("parameter  initialize  defaulted  sets limit 3", "[parameter  initialize]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::defaulty);
     parameter.initialize(option, names);
-    BOOST_REQUIRE_EQUAL(parameter.get_position(), 2);
-    BOOST_REQUIRE_EQUAL(parameter.get_args_limit(), 3u);
-    BOOST_REQUIRE_EQUAL(parameter.get_required(), false);
-    BOOST_REQUIRE_EQUAL(parameter.get_short_name(), '\0');
-    BOOST_REQUIRE_EQUAL(parameter.get_long_name(), "defaulty");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_name(), "--defaulty");
-    BOOST_REQUIRE_EQUAL(parameter.get_description(), "Defaulted bool.");
+    REQUIRE(parameter.get_position() == 2);
+    REQUIRE(parameter.get_args_limit() == 3u);
+    REQUIRE(parameter.get_required() == false);
+    REQUIRE(parameter.get_short_name() == '\0');
+    REQUIRE(parameter.get_long_name() == "defaulty");
+    REQUIRE(parameter.get_format_name() == "--defaulty");
+    REQUIRE(parameter.get_description() == "Defaulted bool.");
 
     // The (=1) appears to be the default value (as int), i.e. (=true)
     // This makes the bool type indistinguishable at the metadata level from
     // an integer. So we must use zero_tokens() instead (see 'toggled' case).
-    BOOST_REQUIRE_EQUAL(parameter.get_format_parameter(), "arg (=1)");
+    REQUIRE(parameter.get_format_parameter() == "arg (=1)");
 }
 
-BOOST_AUTO_TEST_CASE(parameter__initialize__required__sets_limit_4)
-{
+TEST_CASE("parameter  initialize  required  sets limit 4", "[parameter  initialize]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::required);
     parameter.initialize(option, names);
-    BOOST_REQUIRE_EQUAL(parameter.get_position(), 3);
-    BOOST_REQUIRE_EQUAL(parameter.get_args_limit(), 4u);
-    BOOST_REQUIRE_EQUAL(parameter.get_required(), true);
-    BOOST_REQUIRE_EQUAL(parameter.get_short_name(), '\0');
-    BOOST_REQUIRE_EQUAL(parameter.get_long_name(), "required");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_name(), "--required");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_parameter(), "arg");
-    BOOST_REQUIRE_EQUAL(parameter.get_description(), "Required path.");
+    REQUIRE(parameter.get_position() == 3);
+    REQUIRE(parameter.get_args_limit() == 4u);
+    REQUIRE(parameter.get_required() == true);
+    REQUIRE(parameter.get_short_name() == '\0');
+    REQUIRE(parameter.get_long_name() == "required");
+    REQUIRE(parameter.get_format_name() == "--required");
+    REQUIRE(parameter.get_format_parameter() == "arg");
+    REQUIRE(parameter.get_description() == "Required path.");
 }
 
 //
-BOOST_AUTO_TEST_CASE(parameter__initialize__toggled__sets_limit_0)
-{
+TEST_CASE("parameter  initialize  toggled  sets limit 0", "[parameter  initialize]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::toggled);
     parameter.initialize(option, names);
-    BOOST_REQUIRE_EQUAL(parameter.get_required(), false);
-    BOOST_REQUIRE_EQUAL(parameter.get_short_name(), '\0');
-    BOOST_REQUIRE_EQUAL(parameter.get_long_name(), "toggled");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_name(), "--toggled");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_parameter(), "");
-    BOOST_REQUIRE_EQUAL(parameter.get_description(), "Toggle only bool.");
+    REQUIRE(parameter.get_required() == false);
+    REQUIRE(parameter.get_short_name() == '\0');
+    REQUIRE(parameter.get_long_name() == "toggled");
+    REQUIRE(parameter.get_format_name() == "--toggled");
+    REQUIRE(parameter.get_format_parameter() == "");
+    REQUIRE(parameter.get_description() == "Toggle only bool.");
 
     // This combination uniquely implies that the option is a toggle.
-    BOOST_REQUIRE_EQUAL(parameter.get_position(), parameter::not_positional);
-    BOOST_REQUIRE_EQUAL(parameter.get_args_limit(), 0u);
+    REQUIRE(parameter.get_position() == parameter::not_positional);
+    REQUIRE(parameter.get_args_limit() == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(parameter__initialize__vector__sets_limit_1)
-{
+TEST_CASE("parameter  initialize  vector  sets limit 1", "[parameter  initialize]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::vector);
     parameter.initialize(option, names);
-    BOOST_REQUIRE_EQUAL(parameter.get_position(), 4);
-    BOOST_REQUIRE_EQUAL(parameter.get_args_limit(), 5u);
-    BOOST_REQUIRE_EQUAL(parameter.get_required(), false);
-    BOOST_REQUIRE_EQUAL(parameter.get_short_name(), '\0');
-    BOOST_REQUIRE_EQUAL(parameter.get_long_name(), "VECTOR");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_name(), "--VECTOR");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_parameter(), "arg");
-    BOOST_REQUIRE_EQUAL(parameter.get_description(), "String vector.");
+    REQUIRE(parameter.get_position() == 4);
+    REQUIRE(parameter.get_args_limit() == 5u);
+    REQUIRE(parameter.get_required() == false);
+    REQUIRE(parameter.get_short_name() == '\0');
+    REQUIRE(parameter.get_long_name() == "VECTOR");
+    REQUIRE(parameter.get_format_name() == "--VECTOR");
+    REQUIRE(parameter.get_format_parameter() == "arg");
+    REQUIRE(parameter.get_description() == "String vector.");
 }
 
-BOOST_AUTO_TEST_CASE(parameter__initialize__multitoken__sets_unlimited)
-{
+TEST_CASE("parameter  initialize  multitoken  sets unlimited", "[parameter  initialize]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::multitoken);
     parameter.initialize(option, names);
-    BOOST_REQUIRE_EQUAL(parameter.get_position(), 5);
+    REQUIRE(parameter.get_position() == 5);
     /* The positional "unlimited" limit is different than the named limit. */
-    BOOST_REQUIRE_EQUAL(parameter.get_args_limit(), 0xFFFFFFFFu);
-    BOOST_REQUIRE_EQUAL(parameter.get_required(), false);
-    BOOST_REQUIRE_EQUAL(parameter.get_short_name(), '\0');
-    BOOST_REQUIRE_EQUAL(parameter.get_long_name(), "multitoken");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_name(), "--multitoken");
-    BOOST_REQUIRE_EQUAL(parameter.get_format_parameter(), "arg");
-    BOOST_REQUIRE_EQUAL(parameter.get_description(), "Multi-token int.");
+    REQUIRE(parameter.get_args_limit() == 0xFFFFFFFFu);
+    REQUIRE(parameter.get_required() == false);
+    REQUIRE(parameter.get_short_name() == '\0');
+    REQUIRE(parameter.get_long_name() == "multitoken");
+    REQUIRE(parameter.get_format_name() == "--multitoken");
+    REQUIRE(parameter.get_format_parameter() == "arg");
+    REQUIRE(parameter.get_description() == "Multi-token int.");
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
 // ------------------------------------------------------------------------- //
-BOOST_AUTO_TEST_SUITE(parameter__short_name)
+// Start Boost Suite: parameter  short name
 
-BOOST_AUTO_TEST_CASE(parameter__short_name__short_and_long__returns_short)
-{
+TEST_CASE("parameter  short name  short and long  returns short", "[parameter  short name]") {
     CONFIG_TEST_PARAMETER_OPTIONS_SETUP(opt::short_long);
-    BOOST_REQUIRE_EQUAL(parameter.short_name(option), 's');
+    REQUIRE(parameter.short_name(option) == 's');
 }
 
-BOOST_AUTO_TEST_CASE(parameter__short_name__short_only__returns_short)
-{
+TEST_CASE("parameter  short name  short only  returns short", "[parameter  short name]") {
     CONFIG_TEST_PARAMETER_OPTIONS_SETUP(opt::shorty);
-    BOOST_REQUIRE_EQUAL(parameter.short_name(option), 'm');
+    REQUIRE(parameter.short_name(option) == 'm');
 }
 
-BOOST_AUTO_TEST_CASE(parameter__short_name__long_only__returns_null_char)
-{
+TEST_CASE("parameter  short name  long only  returns null char", "[parameter  short name]") {
     CONFIG_TEST_PARAMETER_OPTIONS_SETUP(opt::longy);
-    BOOST_REQUIRE_EQUAL(parameter.short_name(option), parameter::no_short_name);
+    REQUIRE(parameter.short_name(option) == parameter::no_short_name);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite

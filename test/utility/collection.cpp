@@ -2,153 +2,142 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 
 #include <vector>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 
-BOOST_AUTO_TEST_SUITE(collection_tests)
+// Start Boost Suite: collection tests
 
 typedef std::vector<uint8_t> collection;
 
 // distinct
 
-BOOST_AUTO_TEST_CASE(collection__distinct__empty__same)
-{
+TEST_CASE("collection  distinct  empty  same", "[collection tests]") {
     collection parameter;
     auto const& result = distinct(parameter);
-    BOOST_REQUIRE(parameter.empty());
-    BOOST_REQUIRE(&result == &parameter);
+    REQUIRE(parameter.empty());
+    REQUIRE(&result == &parameter);
 }
 
-BOOST_AUTO_TEST_CASE(collection__distinct__single__match)
-{
+TEST_CASE("collection  distinct  single  match", "[collection tests]") {
     uint8_t const expected = 42;
     collection set{ expected };
     auto const& result = distinct(set);
-    BOOST_REQUIRE_EQUAL(result.size(), 1u);
-    BOOST_REQUIRE_EQUAL(result[0], expected);
+    REQUIRE(result.size() == 1u);
+    REQUIRE(result[0] == expected);
 }
 
-BOOST_AUTO_TEST_CASE(collection__distinct__distinct_sorted__sorted)
-{
+TEST_CASE("collection  distinct  distinct sorted  sorted", "[collection tests]") {
     collection set{ 0, 2, 4, 6, 8 };
     auto const& result = distinct(set);
-    BOOST_REQUIRE_EQUAL(result.size(), 5u);
-    BOOST_REQUIRE_EQUAL(result[0], 0u);
-    BOOST_REQUIRE_EQUAL(result[1], 2u);
-    BOOST_REQUIRE_EQUAL(result[2], 4u);
-    BOOST_REQUIRE_EQUAL(result[3], 6u);
-    BOOST_REQUIRE_EQUAL(result[4], 8u);
+    REQUIRE(result.size() == 5u);
+    REQUIRE(result[0] == 0u);
+    REQUIRE(result[1] == 2u);
+    REQUIRE(result[2] == 4u);
+    REQUIRE(result[3] == 6u);
+    REQUIRE(result[4] == 8u);
 }
 
-BOOST_AUTO_TEST_CASE(collection__distinct__distinct_unsorted__sorted)
-{
+TEST_CASE("collection  distinct  distinct unsorted  sorted", "[collection tests]") {
     collection set{ 2, 0, 8, 6, 4 };
     auto const& result = distinct(set);
-    BOOST_REQUIRE_EQUAL(result.size(), 5u);
-    BOOST_REQUIRE_EQUAL(result[0], 0u);
-    BOOST_REQUIRE_EQUAL(result[1], 2u);
-    BOOST_REQUIRE_EQUAL(result[2], 4u);
-    BOOST_REQUIRE_EQUAL(result[3], 6u);
-    BOOST_REQUIRE_EQUAL(result[4], 8u);
+    REQUIRE(result.size() == 5u);
+    REQUIRE(result[0] == 0u);
+    REQUIRE(result[1] == 2u);
+    REQUIRE(result[2] == 4u);
+    REQUIRE(result[3] == 6u);
+    REQUIRE(result[4] == 8u);
 }
 
-BOOST_AUTO_TEST_CASE(collection__distinct__distinct_unsorted_duplicates__sorted_distinct)
-{
+TEST_CASE("collection  distinct  distinct unsorted duplicates  sorted distinct", "[collection tests]") {
     collection set{ 2, 0, 0, 8, 6, 4 };
     auto const& result = distinct(set);
-    BOOST_REQUIRE_EQUAL(result.size(), 5u);
-    BOOST_REQUIRE_EQUAL(result[0], 0u);
-    BOOST_REQUIRE_EQUAL(result[1], 2u);
-    BOOST_REQUIRE_EQUAL(result[2], 4u);
-    BOOST_REQUIRE_EQUAL(result[3], 6u);
-    BOOST_REQUIRE_EQUAL(result[4], 8u);
+    REQUIRE(result.size() == 5u);
+    REQUIRE(result[0] == 0u);
+    REQUIRE(result[1] == 2u);
+    REQUIRE(result[2] == 4u);
+    REQUIRE(result[3] == 6u);
+    REQUIRE(result[4] == 8u);
 }
 
 // move_append
 
-BOOST_AUTO_TEST_CASE(collection__move_append__both_empty__both_empty)
-{
+TEST_CASE("collection  move append  both empty  both empty", "[collection tests]") {
     collection source;
     collection target;
     move_append(target, source);
-    BOOST_REQUIRE_EQUAL(source.size(), 0u);
-    BOOST_REQUIRE_EQUAL(target.size(), 0u);
+    REQUIRE(source.size() == 0u);
+    REQUIRE(target.size() == 0u);
 }
 
-BOOST_AUTO_TEST_CASE(collection__move_append__source_empty__both_unchanged)
-{
+TEST_CASE("collection  move append  source empty  both unchanged", "[collection tests]") {
     collection source;
     collection target{ 0, 2, 4, 6, 8 };
     auto const expected = target.size();
     move_append(target, source);
-    BOOST_REQUIRE_EQUAL(source.size(), 0u);
-    BOOST_REQUIRE_EQUAL(target.size(), expected);
-    BOOST_REQUIRE_EQUAL(target[0], 0u);
-    BOOST_REQUIRE_EQUAL(target[1], 2u);
-    BOOST_REQUIRE_EQUAL(target[2], 4u);
-    BOOST_REQUIRE_EQUAL(target[3], 6u);
-    BOOST_REQUIRE_EQUAL(target[4], 8u);
+    REQUIRE(source.size() == 0u);
+    REQUIRE(target.size() == expected);
+    REQUIRE(target[0] == 0u);
+    REQUIRE(target[1] == 2u);
+    REQUIRE(target[2] == 4u);
+    REQUIRE(target[3] == 6u);
+    REQUIRE(target[4] == 8u);
 }
 
-BOOST_AUTO_TEST_CASE(collection__move_append__target_empty__swapped_values)
-{
+TEST_CASE("collection  move append  target empty  swapped values", "[collection tests]") {
     collection source{ 0, 2, 4, 6, 8 };
     collection target;
     auto const expected = source.size();
     move_append(target, source);
-    BOOST_REQUIRE_EQUAL(source.size(), 0u);
-    BOOST_REQUIRE_EQUAL(target.size(), expected);
-    BOOST_REQUIRE_EQUAL(target[0], 0u);
-    BOOST_REQUIRE_EQUAL(target[1], 2u);
-    BOOST_REQUIRE_EQUAL(target[2], 4u);
-    BOOST_REQUIRE_EQUAL(target[3], 6u);
-    BOOST_REQUIRE_EQUAL(target[4], 8u);
+    REQUIRE(source.size() == 0u);
+    REQUIRE(target.size() == expected);
+    REQUIRE(target[0] == 0u);
+    REQUIRE(target[1] == 2u);
+    REQUIRE(target[2] == 4u);
+    REQUIRE(target[3] == 6u);
+    REQUIRE(target[4] == 8u);
 }
 
-BOOST_AUTO_TEST_CASE(collection__move_append__neither_empty__moved_in_order)
-{
+TEST_CASE("collection  move append  neither empty  moved in order", "[collection tests]") {
     collection source{ 10, 12, 14, 16, 18 };
     collection target{ 0, 2, 4, 6, 8 };
     auto const expected = source.size() + source.size();
     move_append(target, source);
-    BOOST_REQUIRE_EQUAL(source.size(), 0u);
-    BOOST_REQUIRE_EQUAL(target.size(), expected);
-    BOOST_REQUIRE_EQUAL(target[0], 0u);
-    BOOST_REQUIRE_EQUAL(target[1], 2u);
-    BOOST_REQUIRE_EQUAL(target[2], 4u);
-    BOOST_REQUIRE_EQUAL(target[3], 6u);
-    BOOST_REQUIRE_EQUAL(target[4], 8u);
-    BOOST_REQUIRE_EQUAL(target[5], 10u);
-    BOOST_REQUIRE_EQUAL(target[6], 12u);
-    BOOST_REQUIRE_EQUAL(target[7], 14u);
-    BOOST_REQUIRE_EQUAL(target[8], 16u);
-    BOOST_REQUIRE_EQUAL(target[9], 18u);
+    REQUIRE(source.size() == 0u);
+    REQUIRE(target.size() == expected);
+    REQUIRE(target[0] == 0u);
+    REQUIRE(target[1] == 2u);
+    REQUIRE(target[2] == 4u);
+    REQUIRE(target[3] == 6u);
+    REQUIRE(target[4] == 8u);
+    REQUIRE(target[5] == 10u);
+    REQUIRE(target[6] == 12u);
+    REQUIRE(target[7] == 14u);
+    REQUIRE(target[8] == 16u);
+    REQUIRE(target[9] == 18u);
 }
 
-BOOST_AUTO_TEST_CASE(collection__pop__single__empty_and_returns_expected)
-{
+TEST_CASE("collection  pop  single  empty and returns expected", "[collection tests]") {
     uint8_t const expected = 42u;
     collection stack{ expected };
     auto const value = pop(stack);
-    BOOST_REQUIRE(stack.empty());
-    BOOST_REQUIRE_EQUAL(value, expected);
+    REQUIRE(stack.empty());
+    REQUIRE(value == expected);
 }
 
-BOOST_AUTO_TEST_CASE(collection__pop__multiple__popped_and_returns_expected)
-{
+TEST_CASE("collection  pop  multiple  popped and returns expected", "[collection tests]") {
     uint8_t const expected = 42u;
     collection stack{ 0, 1, 2, 3, expected };
     auto const value = pop(stack);
-    BOOST_REQUIRE_EQUAL(stack.size(), 4u);
-    BOOST_REQUIRE_EQUAL(stack[0], 0u);
-    BOOST_REQUIRE_EQUAL(stack[1], 1u);
-    BOOST_REQUIRE_EQUAL(stack[2], 2u);
-    BOOST_REQUIRE_EQUAL(stack[3], 3u);
-    BOOST_REQUIRE_EQUAL(value, expected);
+    REQUIRE(stack.size() == 4u);
+    REQUIRE(stack[0] == 0u);
+    REQUIRE(stack[1] == 1u);
+    REQUIRE(stack[2] == 2u);
+    REQUIRE(stack[3] == 3u);
+    REQUIRE(value == expected);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite

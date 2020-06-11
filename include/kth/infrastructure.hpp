@@ -62,6 +62,7 @@
 #include <kth/infrastructure/log/features/timer.hpp>
 #endif // defined(KTH_LOG_LIBRARY_BOOST)
 
+
 #include <kth/infrastructure/machine/number.hpp>
 #include <kth/infrastructure/machine/script_pattern.hpp>
 #include <kth/infrastructure/machine/script_version.hpp>
@@ -75,6 +76,7 @@
 
 #include <kth/infrastructure/message/message_tools.hpp>
 #include <kth/infrastructure/message/messages.hpp>
+#include <kth/infrastructure/message/network_address.hpp>
 
 #include <kth/infrastructure/unicode/console_streambuf.hpp>
 #include <kth/infrastructure/unicode/file_lock.hpp>

@@ -2,7 +2,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 
 #include <cstdint>
 #include <kth/infrastructure.hpp>
@@ -10,12 +10,11 @@
 using namespace kth;
 using namespace kth::infrastructure::wallet;
 
-BOOST_AUTO_TEST_SUITE(qrcode_tests)
+// Start Boost Suite: qrcode tests
 
 #ifdef WITH_QRENCODE
 
-BOOST_AUTO_TEST_CASE(qrcode__invoke__qrencode_data__success)
-{
+TEST_CASE("qrcode  invoke  qrencode data  success", "[qrcode tests]") {
     static uint8_t const expected_data[]
     {
         0x03, 0x00, 0x00, 0x00, 0x1d, 0x00, 0x00, 0x00, 0xc1, 0xc1, 0xc1, 0xc1,
@@ -95,10 +94,10 @@ BOOST_AUTO_TEST_CASE(qrcode__invoke__qrencode_data__success)
     static std::string const address = "bitcoin:1L4M4obtbpexxuKpLrDimMEYWB2Rx2yzus";
     auto const encoded_qrcode = qr::encode(to_chunk(address));
 
-    BOOST_REQUIRE_EQUAL(encoded_qrcode.size(), expected_data_length);
-    BOOST_REQUIRE(std::memcmp(encoded_qrcode.data(), expected_data, expected_data_length) == 0);
+    REQUIRE(encoded_qrcode.size() == expected_data_length);
+    REQUIRE(std::memcmp(encoded_qrcode.data(), expected_data, expected_data_length) == 0);
 }
 
 #endif // WITH_QRENCODE
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite

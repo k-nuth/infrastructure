@@ -2,7 +2,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 
 #include <cstdint>
 #include <iostream>
@@ -20,7 +20,7 @@
 #include "big_number.hpp"
 #endif
 
-BOOST_AUTO_TEST_SUITE(number_tests)
+// Start Boost Suite: number tests
 
 using namespace kth;
 using namespace kth::infrastructure::machine;
@@ -28,8 +28,8 @@ using namespace kth::infrastructure::machine;
 // Helpers
 // ----------------------------------------------------------------------------
 
-#define BI_SCRIPT_NUMBER_CHECK_EQ(buffer_num, script_num, value, offset, test) \
-    BOOST_CHECK_MESSAGE( \
+#define KI_SCRIPT_NUMBER_CHECK_EQ(buffer_num, script_num, value, offset, test) \
+    CHECK_MESSAGE( \
     	encode_base16((buffer_num).bytes) == encode_base16((script_num).data()), \
     	"\n\tvalue index : " << value << \
 		"\n\tvalue       : " << number_values[value] << \
@@ -38,7 +38,7 @@ using namespace kth::infrastructure::machine;
 		"\n\ttest        : " << test << \
 		"\n\tFAILURE     : [" << encode_base16((buffer_num).bytes) << " != " << \
 		encode_base16((script_num).data()) << "]"); \
-    BOOST_CHECK_MESSAGE((buffer_num).number == (script_num).int32(), \
+    CHECK_MESSAGE((buffer_num).number == (script_num).int32(), \
        	"\n\tvalue index : " << value << \
    		"\n\tvalue       : " << number_values[value] << \
    		"\n\toffset index: " << offset << \
@@ -77,77 +77,77 @@ bool negate_overflow64(int64_t const number) {
 
 static 
 void CheckAdd(int64_t const num1, int64_t const num2, size_t value, size_t offset, size_t test) {
-	number const_buffer& add = number_adds[value][offset][test];
+	number_buffer const& add = number_adds[value][offset][test];
     number const scriptnum1(num1);
     number const scriptnum2(num2);
 
     if ( ! add_overflow64(num1, num2)) {
-        BI_SCRIPT_NUMBER_CHECK_EQ(add, scriptnum1 + scriptnum2, value, offset, test);
-        BI_SCRIPT_NUMBER_CHECK_EQ(add, scriptnum1 + num2, value, offset, test);
-        BI_SCRIPT_NUMBER_CHECK_EQ(add, scriptnum2 + num1, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(add, scriptnum1 + scriptnum2, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(add, scriptnum1 + num2, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(add, scriptnum2 + num1, value, offset, test);
     }
 }
 
 static 
 void CheckNegate(int64_t const num, size_t value, size_t offset, size_t test) {
-	number const_buffer& negated = number_negates[value][offset][test];
+	number_buffer const& negated = number_negates[value][offset][test];
     number const scriptnum(num);
 
     if ( ! negate_overflow64(num)) {
-        BI_SCRIPT_NUMBER_CHECK_EQ(negated, -scriptnum, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(negated, -scriptnum, value, offset, test);
     }
 }
 
 static 
 void CheckSubtract(int64_t const num1, int64_t const num2, size_t value, size_t offset, size_t test) {
-	number const_subtract& subtract = number_subtracts[value][offset][test];
+	number_subtract const& subtract = number_subtracts[value][offset][test];
     number const scriptnum1(num1);
     number const scriptnum2(num2);
 
     if ( ! subtract_overflow64(num1, num2)) {
-        BI_SCRIPT_NUMBER_CHECK_EQ(subtract.forward, scriptnum1 - scriptnum2, value, offset, test);
-        BI_SCRIPT_NUMBER_CHECK_EQ(subtract.forward, scriptnum1 - num2, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(subtract.forward, scriptnum1 - scriptnum2, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(subtract.forward, scriptnum1 - num2, value, offset, test);
     }
 
     if ( ! subtract_overflow64(num2, num1)) {
-        BI_SCRIPT_NUMBER_CHECK_EQ(subtract.reverse, scriptnum2 - scriptnum1, value, offset, test);
-        BI_SCRIPT_NUMBER_CHECK_EQ(subtract.reverse, scriptnum2 - num1, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(subtract.reverse, scriptnum2 - scriptnum1, value, offset, test);
+        KI_SCRIPT_NUMBER_CHECK_EQ(subtract.reverse, scriptnum2 - num1, value, offset, test);
     }
 }
 
 static 
 void CheckCompare(int64_t const num1, int64_t const num2, size_t value, size_t offset, size_t test) {
-    number const_compare& compare = number_compares[value][offset][test];
+    number_compare const& compare = number_compares[value][offset][test];
     number const scriptnum1(num1);
     number const scriptnum2(num2);
 
-    BOOST_CHECK(scriptnum1 == scriptnum1);
-    BOOST_CHECK(scriptnum1 >= scriptnum1);
-    BOOST_CHECK(scriptnum1 <= scriptnum1);
-    BOOST_CHECK(!(scriptnum1 != scriptnum1));
-    BOOST_CHECK(!(scriptnum1 < scriptnum1));
-    BOOST_CHECK(!(scriptnum1 > scriptnum1));
+    CHECK(scriptnum1 == scriptnum1);
+    CHECK(scriptnum1 >= scriptnum1);
+    CHECK(scriptnum1 <= scriptnum1);
+    CHECK(!(scriptnum1 != scriptnum1));
+    CHECK(!(scriptnum1 < scriptnum1));
+    CHECK(!(scriptnum1 > scriptnum1));
 
-    BOOST_CHECK(scriptnum1 == num1);
-    BOOST_CHECK(scriptnum1 >= num1);
-    BOOST_CHECK(scriptnum1 <= num1);
-    BOOST_CHECK(!(scriptnum1 != num1));
-    BOOST_CHECK(!(scriptnum1 < num1));
-    BOOST_CHECK(!(scriptnum1 > num1));
+    CHECK(scriptnum1 == num1);
+    CHECK(scriptnum1 >= num1);
+    CHECK(scriptnum1 <= num1);
+    CHECK(!(scriptnum1 != num1));
+    CHECK(!(scriptnum1 < num1));
+    CHECK(!(scriptnum1 > num1));
 
-    BOOST_CHECK_EQUAL(is(compare.eq), (scriptnum1 == scriptnum2));
-    BOOST_CHECK_EQUAL(is(compare.ge), (scriptnum1 >= scriptnum2));
-    BOOST_CHECK_EQUAL(is(compare.le), (scriptnum1 <= scriptnum2));
-    BOOST_CHECK_EQUAL(is(compare.ne), (scriptnum1 != scriptnum2));
-    BOOST_CHECK_EQUAL(is(compare.lt), (scriptnum1 < scriptnum2));
-    BOOST_CHECK_EQUAL(is(compare.gt), (scriptnum1 > scriptnum2));
+    CHECK(is(compare.eq) == (scriptnum1 == scriptnum2));
+    CHECK(is(compare.ge) == (scriptnum1 >= scriptnum2));
+    CHECK(is(compare.le) == (scriptnum1 <= scriptnum2));
+    CHECK(is(compare.ne) == (scriptnum1 != scriptnum2));
+    CHECK(is(compare.lt) == (scriptnum1 < scriptnum2));
+    CHECK(is(compare.gt) == (scriptnum1 > scriptnum2));
 
-    BOOST_CHECK_EQUAL(is(compare.eq), (scriptnum1 == num2));
-    BOOST_CHECK_EQUAL(is(compare.ge), (scriptnum1 >= num2));
-    BOOST_CHECK_EQUAL(is(compare.le), (scriptnum1 <= num2));
-    BOOST_CHECK_EQUAL(is(compare.ne), (scriptnum1 != num2));
-    BOOST_CHECK_EQUAL(is(compare.lt), (scriptnum1 < num2));
-    BOOST_CHECK_EQUAL(is(compare.gt), (scriptnum1 > num2));
+    CHECK(is(compare.eq) == (scriptnum1 == num2));
+    CHECK(is(compare.ge) == (scriptnum1 >= num2));
+    CHECK(is(compare.le) == (scriptnum1 <= num2));
+    CHECK(is(compare.ne) == (scriptnum1 != num2));
+    CHECK(is(compare.lt) == (scriptnum1 < num2));
+    CHECK(is(compare.gt) == (scriptnum1 > num2));
 }
 
 #ifndef ENABLE_DATAGEN
@@ -170,7 +170,7 @@ void RunOperators(int64_t const num1, int64_t num2, size_t value, size_t offset,
 	CheckCompare(num1, num2, value, offset, test);
 }
 
-BOOST_AUTO_TEST_CASE(check_operators) {
+TEST_CASE("check operators", "[number tests]") {
     for (size_t i = 0; i < number_values_count; ++i) {
         for (size_t j = 0; j < number_offsets_count; ++j) {
             auto a = number_values[i];
@@ -208,7 +208,7 @@ number_buffer MakeAdd(int64_t const num1, int64_t const num2) {
     bignum2.set_int64(num2);
 
     auto sum = bignum1 + bignum2;
-    number const_buffer add {
+    number_buffer const add {
         sum.int32(),
         sum.data()
     };
@@ -226,7 +226,7 @@ number_buffer MakeNegate(int64_t const num) {
     bignum.set_int64(num);
 
     auto negative = -bignum;
-    number const_buffer negated {
+    number_buffer const negated {
         negative.int32(),
         negative.data()
     };
@@ -251,7 +251,7 @@ number_subtract MakeSubtract(int64_t const num1, int64_t const num2) {
         reverse = bignum2 - bignum1;
     }
 
-    number const_subtract subtract {
+    number_subtract const subtract {
         { forward.int32(), forward.data() },
         { reverse.int32(), reverse.data() }
     };
@@ -334,8 +334,7 @@ void replace(std::string& buffer, std::string const& find, std::string const& re
 static 
 void MakeOperators(int64_t const num1, int64_t const num2,
     std::ostream& add_out, std::ostream& neg_out, std::ostream& sub_out,
-    std::ostream& cmp_out)
-{
+    std::ostream& cmp_out) {
     write("\n              ", add_out, neg_out, sub_out, cmp_out);
 
     auto add = MakeAdd(num1, num2);
@@ -355,8 +354,7 @@ void MakeOperators(int64_t const num1, int64_t const num2,
     write_compare(compare, cmp_out);
 }
 
-BOOST_AUTO_TEST_CASE(make_operator_expectations)
-{
+TEST_CASE("make operator expectations", "[number tests]") {
     std::stringstream add_out;
     std::stringstream neg_out;
     std::stringstream sub_out;
@@ -411,4 +409,4 @@ BOOST_AUTO_TEST_CASE(make_operator_expectations)
 }
 #endif
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite

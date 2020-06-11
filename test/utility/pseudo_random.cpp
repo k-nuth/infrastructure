@@ -3,69 +3,63 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <kth/infrastructure.hpp>
-#include <boost/test/unit_test.hpp>
+#include <test_helpers.hpp>
 
 using namespace kth;
 
-BOOST_AUTO_TEST_SUITE(pseudo_random_tests)
+// Start Boost Suite: pseudo random tests
 
-BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__zero_duration__maximum)
-{
+TEST_CASE("pseudo random  pseudo randomize  zero duration  maximum", "[pseudo random tests]") {
     int const max_seconds = 0;
     const asio::seconds maximum(max_seconds);
     auto const result = pseudo_randomize(maximum, 1);
-    BOOST_REQUIRE(result == maximum);
+    REQUIRE(result == maximum);
 }
 
-BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__subminute_default_percent__expected)
-{
+TEST_CASE("pseudo random  pseudo randomize  subminute default percent  expected", "[pseudo random tests]") {
     int const max_seconds = 42;
     const asio::seconds maximum(max_seconds);
     const asio::seconds minimum(max_seconds - max_seconds / 2);
     auto const result = pseudo_randomize(maximum);
-    BOOST_REQUIRE(result <= maximum);
-    BOOST_REQUIRE(result >= minimum);
+    REQUIRE(result <= maximum);
+    REQUIRE(result >= minimum);
 }
 
-BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__subminute_ratio_0__maximum)
-{
+TEST_CASE("pseudo random  pseudo randomize  subminute ratio 0  maximum", "[pseudo random tests]") {
     int const max_seconds = 42;
     const asio::seconds maximum(max_seconds);
     auto const result = pseudo_randomize(maximum, 0);
-    BOOST_REQUIRE(result == maximum);
+    REQUIRE(result == maximum);
 }
 
-BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__subminute_ratio_1__expected)
-{
+TEST_CASE("pseudo random  pseudo randomize  subminute ratio 1  expected", "[pseudo random tests]") {
     uint8_t const ratio = 1;
     int const max_seconds = 42;
     const asio::seconds maximum(max_seconds);
     const asio::seconds minimum(max_seconds - max_seconds / ratio);
     auto const result = pseudo_randomize(maximum, ratio);
-    BOOST_REQUIRE(result <= maximum);
-    BOOST_REQUIRE(result >= minimum);
+    REQUIRE(result <= maximum);
+    REQUIRE(result >= minimum);
 }
 
-BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__subminute_default_ratio__expected)
-{
+TEST_CASE("pseudo random  pseudo randomize  subminute default ratio  expected", "[pseudo random tests]") {
     int const max_seconds = 42;
     const asio::seconds maximum(max_seconds);
     const asio::seconds minimum(max_seconds - max_seconds / 2);
     auto const result = pseudo_randomize(maximum);
-    BOOST_REQUIRE(result <= maximum);
-    BOOST_REQUIRE(result >= minimum);
+    REQUIRE(result <= maximum);
+    REQUIRE(result >= minimum);
 }
 
 // Use same (ms) resolution as function to prevent test rounding difference.
-BOOST_AUTO_TEST_CASE(pseudo_random__pseudo_randomize__superminute_ratio_255__expected)
-{
+TEST_CASE("pseudo random  pseudo randomize  superminute ratio 255  expected", "[pseudo random tests]") {
     uint8_t const ratio = 255;
     int const max_seconds = 420;
     const asio::milliseconds maximum(max_seconds);
     const asio::milliseconds minimum(max_seconds - max_seconds / ratio);
     auto const result = pseudo_randomize(maximum, ratio);
-    BOOST_REQUIRE(result <= maximum);
-    BOOST_REQUIRE(result >= minimum);
+    REQUIRE(result <= maximum);
+    REQUIRE(result >= minimum);
 }
 
-BOOST_AUTO_TEST_SUITE_END()
+// End Boost Suite
