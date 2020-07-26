@@ -5,11 +5,13 @@
 #ifndef KTH_INFRASTUCTURE_CONFIG_SETTINGS_HPP
 #define KTH_INFRASTUCTURE_CONFIG_SETTINGS_HPP
 
+
+//TODO(fernando): is it Ok this in infrastructure?
+
 namespace kth::infrastructure::config {
 
 // For configuration settings initialization in other libraries.
-enum class settings
-{
+enum class settings {
     none,
     mainnet,
     testnet,

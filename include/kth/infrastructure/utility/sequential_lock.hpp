@@ -14,14 +14,13 @@ namespace kth {
 
 /// This class is thread safe.
 /// Encapsulation of sequential locking conditions.
-class KI_API sequential_lock
-{
+class KI_API sequential_lock {
 public:
     using handle = size_t;
 
     /// Determine if the given handle is a write-locked handle.
-    static bool is_write_locked(handle value)
-    {
+    static 
+    bool is_write_locked(handle value) {
         return (value % 2) == 1;
     }
 

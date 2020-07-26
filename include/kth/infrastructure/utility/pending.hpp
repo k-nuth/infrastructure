@@ -19,9 +19,7 @@ namespace kth {
 
 /// A managed collection of object pointers.
 template <typename Element>
-class pending
-    : noncopyable
-{
+class pending : noncopyable {
 public:
     using element_ptr = std::shared_ptr<Element>;
     using elements = std::vector<element_ptr>;
