@@ -110,7 +110,7 @@ public:
     static
     network_address factory_from_data(R& source, uint32_t version, bool with_timestamp) { 
         network_address instance;
-        instance.from_data(version, source, with_timestamp);
+        instance.from_data(source, version, with_timestamp);
         return instance;
     }
 

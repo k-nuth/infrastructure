@@ -40,12 +40,12 @@ void network_address::reset() {
 
 bool network_address::from_data(data_chunk const& data, uint32_t version, bool with_timestamp) {
     data_source istream(data);
-    return from_data(version, istream, with_timestamp);
+    return from_data(istream, version, with_timestamp);
 }
 
 bool network_address::from_data(data_source& stream, uint32_t version, bool with_timestamp) {
     istream_reader source(stream);
-    return from_data(version, source, with_timestamp);
+    return from_data(source, version, with_timestamp);
 }
 
 data_chunk network_address::to_data(uint32_t version, bool with_timestamp) const {
@@ -116,13 +116,13 @@ void network_address::set_port(uint16_t value) {
 
 network_address network_address::factory_from_data(data_chunk const& data, uint32_t version, bool with_timestamp) {
     network_address instance;
-    instance.from_data(version, data, with_timestamp);
+    instance.from_data(data, version, with_timestamp);
     return instance;
 }
 
 network_address network_address::factory_from_data(data_source& stream, uint32_t version, bool with_timestamp) {
     network_address instance;
-    instance.from_data(version, stream, with_timestamp);
+    instance.from_data(stream, version, with_timestamp);
     return instance;
 }
 

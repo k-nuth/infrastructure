@@ -11,14 +11,12 @@ sequential_lock::sequential_lock()
 {
 }
 
-sequential_lock::handle sequential_lock::begin_read() const
-{
+sequential_lock::handle sequential_lock::begin_read() const {
     // Start read lock.
     return sequence_.load();
 }
 
-bool sequential_lock::is_read_valid(handle value) const
-{
+bool sequential_lock::is_read_valid(handle value) const {
     // Test read lock.
     return value == sequence_.load();
 }

@@ -24,14 +24,12 @@ serializer<Iterator>::serializer(Iterator begin)
 //-----------------------------------------------------------------------------
 
 template <typename Iterator>
-serializer<Iterator>::operator bool() const
-{
+serializer<Iterator>::operator bool() const {
     return valid_;
 }
 
 template <typename Iterator>
-bool serializer<Iterator>::operator!() const
-{
+bool serializer<Iterator>::operator!() const {
     return !valid_;
 }
 

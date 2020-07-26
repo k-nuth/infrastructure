@@ -25,33 +25,28 @@ parse_encrypted_key<PrefixSize>::parse_encrypted_key(
 }
 
 template <size_t PrefixSize>
-bool parse_encrypted_key<PrefixSize>::compressed() const
-{
+bool parse_encrypted_key<PrefixSize>::compressed() const {
     return (flags() & ek_flag::ec_compressed_key) != 0;
 }
 
 template <size_t PrefixSize>
-ek_entropy parse_encrypted_key<PrefixSize>::entropy() const
-{
+ek_entropy parse_encrypted_key<PrefixSize>::entropy() const {
     // The owner salt + lot-sequence or owner entropy.
     return entropy_;
 }
 
 template <size_t PrefixSize>
-uint8_t parse_encrypted_key<PrefixSize>::flags() const
-{
+uint8_t parse_encrypted_key<PrefixSize>::flags() const {
     return flags_.front();
 }
 
 template <size_t PrefixSize>
-bool parse_encrypted_key<PrefixSize>::lot_sequence() const
-{
+bool parse_encrypted_key<PrefixSize>::lot_sequence() const {
     return (flags() & ek_flag::lot_sequence_key) != 0;
 }
 
 template <size_t PrefixSize>
-data_chunk parse_encrypted_key<PrefixSize>::owner_salt() const
-{
+data_chunk parse_encrypted_key<PrefixSize>::owner_salt() const {
     // Either 4 or 8 bytes, depending on the lot sequence flags.
     if (lot_sequence())
         return to_chunk(slice<0, ek_salt_size>(entropy()));
@@ -60,8 +55,7 @@ data_chunk parse_encrypted_key<PrefixSize>::owner_salt() const
 }
 
 template <size_t PrefixSize>
-ek_salt parse_encrypted_key<PrefixSize>::salt() const
-{
+ek_salt parse_encrypted_key<PrefixSize>::salt() const {
     // The address hash salt.
     return salt_;
 }
