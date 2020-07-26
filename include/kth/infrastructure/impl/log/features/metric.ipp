@@ -53,8 +53,7 @@ void metric_feature<BaseType>::metric(const metric_type& value)
 
 template <typename BaseType>
 const typename metric_feature<BaseType>::metric_attribute&
-    metric_feature<BaseType>::get_metric_attribute() const
-{
+    metric_feature<BaseType>::get_metric_attribute() const {
     return metric_attribute_;
 }
 

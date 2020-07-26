@@ -36,8 +36,7 @@ file_counter_formatter::file_counter_formatter(
 
 file_counter_formatter::path_string_type file_counter_formatter::operator()(
     path_string_type const& stem, path_string_type const& extension,
-    unsigned int counter) const
-{
+    unsigned int counter) const {
     stream_.str(path_string_type());
     stream_.width(width_);
     stream_ << counter;

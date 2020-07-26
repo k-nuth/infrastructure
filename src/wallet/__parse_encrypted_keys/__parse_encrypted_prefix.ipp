@@ -21,20 +21,17 @@ parse_encrypted_prefix<Size>::parse_encrypted_prefix(
 }
 
 template <size_t Size>
-uint8_t parse_encrypted_prefix<Size>::context() const
-{
+uint8_t parse_encrypted_prefix<Size>::context() const {
     return prefix_.back();
 }
 
 template <size_t Size>
-byte_array<Size> parse_encrypted_prefix<Size>::prefix() const
-{
+byte_array<Size> parse_encrypted_prefix<Size>::prefix() const {
     return prefix_;
 }
 
 template <size_t Size>
-bool parse_encrypted_prefix<Size>::valid() const
-{
+bool parse_encrypted_prefix<Size>::valid() const {
     return valid_;
 }
 

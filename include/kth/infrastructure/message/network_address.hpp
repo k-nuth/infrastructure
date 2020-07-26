@@ -57,14 +57,11 @@ public:
 
     size_t serialized_size(uint32_t version, bool with_timestamp) const;
 
-    bool from_data(uint32_t version, data_chunk const& data, bool with_timestamp);
-    // bool from_data(uint32_t version, std::istream& stream, bool with_timestamp);
-    bool from_data(uint32_t version, data_source& stream, bool with_timestamp);
-
-    // bool from_data(uint32_t version, reader& source, bool with_timestamp);
+    bool from_data(data_chunk const& data, uint32_t version, bool with_timestamp);
+    bool from_data(data_source& stream, uint32_t version, bool with_timestamp);
 
     template <typename R>
-    bool from_data(uint32_t version, R& source, bool with_timestamp) {
+    bool from_data(R& source, uint32_t version, bool with_timestamp) {
         reset();
 
         if (with_timestamp) {
@@ -104,22 +101,16 @@ public:
     void reset();
 
     static 
-    network_address factory_from_data(uint32_t version, data_chunk const& data, bool with_timestamp);
+    network_address factory_from_data(data_chunk const& data, uint32_t version, bool with_timestamp);
     
-    // static 
-    // network_address factory_from_data(uint32_t version, std::istream& stream, bool with_timestamp);
-
     static 
-    network_address factory_from_data(uint32_t version, data_source& stream, bool with_timestamp);
-
-    // static 
-    // network_address factory_from_data(uint32_t version, reader& source, bool with_timestamp);
+    network_address factory_from_data(data_source& stream, uint32_t version, bool with_timestamp);
     
     template <typename R>
     static
-    network_address factory_from_data(uint32_t version, R& source, bool with_timestamp) { 
+    network_address factory_from_data(R& source, uint32_t version, bool with_timestamp) { 
         network_address instance;
-        instance.from_data(version, source, with_timestamp);
+        instance.from_data(source, version, with_timestamp);
         return instance;
     }
 

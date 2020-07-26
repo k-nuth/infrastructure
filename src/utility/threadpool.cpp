@@ -25,14 +25,12 @@ threadpool::~threadpool()
 }
 
 // Should not be called during spawn.
-bool threadpool::empty() const
-{
+bool threadpool::empty() const {
     return size() != 0;
 }
 
 // Should not be called during spawn.
-size_t threadpool::size() const
-{
+size_t threadpool::size() const {
     return size_.load();
 }
 
@@ -121,8 +119,7 @@ asio::service& threadpool::service()
     return service_;
 }
 
-const asio::service& threadpool::service() const
-{
+const asio::service& threadpool::service() const {
     return service_;
 }
 

@@ -174,8 +174,7 @@ hd_key hd_public::to_hd_key() const {
     return out;
 }
 
-hd_public hd_public::derive_public(uint32_t index) const
-{
+hd_public hd_public::derive_public(uint32_t index) const {
     if (index >= hd_first_hardened_key) {
         return {};
     }

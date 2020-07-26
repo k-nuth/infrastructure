@@ -28,8 +28,7 @@ pending<Element>::~pending()
 }
 
 template <typename Element>
-typename pending<Element>::elements pending<Element>::collection() const
-{
+typename pending<Element>::elements pending<Element>::collection() const {
     // Critical Section
     ///////////////////////////////////////////////////////////////////////////
     shared_lock lock(mutex_);
@@ -39,8 +38,7 @@ typename pending<Element>::elements pending<Element>::collection() const
 };
 
 template <typename Element>
-size_t pending<Element>::size() const
-{
+size_t pending<Element>::size() const {
     // Critical Section
     ///////////////////////////////////////////////////////////////////////////
     shared_lock lock(mutex_);
@@ -50,8 +48,7 @@ size_t pending<Element>::size() const
 };
 
 template <typename Element>
-bool pending<Element>::exists(finder match) const
-{
+bool pending<Element>::exists(finder match) const {
     // Critical Section
     ///////////////////////////////////////////////////////////////////////////
     shared_lock lock(mutex_);
