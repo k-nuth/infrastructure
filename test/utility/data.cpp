@@ -117,7 +117,7 @@ TEST_CASE("data  build array  overflow  returns false", "[data tests]") {
         std::array<uint8_t, 2>{ { 1, 2 } },
         std::array<uint8_t, 2>{ { 3, 4 } }
     });
-    REQUIRE(!result);
+    REQUIRE( ! result);
 }
 
 TEST_CASE("data  extend data  twice  expected", "[data tests]") {
@@ -291,7 +291,7 @@ TEST_CASE("data  starts with  empty empty  true", "[data tests]") {
 TEST_CASE("data  starts with  not empty empty  false", "[data tests]") {
     static data_chunk const buffer{};
     static data_chunk const sequence{ 42 };
-    REQUIRE(!starts_with(buffer.begin(), buffer.end(), sequence));
+    REQUIRE( ! starts_with(buffer.begin(), buffer.end(), sequence));
 }
 
 TEST_CASE("data  starts with  same same  true", "[data tests]") {
@@ -303,7 +303,7 @@ TEST_CASE("data  starts with  same same  true", "[data tests]") {
 TEST_CASE("data  starts with  too short  false", "[data tests]") {
     static data_chunk const buffer{ 42 };
     static data_chunk const sequence{ 42, 24 };
-    REQUIRE(!starts_with(buffer.begin(), buffer.end(), sequence));
+    REQUIRE( ! starts_with(buffer.begin(), buffer.end(), sequence));
 }
 
 TEST_CASE("data  xor data0  same  zeros", "[data tests]") {

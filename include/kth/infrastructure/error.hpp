@@ -91,7 +91,11 @@ enum error_code_t {
     forward_reference = 79,
     merkle_mismatch = 31,
     block_legacy_sigop_limit = 30,
+
+#if defined(KTH_CURRENCY_BCH)
     non_canonical_ordered = 84,
+    block_sigchecks_limit = 85,
+#endif
 
     // accept block
     block_non_final = 34,
@@ -110,6 +114,10 @@ enum error_code_t {
     transaction_internal_double_spend = 72,
     transaction_size_limit = 53,
     transaction_legacy_sigop_limit = 54,
+
+#if defined(KTH_CURRENCY_BCH)
+    transaction_sigchecks_limit = 86,
+#endif
 
     // accept transaction
     transaction_non_final = 74,

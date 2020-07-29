@@ -65,8 +65,7 @@ code pending<Element>::store(element_ptr element)
     ///////////////////////////////////////////////////////////////////////////
     mutex_.lock_upgrade();
 
-    if (stopped_)
-    {
+    if (stopped_) {
         mutex_.unlock_upgrade();
         //---------------------------------------------------------------------
         return error::service_stopped;
@@ -91,8 +90,7 @@ code pending<Element>::store(element_ptr element, finder match)
 
     auto const stopped = stopped_.load();
 
-    if ( ! stopped)
-    {
+    if ( ! stopped) {
         if (std::find_if(elements_.begin(), elements_.end(), match) ==
             elements_.end())
         {
@@ -121,8 +119,7 @@ void pending<Element>::remove(element_ptr element)
 
     auto it = std::find(elements_.begin(), elements_.end(), element);
 
-    if (it != elements_.end())
-    {
+    if (it != elements_.end()) {
         mutex_.unlock_upgrade_and_lock();
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         elements_.erase(it);
@@ -145,8 +142,7 @@ void pending<Element>::stop(code const& ec)
     ///////////////////////////////////////////////////////////////////////////
     mutex_.lock_upgrade();
 
-    if ( ! stopped_)
-    {
+    if ( ! stopped_) {
         mutex_.unlock_upgrade_and_lock();
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         stopped_ = true;

@@ -21,7 +21,7 @@ TEST_CASE("hd public  derive public  invalid  false", "[hd public tests]") {
 
     hd_private const m(seed, hd_private::mainnet);
     hd_public const m_pub = m;
-    REQUIRE(!m_pub.derive_public(hd_first_hardened_key));
+    REQUIRE( ! m_pub.derive_public(hd_first_hardened_key));
 }
 
 TEST_CASE("hd public  encoded  round trip  expected", "[hd public tests]") {

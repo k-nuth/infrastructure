@@ -25,8 +25,7 @@ public:
 
     explicit
     container_sink(Container& container)
-        : container_(container)
-    {
+        : container_(container) {
         static_assert(sizeof(SinkType) == sizeof(CharType), "invalid size");
     }
 

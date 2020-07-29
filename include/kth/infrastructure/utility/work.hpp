@@ -45,15 +45,13 @@ public:
 
     /// Local execution for any operation, equivalent to std::bind.
     template <typename Handler, typename... Args>
-    static void bound(Handler&& handler, Args&&... args)
-    {
+    static void bound(Handler&& handler, Args&&... args) {
         BIND_HANDLER(handler, args)();
     }
 
     /// Concurrent execution for any operation.
     template <typename Handler, typename... Args>
-    void concurrent(Handler&& handler, Args&&... args)
-    {
+    void concurrent(Handler&& handler, Args&&... args) {
         // Service post ensures the job does not execute in the current thread.
         service_.post(BIND_HANDLER(handler, args));
         ////service_.post(inject(BIND_HANDLER(handler, args), CONCURRENT,
@@ -62,8 +60,7 @@ public:
 
     /// Sequential execution for synchronous operations.
     template <typename Handler, typename... Args>
-    void ordered(Handler&& handler, Args&&... args)
-    {
+    void ordered(Handler&& handler, Args&&... args) {
         // Use a strand to prevent concurrency and post vs. dispatch to ensure
         // that the job is not executed in the current thread.
         strand_.post(BIND_HANDLER(handler, args));
@@ -72,8 +69,7 @@ public:
 
     /// Non-concurrent execution for synchronous operations.
     template <typename Handler, typename... Args>
-    void unordered(Handler&& handler, Args&&... args)
-    {
+    void unordered(Handler&& handler, Args&&... args) {
         // Use a strand wrapper to prevent concurrency and a service post
         // to deny ordering while ensuring execution on another thread.
         service_.post(strand_.wrap(BIND_HANDLER(handler, args)));
@@ -84,8 +80,7 @@ public:
     /// Begin sequential execution for a set of asynchronous operations.
     /// The operation will be queued until the lock is free and then executed.
     template <typename Handler, typename... Args>
-    void lock(Handler&& handler, Args&&... args)
-    {
+    void lock(Handler&& handler, Args&&... args) {
         // Use a sequence to track the asynchronous operation to completion,
         // ensuring each asynchronous op executes independently and in order.
         sequence_.lock(BIND_HANDLER(handler, args));
@@ -94,8 +89,7 @@ public:
     }
 
     /// Complete sequential execution.
-    void unlock()
-    {
+    void unlock() {
         sequence_.unlock();
     }
 

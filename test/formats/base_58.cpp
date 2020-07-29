@@ -51,19 +51,17 @@ TEST_CASE("base58 address test", "[base 58 tests]") {
 
 TEST_CASE("is b58", "[base 58 tests]") {
     std::string const base58_chars = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
-    for (char ch: base58_chars)
-    {
+    for (char ch: base58_chars) {
         REQUIRE(is_base58(ch));
     }
 
     std::string const non_base58_chars = "0OIl+- //#";
-    for (char ch: non_base58_chars)
-    {
-        REQUIRE(!is_base58(ch));
+    for (char ch: non_base58_chars) {
+        REQUIRE( ! is_base58(ch));
     }
 
     REQUIRE(is_base58("abcdjkk11"));
-    REQUIRE(!is_base58("abcdjkk011"));
+    REQUIRE( ! is_base58("abcdjkk011"));
 }
 
 TEST_CASE("base58 array test", "[base 58 tests]") {

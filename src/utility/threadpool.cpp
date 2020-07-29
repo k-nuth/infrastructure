@@ -52,8 +52,7 @@ void threadpool::spawn_once(thread_priority priority)
     work_mutex_.lock_upgrade();
 
     // Work prevents the service from running out of work and terminating.
-    if ( ! work_)
-    {
+    if ( ! work_) {
         work_mutex_.unlock_upgrade_and_lock();
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         work_ = std::make_shared<asio::service::work>(service_);
@@ -69,8 +68,7 @@ void threadpool::spawn_once(thread_priority priority)
     // Critical Section
     unique_lock lock(threads_mutex_);
 
-    threads_.emplace_back([this, priority]()
-    {
+    threads_.emplace_back([this, priority]() {
         set_priority(priority);
         service_.run();
     });
@@ -102,8 +100,7 @@ void threadpool::join()
 
     DEBUG_ONLY(auto const this_id = boost::this_thread::get_id();)
 
-    for (auto& thread: threads_)
-    {
+    for (auto& thread: threads_) {
         KTH_ASSERT(this_id != thread.get_id());
         KTH_ASSERT(thread.joinable());
         thread.join();

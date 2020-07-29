@@ -59,8 +59,7 @@ void HMACSHA512Init(HMACSHA512CTX* context, uint8_t const* key,
     uint8_t pad[SHA512_BLOCK_LENGTH];
     uint8_t key_hash[SHA512_DIGEST_LENGTH];
 
-    if (key_length > SHA512_BLOCK_LENGTH)
-    {
+    if (key_length > SHA512_BLOCK_LENGTH) {
         SHA512Init(&context->ictx);
         SHA512Update(&context->ictx, key, key_length);
         SHA512Final(&context->ictx, key_hash);

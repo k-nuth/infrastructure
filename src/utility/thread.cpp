@@ -32,8 +32,7 @@ namespace kth {
 // Privately map the class enum thread priority value to an interger.
 static int get_priority(thread_priority priority)
 {
-    switch (priority)
-    {
+    switch (priority) {
         case thread_priority::high:
             return THREAD_PRIORITY_ABOVE_NORMAL;
         case thread_priority::normal:

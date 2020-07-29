@@ -29,8 +29,7 @@ boost::log::record rate_feature<BaseType>::open_record_unlocked(Arguments const&
     auto tag = add_rate_unlocked(set,
         arguments[keywords::rate | boost::parameter::void_()]);
 
-    BOOST_SCOPE_EXIT_TPL((&tag)(&set))
-    {
+    BOOST_SCOPE_EXIT_TPL((&tag)(&set)) {
         if (tag != set.end()) {
             set.erase(tag);
         }

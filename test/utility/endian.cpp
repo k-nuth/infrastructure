@@ -14,10 +14,10 @@ using namespace kth;
 TEST_CASE("endian  from big endian stream unsafe  insufficient data  stream failure", "[endian tests]") {
     static data_chunk const data{ 0xFF };
     data_source stream(data);
-    REQUIRE(!stream.eof());
+    REQUIRE( ! stream.eof());
 
     auto const value = from_little_endian_stream_unsafe<uint64_t>(stream);
-    REQUIRE(!stream);
+    REQUIRE( ! stream);
     REQUIRE(stream.eof());
 }
 
@@ -27,7 +27,7 @@ TEST_CASE("endian  from big endian stream unsafe  eof  stream partial read", "[e
     const uint32_t expected = static_cast<uint32_t>(content) << shift;
     std::stringstream stream;
     stream.put(content);
-    REQUIRE(!stream.eof());
+    REQUIRE( ! stream.eof());
 
     auto const value = from_big_endian_stream_unsafe<uint32_t>(stream);
     REQUIRE(value == expected);
@@ -49,10 +49,10 @@ TEST_CASE("endian  from big endian stream unsafe  valid  expected", "[endian tes
 TEST_CASE("endian  from little endian stream unsafe  insufficient data  stream failure", "[endian tests]") {
     static data_chunk const data{ 0xFF };
     data_source stream(data);
-    REQUIRE(!stream.eof());
+    REQUIRE( ! stream.eof());
 
     auto const value = from_little_endian_stream_unsafe<uint64_t>(stream);
-    REQUIRE(!stream);
+    REQUIRE( ! stream);
     REQUIRE(stream.eof());
 }
 
@@ -61,7 +61,7 @@ TEST_CASE("endian  from little endian stream unsafe  eof  stream partial read", 
     auto const expected = static_cast<uint32_t>(content);
     std::stringstream stream;
     stream.put(content);
-    REQUIRE(!stream.eof());
+    REQUIRE( ! stream.eof());
 
     auto const value = from_little_endian_stream_unsafe<uint32_t>(stream);
     REQUIRE(value == expected);

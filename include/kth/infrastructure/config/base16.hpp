@@ -44,8 +44,7 @@ public:
     template <size_t Size>
     explicit
     base16(byte_array<Size> const& value)
-        : value_(value.begin(), value.end())
-    {}
+        : value_(value.begin(), value.end()) {}
 
     /**
      * Overload cast to internal type.

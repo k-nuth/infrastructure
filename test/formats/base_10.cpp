@@ -35,7 +35,7 @@
 // BOOST_AUTO_TEST_CASE(parse_amount_##NAME##_test) \
 // { \
 //     uint64_t result; \
-     REQUIRE(!decode_base10(result, __VA_ARGS__));
+     REQUIRE( ! decode_base10(result, __VA_ARGS__));
 // }
 
 // #define TEST_FORMAT(NAME, EXPECTED, ...) \

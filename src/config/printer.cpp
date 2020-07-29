@@ -126,8 +126,7 @@ std::vector<std::string> printer::columnize(std::string const& paragraph,
     std::string fragment;
     std::vector<std::string> column;
 
-    for (auto const& word: words)
-    {
+    for (auto const& word: words) {
         if ( ! fragment.empty() && (word.length() + fragment.length() < width))
         {
             fragment += KI_SENTENCE_DELIMITER + word;

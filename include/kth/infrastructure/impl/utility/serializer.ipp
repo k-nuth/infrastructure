@@ -78,17 +78,14 @@ void serializer<Iterator>::write_8_bytes_big_endian(uint64_t value)
 template <typename Iterator>
 void serializer<Iterator>::write_variable_big_endian(uint64_t value)
 {
-    if (value < varint_two_bytes)
-    {
+    if (value < varint_two_bytes) {
         write_byte(static_cast<uint8_t>(value));
     }
-    else if (value <= max_uint16)
-    {
+    else if (value <= max_uint16) {
         write_byte(varint_two_bytes);
         write_2_bytes_big_endian(static_cast<uint16_t>(value));
     }
-    else if (value <= max_uint32)
-    {
+    else if (value <= max_uint32) {
         write_byte(varint_four_bytes);
         write_4_bytes_big_endian(static_cast<uint32_t>(value));
     }
@@ -135,17 +132,14 @@ void serializer<Iterator>::write_8_bytes_little_endian(uint64_t value)
 template <typename Iterator>
 void serializer<Iterator>::write_variable_little_endian(uint64_t value)
 {
-    if (value < varint_two_bytes)
-    {
+    if (value < varint_two_bytes) {
         write_byte(static_cast<uint8_t>(value));
     }
-    else if (value <= max_uint16)
-    {
+    else if (value <= max_uint16) {
         write_byte(varint_two_bytes);
         write_2_bytes_little_endian(static_cast<uint16_t>(value));
     }
-    else if (value <= max_uint32)
-    {
+    else if (value <= max_uint32) {
         write_byte(varint_four_bytes);
         write_4_bytes_little_endian(static_cast<uint32_t>(value));
     }
@@ -250,8 +244,7 @@ size_t serializer<Iterator>::read_size_big_endian()
     auto const begin = iterator_;
     uint64_t size;
 
-    switch (prefix)
-    {
+    switch (prefix) {
         case varint_eight_bytes:
             iterator_ += sizeof(uint64_t);
             size = from_big_endian_unsafe<uint64_t>(begin);
@@ -283,8 +276,7 @@ size_t serializer<Iterator>::read_size_little_endian()
     auto const begin = iterator_;
     uint64_t size;
 
-    switch (prefix)
-    {
+    switch (prefix) {
         case varint_eight_bytes:
             iterator_ += sizeof(uint64_t);
             size = from_little_endian_unsafe<uint64_t>(begin);

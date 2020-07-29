@@ -17,7 +17,7 @@ namespace kth {
 
 ////// Adapted from: stackoverflow.com/a/18298965/1172329
 ////#ifndef thread_local
-////    #if (__STDC_VERSION__ >= 201112) && (!defined __STDC_NO_THREADS__)
+////    #if (__STDC_VERSION__ >= 201112) && ( ! defined __STDC_NO_THREADS__)
 ////        #define thread_local _Thread_local
 ////    #elif (defined _MSC_VER)
 ////        #define thread_local __declspec(thread)

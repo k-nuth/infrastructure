@@ -83,7 +83,7 @@ TEST_CASE("checksum  build checked array  overflow  false", "[checksum tests]") 
     {
         data
     });
-    REQUIRE(!result);
+    REQUIRE( ! result);
 }
 
 TEST_CASE("checksum  insert checksum  empty  valid", "[checksum tests]") {
@@ -109,17 +109,17 @@ TEST_CASE("checksum  insert checksum  not empty  valid", "[checksum tests]") {
 
 TEST_CASE("checksum  insert checksum  underflow  false", "[checksum tests]") {
     byte_array<checksum_size - 1> out;
-    REQUIRE(!insert_checksum(out));
+    REQUIRE( ! insert_checksum(out));
 }
 
 TEST_CASE("checksum  verify checksum  underflow  false", "[checksum tests]") {
     data_chunk const data = { 0, 0, 0 };
-    REQUIRE(!verify_checksum(data));
+    REQUIRE( ! verify_checksum(data));
 }
 
 TEST_CASE("checksum  verify checksum  not set  false", "[checksum tests]") {
     data_chunk const data = { 0, 0, 0, 0, 0 };
-    REQUIRE(!verify_checksum(data));
+    REQUIRE( ! verify_checksum(data));
 }
 
 TEST_CASE("checksum  verify checksum  added  true", "[checksum tests]") {
@@ -133,7 +133,7 @@ TEST_CASE("checksum  verify checksum  invalidated  false", "[checksum tests]") {
     auto const data_size = data.size();
     append_checksum(data);
     data[data_size] = 42;
-    REQUIRE(!verify_checksum(data));
+    REQUIRE( ! verify_checksum(data));
 }
 
 // End Boost Suite

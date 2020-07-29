@@ -140,8 +140,7 @@ static void handle_script_result(int result)
         return;
 }
 
-    switch (errno)
-    {
+    switch (errno) {
         case EFBIG:
             throw std::length_error("scrypt parameter too large");
         case EINVAL:

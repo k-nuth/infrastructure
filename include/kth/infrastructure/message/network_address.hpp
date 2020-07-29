@@ -32,8 +32,7 @@ public:
         : timestamp_(timestamp)
         , services_(services)
         , ip_(ip)
-        , port_(port)
-    {}
+        , port_(port) {}
 
     network_address(network_address const& x) = default;
     network_address& operator=(network_address const& x) = default;

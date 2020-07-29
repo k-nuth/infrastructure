@@ -88,7 +88,7 @@ TEST_CASE("elliptic curve  sign  round trip negative  test", "[elliptic curve te
 
     // Invalidate the positive test.
     hash[0] = 0;
-    REQUIRE(!verify_signature(point, hash, signature));
+    REQUIRE( ! verify_signature(point, hash, signature));
 }
 
 TEST_CASE("elliptic curve  verify signature  positive  test", "[elliptic curve tests]") {
@@ -113,7 +113,7 @@ TEST_CASE("elliptic curve  verify signature  negative  test", "[elliptic curve t
 
     // Invalidate the positive test.
     signature[10] = 110;
-    REQUIRE(!verify_signature(point, sighash, signature));
+    REQUIRE( ! verify_signature(point, sighash, signature));
 }
 
 TEST_CASE("elliptic curve  ec add  positive  test", "[elliptic curve tests]") {
@@ -137,8 +137,8 @@ TEST_CASE("elliptic curve  ec add  negative  test", "[elliptic curve tests]") {
     secret2[31] = 1;
     ec_compressed public1;
     REQUIRE(secret_to_public(public1, secret1));
-    REQUIRE(!ec_add(secret1, secret2));
-    REQUIRE(!ec_add(public1, secret2));
+    REQUIRE( ! ec_add(secret1, secret2));
+    REQUIRE( ! ec_add(public1, secret2));
 }
 
 TEST_CASE("elliptic curve  ec multiply test", "[elliptic curve tests]") {

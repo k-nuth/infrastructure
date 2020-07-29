@@ -131,15 +131,13 @@ void SHA256Update(SHA256CTX* context, uint8_t const* input, size_t length)
     bitlen[1] = ((uint32_t)length) << 3;
     bitlen[0] = (uint32_t)(length >> 29);
 
-    if ((context->count[1] += bitlen[1]) < bitlen[1])
-    {
+    if ((context->count[1] += bitlen[1]) < bitlen[1]) {
         context->count[0]++;
     }
 
     context->count[0] += bitlen[0];
 
-    if (length < 64 - r)
-    {
+    if (length < 64 - r) {
         memcpy(&context->buf[r], input, length);
         return;
     }
@@ -150,8 +148,7 @@ void SHA256Update(SHA256CTX* context, uint8_t const* input, size_t length)
     input += 64 - r;
     length -= 64 - r;
 
-    while (length >= 64)
-    {
+    while (length >= 64) {
         SHA256Transform(context->state, input);
         input += 64;
         length -= 64;
@@ -193,8 +190,7 @@ void SHA256Transform(uint32_t state[SHA256_STATE_LENGTH],
 
     be32dec_vect(W, block, SHA256_BLOCK_LENGTH);
 
-    for (i = 16; i < 64; i++)
-    {
+    for (i = 16; i < 64; i++) {
         W[i] = s1(W[i - 2]) + W[i - 7] + s0(W[i - 15]) + W[i - 16];
     }
 

@@ -22,8 +22,7 @@ class KI_API pseudo_random
      * Fill a container with randomness using the default random engine.
      */
     template <typename Container>
-    static void fill(Container& out)
-    {
+    static void fill(Container& out) {
         // uniform_int_distribution is undefined for sizes < 16 bits.
         std::uniform_int_distribution<uint16_t> distribution(0, max_uint8);
         auto& twister = pseudo_random::get_twister();
@@ -40,8 +39,7 @@ class KI_API pseudo_random
      * Shuffle a container using the default random engine.
      */
     template <typename Container>
-    static void shuffle(Container& out)
-    {
+    static void shuffle(Container& out) {
         std::shuffle(out.begin(), out.end(), get_twister());
     }
 

@@ -33,7 +33,7 @@ TEST_CASE("uri  parse  messy roundtrip  test", "[uri tests]") {
     uri parsed;
     REQUIRE(parsed.decode(test));
 
-    REQUIRE(!parsed.has_authority());
+    REQUIRE( ! parsed.has_authority());
     REQUIRE(parsed.has_query());
     REQUIRE(parsed.has_fragment());
 
@@ -47,10 +47,10 @@ TEST_CASE("uri  parse  messy roundtrip  test", "[uri tests]") {
 
 TEST_CASE("uri  parse  scheme  test", "[uri tests]") {
     uri parsed;
-    REQUIRE(!parsed.decode(""));
-    REQUIRE(!parsed.decode(":"));
-    REQUIRE(!parsed.decode("1:"));
-    REQUIRE(!parsed.decode("%78:"));
+    REQUIRE( ! parsed.decode(""));
+    REQUIRE( ! parsed.decode(":"));
+    REQUIRE( ! parsed.decode("1:"));
+    REQUIRE( ! parsed.decode("%78:"));
 
     REQUIRE(parsed.decode("x:"));
     REQUIRE(parsed.scheme() == "x");
@@ -62,7 +62,7 @@ TEST_CASE("uri  parse  scheme  test", "[uri tests]") {
 
 TEST_CASE("uri  parsing  non strict  test", "[uri tests]") {
     uri parsed;
-    REQUIRE(!parsed.decode("test:?テスト"));
+    REQUIRE( ! parsed.decode("test:?テスト"));
 
     REQUIRE(parsed.decode("test:テスト", false));
     REQUIRE(parsed.scheme() == "test");
@@ -72,7 +72,7 @@ TEST_CASE("uri  parsing  non strict  test", "[uri tests]") {
 TEST_CASE("uri  parse  authority  test", "[uri tests]") {
     uri parsed;
     REQUIRE(parsed.decode("test:/"));
-    REQUIRE(!parsed.has_authority());
+    REQUIRE( ! parsed.has_authority());
     REQUIRE(parsed.path() == "/");
 
     REQUIRE(parsed.decode("test://"));
@@ -86,7 +86,7 @@ TEST_CASE("uri  parse  authority  test", "[uri tests]") {
     REQUIRE(parsed.path() == "/");
 
     REQUIRE(parsed.decode("test:/x//"));
-    REQUIRE(!parsed.has_authority());
+    REQUIRE( ! parsed.has_authority());
     REQUIRE(parsed.path() == "/x//");
 
     REQUIRE(parsed.decode("ssh://git@github.com:22/path/"));
@@ -98,7 +98,7 @@ TEST_CASE("uri  parse  authority  test", "[uri tests]") {
 TEST_CASE("uri  parse  query  test", "[uri tests]") {
     uri parsed;
     REQUIRE(parsed.decode("test:#?"));
-    REQUIRE(!parsed.has_query());
+    REQUIRE( ! parsed.has_query());
 
     REQUIRE(parsed.decode("test:?&&x=y&z"));
     REQUIRE(parsed.has_query());
@@ -118,7 +118,7 @@ TEST_CASE("uri  parse  query  test", "[uri tests]") {
 TEST_CASE("uri  parse  fragment  test", "[uri tests]") {
     uri parsed;
     REQUIRE(parsed.decode("test:?"));
-    REQUIRE(!parsed.has_fragment());
+    REQUIRE( ! parsed.has_fragment());
 
     REQUIRE(parsed.decode("test:#"));
     REQUIRE(parsed.has_fragment());

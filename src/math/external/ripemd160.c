@@ -115,8 +115,7 @@ void RMDUpdate(RMD160CTX* context, uint8_t const* message, size_t length)
     size_t i;
     size_t byte;
 
-    for (byte = length; byte > 63; byte -= 64)
-    {
+    for (byte = length; byte > 63; byte -= 64) {
         for (i = 0; i < 16; i++)
         {
             context->chunk[i] = BYTES_TO_DWORD(message);
@@ -133,8 +132,7 @@ void RMDFinal(RMD160CTX* context, uint8_t digest[RMD160_DIGEST_LENGTH])
 {
     size_t i;
 
-    for (i = 0; i < RMD160_DIGEST_LENGTH; i += 4)
-    {
+    for (i = 0; i < RMD160_DIGEST_LENGTH; i += 4) {
         digest[i + 0] = (context->state[i >> 2] >> 0);
         digest[i + 1] = (context->state[i >> 2] >> 8);
         digest[i + 2] = (context->state[i >> 2] >> 16);
@@ -359,15 +357,13 @@ void RMDfinish(RMD160CTX* context, uint8_t const* message, size_t length)
 
     zeroize(chunk, RMD160_CHUNK_LENGTH * sizeof(uint32_t));
 
-    for (i = 0; i < (lo_length & 63); i++)
-    {
+    for (i = 0; i < (lo_length & 63); i++) {
         chunk[i >> 2] ^= (uint32_t)*message++ << (8 * (i & 3));
     }
 
     chunk[(lo_length >> 2) & 15] ^= (uint32_t)1 << (8 * (lo_length & 3) + 7);
 
-    if ((lo_length & 63) > 55)
-    {
+    if ((lo_length & 63) > 55) {
         RMDcompress(context);
         zeroize(chunk, RMD160_CHUNK_LENGTH * sizeof(uint32_t));
     }

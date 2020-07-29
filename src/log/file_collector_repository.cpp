@@ -45,13 +45,11 @@ boost::shared_ptr<boost::log::sinks::file::collector> file_collector_repository:
         result = it->shared_from_this();
         result->update(max_size, min_free_space, max_files);
     }
-    catch (boost::bad_weak_ptr&)
-    {
+    catch (boost::bad_weak_ptr&) {
     }
 }
 
-    if ( ! result)
-    {
+    if ( ! result) {
         result = boost::make_shared<file_collector>(
             file_collector_repository::get(),
             target_dir, max_size, min_free_space, max_files);
