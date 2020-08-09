@@ -33,7 +33,7 @@ enum sighash_algorithm : uint32_t
     single = 0x03,
 
     //TODO(fernando): check if we have to cancel the following values for coins not equal to BCH
-// #ifdef KTH_CURRENCY_BCH
+// #if defined(KTH_CURRENCY_BCH)
     cash_forkid_all = all | 0x40,           //Old name: all_forkid
     cash_forkid_none = none | 0x40,         //Old name: none_forkid
     cash_forkid_single = single | 0x40,     //Old name: single_forkid
