@@ -140,6 +140,9 @@ class KnuthInfrastructureConan(KnuthConanFile):
         if self.settings.os == "Linux" or self.settings.os == "FreeBSD":
             self.cpp_info.libs.append("pthread")
 
+        if self.settings.os == "Linux" and self.settings.compiler == "gcc" and self.settings.compiler.version <= 8:
+            self.cpp_info.libs.append("stdc++fs")
+
         if self.settings.os == "Windows" and self.settings.compiler == "gcc": # MinGW
             self.cpp_info.libs.append("ws2_32")
             self.cpp_info.libs.append("wsock32")
