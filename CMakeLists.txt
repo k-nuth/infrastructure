@@ -599,6 +599,7 @@ if (WITH_TESTS)
     test/utility/collection.cpp
     test/utility/data.cpp
     test/utility/endian.cpp
+    test/utility/operators.cpp
     test/utility/pseudo_random.cpp
     test/utility/serializer.cpp
     test/utility/stream.cpp
