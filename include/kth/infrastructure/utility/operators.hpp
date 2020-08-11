@@ -5,6 +5,9 @@
 #ifndef KTH_INFRASTRUCTURE_UTILITY_OPERATORS_HPP_
 #define KTH_INFRASTRUCTURE_UTILITY_OPERATORS_HPP_
 
+#include <limits>
+#include <type_traits>
+
 namespace kth {
 
 template <typename I, typename I2>
