@@ -13,13 +13,12 @@
 namespace kth {
 
 threadpool::threadpool(size_t number_threads, thread_priority priority)
-  : size_(0)
+    : size_(0)
 {
     spawn(number_threads, priority);
 }
 
-threadpool::~threadpool()
-{
+threadpool::~threadpool() {
     shutdown();
     join();
 }
@@ -35,18 +34,16 @@ size_t threadpool::size() const {
 }
 
 // This is not thread safe.
-void threadpool::spawn(size_t number_threads, thread_priority priority)
-{
+void threadpool::spawn(size_t number_threads, thread_priority priority) {
     // This allows the pool to be restarted.
     service_.reset();
 
     for (size_t i = 0; i < number_threads; ++i) {
         spawn_once(priority);
-}
+    }
 }
 
-void threadpool::spawn_once(thread_priority priority)
-{
+void threadpool::spawn_once(thread_priority priority) {
     ///////////////////////////////////////////////////////////////////////////
     // Critical Section
     work_mutex_.lock_upgrade();
@@ -77,13 +74,11 @@ void threadpool::spawn_once(thread_priority priority)
     ///////////////////////////////////////////////////////////////////////////
 }
 
-void threadpool::abort()
-{
+void threadpool::abort() {
     service_.stop();
 }
 
-void threadpool::shutdown()
-{
+void threadpool::shutdown() {
     ///////////////////////////////////////////////////////////////////////////
     // Critical Section
     unique_lock lock(work_mutex_);
@@ -92,8 +87,7 @@ void threadpool::shutdown()
     ///////////////////////////////////////////////////////////////////////////
 }
 
-void threadpool::join()
-{
+void threadpool::join() {
     ///////////////////////////////////////////////////////////////////////////
     // Critical Section
     unique_lock lock(threads_mutex_);
@@ -111,8 +105,7 @@ void threadpool::join()
     ///////////////////////////////////////////////////////////////////////////
 }
 
-asio::service& threadpool::service()
-{
+asio::service& threadpool::service() {
     return service_;
 }
 
