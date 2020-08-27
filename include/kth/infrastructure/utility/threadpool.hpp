@@ -33,7 +33,7 @@ public:
      * @param[in]   priority        Priority of threads to spawn.
      */
     explicit
-    threadpool(size_t number_threads = 0, thread_priority priority = thread_priority::normal);
+    threadpool(std::string const& name, size_t number_threads = 0, thread_priority priority = thread_priority::normal);
 
     ~threadpool();
 
@@ -90,6 +90,7 @@ private:
 
     // These are protected by mutex.
 
+    std::string name_;
     std::atomic<size_t> size_;
     std::vector<asio::thread> threads_;
     mutable upgrade_mutex threads_mutex_;
