@@ -27,8 +27,7 @@ std::string encode_base64(data_slice unencoded)
 
     uint32_t value;
     auto cursor = unencoded.begin();
-    for (size_t position = 0; position < size / 3; position++)
-    {
+    for (size_t position = 0; position < size / 3; position++) {
         // Convert to big endian.
         value = (*cursor++) << 16;
 
@@ -40,8 +39,7 @@ std::string encode_base64(data_slice unencoded)
         encoded.append(1, table[(value & 0x0000003F) >> 0]);
     }
 
-    switch (size % 3)
-    {
+    switch (size % 3) {
         case 1:
             // Convert to big endian.
             value = (*cursor++) << 16;
@@ -75,8 +73,7 @@ bool decode_base64(data_chunk& out, std::string const& in)
 }
 
     size_t padding = 0;
-    if (length > 0)
-    {
+    if (length > 0) {
         if (in[length - 1] == pad) {
             padding++;
 }
@@ -89,8 +86,7 @@ bool decode_base64(data_chunk& out, std::string const& in)
     decoded.reserve(((length / 4) * 3) - padding);
 
     uint32_t value = 0;
-    for (auto cursor = in.begin(); cursor < in.end();)
-    {
+    for (auto cursor = in.begin(); cursor < in.end();) {
         for (size_t position = 0; position < 4; position++)
         {
             value <<= 6;

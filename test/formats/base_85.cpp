@@ -44,7 +44,7 @@ TEST_CASE("encode base85 valid test", "[base 85 tests]") {
 TEST_CASE("encode base85 invalid test", "[base 85 tests]") {
     std::string encoded;
     data_chunk decoded(BASE85_DECODED_INVALID);
-    REQUIRE(!encode_base85(encoded, decoded));
+    REQUIRE( ! encode_base85(encoded, decoded));
     REQUIRE(encoded.empty());
 }
 
@@ -56,13 +56,13 @@ TEST_CASE("decode base85 valid test", "[base 85 tests]") {
 
 TEST_CASE("decode base85 invalid char test", "[base 85 tests]") {
     data_chunk result;
-    REQUIRE(!decode_base85(result, BASE85_ENCODED_INVALID_CHAR));
+    REQUIRE( ! decode_base85(result, BASE85_ENCODED_INVALID_CHAR));
     REQUIRE(result.empty());
 }
 
 TEST_CASE("decode base85 invalid length test", "[base 85 tests]") {
     data_chunk result;
-    REQUIRE(!decode_base85(result, BASE85_ENCODED_INVALID_LENGTH));
+    REQUIRE( ! decode_base85(result, BASE85_ENCODED_INVALID_LENGTH));
     REQUIRE(result.empty());
 }
 

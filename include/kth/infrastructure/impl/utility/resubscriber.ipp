@@ -39,8 +39,7 @@ void resubscriber<Args...>::start()
     ///////////////////////////////////////////////////////////////////////////
     subscribe_mutex_.lock_upgrade();
 
-    if (stopped_)
-    {
+    if (stopped_) {
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         subscribe_mutex_.unlock_upgrade_and_lock();
         stopped_ = false;
@@ -60,8 +59,7 @@ void resubscriber<Args...>::stop()
     ///////////////////////////////////////////////////////////////////////////
     subscribe_mutex_.lock_upgrade();
 
-    if ( ! stopped_)
-    {
+    if ( ! stopped_) {
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         subscribe_mutex_.unlock_upgrade_and_lock();
         stopped_ = true;
@@ -81,8 +79,7 @@ void resubscriber<Args...>::subscribe(handler&& notify, Args... stopped_args)
     ///////////////////////////////////////////////////////////////////////////
     subscribe_mutex_.lock_upgrade();
 
-    if ( ! stopped_)
-    {
+    if ( ! stopped_) {
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         subscribe_mutex_.unlock_upgrade_and_lock();
         subscriptions_.push_back(std::forward<handler>(notify));
@@ -132,8 +129,7 @@ void resubscriber<Args...>::do_invoke(Args... args)
 
     // Subscriptions may be created while this loop is executing.
     // Invoke subscribers from temporary list and resubscribe as indicated.
-    for (auto const& handler: subscriptions)
-    {
+    for (auto const& handler: subscriptions) {
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // DEADLOCK RISK, handler must not return to invoke.
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

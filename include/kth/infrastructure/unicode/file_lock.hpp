@@ -49,8 +49,7 @@ public:
     //!Constructs an empty file mapping.
     //!Does not throw
     file_lock()
-        :  m_file_hnd(boost::interprocess::file_handle_t(boost::interprocess::ipcdetail::invalid_file()))
-    {}
+        :  m_file_hnd(boost::interprocess::file_handle_t(boost::interprocess::ipcdetail::invalid_file())) {}
 
     // MODIFIED TO EXPECT UTF8 ENCODING ON WINDOWS.
     //!Opens a file lock. Throws boost::interprocess::interprocess_exception if the file does not
@@ -62,8 +61,7 @@ public:
     //!After the call, "x" does not represent any file mapping object.
     //!Does not throw
     file_lock(file_lock&& x) noexcept
-        :  m_file_hnd(boost::interprocess::file_handle_t(boost::interprocess::ipcdetail::invalid_file()))
-    {  
+        :  m_file_hnd(boost::interprocess::file_handle_t(boost::interprocess::ipcdetail::invalid_file())) {  
         this->swap(x);   
     }
 
@@ -215,7 +213,7 @@ inline file_lock::~file_lock()
 
 inline void file_lock::lock()
 {
-   if(!boost::interprocess::ipcdetail::acquire_file_lock(m_file_hnd)){
+   if( ! boost::interprocess::ipcdetail::acquire_file_lock(m_file_hnd)){
       boost::interprocess::error_info err(boost::interprocess::system_error_code());
       throw boost::interprocess::interprocess_exception(err);
    }
@@ -224,7 +222,7 @@ inline void file_lock::lock()
 inline bool file_lock::try_lock()
 {
    bool result;
-   if(!boost::interprocess::ipcdetail::try_acquire_file_lock(m_file_hnd, result)){
+   if( ! boost::interprocess::ipcdetail::try_acquire_file_lock(m_file_hnd, result)){
       boost::interprocess::error_info err(boost::interprocess::system_error_code());
       throw boost::interprocess::interprocess_exception(err);
    }
@@ -236,7 +234,7 @@ inline bool file_lock::timed_lock(const boost::posix_time::ptime &abs_time)
 
 inline void file_lock::unlock()
 {
-   if(!boost::interprocess::ipcdetail::release_file_lock(m_file_hnd)){
+   if( ! boost::interprocess::ipcdetail::release_file_lock(m_file_hnd)){
       boost::interprocess::error_info err(boost::interprocess::system_error_code());
       throw boost::interprocess::interprocess_exception(err);
    }
@@ -244,7 +242,7 @@ inline void file_lock::unlock()
 
 inline void file_lock::lock_sharable()
 {
-   if(!boost::interprocess::ipcdetail::acquire_file_lock_sharable(m_file_hnd)){
+   if( ! boost::interprocess::ipcdetail::acquire_file_lock_sharable(m_file_hnd)){
       boost::interprocess::error_info err(boost::interprocess::system_error_code());
       throw boost::interprocess::interprocess_exception(err);
    }
@@ -253,7 +251,7 @@ inline void file_lock::lock_sharable()
 inline bool file_lock::try_lock_sharable()
 {
    bool result;
-   if(!boost::interprocess::ipcdetail::try_acquire_file_lock_sharable(m_file_hnd, result)){
+   if( ! boost::interprocess::ipcdetail::try_acquire_file_lock_sharable(m_file_hnd, result)){
       boost::interprocess::error_info err(boost::interprocess::system_error_code());
       throw boost::interprocess::interprocess_exception(err);
    }
@@ -268,7 +266,7 @@ inline bool file_lock::timed_lock_sharable(const boost::posix_time::ptime &abs_t
 
 inline void file_lock::unlock_sharable()
 {
-   if(!boost::interprocess::ipcdetail::release_file_lock_sharable(m_file_hnd)){
+   if( ! boost::interprocess::ipcdetail::release_file_lock_sharable(m_file_hnd)){
       boost::interprocess::error_info err(boost::interprocess::system_error_code());
       throw boost::interprocess::interprocess_exception(err);
    }

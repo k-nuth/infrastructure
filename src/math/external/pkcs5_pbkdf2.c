@@ -49,8 +49,7 @@ int pkcs5_pbkdf2(uint8_t const* passphrase, size_t passphrase_length,
 }
 
     memcpy(asalt, salt, salt_length);
-    for (count = 1; key_length > 0; count++)
-    {
+    for (count = 1; key_length > 0; count++) {
         asalt[salt_length + 0] = (count >> 24) & 0xff;
         asalt[salt_length + 1] = (count >> 16) & 0xff;
         asalt[salt_length + 2] = (count >> 8) & 0xff;

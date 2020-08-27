@@ -65,8 +65,7 @@ void SHA1Update(SHA1CTX* context, uint8_t const* message, size_t length)
         return;
 }
 
-    while (length--)
-    {
+    while (length--) {
         context->block[context->index++] = (*message & 0xFF);
         context->length += 8;
 
@@ -85,13 +84,11 @@ void SHA1Final(SHA1CTX* context, uint8_t digest[SHA1_DIGEST_LENGTH])
 
     SHA1PadMessage(context);
 
-    for (i = 0; i < SHA1_BLOCK_LENGTH; ++i)
-    {
+    for (i = 0; i < SHA1_BLOCK_LENGTH; ++i) {
         context->block[i] = 0;
     }
 
-    for (i = 0; i < SHA1_DIGEST_LENGTH; ++i)
-    {
+    for (i = 0; i < SHA1_DIGEST_LENGTH; ++i) {
         digest[i] = context->state[i >> 2] >> 8 * (3 - (i & 0x03));
     }
 }
@@ -113,16 +110,14 @@ void SHA1ProcessMessageBlock(SHA1CTX* context)
     uint32_t W[80];
     uint32_t A, B, C, D, E;
 
-    for (t = 0; t < 16; t++)
-    {
+    for (t = 0; t < 16; t++) {
         W[t]  = context->block[t * 4 + 0] << 24;
         W[t] |= context->block[t * 4 + 1] << 16;
         W[t] |= context->block[t * 4 + 2] << 8;
         W[t] |= context->block[t * 4 + 3] << 0;
     }
 
-    for (t = 16; t < 80; t++)
-    {
+    for (t = 16; t < 80; t++) {
        W[t] = SHIFT(1, W[t-3] ^ W[t-8] ^ W[t-14] ^ W[t-16]);
     }
 
@@ -132,8 +127,7 @@ void SHA1ProcessMessageBlock(SHA1CTX* context)
     D = context->state[3];
     E = context->state[4];
 
-    for (t = 0; t < 20; t++)
-    {
+    for (t = 0; t < 20; t++) {
         temp = SHIFT(5, A) + ((B & C) | ((~B) & D)) + E + W[t] + K[0];
         E = D;
         D = C;
@@ -143,8 +137,7 @@ void SHA1ProcessMessageBlock(SHA1CTX* context)
         A = temp;
     }
 
-    for (t = 20; t < 40; t++)
-    {
+    for (t = 20; t < 40; t++) {
         temp = SHIFT(5, A) + (B ^ C ^ D) + E + W[t] + K[1];
         E = D;
         D = C;
@@ -153,8 +146,7 @@ void SHA1ProcessMessageBlock(SHA1CTX* context)
         A = temp;
     }
 
-    for (t = 40; t < 60; t++)
-    {
+    for (t = 40; t < 60; t++) {
         temp = SHIFT(5, A) + ((B & C) | (B & D) | (C & D)) + E + W[t] + K[2];
         E = D;
         D = C;
@@ -163,8 +155,7 @@ void SHA1ProcessMessageBlock(SHA1CTX* context)
         A = temp;
     }
 
-    for (t = 60; t < 80; t++)
-    {
+    for (t = 60; t < 80; t++) {
         temp = SHIFT(5, A) + (B ^ C ^ D) + E + W[t] + K[3];
         E = D;
         D = C;
@@ -186,8 +177,7 @@ void SHA1PadMessage(SHA1CTX* context)
     uint32_t lo_length;
     uint32_t hi_length;
 
-    if (context->index > 55)
-    {
+    if (context->index > 55) {
         context->block [context->index++] = 0x80;
 
         while (context->index < 64)

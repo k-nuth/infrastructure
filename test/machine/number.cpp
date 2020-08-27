@@ -124,16 +124,16 @@ void CheckCompare(int64_t const num1, int64_t const num2, size_t value, size_t o
     CHECK(scriptnum1 == scriptnum1);
     CHECK(scriptnum1 >= scriptnum1);
     CHECK(scriptnum1 <= scriptnum1);
-    CHECK(!(scriptnum1 != scriptnum1));
-    CHECK(!(scriptnum1 < scriptnum1));
-    CHECK(!(scriptnum1 > scriptnum1));
+    CHECK( ! (scriptnum1 != scriptnum1));
+    CHECK( ! (scriptnum1 < scriptnum1));
+    CHECK( ! (scriptnum1 > scriptnum1));
 
     CHECK(scriptnum1 == num1);
     CHECK(scriptnum1 >= num1);
     CHECK(scriptnum1 <= num1);
-    CHECK(!(scriptnum1 != num1));
-    CHECK(!(scriptnum1 < num1));
-    CHECK(!(scriptnum1 > num1));
+    CHECK( ! (scriptnum1 != num1));
+    CHECK( ! (scriptnum1 < num1));
+    CHECK( ! (scriptnum1 > num1));
 
     CHECK(is(compare.eq) == (scriptnum1 == scriptnum2));
     CHECK(is(compare.ge) == (scriptnum1 >= scriptnum2));
@@ -365,8 +365,7 @@ TEST_CASE("make operator expectations", "[number tests]") {
     write_names("number_subtract number_subtracts", 12, sub_out);
     write_names("number_compare number_compares", 12, cmp_out);
 
-    for (size_t i = 0; i < number_values_count; ++i)
-    {
+    for (size_t i = 0; i < number_values_count; ++i) {
         write("    {\n", add_out, neg_out, sub_out, cmp_out);
 
         for (size_t j = 0; j < number_offsets_count; ++j)

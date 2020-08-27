@@ -53,13 +53,11 @@ struct KI_API file_char_traits
     static const char_type dot = '.';
     static const char_type newline = '\n';
 
-    static bool is_digit(char_type c)
-    {
+    static bool is_digit(char_type c) {
         return (std::isdigit(c) != 0);
     }
 
-    static std::string default_file_name_pattern()
-    {
+    static std::string default_file_name_pattern() {
         return "%5N.log";
     }
 };

@@ -90,7 +90,11 @@ std::string error_category_impl::message(int ev) const noexcept {
         { error::forward_reference, "transactions out of order" },
         { error::merkle_mismatch, "merkle root mismatch" },
         { error::block_legacy_sigop_limit, "too many block legacy signature operations" },
+
+#if defined(KTH_CURRENCY_BCH)
         { error::non_canonical_ordered, "the block is not canonically ordered" },
+        { error::block_sigchecks_limit, "too many block SigChecks" },
+#endif
 
         // accept block
         { error::block_non_final, "block contains a non-final transaction" },
@@ -110,6 +114,9 @@ std::string error_category_impl::message(int ev) const noexcept {
         { error::transaction_size_limit, "transaction size limit exceeded" },
         { error::transaction_legacy_sigop_limit, "too many transaction legacy signature operations" },
 
+#if defined(KTH_CURRENCY_BCH)
+        { error::transaction_sigchecks_limit, "too many transaction SigChecks" },
+#endif
         // accept transaction
         { error::transaction_non_final, "transaction currently non-final for next block" },
         { error::premature_validation, "transaction validation under checkpoint" },
@@ -289,8 +296,7 @@ error_code_t boost_to_error_code(const boost_code& ec) {
     namespace asio_error = boost::asio::error;
 #endif
     // TODO: use a static map (hash table)
-    switch (ec.value())
-    {
+    switch (ec.value()) {
         // There should be no boost mapping to the shutdown sentinel.
         //    return error::service_stopped;
 

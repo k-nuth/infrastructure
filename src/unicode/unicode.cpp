@@ -133,8 +133,7 @@ data_chunk to_utf8(int argc, wchar_t* argv[])
     size_t payload_size = 0;
     std::vector<std::string> collection(arg_count + 1);
 
-    for (size_t arg = 0; arg < arg_count; arg++)
-    {
+    for (size_t arg = 0; arg < arg_count; arg++) {
         collection[arg] = to_utf8(argv[arg]);
         payload_size += collection[arg].size() + 1;
     }
@@ -153,8 +152,7 @@ data_chunk to_utf8(int argc, wchar_t* argv[])
     auto arguments = reinterpret_cast<char*>(&buffer[index_size]);
 
     // Clone the converted collection into the new narrow argv.
-    for (size_t arg = 0; arg < arg_count; arg++)
-    {
+    for (size_t arg = 0; arg < arg_count; arg++) {
         index[arg] = arguments;
         auto const size = collection[arg].size();
         std::copy_n(collection[arg].begin(), size, index[arg]);
@@ -194,8 +192,7 @@ size_t to_utf8(char out[], size_t out_bytes, const wchar_t in[],
             memcpy(out, narrow.data(), bytes);
 }
     }
-    catch (const boost::locale::conv::conversion_error&)
-    {
+    catch (const boost::locale::conv::conversion_error&) {
         bytes = 0;
     }
 
@@ -223,8 +220,7 @@ static bool is_utf8_character_sequence(char const sequence[], uint8_t bytes)
     KTH_ASSERT(bytes <= utf8_max_character_size);
 
     // See tools.ietf.org/html/rfc3629#section-3 for definition.
-    switch (bytes)
-    {
+    switch (bytes) {
         case 1:
             // 0xxxxxxx
             return
@@ -260,8 +256,7 @@ static bool is_terminal_utf8_character(char const text[], size_t size)
 
     // Walk back up to the max length of a utf8 character.
     for (uint8_t length = 1; length <= utf8_max_character_size &&
-        length < size; length++)
-    {
+        length < size; length++) {
         auto const start = size - length;
         auto const sequence = &text[start];
         if (is_utf8_character_sequence(sequence, length)) {
@@ -282,8 +277,7 @@ static uint8_t offset_to_terminal_utf8_character(char const text[], size_t size)
 
     // Walk back up to the max length of a utf8 character.
     for (uint8_t unread = 0; unread < utf8_max_character_size &&
-        unread < size; unread++)
-    {
+        unread < size; unread++) {
         auto const length = size - unread;
         if (is_terminal_utf8_character(text, length)) {
             return unread;
@@ -319,8 +313,7 @@ size_t to_utf16(wchar_t out[], size_t out_chars, char const in[],
             wmemcpy(out, wide.data(), chars);
 }
     }
-    catch (const boost::locale::conv::conversion_error&)
-    {
+    catch (const boost::locale::conv::conversion_error&) {
         chars = 0;
     }
 

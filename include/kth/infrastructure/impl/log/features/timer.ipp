@@ -33,8 +33,7 @@ boost::log::record timer_feature<BaseType>::open_record_unlocked(
     auto tag = add_timer_unlocked(set,
         arguments[keywords::timer | boost::parameter::void_()]);
 
-    BOOST_SCOPE_EXIT_TPL((&tag)(&set))
-    {
+    BOOST_SCOPE_EXIT_TPL((&tag)(&set)) {
         if (tag != set.end()) {
             set.erase(tag);
 }

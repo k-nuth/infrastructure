@@ -62,7 +62,6 @@
 #include <kth/infrastructure/log/features/timer.hpp>
 #endif // defined(KTH_LOG_LIBRARY_BOOST)
 
-
 #include <kth/infrastructure/machine/number.hpp>
 #include <kth/infrastructure/machine/script_pattern.hpp>
 #include <kth/infrastructure/machine/script_version.hpp>
@@ -111,6 +110,7 @@
 #include <kth/infrastructure/utility/istream_reader.hpp>
 #include <kth/infrastructure/utility/monitor.hpp>
 #include <kth/infrastructure/utility/noncopyable.hpp>
+#include <kth/infrastructure/utility/operators.hpp>
 #include <kth/infrastructure/utility/ostream_writer.hpp>
 #include <kth/infrastructure/utility/pending.hpp>
 #include <kth/infrastructure/utility/png.hpp>

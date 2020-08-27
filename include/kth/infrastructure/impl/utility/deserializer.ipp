@@ -96,8 +96,7 @@ uint64_t deserializer<Iterator, CheckSafe>::read_variable_big_endian()
 {
     auto const value = read_byte();
 
-    switch (value)
-    {
+    switch (value) {
         case varint_eight_bytes:
             return read_8_bytes_big_endian();
         case varint_four_bytes:
@@ -157,8 +156,7 @@ uint64_t deserializer<Iterator, CheckSafe>::read_variable_little_endian()
 {
     auto const value = read_byte();
 
-    switch (value)
-    {
+    switch (value) {
         case varint_eight_bytes:
             return read_8_bytes_little_endian();
         case varint_four_bytes:

@@ -48,8 +48,7 @@ struct timer
 {
     /// Returns the quantity (count) of the elapsed time as TimeT units.
     template <typename Function, typename ...Args>
-    static typename Time::rep execution(Function func, Args&&... args)
-    {
+    static typename Time::rep execution(Function func, Args&&... args) {
         auto const start = Clock::now();
         func(std::forward<Args>(args)...);
         auto const difference = Clock::now() - start;
@@ -59,8 +58,7 @@ struct timer
 
     /// Returns the duration (in chrono's type system) of the elapsed time.
     template <typename Function, typename... Args>
-    static Time duration(Function func, Args&&... args)
-    {
+    static Time duration(Function func, Args&&... args) {
         auto start = Clock::now();
         func(std::forward<Args>(args)...);
         return std::chrono::duration_cast<Time>(Clock::now() - start);

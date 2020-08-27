@@ -27,8 +27,7 @@ public:
 
     explicit
     container_source(const Container& container)
-        : container_(container), position_(0)
-    {
+        : container_(container), position_(0) {
         static_assert(sizeof(SourceType) == sizeof(CharType), "invalid size");
     }
 

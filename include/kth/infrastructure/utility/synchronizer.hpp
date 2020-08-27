@@ -45,13 +45,11 @@ public:
         clearance_count_(clearance_count),
         counter_(std::make_shared<size_t>(0)),
         mutex_(std::make_shared<upgrade_mutex>()),
-        terminate_(mode)
-    {
+        terminate_(mode) {
     }
 
     // Determine if the code is cause for termination.
-    bool complete(code const& ec)
-    {
+    bool complete(code const& ec) {
         switch (terminate_)
         {
             case synchronizer_terminate::on_error:
@@ -66,8 +64,7 @@ public:
     }
 
     // Assuming we are terminating, generate the proper result code.
-    code result(code const& ec)
-    {
+    code result(code const& ec) {
         switch (terminate_)
         {
             case synchronizer_terminate::on_error:
@@ -82,8 +79,7 @@ public:
     }
 
     template <typename... Args>
-    void operator()(code const& ec, Args&&... args)
-    {
+    void operator()(code const& ec, Args&&... args) {
         // Critical Section
         ///////////////////////////////////////////////////////////////////////
         mutex_->lock_upgrade();

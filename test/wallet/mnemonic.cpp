@@ -13,8 +13,7 @@ using namespace kth::infrastructure::wallet;
 // Start Boost Suite: mnemonic tests
 
 TEST_CASE("mnemonic  decode mnemonic  no passphrase", "[mnemonic tests]") {
-    for (auto const& vector: mnemonic_no_passphrase)
-    {
+    for (auto const& vector: mnemonic_no_passphrase) {
         auto const words = split(vector.mnemonic, ",");
         REQUIRE(validate_mnemonic(words, vector.language));
         auto const seed = decode_mnemonic(words);
@@ -25,8 +24,7 @@ TEST_CASE("mnemonic  decode mnemonic  no passphrase", "[mnemonic tests]") {
 #ifdef WITH_ICU
 
 TEST_CASE("mnemonic  decode mnemonic  trezor", "[mnemonic tests]") {
-    for (auto const& vector: mnemonic_trezor_vectors)
-    {
+    for (auto const& vector: mnemonic_trezor_vectors) {
         auto const words = split(vector.mnemonic, ",");
         REQUIRE(validate_mnemonic(words));
         auto const seed = decode_mnemonic(words, vector.passphrase);
@@ -35,8 +33,7 @@ TEST_CASE("mnemonic  decode mnemonic  trezor", "[mnemonic tests]") {
 }
 
 TEST_CASE("mnemonic  decode mnemonic  bx", "[mnemonic tests]") {
-    for (auto const& vector: mnemonic_bx_to_seed_vectors)
-    {
+    for (auto const& vector: mnemonic_bx_to_seed_vectors) {
         auto const words = split(vector.mnemonic, ",");
         REQUIRE(validate_mnemonic(words));
         auto const seed = decode_mnemonic(words, vector.passphrase);
@@ -47,8 +44,7 @@ TEST_CASE("mnemonic  decode mnemonic  bx", "[mnemonic tests]") {
 #endif
 
 TEST_CASE("mnemonic  create mnemonic  trezor", "[mnemonic tests]") {
-    for (const mnemonic_result& vector: mnemonic_trezor_vectors)
-    {
+    for (const mnemonic_result& vector: mnemonic_trezor_vectors) {
         data_chunk entropy;
         decode_base16(entropy, vector.entropy);
         auto const mnemonic = create_mnemonic(entropy, vector.language);
@@ -59,8 +55,7 @@ TEST_CASE("mnemonic  create mnemonic  trezor", "[mnemonic tests]") {
 }
 
 TEST_CASE("mnemonic  create mnemonic  bx", "[mnemonic tests]") {
-    for (const mnemonic_result& vector: mnemonic_bx_new_vectors)
-    {
+    for (const mnemonic_result& vector: mnemonic_bx_new_vectors) {
         data_chunk entropy;
         decode_base16(entropy, vector.entropy);
         auto const mnemonic = create_mnemonic(entropy, vector.language);
@@ -71,10 +66,9 @@ TEST_CASE("mnemonic  create mnemonic  bx", "[mnemonic tests]") {
 }
 
 TEST_CASE("mnemonic  validate mnemonic  invalid", "[mnemonic tests]") {
-    for (auto const& mnemonic: invalid_mnemonic_tests)
-    {
+    for (auto const& mnemonic: invalid_mnemonic_tests) {
         auto const words = split(mnemonic, ",");
-        REQUIRE(!validate_mnemonic(words));
+        REQUIRE( ! validate_mnemonic(words));
     }
 }
 
@@ -96,8 +90,7 @@ TEST_CASE("mnemonic  dictionary  en es  no intersection", "[mnemonic tests]") {
     auto const& english = language::en;
     auto const& spanish = language::es;
     size_t intersection = 0;
-    for (auto const es: spanish)
-    {
+    for (auto const es: spanish) {
         std::string test(es);
         auto const it = std::find(english.begin(), english.end(), test);
         if (it != std::end(english))
@@ -111,8 +104,7 @@ TEST_CASE("mnemonic  dictionary  en it  no intersection", "[mnemonic tests]") {
     auto const& english = language::en;
     auto const& italian = language::it;
     size_t intersection = 0;
-    for (auto const it: italian)
-    {
+    for (auto const it: italian) {
         std::string test(it);
         auto const iter = std::find(english.begin(), english.end(), test);
         if (iter != std::end(english))
@@ -126,8 +118,7 @@ TEST_CASE("mnemonic  dictionary  fr es  no intersection", "[mnemonic tests]") {
     auto const& french = language::fr;
     auto const& spanish = language::es;
     size_t intersection = 0;
-    for (auto const es: spanish)
-    {
+    for (auto const es: spanish) {
         std::string test(es);
         auto const it = std::find(french.begin(), french.end(), test);
         if (it != std::end(french))
@@ -141,8 +132,7 @@ TEST_CASE("mnemonic  dictionary  it es  no intersection", "[mnemonic tests]") {
     auto const& italian = language::it;
     auto const& spanish = language::es;
     size_t intersection = 0;
-    for (auto const es: spanish)
-    {
+    for (auto const es: spanish) {
         std::string test(es);
         auto const it = std::find(italian.begin(), italian.end(), test);
         if (it != std::end(italian))
@@ -156,8 +146,7 @@ TEST_CASE("mnemonic  dictionary  fr it  no intersection", "[mnemonic tests]") {
     auto const& french = language::fr;
     auto const& italian = language::it;
     size_t intersection = 0;
-    for (auto const it: italian)
-    {
+    for (auto const it: italian) {
         std::string test(it);
         auto const iter = std::find(french.begin(), french.end(), test);
         if (iter != std::end(french))
@@ -171,8 +160,7 @@ TEST_CASE("mnemonic  dictionary  cs ru  no intersection", "[mnemonic tests]") {
     auto const& czech = language::cs;
     auto const& russian = language::ru;
     size_t intersection = 0;
-    for (auto const ru: russian)
-    {
+    for (auto const ru: russian) {
         std::string test(ru);
         auto const iter = std::find(czech.begin(), czech.end(), test);
         if (iter != std::end(czech))
@@ -186,8 +174,7 @@ TEST_CASE("mnemonic  dictionary  cs uk  no intersection", "[mnemonic tests]") {
     auto const& czech = language::cs;
     auto const& ukranian = language::uk;
     size_t intersection = 0;
-    for (auto const uk: ukranian)
-    {
+    for (auto const uk: ukranian) {
         std::string test(uk);
         auto const iter = std::find(czech.begin(), czech.end(), test);
         if (iter != std::end(czech))
@@ -201,8 +188,7 @@ TEST_CASE("mnemonic  dictionary  zh Hans Hant  intersection", "[mnemonic tests]"
     auto const& simplified = language::zh_Hans;
     auto const& traditional = language::zh_Hant;
     size_t intersection = 0;
-    for (auto const hant: traditional)
-    {
+    for (auto const hant: traditional) {
         std::string test(hant);
         auto const it = std::find(simplified.begin(), simplified.end(), test);
         if (it != std::end(simplified))

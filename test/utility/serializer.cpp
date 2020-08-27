@@ -42,7 +42,7 @@ TEST_CASE("serializer - deserializer exhaustion", "[serializer tests]") {
     REQUIRE(reader);
     REQUIRE(reader.is_exhausted());
     REQUIRE(reader.read_byte() == 0u);
-    REQUIRE(!reader);
+    REQUIRE( ! reader);
 }
 
 TEST_CASE("serializer - is exhausted initialized empty stream returns true", "[serializer tests]") {
@@ -50,15 +50,15 @@ TEST_CASE("serializer - is exhausted initialized empty stream returns true", "[s
     auto source = make_safe_deserializer(data.begin(), data.end());
     REQUIRE(source.is_exhausted());
     REQUIRE((bool)source);
-    REQUIRE(!source == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - is exhausted initialized nonempty stream returns false", "[serializer tests]") {
     data_chunk data(1);
     auto source = make_safe_deserializer(data.begin(), data.end());
-    REQUIRE(!source.is_exhausted());
+    REQUIRE( ! source.is_exhausted());
     REQUIRE((bool)source);
-    REQUIRE(!source == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - peek byte nonempty stream does not advance", "[serializer tests]") {
@@ -83,8 +83,8 @@ TEST_CASE("serializer - roundtrip byte", "[serializer tests]") {
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip error code", "[serializer tests]") {
@@ -99,8 +99,8 @@ TEST_CASE("serializer - roundtrip error code", "[serializer tests]") {
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip 2 bytes little endian", "[serializer tests]") {
@@ -115,8 +115,8 @@ TEST_CASE("serializer - roundtrip 2 bytes little endian", "[serializer tests]") 
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 
 }
 
@@ -132,8 +132,8 @@ TEST_CASE("serializer - roundtrip 4 bytes little endian", "[serializer tests]") 
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip 8 bytes little endian", "[serializer tests]") {
@@ -148,8 +148,8 @@ TEST_CASE("serializer - roundtrip 8 bytes little endian", "[serializer tests]") 
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip 2 bytes big endian", "[serializer tests]") {
@@ -164,8 +164,8 @@ TEST_CASE("serializer - roundtrip 2 bytes big endian", "[serializer tests]") {
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip 4 bytes big endian", "[serializer tests]") {
@@ -180,8 +180,8 @@ TEST_CASE("serializer - roundtrip 4 bytes big endian", "[serializer tests]") {
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip 8 bytes big endian", "[serializer tests]") {
@@ -196,8 +196,8 @@ TEST_CASE("serializer - roundtrip 8 bytes big endian", "[serializer tests]") {
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 
@@ -214,8 +214,8 @@ TEST_CASE("serializer - roundtrip variable uint little endian 1 byte", "[seriali
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip variable uint little endian 2 bytes", "[serializer tests]") {
@@ -231,8 +231,8 @@ TEST_CASE("serializer - roundtrip variable uint little endian 2 bytes", "[serial
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip variable uint little endian 4 bytes", "[serializer tests]") {
@@ -248,8 +248,8 @@ TEST_CASE("serializer - roundtrip variable uint little endian 4 bytes", "[serial
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip variable uint little endian 8 bytes", "[serializer tests]") {
@@ -265,8 +265,8 @@ TEST_CASE("serializer - roundtrip variable uint little endian 8 bytes", "[serial
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip variable uint big endian 1 byte", "[serializer tests]") {
@@ -282,8 +282,8 @@ TEST_CASE("serializer - roundtrip variable uint big endian 1 byte", "[serializer
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip variable uint big endian 2 bytes", "[serializer tests]") {
@@ -299,8 +299,8 @@ TEST_CASE("serializer - roundtrip variable uint big endian 2 bytes", "[serialize
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip variable uint big endian 4 bytes", "[serializer tests]") {
@@ -316,8 +316,8 @@ TEST_CASE("serializer - roundtrip variable uint big endian 4 bytes", "[serialize
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip variable uint big endian 8 bytes", "[serializer tests]") {
@@ -333,8 +333,8 @@ TEST_CASE("serializer - roundtrip variable uint big endian 8 bytes", "[serialize
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip data chunk", "[serializer tests]") {
@@ -358,8 +358,8 @@ TEST_CASE("serializer - roundtrip data chunk", "[serializer tests]") {
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip hash", "[serializer tests]") {
@@ -381,8 +381,8 @@ TEST_CASE("serializer - roundtrip hash", "[serializer tests]") {
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip short hash", "[serializer tests]") {
@@ -403,8 +403,8 @@ TEST_CASE("serializer - roundtrip short hash", "[serializer tests]") {
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip fixed string", "[serializer tests]") {
@@ -421,8 +421,8 @@ TEST_CASE("serializer - roundtrip fixed string", "[serializer tests]") {
     REQUIRE(expected.substr(0, 10) == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - roundtrip string", "[serializer tests]") {
@@ -439,8 +439,8 @@ TEST_CASE("serializer - roundtrip string", "[serializer tests]") {
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("serializer - read bytes to eof", "[serializer tests]") {
@@ -462,8 +462,8 @@ TEST_CASE("serializer - read bytes to eof", "[serializer tests]") {
     REQUIRE(expected == result);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 // End Boost Suite

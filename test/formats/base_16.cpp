@@ -23,7 +23,7 @@ TEST_CASE("base16 literal test", "[base 16 tests]") {
 TEST_CASE("base16 odd length invalid test", "[base 16 tests]") {
     auto const& hex_str = "10a7fd15cb45bda9e90e19a15";
     data_chunk data;
-    REQUIRE(!decode_base16(data, hex_str));
+    REQUIRE( ! decode_base16(data, hex_str));
 }
 
 TEST_CASE("base16 short hash test", "[base 16 tests]") {

@@ -60,7 +60,7 @@ TEST_CASE("decode base64 padded valid test", "[base 64 tests]") {
 
 TEST_CASE("decode base64 invalid test", "[base 64 tests]") {
     data_chunk result;
-    REQUIRE(!decode_base64(result, "!@#$%^&*()"));
+    REQUIRE( ! decode_base64(result, "!@#$%^&*()"));
 }
 
 // End Boost Suite

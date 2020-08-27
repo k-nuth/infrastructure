@@ -203,8 +203,7 @@ bool png::write_png(std::istream& in, uint32_t size, uint32_t dots_per_inch,
 
         out.flush();
     }
-    catch (const std::runtime_error& error)
-    {
+    catch (const std::runtime_error& error) {
         return false;
     }
 

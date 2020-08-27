@@ -46,8 +46,7 @@ static uint32_t get_clock_seed()
 std::mt19937& pseudo_random::get_twister()
 {
     // Boost.thread will clean up the thread statics using this function.
-    auto const deleter = [](std::mt19937* twister)
-    {
+    auto const deleter = [](std::mt19937* twister) {
         delete twister;
     };
 
@@ -55,8 +54,7 @@ std::mt19937& pseudo_random::get_twister()
     static boost::thread_specific_ptr<std::mt19937> twister(deleter);
 
     // This is thread safe because the instance is thread static.
-    if (twister.get() == nullptr)
-    {
+    if (twister.get() == nullptr) {
         // Seed with high resolution clock.
         twister.reset(new std::mt19937(get_clock_seed()));
     }

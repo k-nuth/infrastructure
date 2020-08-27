@@ -13,8 +13,7 @@ prioritized_mutex::prioritized_mutex(bool prioritize)
 
 void prioritized_mutex::lock_low_priority()
 {
-    if (prioritize_)
-    {
+    if (prioritize_) {
         wait_mutex_.lock();
         next_mutex_.lock();
     }

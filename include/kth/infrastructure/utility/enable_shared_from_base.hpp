@@ -16,8 +16,7 @@ class enable_shared_from_base
 {
 protected:
     template <typename Derived>
-    std::shared_ptr<Derived> shared_from_base()
-    {
+    std::shared_ptr<Derived> shared_from_base() {
         return std::static_pointer_cast<Derived>(this->shared_from_this());
     }
 };

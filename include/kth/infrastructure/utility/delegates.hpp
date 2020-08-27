@@ -24,8 +24,7 @@ template <typename Handler>
 struct bound
 {
     template <typename... Args>
-    void operator()(Args&&... args)
-    {
+    void operator()(Args&&... args) {
         work::bound(BIND_HANDLER(handler, args));
     }
 
@@ -37,8 +36,7 @@ template <typename Handler>
 struct concurrent
 {
     template <typename... Args>
-    void operator()(Args&&... args)
-    {
+    void operator()(Args&&... args) {
         heap->concurrent(BIND_HANDLER(handler, args));
     }
 
@@ -51,8 +49,7 @@ template <typename Handler>
 struct ordered
 {
     template <typename... Args>
-    void operator()(Args&&... args)
-    {
+    void operator()(Args&&... args) {
         heap->ordered(BIND_HANDLER(handler, args));
     }
 
@@ -65,8 +62,7 @@ template <typename Handler>
 struct unordered
 {
     template <typename... Args>
-    void operator()(Args&&... args)
-    {
+    void operator()(Args&&... args) {
         heap->unordered(BIND_HANDLER(handler, args));
     }
 
@@ -79,8 +75,7 @@ template <typename Handler>
 struct sequence
 {
     template <typename... Args>
-    void operator()(Args&&... args)
-    {
+    void operator()(Args&&... args) {
         heap->lock(BIND_HANDLER(handler, args));
     }
 

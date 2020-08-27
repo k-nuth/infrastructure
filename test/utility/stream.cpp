@@ -22,7 +22,7 @@ TEST_CASE("stream - is exhausted initialized empty stream returns true", "[strea
 TEST_CASE("stream - is exhausted initialized nonempty stream returns false", "[stream tests]") {
     std::stringstream stream("abc");
     istream_reader source(stream);
-    REQUIRE(!source.is_exhausted());
+    REQUIRE( ! source.is_exhausted());
 }
 
 TEST_CASE("stream - peek byte nonempty stream does not advance", "[stream tests]") {
@@ -47,8 +47,8 @@ TEST_CASE("stream - roundtrip byte", "[stream tests]") {
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip 2 bytes little endian", "[stream tests]") {
@@ -63,8 +63,8 @@ TEST_CASE("stream - roundtrip 2 bytes little endian", "[stream tests]") {
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip 4 bytes little endian", "[stream tests]") {
@@ -79,8 +79,8 @@ TEST_CASE("stream - roundtrip 4 bytes little endian", "[stream tests]") {
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip 8 bytes little endian", "[stream tests]") {
@@ -95,8 +95,8 @@ TEST_CASE("stream - roundtrip 8 bytes little endian", "[stream tests]") {
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip 2 bytes big endian", "[stream tests]") {
@@ -111,8 +111,8 @@ TEST_CASE("stream - roundtrip 2 bytes big endian", "[stream tests]") {
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip 4 bytes big endian", "[stream tests]") {
@@ -128,8 +128,8 @@ TEST_CASE("stream - roundtrip 4 bytes big endian", "[stream tests]") {
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip 8 bytes big endian", "[stream tests]") {
@@ -144,8 +144,8 @@ TEST_CASE("stream - roundtrip 8 bytes big endian", "[stream tests]") {
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 
@@ -164,8 +164,8 @@ TEST_CASE("stream - roundtrip variable uint little endian 1 byte", "[stream test
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip variable uint little endian 2 bytes", "[stream tests]") {
@@ -184,8 +184,8 @@ TEST_CASE("stream - roundtrip variable uint little endian 2 bytes", "[stream tes
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip variable uint little endian 4 bytes", "[stream tests]") {
@@ -203,8 +203,8 @@ TEST_CASE("stream - roundtrip variable uint little endian 4 bytes", "[stream tes
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip variable uint little endian 8 bytes", "[stream tests]") {
@@ -223,8 +223,8 @@ TEST_CASE("stream - roundtrip variable uint little endian 8 bytes", "[stream tes
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip variable uint big endian 1 byte", "[stream tests]") {
@@ -242,8 +242,8 @@ TEST_CASE("stream - roundtrip variable uint big endian 1 byte", "[stream tests]"
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip variable uint big endian 2 bytes", "[stream tests]") {
@@ -262,8 +262,8 @@ TEST_CASE("stream - roundtrip variable uint big endian 2 bytes", "[stream tests]
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip variable uint big endian 4 bytes", "[stream tests]") {
@@ -281,8 +281,8 @@ TEST_CASE("stream - roundtrip variable uint big endian 4 bytes", "[stream tests]
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip variable uint big endian 8 bytes", "[stream tests]") {
@@ -300,8 +300,8 @@ TEST_CASE("stream - roundtrip variable uint big endian 8 bytes", "[stream tests]
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip data chunk", "[stream tests]") {
@@ -327,8 +327,8 @@ TEST_CASE("stream - roundtrip data chunk", "[stream tests]") {
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip hash", "[stream tests]") {
@@ -354,8 +354,8 @@ TEST_CASE("stream - roundtrip hash", "[stream tests]") {
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip short hash", "[stream tests]") {
@@ -380,8 +380,8 @@ TEST_CASE("stream - roundtrip short hash", "[stream tests]") {
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip fixed string", "[stream tests]") {
@@ -400,8 +400,8 @@ TEST_CASE("stream - roundtrip fixed string", "[stream tests]") {
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - roundtrip string", "[stream tests]") {
@@ -420,8 +420,8 @@ TEST_CASE("stream - roundtrip string", "[stream tests]") {
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 TEST_CASE("stream - read bytes to eof", "[stream tests]") {
@@ -447,8 +447,8 @@ TEST_CASE("stream - read bytes to eof", "[stream tests]") {
     REQUIRE(stream);
     REQUIRE((bool)sink);
     REQUIRE((bool)source);
-    REQUIRE(!sink == false);
-    REQUIRE(!source == false);
+    REQUIRE( ! sink == false);
+    REQUIRE( ! source == false);
 }
 
 // End Boost Suite

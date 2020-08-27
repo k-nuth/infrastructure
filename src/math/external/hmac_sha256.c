@@ -59,8 +59,7 @@ void HMACSHA256Init(HMACSHA256CTX* context, uint8_t const* key,
     uint8_t pad[SHA256_BLOCK_LENGTH];
     uint8_t key_hash[SHA256_DIGEST_LENGTH];
 
-    if (key_length > SHA256_BLOCK_LENGTH)
-    {
+    if (key_length > SHA256_BLOCK_LENGTH) {
         SHA256Init(&context->ictx);
         SHA256Update(&context->ictx, key, key_length);
         SHA256Final(&context->ictx, key_hash);

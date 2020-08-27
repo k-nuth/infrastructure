@@ -133,12 +133,12 @@ TEST_CASE("authority  port  boost endpoint  expected", "[authority  port]") {
 
 TEST_CASE("authority  bool  default  false", "[authority  ip]") {
     const authority host;
-    REQUIRE(!host);
+    REQUIRE( ! host);
 }
 
 TEST_CASE("authority  bool  zero port  false", "[authority  ip]") {
     const authority host(test_ipv6_address, 0);
-    REQUIRE(!host);
+    REQUIRE( ! host);
 }
 
 TEST_CASE("authority  bool  nonzero port  true", "[authority  ip]") {
@@ -393,7 +393,7 @@ TEST_CASE("authority  equality  default default  true", "[authority  equality]")
 TEST_CASE("authority  equality  default unspecified port  false", "[authority  equality]") {
     const authority host1;
     const authority host2(KI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS, 42);
-    REQUIRE(!(host1 == host2));
+    REQUIRE( ! (host1 == host2));
 }
 
 TEST_CASE("authority  equality  ipv4 ipv4  true", "[authority  equality]") {
@@ -405,13 +405,13 @@ TEST_CASE("authority  equality  ipv4 ipv4  true", "[authority  equality]") {
 TEST_CASE("authority  equality  ipv4 ipv4 port  true", "[authority  equality]") {
     const authority host1(KI_AUTHORITY_IPV4_ADDRESS);
     const authority host2(KI_AUTHORITY_IPV4_ADDRESS, 42);
-    REQUIRE(!(host1 == host2));
+    REQUIRE( ! (host1 == host2));
 }
 
 TEST_CASE("authority  equality  ipv4 ipv6  false", "[authority  equality]") {
     const authority host1(KI_AUTHORITY_IPV4_ADDRESS);
     const authority host2("[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
-    REQUIRE(!(host1 == host2));
+    REQUIRE( ! (host1 == host2));
 }
 
 TEST_CASE("authority  equality  ipv6 ipv6  true", "[authority  equality]") {
@@ -423,7 +423,7 @@ TEST_CASE("authority  equality  ipv6 ipv6  true", "[authority  equality]") {
 TEST_CASE("authority  equality  ipv6 ipv6 port  false", "[authority  equality]") {
     const authority host1("[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
     const authority host2(KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS, 42);
-    REQUIRE(!(host1 == host2));
+    REQUIRE( ! (host1 == host2));
 }
 
 TEST_CASE("authority  equality  compatible alternative  true", "[authority  equality]") {
@@ -442,7 +442,7 @@ TEST_CASE("authority  equality  compatible alternative  true", "[authority  equa
 TEST_CASE("authority  inequality  default default  false", "[authority  inequality]") {
     const authority host1;
     const authority host2;
-    REQUIRE(!(host1 != host2));
+    REQUIRE( ! (host1 != host2));
 }
 
 TEST_CASE("authority  inequality  default unspecified port  true", "[authority  inequality]") {
@@ -454,7 +454,7 @@ TEST_CASE("authority  inequality  default unspecified port  true", "[authority  
 TEST_CASE("authority  inequality  ipv6 ipv6  false", "[authority  inequality]") {
     const authority host1("[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
     const authority host2("[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
-    REQUIRE(!(host1 != host2));
+    REQUIRE( ! (host1 != host2));
 }
 
 // End Boost Suite

@@ -12,8 +12,7 @@ using namespace kth;
 // Start Boost Suite: hash tests
 
 TEST_CASE("sha1 hash test", "[hash tests]") {
-    for (auto const& result: sha1_tests)
-    {
+    for (auto const& result: sha1_tests) {
         data_chunk data;
         REQUIRE(decode_base16(data, result.input));
         REQUIRE(encode_base16(sha1_hash(data)) == result.result);
@@ -21,8 +20,7 @@ TEST_CASE("sha1 hash test", "[hash tests]") {
 }
 
 TEST_CASE("ripemd hash test", "[hash tests]") {
-    for (auto const& result: ripemd_tests)
-    {
+    for (auto const& result: ripemd_tests) {
         data_chunk data;
         REQUIRE(decode_base16(data, result.input));
         REQUIRE(encode_base16(ripemd160_hash(data)) == result.result);
@@ -62,8 +60,7 @@ TEST_CASE("hmac sha512 hash test", "[hash tests]") {
 }
 
 TEST_CASE("pkcs5 pbkdf2 hmac sha512 test", "[hash tests]") {
-    for (auto const& result: pkcs5_pbkdf2_hmac_sha512_tests)
-    {
+    for (auto const& result: pkcs5_pbkdf2_hmac_sha512_tests) {
         auto const hash = pkcs5_pbkdf2_hmac_sha512(to_chunk(result.passphrase), to_chunk(result.salt), result.iterations);
         REQUIRE(encode_base16(hash) == result.result);
     }

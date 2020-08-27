@@ -27,8 +27,7 @@ struct decorator_dispatch
 
     template <typename... Args>
     auto operator()(Args&&... args)
-        -> decltype(wrapper(handler)(std::forward<Args>(args)...))
-    {
+        -> decltype(wrapper(handler)(std::forward<Args>(args)...)) {
         return wrapper(handler)(std::forward<Args>(args)...);
     }
 };
