@@ -31,8 +31,7 @@
 //!\file
 //!Describes a class that wraps file locking capabilities.
 
-namespace kth {
-namespace interprocess {
+namespace kth::interprocess {
 
 //!A file lock, is a mutual exclusion utility similar to a mutex using a
 //!file. A file lock has sharable and exclusive locking capabilities and
@@ -152,10 +151,9 @@ public:
 extern "C" __declspec(dllimport) void * __stdcall CreateFileW(const wchar_t *, unsigned long, unsigned long, struct boost::interprocess::winapi::interprocess_security_attributes*, unsigned long, unsigned long, void *);
 
 // ENABLE UNICODE PATHS ON WINDOWS FROM UTF8 STRING REGARDLESS OF BUILD CONFIGURATION.
-inline void* CreateFileUTF8(std::string const& name, unsigned long access, unsigned long mode,
-    struct boost::interprocess::winapi::interprocess_security_attributes *psec, unsigned long creation, unsigned long attributes, void *ptemplate)
-{
-    return ::CreateFileW(kth::to_utf16(name).c_str(), access, mode, psec, creation, attributes, ptemplate);
+inline 
+void* CreateFileUTF8(std::string const& name, unsigned long access, unsigned long mode, struct boost::interprocess::winapi::interprocess_security_attributes *psec, unsigned long creation, unsigned long attributes, void *ptemplate) {
+    return kth::interprocess::CreateFileW(kth::to_utf16(name).c_str(), access, mode, psec, creation, attributes, ptemplate);
 }
 
 // ADAPTED FROM boost/interprocess/winapi/win32_api.hpp UNDER SAME LICENSE AS ABOVE.
@@ -272,8 +270,7 @@ inline void file_lock::unlock_sharable()
    }
 }
 
-} // namespace interprocess
-} // namespace kth
+} // namespace kth::interprocess
 
 #include <boost/interprocess/detail/config_end.hpp>
 
