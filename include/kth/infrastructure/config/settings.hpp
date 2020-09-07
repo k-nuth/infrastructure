@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef KTH_INFRASTUCTURE_CONFIG_SETTINGS_HPP
-#define KTH_INFRASTUCTURE_CONFIG_SETTINGS_HPP
+#ifndef KTH_INFRASTUCTURE_CONFIG_SETTINGS_HPP_
+#define KTH_INFRASTUCTURE_CONFIG_SETTINGS_HPP_
 
 
 //TODO(fernando): is it Ok this in infrastructure?
@@ -15,9 +15,10 @@ enum class settings {
     none,
     mainnet,
     testnet,
-    regtest
+    regtest,
+    testnet4
 };
 
 } // namespace kth::infrastructure::config
 
-#endif
+#endif // KTH_INFRASTUCTURE_CONFIG_SETTINGS_HPP_
