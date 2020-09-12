@@ -33,7 +33,6 @@
 #include <kth/infrastructure/config/parameter.hpp>
 // #include <kth/infrastructure/config/parser.hpp>
 #include <kth/infrastructure/config/printer.hpp>
-#include <kth/infrastructure/config/settings.hpp>
 #include <kth/infrastructure/config/sodium.hpp>
 
 #include <kth/infrastructure/formats/base_10.hpp>

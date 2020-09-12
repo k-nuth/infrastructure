@@ -2,20 +2,18 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef KTH_INFRASTRUCTURE_CONSTANTS_HPP
-#define KTH_INFRASTRUCTURE_CONSTANTS_HPP
+#ifndef KTH_INFRASTRUCTURE_CONSTANTS_HPP_
+#define KTH_INFRASTRUCTURE_CONSTANTS_HPP_
 
 #include <cstddef>
 #include <cstdint>
 
+#include <kth/infrastructure/assumptions.hpp>
 #include <kth/infrastructure/compat.hpp>
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/hash_define.hpp>
 
 namespace kth {
-
-// This guards assumptions within the codebase.
-static_assert(sizeof(size_t) >= sizeof(uint32_t), "unsupported size_t");
 
 // Generic constants.
 //-----------------------------------------------------------------------------
@@ -50,4 +48,4 @@ constexpr uint8_t string_terminator = 0x00;
 
 } // namespace kth
 
-#endif
+#endif // KTH_INFRASTRUCTURE_CONSTANTS_HPP_
