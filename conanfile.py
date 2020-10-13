@@ -68,12 +68,12 @@ class KnuthInfrastructureConan(KnuthConanFile):
         self.requires("fmt/7.0.3@")
 
         if self.options.tests:
-            self.requires("catch2/2.13.0@")
+            self.requires("catch2/2.13.1@")
 
         if self.options.log == "binlog":
             self.requires("binlog/2020.02.29@kth/stable")
         elif self.options.log == "spdlog":
-            self.requires("spdlog/1.7.0@")
+            self.requires("spdlog/1.8.0@")
 
         if self.options.with_png:
             self.requires("libpng/1.6.34@kth/stable")
