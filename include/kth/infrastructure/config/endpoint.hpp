@@ -16,6 +16,10 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/formats/base_16.hpp>
 
+#if defined(KTH_LOG_LIBRARY_SPDLOG)
+#include <spdlog/fmt/ostr.h>
+#endif
+
 namespace kth::infrastructure::config {
 
 /**
@@ -82,8 +86,8 @@ public:
      * Getter.
      * @return True if the endpoint is initialized.
      */
-    // implicit
-    operator bool const() const;    //NOLINT
+    explicit
+    operator bool const() const;
 
     /**
      * Getter.
@@ -131,9 +135,24 @@ public:
      * @param[out]  argument  The object from which to obtain the value.
      * @return                The output stream reference.
      */
-    friend 
-    std::ostream& operator<<(std::ostream& output, endpoint const& argument);
+    // friend 
+    // std::ostream& operator<<(std::ostream& output, endpoint const& argument);
 
+    template <typename OStream>
+    friend
+    OStream& operator<<(OStream& output, endpoint const& argument) {
+        if ( ! argument.scheme().empty()) {
+            output << argument.scheme() << "://";
+        }
+
+        output << argument.host();
+
+        if (argument.port() != 0) {
+            output << ":" << argument.port();
+        }
+
+        return output;
+    }
 private:
     std::string scheme_;
     std::string host_;

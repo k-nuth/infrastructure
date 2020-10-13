@@ -55,8 +55,8 @@ public:
      * Getter.
      * @return True if the key is initialized.
      */
-    // implicit
-    operator bool const() const;    //NOLINT
+    explicit
+    operator bool const() const;
 
     /**
      * Overload cast to internal type.

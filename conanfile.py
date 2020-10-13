@@ -53,7 +53,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "cflags": "_DUMMY_",
         "glibcxx_supports_cxx11_abi": "_DUMMY_",
         "cmake_export_compile_commands": False,
-        "log": "boost",
+        "log": "spdlog",
     }
 
     generators = "cmake"
@@ -96,6 +96,8 @@ class KnuthInfrastructureConan(KnuthConanFile):
             self.options["boost"].without_filesystem = True
             self.options["boost"].without_log = True
 
+        # self.options["*"].log = self.options.log
+        self.output.info("Compiling with log: %s" % (self.options.log,))
 
     def package_id(self):
         KnuthConanFile.package_id(self)
