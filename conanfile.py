@@ -34,7 +34,8 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "cflags": "ANY",
         "glibcxx_supports_cxx11_abi": "ANY",
         "cmake_export_compile_commands": [True, False],
-        "log": ["boost", "spdlog", "binlog"]
+        "log": ["boost", "spdlog", "binlog"],
+        "asio_standalone": [True, False],
     }
 
     default_options = {
@@ -54,6 +55,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "glibcxx_supports_cxx11_abi": "_DUMMY_",
         "cmake_export_compile_commands": False,
         "log": "spdlog",
+        "asio_standalone": False,
     }
 
     generators = "cmake"
@@ -80,6 +82,10 @@ class KnuthInfrastructureConan(KnuthConanFile):
 
         if self.options.with_qrencode:
             self.requires("libqrencode/4.0.0@kth/stable")
+
+        if self.options.asio_standalone:
+            self.requires("asio/1.18.0@")
+
 
     def config_options(self):
         KnuthConanFile.config_options(self)
