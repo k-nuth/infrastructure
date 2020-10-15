@@ -61,6 +61,10 @@
 #include <kth/infrastructure/log/features/timer.hpp>
 #endif // defined(KTH_LOG_LIBRARY_BOOST)
 
+#if defined(KTH_LOG_LIBRARY_SPDLOG)
+#include <kth/infrastructure/log/sink.hpp>
+#endif
+
 #include <kth/infrastructure/machine/number.hpp>
 #include <kth/infrastructure/machine/script_pattern.hpp>
 #include <kth/infrastructure/machine/script_version.hpp>

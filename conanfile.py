@@ -53,7 +53,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "cflags": "_DUMMY_",
         "glibcxx_supports_cxx11_abi": "_DUMMY_",
         "cmake_export_compile_commands": False,
-        "log": "boost",
+        "log": "spdlog",
     }
 
     generators = "cmake"
@@ -68,12 +68,12 @@ class KnuthInfrastructureConan(KnuthConanFile):
         self.requires("fmt/7.0.3@")
 
         if self.options.tests:
-            self.requires("catch2/2.13.0@")
+            self.requires("catch2/2.13.1@")
 
         if self.options.log == "binlog":
             self.requires("binlog/2020.02.29@kth/stable")
         elif self.options.log == "spdlog":
-            self.requires("spdlog/1.7.0@")
+            self.requires("spdlog/1.8.0@")
 
         if self.options.with_png:
             self.requires("libpng/1.6.34@kth/stable")
@@ -96,6 +96,8 @@ class KnuthInfrastructureConan(KnuthConanFile):
             self.options["boost"].without_filesystem = True
             self.options["boost"].without_log = True
 
+        # self.options["*"].log = self.options.log
+        self.output.info("Compiling with log: %s" % (self.options.log,))
 
     def package_id(self):
         KnuthConanFile.package_id(self)

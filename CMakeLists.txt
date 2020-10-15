@@ -430,6 +430,14 @@ set(kth_infrastructure_sources_just_legacy
     )
   endif()
 
+  if (${LOG_LIBRARY} STREQUAL "spdlog")
+    set(kth_infrastructure_sources_just_legacy 
+      ${kth_infrastructure_sources_just_legacy}
+      src/log/sink.cpp
+    )
+  endif()
+
+
 # if (${CURRENCY} STREQUAL "LTC")
 #     set(knuth_domain_sources_just_knuth 
 #     ${knuth_domain_sources_just_knuth}         

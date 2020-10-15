@@ -15,7 +15,6 @@
 #include <boost/log/sources/severity_channel_logger.hpp>
 #else
 #include <boost/preprocessor/repetition/repeat.hpp>
-
 #include <spdlog/spdlog.h>
 #endif // defined(KTH_LOG_LIBRARY_BINLOG)
 
@@ -36,9 +35,6 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source) {
 }
 } // namespace kth::log
 #endif // defined(KTH_LOG_LIBRARY_BOOST)
-
-#define KI_LOG_SEVERITY(id, level) \
-    BOOST_LOG_CHANNEL_SEV(kth::log::source::get(), id, kth::log::severity::level)
 
 #define KTH_PP_ARG_N( _1, _2, _3, _4, _5, _6, _7, _8, _9,_10,_11,_12,_13,_14,_15,_16,_17,_18,_19,_20, \
                  _21,_22,_23,_24,_25,_26,_27,_28,_29,_30,_31,_32,_33,_34,_35,_36,_37,_38,_39,_40, \
@@ -90,6 +86,9 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source) {
 
 
 #elif defined(KTH_LOG_LIBRARY_BOOST)
+
+#define KI_LOG_SEVERITY(id, level) \
+    BOOST_LOG_CHANNEL_SEV(kth::log::source::get(), id, kth::log::severity::level)
 
 // #define LOG_VERBOSE(modul) KI_LOG_SEVERITY(modul, verbose)
 // #define LOG_DEBUG(modul) KI_LOG_SEVERITY(modul, debug)
@@ -159,12 +158,12 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source) {
 #define KTH_FOLD(z, n, text)  text
 #define KTH_STRREP(str, n) BOOST_PP_REPEAT(n, KTH_FOLD, str)
 
-#define LOG_VERBOSE(modul,...) spdlog::trace("{} " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
-#define LOG_DEBUG(modul,...) spdlog::debug("{} " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
-#define LOG_INFO(modul,...) spdlog::info("{} " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
-#define LOG_WARNING(modul,...) spdlog::warn("{} " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
-#define LOG_ERROR(modul,...) spdlog::error("{} " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
-#define LOG_FATAL(modul,...) spdlog::critical("{} " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_VERBOSE(modul,...) spdlog::trace("[{}] " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_DEBUG(modul,...) spdlog::debug("[{}] " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_INFO(modul,...) spdlog::info("[{}] " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_WARNING(modul,...) spdlog::warn("[{}] " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_ERROR(modul,...) spdlog::error("[{}] " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_FATAL(modul,...) spdlog::critical("[{}] " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
 
 #endif // defined(KTH_LOG_LIBRARY_BINLOG)
 

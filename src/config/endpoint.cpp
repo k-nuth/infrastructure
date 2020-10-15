@@ -106,18 +106,18 @@ std::istream& operator>>(std::istream& input, endpoint& argument) {
     return input;
 }
 
-std::ostream& operator<<(std::ostream& output, endpoint const& argument) {
-    if ( ! argument.scheme().empty()) {
-        output << argument.scheme() << "://";
-    }
+// std::ostream& operator<<(std::ostream& output, endpoint const& argument) {
+//     if ( ! argument.scheme().empty()) {
+//         output << argument.scheme() << "://";
+//     }
 
-    output << argument.host();
+//     output << argument.host();
 
-    if (argument.port() != 0) {
-        output << ":" << argument.port();
-    }
+//     if (argument.port() != 0) {
+//         output << ":" << argument.port();
+//     }
 
-    return output;
-}
+//     return output;
+// }
 
 } // namespace kth::infrastructure::config
