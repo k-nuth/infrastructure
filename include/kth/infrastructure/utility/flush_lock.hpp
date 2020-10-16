@@ -9,6 +9,7 @@
 #include <memory>
 
 #include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/path.hpp>
 #include <kth/infrastructure/unicode/file_lock.hpp>
 
 namespace kth {

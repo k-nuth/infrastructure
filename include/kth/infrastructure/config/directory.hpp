@@ -9,6 +9,7 @@
 #include <string>
 
 #include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/path.hpp>
 
 namespace kth::infrastructure::config {
 

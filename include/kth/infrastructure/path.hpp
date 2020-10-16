@@ -7,12 +7,14 @@
 
 #include <filesystem>
 
+namespace fs = std::filesystem;
+
 namespace kth {
 
 //Note(fernando): std::filesystem::u8path will be deprecated in C++20
 // https://stackoverflow.com/questions/54004000/why-is-stdfilesystemu8path-deprecated-in-c20
 
-using path = std::filesystem::u8path;
+using path = std::filesystem::path;
 
 } // namespace kth
 
