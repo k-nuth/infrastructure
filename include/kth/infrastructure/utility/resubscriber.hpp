@@ -20,12 +20,12 @@ namespace kth {
 
 template <typename... Args>
 class resubscriber
-  : public enable_shared_from_base<resubscriber<Args...>>
-    /*, track<resubscriber<Args...>>*/
+    : public enable_shared_from_base<resubscriber<Args...>>
+        /*, track<resubscriber<Args...>>*/
 {
 public:
-    typedef std::function<bool (Args...)> handler;
-    typedef std::shared_ptr<resubscriber<Args...>> ptr;
+    using handler = std::function<bool (Args...)>;
+    using ptr = std::shared_ptr<resubscriber<Args...>>;
 
     /// Construct an instance. The class_name is for debugging.
     resubscriber(threadpool& pool, std::string const& class_name);
@@ -48,7 +48,7 @@ public:
     void relay(Args... args);
 
 private:
-    typedef std::vector<handler> list;
+    using list = std::vector<handler>;
 
     void do_invoke(Args... args);
 

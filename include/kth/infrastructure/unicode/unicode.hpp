@@ -78,14 +78,11 @@
             using namespace kth; \
             boost::locale::generator locale; \
             std::locale::global(locale(KI_LOCALE_UTF8)); \
-            std::filesystem::path::imbue(std::locale()); \
-            \
+            // std::filesystem::path::imbue(std::locale()); \
             auto variables = to_utf8(_wenviron); \
             environ = reinterpret_cast<char**>(variables.data()); \
-            \
             auto arguments = to_utf8(argc, argv); \
             auto args = reinterpret_cast<char**>(arguments.data()); \
-            \
             return kth::main(argc, args); \
         }
 #else

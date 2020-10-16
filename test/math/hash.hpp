@@ -20,9 +20,8 @@ struct pkcs5_pbkdf2_hmac_sha512_result
     std::string result;
 };
 
-typedef std::vector<hash_result> hash_result_list;
-typedef std::vector<pkcs5_pbkdf2_hmac_sha512_result>
-    pkcs5_pbkdf2_hmac_sha512_result_list;
+using hash_result_list = std::vector<hash_result>;
+using pkcs5_pbkdf2_hmac_sha512_result_list = std::vector<pkcs5_pbkdf2_hmac_sha512_result>;
 
 hash_result_list sha1_tests{{
     {"", "da39a3ee5e6b4b0d3255bfef95601890afd80709"},

@@ -18,7 +18,7 @@ namespace kth {
 /// Guard a resource againt concurrent use by another instance of this app.
 class KI_API interprocess_lock {
 public:
-    using path = std::filesystem::path;
+    using path = kth::path;
 
     explicit
     interprocess_lock(path const& file);

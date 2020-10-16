@@ -18,11 +18,10 @@
 
 namespace kth::infrastructure::wallet {
 
-class KI_API qr
-{
+class KI_API qr {
 public:
-    typedef QRencodeMode encode_mode;
-    typedef QRecLevel error_recovery_level;
+    using encode_mode = QRencodeMode;
+    using error_recovery_level = QRecLevel;
 
     static constexpr uint32_t version = 0;
     static constexpr bool case_sensitive = true;

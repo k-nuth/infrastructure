@@ -789,6 +789,7 @@ set(_kth_infrastructure_headers
     kth/infrastructure/define.hpp
     kth/infrastructure/error.hpp
     kth/infrastructure/handlers.hpp
+    kth/infrastructure/path.hpp
     kth/infrastructure/version.hpp
 
     kth/infrastructure/machine/interpreter.hpp

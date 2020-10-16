@@ -13,16 +13,16 @@
 namespace kth::infrastructure::config {
 
 static 
-std::filesystem::path config_default_path() {
-    const std::filesystem::path folder;
+kth::path config_default_path() {
+    kth::path const folder;
     return folder;
 }
 
 //// Declare config_default_path() via KI_DECLARE_CONFIG_DEFAULT_PATH(relative).
 //#define CONFIG_DEFAULT_PATH(directory, subdirectory) \
-//    static std::filesystem::path config_default_path() \
+//    static kth::path config_default_path() \
 //    { \
-//        const std::filesystem::path folder(directory); \
+//        const kth::path folder(directory); \
 //        return folder / subdirectory; \
 //    }
 //
