@@ -214,18 +214,22 @@ void initialize(std::string const& debug_file, std::string const& error_file, bo
     {
         auto debug_file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(debug_file, true);
         debug_file_sink->set_level(spdlog::level::debug);
-        // debug_file_sink->set_level(spdlog::level::trace);
-
         auto error_file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(error_file, true);
         error_file_sink->set_level(spdlog::level::err);
 
         if (stdout_enabled) {
             auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
             stdout_sink->set_level(spdlog::level::info);
-            spdlog::set_default_logger(std::make_shared<spdlog::logger>("", spdlog::sinks_init_list({debug_file_sink, error_file_sink, stdout_sink})));
+            auto logger = std::make_shared<spdlog::logger>("", spdlog::sinks_init_list({debug_file_sink, error_file_sink, stdout_sink}));
+            logger->set_level(spdlog::level::debug);
+            spdlog::set_default_logger(logger);
         } else {
-            spdlog::set_default_logger(std::make_shared<spdlog::logger>("", spdlog::sinks_init_list({debug_file_sink, error_file_sink})));
+            auto logger = std::make_shared<spdlog::logger>("", spdlog::sinks_init_list({debug_file_sink, error_file_sink}));
+            logger->set_level(spdlog::level::debug);
+            spdlog::set_default_logger(logger);
         }
+
+        spdlog::flush_every(std::chrono::seconds(2));
     }
     catch (spdlog::spdlog_ex const& ex) {
         std::cout << "Log initialization failed: " << ex.what() << std::endl;

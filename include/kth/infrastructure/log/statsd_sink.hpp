@@ -5,7 +5,7 @@
 #ifndef KTH_INFRASTRUCTURE_LOG_STATSD_SINK_HPP
 #define KTH_INFRASTRUCTURE_LOG_STATSD_SINK_HPP
 
-#include <boost/asio.hpp>
+#include <kth/infrastructure/utility/asio_helper.hpp>
 
 #include <kth/infrastructure/config/authority.hpp>
 #include <kth/infrastructure/define.hpp>

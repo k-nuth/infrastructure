@@ -31,7 +31,7 @@
 namespace kth::log {
 
 using namespace kth::infrastructure::config;
-using namespace boost::asio::ip;
+using namespace ::asio::ip;
 using namespace boost::log;
 using namespace boost::log::expressions;
 using namespace boost::log::sinks;

@@ -8,16 +8,15 @@
 #include <chrono>
 #include <memory>
 
-#include <boost/asio.hpp>
 #include <boost/thread.hpp>
 
 #include <kth/infrastructure/compat.hpp>
+#include <kth/infrastructure/utility/asio_helper.hpp>
 
 // Convenience namespace for commonly used boost asio aliases.
-
 namespace kth::asio {
 
-namespace error = boost::asio::error;
+namespace error = ::asio::error;
 
 using hours = std::chrono::hours;
 using minutes = std::chrono::minutes;
@@ -29,14 +28,14 @@ using microseconds = std::chrono::microseconds;
 using steady_clock = std::chrono::steady_clock;
 using duration = steady_clock::duration;
 using time_point = steady_clock::time_point;
-using timer = boost::asio::basic_waitable_timer<steady_clock>;
+using timer = ::asio::basic_waitable_timer<steady_clock>;
 
-using service = boost::asio::io_service;
-using address = boost::asio::ip::address;
-using ipv4 = boost::asio::ip::address_v4;
-using ipv6 = boost::asio::ip::address_v6;
-using tcp = boost::asio::ip::tcp;
-using endpoint = boost::asio::ip::tcp::endpoint;
+using service = ::asio::io_service;
+using address = ::asio::ip::address;
+using ipv4 = ::asio::ip::address_v4;
+using ipv6 = ::asio::ip::address_v6;
+using tcp = ::asio::ip::tcp;
+using endpoint = ::asio::ip::tcp::endpoint;
 
 using socket = tcp::socket;
 using acceptor = tcp::acceptor;
@@ -50,7 +49,7 @@ using thread = boost::thread;
 
 using socket_ptr = std::shared_ptr<socket>;
 
-constexpr int max_connections = boost::asio::socket_base::max_connections;
+constexpr int max_connections = ::asio::socket_base::max_connections;
 
 } // namespace kth::asio
 

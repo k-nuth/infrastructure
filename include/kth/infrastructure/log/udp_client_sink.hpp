@@ -7,12 +7,12 @@
 
 #include <string>
 
-#include <boost/asio.hpp>
 #include <boost/log/sinks/basic_sink_backend.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/error.hpp>
+#include <kth/infrastructure/utility/asio_helper.hpp>
 
 namespace kth::log {
 
@@ -21,7 +21,7 @@ class KI_API udp_client_sink
         boost::log::sinks::synchronized_feeding>
 {
 public:
-    using udp = boost::asio::ip::udp;
+    using udp = asio::ip::udp;
     using socket_ptr = boost::shared_ptr<udp::socket>;
     using endpoint_ptr = boost::shared_ptr<udp::endpoint>;
 
@@ -34,7 +34,7 @@ protected:
     using message_ptr = boost::shared_ptr<std::string>;
 
     void send(std::string const& message);
-    void handle_send(const boost_code& /*unused*/, size_t /*unused*/, message_ptr payload);
+    void handle_send(boost_code const& /*unused*/, size_t /*unused*/, message_ptr payload);
 
 private:
     socket_ptr socket_;

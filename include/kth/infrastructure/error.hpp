@@ -9,7 +9,12 @@
 #include <system_error>
 #include <unordered_map>
 
+
+#if defined(ASIO_STANDALONE)
+#include <asio/error_code.hpp>
+#else
 #include <boost/system/error_code.hpp>
+#endif
 
 #include <kth/infrastructure/define.hpp>
 
@@ -26,7 +31,12 @@ enum console_result : int {
 using code = std::error_code;
 
 /// Alias for boost error code declarations.
+
+#if defined(ASIO_STANDALONE)
+using boost_code = ::asio::error_code;
+#else
 using boost_code = boost::system::error_code;
+#endif
 
 namespace error {
 
@@ -286,7 +296,7 @@ enum error_condition_t {};
 
 KI_API code make_error_code(error_code_t e);
 KI_API std::error_condition make_error_condition(error_condition_t e);
-KI_API error_code_t boost_to_error_code(const boost_code& ec);
+KI_API error_code_t boost_to_error_code(boost_code const& ec);
 KI_API error_code_t posix_to_error_code(int ec);
 
 } // namespace error

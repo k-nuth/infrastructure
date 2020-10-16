@@ -20,7 +20,7 @@
 namespace kth {
 
 /**
- * Class wrapper for boost::asio::deadline_timer, thread safe.
+ * Class wrapper for ::asio::deadline_timer, thread safe.
  * This simplifies invocation, eliminates boost-specific error handling and
  * makes timer firing and cancellation conditions safer.
  */
@@ -70,7 +70,7 @@ public:
     void stop();
 
 private:
-    void handle_timer(const boost_code& ec, const handler& handle) const;
+    void handle_timer(boost_code const& ec, const handler& handle) const;
 
     asio::timer timer_;
     asio::duration duration_;

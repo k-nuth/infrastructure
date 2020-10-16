@@ -56,7 +56,7 @@
 // Regarding use of boost:
 //
 // When working with boost and utf8 narrow characters on Windows the thread
-// must be configured for utf8. When working with boost::filesystem::path the
+// must be configured for utf8. When working with std::filesystem::path the
 // static path object must be imbued with the utf8 locale or paths will be
 // incorrectly translated.
 
@@ -78,7 +78,7 @@
             using namespace kth; \
             boost::locale::generator locale; \
             std::locale::global(locale(KI_LOCALE_UTF8)); \
-            boost::filesystem::path::imbue(std::locale()); \
+            std::filesystem::path::imbue(std::locale()); \
             \
             auto variables = to_utf8(_wenviron); \
             environ = reinterpret_cast<char**>(variables.data()); \
