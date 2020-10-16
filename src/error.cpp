@@ -4,9 +4,10 @@
 
 #include <kth/infrastructure/error.hpp>
 
-#include <kth/infrastructure/compat.hpp>
-#include <boost/asio.hpp>
 #include <boost/system/error_code.hpp>
+
+#include <kth/infrastructure/compat.hpp>
+#include <kth/infrastructure/utility/asio_helper.hpp>
 
 using namespace kth;
 
@@ -287,13 +288,13 @@ std::error_condition make_error_condition(error_condition_t e) {
     return {e, get_error_category_instance()};
 }
 
-error_code_t boost_to_error_code(const boost_code& ec) {
+error_code_t boost_to_error_code(boost_code const& ec) {
     namespace boost_error = boost::system::errc;
 
 #ifdef _MSC_VER
     // TODO: is there a means to map ASIO errors to boost errors?
     // ASIO codes are unique on Windows but not on Linux.
-    namespace asio_error = boost::asio::error;
+    namespace asio_error = ::asio::error;
 #endif
     // TODO: use a static map (hash table)
     switch (ec.value()) {
