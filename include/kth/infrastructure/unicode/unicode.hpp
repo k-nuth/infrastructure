@@ -68,6 +68,7 @@
     #include <locale>
     #include <boost/locale.hpp>
     #include <windows.h>
+
     #define KTH_USE_MAIN \
         namespace kth { \
         int main(int argc, char* argv[]); \
@@ -78,7 +79,6 @@
             using namespace kth; \
             boost::locale::generator locale; \
             std::locale::global(locale(KI_LOCALE_UTF8)); \
-            // std::filesystem::path::imbue(std::locale()); \
             auto variables = to_utf8(_wenviron); \
             environ = reinterpret_cast<char**>(variables.data()); \
             auto arguments = to_utf8(argc, argv); \
