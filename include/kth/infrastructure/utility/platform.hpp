@@ -17,17 +17,17 @@ namespace kth::platform {
 #ifdef __GLIBC__    //TODO(fernando): replace using a BOOST macro or something like that
 namespace {
 
-std::filesystem::path rotational_path_base() {
+kth::path rotational_path_base() {
     return "/sys/dev/block/";
 }
 
-std::filesystem::path rotational_path(uint16_t st_dev) {
+kth::path rotational_path(uint16_t st_dev) {
     return rotational_path_base() / 
            fmt::format("{}:{}", major(st_dev), minor(st_dev)) /
            "queue/rotational";
 }
 
-std::filesystem::path rotational_path() {
+kth::path rotational_path() {
     return rotational_path_base() / 
            "queue/rotational";
 }
@@ -40,7 +40,7 @@ std::ifstream get_rotational_file(uint16_t st_dev) {
 }
 #endif
 
-tristate drive_is_rotational(std::filesystem::path const& file_path) {
+tristate drive_is_rotational(kth::path const& file_path) {
 #ifdef __GLIBC__    //TODO(fernando): replace using a BOOST macro or something like that
     struct stat st;
     if (stat(file_path, &st) != 0) return tristate::unknown;

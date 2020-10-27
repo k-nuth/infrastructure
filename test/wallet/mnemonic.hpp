@@ -18,7 +18,7 @@ struct mnemonic_result {
     kth::infrastructure::wallet::dictionary language;
 };
 
-typedef std::vector<mnemonic_result> mnemonic_result_list;
+using mnemonic_result_list = std::vector<mnemonic_result>;
 
 const mnemonic_result_list mnemonic_trezor_vectors
 {
@@ -275,7 +275,7 @@ const mnemonic_result_list mnemonic_no_passphrase
     }
 };
 
-typedef std::vector<std::string> string_list;
+using string_list = std::vector<std::string>;
 
 const string_list invalid_mnemonic_tests
 {

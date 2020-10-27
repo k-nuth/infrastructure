@@ -9,6 +9,7 @@
 #include <memory>
 
 #include <kth/infrastructure/define.hpp>
+#include <kth/infrastructure/path.hpp>
 #include <kth/infrastructure/unicode/file_lock.hpp>
 
 namespace kth {
@@ -17,7 +18,7 @@ namespace kth {
 /// Guard a resource that may be corrupted due to an interrupted write.
 class KI_API flush_lock {
 public:
-    using path = std::filesystem::path;
+    using path = kth::path;
 
     explicit
     flush_lock(path const& file);
