@@ -35,9 +35,18 @@ jobs:
     name: ${{ matrix.config.name }}
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: true
       - uses: actions/setup-python@v1
         with:
-          python-version: "3.8"
+          python-version: "3.8"          
+  
+      - name: Install Dependencies
+        run: |
+          chmod +x ci_utils/.travis/install.sh
+          ./ci_utils/.travis/install.sh
+        shell: bash
+  
       - name: Install Conan
         env:
           BPT_MATRIX: ${{toJson(matrix.config)}}
@@ -45,6 +54,17 @@ jobs:
           matrix=$(echo ${BPT_MATRIX})
         shell: bash
 
+      - name: Build
+        env:
+          CONAN_GCC_VERSIONS: ${{ matrix.config.version }}
+          CONAN_DOCKER_IMAGE: conanio/gcc${{ matrix.config.version }}
+        shell: bash
+        run: |
+          echo ${CONAN_STABLE_BRANCH_PATTERN}
+          echo ${CONAN_GCC_VERSIONS}
+          echo ${CONAN_DOCKER_IMAGE}
+          chmod +x ci_utils/.travis/run.sh
+          ./ci_utils/.travis/run.sh
 
 
 
