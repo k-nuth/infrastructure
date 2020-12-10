@@ -23,7 +23,6 @@ jobs:
     - name: Install Dependencies
       run: |
         pwd
-        ls
         ls ci_utils
         chmod +x ci_utils/.travis/install.sh
         ./ci_utils/.travis/install.sh
