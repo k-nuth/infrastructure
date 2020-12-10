@@ -25,10 +25,12 @@ jobs:
         id: set-matrix
         env:
           splitByBuildTypes: ${{ env.splitByBuildTypes }}
+
         run: |
-          MATRIX=$(bincrafters-package-tools generate-ci-jobs --platform gha)
+          MATRIX='{"config": [{"name": "Linux GCC 10","compiler": "GCC","version": "10","os": "ubuntu-20.04"},{"name": "Linux GCC 9","compiler": "GCC","version": "9","os": "ubuntu-20.04"},{"name": "Linux GCC 8","compiler": "GCC","version": "8","os": "ubuntu-20.04"}]}'
           echo "${MATRIX}"
           echo "::set-output name=matrix::${MATRIX}"
+
 
   # conan:
   #   # The CMake configure and build commands are platform agnostic and should work equally
