@@ -13,15 +13,15 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v1
-        with:
-          python-version: "3.8"
+      # - uses: actions/checkout@v2
+      # - uses: actions/setup-python@v1
+      #   with:
+      #     python-version: "3.8"
       - name: Generate Job Matrix
         id: set-matrix
         env:
           splitByBuildTypes: ${{ env.splitByBuildTypes }}
-          MATRIX: '{"config": [{"name": "Linux GCC 10","compiler": "GCC","version": "10","os": "ubuntu-20.04"},{"name": "Linux GCC 9","compiler": "GCC","version": "9","os": "ubuntu-20.04"},{"name": "Linux GCC 8","compiler": "GCC","version": "8","os": "ubuntu-20.04"}]}'
+          MATRIX: '{"config": [{"name": "Linux GCC 10","compiler": "GCC","version": "10","os": "ubuntu-20.04"},{"name": "Linux GCC 9","compiler": "GCC","version": "9","os": "ubuntu-20.04"},{"name": "Linux GCC 8","compiler": "GCC","version": "8","os": "ubuntu-20.04"},{"name": "Linux Apple-Clang 12","compiler": "apple-clang","version": "12","os": "macos-11.0"}]}'
         run: |
           echo "${MATRIX}"
           echo "::set-output name=matrix::${MATRIX}"
@@ -58,10 +58,12 @@ jobs:
         env:
           CONAN_GCC_VERSIONS: ${{ matrix.config.version }}
           CONAN_DOCKER_IMAGE: conanio/gcc${{ matrix.config.version }}
+          CONAN_APPLE_CLANG_VERSIONS: ${{ matrix.config.version }}.0
         shell: bash
         run: |
           echo ${CONAN_STABLE_BRANCH_PATTERN}
           echo ${CONAN_GCC_VERSIONS}
+          echo ${CONAN_APPLE_CLANG_VERSIONS}
           echo ${CONAN_DOCKER_IMAGE}
           chmod +x ci_utils/.travis/run.sh
           ./ci_utils/.travis/run.sh
