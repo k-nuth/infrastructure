@@ -25,9 +25,9 @@ jobs:
         id: set-matrix
         env:
           splitByBuildTypes: ${{ env.splitByBuildTypes }}
-
+          MATRIX: '{"config": [{"name": "Linux GCC 10","compiler": "GCC","version": "10","os": "ubuntu-20.04"},{"name": "Linux GCC 9","compiler": "GCC","version": "9","os": "ubuntu-20.04"},{"name": "Linux GCC 8","compiler": "GCC","version": "8","os": "ubuntu-20.04"}]}'
         run: |
-          MATRIX='{"config": [{"name": "Linux GCC 10","compiler": "GCC","version": "10","os": "ubuntu-20.04"},{"name": "Linux GCC 9","compiler": "GCC","version": "9","os": "ubuntu-20.04"},{"name": "Linux GCC 8","compiler": "GCC","version": "8","os": "ubuntu-20.04"}]}'
+          # MATRIX='{"config": [{"name": "Linux GCC 10","compiler": "GCC","version": "10","os": "ubuntu-20.04"},{"name": "Linux GCC 9","compiler": "GCC","version": "9","os": "ubuntu-20.04"},{"name": "Linux GCC 8","compiler": "GCC","version": "8","os": "ubuntu-20.04"}]}'
           echo "${MATRIX}"
           echo "::set-output name=matrix::${MATRIX}"
 
