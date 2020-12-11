@@ -21,7 +21,8 @@ jobs:
         id: set-matrix
         env:
           splitByBuildTypes: ${{ env.splitByBuildTypes }}
-          MATRIX: '{"config": [{"name": "Linux GCC 10","compiler": "GCC","version": "10","os": "ubuntu-20.04"},{"name": "Linux GCC 9","compiler": "GCC","version": "9","os": "ubuntu-20.04"},{"name": "Linux GCC 8","compiler": "GCC","version": "8","os": "ubuntu-20.04"},{"name": "macOS Apple-Clang 12","compiler": "apple-clang","version": "12","os": "macos-10.15"}]}'
+          # MATRIX: '{"config": [{"name": "Linux GCC 10","compiler": "GCC","version": "10","os": "ubuntu-20.04"},{"name": "Linux GCC 9","compiler": "GCC","version": "9","os": "ubuntu-20.04"},{"name": "Linux GCC 8","compiler": "GCC","version": "8","os": "ubuntu-20.04"},{"name": "macOS apple-clang 12","compiler": "apple-clang","version": "12","os": "macos-10.15"}]}'
+          MATRIX: '{"config": [{"name": "macOS apple-clang 12","compiler": "apple-clang","version": "12","os": "macos-10.15"}]}'
         run: |
           echo "${MATRIX}"
           echo "::set-output name=matrix::${MATRIX}"
@@ -47,39 +48,40 @@ jobs:
           ./ci_utils/.travis/install.sh
         shell: bash
   
-      - name: Install Conan
-        env:
-          BPT_MATRIX: ${{toJson(matrix.config)}}
-        run: |
-          matrix=$(echo ${BPT_MATRIX})
-        shell: bash
+      # - name: Install Conan
+      #   env:
+      #     BPT_MATRIX: ${{toJson(matrix.config)}}
+      #   run: |
+      #     matrix=$(echo ${BPT_MATRIX})
+      #   shell: bash
 
-      - name: Build Linux
-        if: ${{ matrix.config.compiler }} == 'GCC'
-        env:
-          CONAN_GCC_VERSIONS: ${{ matrix.config.version }}
-          CONAN_DOCKER_IMAGE: conanio/gcc${{ matrix.config.version }}
-          CONAN_LOGIN_USERNAME: ${{ secrets.CONAN_LOGIN_USERNAME }}
-          CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
-        shell: bash
-        run: |
-          echo ${BPT_MATRIX}
-          echo ${CONAN_STABLE_BRANCH_PATTERN}
-          echo ${CONAN_GCC_VERSIONS}
-          echo ${CONAN_APPLE_CLANG_VERSIONS}
-          echo ${CONAN_DOCKER_IMAGE}
-          echo ${CONAN_LOGIN_USERNAME}
-          chmod +x ci_utils/.travis/run.sh
-          ./ci_utils/.travis/run.sh
+      # - name: Build Linux
+      #   if: ${{ matrix.config.compiler }} == 'GCC'
+      #   env:
+      #     CONAN_GCC_VERSIONS: ${{ matrix.config.version }}
+      #     CONAN_DOCKER_IMAGE: conanio/gcc${{ matrix.config.version }}
+      #     CONAN_LOGIN_USERNAME: ${{ secrets.CONAN_LOGIN_USERNAME }}
+      #     CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
+      #   shell: bash
+      #   run: |
+      #     echo ${BPT_MATRIX}
+      #     echo ${CONAN_STABLE_BRANCH_PATTERN}
+      #     echo ${CONAN_GCC_VERSIONS}
+      #     echo ${CONAN_APPLE_CLANG_VERSIONS}
+      #     echo ${CONAN_DOCKER_IMAGE}
+      #     echo ${CONAN_LOGIN_USERNAME}
+      #     chmod +x ci_utils/.travis/run.sh
+      #     ./ci_utils/.travis/run.sh
 
       - name: Build macOS
-        if: ${{ matrix.config.compiler }} == 'apple-clang'
+        # if: ${{ matrix.config.compiler }} == 'apple-clang'
         env:
           CONAN_APPLE_CLANG_VERSIONS: ${{ matrix.config.version }}.0
           CONAN_LOGIN_USERNAME: ${{ secrets.CONAN_LOGIN_USERNAME }}
           CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
         shell: bash
         run: |
+          echo ${{ matrix.config.compiler }}
           echo ${BPT_MATRIX}
           echo ${CONAN_STABLE_BRANCH_PATTERN}
           echo ${CONAN_GCC_VERSIONS}
