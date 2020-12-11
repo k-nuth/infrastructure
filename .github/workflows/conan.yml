@@ -3,8 +3,27 @@ name: Conan
 on: [push]
 
 jobs:
+  setup:
+    name: Setup
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Setup
+        shell: bash
+        run: |
+          echo "KTH_REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
+          echo "My repo name is $KTH_REPO_NAME"
+
   wait-for-dependencies:
     name: Wait for dependencies
+    needs: setup
     if: startsWith(github.ref, 'refs/heads/using') || 
         startsWith(github.ref, 'refs/heads/release') || 
         startsWith(github.ref, 'refs/heads/hotfix')
@@ -16,7 +35,12 @@ jobs:
       - uses: actions/setup-python@v1
         with:
           python-version: "3.8"
-      
+
+      - name: Print
+        shell: bash
+        run: |
+          echo "My repo name is $KTH_REPO_NAME"
+
       - name: Install Dependencies
         run: |
           chmod +x ci_utils/.travis/install.sh
