@@ -74,7 +74,7 @@ jobs:
       #     ./ci_utils/.travis/run.sh
 
       - name: Build macOS
-        if: '${{ matrix.config.compiler }}' == 'apple-clang'
+        if: ${{ matrix.config.compiler == 'apple-clang' }}
         env:
           CONAN_APPLE_CLANG_VERSIONS: ${{ matrix.config.version }}.0
           CONAN_LOGIN_USERNAME: ${{ secrets.CONAN_LOGIN_USERNAME }}
