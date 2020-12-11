@@ -37,6 +37,10 @@ jobs:
           # REPO_NAME=$(echo $TRAVIS_REPO_SLUG| cut -d'/' -f 2)
           # echo $REPO_NAME
           # python ci_utils/wait_for_deps.py $REPO_NAME
+
+          echo "KTH_REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
+          echo "My repo name is $KTH_REPO_NAME"
+
           python ci_utils/wait_for_deps.py
 
   generate-matrix:
