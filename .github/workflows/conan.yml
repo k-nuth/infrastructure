@@ -77,18 +77,19 @@ jobs:
 
   static-checks:
     name: Static Checks
-    on:
-      push:
-        branches:    
-          - using-*
-          - release-*
-          - release/**
-          - hotfix-*
-          - hotfix/**
-          - def
+    # on:
+    #   push:
+    #     branches:    
+    #       - using-*
+    #       - release-*
+    #       - release/**
+    #       - hotfix-*
+    #       - hotfix/**
+    #       - def
     runs-on: ubuntu-20.04
     steps:
       - name: Static Checks
+        if: startsWith(github.ref, 'refs/using')
         # if: contains('
         #     refs/heads/using-*
         #     refs/heads/release-*
