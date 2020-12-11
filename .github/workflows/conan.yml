@@ -3,24 +3,24 @@ name: Conan
 on: [push]
 
 jobs:
-  setup:
-    name: Setup
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
+  # setup:
+  #   name: Setup
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         submodules: true
     
-      - name: Setup
-        shell: bash
-        run: |
-          echo "github.repository: ${{ github.repository }}"
-          echo "KTH_REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
-          echo "My repo name is $KTH_REPO_NAME"
+  #     - name: Setup
+  #       shell: bash
+  #       run: |
+  #         echo "github.repository: ${{ github.repository }}"
+  #         echo "KTH_REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
+  #         echo "My repo name is $KTH_REPO_NAME"
 
   wait-for-dependencies:
     name: Wait for dependencies
-    needs: setup
+    # needs: setup
     if: startsWith(github.ref, 'refs/heads/using') || 
         startsWith(github.ref, 'refs/heads/release') || 
         startsWith(github.ref, 'refs/heads/hotfix')
@@ -33,10 +33,10 @@ jobs:
         with:
           python-version: "3.8"
 
-      - name: Print
-        shell: bash
-        run: |
-          echo "My repo name is $KTH_REPO_NAME"
+      # - name: Print
+      #   shell: bash
+      #   run: |
+      #     echo "My repo name is $KTH_REPO_NAME"
 
       - name: Install Dependencies
         run: |
@@ -59,7 +59,8 @@ jobs:
           # echo $REPO_NAME
           # python ci_utils/wait_for_deps.py $REPO_NAME
 
-          echo "KTH_REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
+          # echo "KTH_REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
+          KTH_REPO_NAME=$(echo '${{ github.repository }}'
           echo "My repo name is $KTH_REPO_NAME"
 
           python ci_utils/wait_for_deps.py
