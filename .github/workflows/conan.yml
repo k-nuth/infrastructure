@@ -6,8 +6,8 @@ jobs:
   wait-for-dependencies:
     name: Wait for dependencies (modules)
     # needs: setup
-    if: startsWith(github.ref, 'refs/heads/using') || 
-        startsWith(github.ref, 'refs/heads/release') || 
+    if: startsWith(github.ref, 'refs/heads/testci') ||
+        startsWith(github.ref, 'refs/heads/release') ||
         startsWith(github.ref, 'refs/heads/hotfix')
     runs-on: ubuntu-20.04
     steps:
@@ -49,12 +49,17 @@ jobs:
     steps:
       - name: Generate Job Matrix
         id: set-matrix
-        env:
-          splitByBuildTypes: ${{ env.splitByBuildTypes }}
-          MATRIX: '{"config": [{"name": "Linux GCC 10","compiler": "GCC","version": "10","os": "ubuntu-20.04"},{"name": "Linux GCC 9","compiler": "GCC","version": "9","os": "ubuntu-20.04"},{"name": "Linux GCC 8","compiler": "GCC","version": "8","os": "ubuntu-20.04"},{"name": "macOS apple-clang 12","compiler": "apple-clang","version": "12","os": "macos-10.15"}]}'
-          # MATRIX: '{"config": [{"name": "macOS apple-clang 12","compiler": "apple-clang","version": "12","os": "macos-10.15"}]}'
+        # env:
+        #   splitByBuildTypes: ${{ env.splitByBuildTypes }}
+        #   MATRIX: '{"config": [{"name": "Linux GCC 10","compiler": "GCC","version": "10","os": "ubuntu-20.04"},{"name": "Linux GCC 9","compiler": "GCC","version": "9","os": "ubuntu-20.04"},{"name": "Linux GCC 8","compiler": "GCC","version": "8","os": "ubuntu-20.04"},{"name": "macOS apple-clang 12","compiler": "apple-clang","version": "12","os": "macos-10.15"}]}'
+        #   # MATRIX: '{"config": [{"name": "macOS apple-clang 12","compiler": "apple-clang","version": "12","os": "macos-10.15"}]}'
         run: |
+          MATRIX=$(cat ./ci_utils/.github/matrix.json)
           echo "${MATRIX}"
+          
+          # echo "::set-output name=${JSON//'%'/'%25'}"
+          # echo "::set-output name=${MATRIX//'%'/'%25'}"
+
           echo "::set-output name=matrix::${MATRIX}"
 
   builds:
@@ -72,11 +77,11 @@ jobs:
         with:
           python-version: "3.8"
   
-      # - name: Install Dependencies
-      #   run: |
-      #     chmod +x ci_utils/.travis/install.sh
-      #     ./ci_utils/.travis/install.sh
-      #   shell: bash
+      - name: Install Dependencies
+        run: |
+          chmod +x ci_utils/.travis/install.sh
+          ./ci_utils/.travis/install.sh
+        shell: bash
   
       - name: Settting Linux EnvVars
         if: ${{ matrix.config.compiler == 'GCC' }}
@@ -104,21 +109,14 @@ jobs:
           echo ${CONAN_APPLE_CLANG_VERSIONS}
           echo ${CONAN_DOCKER_IMAGE}
           echo ${CONAN_LOGIN_USERNAME}
-          # chmod +x ci_utils/.travis/run.sh
-          # ./ci_utils/.travis/run.sh
-
-  # print-branch:
-  #   needs: wait-for-dependencies
-  #   name: Print branch
-  #   runs-on: ubuntu-20.04
-  #   steps:
-  #     - run: echo ${{github.ref}}
-
+          chmod +x ci_utils/.travis/run.sh
+          ./ci_utils/.travis/run.sh
+ 
   static-checks:
     needs: wait-for-dependencies
     name: Static Checks
     if: github.ref == 'refs/heads/dev' || 
-        startsWith(github.ref, 'refs/heads/using') || 
+        startsWith(github.ref, 'refs/heads/testci') ||
         startsWith(github.ref, 'refs/heads/release') || 
         startsWith(github.ref, 'refs/heads/hotfix')
 
@@ -133,7 +131,7 @@ jobs:
     name: Upload Aliases
     needs: [builds, static-checks]
     if: github.ref == 'refs/heads/dev' || 
-        startsWith(github.ref, 'refs/heads/using') || 
+        startsWith(github.ref, 'refs/heads/testci') ||
         startsWith(github.ref, 'refs/heads/release') || 
         startsWith(github.ref, 'refs/heads/hotfix') ||
         startsWith(github.ref, 'refs/heads/feature') 
@@ -158,11 +156,6 @@ jobs:
           CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
         shell: bash
         run: |
-          # echo ${{github.ref}}
-          # cd ${TRAVIS_BUILD_DIR}
-          # echo $TRAVIS_REPO_SLUG
-          #git fetch --unshallow
-          #git fetch origin master:master
 
           # echo "REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
           REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
@@ -180,3 +173,8 @@ jobs:
           conan alias "${REPO_NAME}/0.X@kth/${KTH_CONAN_CHANNEL}" "${REPO_NAME}/${KTH_CONAN_VERSION}@kth/${KTH_CONAN_CHANNEL}"
           echo "conan upload ${REPO_NAME}/0.X@kth/${KTH_CONAN_CHANNEL} --all -r kthbuild_kth_temp_"
           conan upload "${REPO_NAME}/0.X@kth/${KTH_CONAN_CHANNEL}" --all -r kthbuild_kth_temp_        
+
+
+
+# References:
+  # https://github.com/radareorg/radare2
