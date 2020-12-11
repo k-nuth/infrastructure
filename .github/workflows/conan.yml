@@ -5,19 +5,16 @@ on: [push]
 jobs:
   setup:
     name: Setup
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: true
-
+    
       - name: Setup
         shell: bash
         run: |
+          echo "github.repository: ${{ github.repository }}"
           echo "KTH_REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
           echo "My repo name is $KTH_REPO_NAME"
 
