@@ -92,8 +92,7 @@ jobs:
 
   upload-aliases:
     name: Upload Aliases
-    needs: builds
-    needs: static-checks
+    needs: [builds, static-checks]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
