@@ -77,6 +77,11 @@ jobs:
 
   static-checks:
     name: Static Checks
+    if: github.ref == 'refs/heads/dev' || 
+        startsWith(github.ref, 'refs/heads/using') || 
+        startsWith(github.ref, 'refs/heads/release') || 
+        startsWith(github.ref, 'refs/heads/hotfix')
+
     # on:
     #   push:
     #     branches:    
@@ -89,7 +94,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Static Checks
-        if: startsWith(github.ref, 'refs/heads/using')
         # if: contains('
         #     refs/heads/using-*
         #     refs/heads/release-*
@@ -103,13 +107,19 @@ jobs:
   upload-aliases:
     name: Upload Aliases
     needs: [builds, static-checks]
-    if: contains('
-        refs/heads/using-*
-        refs/heads/release-*
-        refs/heads/hotfix-*
-        refs/heads/feature-*
-        refs/heads/dev
-      ', github.ref)    
+    if: github.ref == 'refs/heads/dev' || 
+        startsWith(github.ref, 'refs/heads/using') || 
+        startsWith(github.ref, 'refs/heads/release') || 
+        startsWith(github.ref, 'refs/heads/hotfix') ||
+        startsWith(github.ref, 'refs/heads/feature')
+
+    # if: contains('
+    #     refs/heads/using-*
+    #     refs/heads/release-*
+    #     refs/heads/hotfix-*
+    #     refs/heads/feature-*
+    #     refs/heads/dev
+    #   ', github.ref)    
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
