@@ -20,7 +20,6 @@ jobs:
           echo "::set-output name=matrix::${MATRIX}"
 
   builds:
-    name: Builds
     needs: generate-matrix
     runs-on: ${{ matrix.config.os }}
     strategy:
@@ -33,7 +32,7 @@ jobs:
           submodules: true
       - uses: actions/setup-python@v1
         with:
-          python-version: "3.8"          
+          python-version: "3.8"
   
       # - name: Install Dependencies
       #   run: |
@@ -82,9 +81,70 @@ jobs:
     steps:
       - name: Static Checks
         if: contains('
-            refs/heads/using
-            refs/heads/production
-          ', github.ref)
+            refs/heads/using-*
+            refs/heads/release-*
+            refs/heads/hotfix-*
+            refs/heads/dev
+]          ', github.ref)
         shell: bash
         run: |
           echo ${{github.ref}}
+
+  upload-aliases:
+    name: Upload Aliases
+    needs: builds
+    needs: static-checks
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: actions/setup-python@v1
+        with:
+          python-version: "3.8"
+
+      - name: Upload Aliases
+        if: contains('
+            refs/heads/using-*
+            refs/heads/release-*
+            refs/heads/hotfix-*
+            refs/heads/feature-*
+            refs/heads/dev
+          ', github.ref)
+        env:
+          CONAN_LOGIN_USERNAME: ${{ secrets.CONAN_LOGIN_USERNAME }}
+          CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
+        shell: bash
+        run: |
+          echo ${{github.ref}}
+          cd ${TRAVIS_BUILD_DIR}
+          echo $TRAVIS_REPO_SLUG
+          git fetch --unshallow
+          git fetch origin master:master
+          # REPO_NAME=$(echo $TRAVIS_REPO_SLUG| cut -d'/' -f 2)
+
+          echo "REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
+          echo $REPO_NAME
+
+          eval $(python ci_utils/set_envvars_and_files.py)
+          # conan remote add kthbuild_kth_temp_ https://api.bintray.com/conan/k-nuth/kth
+          conan user
+          conan user ${CONAN_LOGIN_USERNAME} -r kthbuild_kth_temp_ -p ${CONAN_PASSWORD}
+          conan user
+          echo "conan alias ${REPO_NAME}/0.X@kth/${KTH_CONAN_CHANNEL} ${REPO_NAME}/${KTH_CONAN_VERSION}@kth/${KTH_CONAN_CHANNEL}"
+          conan alias "${REPO_NAME}/0.X@kth/${KTH_CONAN_CHANNEL}" "${REPO_NAME}/${KTH_CONAN_VERSION}@kth/${KTH_CONAN_CHANNEL}"
+          echo "conan upload ${REPO_NAME}/0.X@kth/${KTH_CONAN_CHANNEL} --all -r kthbuild_kth_temp_"
+          conan upload "${REPO_NAME}/0.X@kth/${KTH_CONAN_CHANNEL}" --all -r kthbuild_kth_temp_        
+
+
+# # Upload Aliases -----------------------------------------------------
+#     - stage: upload aliases
+#       os: linux
+#       sudo: required
+#       dist: xenial
+#       language: python
+#       python: "3.7"
+#       # install: skip
+#       if: branch =~ /^(release|hotfix|dev|feature).*$/    #Avoid master
+#       script:
+#         - |
