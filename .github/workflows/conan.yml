@@ -89,7 +89,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Static Checks
-        if: startsWith(github.ref, 'refs/using')
+        if: startsWith(github.ref, 'refs/heads/using')
         # if: contains('
         #     refs/heads/using-*
         #     refs/heads/release-*
