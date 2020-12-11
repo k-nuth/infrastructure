@@ -85,7 +85,7 @@ jobs:
             refs/heads/release-*
             refs/heads/hotfix-*
             refs/heads/dev
-]          ', github.ref)
+          ', github.ref)
         shell: bash
         run: |
           echo ${{github.ref}}
