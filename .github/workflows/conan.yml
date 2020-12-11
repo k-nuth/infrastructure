@@ -56,47 +56,25 @@ jobs:
       #   shell: bash
 
       - name: Settting Linux EnvVars
-        # if: ${{ matrix.config.compiler }} == 'GCC'
         if: ${{ matrix.config.compiler == 'GCC' }}
         shell: bash
         run: |
-          echo "my_env_var=linux" >> $GITHUB_ENV
+          echo "CONAN_GCC_VERSIONS=${{ matrix.config.version }}" >> $GITHUB_ENV
+          echo "CONAN_DOCKER_IMAGE=conanio/gcc${{ matrix.config.version }}" >> $GITHUB_ENV
 
       - name: Settting macOS EnvVars
         if: ${{ matrix.config.compiler == 'apple-clang' }}
         shell: bash
         run: |
-          echo "my_env_var=macos" >> $GITHUB_ENV
+          echo "CONAN_APPLE_CLANG_VERSIONS=${{ matrix.config.version }}.0" >> $GITHUB_ENV
 
-      - name: Print EnvVars
-        shell: bash
-        run: |
-          echo ${my_env_var}
+      # - name: Print EnvVars
+      #   shell: bash
+      #   run: |
+      #     echo ${my_env_var}
 
-      - name: Build Linux
-        # if: ${{ matrix.config.compiler }} == 'GCC'
-        if: ${{ matrix.config.compiler == 'GCC' }}
+      - name: Build
         env:
-          CONAN_GCC_VERSIONS: ${{ matrix.config.version }}
-          CONAN_DOCKER_IMAGE: conanio/gcc${{ matrix.config.version }}
-          CONAN_LOGIN_USERNAME: ${{ secrets.CONAN_LOGIN_USERNAME }}
-          CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
-        shell: bash
-        run: |
-          echo ${{ matrix.config.compiler }}
-          echo ${BPT_MATRIX}
-          echo ${CONAN_STABLE_BRANCH_PATTERN}
-          echo ${CONAN_GCC_VERSIONS}
-          echo ${CONAN_APPLE_CLANG_VERSIONS}
-          echo ${CONAN_DOCKER_IMAGE}
-          echo ${CONAN_LOGIN_USERNAME}
-          # chmod +x ci_utils/.travis/run.sh
-          # ./ci_utils/.travis/run.sh
-
-      - name: Build macOS
-        if: ${{ matrix.config.compiler == 'apple-clang' }}
-        env:
-          CONAN_APPLE_CLANG_VERSIONS: ${{ matrix.config.version }}.0
           CONAN_LOGIN_USERNAME: ${{ secrets.CONAN_LOGIN_USERNAME }}
           CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
         shell: bash
