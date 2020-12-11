@@ -158,9 +158,11 @@ jobs:
           CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
         shell: bash
         run: |
-          echo ${{github.ref}}
-          cd ${TRAVIS_BUILD_DIR}
-          echo $TRAVIS_REPO_SLUG
+          pwd
+          ls
+          # echo ${{github.ref}}
+          # cd ${TRAVIS_BUILD_DIR}
+          # echo $TRAVIS_REPO_SLUG
           #git fetch --unshallow
           #git fetch origin master:master
 
