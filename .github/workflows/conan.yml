@@ -17,6 +17,13 @@ jobs:
         with:
           python-version: "3.8"
       
+      - name: Install Dependencies
+        run: |
+          chmod +x ci_utils/.travis/install.sh
+          ./ci_utils/.travis/install.sh
+        shell: bash
+
+
       - name: Wait for dependencies
         env:
           CONAN_GCC_VERSIONS: 10
