@@ -19,7 +19,7 @@ jobs:
   #         echo "My repo name is $KTH_REPO_NAME"
 
   wait-for-dependencies:
-    name: Wait for dependencies
+    name: Wait for dependencies (modules)
     # needs: setup
     if: startsWith(github.ref, 'refs/heads/using') || 
         startsWith(github.ref, 'refs/heads/release') || 
@@ -38,13 +38,13 @@ jobs:
       #   run: |
       #     echo "My repo name is $KTH_REPO_NAME"
 
-      - name: Install Dependencies
+      - name: Install software
         run: |
           chmod +x ci_utils/.travis/install.sh
           ./ci_utils/.travis/install.sh
         shell: bash
 
-      - name: Wait for dependencies
+      - name: Wait for dependencies (modules)
         env:
           CONAN_GCC_VERSIONS: 10
           CONAN_DOCKER_IMAGE: conanio/gcc10
@@ -60,7 +60,7 @@ jobs:
           # python ci_utils/wait_for_deps.py $REPO_NAME
 
           # echo "KTH_REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
-          KTH_REPO_NAME=$(echo '${{ github.repository }}'
+          KTH_REPO_NAME=$(echo '${{ github.repository }}')
           echo "My repo name is $KTH_REPO_NAME"
 
           python ci_utils/wait_for_deps.py
