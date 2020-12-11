@@ -31,7 +31,7 @@ jobs:
     steps:
       - name: Static Checks
         if: contains('
-            refs/heads/staging
+            refs/heads/using
             refs/heads/production
           ', github.ref)
         shell: bash
@@ -39,6 +39,7 @@ jobs:
           echo ${{github.ref}}
 
   builds:
+    name: Builds
     needs: generate-matrix
     runs-on: ${{ matrix.config.os }}
     strategy:
