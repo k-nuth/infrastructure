@@ -22,7 +22,7 @@ jobs:
           # echo "KTH_REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
           # echo "My repo name is $KTH_REPO_NAME"
 
-          KTH_REPO_NAME=$(echo '${{ github.repository }}')
+          export KTH_REPO_NAME=$(echo '${{ github.repository }}')
           echo "My repo name is $KTH_REPO_NAME"
           python -c 'import os;full_name = os.getenv("KTH_REPO_NAME", None);print("From Python");print(full_name)'
 
