@@ -55,6 +55,24 @@ jobs:
       #     matrix=$(echo ${BPT_MATRIX})
       #   shell: bash
 
+      - name: Settting Linux EnvVars
+        # if: ${{ matrix.config.compiler }} == 'GCC'
+        if: ${{ matrix.config.compiler == 'GCC' }}
+        shell: bash
+        run: |
+          echo "my_env_var=linux" >> $GITHUB_ENV
+
+      - name: Settting macOS EnvVars
+        if: ${{ matrix.config.compiler == 'apple-clang' }}
+        shell: bash
+        run: |
+          echo "my_env_var=macos" >> $GITHUB_ENV
+
+      - name: Print EnvVars
+        shell: bash
+        run: |
+          echo ${my_env_var}
+
       - name: Build Linux
         # if: ${{ matrix.config.compiler }} == 'GCC'
         if: ${{ matrix.config.compiler == 'GCC' }}
