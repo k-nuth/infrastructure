@@ -93,6 +93,13 @@ jobs:
   upload-aliases:
     name: Upload Aliases
     needs: [builds, static-checks]
+    if: contains('
+        refs/heads/using-*
+        refs/heads/release-*
+        refs/heads/hotfix-*
+        refs/heads/feature-*
+        refs/heads/dev
+      ', github.ref)    
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -103,13 +110,6 @@ jobs:
           python-version: "3.8"
 
       - name: Upload Aliases
-        if: contains('
-            refs/heads/using-*
-            refs/heads/release-*
-            refs/heads/hotfix-*
-            refs/heads/feature-*
-            refs/heads/dev
-          ', github.ref)
         env:
           CONAN_LOGIN_USERNAME: ${{ secrets.CONAN_LOGIN_USERNAME }}
           CONAN_PASSWORD: ${{ secrets.CONAN_PASSWORD }}
