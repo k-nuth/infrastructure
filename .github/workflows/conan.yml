@@ -19,7 +19,26 @@ jobs:
           echo "${MATRIX}"
           echo "::set-output name=matrix::${MATRIX}"
 
-  conan:
+  print-branch:
+    name: Print branch
+    runs-on: ubuntu-20.04
+    steps:
+      - run: echo ${{github.ref}}
+
+  static-checks:
+    name: Static Checks
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Static Checks
+        if: contains('
+            refs/heads/staging
+            refs/heads/production
+          ', github.ref)
+        shell: bash
+        run: |
+          echo ${{github.ref}}
+
+  builds:
     needs: generate-matrix
     runs-on: ${{ matrix.config.os }}
     strategy:
@@ -40,13 +59,6 @@ jobs:
           ./ci_utils/.travis/install.sh
         shell: bash
   
-      # - name: Install Conan
-      #   env:
-      #     BPT_MATRIX: ${{toJson(matrix.config)}}
-      #   run: |
-      #     matrix=$(echo ${BPT_MATRIX})
-      #   shell: bash
-
       - name: Settting Linux EnvVars
         if: ${{ matrix.config.compiler == 'GCC' }}
         shell: bash
