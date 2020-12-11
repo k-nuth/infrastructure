@@ -165,7 +165,7 @@ jobs:
           #git fetch origin master:master
 
           # echo "REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
-          REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')
+          REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')
           echo "My repo name is $REPO_NAME"
 
           eval $(python ci_utils/set_envvars_and_files.py)
