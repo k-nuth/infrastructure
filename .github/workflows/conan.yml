@@ -31,28 +31,9 @@ jobs:
           # python ci_utils/wait_for_deps.py $REPO_NAME
           python ci_utils/wait_for_deps.py
 
-# Wait for dependencies ----------------------------------------------
-    - stage: wait for dependencies
-      os: linux
-      sudo: required
-      dist: xenial
-      language: python
-      python: "3.7"
-      services:
-        - docker
-      env: CONAN_GCC_VERSIONS=9 CONAN_DOCKER_IMAGE=conanio/gcc9
-      if: branch =~ /^(release|hotfix).+$/    #Just releases
-      script:
-        - |
-          conan user
-          conan remote add kth_temp https://api.bintray.com/conan/k-nuth/kth
-          # REPO_NAME=$(echo $TRAVIS_REPO_SLUG| cut -d'/' -f 2)
-          # echo $REPO_NAME
-          # python ci_utils/wait_for_deps.py $REPO_NAME
-          python ci_utils/wait_for_deps.py
-
   generate-matrix:
     name: Generate Job Matrix
+    needs: wait-for-dependencies
     runs-on: ubuntu-20.04
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -118,12 +99,14 @@ jobs:
           # ./ci_utils/.travis/run.sh
 
   print-branch:
+    needs: wait-for-dependencies
     name: Print branch
     runs-on: ubuntu-20.04
     steps:
       - run: echo ${{github.ref}}
 
   static-checks:
+    needs: wait-for-dependencies
     name: Static Checks
     if: github.ref == 'refs/heads/dev' || 
         startsWith(github.ref, 'refs/heads/using') || 
@@ -163,12 +146,11 @@ jobs:
           echo ${{github.ref}}
           cd ${TRAVIS_BUILD_DIR}
           echo $TRAVIS_REPO_SLUG
-          git fetch --unshallow
-          git fetch origin master:master
-          # REPO_NAME=$(echo $TRAVIS_REPO_SLUG| cut -d'/' -f 2)
+          #git fetch --unshallow
+          #git fetch origin master:master
 
           echo "REPO_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $1}')" >> $GITHUB_ENV
-          echo $REPO_NAME
+          echo "My repo name is $REPO_NAME"
 
           eval $(python ci_utils/set_envvars_and_files.py)
           # conan remote add kthbuild_kth_temp_ https://api.bintray.com/conan/k-nuth/kth
