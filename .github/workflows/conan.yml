@@ -5,26 +5,40 @@ on: [push]
 jobs:
   wait-for-dependencies:
     name: Wait for dependencies (modules)
-    # needs: setup
-    if: startsWith(github.ref, 'refs/heads/testci') ||
+    if: github.ref == 'refs/heads/dev' || 
+        startsWith(github.ref, 'refs/heads/testci') ||
         startsWith(github.ref, 'refs/heads/release') ||
         startsWith(github.ref, 'refs/heads/hotfix')
+
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+        if: startsWith(github.ref, 'refs/heads/testci') ||
+            startsWith(github.ref, 'refs/heads/release') ||
+            startsWith(github.ref, 'refs/heads/hotfix')
+
         with:
           submodules: true
       - uses: actions/setup-python@v1
+        if: startsWith(github.ref, 'refs/heads/testci') ||
+            startsWith(github.ref, 'refs/heads/release') ||
+            startsWith(github.ref, 'refs/heads/hotfix')
         with:
           python-version: "3.8"
 
       - name: Install software
+        if: startsWith(github.ref, 'refs/heads/testci') ||
+            startsWith(github.ref, 'refs/heads/release') ||
+            startsWith(github.ref, 'refs/heads/hotfix')
         run: |
           chmod +x ci_utils/.travis/install.sh
           ./ci_utils/.travis/install.sh
         shell: bash
 
       - name: Wait for dependencies (modules)
+        if: startsWith(github.ref, 'refs/heads/testci') ||
+            startsWith(github.ref, 'refs/heads/release') ||
+            startsWith(github.ref, 'refs/heads/hotfix')
         env:
           CONAN_GCC_VERSIONS: 10
           CONAN_DOCKER_IMAGE: conanio/gcc10
@@ -39,6 +53,12 @@ jobs:
           export KTH_REPO_NAME=$(echo '${{ github.repository }}')
           echo "My repo name is $KTH_REPO_NAME"
           python ci_utils/wait_for_deps.py
+
+      - name: Dummy Step for dev branch
+        if: github.ref == 'refs/heads/dev'
+        shell: bash
+        run: |
+          echo "Nothing to do!"
 
   generate-matrix:
     name: Generate Job Matrix
