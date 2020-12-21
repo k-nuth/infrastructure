@@ -3,6 +3,16 @@ name: Conan
 on: [push]
 
 jobs:
+  master:
+    name: Master
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Master Build
+        shell: bash
+        run: |
+          echo "Stable packages are published in Release branches"
+
   wait-for-dependencies:
     name: Wait for dependencies (modules)
     if: github.ref == 'refs/heads/dev' || 
