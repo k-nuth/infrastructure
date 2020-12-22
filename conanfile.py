@@ -65,17 +65,17 @@ class KnuthInfrastructureConan(KnuthConanFile):
     build_policy = "missing"
 
     def requirements(self):
-        self.requires("boost/1.74.0@kth/stable")
+        self.requires("boost/1.75.0@kth/stable")
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
-        self.requires("fmt/7.0.3@")
+        self.requires("fmt/7.1.3@")
 
         if self.options.tests:
-            self.requires("catch2/2.13.1@")
+            self.requires("catch2/2.13.3@")
 
         if self.options.log == "binlog":
             self.requires("binlog/2020.02.29@kth/stable")
         elif self.options.log == "spdlog":
-            self.requires("spdlog/1.8.0@")
+            self.requires("spdlog/1.8.2@")
 
         if self.options.with_png:
             self.requires("libpng/1.6.34@kth/stable")
