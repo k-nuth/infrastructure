@@ -46,7 +46,7 @@ void ostream_writer::write_short_hash(short_hash const& value) {
     stream_.write(reinterpret_cast<char const*>(value.data()), value.size());
 }
 
-void ostream_writer::write_mini_hash(const mini_hash& value) {
+void ostream_writer::write_mini_hash(mini_hash const& value) {
     stream_.write(reinterpret_cast<char const*>(value.data()), value.size());
 }
 
