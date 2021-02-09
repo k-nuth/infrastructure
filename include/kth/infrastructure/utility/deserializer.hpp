@@ -10,19 +10,15 @@
 #include <string>
 
 #include <kth/infrastructure/error.hpp>
-// #include <kth/infrastructure/math/hash.hpp>
 #include <kth/infrastructure/hash_define.hpp>
 #include <kth/infrastructure/utility/data.hpp>
-////#include <kth/infrastructure/utility/noncopyable.hpp>
 #include <kth/infrastructure/utility/reader.hpp>
 
 namespace kth {
 
 /// Reader to wrap arbitrary iterator.
 template <typename Iterator, bool CheckSafe>
-class deserializer
-    // : public reader/*, noncopyable*/
-{
+class deserializer { // : public reader/*, noncopyable*/
 public:
     explicit
     deserializer(Iterator begin);
@@ -88,6 +84,9 @@ public:
     /// Advance iterator without reading.
     void skip(size_t size);
 
+    /// Advance iterator without reading.
+    void skip_remaining();
+
 private:
     // True if is a safe deserializer and size does not exceed remaining bytes.
     bool safe(size_t size) const;
@@ -106,8 +105,7 @@ private:
 /// Slower deserializer (with bounds checking).
 /// Safe for use with public data, caller should check object state.
 template <typename Iterator>
-deserializer<Iterator, true> make_safe_deserializer(Iterator begin,
-    Iterator end);
+deserializer<Iterator, true> make_safe_deserializer(Iterator begin, Iterator end);
 
 /// Faster deserializer (without bounds checking).
 /// Intended for use with internal/protected buffers only.
