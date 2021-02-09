@@ -50,7 +50,7 @@ public:
     /// Write hashes.
     void write_hash(hash_digest const& hash);
     void write_short_hash(short_hash const& hash);
-    void write_mini_hash(const mini_hash& hash);
+    void write_mini_hash(mini_hash const& hash);
 
     /// Write big endian integers.
     void write_2_bytes_big_endian(uint16_t value);
