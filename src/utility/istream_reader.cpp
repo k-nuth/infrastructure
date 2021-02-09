@@ -11,9 +11,8 @@
 namespace kth {
 
 istream_reader::istream_reader(std::istream& stream)
-  : stream_(stream)
-{
-}
+    : stream_(stream)
+{}
 
 // Context.
 //-----------------------------------------------------------------------------
@@ -209,6 +208,16 @@ void istream_reader::skip(size_t size) {
     // Seek the relative size offset from the current position.
     ////stream_.seekg(size, std::ios_base::cur);
     read_bytes(size);
+}
+
+void istream_reader::skip_remaining() {
+    // stream_.seekg(0, std::ios_base::end);
+
+    stream_.ignore(std::numeric_limits<std::streamsize>::max());
+
+    // stream_.seekg(0, stream_.end);
+    // auto length = stream_.tellg();
+    // std::cout << length << std::endl;
 }
 
 // private
