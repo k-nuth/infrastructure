@@ -76,8 +76,11 @@ public:
     /// Read required size string and trim nulls.
     std::string read_string(size_t size);
 
-    /// Advance iterator without reading.
+    /// Advance the stream without reading.
     void skip(size_t size);
+
+    /// Advance the stream without reading.
+    void skip_remaining();
 
 private:
     // The buffer is faulted or at eof.
