@@ -74,26 +74,22 @@ mini_hash deserializer<Iterator, CheckSafe>::read_mini_hash() {
 //-----------------------------------------------------------------------------
 
 template <typename Iterator, bool CheckSafe>
-uint16_t deserializer<Iterator, CheckSafe>::read_2_bytes_big_endian()
-{
+uint16_t deserializer<Iterator, CheckSafe>::read_2_bytes_big_endian() {
     return read_big_endian<uint16_t>();
 }
 
 template <typename Iterator, bool CheckSafe>
-uint32_t deserializer<Iterator, CheckSafe>::read_4_bytes_big_endian()
-{
+uint32_t deserializer<Iterator, CheckSafe>::read_4_bytes_big_endian() {
     return read_big_endian<uint32_t>();
 }
 
 template <typename Iterator, bool CheckSafe>
-uint64_t deserializer<Iterator, CheckSafe>::read_8_bytes_big_endian()
-{
+uint64_t deserializer<Iterator, CheckSafe>::read_8_bytes_big_endian() {
     return read_big_endian<uint64_t>();
 }
 
 template <typename Iterator, bool CheckSafe>
-uint64_t deserializer<Iterator, CheckSafe>::read_variable_big_endian()
-{
+uint64_t deserializer<Iterator, CheckSafe>::read_variable_big_endian() {
     auto const value = read_byte();
 
     switch (value) {
@@ -109,15 +105,14 @@ uint64_t deserializer<Iterator, CheckSafe>::read_variable_big_endian()
 }
 
 template <typename Iterator, bool CheckSafe>
-size_t deserializer<Iterator, CheckSafe>::read_size_big_endian()
-{
+size_t deserializer<Iterator, CheckSafe>::read_size_big_endian() {
     auto const size = read_variable_big_endian();
 
     // This facilitates safely passing the size into a follow-on reader.
     // Return zero allows follow-on use before testing reader state.
     if (size <= max_size_t) {
         return static_cast<size_t>(size);
-}
+    }
 
     invalidate();
     return 0;
@@ -127,33 +122,28 @@ size_t deserializer<Iterator, CheckSafe>::read_size_big_endian()
 //-----------------------------------------------------------------------------
 
 template <typename Iterator, bool CheckSafe>
-code deserializer<Iterator, CheckSafe>::read_error_code()
-{
+code deserializer<Iterator, CheckSafe>::read_error_code() {
     auto const value = read_little_endian<uint32_t>();
     return code(static_cast<error::error_code_t>(value));
 }
 
 template <typename Iterator, bool CheckSafe>
-uint16_t deserializer<Iterator, CheckSafe>::read_2_bytes_little_endian()
-{
+uint16_t deserializer<Iterator, CheckSafe>::read_2_bytes_little_endian() {
     return read_little_endian<uint16_t>();
 }
 
 template <typename Iterator, bool CheckSafe>
-uint32_t deserializer<Iterator, CheckSafe>::read_4_bytes_little_endian()
-{
+uint32_t deserializer<Iterator, CheckSafe>::read_4_bytes_little_endian() {
     return read_little_endian<uint32_t>();
 }
 
 template <typename Iterator, bool CheckSafe>
-uint64_t deserializer<Iterator, CheckSafe>::read_8_bytes_little_endian()
-{
+uint64_t deserializer<Iterator, CheckSafe>::read_8_bytes_little_endian() {
     return read_little_endian<uint64_t>();
 }
 
 template <typename Iterator, bool CheckSafe>
-uint64_t deserializer<Iterator, CheckSafe>::read_variable_little_endian()
-{
+uint64_t deserializer<Iterator, CheckSafe>::read_variable_little_endian() {
     auto const value = read_byte();
 
     switch (value) {
@@ -169,15 +159,14 @@ uint64_t deserializer<Iterator, CheckSafe>::read_variable_little_endian()
 }
 
 template <typename Iterator, bool CheckSafe>
-size_t deserializer<Iterator, CheckSafe>::read_size_little_endian()
-{
+size_t deserializer<Iterator, CheckSafe>::read_size_little_endian() {
     auto const size = read_variable_little_endian();
 
     // This facilitates safely passing the size into a follow-on reader.
     // Return zero allows follow-on use before testing reader state.
     if (size <= max_size_t) {
         return static_cast<size_t>(size);
-}
+    }
 
     invalidate();
     return 0;
@@ -283,6 +272,11 @@ void deserializer<Iterator, CheckSafe>::skip(size_t size) {
     }
 
     iterator_ += size;
+}
+
+template <typename Iterator, bool CheckSafe>
+void deserializer<Iterator, CheckSafe>::skip_remaining() {
+    return skip(remaining());
 }
 
 template <typename Iterator, bool CheckSafe>
