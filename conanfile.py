@@ -99,9 +99,9 @@ class KnuthInfrastructureConan(KnuthConanFile):
         if self.options.log == "spdlog":
             self.options["spdlog"].header_only = True
 
-        if self.options.log != "boost":
-            self.options["boost"].without_filesystem = True
-            self.options["boost"].without_log = True
+        # if self.options.log != "boost":
+        #     self.options["boost"].without_filesystem = True
+        #     self.options["boost"].without_log = True
 
         # self.options["*"].log = self.options.log
         self.output.info("Compiling with log: %s" % (self.options.log,))
