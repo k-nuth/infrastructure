@@ -46,9 +46,9 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "with_qrencode": False,
         "tests": False,
         "examples": False,
-        "microarchitecture": "_DUMMY_", 
+        "microarchitecture": "_DUMMY_",
         "fix_march": False,
-        "march_id": "_DUMMY_", 
+        "march_id": "_DUMMY_",
         "verbose": False,
         "cxxflags": "_DUMMY_",
         "cflags": "_DUMMY_",
@@ -65,17 +65,18 @@ class KnuthInfrastructureConan(KnuthConanFile):
     build_policy = "missing"
 
     def requirements(self):
-        self.requires("boost/1.75.0@kth/stable")
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
-        self.requires("fmt/7.1.3@")
+
+        self.requires("boost/1.75.0")
+        self.requires("fmt/7.1.3")
 
         if self.options.tests:
-            self.requires("catch2/2.13.3@")
+            self.requires("catch2/2.13.4")
 
         if self.options.log == "binlog":
             self.requires("binlog/2020.02.29@kth/stable")
         elif self.options.log == "spdlog":
-            self.requires("spdlog/1.8.2@")
+            self.requires("spdlog/1.8.5")
 
         if self.options.with_png:
             self.requires("libpng/1.6.34@kth/stable")
@@ -84,7 +85,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
             self.requires("libqrencode/4.0.0@kth/stable")
 
         if self.options.asio_standalone:
-            self.requires("asio/1.18.0@")
+            self.requires("asio/1.18.1")
 
 
     def config_options(self):
