@@ -142,7 +142,7 @@ std::vector<std::string> printer::columnize(std::string const& paragraph,
 }
 
 // 100% component tested.
-static 
+static
 std::string format_row_name(const parameter& value) {
     // We hack in upper case for all positional args because of a bug in
     // boost that requires environment variable options to be lower case
@@ -152,22 +152,22 @@ std::string format_row_name(const parameter& value) {
 
     if (value.get_position() != parameter::not_positional) {
         return fmt::format(KI_PRINTER_TABLE_ARGUMENT_FORMAT, boost::to_upper_copy(value.get_long_name()));
-    } 
-    
+    }
+
     if (value.get_short_name() == parameter::no_short_name) {
         return fmt::format(KI_PRINTER_TABLE_OPTION_LONG_FORMAT, value.get_long_name());
-    } 
-    
+    }
+
     if (value.get_long_name().empty()) {
         return fmt::format(KI_PRINTER_TABLE_OPTION_SHORT_FORMAT, value.get_short_name());
-    } 
-    
+    }
+
     return fmt::format(KI_PRINTER_TABLE_OPTION_FORMAT, value.get_short_name(), value.get_long_name());
-    
+
 }
 
 // 100% component tested.
-static 
+static
 bool match_positional(bool positional, const parameter& value) {
     auto positioned = value.get_position() != parameter::not_positional;
     return positioned == positional;
@@ -179,7 +179,6 @@ bool match_positional(bool positional, const parameter& value) {
 std::string printer::format_parameters_table(bool positional) {
     std::stringstream output;
     auto const& parameters = get_parameters();
-    // format table_format("%-20s %-52s\n");
 
     for (auto const& parameter: parameters) {
         // Skip positional arguments if not positional.
@@ -195,8 +194,7 @@ std::string printer::format_parameters_table(bool positional) {
 
         // If there is no description the command is not output!
         for (auto const& row : rows) {
-            // output << table_format % name % row;
-            output << fmt::format("%-20s %-52s\n", name, row);
+            output << fmt::format("{:<20} {:<52}\n", name, row);
             // The name is only set in the first row.
             name.clear();
         }
@@ -209,19 +207,14 @@ std::string printer::format_parameters_table(bool positional) {
 // GitHub code examples start horizontal scroll after 73 characters.
 std::string printer::format_paragraph(std::string const& paragraph) {
     std::stringstream output;
-    // format paragraph_format("%-73s\n");
-
     auto const lines = columnize(paragraph, 73);
-
     for (auto const& line: lines) {
-        // output << paragraph_format % line;
-        output << fmt::format("%-73s\n", line);
+        output << fmt::format("{:<73}\n", line);
     }
-
     return output.str();
 }
 
-static 
+static
 std::string format_setting(const parameter& value, std::string const& name) {
     // A required argument may only be preceeded by required arguments.
     // Requiredness may be in error if the metadata is inconsistent.
@@ -243,7 +236,7 @@ std::string format_setting(const parameter& value, std::string const& name) {
 }
 
 // Requires a single period in each setting (i.e. no unnamed sections).
-static 
+static
 void split_setting_name(const parameter& value, std::string& name, std::string& section)
 {
     auto const tokens = split(value.get_long_name(), ".");
@@ -397,7 +390,7 @@ std::string printer::format_usage_parameters() {
 /* Initialization */
 
 // 100% component tested.
-static 
+static
 void enqueue_name(int count, std::string& name, argument_list& names) {
     if (count <= 0) {
         return;
@@ -451,7 +444,7 @@ void printer::generate_argument_names() {
 }
 
 // 100% component tested.
-static 
+static
 bool compare_parameters(const parameter& left, const parameter& right) {
     return left.get_format_name() < right.get_format_name();
 }
