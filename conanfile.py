@@ -67,11 +67,11 @@ class KnuthInfrastructureConan(KnuthConanFile):
     def requirements(self):
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
 
-        self.requires("boost/1.75.0")
+        self.requires("boost/1.76.0")
         self.requires("fmt/7.1.3")
 
         if self.options.tests:
-            self.requires("catch2/2.13.4")
+            self.requires("catch2/2.13.6")
 
         if self.options.log == "binlog":
             self.requires("binlog/2020.02.29@kth/stable")
@@ -85,7 +85,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
             self.requires("libqrencode/4.0.0@kth/stable")
 
         if self.options.asio_standalone:
-            self.requires("asio/1.18.1")
+            self.requires("asio/1.18.2")
 
 
     def config_options(self):
