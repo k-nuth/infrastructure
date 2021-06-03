@@ -2,10 +2,11 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef KTH_INFRASTUCTURE_WALLET_DICTIONARY_HPP
-#define KTH_INFRASTUCTURE_WALLET_DICTIONARY_HPP
+#ifndef KTH_INFRASTUCTURE_WALLET_DICTIONARY_HPP_
+#define KTH_INFRASTUCTURE_WALLET_DICTIONARY_HPP_
 
 #include <array>
+#include <cstddef>
 #include <vector>
 
 #include <kth/infrastructure/compat.hpp>
@@ -28,10 +29,9 @@ using dictionary = std::array<char const*, dictionary_size>;
 /**
  * A collection of candidate dictionaries for mnemonic validation.
  */
-using dictionary_list = std::vector<const dictionary *>;
+using dictionary_list = std::vector<dictionary const*>;
 
-namespace language
-{
+namespace language {
     // Individual built-in languages:
     extern const dictionary en;
     extern const dictionary es;
@@ -50,4 +50,4 @@ namespace language
 
 } // namespace kth::infrastructure::wallet
 
-#endif
+#endif // KTH_INFRASTUCTURE_WALLET_DICTIONARY_HPP_
