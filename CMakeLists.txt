@@ -232,7 +232,7 @@ if (NOT USE_CONAN)
 # Require secp256k1 of at least version 0 and output ${secp256k1_CPPFLAGS/LIBS/PKG}.
 #------------------------------------------------------------------------------
   if (NOT TARGET secp256k1)
-    find_package(secp256k1 0 REQUIRED) 
+    find_package(secp256k1 0 REQUIRED)
   endif()
 endif()
 
@@ -315,7 +315,7 @@ if (ENABLE_SHARED)
   set(MODE SHARED)
 endif()
 
-set(kth_infrastructure_sources_just_legacy 
+set(kth_infrastructure_sources_just_legacy
         src/machine/number.cpp        #Fernando: commented for the moment...
 
         src/config/authority.cpp
@@ -374,7 +374,7 @@ set(kth_infrastructure_sources_just_legacy
         src/math/external/sha256.c
         src/math/external/sha512.c
         src/math/external/zeroize.c
-        
+
         src/message/message_tools.cpp
         src/message/messages.cpp
         src/message/network_address.cpp
@@ -386,7 +386,7 @@ set(kth_infrastructure_sources_just_legacy
         src/unicode/unicode_istream.cpp
         src/unicode/unicode_ostream.cpp
         src/unicode/unicode_streambuf.cpp
-        
+
         src/utility/binary.cpp
         src/utility/conditional_lock.cpp
         src/utility/deadline.cpp
@@ -417,7 +417,7 @@ set(kth_infrastructure_sources_just_legacy
     )
 
   if (${LOG_LIBRARY} STREQUAL "boost")
-    set(kth_infrastructure_sources_just_legacy 
+    set(kth_infrastructure_sources_just_legacy
       ${kth_infrastructure_sources_just_legacy}
       src/log/file_collector.cpp
       src/log/file_collector_repository.cpp
@@ -429,7 +429,7 @@ set(kth_infrastructure_sources_just_legacy
   endif()
 
   if (${LOG_LIBRARY} STREQUAL "spdlog")
-    set(kth_infrastructure_sources_just_legacy 
+    set(kth_infrastructure_sources_just_legacy
       ${kth_infrastructure_sources_just_legacy}
       src/log/sink.cpp
     )
@@ -437,21 +437,21 @@ set(kth_infrastructure_sources_just_legacy
 
 
 # if (${CURRENCY} STREQUAL "LTC")
-#     set(knuth_domain_sources_just_knuth 
-#     ${knuth_domain_sources_just_knuth}         
+#     set(knuth_domain_sources_just_knuth
+#     ${knuth_domain_sources_just_knuth}
 #     src/math/external/scrypt.cpp
 #     src/math/external/scrypt-sse2.cpp)
 # endif()
-  
+
 if (WITH_PNG)
-  set(kth_infrastructure_sources_just_legacy 
+  set(kth_infrastructure_sources_just_legacy
     ${kth_infrastructure_sources_just_legacy}
     src/utility/png.cpp
   )
 endif()
 
 if (WITH_QRENCODE)
-  set(kth_infrastructure_sources_just_legacy 
+  set(kth_infrastructure_sources_just_legacy
     ${kth_infrastructure_sources_just_legacy}
     src/wallet/qrcode.cpp
   )
@@ -465,14 +465,14 @@ set(kth_infrastructure_sources_just_knuth
 )
 
 if (NOT JUST_KTH_SOURCES)
-  set(kth_infrastructure_sources 
+  set(kth_infrastructure_sources
     ${kth_infrastructure_sources_just_legacy}
   )
 endif()
 
-set(kth_infrastructure_sources 
-  ${kth_infrastructure_sources}   
-  ${kth_infrastructure_sources_just_knuth}         
+set(kth_infrastructure_sources
+  ${kth_infrastructure_sources}
+  ${kth_infrastructure_sources_just_knuth}
 )
 
 add_library(kth-infrastructure ${MODE} ${kth_infrastructure_sources})
@@ -494,7 +494,7 @@ endif(ENABLE_POSITION_INDEPENDENT_CODE)
 target_include_directories(kth-infrastructure PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
-  
+
 if (NOT ENABLE_SHARED)
     target_compile_definitions(kth-infrastructure PUBLIC -DKI_STATIC) #TODO(fernando): manage with Conan????
 endif()
@@ -621,14 +621,14 @@ if (WITH_TESTS)
 
 
   if (WITH_PNG)
-    set(kth_infrastructure_test_sources 
+    set(kth_infrastructure_test_sources
         ${kth_infrastructure_test_sources}
         src/utility/png.cpp
     )
   endif()
 
   if (WITH_QRENCODE)
-    set(kth_infrastructure_test_sources 
+    set(kth_infrastructure_test_sources
         ${kth_infrastructure_test_sources}
         src/wallet/qrcode.cpp
     )
@@ -793,7 +793,7 @@ set(_kth_infrastructure_headers
     kth/infrastructure/version.hpp
 
     kth/infrastructure/machine/interpreter.hpp
-    kth/infrastructure/machine/number.hpp    
+    kth/infrastructure/machine/number.hpp
     kth/infrastructure/machine/program.hpp
     kth/infrastructure/machine/script_pattern.hpp
     kth/infrastructure/machine/sighash_algorithm.hpp
@@ -831,7 +831,7 @@ set(_kth_infrastructure_headers
 
     kth/infrastructure/impl/formats/base_16.ipp
     kth/infrastructure/impl/formats/base_58.ipp
-   
+
     kth/infrastructure/impl/math/checksum.ipp
     kth/infrastructure/impl/math/hash.ipp
 
@@ -906,7 +906,7 @@ set(_kth_infrastructure_headers
     kth/infrastructure/utility/sequencer.hpp
     kth/infrastructure/utility/sequential_lock.hpp
     kth/infrastructure/utility/serializer.hpp
-    kth/infrastructure/utility/socket.hpp    
+    kth/infrastructure/utility/socket.hpp
     kth/infrastructure/utility/string.hpp
     kth/infrastructure/utility/subscriber.hpp
     kth/infrastructure/utility/synchronizer.hpp
@@ -916,7 +916,7 @@ set(_kth_infrastructure_headers
     kth/infrastructure/utility/track.hpp
     kth/infrastructure/utility/work.hpp
     kth/infrastructure/utility/writer.hpp
-    
+
     kth/infrastructure/wallet/cashaddr.hpp
 
     kth/infrastructure/wallet/dictionary.hpp
@@ -937,14 +937,14 @@ set(_kth_infrastructure_headers
   )
 
 if (${LOG_LIBRARY} STREQUAL "boost")
-  set(_kth_infrastructure_headers 
+  set(_kth_infrastructure_headers
     ${_kth_infrastructure_headers}
     kth/infrastructure/log/attributes.hpp
     kth/infrastructure/log/file_char_traits.hpp
     kth/infrastructure/log/file_collector.hpp
     kth/infrastructure/log/file_collector_repository.hpp
     kth/infrastructure/log/file_counter_formatter.hpp
-    kth/infrastructure/log/rotable_file.hpp    
+    kth/infrastructure/log/rotable_file.hpp
     kth/infrastructure/log/severity.hpp
     kth/infrastructure/log/sink.hpp
     kth/infrastructure/log/source.hpp
