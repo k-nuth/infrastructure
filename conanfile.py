@@ -67,7 +67,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
     def requirements(self):
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
 
-        self.requires("boost/1.76.0")
+        self.requires("boost/1.77.0")
         self.requires("fmt/8.0.1")
 
         if self.options.tests:
