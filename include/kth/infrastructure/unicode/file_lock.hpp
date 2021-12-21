@@ -15,10 +15,11 @@
 
 #include <string>
 
+#include <boost/date_time/posix_time/posix_time_types.hpp>
+
 #include <boost/interprocess/detail/config_begin.hpp>
 #include <boost/interprocess/detail/os_file_functions.hpp>
 #include <boost/interprocess/detail/os_thread_functions.hpp>
-#include <boost/interprocess/detail/posix_time_types_wrk.hpp>
 #include <boost/interprocess/detail/workaround.hpp>
 #include <boost/interprocess/exceptions.hpp>
 #include <boost/interprocess/sync/detail/common_algorithms.hpp>
@@ -60,8 +61,8 @@ public:
     //!After the call, "x" does not represent any file mapping object.
     //!Does not throw
     file_lock(file_lock&& x) noexcept
-        :  m_file_hnd(boost::interprocess::file_handle_t(boost::interprocess::ipcdetail::invalid_file())) {  
-        this->swap(x);   
+        :  m_file_hnd(boost::interprocess::file_handle_t(boost::interprocess::ipcdetail::invalid_file())) {
+        this->swap(x);
     }
 
     //!Moves the ownership of "x"'s file mapping to *this.
@@ -151,7 +152,7 @@ public:
 extern "C" __declspec(dllimport) void * __stdcall CreateFileW(const wchar_t *, unsigned long, unsigned long, struct boost::interprocess::winapi::interprocess_security_attributes*, unsigned long, unsigned long, void *);
 
 // ENABLE UNICODE PATHS ON WINDOWS FROM UTF8 STRING REGARDLESS OF BUILD CONFIGURATION.
-inline 
+inline
 void* CreateFileUTF8(std::string const& name, unsigned long access, unsigned long mode, struct boost::interprocess::winapi::interprocess_security_attributes *psec, unsigned long creation, unsigned long attributes, void *ptemplate) {
     return kth::interprocess::CreateFileW(kth::to_utf16(name).c_str(), access, mode, psec, creation, attributes, ptemplate);
 }
