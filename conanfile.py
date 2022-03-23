@@ -68,10 +68,10 @@ class KnuthInfrastructureConan(KnuthConanFile):
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
 
         self.requires("boost/1.78.0")
-        self.requires("fmt/8.0.1")
+        self.requires("fmt/8.1.1")
 
         if self.options.tests:
-            self.requires("catch2/2.13.7")
+            self.requires("catch2/2.13.8")
 
         if self.options.log == "binlog":
             self.requires("binlog/2020.02.29@kth/stable")
