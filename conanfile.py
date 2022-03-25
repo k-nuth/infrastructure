@@ -1,4 +1,4 @@
-# Copyright (c) 2016-2021 Knuth Project developers.
+# Copyright (c) 2016-2022 Knuth Project developers.
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -68,10 +68,10 @@ class KnuthInfrastructureConan(KnuthConanFile):
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
 
         self.requires("boost/1.78.0")
-        self.requires("fmt/8.0.1")
+        self.requires("fmt/8.1.1")
 
         if self.options.tests:
-            self.requires("catch2/2.13.7")
+            self.requires("catch2/2.13.8")
 
         if self.options.log == "binlog":
             self.requires("binlog/2020.02.29@kth/stable")
