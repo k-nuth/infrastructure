@@ -67,16 +67,16 @@ class KnuthInfrastructureConan(KnuthConanFile):
     def requirements(self):
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
 
-        self.requires("boost/1.78.0")
+        self.requires("boost/1.79.0")
         self.requires("fmt/8.1.1")
 
         if self.options.tests:
-            self.requires("catch2/2.13.8")
+            self.requires("catch2/3.0.1")
 
         if self.options.log == "binlog":
             self.requires("binlog/2020.02.29@kth/stable")
         elif self.options.log == "spdlog":
-            self.requires("spdlog/1.9.1")
+            self.requires("spdlog/1.10.0")
 
         if self.options.with_png:
             self.requires("libpng/1.6.34@kth/stable")
@@ -85,7 +85,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
             self.requires("libqrencode/4.0.0@kth/stable")
 
         if self.options.asio_standalone:
-            self.requires("asio/1.19.2")
+            self.requires("asio/1.22.1")
 
 
     def config_options(self):
@@ -117,6 +117,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         cmake.definitions["WITH_QRENCODE"] = option_on_off(self.options.with_qrencode)
         cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_png)
         cmake.definitions["LOG_LIBRARY"] = self.options.log
+        cmake.definitions["CONAN_DISABLE_CHECK_COMPILER"] = option_on_off(True)
 
         cmake.configure(source_dir=self.source_folder)
 
