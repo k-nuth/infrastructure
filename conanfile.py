@@ -117,6 +117,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         cmake.definitions["WITH_QRENCODE"] = option_on_off(self.options.with_qrencode)
         cmake.definitions["WITH_PNG"] = option_on_off(self.options.with_png)
         cmake.definitions["LOG_LIBRARY"] = self.options.log
+        cmake.definitions["CONAN_DISABLE_CHECK_COMPILER"] = option_on_off(True)
 
         cmake.configure(source_dir=self.source_folder)
 
