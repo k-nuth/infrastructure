@@ -91,11 +91,11 @@ class KnuthInfrastructureConan(KnuthConanFile):
         if self.options.asio_standalone:
             self.requires("asio/1.22.1")
 
-    def config_options(self):
-        KnuthConanFile.config_options(self)
-
     def validate(self):
         KnuthConanFile.validate(self)
+
+    def config_options(self):
+        KnuthConanFile.config_options(self)
 
     def configure(self):
         # self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
