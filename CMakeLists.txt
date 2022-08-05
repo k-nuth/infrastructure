@@ -33,7 +33,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # Check for baseline language coverage in the compiler for the C++17 standard.
 #------------------------------------------------------------------------------
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Process options.
@@ -134,7 +134,7 @@ set(MICROARCHITECTURE "x86_64" CACHE STRING "Specify the Microarchitecture (x86_
 message( STATUS "Knuth: Compiling for ${MICROARCHITECTURE}")
 
 set(MARCH_ID "" CACHE STRING "Specify the Microarchitecture ID (x86_64|...).")
-message( STATUS "Knuth: Compiling for Microarchitecture ID ${MARCH_ID}")
+message( STATUS "Knuth: Compiling for Microarchitecture ID ${KTH_MARCH_ID}")
 
 message( STATUS "Knuth: CONAN_CXX_FLAGS ${CONAN_CXX_FLAGS}")
 message( STATUS "Knuth: CONAN_C_FLAGS ${CONAN_C_FLAGS}")
