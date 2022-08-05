@@ -25,8 +25,6 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "with_qrencode": [True, False],
         "tests": [True, False],
         "examples": [True, False],
-        # "microarchitecture": "ANY", #["x86_64", "haswell", "ivybridge", "sandybridge", "bulldozer", ...]
-        # "fix_march": [True, False],
 
         "march_id": "ANY",
         "march_strategy": ["download_if_possible", "optimized", "download_or_fail"],
