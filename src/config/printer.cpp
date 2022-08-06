@@ -81,9 +81,9 @@
 
 #define KI_PRINTER_SETTING_SECTION_FORMAT "[{}]\n"
 #define KI_PRINTER_SETTING_COMMENT_FORMAT "# {}\n"
-#define KI_PRINTER_SETTING_MULTIPLE_FORMAT "{} = <{}>\n{} = <{}>\n...\n"
-#define KI_PRINTER_SETTING_OPTIONAL_FORMAT "{} = <{}>\n"
-#define KI_PRINTER_SETTING_REQUIRED_FORMAT "{} = {}\n"
+#define KI_PRINTER_SETTING_MULTIPLE_FORMAT "{0} = <{1}>\n{0} = <{1}>\n...\n"
+#define KI_PRINTER_SETTING_OPTIONAL_FORMAT "{0} = <{1}>\n"
+#define KI_PRINTER_SETTING_REQUIRED_FORMAT "{0} = {1}\n"
 
 namespace po = boost::program_options;
 using namespace kth;
@@ -225,14 +225,11 @@ std::string format_setting(const parameter& value, std::string const& name) {
 
     std::string formatter;
     if (required) {
-        formatter = KI_PRINTER_SETTING_REQUIRED_FORMAT;
+        return fmt::format(KI_PRINTER_SETTING_REQUIRED_FORMAT, name, KI_PRINTER_VALUE_TEXT);
     } else if (optional) {
-        formatter = KI_PRINTER_SETTING_OPTIONAL_FORMAT;
-    } else {
-        formatter = KI_PRINTER_SETTING_MULTIPLE_FORMAT;
+        return fmt::format(KI_PRINTER_SETTING_OPTIONAL_FORMAT, name, KI_PRINTER_VALUE_TEXT);
     }
-
-    return fmt::format(formatter,  name, KI_PRINTER_VALUE_TEXT);
+    return fmt::format(KI_PRINTER_SETTING_MULTIPLE_FORMAT, name, KI_PRINTER_VALUE_TEXT);
 }
 
 // Requires a single period in each setting (i.e. no unnamed sections).

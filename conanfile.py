@@ -12,7 +12,6 @@ class KnuthInfrastructureConan(KnuthConanFile):
         return os.path.dirname(os.path.abspath(__file__))
 
     name = "infrastructure"
-    # version = get_version()
     license = "http://www.boost.org/users/license.html"
     url = "https://github.com/knuth/infrastructure"
     description = "Multicrypto Cross-Platform C++ Development Toolkit"
@@ -26,9 +25,10 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "with_qrencode": [True, False],
         "tests": [True, False],
         "examples": [True, False],
-        "microarchitecture": "ANY", #["x86_64", "haswell", "ivybridge", "sandybridge", "bulldozer", ...]
-        "fix_march": [True, False],
+
         "march_id": "ANY",
+        "march_strategy": ["download_if_possible", "optimized", "download_or_fail"],
+
         "verbose": [True, False],
         "cxxflags": "ANY",
         "cflags": "ANY",
@@ -46,9 +46,13 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "with_qrencode": False,
         "tests": False,
         "examples": False,
-        "microarchitecture": "_DUMMY_",
-        "fix_march": False,
+        # "microarchitecture": "_DUMMY_",
+        # "fix_march": False,
+
         "march_id": "_DUMMY_",
+        "march_strategy": "download_if_possible",
+
+
         "verbose": False,
         "cxxflags": "_DUMMY_",
         "cflags": "_DUMMY_",
@@ -68,6 +72,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
 
         self.requires("boost/1.79.0")
+        # self.requires("fmt/9.0.0")
         self.requires("fmt/8.1.1")
 
         if self.options.tests:
@@ -87,6 +92,8 @@ class KnuthInfrastructureConan(KnuthConanFile):
         if self.options.asio_standalone:
             self.requires("asio/1.22.1")
 
+    def validate(self):
+        KnuthConanFile.validate(self)
 
     def config_options(self):
         KnuthConanFile.config_options(self)
