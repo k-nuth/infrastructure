@@ -56,14 +56,21 @@ constexpr int max_connections = ::asio::socket_base::max_connections;
 #define FMT_HEADER_ONLY 1
 #include <fmt/format.h>
 
-template <>
-struct fmt::formatter<kth::asio::ipv6> {
-    constexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }
+// template <>
+// struct fmt::formatter<kth::asio::ipv6> {
+//     constexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }
 
+//     template <typename FormatContext>
+//     auto format(kth::asio::ipv6 const& addr, FormatContext& ctx) {
+//         return format_to(ctx.out(), "{}", addr.to_string());
+//     }
+// };
+
+template <> 
+struct fmt::formatter<kth::asio::ipv6> : formatter<std::string> {
     template <typename FormatContext>
-    auto format(kth::asio::ipv6 const& addr, FormatContext& ctx) {
-        return format_to(ctx.out(), "{}", addr.to_string());
+    auto format(kth::asio::ipv6 const& addr, FormatContext& ctx) const {
+        return formatter<std::string>::format(addr.to_string(), ctx);
     }
 };
-
 #endif
