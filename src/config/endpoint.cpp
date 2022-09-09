@@ -10,7 +10,7 @@
 #include <regex>
 #include <string>
 
-#include <boost/lexical_cast.hpp>
+// #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
 
 #include <kth/infrastructure/config/endpoint.hpp>
@@ -84,7 +84,7 @@ std::istream& operator>>(std::istream& input, endpoint& argument) {
 
     // std::regex requires gcc 4.9, so we are using boost::regex for now.
     // Knuth: we use std::regex, becase we drop support por GCC<5
-    static 
+    static
     std::regex const regular(R"(^((tcp|udp|http|https|inproc):\/\/)?(\[([0-9a-f:\.]+)\]|([^:]+))(:([0-9]{1,5}))?$)");
 
     std::sregex_iterator it(value.begin(), value.end(), regular), end;

@@ -18,8 +18,7 @@
 namespace kth {
 
 /// This class is thread safe but the socket may not be used concurrently.
-class KI_API socket
-    : noncopyable
+class KI_API socket : noncopyable
     /*, public track<socket>*/
 {
 public:
@@ -39,6 +38,7 @@ public:
     void stop();
 
 private:
+    //TODO(fernando): work here!
     // This is thread safe.
     threadpool& thread_;
 

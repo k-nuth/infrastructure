@@ -9,7 +9,7 @@
 #include <regex>
 #include <string>
 
-#include <boost/lexical_cast.hpp>
+// #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
 
 #include <kth/infrastructure/define.hpp>
@@ -22,7 +22,7 @@ namespace kth::infrastructure::config {
 using namespace boost::program_options;
 
 checkpoint::checkpoint()
-    : hash_(kth::null_hash) 
+    : hash_(kth::null_hash)
 {}
 
 checkpoint::checkpoint(std::string const& value)

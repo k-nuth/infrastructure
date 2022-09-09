@@ -27,7 +27,7 @@ public:
 
     network_address() = default;
 
-    constexpr 
+    constexpr
     network_address(uint32_t timestamp, uint64_t services, ip_address const& ip, uint16_t port)
         : timestamp_(timestamp)
         , services_(services)
@@ -99,21 +99,21 @@ public:
     bool is_valid() const;
     void reset();
 
-    static 
+    static
     network_address factory_from_data(data_chunk const& data, uint32_t version, bool with_timestamp);
-    
-    static 
+
+    static
     network_address factory_from_data(data_source& stream, uint32_t version, bool with_timestamp);
-    
+
     template <typename R>
     static
-    network_address factory_from_data(R& source, uint32_t version, bool with_timestamp) { 
+    network_address factory_from_data(R& source, uint32_t version, bool with_timestamp) {
         network_address instance;
         instance.from_data(source, version, with_timestamp);
         return instance;
     }
 
-    static 
+    static
     size_t satoshi_fixed_size(uint32_t version, bool with_timestamp);
 
 
@@ -142,5 +142,29 @@ constexpr network_address unspecified_network_address {
 };
 
 } // namespace kth::infrastructure::message
+
+// #define FMT_HEADER_ONLY 1
+// #include <fmt/format.h>
+
+// // template <>
+// // struct fmt::formatter<kth::asio::ipv6> {
+// //     constexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }
+
+// //     template <typename FormatContext>
+// //     auto format(kth::asio::ipv6 const& addr, FormatContext& ctx) {
+// //         return format_to(ctx.out(), "{}", addr.to_string());
+// //     }
+// // };
+
+
+
+// template <>
+// struct fmt::formatter<kth::infrastructure::message::network_address> : formatter<std::string> {
+//     template <typename FormatContext>
+//     auto format(kth::infrastructure::message::network_address const& addr, FormatContext& ctx) const {
+//         return formatter<std::string>::format(addr.to_string(), ctx);
+//     }
+// };
+
 
 #endif

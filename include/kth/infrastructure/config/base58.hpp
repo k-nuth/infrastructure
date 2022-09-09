@@ -5,6 +5,8 @@
 #ifndef KTH_INFRASTUCTURE_CONFIG_BASE58_HPP
 #define KTH_INFRASTUCTURE_CONFIG_BASE58_HPP
 
+#ifdef KTH_INFRASTUCTURE_CONFIG_ENABLED
+
 #include <iostream>
 #include <string>
 
@@ -55,7 +57,7 @@ public:
      * @param[out]  argument  The object to receive the read value.
      * @return                The input stream reference.
      */
-    friend 
+    friend
     std::istream& operator>>(std::istream& input, base58& argument);
 
     /**
@@ -64,7 +66,7 @@ public:
      * @param[out]  argument  The object from which to obtain the value.
      * @return                The output stream reference.
      */
-    friend 
+    friend
     std::ostream& operator<<(std::ostream& output, const base58& argument);
 
 private:
@@ -72,5 +74,8 @@ private:
 };
 
 } // namespace kth::infrastructure::config
+
+
+#endif // KTH_INFRASTUCTURE_CONFIG_ENABLED
 
 #endif

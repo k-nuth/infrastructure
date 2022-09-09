@@ -74,6 +74,8 @@ class KnuthInfrastructureConan(KnuthConanFile):
         self.requires("boost/1.79.0")
         # self.requires("fmt/9.1.0")
         self.requires("fmt/8.1.1")
+        self.requires("ctre/3.7")
+        self.requires("range-v3/0.12.0")
 
         if self.options.tests:
             self.requires("catch2/3.0.1")

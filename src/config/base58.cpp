@@ -2,6 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#ifdef KTH_INFRASTUCTURE_CONFIG_ENABLED
+
 #include <kth/infrastructure/config/base58.hpp>
 
 #include <iostream>
@@ -15,10 +17,6 @@
 #include <kth/infrastructure/utility/data.hpp>
 
 namespace kth::infrastructure::config {
-
-// base58::base58()
-// {
-// }
 
 base58::base58(std::string const& base58) {
     std::stringstream(base58) >> *this;
@@ -58,3 +56,5 @@ std::ostream& operator<<(std::ostream& output, const base58& argument) {
 }
 
 } // namespace kth::infrastructure::config
+
+#endif // KTH_INFRASTUCTURE_CONFIG_ENABLED

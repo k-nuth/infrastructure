@@ -66,11 +66,12 @@ constexpr int max_connections = ::asio::socket_base::max_connections;
 //     }
 // };
 
-template <> 
+template <>
 struct fmt::formatter<kth::asio::ipv6> : formatter<std::string> {
     template <typename FormatContext>
     auto format(kth::asio::ipv6 const& addr, FormatContext& ctx) const {
         return formatter<std::string>::format(addr.to_string(), ctx);
     }
 };
+
 #endif

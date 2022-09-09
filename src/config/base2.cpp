@@ -2,6 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#ifdef KTH_INFRASTUCTURE_CONFIG_ENABLED
+
 #include <kth/infrastructure/config/base2.hpp>
 
 #include <iostream>
@@ -51,3 +53,5 @@ std::ostream& operator<<(std::ostream& output, const base2& argument) {
 }
 
 } // namespace kth::infrastructure::config
+
+#endif // KTH_INFRASTUCTURE_CONFIG_ENABLED

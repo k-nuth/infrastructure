@@ -16,38 +16,37 @@
 
 namespace kth {
 
-using string_list = std::vector<std::string>;
+// using string_list = std::vector<std::string>;
 
-/**
- * Convert a text string to the specified type.
- * @param      <Value>  The converted type.
- * @param[in]  text     The text to convert.
- * @param[in]  trim     True if value should be trimmed before conversion.
- * return               The parsed value.
- */
-template <typename Value>
-Value deserialize(std::string const& text, bool trim);
+// /**
+//  * Convert a text string to the specified type.
+//  * @param      <Value>  The converted type.
+//  * @param[in]  text     The text to convert.
+//  * @param[in]  trim     True if value should be trimmed before conversion.
+//  * return               The parsed value.
+//  */
+// template <typename Value>
+// Value deserialize(std::string const& text, bool trim);
 
-/**
- * Convert a text string to the specified type.
- * @param      <Value>  The converted type.
- * @param[out] value    The parsed value.
- * @param[in]  text     The text to convert.
- * @param[in]  trim     True if value should be trimmed before conversion.
- */
-template <typename Value>
-void deserialize(Value& value, std::string const& text, bool trim);
+// /**
+//  * Convert a text string to the specified type.
+//  * @param      <Value>  The converted type.
+//  * @param[out] value    The parsed value.
+//  * @param[in]  text     The text to convert.
+//  * @param[in]  trim     True if value should be trimmed before conversion.
+//  */
+// template <typename Value>
+// void deserialize(Value& value, std::string const& text, bool trim);
 
-/**
- * Deserialize the tokens of a text string to a vector of the inner type.
- * @param      <Value>     The inner type.
- * @param[out] collection  The parsed vector value.
- * @param[in]  text        The text to convert.
- * @param[in]  trim        True if value should be trimmed before conversion.
- */
-template <typename Value>
-void deserialize(std::vector<Value>& collection, std::string const& text,
-    bool trim);
+// /**
+//  * Deserialize the tokens of a text string to a vector of the inner type.
+//  * @param      <Value>     The inner type.
+//  * @param[out] collection  The parsed vector value.
+//  * @param[in]  text        The text to convert.
+//  * @param[in]  trim        True if value should be trimmed before conversion.
+//  */
+// template <typename Value>
+// void deserialize(std::vector<Value>& collection, std::string const& text, bool trim);
 
 /**
  * Conveniently convert an instance of the specified type to string.
@@ -56,28 +55,26 @@ void deserialize(std::vector<Value>& collection, std::string const& text,
  * @param[in]  fallback  The text to populate if value is empty.
  * @return               The serialized value.
  */
-template <typename Value>
-std::string serialize(const Value& value, std::string const& fallback="");
+// template <typename Value>
+// std::string serialize(const Value& value, std::string const& fallback="");
 
-/**
- * Join a list of strings into a single string, in order.
- * @param[in]  words      The list of strings to join.
- * @param[in]  delimiter  The delimiter, defaults to " ".
- * @return                The resulting string.
- */
-KI_API std::string join(const string_list& words,
-    std::string const& delimiter=" ");
+// /**
+//  * Join a list of strings into a single string, in order.
+//  * @param[in]  words      The list of strings to join.
+//  * @param[in]  delimiter  The delimiter, defaults to " ".
+//  * @return                The resulting string.
+//  */
+// KI_API std::string join(const string_list& words, std::string const& delimiter=" ");
 
-/**
- * Split a list of strings into a string vector string, in order, white space
- * delimited.
- * @param[in]  sentence   The string to split.
- * @param[in]  delimiter  The delimeter, defaults to " ".
- * @param[in]  trim       Trim the sentence for whitespace, defaults to true.
- * @return                The list of resulting strings.
- */
-KI_API string_list split(std::string const& sentence,
-    std::string const& delimiter=" ", bool trim=true);
+// /**
+//  * Split a list of strings into a string vector string, in order, white space
+//  * delimited.
+//  * @param[in]  sentence   The string to split.
+//  * @param[in]  delimiter  The delimeter, defaults to " ".
+//  * @param[in]  trim       Trim the sentence for whitespace, defaults to true.
+//  * @return                The list of resulting strings.
+//  */
+// KI_API string_list split(std::string const& sentence, std::string const& delimiter=" ", bool trim=true);
 
 } // namespace kth
 

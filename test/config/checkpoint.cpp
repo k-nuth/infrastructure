@@ -5,7 +5,7 @@
 #include <sstream>
 #include <string>
 
-#include <boost/lexical_cast.hpp>
+// #include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
 #include <test_helpers.hpp>
 
@@ -98,7 +98,7 @@ TEST_CASE("checkpoint  istream  empty  expected", "[checkpoint  istream]") {
 
 // Start Boost Suite: checkpoint  ostream
 
-static 
+static
 checkpoint::list const test_checkpoints_list({
     checkpoint{CHECKPOINT_A},
     checkpoint{CHECKPOINT_B},

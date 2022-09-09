@@ -67,29 +67,24 @@ public:
     /**
      * Sentinel - the option is not a positional argument.
      */
-    static 
-    int const not_positional;
+    static constexpr int not_positional;
 
     /**
      * Sentinel - there is no short name.
      */
-    static 
-    char const no_short_name;
+    static constexpr char no_short_name;
 
     /**
      * The character used to prefix command line options.
      */
-    static 
-    char const option_prefix_char;
+    static constexpr char option_prefix_char;
 
     /**
      * Populate with normalized parameter data.
      * @param[in]  option     The metadata of the option to test.
      * @param[in]  arguments  The list of supported positional arguments.
      */
-    void initialize(
-        boost::program_options::option_description const& option,
-        argument_list const& arguments);
+    void initialize(boost::program_options::option_description const& option, argument_list const& arguments);
 
     /**
      * Determine if the option is an argument by testing for it by name in the
