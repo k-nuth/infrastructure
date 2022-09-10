@@ -6,6 +6,8 @@
 #define KTH_INFRASTRUCTURE_STRING_HPP
 
 #include <string>
+#include <string_view>
+#include <utility>
 #include <vector>
 
 #include <kth/infrastructure/define.hpp>
@@ -16,65 +18,37 @@
 
 namespace kth {
 
-// using string_list = std::vector<std::string>;
+//TODO(fernando): check where this is used. Code smell.
+using string_list = std::vector<std::string>;
 
-// /**
-//  * Convert a text string to the specified type.
-//  * @param      <Value>  The converted type.
-//  * @param[in]  text     The text to convert.
-//  * @param[in]  trim     True if value should be trimmed before conversion.
-//  * return               The parsed value.
-//  */
-// template <typename Value>
-// Value deserialize(std::string const& text, bool trim);
+constexpr
+std::pair<std::string_view, std::string_view> split2(std::string_view x, char c) {
+    auto const p = x.find(c);
+    if (p == x.npos) {
+        return {"", ""};
+    }
 
-// /**
-//  * Convert a text string to the specified type.
-//  * @param      <Value>  The converted type.
-//  * @param[out] value    The parsed value.
-//  * @param[in]  text     The text to convert.
-//  * @param[in]  trim     True if value should be trimmed before conversion.
-//  */
-// template <typename Value>
-// void deserialize(Value& value, std::string const& text, bool trim);
+    return {
+        std::string_view(x.begin(), x.begin() + p),
+        std::string_view(x.begin() + (p + 1), x.end())
+    };
+}
 
-// /**
-//  * Deserialize the tokens of a text string to a vector of the inner type.
-//  * @param      <Value>     The inner type.
-//  * @param[out] collection  The parsed vector value.
-//  * @param[in]  text        The text to convert.
-//  * @param[in]  trim        True if value should be trimmed before conversion.
-//  */
-// template <typename Value>
-// void deserialize(std::vector<Value>& collection, std::string const& text, bool trim);
+template <typename Value>
+Value deserialize(std::string const& text, bool trim);
 
-/**
- * Conveniently convert an instance of the specified type to string.
- * @param      <Value>   The type to serialize.
- * @param[in]  value     The instance to convert.
- * @param[in]  fallback  The text to populate if value is empty.
- * @return               The serialized value.
- */
-// template <typename Value>
-// std::string serialize(const Value& value, std::string const& fallback="");
+template <typename Value>
+void deserialize(Value& value, std::string const& text, bool trim);
 
-// /**
-//  * Join a list of strings into a single string, in order.
-//  * @param[in]  words      The list of strings to join.
-//  * @param[in]  delimiter  The delimiter, defaults to " ".
-//  * @return                The resulting string.
-//  */
-// KI_API std::string join(const string_list& words, std::string const& delimiter=" ");
+template <typename Value>
+void deserialize(std::vector<Value>& collection, std::string const& text, bool trim);
 
-// /**
-//  * Split a list of strings into a string vector string, in order, white space
-//  * delimited.
-//  * @param[in]  sentence   The string to split.
-//  * @param[in]  delimiter  The delimeter, defaults to " ".
-//  * @param[in]  trim       Trim the sentence for whitespace, defaults to true.
-//  * @return                The list of resulting strings.
-//  */
-// KI_API string_list split(std::string const& sentence, std::string const& delimiter=" ", bool trim=true);
+template <typename Value>
+std::string serialize(const Value& value, std::string const& fallback="");
+
+KI_API std::string join(const string_list& words, std::string const& delimiter=" ");
+
+KI_API string_list split(std::string const& sentence, std::string const& delimiter=" ", bool trim=true);
 
 } // namespace kth
 

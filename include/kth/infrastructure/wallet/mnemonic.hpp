@@ -5,6 +5,9 @@
 #ifndef KTH_INFRASTUCTURE_WALLET_MNEMONIC_HPP
 #define KTH_INFRASTUCTURE_WALLET_MNEMONIC_HPP
 
+//TODO(fernando): put this option in Conan
+#ifdef KTH_INFRASTUCTURE_WALLET_ENABLED
+
 #include <cstddef>
 #include <string>
 #include <vector>
@@ -74,4 +77,5 @@ KI_API long_hash decode_mnemonic(const word_list& mnemonic,
 
 } // namespace kth::infrastructure::wallet
 
+#endif // KTH_INFRASTUCTURE_WALLET_ENABLED
 #endif

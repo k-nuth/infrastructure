@@ -21,9 +21,9 @@
 namespace po = boost::program_options;
 using namespace kth::infrastructure::config;
 
-int constexpr parameter::not_positional = -1;
-char constexpr parameter::no_short_name = 0x00;
-char constexpr parameter::option_prefix_char = '-';
+// int constexpr parameter::not_positional = -1;
+// char constexpr parameter::no_short_name = 0x00;
+// char constexpr parameter::option_prefix_char = '-';
 
 // 100% component coverage, common scenarios.
 // A required argument may only be preceeded by required arguments.

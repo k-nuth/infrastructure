@@ -5,6 +5,8 @@
 #ifndef KTH_INFRASTUCTURE_WALLET_URI_HPP
 #define KTH_INFRASTUCTURE_WALLET_URI_HPP
 
+#ifdef KTH_INFRASTUCTURE_WALLET_ENABLED
+
 #include <map>
 #include <string>
 
@@ -85,5 +87,7 @@ private:
 };
 
 } // namespace kth::infrastructure::wallet
+
+#endif // KTH_INFRASTUCTURE_WALLET_ENABLED
 
 #endif

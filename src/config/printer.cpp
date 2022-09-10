@@ -2,11 +2,15 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+//TODO(fernando): rewrite this code, this is not C++
+
 #include <kth/infrastructure/config/printer.hpp>
 
 #include <algorithm>
 #include <iostream>
+#include <ranges>
 #include <string>
+#include <string_view>
 #include <vector>
 
 #include <boost/algorithm/string.hpp>
@@ -14,6 +18,7 @@
 
 #define FMT_HEADER_ONLY 1
 #include <fmt/core.h>
+#include <fmt/ostream.h>
 
 #include <kth/infrastructure/config/parameter.hpp>
 #include <kth/infrastructure/define.hpp>
@@ -86,11 +91,14 @@
 #define KI_PRINTER_SETTING_REQUIRED_FORMAT "{0} = {1}\n"
 
 namespace po = boost::program_options;
+namespace ranges = std::ranges;
+namespace views = std::views;
+
 using namespace kth;
 using namespace kth::infrastructure::config;
 // using boost::format;
 
-int const printer::max_arguments = 256;
+// int const printer::max_arguments = 256;
 
 printer::printer(const po::options_description& options,
     const po::positional_options_description& arguments,
@@ -100,36 +108,31 @@ printer::printer(const po::options_description& options,
     description_(description), command_(command)
 {}
 
-printer::printer(const po::options_description& settings,
-    std::string const& application, std::string const& description)
-  : options_(settings), application_(application), description_(description)
-{
-}
+printer::printer(const po::options_description& settings, std::string const& application, std::string const& description)
+    : options_(settings), application_(application), description_(description)
+{}
 
 /* Formatters */
 
-// 100% component tested.
-static void enqueue_fragment(std::string& fragment,
-    std::vector<std::string>& column)
-{
+static
+void enqueue_fragment(std::string const& fragment, std::vector<std::string>& column) {
     if ( ! fragment.empty()) {
         column.push_back(fragment);
-}
+    }
 }
 
-// 100% component tested.
-std::vector<std::string> printer::columnize(std::string const& paragraph,
-    size_t width)
-{
-    auto const words = split(paragraph, " ", false);
+std::vector<std::string> printer::columnize(std::string const& paragraph, size_t width) const {
+    // auto const words = split(paragraph, " ", false);
 
     std::string fragment;
     std::vector<std::string> column;
 
-    for (auto const& word: words) {
-        if ( ! fragment.empty() && (word.length() + fragment.length() < width))
-        {
-            fragment += KI_SENTENCE_DELIMITER + word;
+    // for (auto const& word : words) {
+    for (auto word_rng : paragraph | views::split(' ')) {
+        std::string_view const word(std::begin(word_rng), std::end(word_rng));
+        if ( ! fragment.empty() && (word.size() + fragment.length() < width)) {
+            fragment += KI_SENTENCE_DELIMITER;
+            fragment += word;
             continue;
         }
 
@@ -141,9 +144,8 @@ std::vector<std::string> printer::columnize(std::string const& paragraph,
     return column;
 }
 
-// 100% component tested.
 static
-std::string format_row_name(const parameter& value) {
+std::string format_row_name(parameter const& value) {
     // We hack in upper case for all positional args because of a bug in
     // boost that requires environment variable options to be lower case
     // in order to match any case environment variable, at least on Windows.
@@ -166,41 +168,62 @@ std::string format_row_name(const parameter& value) {
 
 }
 
-// 100% component tested.
 static
-bool match_positional(bool positional, const parameter& value) {
+bool match_positional(bool positional, parameter const& value) {
     auto positioned = value.get_position() != parameter::not_positional;
     return positioned == positional;
 }
 
-// 100% component tested.
+// // This formats to 73 char width as: [ 20 | ' ' | 52 | '\n' ]
+// // GitHub code examples start horizontal scroll after 73 characters.
+// std::string printer::format_parameters_table(bool positional) {
+//     std::stringstream output;
+//     auto const& parameters = get_parameters();
+
+//     for (auto const& parameter: parameters) {
+//         // Skip positional arguments if not positional.
+//         if ( ! match_positional(positional, parameter)) {
+//             continue;
+//         }
+
+//         // Get the formatted parameter name.
+//         auto name = format_row_name(parameter);
+
+//         // Build a column for the description.
+//         auto const rows = columnize(parameter.get_description(), 52);
+
+//         // If there is no description the command is not output!
+//         for (auto const& row : rows) {
+//             output << fmt::format("{:<20} {:<52}\n", name, row);
+//             // The name is only set in the first row.
+//             name.clear();
+//         }
+//     }
+
+//     return output.str();
+// }
+
 // This formats to 73 char width as: [ 20 | ' ' | 52 | '\n' ]
 // GitHub code examples start horizontal scroll after 73 characters.
-std::string printer::format_parameters_table(bool positional) {
-    std::stringstream output;
+void printer::print_parameters_table(std::ostream& output, bool positional) const {
     auto const& parameters = get_parameters();
 
     for (auto const& parameter: parameters) {
-        // Skip positional arguments if not positional.
         if ( ! match_positional(positional, parameter)) {
             continue;
         }
 
-        // Get the formatted parameter name.
-        auto name = format_row_name(parameter);
-
-        // Build a column for the description.
         auto const rows = columnize(parameter.get_description(), 52);
 
-        // If there is no description the command is not output!
-        for (auto const& row : rows) {
-            output << fmt::format("{:<20} {:<52}\n", name, row);
-            // The name is only set in the first row.
-            name.clear();
+        if ( ! rows.empty()) {
+            auto const name = format_row_name(parameter);
+            fmt::print(output, "{:<20} {:<52}\n", name, rows[0]);
+        }
+
+        for (size_t i = 1; i < rows.size(); ++i) {
+            fmt::print(output, "{:<20} {:<52}\n", "", rows[0]); //TODO(fernando): could be improved
         }
     }
-
-    return output.str();
 }
 
 // This formats to 73 char width: [ 73 | '\n' ]
@@ -214,8 +237,72 @@ std::string printer::format_paragraph(std::string const& paragraph) {
     return output.str();
 }
 
+// static
+// std::string format_setting(parameter const& value, std::string const& name) {
+//     // A required argument may only be preceeded by required arguments.
+//     // Requiredness may be in error if the metadata is inconsistent.
+//     auto required = value.get_required();
+
+//     // In terms of formatting we also treat multivalued as not required.
+//     auto optional = value.get_args_limit() == 1;
+
+//     std::string formatter;
+
+//     if (required) {
+//         return fmt::format(KI_PRINTER_SETTING_REQUIRED_FORMAT, name, KI_PRINTER_VALUE_TEXT);
+//     }
+
+//     if (optional) {
+//         return fmt::format(KI_PRINTER_SETTING_OPTIONAL_FORMAT, name, KI_PRINTER_VALUE_TEXT);
+//     }
+//     return fmt::format(KI_PRINTER_SETTING_MULTIPLE_FORMAT, name, KI_PRINTER_VALUE_TEXT);
+// }
+
+// // Requires a single period in each setting (i.e. no unnamed sections).
+// static
+// void split_setting_name(parameter const& value, std::string& name, std::string& section) {
+//     auto const tokens = split(value.get_long_name(), ".");
+//     if (tokens.size() != 2) {
+//         section.clear();
+//         name.clear();
+//         return;
+//     }
+
+//     section = tokens[0];
+//     name = tokens[1];
+// }
+
+// std::string printer::format_settings_table() {
+//     std::string name;
+//     std::string section;
+//     std::stringstream output;
+//     std::string preceding_section;
+
+//     auto const& parameters = get_parameters();
+//     for (auto const& parameter: parameters) {
+//         split_setting_name(parameter, name, section);
+//         if (section.empty()) {
+//             KTH_ASSERT_MSG(false, "Invalid config setting metadata.");
+//             continue;
+//         }
+
+//         if (section != preceding_section) {
+//             output << std::endl;
+//             if ( ! section.empty()) {
+//                 output << fmt::format(KI_PRINTER_SETTING_SECTION_FORMAT, section);
+//                 preceding_section = section;
+//             }
+//         }
+
+//         output << fmt::format(KI_PRINTER_SETTING_COMMENT_FORMAT, parameter.get_description());
+//         output << format_setting(parameter, name);
+//     }
+
+//     return output.str();
+// }
+
 static
-std::string format_setting(const parameter& value, std::string const& name) {
+void print_setting(std::ostream& output, parameter const& value, std::string_view name) {
     // A required argument may only be preceeded by required arguments.
     // Requiredness may be in error if the metadata is inconsistent.
     auto required = value.get_required();
@@ -223,57 +310,38 @@ std::string format_setting(const parameter& value, std::string const& name) {
     // In terms of formatting we also treat multivalued as not required.
     auto optional = value.get_args_limit() == 1;
 
-    std::string formatter;
     if (required) {
-        return fmt::format(KI_PRINTER_SETTING_REQUIRED_FORMAT, name, KI_PRINTER_VALUE_TEXT);
+        fmt::print(output, KI_PRINTER_SETTING_REQUIRED_FORMAT, name, KI_PRINTER_VALUE_TEXT);
     } else if (optional) {
-        return fmt::format(KI_PRINTER_SETTING_OPTIONAL_FORMAT, name, KI_PRINTER_VALUE_TEXT);
+        fmt::print(output, KI_PRINTER_SETTING_OPTIONAL_FORMAT, name, KI_PRINTER_VALUE_TEXT);
+    } else {
+        fmt::print(output, KI_PRINTER_SETTING_MULTIPLE_FORMAT, name, KI_PRINTER_VALUE_TEXT);
     }
-    return fmt::format(KI_PRINTER_SETTING_MULTIPLE_FORMAT, name, KI_PRINTER_VALUE_TEXT);
 }
 
-// Requires a single period in each setting (i.e. no unnamed sections).
-static
-void split_setting_name(const parameter& value, std::string& name, std::string& section)
-{
-    auto const tokens = split(value.get_long_name(), ".");
-    if (tokens.size() != 2) {
-        section.clear();
-        name.clear();
-        return;
-    }
-
-    section = tokens[0];
-    name = tokens[1];
-}
-
-std::string printer::format_settings_table() {
-    std::string name;
-    std::string section;
-    std::stringstream output;
+void printer::print_settings_table(std::ostream& output) const {
     std::string preceding_section;
 
     auto const& parameters = get_parameters();
     for (auto const& parameter: parameters) {
-        split_setting_name(parameter, name, section);
+        auto const [name, section] = split2(parameter.get_long_name(), '.');
         if (section.empty()) {
             KTH_ASSERT_MSG(false, "Invalid config setting metadata.");
             continue;
         }
 
         if (section != preceding_section) {
-            output << std::endl;
+            output << '\n';
             if ( ! section.empty()) {
-                output << fmt::format(KI_PRINTER_SETTING_SECTION_FORMAT, section);
+                fmt::print(output, KI_PRINTER_SETTING_SECTION_FORMAT, section);
                 preceding_section = section;
             }
         }
 
-        output << fmt::format(KI_PRINTER_SETTING_COMMENT_FORMAT, parameter.get_description());
-        output << format_setting(parameter, name);
+        fmt::print(output, KI_PRINTER_SETTING_COMMENT_FORMAT, parameter.get_description());
+        // output << format_setting(parameter, name);
+        print_setting(output, parameter, name);
     }
-
-    return output.str();
 }
 
 std::string printer::format_usage() {
@@ -289,7 +357,6 @@ std::string printer::format_description() {
     return format_paragraph(description);
 }
 
-// 100% component tested.
 std::string printer::format_usage_parameters() {
     std::string toggle_short_options;
     std::vector<std::string> toggle_long_options;
@@ -386,7 +453,6 @@ std::string printer::format_usage_parameters() {
 
 /* Initialization */
 
-// 100% component tested.
 static
 void enqueue_name(int count, std::string& name, argument_list& names) {
     if (count <= 0) {
@@ -400,7 +466,6 @@ void enqueue_name(int count, std::string& name, argument_list& names) {
     names.push_back(argument_pair(name, count));
 }
 
-// 100% component tested.
 // This method just gives us a copy of arguments_metadata private state.
 // It would be nice if instead that state was public.
 void printer::generate_argument_names() {
@@ -440,13 +505,11 @@ void printer::generate_argument_names() {
     enqueue_name(max_previous_argument, previous_argument_name, argument_names);
 }
 
-// 100% component tested.
 static
-bool compare_parameters(const parameter& left, const parameter& right) {
+bool compare_parameters(parameter const& left, parameter const& right) {
     return left.get_format_name() < right.get_format_name();
 }
 
-// 100% component tested.
 void printer::generate_parameters() {
     auto const& argument_names = get_argument_names();
     auto const& options = get_options();
@@ -467,7 +530,6 @@ void printer::generate_parameters() {
     }
 }
 
-// 100% component tested.
 void printer::initialize() {
     generate_argument_names();
     generate_parameters();
@@ -475,29 +537,44 @@ void printer::initialize() {
 
 /* Printers */
 
+// void printer::commandline(std::ostream& output) {
+//     auto const& option_table = format_parameters_table(false);
+//     auto const& argument_table = format_parameters_table(true);
+
+//     // Don't write a header if a table is empty.
+//     std::string option_table_header(option_table.empty() ? "" : KI_PRINTER_OPTION_TABLE_HEADER "\n");
+//     std::string argument_table_header(argument_table.empty() ? "" : KI_PRINTER_ARGUMENT_TABLE_HEADER "\n");
+
+//     output
+//         << '\n' << format_usage()
+//         << '\n' << format_description()
+//         << '\n' << option_table_header
+//         << '\n' << option_table
+//         << '\n' << argument_table_header
+//         << '\n' << argument_table;
+// }
+
 void printer::commandline(std::ostream& output) {
-    auto const& option_table = format_parameters_table(false);
-    auto const& argument_table = format_parameters_table(true);
-
-    // Don't write a header if a table is empty.
-    std::string option_table_header(option_table.empty() ? "" : KI_PRINTER_OPTION_TABLE_HEADER "\n");
-    std::string argument_table_header(argument_table.empty() ? "" : KI_PRINTER_ARGUMENT_TABLE_HEADER "\n");
-
     output
-        << std::endl << format_usage()
-        << std::endl << format_description()
-        << std::endl << option_table_header
-        << std::endl << option_table
-        << std::endl << argument_table_header
-        << std::endl << argument_table;
+        << '\n' << format_usage()
+        << '\n' << format_description()
+        << '\n' << KI_PRINTER_OPTION_TABLE_HEADER << '\n';
+
+    print_parameters_table(output, false);
+
+    output << '\n' << KI_PRINTER_ARGUMENT_TABLE_HEADER << '\n';
+    print_parameters_table(output, true);
 }
 
-void printer::settings(std::ostream& output) {
-    auto const& setting_table = format_settings_table();
+void printer::settings(std::ostream& output) const {
+    // auto const& setting_table = format_settings_table();
 
     if ( ! description_.empty()) {
-        output << std::endl << description_;
+        // output << std::endl << description_;
+        fmt::print(output, "\n{}", description_);
     }
 
-    output << std::endl << setting_table;
+    // output << std::endl << setting_table;
+    output << '\n';
+    print_settings_table(output);
 }

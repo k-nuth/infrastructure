@@ -5,6 +5,8 @@
 #ifndef KTH_INFRASTUCTURE_CONFIG_PRINTER_HPP
 #define KTH_INFRASTUCTURE_CONFIG_PRINTER_HPP
 
+//TODO(fernando): rewrite this code, this is not C++
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -24,6 +26,11 @@ namespace kth::infrastructure::config {
  */
 #define KI_PROPERTY_GET_REF(type, name) \
     public: type& get_##name() { return name##_; } \
+    public: type const& get_##name() const { return name##_; } \
+    private: type name##_
+
+#define KI_PROPERTY_GET_CONST_REF(type, name) \
+    public: type const& get_##name() const { return name##_; } \
     private: type name##_
 
 /**
@@ -35,7 +42,7 @@ public:
     /**
      * Number of arguments above which the argument is considered unlimited.
      */
-    KI_API static int const max_arguments;
+    KI_API static constexpr int max_arguments = 256;
 
     /**
      * Construct an instance of the printer class.
@@ -67,7 +74,7 @@ public:
      * @param[in]  paragraph  The paragraph to columnize.
      * @return                The column, as a list of fragments.
      */
-    std::vector<std::string> columnize(std::string const& paragraph, size_t width);
+    std::vector<std::string> columnize(std::string const& paragraph, size_t width) const;
 
     /**
      * Format the command description.
@@ -80,13 +87,11 @@ public:
      * @param[in]  positional  True for positional otherwize named.
      * @return                 The formatted help arguments table.
      */
-    std::string format_parameters_table(bool positional);
+    // std::string format_parameters_table(bool positional);
+    void print_parameters_table(std::ostream& output, bool positional) const;
 
-    /**
-     * Format the settings table.
-     * @return  The formatted settings table.
-     */
-    std::string format_settings_table();
+    // std::string format_settings_table();
+    void print_settings_table(std::ostream& output) const;
 
     /**
      * Format a paragraph.
@@ -132,16 +137,16 @@ public:
      * Serialize as config settings (full details).
      * @param[out] output  Stream that is sink for output.
      */
-    void settings(std::ostream& output);
+    void settings(std::ostream& output) const;
 
     /**
      * Virtual property declarations, passed on construct.
      */
-    KI_PROPERTY_GET_REF(boost::program_options::options_description, options);
-    KI_PROPERTY_GET_REF(boost::program_options::positional_options_description, arguments);
-    KI_PROPERTY_GET_REF(std::string, application);
-    KI_PROPERTY_GET_REF(std::string, description);
-    KI_PROPERTY_GET_REF(std::string, command);
+    KI_PROPERTY_GET_CONST_REF(boost::program_options::options_description, options);
+    KI_PROPERTY_GET_CONST_REF(boost::program_options::positional_options_description, arguments);
+    KI_PROPERTY_GET_CONST_REF(std::string, application);
+    KI_PROPERTY_GET_CONST_REF(std::string, description);
+    KI_PROPERTY_GET_CONST_REF(std::string, command);
 
     /**
      * Virtual property declarations, generated from metadata.
