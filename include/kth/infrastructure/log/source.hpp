@@ -42,7 +42,7 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source) {
                  _61,_62,_63,  N, ...) N
 
 #ifdef _MSC_VER // Microsoft compilers
-#define KTH_PP_EXPAND(x) x 
+#define KTH_PP_EXPAND(x) x
 #define KTH_PP_NARG(...) KTH_PP_EXPAND(KTH_PP_ARG_N(__VA_ARGS__, 63,62,61,60,                                                 \
                     59,58,57,56,55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40, \
                     39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20, \
@@ -61,14 +61,14 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source) {
 
 #include <binlog/binlog.hpp>
 
-//  BINLOG_TRACE, 
-//  BINLOG_DEBUG, 
-//  BINLOG_INFO, 
-//  BINLOG_WARNING, 
+//  BINLOG_TRACE,
+//  BINLOG_DEBUG,
+//  BINLOG_INFO,
+//  BINLOG_WARNING,
 //  BINLOG_ERROR
 //  BINLOG_CRITICAL
 
-#define LOG_VERBOSE(modul,...) 
+#define LOG_VERBOSE(modul,...)
 #define LOG_DEBUG(...)
 #define LOG_INFO(modul,...)
 #define LOG_WARNING(modul,...)
@@ -158,12 +158,12 @@ BOOST_LOG_INLINE_GLOBAL_LOGGER_INIT(source, severity_source) {
 #define KTH_FOLD(z, n, text)  text
 #define KTH_STRREP(str, n) BOOST_PP_REPEAT(n, KTH_FOLD, str)
 
-#define LOG_VERBOSE(modul,...) spdlog::trace("[{}] " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
-#define LOG_DEBUG(modul,...) spdlog::debug("[{}] " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
-#define LOG_INFO(modul,...) spdlog::info("[{}] " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
-#define LOG_WARNING(modul,...) spdlog::warn("[{}] " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
-#define LOG_ERROR(modul,...) spdlog::error("[{}] " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
-#define LOG_FATAL(modul,...) spdlog::critical("[{}] " KTH_STRREP("{} ", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_VERBOSE(modul,...) spdlog::trace("[{}] " KTH_STRREP("{}", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_DEBUG(modul,...) spdlog::debug("[{}] " KTH_STRREP("{}", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_INFO(modul,...) spdlog::info("[{}] " KTH_STRREP("{}", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_WARNING(modul,...) spdlog::warn("[{}] " KTH_STRREP("{}", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_ERROR(modul,...) spdlog::error("[{}] " KTH_STRREP("{}", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
+#define LOG_FATAL(modul,...) spdlog::critical("[{}] " KTH_STRREP("{}", KTH_PP_NARG(__VA_ARGS__)), modul, __VA_ARGS__)
 
 #endif // defined(KTH_LOG_LIBRARY_BINLOG)
 
