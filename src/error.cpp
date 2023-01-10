@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -20,7 +20,7 @@ public:
     std::error_condition default_error_condition(int ev) const noexcept override;
 };
 
-static 
+static
 const error_category_impl& get_error_category_instance() {
     static error_category_impl instance;
     return instance;

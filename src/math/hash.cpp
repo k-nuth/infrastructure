@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -35,7 +35,7 @@ hash_digest bitcoin_hash(data_slice data)
 // #ifdef KTH_CURRENCY_LTC
 // hash_digest litecoin_hash(data_slice data) {
 //     hash_digest hash;
-//     scrypt_1024_1_1_256(reinterpret_cast<char const*>(data.data()), 
+//     scrypt_1024_1_1_256(reinterpret_cast<char const*>(data.data()),
 //                         reinterpret_cast<char*>(hash.data()));
 //     return hash;
 // }

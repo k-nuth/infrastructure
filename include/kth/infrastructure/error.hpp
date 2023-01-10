@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -289,7 +289,7 @@ enum error_code_t {
     low_benefit_transaction,
     duplicate_transaction,
     double_spend_mempool,
-    double_spend_blockchain    
+    double_spend_blockchain
 };
 
 enum error_condition_t {};

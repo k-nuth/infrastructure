@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -26,7 +26,7 @@
 
 namespace kth {
 
-sip_hasher::sip_hasher(uint64_t k0, uint64_t k1) 
+sip_hasher::sip_hasher(uint64_t k0, uint64_t k1)
     : v { 0x736f6d6570736575ULL ^ k0
         , 0x646f72616e646f6dULL ^ k1
         , 0x6c7967656e657261ULL ^ k0
@@ -36,9 +36,9 @@ sip_hasher::sip_hasher(uint64_t k0, uint64_t k1)
 {}
 
 sip_hasher& sip_hasher::write(uint64_t data) {
-    uint64_t v0 = v[0], 
-             v1 = v[1], 
-             v2 = v[2], 
+    uint64_t v0 = v[0],
+             v1 = v[1],
+             v2 = v[2],
              v3 = v[3];
 
     //class invariant
@@ -59,9 +59,9 @@ sip_hasher& sip_hasher::write(uint64_t data) {
 }
 
 sip_hasher& sip_hasher::write(uint8_t const* data, size_t size) {
-    uint64_t v0 = v[0], 
-             v1 = v[1], 
-             v2 = v[2], 
+    uint64_t v0 = v[0],
+             v1 = v[1],
+             v2 = v[2],
              v3 = v[3];
 
     uint64_t t = tmp;
@@ -90,9 +90,9 @@ sip_hasher& sip_hasher::write(uint8_t const* data, size_t size) {
 }
 
 uint64_t sip_hasher::finalize() const {
-    uint64_t v0 = v[0], 
-             v1 = v[1], 
-             v2 = v[2], 
+    uint64_t v0 = v[0],
+             v1 = v[1],
+             v2 = v[2],
              v3 = v[3];
 
     uint64_t t = tmp | (uint64_t(count) << 56);

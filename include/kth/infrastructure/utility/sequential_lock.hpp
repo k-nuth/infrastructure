@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -19,7 +19,7 @@ public:
     using handle = size_t;
 
     /// Determine if the given handle is a write-locked handle.
-    static 
+    static
     bool is_write_locked(handle value) {
         return (value % 2) == 1;
     }

@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -22,13 +22,13 @@ kth::path rotational_path_base() {
 }
 
 kth::path rotational_path(uint16_t st_dev) {
-    return rotational_path_base() / 
+    return rotational_path_base() /
            fmt::format("{}:{}", major(st_dev), minor(st_dev)) /
            "queue/rotational";
 }
 
 kth::path rotational_path() {
-    return rotational_path_base() / 
+    return rotational_path_base() /
            "queue/rotational";
 }
 
@@ -47,7 +47,7 @@ tristate drive_is_rotational(kth::path const& file_path) {
 
     auto f = get_rotational_file(st.st_dev);
     if ( ! f.is_open()) return tristate::unknown;
-    
+
     unsigned short val = 0xdead;
     f >> val;
     if (f.fail()) return tristate::unknown;

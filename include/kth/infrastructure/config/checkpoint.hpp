@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -28,7 +28,7 @@ public:
      * @param[in]  checks  The list of checkpoints.
      * @return             The sorted list of checkpoints.
      */
-    static 
+    static
     list sort(list const& checks);
 
     /**
@@ -36,7 +36,7 @@ public:
      * @param[in]  height  The height of checkpoint.
      * @param[in]  checks  The list of checkpoints.
      */
-    static 
+    static
     bool covered(size_t height, list const& checks);
 
     /**
@@ -45,7 +45,7 @@ public:
      * @param[in]  height  The height of checkpoint.
      * @param[in]  checks  The set of checkpoints.
      */
-    static 
+    static
     bool validate(hash_digest const& hash, size_t height, list const& checks);
 
     checkpoint();
@@ -84,10 +84,10 @@ public:
 
     bool operator==(checkpoint const& x) const;
 
-    friend 
+    friend
     std::istream& operator>>(std::istream& input, checkpoint& argument);
 
-    friend 
+    friend
     std::ostream& operator<<(std::ostream& output, checkpoint const& argument);
 
 private:

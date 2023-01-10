@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -30,7 +30,7 @@ bool is_base16(char c) {
         ('a' <= c && c <= 'f');
 }
 
-static 
+static
 unsigned from_hex(char c) {
     if ('A' <= c && c <= 'F') {
         return 10 + c - 'A';

@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -150,7 +150,7 @@ uint64_t poly_mod(data_chunk const& v) {
  *
  * Assume the input is a character.
  */
-inline 
+inline
 uint8_t lower_case(uint8_t c) {
     // ASCII black magic.
     return c | 0x20u;
