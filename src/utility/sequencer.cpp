@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -51,7 +51,7 @@ void sequencer::lock(action&& handler) {
         if (executing_) {
             actions_.push(std::move(handler));
             return;
-        } 
+        }
         executing_ = true;
     } //unlock()
     ///////////////////////////////////////////////////////////////////////
@@ -76,7 +76,7 @@ void sequencer::unlock() {
         if (actions_.empty()) {
             executing_ = false;
             return;
-        } 
+        }
 
         executing_ = true;
         swap(handler, actions_.front());

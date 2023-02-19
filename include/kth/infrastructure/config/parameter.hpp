@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -67,19 +67,19 @@ public:
     /**
      * Sentinel - the option is not a positional argument.
      */
-    static 
+    static
     int const not_positional;
 
     /**
      * Sentinel - there is no short name.
      */
-    static 
+    static
     char const no_short_name;
 
     /**
      * The character used to prefix command line options.
      */
-    static 
+    static
     char const option_prefix_char;
 
     /**

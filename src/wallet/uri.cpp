@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -15,21 +15,21 @@ namespace kth::infrastructure::wallet {
 // These character classification functions correspond to RFC 3986.
 // They avoid C standard library character classification functions,
 // since those give different answers based on the current locale.
-static 
+static
 bool is_alpha(char c) {
     return
         ('A' <= c && c <= 'Z') ||
         ('a' <= c && c <= 'z');
 }
 
-static 
+static
 bool is_scheme(char c) {
     return
         is_alpha(c) || ('0' <= c && c <= '9') ||
         '+' == c || '-' == c || '.' == c;
 }
 
-static 
+static
 bool is_path_char(char c) {
     return
         is_alpha(c) || ('0' <= c && c <= '9') ||
@@ -40,24 +40,24 @@ bool is_path_char(char c) {
         ':' == c || '@' == c;
 }
 
-static 
+static
 bool is_path(char c) {
     return is_path_char(c) || '/' == c;
 }
 
-static 
+static
 bool is_query(char c) {
     return is_path_char(c) || '/' == c || '?' == c;
 }
 
-static 
+static
 bool is_query_char(char c) {
     return is_query(c) && '&' != c && '=' != c;
 }
 
 // Verifies that all RFC 3986 escape sequences in a string are valid, and that
 // all characters belong to the given class.
-static 
+static
 bool validate(std::string const& in, bool (*is_valid)(char const)) {
     auto i = in.begin();
     while (in.end() != i) {
@@ -78,7 +78,7 @@ bool validate(std::string const& in, bool (*is_valid)(char const)) {
 }
 
 // Decodes all RFC 3986 escape sequences in a string.
-static 
+static
 std::string unescape(std::string const& in) {
     // Do the conversion:
     std::string out;
@@ -101,7 +101,7 @@ std::string unescape(std::string const& in) {
 
 // URI encodes a string (i.e. percent encoding).
 // is_valid a function returning true for acceptable characters.
-static 
+static
 std::string escape(std::string const& in, bool (*is_valid)(char)) {
     std::ostringstream stream;
     stream << std::hex << std::uppercase << std::setfill('0');

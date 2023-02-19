@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -27,7 +27,7 @@ public:
 
     network_address() = default;
 
-    constexpr 
+    constexpr
     network_address(uint32_t timestamp, uint64_t services, ip_address const& ip, uint16_t port)
         : timestamp_(timestamp)
         , services_(services)
@@ -99,21 +99,21 @@ public:
     bool is_valid() const;
     void reset();
 
-    static 
+    static
     network_address factory_from_data(data_chunk const& data, uint32_t version, bool with_timestamp);
-    
-    static 
+
+    static
     network_address factory_from_data(data_source& stream, uint32_t version, bool with_timestamp);
-    
+
     template <typename R>
     static
-    network_address factory_from_data(R& source, uint32_t version, bool with_timestamp) { 
+    network_address factory_from_data(R& source, uint32_t version, bool with_timestamp) {
         network_address instance;
         instance.from_data(source, version, with_timestamp);
         return instance;
     }
 
-    static 
+    static
     size_t satoshi_fixed_size(uint32_t version, bool with_timestamp);
 
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,7 +16,7 @@
 #include <windows.h>
 
 // Get Windows input handle.
-static 
+static
 LPVOID get_input_handle() {
     auto handle = GetStdHandle(STD_INPUT_HANDLE);
     if (handle == INVALID_HANDLE_VALUE || handle == nullptr)

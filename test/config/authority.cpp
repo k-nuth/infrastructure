@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -26,13 +26,13 @@ using namespace boost::program_options;
 #define KI_AUTHORITY_IPV6_BOGUS_IPV4_ADDRESS "[::ffff:0:39]:256"
 
 // tools.ietf.org/html/rfc4291#section-2.5.2
-constexpr 
+constexpr
 message::ip_address test_unspecified_ip_address = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 // tools.ietf.org/html/rfc4291#section-2.5.5.2
-constexpr 
+constexpr
 message::ip_address test_mapped_ip_address = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0xff, 0xff, 0x01, 0x02, 0xf0, 0x01};

@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -98,7 +98,7 @@ TEST_CASE("checkpoint  istream  empty  expected", "[checkpoint  istream]") {
 
 // Start Boost Suite: checkpoint  ostream
 
-static 
+static
 checkpoint::list const test_checkpoints_list({
     checkpoint{CHECKPOINT_A},
     checkpoint{CHECKPOINT_B},

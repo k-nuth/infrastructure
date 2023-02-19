@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -30,7 +30,7 @@ using namespace boost::program_options;
 
 // host:    [2001:db8::2] or  2001:db8::2  or 1.2.240.1
 // returns: [2001:db8::2] or [2001:db8::2] or 1.2.240.1
-static 
+static
 std::string to_host_name(std::string const& host) {
     if (host.find(':') == std::string::npos || host.find('[') == 0) {
         return host;
@@ -42,7 +42,7 @@ std::string to_host_name(std::string const& host) {
 }
 
 // host: [2001:db8::2] or 2001:db8::2 or 1.2.240.1
-static 
+static
 std::string to_authority(std::string const& host, uint16_t port) {
     std::stringstream authority;
     authority << to_host_name(host);
@@ -53,19 +53,19 @@ std::string to_authority(std::string const& host, uint16_t port) {
     return authority.str();
 }
 
-static 
+static
 std::string to_ipv6(std::string const& ipv4_address) {
     return std::string("::ffff:") + ipv4_address;
 }
 
-static 
+static
 asio::ipv6 to_ipv6(asio::ipv4 const& ipv4_address) {
     // Create an IPv6 mapped IPv4 address via serialization.
     auto const ipv6 = to_ipv6(ipv4_address.to_string());
     return asio::ipv6::from_string(ipv6);
 }
 
-static 
+static
 asio::ipv6 to_ipv6(asio::address const& ip_address) {
     if (ip_address.is_v6()) {
         return ip_address.to_v6();
@@ -75,7 +75,7 @@ asio::ipv6 to_ipv6(asio::address const& ip_address) {
     return to_ipv6(ip_address.to_v4());
 }
 
-static 
+static
 std::string to_ipv4_hostname(asio::address const& ip_address) {
     // std::regex requires gcc 4.9, so we are using boost::regex for now.
     // Knuth: we use std::regex, becase we drop support por GCC<5
@@ -91,7 +91,7 @@ std::string to_ipv4_hostname(asio::address const& ip_address) {
     return match[1];
 }
 
-static 
+static
 std::string to_ipv6_hostname(asio::address const& ip_address) {
     // IPv6 URLs use a bracketed IPv6 address, see rfc2732.
     // auto const hostname = boost::format("[%1%]") % to_ipv6(ip_address);
@@ -113,7 +113,7 @@ authority::authority(message::network_address const& address)
     : authority(address.ip(), address.port())
 {}
 
-static 
+static
 asio::ipv6 to_boost_address(message::ip_address const& in) {
     asio::ipv6::bytes_type bytes;
     KTH_ASSERT(bytes.size() == in.size());
@@ -122,7 +122,7 @@ asio::ipv6 to_boost_address(message::ip_address const& in) {
     return out;
 }
 
-static 
+static
 message::ip_address to_bc_address(const asio::ipv6& in) {
     message::ip_address out;
     auto const bytes = in.to_bytes();
@@ -202,7 +202,7 @@ std::istream& operator>>(std::istream& input, authority& argument) {
 
     // std::regex requires gcc 4.9, so we are using boost::regex for now.
     // Knuth: we use std::regex, becase we drop support por GCC<5
-    static 
+    static
     regex const regular(R"(^(([0-9\.]+)|\[([0-9a-f:\.]+)\])(:([0-9]{1,5}))?$)");
 
     sregex_iterator it(value.begin(), value.end(), regular), end;

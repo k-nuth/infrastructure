@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2016-2022 Knuth Project developers.
+﻿// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -23,7 +23,7 @@ public:
      * Initialize stdio to use utf8 translation on Windows.
      * @param[in]  size  The stream buffer size.
      */
-    static 
+    static
     void initialize(size_t size);
 
 protected:
