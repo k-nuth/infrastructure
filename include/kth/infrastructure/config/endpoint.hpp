@@ -10,11 +10,12 @@
 #include <string>
 #include <vector>
 
-#include <kth/infrastructure/utility/asio_helper.hpp>
+#include <fmt/ostream.h>
 
 #include <kth/infrastructure/config/authority.hpp>
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/formats/base_16.hpp>
+#include <kth/infrastructure/utility/asio_helper.hpp>
 
 #if defined(KTH_LOG_LIBRARY_SPDLOG)
 #include <spdlog/fmt/ostr.h>
@@ -126,7 +127,7 @@ public:
      * @param[out]  argument  The object to receive the read value.
      * @return                The input stream reference.
      */
-    friend 
+    friend
     std::istream& operator>>(std::istream& input, endpoint& argument);
 
     /**
@@ -135,7 +136,7 @@ public:
      * @param[out]  argument  The object from which to obtain the value.
      * @return                The output stream reference.
      */
-    // friend 
+    // friend
     // std::ostream& operator<<(std::ostream& output, endpoint const& argument);
 
     template <typename OStream>
@@ -160,5 +161,7 @@ private:
 };
 
 } // namespace kth::infrastructure::config
+
+template <> struct fmt::formatter<kth::infrastructure::config::endpoint> : ostream_formatter {};
 
 #endif

@@ -10,6 +10,8 @@
 #include <string>
 #include <vector>
 
+#include <fmt/ostream.h>
+
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/message/network_address.hpp>
 #include <kth/infrastructure/utility/asio.hpp>
@@ -149,7 +151,7 @@ public:
      * @param[out]  argument  The object to receive the read value.
      * @return                The input stream reference.
      */
-    friend 
+    friend
     std::istream& operator>>(std::istream& input, authority& argument);
 
     /**
@@ -158,7 +160,7 @@ public:
      * @param[out]  argument  The object from which to obtain the value.
      * @return                The output stream reference.
      */
-    friend 
+    friend
     std::ostream& operator<<(std::ostream& output, authority const& argument);
 
 private:
@@ -167,5 +169,7 @@ private:
 };
 
 } // namespace kth::infrastructure::config
+
+template <> struct fmt::formatter<kth::infrastructure::config::authority> : ostream_formatter {};
 
 #endif

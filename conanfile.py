@@ -76,7 +76,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         # self.requires("fmt/8.1.1")
 
         if self.options.tests:
-            self.requires("catch2/3.2.1")
+            self.requires("catch2/3.3.1")
 
         if self.options.log == "binlog":
             self.requires("binlog/2020.02.29@kth/stable")

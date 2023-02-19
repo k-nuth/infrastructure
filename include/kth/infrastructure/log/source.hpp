@@ -7,6 +7,9 @@
 
 #include <string>
 
+#include <fmt/ostream.h>
+#include <fmt/std.h>
+
 #if defined(KTH_LOG_LIBRARY_BINLOG)
 #include <binlog/binlog.hpp>
 #elif defined(KTH_LOG_LIBRARY_BOOST)
