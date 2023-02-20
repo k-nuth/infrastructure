@@ -24,6 +24,15 @@ hash160::hash160(short_hash const& value)
     : value_(value)
 {}
 
+// hash160::hash160(byte_span value) {
+//     if (value.size() != value_.size()) {
+//         using namespace boost::program_options;
+//         BOOST_THROW_EXCEPTION(invalid_option_value("byte array size is not 20"));
+//     }
+
+//     std::copy_n(value.begin(), value_.size(), value_.begin());
+// }
+
 hash160::operator short_hash const&() const {
     return value_;
 }
