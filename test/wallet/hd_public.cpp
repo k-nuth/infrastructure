@@ -8,7 +8,7 @@
 using namespace kth;
 using namespace kth::infrastructure::wallet;
 
-// Start Boost Suite: hd public tests
+// Start Test Suite: hd public tests
 
 // TODO: test altchain
 
@@ -77,4 +77,4 @@ TEST_CASE("hd public  derive public  long seed  expected", "[hd public tests]") 
     REQUIRE(m0xH1yH2_pub.encoded() == "xpub6FnCn6nSzZAw5Tw7cgR9bi15UV96gLZhjDstkXXxvCLsUXBGXPdSnLFbdpq8p9HmGsApME5hQTZ3emM2rnY5agb9rXpVGyy3bdW6EEgAtqt");
 }
 
-// End Boost Suite
+// End Test Suite

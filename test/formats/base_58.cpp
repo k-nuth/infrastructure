@@ -7,7 +7,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: base 58 tests
+// Start Test Suite: base 58 tests
 
 void encdec_test(std::string const& hex, std::string const& encoded) {
     data_chunk data, decoded;
@@ -79,4 +79,4 @@ TEST_CASE("base58 array test", "[base 58 tests]") {
     REQUIRE(converted == expected);
 }
 
-// End Boost Suite
+// End Test Suite

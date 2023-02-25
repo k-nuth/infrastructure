@@ -8,7 +8,7 @@
 using namespace kth;
 using namespace kth::infrastructure;
 
-// Start Boost Suite: serializer tests
+// Start Test Suite: serializer tests
 
 TEST_CASE("serializer - roundtrip serialize deserialize", "[serializer tests]") {
     data_chunk data(1 + 2 + 4 + 8 + 4 + 4 + 3 + 7);
@@ -466,4 +466,4 @@ TEST_CASE("serializer - read bytes to eof", "[serializer tests]") {
     REQUIRE( ! source == false);
 }
 
-// End Boost Suite
+// End Test Suite

@@ -7,7 +7,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: base 16 tests
+// Start Test Suite: base 16 tests
 
 TEST_CASE("base16 literal test", "[base 16 tests]") {
     auto result = base16_literal("01ff42bc");
@@ -61,4 +61,4 @@ TEST_CASE("base16 array test", "[base 16 tests]") {
     REQUIRE(converted == expected);
 }
 
-// End Boost Suite
+// End Test Suite

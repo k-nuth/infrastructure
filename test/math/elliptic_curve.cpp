@@ -7,7 +7,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: elliptic curve tests
+// Start Test Suite: elliptic curve tests
 
 // Scenario 1
 #define SECRET1 "8010b1bb119ad37d4b65a1022a314897b1b3614b345974332cb1b9582cf03536"
@@ -157,4 +157,4 @@ TEST_CASE("elliptic curve  ec multiply test", "[elliptic curve tests]") {
     REQUIRE(std::equal(public1.begin(), public1.end(), public2.begin()));
 }
 
-// End Boost Suite
+// End Test Suite

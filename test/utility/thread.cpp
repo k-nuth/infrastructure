@@ -26,7 +26,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: thread tests
+// Start Test Suite: thread tests
 
 static int get_thread_priority_test() {
 #if defined(_WIN32)
@@ -94,4 +94,4 @@ TEST_CASE("thread  set thread priority  invalid  throws invalid argument", "[thr
     REQUIRE_THROWS_AS(set_priority(static_cast<thread_priority>(42)), std::invalid_argument);
 }
 
-// End Boost Suite
+// End Test Suite

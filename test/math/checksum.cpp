@@ -7,7 +7,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: checksum tests
+// Start Test Suite: checksum tests
 
 // TODO: add append_checksum<> tests.
 // TODO: add build_checked_array<> tests.
@@ -136,4 +136,4 @@ TEST_CASE("checksum  verify checksum  invalidated  false", "[checksum tests]") {
     REQUIRE( ! verify_checksum(data));
 }
 
-// End Boost Suite
+// End Test Suite

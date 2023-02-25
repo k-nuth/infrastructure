@@ -10,7 +10,7 @@
 using namespace kth;
 using namespace kth::infrastructure::wallet;
 
-// Start Boost Suite: mnemonic tests
+// Start Test Suite: mnemonic tests
 
 TEST_CASE("mnemonic  decode mnemonic  no passphrase", "[mnemonic tests]") {
     for (auto const& vector: mnemonic_no_passphrase) {
@@ -198,4 +198,4 @@ TEST_CASE("mnemonic  dictionary  zh Hans Hant  intersection", "[mnemonic tests]"
     REQUIRE(intersection == 1275u);
 }
 
-// End Boost Suite
+// End Test Suite

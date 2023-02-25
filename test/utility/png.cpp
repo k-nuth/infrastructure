@@ -8,7 +8,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: png tests
+// Start Test Suite: png tests
 
 #ifdef WITH_PNG
 
@@ -130,4 +130,4 @@ TEST_CASE("png  size one  success", "[png tests]") {
 
 #endif // WITH_PNG
 
-// End Boost Suite
+// End Test Suite

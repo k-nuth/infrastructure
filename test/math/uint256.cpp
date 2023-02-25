@@ -10,7 +10,7 @@
 
 // using namespace kth;
 
-// // Start Boost Suite: uint256 tests
+// // Start Test Suite: uint256 tests
 
 // #define MAX_HASH \
 // "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
@@ -923,4 +923,4 @@
 //     REQUIRE(quotient[3] == 0x00ffffffffffffff);
 // }
 
-// // End Boost Suite
+// // End Test Suite

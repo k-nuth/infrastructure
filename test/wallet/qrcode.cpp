@@ -10,7 +10,7 @@
 using namespace kth;
 using namespace kth::infrastructure::wallet;
 
-// Start Boost Suite: qrcode tests
+// Start Test Suite: qrcode tests
 
 #ifdef WITH_QRENCODE
 
@@ -100,4 +100,4 @@ TEST_CASE("qrcode  invoke  qrencode data  success", "[qrcode tests]") {
 
 #endif // WITH_QRENCODE
 
-// End Boost Suite
+// End Test Suite

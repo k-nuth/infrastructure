@@ -9,7 +9,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: collection tests
+// Start Test Suite: collection tests
 
 typedef std::vector<uint8_t> collection;
 
@@ -140,4 +140,4 @@ TEST_CASE("collection  pop  multiple  popped and returns expected", "[collection
     REQUIRE(value == expected);
 }
 
-// End Boost Suite
+// End Test Suite

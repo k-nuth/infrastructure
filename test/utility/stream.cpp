@@ -11,7 +11,7 @@
 using namespace kth;
 using namespace kth::infrastructure;
 
-// Start Boost Suite: stream tests
+// Start Test Suite: stream tests
 
 TEST_CASE("stream - is exhausted initialized empty stream returns true", "[stream tests]") {
     std::stringstream stream;
@@ -451,4 +451,4 @@ TEST_CASE("stream - read bytes to eof", "[stream tests]") {
     REQUIRE( ! source == false);
 }
 
-// End Boost Suite
+// End Test Suite
