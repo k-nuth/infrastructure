@@ -140,6 +140,7 @@ enum error_code_t {
     transaction_embedded_sigop_limit = 55,
     sequence_locked = 78,
     transaction_weight_limit = 83,
+    transaction_version_out_of_range = 87,
 
     // connect input
     invalid_script = 39,
