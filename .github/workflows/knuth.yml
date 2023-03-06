@@ -228,6 +228,8 @@ jobs:
 
           # conan info . --only None
           # conan info . --only None -s compiler=gcc -s compiler.version=5 -s compiler.libcxx=libstdc++
+
+          conan info . --only requires  --json -s compiler=gcc -s compiler.version=5 -s compiler.libcxx=libstdc++
           python ci_utils/process_conan_reqs.py
 
           $ErrorActionPreference = 'SilentlyContinue'
