@@ -129,6 +129,7 @@ std::string error_category_impl::message(int ev) const noexcept {
         { error::transaction_embedded_sigop_limit, "too many transaction embedded signature operations" },
         { error::sequence_locked, "transaction currently locked" },
         { error::transaction_weight_limit, "transaction weight limit exceeded" },
+        { error::transaction_version_out_of_range, "transaction version out of range" },
 
         // connect input
         { error::invalid_script, "invalid script" },

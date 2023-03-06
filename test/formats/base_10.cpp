@@ -21,7 +21,7 @@
 
 // using namespace kth;
 
-// Start Boost Suite: base 10 tests
+// Start Test Suite: base 10 tests
 
 // #define TEST_AMOUNT(NAME, EXPECTED, ...) \
 // BOOST_AUTO_TEST_CASE(parse_amount_##NAME##_test) \
@@ -103,4 +103,4 @@
 // TEST_FORMAT(leading_zero, "0.42", 42000, mbtc_decimal_places)
 // TEST_FORMAT(internal_leading_zero, "0.042", 4200, mbtc_decimal_places)
 
-// End Boost Suite
+// End Test Suite

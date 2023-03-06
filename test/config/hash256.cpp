@@ -9,9 +9,9 @@
 using namespace kth;
 using namespace kth::infrastructure::config;
 
-// Start Boost Suite: hash256 tests
+// Start Test Suite: hash256 tests
 
-// Start Boost Suite: hash256  construct
+// Start Test Suite: hash256  construct
 
 TEST_CASE("hash256  construct  default  null hash", "[hash256  construct]") {
     const hash256 uninitialized_hash;
@@ -20,6 +20,6 @@ TEST_CASE("hash256  construct  default  null hash", "[hash256  construct]") {
     REQUIRE(expectation == result);
 }
 
-// End Boost Suite
+// End Test Suite
 
-// End Boost Suite
+// End Test Suite

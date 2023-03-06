@@ -8,7 +8,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: base 64 tests
+// Start Test Suite: base 64 tests
 
 #define BASE64_MURRAY "TXVycmF5IFJvdGhiYXJk"
 #define BASE64_DATA_MURRAY \
@@ -63,4 +63,4 @@ TEST_CASE("decode base64 invalid test", "[base 64 tests]") {
     REQUIRE( ! decode_base64(result, "!@#$%^&*()"));
 }
 
-// End Boost Suite
+// End Test Suite

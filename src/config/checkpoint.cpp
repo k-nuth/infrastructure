@@ -21,9 +21,9 @@ namespace kth::infrastructure::config {
 // using namespace boost;
 using namespace boost::program_options;
 
-checkpoint::checkpoint()
-    : hash_(kth::null_hash)
-{}
+// checkpoint::checkpoint()
+//     : hash_(kth::null_hash)
+// {}
 
 checkpoint::checkpoint(std::string const& value)
     : checkpoint()
@@ -31,9 +31,9 @@ checkpoint::checkpoint(std::string const& value)
     std::stringstream(value) >> *this;
 }
 
-checkpoint::checkpoint(checkpoint const& x)
-    : hash_(x.hash()), height_(x.height())
-{}
+// checkpoint::checkpoint(checkpoint const& x)
+//     : hash_(x.hash()), height_(x.height())
+// {}
 
 // This is intended for static initialization (i.e. of the internal defaults).
 checkpoint::checkpoint(std::string const& hash, size_t height)
@@ -85,16 +85,14 @@ bool checkpoint::validate(hash_digest const& hash, size_t height, list const& ch
     return it == checks.end();
 }
 
-bool checkpoint::operator==(checkpoint const& x) const {
-    return height_ == x.height_ && hash_ == x.hash_;
-}
+// bool checkpoint::operator==(checkpoint const& x) const {
+//     return height_ == x.height_ && hash_ == x.hash_;
+// }
 
 std::istream& operator>>(std::istream& input, checkpoint& argument) {
     std::string value;
     input >> value;
 
-    // std::regex requires gcc 4.9, so we are using boost::regex for now.
-    // Knuth: we use std::regex, becase we drop support por GCC<5
     static
     std::regex const regular("^([0-9a-f]{64})(:([0-9]{1,20}))?$");
 

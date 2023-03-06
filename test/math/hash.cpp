@@ -9,7 +9,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: hash tests
+// Start Test Suite: hash tests
 
 TEST_CASE("sha1 hash test", "[hash tests]") {
     for (auto const& result: sha1_tests) {
@@ -66,4 +66,4 @@ TEST_CASE("pkcs5 pbkdf2 hmac sha512 test", "[hash tests]") {
     }
 }
 
-// End Boost Suite
+// End Test Suite

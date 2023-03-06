@@ -3,7 +3,7 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 import os
-from conans import CMake
+from conan import CMake
 from kthbuild import option_on_off, march_conan_manip, pass_march_to_compiler
 from kthbuild import KnuthConanFile
 
@@ -62,26 +62,28 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "asio_standalone": False,
     }
 
-    generators = "cmake"
+    # generators = "cmake"
+    generators = "CMakeToolchain", "CMakeDeps"
+
     exports = "conan_*", "ci_utils/*"
     exports_sources = "src/*", "CMakeLists.txt", "cmake/*", "kth-infrastructureConfig.cmake.in", "include/*", "test/*", "examples/*", "test_new/*"
     package_files = "build/lkth-infrastructure.a"
-    build_policy = "missing"
+    # build_policy = "missing"
+
+    def build_requirements(self):
+        if self.options.tests:
+            self.test_requires("catch2/3.3.1")
 
     def requirements(self):
         self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
 
-        self.requires("boost/1.80.0")
-        # self.requires("fmt/9.1.0")
-        self.requires("fmt/8.1.1")
-
-        if self.options.tests:
-            self.requires("catch2/3.0.1")
+        self.requires("boost/1.81.0")
+        self.requires("fmt/9.1.0")
 
         if self.options.log == "binlog":
             self.requires("binlog/2020.02.29@kth/stable")
         elif self.options.log == "spdlog":
-            self.requires("spdlog/1.10.0")
+            self.requires("spdlog/1.11.0")
 
         if self.options.with_png:
             self.requires("libpng/1.6.34@kth/stable")
@@ -90,10 +92,12 @@ class KnuthInfrastructureConan(KnuthConanFile):
             self.requires("libqrencode/4.0.0@kth/stable")
 
         if self.options.asio_standalone:
-            self.requires("asio/1.22.1")
+            self.requires("asio/1.24.0")
 
     def validate(self):
         KnuthConanFile.validate(self)
+        if self.info.settings.compiler.cppstd:
+            check_min_cppstd(self, "20")
 
     def config_options(self):
         KnuthConanFile.config_options(self)
@@ -116,6 +120,16 @@ class KnuthInfrastructureConan(KnuthConanFile):
     def package_id(self):
         KnuthConanFile.package_id(self)
 
+    def layout(self):
+        cmake_layout(self)
+
+    def generate(self):
+        tc = CMakeToolchain(self)
+        # tc.variables["CMAKE_VERBOSE_MAKEFILE"] = True
+        tc.generate()
+        tc = CMakeDeps(self)
+        tc.generate()
+
     def build(self):
         cmake = self.cmake_basis()
         cmake.definitions["WITH_ICU"] = option_on_off(self.options.with_icu)
@@ -126,7 +140,8 @@ class KnuthInfrastructureConan(KnuthConanFile):
         cmake.definitions["LOG_LIBRARY"] = self.options.log
         cmake.definitions["CONAN_DISABLE_CHECK_COMPILER"] = option_on_off(True)
 
-        cmake.configure(source_dir=self.source_folder)
+        # cmake.configure(source_dir=self.source_folder)
+        cmake.configure()
 
         if not self.options.cmake_export_compile_commands:
             cmake.build()

@@ -10,11 +10,12 @@
 #include <string>
 #include <vector>
 
-#include <kth/infrastructure/utility/asio_helper.hpp>
+#include <fmt/ostream.h>
 
 #include <kth/infrastructure/config/authority.hpp>
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/formats/base_16.hpp>
+#include <kth/infrastructure/utility/asio_helper.hpp>
 
 #if defined(KTH_LOG_LIBRARY_SPDLOG)
 #include <spdlog/fmt/ostr.h>
@@ -160,5 +161,7 @@ private:
 };
 
 } // namespace kth::infrastructure::config
+
+template <> struct fmt::formatter<kth::infrastructure::config::endpoint> : ostream_formatter {};
 
 #endif

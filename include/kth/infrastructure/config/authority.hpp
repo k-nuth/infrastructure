@@ -10,6 +10,8 @@
 #include <string>
 #include <vector>
 
+#include <fmt/ostream.h>
+
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/message/network_address.hpp>
 #include <kth/infrastructure/utility/asio.hpp>
@@ -167,5 +169,7 @@ private:
 };
 
 } // namespace kth::infrastructure::config
+
+template <> struct fmt::formatter<kth::infrastructure::config::authority> : ostream_formatter {};
 
 #endif

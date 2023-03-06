@@ -5,7 +5,9 @@
 #include <sstream>
 
 #include <boost/program_options.hpp>
-#include <test_helpers.hpp>
+// #include <test_helpers.hpp>
+
+#include <catch2/catch_test_macros.hpp>
 
 #include <kth/infrastructure.hpp>
 
@@ -14,7 +16,7 @@ using namespace kth::infrastructure;
 using namespace kth::infrastructure::config;
 using namespace boost::program_options;
 
-// Start Boost Suite: authority tests
+// Start Test Suite: authority tests
 
 // tools.ietf.org/html/rfc4291#section-2.2
 #define KI_AUTHORITY_IPV4_ADDRESS "1.2.240.1"
@@ -58,21 +60,21 @@ static bool net_equal(message::network_address const& a, message::network_addres
 
 // ------------------------------------------------------------------------- //
 
-// Start Boost Suite: authority  port
+// Start Test Suite: authority port
 
-TEST_CASE("authority  port  default  zero", "[authority  port]") {
+TEST_CASE("authority port default zero", "[authority port]") {
     const authority host;
     REQUIRE(host.port() == 0u);
 }
 
-TEST_CASE("authority  port  copy  expected", "[authority  port]") {
+TEST_CASE("authority port copy expected", "[authority port]") {
     const uint16_t expected_port = 42;
     const authority other(test_ipv6_address, expected_port);
     const authority host(other);
     REQUIRE(host.port() == expected_port);
 }
 
-TEST_CASE("authority  port  ipv4 authority  expected", "[authority  port]") {
+TEST_CASE("authority port ipv4 authority expected", "[authority port]") {
     const uint16_t expected_port = 42;
     std::stringstream address;
     address << KI_AUTHORITY_IPV4_ADDRESS ":" << expected_port;
@@ -112,24 +114,24 @@ TEST_CASE("authority  port  hostname  expected", "[authority  port]") {
 
 TEST_CASE("authority  port  boost address  expected", "[authority  port]") {
     const uint16_t expected_port = 42;
-    auto const address = asio::address::from_string(KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
+    auto const address = kth::asio::address::from_string(KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
     const authority host(address, expected_port);
     REQUIRE(host.port() == expected_port);
 }
 
 TEST_CASE("authority  port  boost endpoint  expected", "[authority  port]") {
     const uint16_t expected_port = 42;
-    auto const address = asio::address::from_string(KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
-    asio::endpoint tcp_endpoint(address, expected_port);
+    auto const address = kth::asio::address::from_string(KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
+    kth::asio::endpoint tcp_endpoint(address, expected_port);
     const authority host(tcp_endpoint);
     REQUIRE(host.port() == expected_port);
 }
 
-// End Boost Suite
+// End Test Suite
 
 // ------------------------------------------------------------------------- //
 
-// Start Boost Suite: authority  ip
+// Start Test Suite: authority  ip
 
 TEST_CASE("authority  bool  default  false", "[authority  ip]") {
     const authority host;
@@ -146,11 +148,11 @@ TEST_CASE("authority  bool  nonzero port  true", "[authority  ip]") {
     REQUIRE(host);
 }
 
-// End Boost Suite
+// End Test Suite
 
 // ------------------------------------------------------------------------- //
 
-// Start Boost Suite: authority  ip
+// Start Test Suite: authority  ip
 
 TEST_CASE("authority  ip  default  unspecified", "[authority  ip]") {
     const authority host;
@@ -218,23 +220,23 @@ TEST_CASE("authority  ip  ipv6 hostname  expected", "[authority  ip]") {
 }
 
 TEST_CASE("authority  ip  boost address  expected", "[authority  ip]") {
-    auto const address = asio::address::from_string(KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
+    auto const address = kth::asio::address::from_string(KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
     const authority host(address, 42);
     REQUIRE(ip_equal(host.ip(), test_ipv6_address));
 }
 
 TEST_CASE("authority  ip  boost endpoint  expected", "[authority  ip]") {
-    auto const address = asio::address::from_string(KI_AUTHORITY_IPV4_ADDRESS);
-    asio::endpoint tcp_endpoint(address, 42);
+    auto const address = kth::asio::address::from_string(KI_AUTHORITY_IPV4_ADDRESS);
+    kth::asio::endpoint tcp_endpoint(address, 42);
     const authority host(tcp_endpoint);
     REQUIRE(ip_equal(host.ip(), test_mapped_ip_address));
 }
 
-// End Boost Suite
+// End Test Suite
 
 // ------------------------------------------------------------------------- //
 
-// Start Boost Suite: authority  to hostname
+// Start Test Suite: authority  to hostname
 
 TEST_CASE("authority  to hostname  default  ipv6 unspecified", "[authority  to hostname]") {
     const authority host;
@@ -259,11 +261,11 @@ TEST_CASE("authority  to hostname  ipv6 address  ipv6 compressed", "[authority  
     REQUIRE(host.to_hostname() == "[" KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS "]");
 }
 
-// End Boost Suite
+// End Test Suite
 
 // ------------------------------------------------------------------------- //
 
-// Start Boost Suite: authority  to network address
+// Start Test Suite: authority  to network address
 
 TEST_CASE("authority  to network address  default  ipv6 unspecified", "[authority  to network address]") {
     message::network_address const expected_address {
@@ -301,11 +303,11 @@ TEST_CASE("authority  to network address  ipv6 address  ipv6 compressed", "[auth
     REQUIRE(net_equal(host.to_network_address(), expected_address));
 }
 
-// End Boost Suite
+// End Test Suite
 
 // ------------------------------------------------------------------------- //
 
-// Start Boost Suite: authority  to string
+// Start Test Suite: authority  to string
 
 TEST_CASE("authority  to string  default  unspecified", "[authority  to string]") {
     const authority host;
@@ -378,11 +380,11 @@ TEST_CASE("authority  to string  ipv6 compatible port  expected", "[authority  t
     REQUIRE(host.to_string() == line);
 }
 
-// End Boost Suite
+// End Test Suite
 
 // ------------------------------------------------------------------------- //
 
-// Start Boost Suite: authority  equality
+// Start Test Suite: authority  equality
 
 TEST_CASE("authority  equality  default default  true", "[authority  equality]") {
     const authority host1;
@@ -433,11 +435,11 @@ TEST_CASE("authority  equality  compatible alternative  true", "[authority  equa
     REQUIRE(host1 == host2);
 }
 
-// End Boost Suite
+// End Test Suite
 
 // ------------------------------------------------------------------------- //
 
-// Start Boost Suite: authority  inequality
+// Start Test Suite: authority  inequality
 
 TEST_CASE("authority  inequality  default default  false", "[authority  inequality]") {
     const authority host1;
@@ -457,11 +459,11 @@ TEST_CASE("authority  inequality  ipv6 ipv6  false", "[authority  inequality]") 
     REQUIRE( ! (host1 != host2));
 }
 
-// End Boost Suite
+// End Test Suite
 
 // ------------------------------------------------------------------------- //
 
-// Start Boost Suite: authority  construct
+// Start Test Suite: authority  construct
 
 TEST_CASE("authority  construct  bogus ip  throws invalid option", "[authority  construct]") {
     REQUIRE_THROWS_AS([](){authority host("bogus");}(), invalid_option_value);
@@ -479,6 +481,6 @@ TEST_CASE("authority  construct  invalid port  throws invalid option", "[authori
     REQUIRE_THROWS_AS([](){authority host("[::]:12345678901");}(), invalid_option_value);
 }
 
-// End Boost Suite
+// End Test Suite
 
-// End Boost Suite
+// End Test Suite

@@ -68,10 +68,10 @@ void load_test_arguments(argument_list& arguments) {
     auto option = *(options.options()[index]); \
     kth::infrastructure::config::parameter parameter
 
-// Start Boost Suite: parameter tests
+// Start Test Suite: parameter tests
 
 // ------------------------------------------------------------------------- //
-// Start Boost Suite: parameter  position
+// Start Test Suite: parameter  position
 
 TEST_CASE("parameter  position  short and long  returns not positional", "[parameter  position]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::short_long);
@@ -118,10 +118,10 @@ TEST_CASE("parameter  position  multitoken  returns expected position", "[parame
     REQUIRE(parameter.position(option, names) == 5);
 }
 
-// End Boost Suite
+// End Test Suite
 
 // ------------------------------------------------------------------------- //
-// Start Boost Suite: parameter  initialize
+// Start Test Suite: parameter  initialize
 
 TEST_CASE("parameter  initialize  short long  sets limit 0", "[parameter  initialize]") {
     CONFIG_TEST_PARAMETER_SETUP(opt::short_long);
@@ -251,10 +251,10 @@ TEST_CASE("parameter  initialize  multitoken  sets unlimited", "[parameter  init
     REQUIRE(parameter.get_description() == "Multi-token int.");
 }
 
-// End Boost Suite
+// End Test Suite
 
 // ------------------------------------------------------------------------- //
-// Start Boost Suite: parameter  short name
+// Start Test Suite: parameter  short name
 
 TEST_CASE("parameter  short name  short and long  returns short", "[parameter  short name]") {
     CONFIG_TEST_PARAMETER_OPTIONS_SETUP(opt::short_long);
@@ -271,6 +271,6 @@ TEST_CASE("parameter  short name  long only  returns null char", "[parameter  sh
     REQUIRE(parameter.short_name(option) == parameter::no_short_name);
 }
 
-// End Boost Suite
+// End Test Suite
 
-// End Boost Suite
+// End Test Suite

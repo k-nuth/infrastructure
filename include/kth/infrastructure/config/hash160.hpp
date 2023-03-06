@@ -28,6 +28,9 @@ public:
     explicit
     hash160(short_hash const& value);
 
+    // explicit
+    // hash160(byte_span value);
+
     /**
      * Overload cast to internal type.
      * @return  This object's value cast to internal type.

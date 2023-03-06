@@ -7,7 +7,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: endian tests
+// Start Test Suite: endian tests
 
 // Stream Tests
 
@@ -137,4 +137,4 @@ TEST_CASE("endian  round trip64  big to big  expected", "[endian tests]") {
     REQUIRE(from_big_endian_unsafe<uint64_t>(big_endian.begin()) == expected);
 }
 
-// End Boost Suite
+// End Test Suite

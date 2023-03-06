@@ -20,7 +20,7 @@
 #include "big_number.hpp"
 #endif
 
-// Start Boost Suite: number tests
+// Start Test Suite: number tests
 
 using namespace kth;
 using namespace kth::infrastructure::machine;
@@ -408,4 +408,4 @@ TEST_CASE("make operator expectations", "[number tests]") {
 }
 #endif
 
-// End Boost Suite
+// End Test Suite

@@ -48,8 +48,8 @@ public:
     static
     bool validate(hash_digest const& hash, size_t height, list const& checks);
 
-    checkpoint();
-    checkpoint(checkpoint const& x);
+    checkpoint() = default;
+    checkpoint(checkpoint const& x) noexcept = default;
 
     /**
      * Initialization constructor.
@@ -82,7 +82,9 @@ public:
      */
     std::string to_string() const;
 
-    bool operator==(checkpoint const& x) const;
+    // bool operator==( const& x) const;
+    friend
+    auto operator<=>(checkpoint const&, checkpoint const&) = default;
 
     friend
     std::istream& operator>>(std::istream& input, checkpoint& argument);
@@ -91,8 +93,8 @@ public:
     std::ostream& operator<<(std::ostream& output, checkpoint const& argument);
 
 private:
-    hash_digest hash_;
-    size_t height_{0};
+    hash_digest hash_ = null_hash;
+    size_t height_ = 0;
 };
 
 } // namespace kth::infrastructure::config

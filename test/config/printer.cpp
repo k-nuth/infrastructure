@@ -14,7 +14,7 @@
 namespace po = boost::program_options;
 using namespace kth::infrastructure::config;
 
-// Start Boost Suite: printer tests
+// Start Test Suite: printer tests
 
 #define CONFIG_APPLICATION "APP"
 #define CONFIG_DESCRIPTION "DESCRIPTION"
@@ -36,7 +36,7 @@ using namespace kth::infrastructure::config;
     REQUIRE(help.get_argument_names().size() == number_of_names)
 
 // ------------------------------------------------------------------------- //
-// Start Boost Suite: printer  columnize
+// Start Test Suite: printer  columnize
 
 TEST_CASE("printer  columnize  paragraph empty width 0  empty", "[printer  columnize]") {
     CONFIG_PRINTER_SETUP();
@@ -106,10 +106,10 @@ TEST_CASE("printer  columnize  excess whitespace width 10  space removed", "[pri
     REQUIRE(rows[2] == "morethantenchars\r\n");
 }
 
-// End Boost Suite
+// End Test Suite
 
 // ------------------------------------------------------------------------- //
-// Start Boost Suite: printer  format parameters table
+// Start Test Suite: printer  format parameters table
 
 TEST_CASE("printer  format parameters table  positional empty  empty", "[printer  format parameters table]") {
     CONFIG_PRINTER_SETUP();
@@ -248,10 +248,10 @@ TEST_CASE("printer  format parameters table  positional three options two matchi
     );
 }
 
-// End Boost Suite
+// End Test Suite
 
 // ------------------------------------------------------------------------- //
-// Start Boost Suite: printer  format usage parameters
+// Start Test Suite: printer  format usage parameters
 
 TEST_CASE("printer  format usage parameters  unsorted two options one arg  sorted", "[printer  format usage parameters]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
@@ -285,10 +285,10 @@ TEST_CASE("printer  format usage parameters  unsorted multiple parameters  sorte
     CONFIG_PRINTER_INITIALIZE(10u, 3u);
     REQUIRE(help.format_usage_parameters() == "[-mst] --longy value [--untoggled] [--defaulty value] [--multy value]... REQUIRED [SIMPLE] [ARRAY]...");
 }
-// End Boost Suite
+// End Test Suite
 
 // ------------------------------------------------------------------------- //
-// Start Boost Suite: printer  generate argument names
+// Start Test Suite: printer  generate argument names
 
 #define BX_PRINTER_GENERATE_ARGUMENT_NAMES(number_of_names) \
     help.generate_argument_names(); \
@@ -374,10 +374,10 @@ TEST_CASE("printer  generate argument names  multiple arguments negative 1  expe
     REQUIRE(names[2].second == -1);
 }
 
-// End Boost Suite
+// End Test Suite
 
 // ------------------------------------------------------------------------- //
-// Start Boost Suite: printer  generate parameters
+// Start Test Suite: printer  generate parameters
 
 #define BX_PRINTER_GENERATE_PARAMETERS(number_of_parameters) \
     help.generate_parameters(); \
@@ -408,10 +408,10 @@ TEST_CASE("printer  generate parameters  unsorted three options  expected sorted
     REQUIRE(parameters[2].get_description() == "Second option description.");
 }
 
-// End Boost Suite
+// End Test Suite
 
 // ------------------------------------------------------------------------- //
-// Start Boost Suite: printer  initialize
+// Start Test Suite: printer  initialize
 
 TEST_CASE("printer  initialize  unsorted multitple options  expected sorted parameters", "[printer  initialize]") {
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
@@ -432,6 +432,6 @@ TEST_CASE("printer  initialize  unsorted multitple options  expected sorted para
     REQUIRE(parameters[2].get_description() == "Second option description.");
 }
 
-// End Boost Suite
+// End Test Suite
 
-// End Boost Suite
+// End Test Suite
