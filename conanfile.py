@@ -66,7 +66,7 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
 
     # exports = "conan_*", "ci_utils/*"
     exports_sources = "src/*", "CMakeLists.txt", "ci_utils/cmake/*", "cmake/*", "kth-infrastructureConfig.cmake.in", "include/*", "test/*", "examples/*", "test_new/*"
-    package_files = "build/lkth-infrastructure.a"
+    # package_files = "build/lkth-infrastructure.a"
 
     def build_requirements(self):
         if self.options.tests:
