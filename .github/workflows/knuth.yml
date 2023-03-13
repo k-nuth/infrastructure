@@ -81,11 +81,11 @@ jobs:
     if: needs.check.outputs.permitted == 'true'
     runs-on: ubuntu-latest
     container:
-      # image: ${{ needs.build-base-docker-image.outputs.name }}
       image: "kthnode/gcc12-ubuntu18.04"
-      credentials:
-        username: ${{ github.repository_owner }}
-        password: ${{ github.token }}
+      # image: ${{ needs.build-base-docker-image.outputs.name }}
+      # credentials:
+      #   username: ${{ github.repository_owner }}
+      #   password: ${{ github.token }}
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
