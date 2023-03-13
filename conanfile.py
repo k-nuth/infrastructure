@@ -3,14 +3,16 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 import os
+from conan import ConanFile
+from conan.tools.build.cppstd import check_min_cppstd
 from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain, cmake_layout
+from conan.tools.files import copy #, apply_conandata_patches, export_conandata_patches, get, rm, rmdir
 from kthbuild import option_on_off, march_conan_manip, pass_march_to_compiler
-from kthbuild import KnuthConanFile
+from kthbuild import KnuthConanFileV2
 
-class KnuthInfrastructureConan(KnuthConanFile):
-    def recipe_dir(self):
-        return os.path.dirname(os.path.abspath(__file__))
+required_conan_version = ">=2.0"
 
+class KnuthInfrastructureConan(KnuthConanFileV2):
     name = "infrastructure"
     license = "http://www.boost.org/users/license.html"
     url = "https://github.com/knuth/infrastructure"
@@ -26,13 +28,13 @@ class KnuthInfrastructureConan(KnuthConanFile):
         "tests": [True, False],
         "examples": [True, False],
 
-        "march_id": "ANY",
+        "march_id": ["ANY"],
         "march_strategy": ["download_if_possible", "optimized", "download_or_fail"],
 
         "verbose": [True, False],
-        "cxxflags": "ANY",
-        "cflags": "ANY",
-        "glibcxx_supports_cxx11_abi": "ANY",
+        "cxxflags": ["ANY"],
+        "cflags": ["ANY"],
+        "glibcxx_supports_cxx11_abi": ["ANY"],
         "cmake_export_compile_commands": [True, False],
         "log": ["boost", "spdlog", "binlog"],
         "asio_standalone": [True, False],
@@ -75,7 +77,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
             self.test_requires("catch2/3.3.1")
 
     def requirements(self):
-        self.requires("secp256k1/0.X@%s/%s" % (self.user, self.channel))
+        self.requires("secp256k1/0.16.0")
 
         self.requires("boost/1.81.0")
         self.requires("fmt/9.1.0")
@@ -95,16 +97,16 @@ class KnuthInfrastructureConan(KnuthConanFile):
             self.requires("asio/1.24.0")
 
     def validate(self):
-        KnuthConanFile.validate(self)
+        KnuthConanFileV2.validate(self)
         if self.info.settings.compiler.cppstd:
             check_min_cppstd(self, "20")
 
     def config_options(self):
-        KnuthConanFile.config_options(self)
+        KnuthConanFileV2.config_options(self)
 
     def configure(self):
         # self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
-        KnuthConanFile.configure(self)
+        KnuthConanFileV2.configure(self)
         self.options["fmt"].header_only = True
 
         if self.options.log == "spdlog":
@@ -118,7 +120,7 @@ class KnuthInfrastructureConan(KnuthConanFile):
         self.output.info("Compiling with log: %s" % (self.options.log,))
 
     def package_id(self):
-        KnuthConanFile.package_id(self)
+        KnuthConanFileV2.package_id(self)
 
     def layout(self):
         cmake_layout(self)
