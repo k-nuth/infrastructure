@@ -189,7 +189,6 @@ include(CheckCXXCompilerFlag)
 # Including common functions
 #------------------------------------------------------------------------------
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/ci_utils/cmake)
-
 include(KnuthTools)
 
 
@@ -253,8 +252,6 @@ endif()
 # Build
 #==============================================================================
 
-# src/kth-infrastructure.la => ${libdir}
-#------------------------------------------------------------------------------
 set(MODE STATIC)
 if (ENABLE_SHARED)
   set(MODE SHARED)
@@ -420,28 +417,28 @@ set(kth_infrastructure_sources
   ${kth_infrastructure_sources_just_knuth}
 )
 
-add_library(kth-infrastructure ${MODE} ${kth_infrastructure_sources})
-set_target_properties(kth-infrastructure PROPERTIES LINKER_LANGUAGE CXX CXX_STANDARD 20 CXX_STANDARD_REQUIRED TRUE)
+add_library(${PROJECT_NAME} ${MODE} ${kth_infrastructure_sources})
+set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX CXX_STANDARD 20 CXX_STANDARD_REQUIRED TRUE)
 
 if (ENABLE_POSITION_INDEPENDENT_CODE)
-    set_property(TARGET kth-infrastructure PROPERTY POSITION_INDEPENDENT_CODE ON)
+    set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
 endif(ENABLE_POSITION_INDEPENDENT_CODE)
 
 
-target_include_directories(kth-infrastructure PUBLIC
+target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 
 if (NOT ENABLE_SHARED)
-    target_compile_definitions(kth-infrastructure PUBLIC -DKI_STATIC) #TODO(fernando): manage with Conan????
+    target_compile_definitions(${PROJECT_NAME} PUBLIC -DKI_STATIC) #TODO(fernando): manage with Conan????
 endif()
 
-# target_compile_definitions(kth-infrastructure PUBLIC -DKTH_PROJECT_VERSION="${KTH_PROJECT_VERSION}") #TODO(fernando): manage with Conan????
+# target_compile_definitions(${PROJECT_NAME} PUBLIC -DKTH_PROJECT_VERSION="${KTH_PROJECT_VERSION}") #TODO(fernando): manage with Conan????
 
-target_include_directories(kth-infrastructure SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
+target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
 
 # if (${CURRENCY} STREQUAL "LTC")
-#   target_include_directories(kth-infrastructure SYSTEM PUBLIC ${OPENSSL_INCLUDE_DIR})
+#   target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${OPENSSL_INCLUDE_DIR})
 # endif()
 
 
@@ -453,18 +450,20 @@ target_link_libraries(${PROJECT_NAME} PUBLIC Boost::thread)
 
 find_package(fmt 9.1.0 REQUIRED)
 find_package(spdlog 1.10.0 REQUIRED)
-target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
-target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog_header_only)
+# target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
+# target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog_header_only)
+target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt)
+target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog)
 
 # if (NO_CONAN_AT_ALL)
   # if (MSVC)
-  #   target_link_libraries(kth-infrastructure PUBLIC
+  #   target_link_libraries(${PROJECT_NAME} PUBLIC
   #     ${Boost_ATOMIC_LIBRARY}
   #     ${Boost_LOG_SETUP_LIBRARY}
   #   )
   # endif()
 
-  # target_link_libraries(kth-infrastructure PUBLIC
+  # target_link_libraries(${PROJECT_NAME} PUBLIC
   #   # ${Boost_CHRONO_LIBRARY}
   #   ${Boost_DATE_TIME_LIBRARY}
   #   ${Boost_FILESYSTEM_LIBRARY}
@@ -478,22 +477,22 @@ target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog_header_only)
   # )
 # endif()
 
-target_link_libraries(kth-infrastructure PUBLIC ${CMAKE_THREAD_LIBS_INIT})  #TODO(fernando): manage with Conan????
+target_link_libraries(${PROJECT_NAME} PUBLIC ${CMAKE_THREAD_LIBS_INIT})  #TODO(fernando): manage with Conan????
 
 # if (NO_CONAN_AT_ALL)
     if (MINGW) #(WIN32)
-        target_link_libraries(kth-infrastructure PUBLIC ws2_32 wsock32)
+        target_link_libraries(${PROJECT_NAME} PUBLIC ws2_32 wsock32)
     endif()
 # endif()
 
 # if (WITH_PNG)
 #     if (NO_CONAN_AT_ALL)
-#         target_link_libraries(kth-infrastructure PUBLIC png)
+#         target_link_libraries(${PROJECT_NAME} PUBLIC png)
 #     endif (NO_CONAN_AT_ALL)
 # endif()
 
 # if (${CURRENCY} STREQUAL "LTC")
-#   target_link_libraries(kth-infrastructure PUBLIC ${OPENSSL_CRYPTO_LIBRARY})  #TODO(fernando): manage with Conan
+#   target_link_libraries(${PROJECT_NAME} PUBLIC ${OPENSSL_CRYPTO_LIBRARY})  #TODO(fernando): manage with Conan
 
 #   # OPENSSL_CRYPTO_LIBRARY
 #   # OPENSSL_SSL_LIBRARY
@@ -501,12 +500,13 @@ target_link_libraries(kth-infrastructure PUBLIC ${CMAKE_THREAD_LIBS_INIT})  #TOD
 # endif()
 
 # if (NOT USE_CONAN)
-  # target_link_libraries(kth-infrastructure PUBLIC secp256k1)
+  # target_link_libraries(${PROJECT_NAME} PUBLIC secp256k1)
 # endif()
 
-target_link_libraries(kth-infrastructure PUBLIC secp256k1)
+# target_link_libraries(${PROJECT_NAME} PUBLIC secp256k1)
+target_link_libraries(${PROJECT_NAME} PUBLIC secp256k1::secp256k1)
 
-_group_sources(kth-infrastructure "${CMAKE_CURRENT_LIST_DIR}")
+_group_sources(${PROJECT_NAME} "${CMAKE_CURRENT_LIST_DIR}")
 
 # Tests
 #==============================================================================
@@ -604,7 +604,7 @@ endif()
 
 # Install
 #==============================================================================
-install(TARGETS kth-infrastructure EXPORT kth-infrastructure
+install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
@@ -625,16 +625,14 @@ set(_kth_infrastructure_headers
     kth/infrastructure/path.hpp
     kth/infrastructure/version.hpp
 
-    kth/infrastructure/machine/interpreter.hpp
     kth/infrastructure/machine/number.hpp
-    kth/infrastructure/machine/program.hpp
     kth/infrastructure/machine/script_pattern.hpp
     kth/infrastructure/machine/sighash_algorithm.hpp
     kth/infrastructure/machine/script_version.hpp
 
     kth/infrastructure/config/authority.hpp
-    kth/infrastructure/config/base16.hpp
     kth/infrastructure/config/base2.hpp
+    kth/infrastructure/config/base16.hpp
     kth/infrastructure/config/base58.hpp
     kth/infrastructure/config/base64.hpp
     kth/infrastructure/config/checkpoint.hpp
@@ -644,17 +642,7 @@ set(_kth_infrastructure_headers
     kth/infrastructure/config/hash256.hpp
     kth/infrastructure/config/parameter.hpp
     kth/infrastructure/config/printer.hpp
-    kth/infrastructure/config/settings.hpp
     kth/infrastructure/config/sodium.hpp
-
-    kth/infrastructure/config/header.hpp
-    kth/infrastructure/config/input.hpp
-    kth/infrastructure/config/output.hpp
-    kth/infrastructure/config/transaction.hpp
-    kth/infrastructure/config/script.hpp
-    kth/infrastructure/config/ec_private.hpp
-    kth/infrastructure/config/endorsement.hpp
-
 
     kth/infrastructure/formats/base_10.hpp
     kth/infrastructure/formats/base_16.hpp
@@ -668,15 +656,13 @@ set(_kth_infrastructure_headers
     kth/infrastructure/impl/math/checksum.ipp
     kth/infrastructure/impl/math/hash.ipp
 
-    kth/infrastructure/impl/machine/interpreter.ipp
     kth/infrastructure/impl/machine/number.ipp
-    kth/infrastructure/impl/machine/program.ipp
 
     kth/infrastructure/math/checksum.hpp
     kth/infrastructure/math/crypto.hpp
     kth/infrastructure/math/elliptic_curve.hpp
     kth/infrastructure/math/hash.hpp
-    kth/infrastructure/math/stealth.hpp
+    kth/infrastructure/math/sip_hash.hpp
     kth/infrastructure/math/uint256.hpp
 
     kth/infrastructure/impl/utility/array_slice.ipp
@@ -751,14 +737,7 @@ set(_kth_infrastructure_headers
     kth/infrastructure/utility/writer.hpp
 
     kth/infrastructure/wallet/cashaddr.hpp
-
     kth/infrastructure/wallet/dictionary.hpp
-    kth/infrastructure/wallet/ec_private.hpp
-    kth/infrastructure/wallet/ec_public.hpp
-    kth/infrastructure/wallet/ek_private.hpp
-    kth/infrastructure/wallet/ek_public.hpp
-    kth/infrastructure/wallet/ek_token.hpp
-    kth/infrastructure/wallet/encrypted_keys.hpp
     kth/infrastructure/wallet/hd_private.hpp
     kth/infrastructure/wallet/hd_public.hpp
     kth/infrastructure/wallet/mini_keys.hpp
@@ -809,9 +788,9 @@ endforeach()
 #==============================================================================
 include(CMakePackageConfigHelpers)
 
-export(EXPORT kth-infrastructure
-  FILE "${CMAKE_CURRENT_BINARY_DIR}/kth-infrastructureTargets.cmake")
-export(PACKAGE kth-infrastructure)
+export(EXPORT ${PROJECT_NAME}
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Targets.cmake")
+export(PACKAGE ${PROJECT_NAME})
 
 if (UNIX)
   set(_config_package_location "lib/cmake")
@@ -819,21 +798,21 @@ elseif (WIN32)
   set(_config_package_location "cmake")
 endif()
 
-install(EXPORT kth-infrastructure
+install(EXPORT ${PROJECT_NAME}
   FILE kth-infrastructureTargets.cmake
   DESTINATION ${_config_package_location})
 
 configure_file(kth-infrastructureConfig.cmake.in
-  "${CMAKE_CURRENT_BINARY_DIR}/kth-infrastructureConfig.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
   @ONLY)
 
 write_basic_package_version_file(
-  "${CMAKE_CURRENT_BINARY_DIR}/kth-infrastructureConfigVersion.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
   VERSION ${PROJECT_VERSION}
   COMPATIBILITY AnyNewerVersion)
 
 install(
   FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/kth-infrastructureConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/kth-infrastructureConfigVersion.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
   DESTINATION ${_config_package_location})
