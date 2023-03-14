@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -53,14 +53,14 @@ public:
 
     /// Constructors.
     hd_public();
-    
+
     hd_public(hd_public const& x) = default;
-    
+
     explicit
     hd_public(hd_key const& public_key);
-    
+
     hd_public(hd_key const& public_key, uint32_t prefix);
-    
+
     explicit
     hd_public(std::string const& encoded);
 
@@ -71,17 +71,17 @@ public:
     bool operator==(hd_public const& x) const;
     bool operator!=(hd_public const& x) const;
     hd_public& operator=(hd_public const& x);
-    
-    friend 
-    std::istream& operator>>(std::istream& in, hd_public& to); 
-    
-    friend 
+
+    friend
+    std::istream& operator>>(std::istream& in, hd_public& to);
+
+    friend
     std::ostream& operator<<(std::ostream& out, hd_public const& of);
 
     /// Cast operators.
     // implicit
     operator bool const() const;    //NOLINT
-    
+
     explicit
     operator const ec_compressed&() const;
 
@@ -99,7 +99,7 @@ public:
 
 protected:
     /// Factories.
-    static 
+    static
     hd_public from_secret(ec_secret const& secret, const hd_chain_code& chain_code, hd_lineage const& lineage);
 
     /// Helpers.
@@ -113,15 +113,15 @@ protected:
     ec_compressed point_;
 
 private:
-    static 
+    static
     hd_public from_key(hd_key const& key);
-    
-    static 
+
+    static
     hd_public from_string(std::string const& encoded);
-    
-    static 
+
+    static
     hd_public from_key(hd_key const& key, uint32_t prefix);
-    
+
     static
     hd_public from_string(std::string const& encoded, uint32_t prefix);
 

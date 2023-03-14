@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -53,7 +53,7 @@ public:
 
     /// Invokes a job on the current thread. Equivalent to invoking std::bind.
     template <typename... Args>
-    static 
+    static
     void bound(Args&&... args) {
         BIND_ARGS(args)();
     }
@@ -85,14 +85,14 @@ public:
     }
 
     /// Complete sequential execution.
-    inline 
+    inline
     void unlock() {
         heap_->unlock();
     }
 
     /// Posts job to service after specified delay. Concurrent and not ordered.
     /// The timer cannot be canceled so delay should be within stop criteria.
-    inline 
+    inline
     void delayed(asio::duration const& delay, delay_handler const& handler) {
         auto timer = std::make_shared<deadline>(pool_, delay);
         timer->start([handler, timer](code const& ec) {
@@ -103,7 +103,7 @@ public:
 
     /// Returns a delegate that will execute the job on the current thread.
     template <typename... Args>
-    static 
+    static
     auto bound_delegate(Args&&... args) -> delegates::bound<decltype(BIND_ARGS(args))> {
         return {
             BIND_ARGS(args)
@@ -213,7 +213,7 @@ public:
     ////}
 
     /// The size of the dispatcher's threadpool at the time of calling.
-    inline 
+    inline
     size_t size() const {
         return pool_.size();
     }

@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -18,7 +18,7 @@ bool equal(network_address const& x, network_address const& y, bool with_timesta
     return matches_timestamp && (x == y);
 }
 
-// Start Boost Suite: network address tests
+// Start Test Suite: network address tests
 
 TEST_CASE("network address  constructor 1  always  invalid", "[network address tests]") {
     network_address instance;
@@ -80,7 +80,7 @@ TEST_CASE("network address  from data  insufficient bytes  failure", "[network a
     data_chunk const raw{1};
     network_address instance{};
 
-    REQUIRE( ! instance.from_data(version_level_minimum, raw, false));
+    REQUIRE( ! instance.from_data(raw, version_level_minimum, false));
 }
 
 TEST_CASE("network address  factory from data 1  without timestamp  success", "[network address tests]") {
@@ -91,7 +91,7 @@ TEST_CASE("network address  factory from data 1  without timestamp  success", "[
         123u};
 
     auto const data = expected.to_data(version_level_minimum, false);
-    auto const result = network_address::factory_from_data(version_level_minimum, data, false);
+    auto const result = network_address::factory_from_data(data, version_level_minimum, false);
 
     REQUIRE(result.is_valid());
     REQUIRE(equal(expected, result, false));
@@ -108,7 +108,7 @@ TEST_CASE("network address  factory from data 2  without timestamp  success", "[
 
     auto const data = expected.to_data(version_level_minimum, false);
     data_source istream(data);
-    auto const result = network_address::factory_from_data(version_level_minimum, istream, false);
+    auto const result = network_address::factory_from_data(istream, version_level_minimum, false);
 
     REQUIRE(result.is_valid());
     REQUIRE(equal(expected, result, false));
@@ -126,7 +126,7 @@ TEST_CASE("network address  factory from data 3  without timestamp  success", "[
     auto const data = expected.to_data(version_level_minimum, false);
     data_source istream(data);
     istream_reader source(istream);
-    auto const result = network_address::factory_from_data(version_level_minimum, source, false);
+    auto const result = network_address::factory_from_data(source, version_level_minimum, false);
 
     REQUIRE(result.is_valid());
     REQUIRE(equal(expected, result, false));
@@ -142,7 +142,7 @@ TEST_CASE("network address  factory from data 1  with timestamp  success", "[net
         123u};
 
     auto const data = expected.to_data(version_level_minimum, true);
-    auto const result = network_address::factory_from_data(version_level_minimum, data, true);
+    auto const result = network_address::factory_from_data(data, version_level_minimum, true);
 
     REQUIRE(result.is_valid());
     REQUIRE(equal(expected, result, true));
@@ -159,7 +159,7 @@ TEST_CASE("network address  factory from data 2  with timestamp  success", "[net
 
     auto const data = expected.to_data(version_level_minimum, true);
     data_source istream(data);
-    auto const result = network_address::factory_from_data(version_level_minimum, istream, true);
+    auto const result = network_address::factory_from_data(istream, version_level_minimum, true);
 
     REQUIRE(result.is_valid());
     REQUIRE(equal(expected, result, true));
@@ -177,7 +177,7 @@ TEST_CASE("network address  factory from data 3  with timestamp  success", "[net
     auto const data = expected.to_data(version_level_minimum, true);
     data_source istream(data);
     istream_reader source(istream);
-    auto const result = network_address::factory_from_data(version_level_minimum, source, true);
+    auto const result = network_address::factory_from_data(source, version_level_minimum, true);
 
     REQUIRE(result.is_valid());
     REQUIRE(equal(expected, result, true));
@@ -372,4 +372,4 @@ TEST_CASE("network address  operator boolean not equals  differs  returns true",
     REQUIRE(instance != expected);
 }
 
-// End Boost Suite
+// End Test Suite

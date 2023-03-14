@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,7 +8,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: base 64 tests
+// Start Test Suite: base 64 tests
 
 #define BASE64_MURRAY "TXVycmF5IFJvdGhiYXJk"
 #define BASE64_DATA_MURRAY \
@@ -63,4 +63,4 @@ TEST_CASE("decode base64 invalid test", "[base 64 tests]") {
     REQUIRE( ! decode_base64(result, "!@#$%^&*()"));
 }
 
-// End Boost Suite
+// End Test Suite

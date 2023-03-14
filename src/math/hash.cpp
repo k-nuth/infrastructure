@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -27,69 +27,60 @@
 
 namespace kth {
 
-hash_digest bitcoin_hash(data_slice data)
-{
+hash_digest bitcoin_hash(data_slice data) {
     return sha256_hash(sha256_hash(data));
 }
 
 // #ifdef KTH_CURRENCY_LTC
 // hash_digest litecoin_hash(data_slice data) {
 //     hash_digest hash;
-//     scrypt_1024_1_1_256(reinterpret_cast<char const*>(data.data()), 
+//     scrypt_1024_1_1_256(reinterpret_cast<char const*>(data.data()),
 //                         reinterpret_cast<char*>(hash.data()));
 //     return hash;
 // }
 // #endif //KTH_CURRENCY_LTC
 
-short_hash bitcoin_short_hash(data_slice data)
-{
+short_hash bitcoin_short_hash(data_slice data) {
     return ripemd160_hash(sha256_hash(data));
 }
 
-short_hash ripemd160_hash(data_slice data)
-{
+short_hash ripemd160_hash(data_slice data) {
     short_hash hash;
     RMD160(data.data(), data.size(), hash.data());
     return hash;
 }
 
-data_chunk ripemd160_hash_chunk(data_slice data)
-{
+data_chunk ripemd160_hash_chunk(data_slice data) {
     data_chunk hash(short_hash_size);
     RMD160(data.data(), data.size(), hash.data());
     return hash;
 }
 
-short_hash sha1_hash(data_slice data)
-{
+short_hash sha1_hash(data_slice data) {
     short_hash hash;
     SHA1_(data.data(), data.size(), hash.data());
     return hash;
 }
 
-data_chunk sha1_hash_chunk(data_slice data)
-{
+data_chunk sha1_hash_chunk(data_slice data) {
     data_chunk hash(short_hash_size);
     SHA1_(data.data(), data.size(), hash.data());
     return hash;
 }
 
-hash_digest sha256_hash(data_slice data)
-{
+hash_digest sha256_hash(data_slice data) {
     hash_digest hash;
     SHA256_(data.data(), data.size(), hash.data());
     return hash;
 }
 
-data_chunk sha256_hash_chunk(data_slice data)
-{
+data_chunk sha256_hash_chunk(data_slice data) {
     data_chunk hash(hash_size);
     SHA256_(data.data(), data.size(), hash.data());
     return hash;
 }
 
-hash_digest sha256_hash(data_slice first, data_slice second)
-{
+hash_digest sha256_hash(data_slice first, data_slice second) {
     hash_digest hash;
     SHA256CTX context;
     SHA256Init(&context);
@@ -99,46 +90,41 @@ hash_digest sha256_hash(data_slice first, data_slice second)
     return hash;
 }
 
-hash_digest hmac_sha256_hash(data_slice data, data_slice key)
-{
+hash_digest hmac_sha256_hash(data_slice data, data_slice key) {
     hash_digest hash;
     HMACSHA256(data.data(), data.size(), key.data(), key.size(), hash.data());
     return hash;
 }
 
-long_hash sha512_hash(data_slice data)
-{
+long_hash sha512_hash(data_slice data) {
     long_hash hash;
     SHA512_(data.data(), data.size(), hash.data());
     return hash;
 }
 
-long_hash hmac_sha512_hash(data_slice data, data_slice key)
-{
+long_hash hmac_sha512_hash(data_slice data, data_slice key) {
     long_hash hash;
     HMACSHA512(data.data(), data.size(), key.data(), key.size(), hash.data());
     return hash;
 }
 
-long_hash pkcs5_pbkdf2_hmac_sha512(data_slice passphrase,
-    data_slice salt, size_t iterations)
-{
+long_hash pkcs5_pbkdf2_hmac_sha512(data_slice passphrase, data_slice salt, size_t iterations) {
     long_hash hash;
     auto const result = pkcs5_pbkdf2(passphrase.data(), passphrase.size(),
         salt.data(), salt.size(), hash.data(), hash.size(), iterations);
 
     if (result != 0) {
         throw std::bad_alloc();
-}
+    }
 
     return hash;
 }
 
-static void handle_script_result(int result)
-{
+static
+void handle_script_result(int result) {
     if (result == 0) {
         return;
-}
+    }
 
     switch (errno) {
         case EFBIG:
@@ -152,9 +138,7 @@ static void handle_script_result(int result)
     }
 }
 
-data_chunk scrypt(data_slice data, data_slice salt, uint64_t N, uint32_t p,
-    uint32_t r, size_t length)
-{
+data_chunk scrypt(data_slice data, data_slice salt, uint64_t N, uint32_t p, uint32_t r, size_t length) {
     data_chunk output(length);
     auto const result = crypto_scrypt(data.data(), data.size(), salt.data(),
         salt.size(), N, r, p, output.data(), output.size());

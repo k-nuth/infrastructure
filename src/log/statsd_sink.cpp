@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -65,7 +65,7 @@ void statsd_formatter(const record_view& record, formatting_ostream& stream) {
     }
 }
 
-static 
+static
 boost::shared_ptr<collector> file_collector(rotable_file const& rotation) {
     // rotation_size controls enable/disable so use zero as max sentinel.
     return kth::log::make_collector(
@@ -75,7 +75,7 @@ boost::shared_ptr<collector> file_collector(rotable_file const& rotation) {
         rotation.maximum_archive_files == 0 ? max_size_t : rotation.maximum_archive_files);
 }
 
-static 
+static
 boost::shared_ptr<text_file_sink> add_text_file_sink(rotable_file const& rotation) {
     // Construct a log sink.
     auto const sink = boost::make_shared<text_file_sink>();
@@ -105,7 +105,7 @@ void initialize_statsd(rotable_file const& file) {
     add_text_file_sink(file)->set_filter(statsd_filter);
 }
 
-static 
+static
 boost::shared_ptr<text_udp_sink> add_udp_sink(threadpool& pool, authority const& server) {
     auto socket = boost::make_shared<udp::socket>(pool.service());
     socket->open(udp::v6());

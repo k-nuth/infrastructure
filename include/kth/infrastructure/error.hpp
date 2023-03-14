@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -140,6 +140,7 @@ enum error_code_t {
     transaction_embedded_sigop_limit = 55,
     sequence_locked = 78,
     transaction_weight_limit = 83,
+    transaction_version_out_of_range = 87,
 
     // connect input
     invalid_script = 39,
@@ -289,7 +290,7 @@ enum error_code_t {
     low_benefit_transaction,
     duplicate_transaction,
     double_spend_mempool,
-    double_spend_blockchain    
+    double_spend_blockchain
 };
 
 enum error_condition_t {};

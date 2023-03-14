@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -17,7 +17,7 @@ namespace kth {
 //template <size_t i>
 //uint64_t get_uint64(uint256_t const& x) {
 //    auto const* ptr = reinterpret_cast<uint8_t const*>(x.backend().limbs()) + i * sizeof(uint64_t);
-//    
+//
 //    return ((uint64_t)ptr[0]) | ((uint64_t)ptr[1]) << 8 |
 //            ((uint64_t)ptr[2]) << 16 | ((uint64_t)ptr[3]) << 24 |
 //            ((uint64_t)ptr[4]) << 32 | ((uint64_t)ptr[5]) << 40 |
@@ -30,7 +30,7 @@ uint64_t get_uint64(hash_digest const& x) {
     //precondition: 0 <= i < sizeof(hash_digest) / sizeof(uint64_t)
 
     auto const* ptr = x.data() + i * sizeof(uint64_t);
-    
+
     return ((uint64_t)ptr[0]) | ((uint64_t)ptr[1]) << 8 |
             ((uint64_t)ptr[2]) << 16 | ((uint64_t)ptr[3]) << 24 |
             ((uint64_t)ptr[4]) << 32 | ((uint64_t)ptr[5]) << 40 |

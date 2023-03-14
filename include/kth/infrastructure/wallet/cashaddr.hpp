@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,16 +13,9 @@
 
 #include <kth/infrastructure/utility/data.hpp>
 
-namespace kth::infrastructure::wallet::cashaddr { 
+namespace kth::infrastructure::wallet::cashaddr {
 
-/**
- * Encode a cashaddr string. Returns the empty string in case of failure.
- */
-std::string encode(std::string const& prefix, data_chunk const& payload);
-
-/**
- * Decode a cashaddr string. Returns (prefix, data). Empty prefix means failure.
- */
+std::string encode(std::string_view prefix, data_chunk const& payload);
 std::pair<std::string, data_chunk> decode(std::string const& str, std::string const& default_prefix);
 
 } // namespace kth::infrastructure::wallet::cashaddr
@@ -35,8 +28,8 @@ std::pair<std::string, data_chunk> decode(std::string const& str, std::string co
 using namespace kth::infrastructure::wallet;
 using namespace std;
 
-static std::pair<std::string, std::vector<uint8_t>>
-cashdddr_decode(std::string const& str) {
+static
+std::pair<std::string, std::vector<uint8_t>> cashdddr_decode(std::string const& str) {
     return cashaddr::decode(str, "");
 }
 
@@ -112,9 +105,6 @@ TEST_CASE("[cashaddr_rawencode] cashaddr_rawencode") {
     raw decoded = cashdddr_decode(encoded);
 
     CHECK(toEncode.first == decoded.first);
-
-    // BOOST_CHECK_EQUAL_COLLECTIONS(begin(toEncode.second), end(toEncode.second),
-    //                               begin(decoded.second), end(decoded.second));
 
     CHECK(std::equal(begin(toEncode.second), end(toEncode.second),
                      begin(decoded.second), end(decoded.second)));

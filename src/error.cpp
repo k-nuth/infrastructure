@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -20,7 +20,7 @@ public:
     std::error_condition default_error_condition(int ev) const noexcept override;
 };
 
-static 
+static
 const error_category_impl& get_error_category_instance() {
     static error_category_impl instance;
     return instance;
@@ -129,6 +129,7 @@ std::string error_category_impl::message(int ev) const noexcept {
         { error::transaction_embedded_sigop_limit, "too many transaction embedded signature operations" },
         { error::sequence_locked, "transaction currently locked" },
         { error::transaction_weight_limit, "transaction weight limit exceeded" },
+        { error::transaction_version_out_of_range, "transaction version out of range" },
 
         // connect input
         { error::invalid_script, "invalid script" },

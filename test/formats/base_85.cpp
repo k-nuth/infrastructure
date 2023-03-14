@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +7,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: base 85 tests
+// Start Test Suite: base 85 tests
 
 #define BASE85_ENCODED "HelloWorld"
 #define BASE85_DECODED \
@@ -74,4 +74,4 @@ TEST_CASE("decode base85 outside alphabet test", "[base 85 tests]") {
     REQUIRE(result == data_chunk({ 0, 0, 0, 0 }));
 }
 
-// End Boost Suite
+// End Test Suite

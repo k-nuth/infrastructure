@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,7 +9,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: unicode istream tests
+// Start Test Suite: unicode istream tests
 
 // Use of L is not recommended as it will only work for ascii.
 TEST_CASE("unicode istream  conditional  test", "[unicode istream tests]") {
@@ -102,4 +102,4 @@ TEST_CASE("unicode istream  overflow  test", "[unicode istream tests]") {
     REQUIRE(result == utf8_1800_bytes);
 }
 
-// End Boost Suite
+// End Test Suite

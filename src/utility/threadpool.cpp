@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -127,7 +127,7 @@ void threadpool::join() {
     //     std::cout << "threadpool::join() *** AFTER  join *** - name: " << name_ << " - thread id: " << thread.get_id() << std::endl;
     // }
 
-    for (auto i = threads_.rbegin(); i != threads_.rend(); ++i ) { 
+    for (auto i = threads_.rbegin(); i != threads_.rend(); ++i ) {
         auto& thread = *i;
 
         KTH_ASSERT(this_id != thread.get_id());
@@ -143,7 +143,7 @@ void threadpool::join() {
         // std::cout << "threadpool::join() *** BEFORE detach *** - name: " << name_ << " - thread id: " << thread.get_id() << std::endl;
         thread.detach();
         // std::cout << "threadpool::join() *** AFTER  detach *** - name: " << name_ << " - thread id: " << thread.get_id() << std::endl;
-    }     
+    }
 
     threads_.clear();
     size_.store(0);

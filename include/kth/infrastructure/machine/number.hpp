@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -72,7 +72,7 @@ public:
     number();
 
     /// Construct with specified value.
-    explicit 
+    explicit
     number(int64_t value);
 
     /// Replace the value derived from a byte vector with LSB first ordering.

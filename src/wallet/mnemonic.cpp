@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -27,7 +27,7 @@ static constexpr size_t entropy_bit_divisor = 32;
 static constexpr size_t hmac_iterations = 2048;
 static char const* passphrase_prefix = "mnemonic";
 
-inline 
+inline
 uint8_t bip39_shift(size_t bit) {
     return (1 << (byte_bits - (bit % byte_bits) - 1));
 }

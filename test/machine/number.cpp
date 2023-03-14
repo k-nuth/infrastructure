@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -20,7 +20,7 @@
 #include "big_number.hpp"
 #endif
 
-// Start Boost Suite: number tests
+// Start Test Suite: number tests
 
 using namespace kth;
 using namespace kth::infrastructure::machine;
@@ -47,27 +47,27 @@ using namespace kth::infrastructure::machine;
 		"\n\tFAILURE     : [" << (buffer_num).number << " != " << \
 		(script_num).int32() << "]")
 
-static 
+static
 bool is(uint8_t byte) {
     return byte != 0;
 }
 
 // check left - right
-static 
+static
 bool subtract_overflow64(int64_t const left, int64_t const right) {
     return
         ((right > 0 && left < std::numeric_limits<int64_t>::min() + right) ||
         (right < 0 && left > std::numeric_limits<int64_t>::max() + right));
 }
 
-static 
+static
 bool add_overflow64(int64_t const left, int64_t const right) {
     return
         ((right > 0 && left > (std::numeric_limits<int64_t>::max() - right)) ||
         (right < 0 && left < (std::numeric_limits<int64_t>::min() - right)));
 }
 
-static 
+static
 bool negate_overflow64(int64_t const number) {
     return number == std::numeric_limits<int64_t>::min();
 }
@@ -75,7 +75,7 @@ bool negate_overflow64(int64_t const number) {
 // Operators
 // ----------------------------------------------------------------------------
 
-static 
+static
 void CheckAdd(int64_t const num1, int64_t const num2, size_t value, size_t offset, size_t test) {
 	number_buffer const& add = number_adds[value][offset][test];
     number const scriptnum1(num1);
@@ -88,7 +88,7 @@ void CheckAdd(int64_t const num1, int64_t const num2, size_t value, size_t offse
     }
 }
 
-static 
+static
 void CheckNegate(int64_t const num, size_t value, size_t offset, size_t test) {
 	number_buffer const& negated = number_negates[value][offset][test];
     number const scriptnum(num);
@@ -98,7 +98,7 @@ void CheckNegate(int64_t const num, size_t value, size_t offset, size_t test) {
     }
 }
 
-static 
+static
 void CheckSubtract(int64_t const num1, int64_t const num2, size_t value, size_t offset, size_t test) {
 	number_subtract const& subtract = number_subtracts[value][offset][test];
     number const scriptnum1(num1);
@@ -115,7 +115,7 @@ void CheckSubtract(int64_t const num1, int64_t const num2, size_t value, size_t 
     }
 }
 
-static 
+static
 void CheckCompare(int64_t const num1, int64_t const num2, size_t value, size_t offset, size_t test) {
     number_compare const& compare = number_compares[value][offset][test];
     number const scriptnum1(num1);
@@ -155,7 +155,7 @@ void CheckCompare(int64_t const num1, int64_t const num2, size_t value, size_t o
 // Test
 // ----------------------------------------------------------------------------
 
-static 
+static
 void RunOperators(int64_t const num1, int64_t num2, size_t value, size_t offset, size_t test) {
     //// Diagnostics
     //std::stringstream message;
@@ -197,7 +197,7 @@ TEST_CASE("check operators", "[number tests]") {
 // big_number value generators
 // ----------------------------------------------------------------------------
 
-static 
+static
 number_buffer MakeAdd(int64_t const num1, int64_t const num2) {
     if (add_overflow64(num1, num2))
         return number_buffer();
@@ -216,7 +216,7 @@ number_buffer MakeAdd(int64_t const num1, int64_t const num2) {
     return add;
 }
 
-static 
+static
 number_buffer MakeNegate(int64_t const num) {
     if (negate_overflow64(num)) {
         return number_buffer();
@@ -234,7 +234,7 @@ number_buffer MakeNegate(int64_t const num) {
     return negated;
 }
 
-static 
+static
 number_subtract MakeSubtract(int64_t const num1, int64_t const num2) {
     big_number bignum1;
     bignum1.set_int64(num1);
@@ -280,25 +280,25 @@ static number_compare MakeCompare(int64_t const num1, int64_t const num2) {
 // Formatter Helpers
 // ----------------------------------------------------------------------------
 
-static 
+static
 void write_bytes(kth::data_chunk chunk, std::ostream& out) {
     for (auto const& byte : chunk)
         out << fmt::format(" 0x%02x, ", static_cast<uint16_t>(byte));
 }
 
-static 
+static
 void write_buffer(number_buffer buffer, std::ostream& out) {
     out << fmt::format("{ {}, {", buffer.number);
     write_bytes(buffer.bytes, out);
     out << "} }, ";
 }
 
-static 
+static
 void write_compare(number_compare compare, std::ostream& out) {
     out << fmt::format("{ {}, {}, {}, {}, {}, {} }, ", compare.eq, compare.ne, compare.lt, compare.gt, compare.le, compare.ge);
 }
 
-static 
+static
 void write_subtract(number_subtract subtract, std::ostream& out) {
     out << "{ ";
     write_buffer(subtract.forward, out);
@@ -306,12 +306,12 @@ void write_subtract(number_subtract subtract, std::ostream& out) {
     out << "}, ";
 }
 
-static 
+static
 void write_names(std::string const& name, size_t count, std::ostream& out) {
     out << fmt::format("const [{}][{}][{}][{}]=\n{\n", name, number_values_count, number_offsets_count, count);
 }
 
-static 
+static
 void write(std::string const& text, std::ostream& add_out, std::ostream& neg_out, std::ostream& sub_out, std::ostream& cmp_out) {
     add_out << text;
     neg_out << text;
@@ -319,7 +319,7 @@ void write(std::string const& text, std::ostream& add_out, std::ostream& neg_out
     cmp_out << text;
 }
 
-static 
+static
 void replace(std::string& buffer, std::string const& find, std::string const& replacement) {
     size_t pos = 0;
     while ((pos = buffer.find(find, pos)) != std::string::npos) {
@@ -331,7 +331,7 @@ void replace(std::string& buffer, std::string const& find, std::string const& re
 // Maker
 // ----------------------------------------------------------------------------
 
-static 
+static
 void MakeOperators(int64_t const num1, int64_t const num2,
     std::ostream& add_out, std::ostream& neg_out, std::ostream& sub_out,
     std::ostream& cmp_out) {
@@ -408,4 +408,4 @@ TEST_CASE("make operator expectations", "[number tests]") {
 }
 #endif
 
-// End Boost Suite
+// End Test Suite

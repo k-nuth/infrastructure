@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,9 +10,9 @@
 
 using namespace kth;
 
-// Start Boost Suite: log tests
+// Start Test Suite: log tests
 
-// Start Boost Suite: log  general
+// Start Test Suite: log  general
 
 //TEST_CASE("log general  debug", "[log  general]") {
 
@@ -50,9 +50,9 @@ using namespace kth;
 //     REQUIRE(prefix.encoded() == "10111010");
 // }
 
-// End Boost Suite
+// End Test Suite
 
-// Start Boost Suite: binary  to string
+// Start Test Suite: binary  to string
 
 //TEST_CASE("prefix to string  32 bits  expected value", "[binary  to string]")
 // {
@@ -63,9 +63,9 @@ using namespace kth;
 //     REQUIRE(stream.str() == "10111010101011011111000000001101");
 // }
 
-// End Boost Suite
+// End Test Suite
 
-// Start Boost Suite: binary  shift left
+// Start Test Suite: binary  shift left
 
 // //TEST_CASE("shift left by zero", "[binary  shift left]")
 // {
@@ -157,9 +157,9 @@ using namespace kth;
 //     REQUIRE(expected == instance);
 // }
 
-// End Boost Suite
+// End Test Suite
 
-// Start Boost Suite: binary  shift right
+// Start Test Suite: binary  shift right
 
 //TEST_CASE("shift right by zero", "[binary  shift right]")
 // {
@@ -242,9 +242,9 @@ using namespace kth;
 //     REQUIRE(expected == instance);
 // }
 
-// End Boost Suite
+// End Test Suite
 
-// Start Boost Suite: binary  append
+// Start Test Suite: binary  append
 
 //TEST_CASE("append to zero length", "[binary  append]")
 // {
@@ -321,9 +321,9 @@ using namespace kth;
 //     REQUIRE(expected == instance);
 // }
 
-// End Boost Suite
+// End Test Suite
 
-// Start Boost Suite: binary  substring
+// Start Test Suite: binary  substring
 
 //TEST_CASE("substring start after end", "[binary  substring]")
 // {
@@ -384,9 +384,9 @@ using namespace kth;
 //     REQUIRE(expected == result);
 // }
 
-// End Boost Suite
+// End Test Suite
 
-// Start Boost Suite: binary  blocks
+// Start Test Suite: binary  blocks
 
 //TEST_CASE("string to prefix  32 bits  expected value", "[binary  blocks]")
 // {
@@ -498,6 +498,6 @@ using namespace kth;
 //     REQUIRE(stream.str() == "0000000000000000");
 // }
 
-// End Boost Suite
+// End Test Suite
 
-// End Boost Suite
+// End Test Suite

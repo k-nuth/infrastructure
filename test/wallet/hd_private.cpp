@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,7 +8,7 @@
 using namespace kth;
 using namespace kth::infrastructure::wallet;
 
-// Start Boost Suite: hd private tests
+// Start Test Suite: hd private tests
 
 // TODO: test altchain
 
@@ -111,4 +111,4 @@ TEST_CASE("hd private  derive public  long seed  expected", "[hd private tests]"
     REQUIRE(m0xH1yH2_pub.encoded() == "xpub6FnCn6nSzZAw5Tw7cgR9bi15UV96gLZhjDstkXXxvCLsUXBGXPdSnLFbdpq8p9HmGsApME5hQTZ3emM2rnY5agb9rXpVGyy3bdW6EEgAtqt");
 }
 
-// End Boost Suite
+// End Test Suite

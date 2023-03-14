@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +7,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: endian tests
+// Start Test Suite: endian tests
 
 // Stream Tests
 
@@ -137,4 +137,4 @@ TEST_CASE("endian  round trip64  big to big  expected", "[endian tests]") {
     REQUIRE(from_big_endian_unsafe<uint64_t>(big_endian.begin()) == expected);
 }
 
-// End Boost Suite
+// End Test Suite

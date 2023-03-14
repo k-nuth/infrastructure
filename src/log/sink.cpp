@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -59,25 +59,25 @@ using namespace boost::posix_time;
 using text_file_sink = synchronous_sink<text_file_backend>;
 using text_stream_sink = synchronous_sink<text_ostream_backend>;
 
-static 
+static
 auto const base_filter =
     has_attr(attributes::channel) &&
     has_attr(attributes::severity) &&
     has_attr(attributes::timestamp);
 
-static 
+static
 auto const error_filter = base_filter && (
     (attributes::severity == severity::warning) ||
     (attributes::severity == severity::error) ||
     (attributes::severity == severity::fatal));
 
-static 
+static
 auto const info_filter = base_filter && (attributes::severity == severity::info);
 
-static 
+static
 auto const lean_filter = base_filter && (attributes::severity != severity::verbose);
 
-static 
+static
 std::map<severity, std::string> severity_mapping {
     { severity::verbose, "VERBOSE" },
     { severity::debug, "DEBUG" },
@@ -92,7 +92,7 @@ formatter& operator<<(formatter& stream, severity value) {
     return stream;
 }
 
-static 
+static
 boost::shared_ptr<collector> file_collector(rotable_file const& rotation) {
     // rotation_size controls enable/disable so use zero as max sentinel.
     return kth::log::make_collector(
@@ -104,7 +104,7 @@ boost::shared_ptr<collector> file_collector(rotable_file const& rotation) {
             rotation.maximum_archive_files);
 }
 
-static 
+static
 boost::shared_ptr<text_file_sink> add_text_file_sink(rotable_file const& rotation) {
     // Construct a log sink.
     auto const sink = boost::make_shared<text_file_sink>();
@@ -131,7 +131,7 @@ boost::shared_ptr<text_file_sink> add_text_file_sink(rotable_file const& rotatio
 }
 
 template <typename Stream>
-static 
+static
 boost::shared_ptr<text_stream_sink> add_text_stream_sink(boost::shared_ptr<Stream>& stream) {
     // Construct a log sink.
     auto const sink = boost::make_shared<text_stream_sink>();
@@ -156,7 +156,7 @@ void initialize() {
     class null_stream : public std::ostream {
     private:
         class null_buffer : public std::streambuf {
-        public: 
+        public:
             int overflow(int value) override {
                 return value;
             }
@@ -233,7 +233,7 @@ void initialize(std::string const& debug_file, std::string const& error_file, bo
     }
     catch (spdlog::spdlog_ex const& ex) {
         std::cout << "Log initialization failed: " << ex.what() << std::endl;
-    }    
+    }
 }
 
 #endif

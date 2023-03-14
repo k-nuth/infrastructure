@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,7 +11,7 @@
 using namespace kth;
 using namespace kth::infrastructure;
 
-// Start Boost Suite: stream tests
+// Start Test Suite: stream tests
 
 TEST_CASE("stream - is exhausted initialized empty stream returns true", "[stream tests]") {
     std::stringstream stream;
@@ -451,4 +451,4 @@ TEST_CASE("stream - read bytes to eof", "[stream tests]") {
     REQUIRE( ! source == false);
 }
 
-// End Boost Suite
+// End Test Suite

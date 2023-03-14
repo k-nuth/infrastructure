@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -28,6 +28,9 @@ public:
     explicit
     hash160(short_hash const& value);
 
+    // explicit
+    // hash160(byte_span value);
+
     /**
      * Overload cast to internal type.
      * @return  This object's value cast to internal type.
@@ -41,7 +44,7 @@ public:
      * @param[out]  argument  The object to receive the read value.
      * @return                The input stream reference.
      */
-    friend 
+    friend
     std::istream& operator>>(std::istream& input, hash160& argument);
 
     /**
@@ -50,7 +53,7 @@ public:
      * @param[out]  argument  The object from which to obtain the value.
      * @return                The output stream reference.
      */
-    friend 
+    friend
     std::ostream& operator<<(std::ostream& output, hash160 const& argument);
 
 private:

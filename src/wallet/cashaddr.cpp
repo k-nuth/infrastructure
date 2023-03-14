@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -150,7 +150,7 @@ uint64_t poly_mod(data_chunk const& v) {
  *
  * Assume the input is a character.
  */
-inline 
+inline
 uint8_t lower_case(uint8_t c) {
     // ASCII black magic.
     return c | 0x20u;
@@ -159,7 +159,7 @@ uint8_t lower_case(uint8_t c) {
 /**
  * Expand the address prefix for the checksum computation.
  */
-data_chunk expand_prefix(std::string const& prefix) {
+data_chunk expand_prefix(std::string_view prefix) {
     data_chunk ret;
     ret.resize(prefix.size() + 1);
     for (size_t i = 0; i < prefix.size(); ++i) {
@@ -173,14 +173,14 @@ data_chunk expand_prefix(std::string const& prefix) {
 /**
  * Verify a checksum.
  */
-bool verify_checksum(std::string const& prefix, data_chunk const& payload) {
+bool verify_checksum(std::string_view prefix, data_chunk const& payload) {
     return poly_mod(cat(expand_prefix(prefix), payload)) == 0;
 }
 
 /**
  * Create a checksum.
  */
-data_chunk create_checksum(std::string const& prefix, data_chunk const& payload) {
+data_chunk create_checksum(std::string_view prefix, data_chunk const& payload) {
     data_chunk enc = cat(expand_prefix(prefix), payload);
     // Append 8 zeroes.
     enc.resize(enc.size() + 8);
@@ -203,10 +203,10 @@ namespace kth::infrastructure::wallet::cashaddr {
 /**
  * Encode a cashaddr string.
  */
-std::string encode(std::string const& prefix, data_chunk const& payload) {
+std::string encode(std::string_view prefix, data_chunk const& payload) {
     data_chunk checksum = create_checksum(prefix, payload);
     data_chunk combined = cat(payload, checksum);
-    std::string ret = prefix + ':';
+    std::string ret = std::string(prefix) + ':';
 
     ret.reserve(ret.size() + combined.size());
     for (uint8_t c : combined) {

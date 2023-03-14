@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +7,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: base 58 tests
+// Start Test Suite: base 58 tests
 
 void encdec_test(std::string const& hex, std::string const& encoded) {
     data_chunk data, decoded;
@@ -79,4 +79,4 @@ TEST_CASE("base58 array test", "[base 58 tests]") {
     REQUIRE(converted == expected);
 }
 
-// End Boost Suite
+// End Test Suite

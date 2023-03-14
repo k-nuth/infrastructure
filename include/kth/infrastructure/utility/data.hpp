@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,6 +11,7 @@
 #include <initializer_list>
 #include <iterator>
 #include <queue>
+#include <span>
 #include <vector>
 
 #include <kth/infrastructure/define.hpp>
@@ -22,9 +23,10 @@ namespace kth {
 template <size_t Size>
 using byte_array = std::array<uint8_t, Size>;
 
+using byte_span = std::span<uint8_t>;
+
 template <size_t Size>
-struct byte_array_parts
-{
+struct byte_array_parts {
     byte_array<Size> left;
     byte_array<Size> right;
 };
@@ -83,16 +85,13 @@ byte_array_parts<Size / 2> split(const byte_array<Size>& bytes);
  * Concatenate two arrays into a new array.
  */
 template <size_t Left, size_t Right>
-byte_array<Left + Right> splice(const std::array<uint8_t, Left>& left,
-    const std::array<uint8_t, Right>& right);
+byte_array<Left + Right> splice(const std::array<uint8_t, Left>& left, const std::array<uint8_t, Right>& right);
 
 /**
  * Concatenate three arrays into a new array.
  */
 template <size_t Left, size_t Middle, size_t Right>
-byte_array<Left + Middle + Right> splice(const std::array<uint8_t, Left>& left,
-    const std::array<uint8_t, Middle>& middle,
-    const std::array<uint8_t, Right>& right);
+byte_array<Left + Middle + Right> splice(const std::array<uint8_t, Left>& left, const std::array<uint8_t, Middle>& middle, const std::array<uint8_t, Right>& right);
 
 /**
  * Convert the data slice to an array. Underfill is ok.
@@ -110,8 +109,7 @@ data_chunk to_chunk(const Source& bytes);
  * Safely determine if a buffer starts with a byte sequence.
  */
 template <typename Source>
-bool starts_with(const typename Source::const_iterator& begin,
-    const typename Source::const_iterator& end, const Source& value);
+bool starts_with(const typename Source::const_iterator& begin, const typename Source::const_iterator& end, const Source& value);
 
 /**
  * Perform an exclusive or (xor) across two buffers to the length specified.
@@ -135,8 +133,7 @@ byte_array<Size> xor_data(data_slice bytes1, data_slice bytes2, size_t offset);
  * exceed the respective buffers.
  */
 template <size_t Size>
-byte_array<Size> xor_data(data_slice bytes1, data_slice bytes2, size_t offset1,
-    size_t offset2);
+byte_array<Size> xor_data(data_slice bytes1, data_slice bytes2, size_t offset1, size_t offset2);
 
 } // namespace kth
 

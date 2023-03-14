@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -19,19 +19,19 @@ public:
     using block = uint8_t;
     using size_type = std::size_t;
 
-    static 
+    static
     constexpr size_type bits_per_block = byte_bits;
-    
-    static 
+
+    static
     size_type blocks_size(size_type bit_size);
-    
-    static 
+
+    static
     bool is_base2(std::string const& text);
 
     binary() = default;
     binary(binary const& x) = default;
 
-    explicit 
+    explicit
     binary(std::string const& bit_string);
 
     binary(size_type size, uint32_t number);
@@ -58,15 +58,15 @@ public:
     bool operator==(binary const& x) const;
     bool operator!=(binary const& x) const;
     bool operator<(binary const& x) const;
-    
-    friend 
+
+    friend
     std::istream& operator>>(std::istream& in, binary& to);
-    
-    friend 
+
+    friend
     std::ostream& operator<<(std::ostream& out, binary const& of);
 
 private:
-    static 
+    static
     uint8_t shift_block_right(uint8_t next, uint8_t current, uint8_t prior, size_type original_offset, size_type intended_offset);
 
     data_chunk blocks_;

@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,7 +10,7 @@
 using namespace kth;
 using namespace kth::infrastructure::wallet;
 
-// Start Boost Suite: qrcode tests
+// Start Test Suite: qrcode tests
 
 #ifdef WITH_QRENCODE
 
@@ -100,4 +100,4 @@ TEST_CASE("qrcode  invoke  qrencode data  success", "[qrcode tests]") {
 
 #endif // WITH_QRENCODE
 
-// End Boost Suite
+// End Test Suite

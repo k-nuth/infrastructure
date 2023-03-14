@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -14,17 +14,17 @@
 
 namespace kth {
 
-inline 
+inline
 one_byte to_array(uint8_t byte) {
     return byte_array<1>{ { byte } };
 }
 
-inline 
+inline
 data_chunk to_chunk(uint8_t byte) {
     return data_chunk{ byte };
 }
 
-inline 
+inline
 data_chunk build_chunk(loaf slices, size_t extra_reserve) {
     size_t size = 0;
     for (auto const slice: slices) {

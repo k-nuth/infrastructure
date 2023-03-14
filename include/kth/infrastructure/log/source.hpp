@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -6,6 +6,9 @@
 #define KTH_INFRASTRUCTURE_LOG_SOURCE_HPP_
 
 #include <string>
+
+#include <fmt/ostream.h>
+#include <fmt/std.h>
 
 #if defined(KTH_LOG_LIBRARY_BINLOG)
 #include <binlog/binlog.hpp>

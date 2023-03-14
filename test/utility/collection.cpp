@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,7 +9,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: collection tests
+// Start Test Suite: collection tests
 
 typedef std::vector<uint8_t> collection;
 
@@ -140,4 +140,4 @@ TEST_CASE("collection  pop  multiple  popped and returns expected", "[collection
     REQUIRE(value == expected);
 }
 
-// End Boost Suite
+// End Test Suite

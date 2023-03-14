@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -25,69 +25,43 @@ namespace kth {
 using uint256_t = boost::multiprecision::uint256_t;
 
 
-constexpr half_hash null_half_hash
-{
-    {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    }
-};
+constexpr half_hash null_half_hash {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
-constexpr quarter_hash null_quarter_hash
-{
-    {
-        0, 0, 0, 0, 0, 0, 0, 0
-    }
-};
+constexpr quarter_hash null_quarter_hash {{0, 0, 0, 0, 0, 0, 0, 0}};
 
-constexpr long_hash null_long_hash
-{
-    {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-    }
-};
+constexpr long_hash null_long_hash {{
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+}};
 
-constexpr short_hash null_short_hash
-{
-    {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 0, 0
-    }
-};
+constexpr short_hash null_short_hash {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
 
 
-constexpr mini_hash null_mini_hash
-{
-    {
-        0, 0, 0, 0, 0, 0
-    }
-};
+constexpr mini_hash null_mini_hash {{0, 0, 0, 0, 0, 0}};
 
 
-inline uint256_t to_uint256(hash_digest const& hash)
-{
+inline
+uint256_t to_uint256(hash_digest const& hash) {
     return from_little_endian<uint256_t>(hash.begin(), hash.end());
 }
 
 /// Generate a scrypt hash to fill a byte array.
 template <size_t Size>
-byte_array<Size> scrypt(data_slice data, data_slice salt, uint64_t N,
-    uint32_t p, uint32_t r);
+byte_array<Size> scrypt(data_slice data, data_slice salt, uint64_t N, uint32_t p, uint32_t r);
 
 /// Generate a scrypt hash of specified length.
-KI_API data_chunk scrypt(data_slice data, data_slice salt, uint64_t N,
-    uint32_t p, uint32_t r, size_t length);
+KI_API data_chunk scrypt(data_slice data, data_slice salt, uint64_t N, uint32_t p, uint32_t r, size_t length);
 
 /// Generate a bitcoin hash.
 KI_API hash_digest bitcoin_hash(data_slice data);
 
 //TODO(fernando): see what to do with Currency
-// #ifdef KTH_CURRENCY_LTC
+#if defined(KTH_CURRENCY_LTC)
 /// Generate a litecoin hash.
 KI_API hash_digest litecoin_hash(data_slice data);
-// #endif //KTH_CURRENCY_LTC
+#endif
 
 /// Generate a bitcoin short hash.
 KI_API short_hash bitcoin_short_hash(data_slice data);
@@ -118,8 +92,7 @@ KI_API long_hash sha512_hash(data_slice data);
 KI_API long_hash hmac_sha512_hash(data_slice data, data_slice key);
 
 /// Generate a pkcs5 pbkdf2 hmac sha512 hash.
-KI_API long_hash pkcs5_pbkdf2_hmac_sha512(data_slice passphrase,
-    data_slice salt, size_t iterations);
+KI_API long_hash pkcs5_pbkdf2_hmac_sha512(data_slice passphrase, data_slice salt, size_t iterations);
 
 } // namespace kth
 
@@ -133,6 +106,13 @@ struct hash<kth::byte_array<Size>> {
         return boost::hash_range(hash.begin(), hash.end());
     }
 };
+
+template <>
+struct hash<kth::byte_span> {
+    size_t operator()(kth::byte_span bytes) const {
+        return boost::hash_range(bytes.begin(), bytes.end());
+    }
+};
 } // namespace std
 
 namespace boost {
@@ -140,6 +120,13 @@ template <size_t Size>
 struct hash<kth::byte_array<Size>> {
     size_t operator()(const kth::byte_array<Size>& hash) const {
         return boost::hash_range(hash.begin(), hash.end());
+    }
+};
+
+template <>
+struct hash<kth::byte_span> {
+    size_t operator()(kth::byte_span bytes) const {
+        return boost::hash_range(bytes.begin(), bytes.end());
     }
 };
 } // namespace boost

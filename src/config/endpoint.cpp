@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -84,7 +84,7 @@ std::istream& operator>>(std::istream& input, endpoint& argument) {
 
     // std::regex requires gcc 4.9, so we are using boost::regex for now.
     // Knuth: we use std::regex, becase we drop support por GCC<5
-    static 
+    static
     std::regex const regular(R"(^((tcp|udp|http|https|inproc):\/\/)?(\[([0-9a-f:\.]+)\]|([^:]+))(:([0-9]{1,5}))?$)");
 
     std::sregex_iterator it(value.begin(), value.end(), regular), end;

@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,9 +7,9 @@
 
 using namespace kth;
 
-// Start Boost Suite: binary tests
+// Start Test Suite: binary tests
 
-// Start Boost Suite: binary  encoded
+// Start Test Suite: binary  encoded
 
 TEST_CASE("prefix encoded  32 bits  expected value", "[binary  encoded]") {
     data_chunk const blocks{ { 0xba, 0xad, 0xf0, 0x0d } };
@@ -26,9 +26,9 @@ TEST_CASE("prefix encoded  8 bits unsigned  expected value", "[binary  encoded]"
     REQUIRE(prefix.encoded() == "10111010");
 }
 
-// End Boost Suite
+// End Test Suite
 
-// Start Boost Suite: binary  to string
+// Start Test Suite: binary  to string
 
 TEST_CASE("prefix to string  32 bits  expected value", "[binary  to string]") {
     data_chunk const blocks{ { 0xba, 0xad, 0xf0, 0x0d } };
@@ -38,9 +38,9 @@ TEST_CASE("prefix to string  32 bits  expected value", "[binary  to string]") {
     REQUIRE(stream.str() == "10111010101011011111000000001101");
 }
 
-// End Boost Suite
+// End Test Suite
 
-// Start Boost Suite: binary  shift left
+// Start Test Suite: binary  shift left
 
 TEST_CASE("shift left by zero", "[binary  shift left]") {
     binary::size_type distance = 0;
@@ -122,9 +122,9 @@ TEST_CASE("shift left by greater than size", "[binary  shift left]") {
     REQUIRE(expected == instance);
 }
 
-// End Boost Suite
+// End Test Suite
 
-// Start Boost Suite: binary  shift right
+// Start Test Suite: binary  shift right
 
 TEST_CASE("shift right by zero", "[binary  shift right]") {
     binary::size_type distance = 0;
@@ -198,9 +198,9 @@ TEST_CASE("shift right by greater than size", "[binary  shift right]") {
     REQUIRE(expected == instance);
 }
 
-// End Boost Suite
+// End Test Suite
 
-// Start Boost Suite: binary  append
+// Start Test Suite: binary  append
 
 TEST_CASE("append to zero length", "[binary  append]") {
     binary instance(0, data_chunk{ 0x00 });
@@ -269,9 +269,9 @@ TEST_CASE("prepend byte nonaligned instances", "[binary  append]") {
     REQUIRE(expected == instance);
 }
 
-// End Boost Suite
+// End Test Suite
 
-// Start Boost Suite: binary  substring
+// Start Test Suite: binary  substring
 
 TEST_CASE("substring start after end", "[binary  substring]") {
     binary instance(20, data_chunk{ 0xAA, 0xBB, 0xCC });
@@ -326,9 +326,9 @@ TEST_CASE("substring implicit length", "[binary  substring]") {
     REQUIRE(expected == result);
 }
 
-// End Boost Suite
+// End Test Suite
 
-// Start Boost Suite: binary  blocks
+// Start Test Suite: binary  blocks
 
 TEST_CASE("string to prefix  32 bits  expected value", "[binary  blocks]") {
     data_chunk const blocks{ { 0xba, 0xad, 0xf0, 0x0d } };
@@ -430,6 +430,6 @@ TEST_CASE("prefix to bytes  two bytes leading null byte  round trips", "[binary 
     REQUIRE(stream.str() == "0000000000000000");
 }
 
-// End Boost Suite
+// End Test Suite
 
-// End Boost Suite
+// End Test Suite

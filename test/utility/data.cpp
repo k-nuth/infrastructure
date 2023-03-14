@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -11,7 +11,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: data tests
+// Start Test Suite: data tests
 
 TEST_CASE("data  to byte  value  expected size and value", "[data tests]") {
     uint8_t const expected = 42;
@@ -364,4 +364,4 @@ TEST_CASE("data  xor data2  distinct bites  bits", "[data tests]") {
     REQUIRE(result[1] == 0);
 }
 
-// End Boost Suite
+// End Test Suite

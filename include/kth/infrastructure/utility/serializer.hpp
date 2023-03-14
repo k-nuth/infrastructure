@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -17,6 +17,22 @@
 #include <kth/infrastructure/utility/writer.hpp>
 
 namespace kth {
+
+inline constexpr
+size_t size_variable_integer(uint64_t value) {
+    if (value < varint_two_bytes) {
+        return 1;
+    }
+    if (value <= max_uint16) {
+        return 3;
+    }
+
+    if (value <= max_uint32) {
+        return 5;
+    }
+
+    return 9;
+}
 
 /// Writer to wrap arbitrary iterator.
 template <typename Iterator>
@@ -44,7 +60,7 @@ public:
     /// Context.
     // implicit
     operator bool() const;
-    
+
     bool operator!() const;
 
     /// Write hashes.

@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -20,17 +20,17 @@ static uint64_t const negative_bit = number::negative_mask;
 static uint64_t const unsigned_max_int64 = kth::max_int64;
 static uint64_t const absolute_min_int64 = kth::min_int64;
 
-inline 
+inline
 bool is_negative(data_chunk const& data) {
     return (data.back() & number::negative_mask) != 0;
 }
 
-inline 
+inline
 number::number()
     : number(0)
 {}
 
-inline 
+inline
 number::number(int64_t value)
     : value_(value)
 {}
@@ -39,7 +39,7 @@ number::number(int64_t value)
 //-----------------------------------------------------------------------------
 
 // The data is interpreted as little-endian.
-inline 
+inline
 bool number::set_data(data_chunk const& data, size_t max_size) {
     if (data.size() > max_size) {
         return false;
@@ -66,7 +66,7 @@ bool number::set_data(data_chunk const& data, size_t max_size) {
 }
 
 // The result is little-endian.
-inline 
+inline
 data_chunk number::data() const {
     if (value_ == 0) {
         return {};
@@ -105,7 +105,7 @@ data_chunk number::data() const {
     return data;
 }
 
-inline 
+inline
 int32_t number::int32() const {
     return domain_constrain<int32_t>(value_);
 }
@@ -131,7 +131,7 @@ bool number::is_false() const {
 // Operators
 //-----------------------------------------------------------------------------
 
-inline 
+inline
 bool number::operator>(int64_t value) const {
     return value_ > value;
 }

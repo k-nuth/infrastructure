@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -66,7 +66,7 @@ constexpr int max_connections = ::asio::socket_base::max_connections;
 //     }
 // };
 
-template <> 
+template <>
 struct fmt::formatter<kth::asio::ipv6> : formatter<std::string> {
     template <typename FormatContext>
     auto format(kth::asio::ipv6 const& addr, FormatContext& ctx) const {

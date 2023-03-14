@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +7,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: checksum tests
+// Start Test Suite: checksum tests
 
 // TODO: add append_checksum<> tests.
 // TODO: add build_checked_array<> tests.
@@ -136,4 +136,4 @@ TEST_CASE("checksum  verify checksum  invalidated  false", "[checksum tests]") {
     REQUIRE( ! verify_checksum(data));
 }
 
-// End Boost Suite
+// End Test Suite

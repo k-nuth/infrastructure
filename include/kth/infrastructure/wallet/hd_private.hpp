@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -46,13 +46,13 @@ public:
 
     explicit
     hd_private(data_chunk const& seed, uint64_t prefixes = mainnet);
-    
+
     explicit
     hd_private(hd_key const& private_key);
 
     hd_private(hd_key const& private_key, uint64_t prefixes);
     hd_private(hd_key const& private_key, uint32_t prefix);
-    
+
     explicit
     hd_private(std::string const& encoded);
 
@@ -64,14 +64,14 @@ public:
     bool operator==(hd_private const& x) const;
     bool operator!=(hd_private const& x) const;
 
-    friend 
+    friend
     std::istream& operator>>(std::istream& in, hd_private& to);
-    
-    friend 
+
+    friend
     std::ostream& operator<<(std::ostream& out, hd_private const& of);
 
     // Swap implementation required to properly handle base class.
-    friend 
+    friend
     void swap(hd_private& left, hd_private& right);
 
     /// Cast operators.

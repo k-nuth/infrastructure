@@ -1,4 +1,4 @@
-// Copyright (c) 2016-2022 Knuth Project developers.
+// Copyright (c) 2016-2023 Knuth Project developers.
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +7,7 @@
 
 using namespace kth;
 
-// Start Boost Suite: elliptic curve tests
+// Start Test Suite: elliptic curve tests
 
 // Scenario 1
 #define SECRET1 "8010b1bb119ad37d4b65a1022a314897b1b3614b345974332cb1b9582cf03536"
@@ -157,4 +157,4 @@ TEST_CASE("elliptic curve  ec multiply test", "[elliptic curve tests]") {
     REQUIRE(std::equal(public1.begin(), public1.end(), public2.begin()));
 }
 
-// End Boost Suite
+// End Test Suite
