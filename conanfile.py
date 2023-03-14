@@ -34,7 +34,6 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
         "verbose": [True, False],
         "cxxflags": ["ANY"],
         "cflags": ["ANY"],
-        "glibcxx_supports_cxx11_abi": ["ANY"],
         "cmake_export_compile_commands": [True, False],
         "log": ["boost", "spdlog", "binlog"],
         "asio_standalone": [True, False],
@@ -48,23 +47,17 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
         "with_qrencode": False,
         "tests": False,
         "examples": False,
-        # "microarchitecture": "_DUMMY_",
-        # "fix_march": False,
 
-        "march_id": "_DUMMY_",
         "march_strategy": "download_if_possible",
 
-
         "verbose": False,
-        "cxxflags": "_DUMMY_",
-        "cflags": "_DUMMY_",
-        "glibcxx_supports_cxx11_abi": "_DUMMY_",
         "cmake_export_compile_commands": False,
         "log": "spdlog",
         "asio_standalone": False,
     }
 
     # exports = "conan_*", "ci_utils/*"
+    exports = "kthconanfile.py"
     exports_sources = "src/*", "CMakeLists.txt", "ci_utils/cmake/*", "cmake/*", "kth-infrastructureConfig.cmake.in", "include/*", "test/*", "examples/*", "test_new/*"
     # package_files = "build/lkth-infrastructure.a"
 
@@ -103,6 +96,17 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
     def configure(self):
         # self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
         KnuthConanFileV2.configure(self)
+
+        self.output.info(f"self.options.march_id: {self.options.march_id}")
+        self.output.info(f"self.options.get_safe('march_id'): {self.options.get_safe('march_id')}")
+
+        self.options["*"].march_id = "ZLm9Pjh"
+        self.options["infrastructure"].march_id = "ZLm9Pjh"
+        # self.options.march_id = "ZLm9Pjh"
+
+        self.output.info(f"self.options.march_id: {self.options.march_id}")
+        self.output.info(f"self.options.get_safe('march_id'): {self.options.get_safe('march_id')}")
+
         self.options["fmt"].header_only = True
 
         if self.options.log == "spdlog":
