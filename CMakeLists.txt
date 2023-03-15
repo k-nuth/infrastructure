@@ -4,79 +4,35 @@
 
 cmake_minimum_required(VERSION 3.15)
 
-project(kth-infrastructure VERSION 0 LANGUAGES CXX C)
+project(infrastructure VERSION 0 LANGUAGES CXX C)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
-# Check for baseline language coverage in the compiler for the C++20 standard.
-#------------------------------------------------------------------------------
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Process options.
-#==============================================================================
-
-# Implement --use-conan
-#------------------------------------------------------------------------------
-# option(USE_CONAN "Use Conan Build Tool." OFF)
-# option(NO_CONAN_AT_ALL "Conan totally disabled." OFF)
-
-# if (NO_CONAN_AT_ALL)
-#   set(USE_CONAN OFF)
-# endif()
-
-
-# Inherit --enable-shared and define BOOST_TEST_DYN_LINK.
-#------------------------------------------------------------------------------
 option(ENABLE_SHARED "" OFF)
-
-# Implement POSITION_INDEPENDENT_CODE
-#------------------------------------------------------------------------------
 option(ENABLE_POSITION_INDEPENDENT_CODE "Enable POSITION_INDEPENDENT_CODE property" ON)
-
-# Implement --with-tests and declare WITH_TESTS.
-#------------------------------------------------------------------------------
 option(WITH_TESTS "Compile with unit tests." ON)
-
-# Implement --with-examples and declare WITH_EXAMPLES.
-#------------------------------------------------------------------------------
 option(WITH_EXAMPLES "Compile with examples." OFF)
-
-
-# Implement --with-icu and define BOOST_HAS_ICU and output ${icu}.
-#------------------------------------------------------------------------------
 option(WITH_ICU "Compile with International Components for Unicode." OFF)
+option(WITH_PNG "Compile with Libpng support." OFF)
+option(WITH_QRENCODE "Compile with QREncode." OFF)
+# option(LOG_LIBRARY "Setting for the logging library." OFF)
+option(JUST_KTH_SOURCES "Just Knuth source code to be linted." OFF)
+
+
 if (WITH_ICU)
   add_definitions(-DWITH_ICU -DBOOST_HAS_ICU)
-  # if (NO_CONAN_AT_ALL)
-  #   message(FATAL_ERROR "WITH_ICU not yet implemented")
-  # endif (NO_CONAN_AT_ALL)
 endif()
 
-# Implement --with-png and output ${png}.
-#------------------------------------------------------------------------------
-option(WITH_PNG "Compile with Libpng support." OFF)
 if (WITH_PNG)
   add_definitions(-DWITH_PNG)
 endif()
 
-# Implement --with-qrencode and output ${qrencode}.
-#------------------------------------------------------------------------------
-option(WITH_QRENCODE "Compile with QREncode." OFF)
 if (WITH_QRENCODE)
   add_definitions(-DWITH_QRENCODE)
-
-  # if (NO_CONAN_AT_ALL)
-  #   message(FATAL_ERROR "WITH_QRENCODE not yet implemented")
-  # endif (NO_CONAN_AT_ALL)
 endif()
 
-# Implement --log_library.
-#------------------------------------------------------------------------------
-# option(LOG_LIBRARY "Setting for the logging library." OFF)
-# if (LOG_LIBRARY)
-#   add_definitions(-DKTH_USE_BINLOG)
-# endif()
 
 set(LOG_LIBRARY "boost" CACHE STRING "Setting for the logging library (boost|spdlog|binlog).")
 
@@ -92,18 +48,10 @@ endif()
 
 message(STATUS "Knuth: Logging Library: ${LOG_LIBRARY}")
 
-
-
-# Implement --JUST_KTH_SOURCES for linting.
-#------------------------------------------------------------------------------
-option(JUST_KTH_SOURCES "Just Knuth source code to be linted." OFF)
 if (JUST_KTH_SOURCES)
   message(STATUS "Knuth: Just Knuth source code to be linted: enabled")
 endif()
 
-# set(KTH_PROJECT_VERSION "-" CACHE STRING "Specify the Knuth Project Version.")
-# # message(${KTH_PROJECT_VERSION})
-# message( STATUS "Knuth: Compiling version ${KTH_PROJECT_VERSION}")
 
 set(MICROARCHITECTURE "x86_64" CACHE STRING "Specify the Microarchitecture (x86_64|...).")
 message( STATUS "Knuth: Compiling for ${MICROARCHITECTURE}")
@@ -116,84 +64,19 @@ message( STATUS "Knuth: CONAN_C_FLAGS ${CONAN_C_FLAGS}")
 
 set(Boost_DEBUG ON)
 
-# Check dependencies.
-#==============================================================================
-#------------------------------------------------------------------------------
-# if (NO_CONAN_AT_ALL)
-#   # Require Boost of at least version 1.56.0 and output ${boost_CPPFLAGS/LDFLAGS}.
-#   #------------------------------------------------------------------------------
-#   if (NOT ENABLE_SHARED)
-#     set(Boost_USE_STATIC_LIBS ON)
-#   endif()
 
-#   if (MSVC)
-#     find_package(
-#       Boost 1.66.0 REQUIRED
-#       COMPONENTS atomic chrono date_time filesystem iostreams locale log log_setup program_options system thread unit_test_framework
-#       # regex
-#     )
-#   else()
-#     find_package(
-#       Boost 1.66.0 REQUIRED
-#       COMPONENTS chrono date_time filesystem iostreams locale log program_options system thread unit_test_framework
-#       # regex
-#     )
-#   endif()
-# endif()
-
-
-# Require pthread and output ${pthread_CPPFLAGS/LIBS}.
-#------------------------------------------------------------------------------
 find_package(Threads REQUIRED)
-
-# Require png of at least version 1.6.25 and output ${png_CPPFLAGS/LIBS/PKG}.
-#------------------------------------------------------------------------------
-if (WITH_PNG)
-    # if (NO_CONAN_AT_ALL)
-    #     find_package(PNG 1.6.25 REQUIRED)
-
-    #     add_library(png INTERFACE IMPORTED)
-    #     set_target_properties(png PROPERTIES
-    #         INTERFACE_INCLUDE_DIRECTORIES "${PNG_INCLUDE_DIRS}"
-    #         INTERFACE_LINK_LIBRARIES "${PNG_LIBRARIES}"
-    #         INTERFACE_COMPILE_DEFINITIONS "${PNG_DEFINITIONS}")
-    # endif(NO_CONAN_AT_ALL)
-endif()
-
-
-
-# Require rt if on linux and output ${rt_LIBS}.
-#------------------------------------------------------------------------------
-
-# Require icu-i18n of at least version 51.2 and output ${icu_i18n_CPPFLAGS/LIBS/PKG}.
-#------------------------------------------------------------------------------
-
-# Require qrencode of at least version 3.4.4 and output ${qrencode_CPPFLAGS/LIBS/PKG}.
-
-
-
-# if (NOT USE_CONAN)
-# # Require secp256k1 of at least version 0 and output ${secp256k1_CPPFLAGS/LIBS/PKG}.
-# #------------------------------------------------------------------------------
-#   if (NOT TARGET secp256k1)
-#     find_package(secp256k1 0 REQUIRED)
-#   endif()
-# endif()
-
 find_package(secp256k1 REQUIRED)
+find_package(Boost 1.81.0 COMPONENTS program_options REQUIRED)
+find_package(Boost 1.81.0 COMPONENTS thread REQUIRED)
+find_package(fmt 9.1.0 REQUIRED)
+find_package(spdlog 1.10.0 REQUIRED)
 
-# Set flags.
-#==============================================================================
 include(CheckCXXCompilerFlag)
 
-# Including common functions
-#------------------------------------------------------------------------------
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/ci_utils/cmake)
 include(KnuthTools)
 
-
-# Warn on all stuff.
-#------------------------------------------------------------------------------
 if (NOT MSVC)
   _add_c_compile_flag(-Wall _has_all_warning_flag)
 else()
@@ -202,63 +85,34 @@ else()
   add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif()
 
-# Warn on extra stuff.
-#------------------------------------------------------------------------------
 if (NOT MSVC)
   _add_c_compile_flag(-Wextra _has_extra_warning_flag)
 endif()
 
-# Be really annoying.
-#------------------------------------------------------------------------------
 _add_c_compile_flag(-Wpedantic _has_pedantic_warning_flag)
 if (_has_pedantic_warning_flag)
   _add_c_compile_flag(-pedantic _has_pedantic_flag)
 endif()
 
-# Conform to style.
-#------------------------------------------------------------------------------
 _add_cxx_compile_flag(-Wno-missing-braces _has_no_missing_braces_warning_flag)
-
-# Conflict in stdlib under clang. Enabled in clang only.
-#------------------------------------------------------------------------------
 _add_cxx_compile_flag(-Wno-mismatched-tags _has_no_mismatched_tags_warning_flag)
-
-# Clean up boost 1.55 headers. Enabled in gcc only.
-#------------------------------------------------------------------------------
 _add_c_compile_flag(-Wno-deprecated-declarations _has_no_deprecated_declarations_warning_flag)
-
-# Protect stack.
-#------------------------------------------------------------------------------
 _add_link_flag(-fstack-protector _has_stack_protector_flag)
-
-# Protect stack comprehensively.
-#------------------------------------------------------------------------------
 _add_link_flag(-fstack-protector-all _has_stack_protector_all_flag)
-
-# Hide internal functions from external libs. Enabled in gcc only.
-#------------------------------------------------------------------------------
 _add_cxx_compile_flag(-fvisibility-hidden _has_visibility_hidden_flag)
-
-# Hide inlines from external libs. Enabled in gcc only.
-#------------------------------------------------------------------------------
 _add_cxx_compile_flag(-fvisibility-inlines-hidden _has_visibility_inlines_hidden_flag)
 
-# Target Windows Vista. Enabled in msvc only.
-#------------------------------------------------------------------------------
-if (MSVC) # OR MINGW)
+if (MSVC)
   add_definitions(-D_WIN32_WINNT=0x0600)
 endif()
-
-# Build
-#==============================================================================
 
 set(MODE STATIC)
 if (ENABLE_SHARED)
   set(MODE SHARED)
 endif()
 
-set(kth_infrastructure_sources_just_legacy
-        src/machine/number.cpp        #Fernando: commented for the moment...
+set(kth_sources_just_legacy
+        src/machine/number.cpp
 
         src/config/authority.cpp
         src/config/base16.cpp
@@ -358,164 +212,260 @@ set(kth_infrastructure_sources_just_legacy
         src/wallet/uri.cpp
     )
 
-  if (${LOG_LIBRARY} STREQUAL "boost")
-    set(kth_infrastructure_sources_just_legacy
-      ${kth_infrastructure_sources_just_legacy}
-      src/log/file_collector.cpp
-      src/log/file_collector_repository.cpp
-      src/log/file_counter_formatter.cpp
-      src/log/sink.cpp
-      src/log/statsd_sink.cpp
-      src/log/udp_client_sink.cpp
-    )
-  endif()
+if (${LOG_LIBRARY} STREQUAL "boost")
+  set(kth_sources_just_legacy
+    ${kth_sources_just_legacy}
+    src/log/file_collector.cpp
+    src/log/file_collector_repository.cpp
+    src/log/file_counter_formatter.cpp
+    src/log/sink.cpp
+    src/log/statsd_sink.cpp
+    src/log/udp_client_sink.cpp
+  )
+endif()
 
-  if (${LOG_LIBRARY} STREQUAL "spdlog")
-    set(kth_infrastructure_sources_just_legacy
-      ${kth_infrastructure_sources_just_legacy}
-      src/log/sink.cpp
-    )
-  endif()
-
-
-# if (${CURRENCY} STREQUAL "LTC")
-#     set(knuth_domain_sources_just_knuth
-#     ${knuth_domain_sources_just_knuth}
-#     src/math/external/scrypt.cpp
-#     src/math/external/scrypt-sse2.cpp)
-# endif()
+if (${LOG_LIBRARY} STREQUAL "spdlog")
+  set(kth_sources_just_legacy
+    ${kth_sources_just_legacy}
+    src/log/sink.cpp
+  )
+endif()
 
 if (WITH_PNG)
-  set(kth_infrastructure_sources_just_legacy
-    ${kth_infrastructure_sources_just_legacy}
+  set(kth_sources_just_legacy
+    ${kth_sources_just_legacy}
     src/utility/png.cpp
   )
 endif()
 
 if (WITH_QRENCODE)
-  set(kth_infrastructure_sources_just_legacy
-    ${kth_infrastructure_sources_just_legacy}
+  set(kth_sources_just_legacy
+    ${kth_sources_just_legacy}
     src/wallet/qrcode.cpp
   )
 endif()
 
-
-set(kth_infrastructure_sources_just_knuth
+set(kth_sources_just_knuth
     # src/math/external/scrypt.cpp
     # src/math/external/scrypt-sse2.cpp
     src/wallet/cashaddr.cpp
 )
 
 if (NOT JUST_KTH_SOURCES)
-  set(kth_infrastructure_sources
-    ${kth_infrastructure_sources_just_legacy}
+  set(kth_sources
+    ${kth_sources_just_legacy}
   )
 endif()
 
-set(kth_infrastructure_sources
-  ${kth_infrastructure_sources}
-  ${kth_infrastructure_sources_just_knuth}
+set(kth_sources ${kth_sources} ${kth_sources_just_knuth})
+
+set(kth_headers
+    include/kth/infrastructure/compat.h
+    include/kth/infrastructure/compat.hpp
+    include/kth/infrastructure/constants.hpp
+    include/kth/infrastructure/define.hpp
+    include/kth/infrastructure/error.hpp
+    include/kth/infrastructure/handlers.hpp
+    include/kth/infrastructure/path.hpp
+    include/kth/infrastructure/version.hpp
+
+    include/kth/infrastructure/machine/number.hpp
+    include/kth/infrastructure/machine/script_pattern.hpp
+    include/kth/infrastructure/machine/sighash_algorithm.hpp
+    include/kth/infrastructure/machine/script_version.hpp
+
+    include/kth/infrastructure/config/authority.hpp
+    include/kth/infrastructure/config/base2.hpp
+    include/kth/infrastructure/config/base16.hpp
+    include/kth/infrastructure/config/base58.hpp
+    include/kth/infrastructure/config/base64.hpp
+    include/kth/infrastructure/config/checkpoint.hpp
+    include/kth/infrastructure/config/directory.hpp
+    include/kth/infrastructure/config/endpoint.hpp
+    include/kth/infrastructure/config/hash160.hpp
+    include/kth/infrastructure/config/hash256.hpp
+    include/kth/infrastructure/config/parameter.hpp
+    include/kth/infrastructure/config/printer.hpp
+    include/kth/infrastructure/config/sodium.hpp
+
+    include/kth/infrastructure/formats/base_10.hpp
+    include/kth/infrastructure/formats/base_16.hpp
+    include/kth/infrastructure/formats/base_58.hpp
+    include/kth/infrastructure/formats/base_64.hpp
+    include/kth/infrastructure/formats/base_85.hpp
+
+    include/kth/infrastructure/impl/formats/base_16.ipp
+    include/kth/infrastructure/impl/formats/base_58.ipp
+
+    include/kth/infrastructure/impl/math/checksum.ipp
+    include/kth/infrastructure/impl/math/hash.ipp
+
+    include/kth/infrastructure/impl/machine/number.ipp
+
+    include/kth/infrastructure/math/checksum.hpp
+    include/kth/infrastructure/math/crypto.hpp
+    include/kth/infrastructure/math/elliptic_curve.hpp
+    include/kth/infrastructure/math/hash.hpp
+    include/kth/infrastructure/math/sip_hash.hpp
+    include/kth/infrastructure/math/uint256.hpp
+
+    include/kth/infrastructure/impl/utility/array_slice.ipp
+    include/kth/infrastructure/impl/utility/collection.ipp
+    include/kth/infrastructure/impl/utility/data.ipp
+    include/kth/infrastructure/impl/utility/deserializer.ipp
+    include/kth/infrastructure/impl/utility/endian.ipp
+    include/kth/infrastructure/impl/utility/istream_reader.ipp
+    include/kth/infrastructure/impl/utility/ostream_writer.ipp
+    include/kth/infrastructure/impl/utility/pending.ipp
+    include/kth/infrastructure/impl/utility/resubscriber.ipp
+    include/kth/infrastructure/impl/utility/serializer.ipp
+    include/kth/infrastructure/impl/utility/subscriber.ipp
+    include/kth/infrastructure/impl/utility/string.ipp
+    include/kth/infrastructure/impl/utility/track.ipp
+
+    include/kth/infrastructure/message/message_tools.hpp
+
+    include/kth/infrastructure/unicode/console_streambuf.hpp
+    include/kth/infrastructure/unicode/file_lock.hpp
+    include/kth/infrastructure/unicode/ifstream.hpp
+    include/kth/infrastructure/unicode/ofstream.hpp
+    include/kth/infrastructure/unicode/unicode.hpp
+    include/kth/infrastructure/unicode/unicode_istream.hpp
+    include/kth/infrastructure/unicode/unicode_ostream.hpp
+    include/kth/infrastructure/unicode/unicode_streambuf.hpp
+
+    include/kth/infrastructure/utility/array_slice.hpp
+    include/kth/infrastructure/utility/asio.hpp
+    include/kth/infrastructure/utility/assert.hpp
+    include/kth/infrastructure/utility/atomic.hpp
+    include/kth/infrastructure/utility/binary.hpp
+    include/kth/infrastructure/utility/collection.hpp
+    include/kth/infrastructure/utility/color.hpp
+    include/kth/infrastructure/utility/conditional_lock.hpp
+    include/kth/infrastructure/utility/container_sink.hpp
+    include/kth/infrastructure/utility/container_source.hpp
+    include/kth/infrastructure/utility/data.hpp
+    include/kth/infrastructure/utility/deadline.hpp
+    include/kth/infrastructure/utility/decorator.hpp
+    include/kth/infrastructure/utility/delegates.hpp
+    include/kth/infrastructure/utility/deserializer.hpp
+    include/kth/infrastructure/utility/dispatcher.hpp
+    include/kth/infrastructure/utility/enable_shared_from_base.hpp
+    include/kth/infrastructure/utility/endian.hpp
+    include/kth/infrastructure/utility/exceptions.hpp
+    include/kth/infrastructure/utility/flush_lock.hpp
+    include/kth/infrastructure/utility/interprocess_lock.hpp
+    include/kth/infrastructure/utility/istream_reader.hpp
+    include/kth/infrastructure/utility/monitor.hpp
+    include/kth/infrastructure/utility/noncopyable.hpp
+    include/kth/infrastructure/utility/ostream_writer.hpp
+    include/kth/infrastructure/utility/pending.hpp
+    include/kth/infrastructure/utility/png.hpp
+    include/kth/infrastructure/utility/prioritized_mutex.hpp
+    include/kth/infrastructure/utility/pseudo_random.hpp
+    include/kth/infrastructure/utility/reader.hpp
+    include/kth/infrastructure/utility/resubscriber.hpp
+    include/kth/infrastructure/utility/scope_lock.hpp
+    include/kth/infrastructure/utility/sequencer.hpp
+    include/kth/infrastructure/utility/sequential_lock.hpp
+    include/kth/infrastructure/utility/serializer.hpp
+    include/kth/infrastructure/utility/socket.hpp
+    include/kth/infrastructure/utility/string.hpp
+    include/kth/infrastructure/utility/subscriber.hpp
+    include/kth/infrastructure/utility/synchronizer.hpp
+    include/kth/infrastructure/utility/thread.hpp
+    include/kth/infrastructure/utility/threadpool.hpp
+    include/kth/infrastructure/utility/timer.hpp
+    include/kth/infrastructure/utility/track.hpp
+    include/kth/infrastructure/utility/work.hpp
+    include/kth/infrastructure/utility/writer.hpp
+
+    include/kth/infrastructure/wallet/cashaddr.hpp
+    include/kth/infrastructure/wallet/dictionary.hpp
+    include/kth/infrastructure/wallet/hd_private.hpp
+    include/kth/infrastructure/wallet/hd_public.hpp
+    include/kth/infrastructure/wallet/mini_keys.hpp
+    include/kth/infrastructure/wallet/mnemonic.hpp
+    include/kth/infrastructure/wallet/qrcode.hpp
+    include/kth/infrastructure/wallet/uri.hpp
+
+    include/kth/infrastructure.hpp
 )
 
-add_library(${PROJECT_NAME} ${MODE} ${kth_infrastructure_sources})
+if (${LOG_LIBRARY} STREQUAL "boost")
+  set(kth_headers
+    ${kth_headers}
+    include/kth/infrastructure/log/attributes.hpp
+    include/kth/infrastructure/log/file_char_traits.hpp
+    include/kth/infrastructure/log/file_collector.hpp
+    include/kth/infrastructure/log/file_collector_repository.hpp
+    include/kth/infrastructure/log/file_counter_formatter.hpp
+    include/kth/infrastructure/log/rotable_file.hpp
+    include/kth/infrastructure/log/severity.hpp
+    include/kth/infrastructure/log/sink.hpp
+    include/kth/infrastructure/log/source.hpp
+    include/kth/infrastructure/log/statsd_sink.hpp
+    include/kth/infrastructure/log/statsd_source.hpp
+    include/kth/infrastructure/log/udp_client_sink.hpp
+
+    include/kth/infrastructure/log/features/counter.hpp
+    include/kth/infrastructure/log/features/gauge.hpp
+    include/kth/infrastructure/log/features/metric.hpp
+    include/kth/infrastructure/log/features/rate.hpp
+    include/kth/infrastructure/log/features/timer.hpp
+
+    include/kth/infrastructure/impl/log/features/counter.ipp
+    include/kth/infrastructure/impl/log/features/gauge.ipp
+    include/kth/infrastructure/impl/log/features/metric.ipp
+    include/kth/infrastructure/impl/log/features/rate.ipp
+    include/kth/infrastructure/impl/log/features/timer.ipp
+  )
+endif()
+
+
+add_library(${PROJECT_NAME} ${MODE} ${kth_sources} ${kth_headers})
+add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX CXX_STANDARD 20 CXX_STANDARD_REQUIRED TRUE)
 
 if (ENABLE_POSITION_INDEPENDENT_CODE)
     set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
 endif(ENABLE_POSITION_INDEPENDENT_CODE)
 
-
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 
 if (NOT ENABLE_SHARED)
-    target_compile_definitions(${PROJECT_NAME} PUBLIC -DKI_STATIC) #TODO(fernando): manage with Conan????
+    target_compile_definitions(${PROJECT_NAME} PUBLIC -DKI_STATIC)
 endif()
-
-# target_compile_definitions(${PROJECT_NAME} PUBLIC -DKTH_PROJECT_VERSION="${KTH_PROJECT_VERSION}") #TODO(fernando): manage with Conan????
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
 
-# if (${CURRENCY} STREQUAL "LTC")
-#   target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${OPENSSL_INCLUDE_DIR})
-# endif()
-
-
-find_package(Boost 1.81.0 COMPONENTS program_options REQUIRED)
-find_package(Boost 1.81.0 COMPONENTS thread REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC Boost::program_options)
 target_link_libraries(${PROJECT_NAME} PUBLIC Boost::thread)
-
-
-find_package(fmt 9.1.0 REQUIRED)
-find_package(spdlog 1.10.0 REQUIRED)
 # target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
 # target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog_header_only)
 target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt)
 target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog)
 
-# if (NO_CONAN_AT_ALL)
-  # if (MSVC)
-  #   target_link_libraries(${PROJECT_NAME} PUBLIC
-  #     ${Boost_ATOMIC_LIBRARY}
-  #     ${Boost_LOG_SETUP_LIBRARY}
-  #   )
-  # endif()
+target_link_libraries(${PROJECT_NAME} PUBLIC ${CMAKE_THREAD_LIBS_INIT})
 
-  # target_link_libraries(${PROJECT_NAME} PUBLIC
-  #   # ${Boost_CHRONO_LIBRARY}
-  #   ${Boost_DATE_TIME_LIBRARY}
-  #   ${Boost_FILESYSTEM_LIBRARY}
-  #   ${Boost_IOSTREAMS_LIBRARY}
-  #   ${Boost_LOCALE_LIBRARY}
-  #   ${Boost_LOG_LIBRARY}
-  #   ${Boost_PROGRAM_OPTIONS_LIBRARY}
-  #   # ${Boost_REGEX_LIBRARY}
-  #   ${Boost_SYSTEM_LIBRARY}
-  #   # ${Boost_THREAD_LIBRARY}
-  # )
-# endif()
+if (MINGW)
+    target_link_libraries(${PROJECT_NAME} PUBLIC ws2_32 wsock32)
+endif()
 
-target_link_libraries(${PROJECT_NAME} PUBLIC ${CMAKE_THREAD_LIBS_INIT})  #TODO(fernando): manage with Conan????
 
-# if (NO_CONAN_AT_ALL)
-    if (MINGW) #(WIN32)
-        target_link_libraries(${PROJECT_NAME} PUBLIC ws2_32 wsock32)
-    endif()
-# endif()
-
-# if (WITH_PNG)
-#     if (NO_CONAN_AT_ALL)
-#         target_link_libraries(${PROJECT_NAME} PUBLIC png)
-#     endif (NO_CONAN_AT_ALL)
-# endif()
-
-# if (${CURRENCY} STREQUAL "LTC")
-#   target_link_libraries(${PROJECT_NAME} PUBLIC ${OPENSSL_CRYPTO_LIBRARY})  #TODO(fernando): manage with Conan
-
-#   # OPENSSL_CRYPTO_LIBRARY
-#   # OPENSSL_SSL_LIBRARY
-#   # OPENSSL_LIBRARIES
-# endif()
-
-# if (NOT USE_CONAN)
-  # target_link_libraries(${PROJECT_NAME} PUBLIC secp256k1)
-# endif()
-
-# target_link_libraries(${PROJECT_NAME} PUBLIC secp256k1)
 target_link_libraries(${PROJECT_NAME} PUBLIC secp256k1::secp256k1)
 
 _group_sources(${PROJECT_NAME} "${CMAKE_CURRENT_LIST_DIR}")
 
 # Tests
-#==============================================================================
+# ------------------------------------------------------------------------------
 if (WITH_TESTS)
   enable_testing()
   find_package(Catch2 3 REQUIRED)
 
-  set(kth_infrastructure_test_sources
-
+  set(kth_test_sources
     test/config/authority.cpp
     test/config/base58.cpp
     test/config/checkpoint.cpp
@@ -560,28 +510,27 @@ if (WITH_TESTS)
     test/wallet/mnemonic.cpp
     test/wallet/uri.cpp
 
-    # test/main.cpp
   )
 
   if (WITH_PNG)
-    set(kth_infrastructure_test_sources
-        ${kth_infrastructure_test_sources}
+    set(kth_test_sources
+        ${kth_test_sources}
         src/utility/png.cpp
     )
   endif()
 
   if (WITH_QRENCODE)
-    set(kth_infrastructure_test_sources
-        ${kth_infrastructure_test_sources}
+    set(kth_test_sources
+        ${kth_test_sources}
         src/wallet/qrcode.cpp
     )
   endif()
 
-  add_executable(kth_infrastructure_test ${kth_infrastructure_test_sources})
+  add_executable(kth_infrastructure_test ${kth_test_sources})
 
   target_include_directories(kth_infrastructure_test PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/test>)
 
-  target_link_libraries(kth_infrastructure_test PRIVATE kth-infrastructure)
+  target_link_libraries(kth_infrastructure_test PRIVATE ${PROJECT_NAME})
   target_link_libraries(kth_infrastructure_test PRIVATE Catch2::Catch2WithMain)
 
   include(CTest)
@@ -590,229 +539,33 @@ if (WITH_TESTS)
 endif()
 
 # Examples
-#==============================================================================
-# local: examples/kth_infrastructure_examples
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 if (WITH_EXAMPLES)
   add_executable(kth_infrastructure_examples
     examples/main.cpp)
 
-  target_link_libraries(kth_infrastructure_examples PUBLIC kth-infrastructure)
+  target_link_libraries(kth_infrastructure_examples PUBLIC ${PROJECT_NAME})
 
   _group_sources(kth_infrastructure_examples "${CMAKE_CURRENT_LIST_DIR}/examples")
 endif()
 
 # Install
-#==============================================================================
-install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    RUNTIME DESTINATION bin
-    INCLUDES DESTINATION include
+# ------------------------------------------------------------------------------
+
+include(GNUInstallDirs)
+install(TARGETS ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}-targets
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+# Generate and install a CMake package configuration file
+install(EXPORT ${PROJECT_NAME}-targets
+    FILE ${PROJECT_NAME}-config.cmake
+    NAMESPACE ${PROJECT_NAME}::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
 )
 
-#install(EXPORT kth-infrastructureTargets
-#
-#)
-
-set(_kth_infrastructure_headers
-    kth/infrastructure/compat.h
-    kth/infrastructure/compat.hpp
-    kth/infrastructure/constants.hpp
-    kth/infrastructure/define.hpp
-    kth/infrastructure/error.hpp
-    kth/infrastructure/handlers.hpp
-    kth/infrastructure/path.hpp
-    kth/infrastructure/version.hpp
-
-    kth/infrastructure/machine/number.hpp
-    kth/infrastructure/machine/script_pattern.hpp
-    kth/infrastructure/machine/sighash_algorithm.hpp
-    kth/infrastructure/machine/script_version.hpp
-
-    kth/infrastructure/config/authority.hpp
-    kth/infrastructure/config/base2.hpp
-    kth/infrastructure/config/base16.hpp
-    kth/infrastructure/config/base58.hpp
-    kth/infrastructure/config/base64.hpp
-    kth/infrastructure/config/checkpoint.hpp
-    kth/infrastructure/config/directory.hpp
-    kth/infrastructure/config/endpoint.hpp
-    kth/infrastructure/config/hash160.hpp
-    kth/infrastructure/config/hash256.hpp
-    kth/infrastructure/config/parameter.hpp
-    kth/infrastructure/config/printer.hpp
-    kth/infrastructure/config/sodium.hpp
-
-    kth/infrastructure/formats/base_10.hpp
-    kth/infrastructure/formats/base_16.hpp
-    kth/infrastructure/formats/base_58.hpp
-    kth/infrastructure/formats/base_64.hpp
-    kth/infrastructure/formats/base_85.hpp
-
-    kth/infrastructure/impl/formats/base_16.ipp
-    kth/infrastructure/impl/formats/base_58.ipp
-
-    kth/infrastructure/impl/math/checksum.ipp
-    kth/infrastructure/impl/math/hash.ipp
-
-    kth/infrastructure/impl/machine/number.ipp
-
-    kth/infrastructure/math/checksum.hpp
-    kth/infrastructure/math/crypto.hpp
-    kth/infrastructure/math/elliptic_curve.hpp
-    kth/infrastructure/math/hash.hpp
-    kth/infrastructure/math/sip_hash.hpp
-    kth/infrastructure/math/uint256.hpp
-
-    kth/infrastructure/impl/utility/array_slice.ipp
-    kth/infrastructure/impl/utility/collection.ipp
-    kth/infrastructure/impl/utility/data.ipp
-    kth/infrastructure/impl/utility/deserializer.ipp
-    kth/infrastructure/impl/utility/endian.ipp
-    kth/infrastructure/impl/utility/istream_reader.ipp
-    kth/infrastructure/impl/utility/ostream_writer.ipp
-    kth/infrastructure/impl/utility/pending.ipp
-    kth/infrastructure/impl/utility/resubscriber.ipp
-    kth/infrastructure/impl/utility/serializer.ipp
-    kth/infrastructure/impl/utility/subscriber.ipp
-    kth/infrastructure/impl/utility/string.ipp
-    kth/infrastructure/impl/utility/track.ipp
-
-    kth/infrastructure/message/message_tools.hpp
-
-    kth/infrastructure/unicode/console_streambuf.hpp
-    kth/infrastructure/unicode/file_lock.hpp
-    kth/infrastructure/unicode/ifstream.hpp
-    kth/infrastructure/unicode/ofstream.hpp
-    kth/infrastructure/unicode/unicode.hpp
-    kth/infrastructure/unicode/unicode_istream.hpp
-    kth/infrastructure/unicode/unicode_ostream.hpp
-    kth/infrastructure/unicode/unicode_streambuf.hpp
-
-    kth/infrastructure/utility/array_slice.hpp
-    kth/infrastructure/utility/asio.hpp
-    kth/infrastructure/utility/assert.hpp
-    kth/infrastructure/utility/atomic.hpp
-    kth/infrastructure/utility/binary.hpp
-    kth/infrastructure/utility/collection.hpp
-    kth/infrastructure/utility/color.hpp
-    kth/infrastructure/utility/conditional_lock.hpp
-    kth/infrastructure/utility/container_sink.hpp
-    kth/infrastructure/utility/container_source.hpp
-    kth/infrastructure/utility/data.hpp
-    kth/infrastructure/utility/deadline.hpp
-    kth/infrastructure/utility/decorator.hpp
-    kth/infrastructure/utility/delegates.hpp
-    kth/infrastructure/utility/deserializer.hpp
-    kth/infrastructure/utility/dispatcher.hpp
-    kth/infrastructure/utility/enable_shared_from_base.hpp
-    kth/infrastructure/utility/endian.hpp
-    kth/infrastructure/utility/exceptions.hpp
-    kth/infrastructure/utility/flush_lock.hpp
-    kth/infrastructure/utility/interprocess_lock.hpp
-    kth/infrastructure/utility/istream_reader.hpp
-    kth/infrastructure/utility/monitor.hpp
-    kth/infrastructure/utility/noncopyable.hpp
-    kth/infrastructure/utility/ostream_writer.hpp
-    kth/infrastructure/utility/pending.hpp
-    kth/infrastructure/utility/png.hpp
-    kth/infrastructure/utility/prioritized_mutex.hpp
-    kth/infrastructure/utility/pseudo_random.hpp
-    kth/infrastructure/utility/reader.hpp
-    kth/infrastructure/utility/resubscriber.hpp
-    kth/infrastructure/utility/scope_lock.hpp
-    kth/infrastructure/utility/sequencer.hpp
-    kth/infrastructure/utility/sequential_lock.hpp
-    kth/infrastructure/utility/serializer.hpp
-    kth/infrastructure/utility/socket.hpp
-    kth/infrastructure/utility/string.hpp
-    kth/infrastructure/utility/subscriber.hpp
-    kth/infrastructure/utility/synchronizer.hpp
-    kth/infrastructure/utility/thread.hpp
-    kth/infrastructure/utility/threadpool.hpp
-    kth/infrastructure/utility/timer.hpp
-    kth/infrastructure/utility/track.hpp
-    kth/infrastructure/utility/work.hpp
-    kth/infrastructure/utility/writer.hpp
-
-    kth/infrastructure/wallet/cashaddr.hpp
-    kth/infrastructure/wallet/dictionary.hpp
-    kth/infrastructure/wallet/hd_private.hpp
-    kth/infrastructure/wallet/hd_public.hpp
-    kth/infrastructure/wallet/mini_keys.hpp
-    kth/infrastructure/wallet/mnemonic.hpp
-    kth/infrastructure/wallet/qrcode.hpp
-    kth/infrastructure/wallet/uri.hpp
-
-    kth/infrastructure.hpp
-  )
-
-if (${LOG_LIBRARY} STREQUAL "boost")
-  set(_kth_infrastructure_headers
-    ${_kth_infrastructure_headers}
-    kth/infrastructure/log/attributes.hpp
-    kth/infrastructure/log/file_char_traits.hpp
-    kth/infrastructure/log/file_collector.hpp
-    kth/infrastructure/log/file_collector_repository.hpp
-    kth/infrastructure/log/file_counter_formatter.hpp
-    kth/infrastructure/log/rotable_file.hpp
-    kth/infrastructure/log/severity.hpp
-    kth/infrastructure/log/sink.hpp
-    kth/infrastructure/log/source.hpp
-    kth/infrastructure/log/statsd_sink.hpp
-    kth/infrastructure/log/statsd_source.hpp
-    kth/infrastructure/log/udp_client_sink.hpp
-
-    kth/infrastructure/log/features/counter.hpp
-    kth/infrastructure/log/features/gauge.hpp
-    kth/infrastructure/log/features/metric.hpp
-    kth/infrastructure/log/features/rate.hpp
-    kth/infrastructure/log/features/timer.hpp
-
-    kth/infrastructure/impl/log/features/counter.ipp
-    kth/infrastructure/impl/log/features/gauge.ipp
-    kth/infrastructure/impl/log/features/metric.ipp
-    kth/infrastructure/impl/log/features/rate.ipp
-    kth/infrastructure/impl/log/features/timer.ipp
-  )
-endif()
-
-
-foreach (_header ${_kth_infrastructure_headers})
-  get_filename_component(_directory "${_header}" DIRECTORY)
-  install(FILES "include/${_header}" DESTINATION "include/${_directory}")
-endforeach()
-
-# Export
-#==============================================================================
-include(CMakePackageConfigHelpers)
-
-export(EXPORT ${PROJECT_NAME}
-  FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Targets.cmake")
-export(PACKAGE ${PROJECT_NAME})
-
-if (UNIX)
-  set(_config_package_location "lib/cmake")
-elseif (WIN32)
-  set(_config_package_location "cmake")
-endif()
-
-install(EXPORT ${PROJECT_NAME}
-  FILE kth-infrastructureTargets.cmake
-  DESTINATION ${_config_package_location})
-
-configure_file(kth-infrastructureConfig.cmake.in
-  "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
-  @ONLY)
-
-write_basic_package_version_file(
-  "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
-  VERSION ${PROJECT_VERSION}
-  COMPATIBILITY AnyNewerVersion)
-
-install(
-  FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
-  DESTINATION ${_config_package_location})
