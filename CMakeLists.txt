@@ -4,7 +4,7 @@
 
 cmake_minimum_required(VERSION 3.15)
 
-project(kth-infrastructure VERSION 0 LANGUAGES CXX C)
+project(infrastructure VERSION 0 LANGUAGES CXX C)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_CXX_STANDARD 20)
@@ -248,7 +248,6 @@ if (WITH_QRENCODE)
   )
 endif()
 
-
 set(kth_infrastructure_sources_just_knuth
     # src/math/external/scrypt.cpp
     # src/math/external/scrypt-sse2.cpp
@@ -261,18 +260,180 @@ if (NOT JUST_KTH_SOURCES)
   )
 endif()
 
-set(kth_infrastructure_sources
-  ${kth_infrastructure_sources}
-  ${kth_infrastructure_sources_just_knuth}
+set(kth_infrastructure_sources ${kth_infrastructure_sources} ${kth_infrastructure_sources_just_knuth})
+
+set(kth_infrastructure_headers
+    include/kth/infrastructure/compat.h
+    include/kth/infrastructure/compat.hpp
+    include/kth/infrastructure/constants.hpp
+    include/kth/infrastructure/define.hpp
+    include/kth/infrastructure/error.hpp
+    include/kth/infrastructure/handlers.hpp
+    include/kth/infrastructure/path.hpp
+    include/kth/infrastructure/version.hpp
+
+    include/kth/infrastructure/machine/number.hpp
+    include/kth/infrastructure/machine/script_pattern.hpp
+    include/kth/infrastructure/machine/sighash_algorithm.hpp
+    include/kth/infrastructure/machine/script_version.hpp
+
+    include/kth/infrastructure/config/authority.hpp
+    include/kth/infrastructure/config/base2.hpp
+    include/kth/infrastructure/config/base16.hpp
+    include/kth/infrastructure/config/base58.hpp
+    include/kth/infrastructure/config/base64.hpp
+    include/kth/infrastructure/config/checkpoint.hpp
+    include/kth/infrastructure/config/directory.hpp
+    include/kth/infrastructure/config/endpoint.hpp
+    include/kth/infrastructure/config/hash160.hpp
+    include/kth/infrastructure/config/hash256.hpp
+    include/kth/infrastructure/config/parameter.hpp
+    include/kth/infrastructure/config/printer.hpp
+    include/kth/infrastructure/config/sodium.hpp
+
+    include/kth/infrastructure/formats/base_10.hpp
+    include/kth/infrastructure/formats/base_16.hpp
+    include/kth/infrastructure/formats/base_58.hpp
+    include/kth/infrastructure/formats/base_64.hpp
+    include/kth/infrastructure/formats/base_85.hpp
+
+    include/kth/infrastructure/impl/formats/base_16.ipp
+    include/kth/infrastructure/impl/formats/base_58.ipp
+
+    include/kth/infrastructure/impl/math/checksum.ipp
+    include/kth/infrastructure/impl/math/hash.ipp
+
+    include/kth/infrastructure/impl/machine/number.ipp
+
+    include/kth/infrastructure/math/checksum.hpp
+    include/kth/infrastructure/math/crypto.hpp
+    include/kth/infrastructure/math/elliptic_curve.hpp
+    include/kth/infrastructure/math/hash.hpp
+    include/kth/infrastructure/math/sip_hash.hpp
+    include/kth/infrastructure/math/uint256.hpp
+
+    include/kth/infrastructure/impl/utility/array_slice.ipp
+    include/kth/infrastructure/impl/utility/collection.ipp
+    include/kth/infrastructure/impl/utility/data.ipp
+    include/kth/infrastructure/impl/utility/deserializer.ipp
+    include/kth/infrastructure/impl/utility/endian.ipp
+    include/kth/infrastructure/impl/utility/istream_reader.ipp
+    include/kth/infrastructure/impl/utility/ostream_writer.ipp
+    include/kth/infrastructure/impl/utility/pending.ipp
+    include/kth/infrastructure/impl/utility/resubscriber.ipp
+    include/kth/infrastructure/impl/utility/serializer.ipp
+    include/kth/infrastructure/impl/utility/subscriber.ipp
+    include/kth/infrastructure/impl/utility/string.ipp
+    include/kth/infrastructure/impl/utility/track.ipp
+
+    include/kth/infrastructure/message/message_tools.hpp
+
+    include/kth/infrastructure/unicode/console_streambuf.hpp
+    include/kth/infrastructure/unicode/file_lock.hpp
+    include/kth/infrastructure/unicode/ifstream.hpp
+    include/kth/infrastructure/unicode/ofstream.hpp
+    include/kth/infrastructure/unicode/unicode.hpp
+    include/kth/infrastructure/unicode/unicode_istream.hpp
+    include/kth/infrastructure/unicode/unicode_ostream.hpp
+    include/kth/infrastructure/unicode/unicode_streambuf.hpp
+
+    include/kth/infrastructure/utility/array_slice.hpp
+    include/kth/infrastructure/utility/asio.hpp
+    include/kth/infrastructure/utility/assert.hpp
+    include/kth/infrastructure/utility/atomic.hpp
+    include/kth/infrastructure/utility/binary.hpp
+    include/kth/infrastructure/utility/collection.hpp
+    include/kth/infrastructure/utility/color.hpp
+    include/kth/infrastructure/utility/conditional_lock.hpp
+    include/kth/infrastructure/utility/container_sink.hpp
+    include/kth/infrastructure/utility/container_source.hpp
+    include/kth/infrastructure/utility/data.hpp
+    include/kth/infrastructure/utility/deadline.hpp
+    include/kth/infrastructure/utility/decorator.hpp
+    include/kth/infrastructure/utility/delegates.hpp
+    include/kth/infrastructure/utility/deserializer.hpp
+    include/kth/infrastructure/utility/dispatcher.hpp
+    include/kth/infrastructure/utility/enable_shared_from_base.hpp
+    include/kth/infrastructure/utility/endian.hpp
+    include/kth/infrastructure/utility/exceptions.hpp
+    include/kth/infrastructure/utility/flush_lock.hpp
+    include/kth/infrastructure/utility/interprocess_lock.hpp
+    include/kth/infrastructure/utility/istream_reader.hpp
+    include/kth/infrastructure/utility/monitor.hpp
+    include/kth/infrastructure/utility/noncopyable.hpp
+    include/kth/infrastructure/utility/ostream_writer.hpp
+    include/kth/infrastructure/utility/pending.hpp
+    include/kth/infrastructure/utility/png.hpp
+    include/kth/infrastructure/utility/prioritized_mutex.hpp
+    include/kth/infrastructure/utility/pseudo_random.hpp
+    include/kth/infrastructure/utility/reader.hpp
+    include/kth/infrastructure/utility/resubscriber.hpp
+    include/kth/infrastructure/utility/scope_lock.hpp
+    include/kth/infrastructure/utility/sequencer.hpp
+    include/kth/infrastructure/utility/sequential_lock.hpp
+    include/kth/infrastructure/utility/serializer.hpp
+    include/kth/infrastructure/utility/socket.hpp
+    include/kth/infrastructure/utility/string.hpp
+    include/kth/infrastructure/utility/subscriber.hpp
+    include/kth/infrastructure/utility/synchronizer.hpp
+    include/kth/infrastructure/utility/thread.hpp
+    include/kth/infrastructure/utility/threadpool.hpp
+    include/kth/infrastructure/utility/timer.hpp
+    include/kth/infrastructure/utility/track.hpp
+    include/kth/infrastructure/utility/work.hpp
+    include/kth/infrastructure/utility/writer.hpp
+
+    include/kth/infrastructure/wallet/cashaddr.hpp
+    include/kth/infrastructure/wallet/dictionary.hpp
+    include/kth/infrastructure/wallet/hd_private.hpp
+    include/kth/infrastructure/wallet/hd_public.hpp
+    include/kth/infrastructure/wallet/mini_keys.hpp
+    include/kth/infrastructure/wallet/mnemonic.hpp
+    include/kth/infrastructure/wallet/qrcode.hpp
+    include/kth/infrastructure/wallet/uri.hpp
+
+    include/kth/infrastructure.hpp
 )
 
-add_library(${PROJECT_NAME} ${MODE} ${kth_infrastructure_sources})
+if (${LOG_LIBRARY} STREQUAL "boost")
+  set(kth_infrastructure_headers
+    ${kth_infrastructure_headers}
+    include/kth/infrastructure/log/attributes.hpp
+    include/kth/infrastructure/log/file_char_traits.hpp
+    include/kth/infrastructure/log/file_collector.hpp
+    include/kth/infrastructure/log/file_collector_repository.hpp
+    include/kth/infrastructure/log/file_counter_formatter.hpp
+    include/kth/infrastructure/log/rotable_file.hpp
+    include/kth/infrastructure/log/severity.hpp
+    include/kth/infrastructure/log/sink.hpp
+    include/kth/infrastructure/log/source.hpp
+    include/kth/infrastructure/log/statsd_sink.hpp
+    include/kth/infrastructure/log/statsd_source.hpp
+    include/kth/infrastructure/log/udp_client_sink.hpp
+
+    include/kth/infrastructure/log/features/counter.hpp
+    include/kth/infrastructure/log/features/gauge.hpp
+    include/kth/infrastructure/log/features/metric.hpp
+    include/kth/infrastructure/log/features/rate.hpp
+    include/kth/infrastructure/log/features/timer.hpp
+
+    include/kth/infrastructure/impl/log/features/counter.ipp
+    include/kth/infrastructure/impl/log/features/gauge.ipp
+    include/kth/infrastructure/impl/log/features/metric.ipp
+    include/kth/infrastructure/impl/log/features/rate.ipp
+    include/kth/infrastructure/impl/log/features/timer.ipp
+  )
+endif()
+
+
+add_library(${PROJECT_NAME} ${MODE} ${kth_infrastructure_sources} ${kth_infrastructure_headers})
+add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
+
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX CXX_STANDARD 20 CXX_STANDARD_REQUIRED TRUE)
 
 if (ENABLE_POSITION_INDEPENDENT_CODE)
     set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
 endif(ENABLE_POSITION_INDEPENDENT_CODE)
-
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -283,10 +444,6 @@ if (NOT ENABLE_SHARED)
 endif()
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
-
-# if (${CURRENCY} STREQUAL "LTC")
-#   target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${OPENSSL_INCLUDE_DIR})
-# endif()
 
 target_link_libraries(${PROJECT_NAME} PUBLIC Boost::program_options)
 target_link_libraries(${PROJECT_NAME} PUBLIC Boost::thread)
@@ -377,7 +534,7 @@ if (WITH_TESTS)
 
   target_include_directories(kth_infrastructure_test PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/test>)
 
-  target_link_libraries(kth_infrastructure_test PRIVATE kth-infrastructure)
+  target_link_libraries(kth_infrastructure_test PRIVATE ${PROJECT_NAME})
   target_link_libraries(kth_infrastructure_test PRIVATE Catch2::Catch2WithMain)
 
   include(CTest)
@@ -391,218 +548,76 @@ if (WITH_EXAMPLES)
   add_executable(kth_infrastructure_examples
     examples/main.cpp)
 
-  target_link_libraries(kth_infrastructure_examples PUBLIC kth-infrastructure)
+  target_link_libraries(kth_infrastructure_examples PUBLIC ${PROJECT_NAME})
 
   _group_sources(kth_infrastructure_examples "${CMAKE_CURRENT_LIST_DIR}/examples")
 endif()
 
 # Install
 # ------------------------------------------------------------------------------
-install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}
-    LIBRARY DESTINATION lib
-    ARCHIVE DESTINATION lib
-    RUNTIME DESTINATION bin
-    INCLUDES DESTINATION include
+
+include(GNUInstallDirs)
+install(TARGETS ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}-targets
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+
+# Generate and install a CMake package configuration file
+install(EXPORT ${PROJECT_NAME}-targets
+    FILE ${PROJECT_NAME}-config.cmake
+    NAMESPACE ${PROJECT_NAME}::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
 )
 
-set(_kth_infrastructure_headers
-    kth/infrastructure/compat.h
-    kth/infrastructure/compat.hpp
-    kth/infrastructure/constants.hpp
-    kth/infrastructure/define.hpp
-    kth/infrastructure/error.hpp
-    kth/infrastructure/handlers.hpp
-    kth/infrastructure/path.hpp
-    kth/infrastructure/version.hpp
-
-    kth/infrastructure/machine/number.hpp
-    kth/infrastructure/machine/script_pattern.hpp
-    kth/infrastructure/machine/sighash_algorithm.hpp
-    kth/infrastructure/machine/script_version.hpp
-
-    kth/infrastructure/config/authority.hpp
-    kth/infrastructure/config/base2.hpp
-    kth/infrastructure/config/base16.hpp
-    kth/infrastructure/config/base58.hpp
-    kth/infrastructure/config/base64.hpp
-    kth/infrastructure/config/checkpoint.hpp
-    kth/infrastructure/config/directory.hpp
-    kth/infrastructure/config/endpoint.hpp
-    kth/infrastructure/config/hash160.hpp
-    kth/infrastructure/config/hash256.hpp
-    kth/infrastructure/config/parameter.hpp
-    kth/infrastructure/config/printer.hpp
-    kth/infrastructure/config/sodium.hpp
-
-    kth/infrastructure/formats/base_10.hpp
-    kth/infrastructure/formats/base_16.hpp
-    kth/infrastructure/formats/base_58.hpp
-    kth/infrastructure/formats/base_64.hpp
-    kth/infrastructure/formats/base_85.hpp
-
-    kth/infrastructure/impl/formats/base_16.ipp
-    kth/infrastructure/impl/formats/base_58.ipp
-
-    kth/infrastructure/impl/math/checksum.ipp
-    kth/infrastructure/impl/math/hash.ipp
-
-    kth/infrastructure/impl/machine/number.ipp
-
-    kth/infrastructure/math/checksum.hpp
-    kth/infrastructure/math/crypto.hpp
-    kth/infrastructure/math/elliptic_curve.hpp
-    kth/infrastructure/math/hash.hpp
-    kth/infrastructure/math/sip_hash.hpp
-    kth/infrastructure/math/uint256.hpp
-
-    kth/infrastructure/impl/utility/array_slice.ipp
-    kth/infrastructure/impl/utility/collection.ipp
-    kth/infrastructure/impl/utility/data.ipp
-    kth/infrastructure/impl/utility/deserializer.ipp
-    kth/infrastructure/impl/utility/endian.ipp
-    kth/infrastructure/impl/utility/istream_reader.ipp
-    kth/infrastructure/impl/utility/ostream_writer.ipp
-    kth/infrastructure/impl/utility/pending.ipp
-    kth/infrastructure/impl/utility/resubscriber.ipp
-    kth/infrastructure/impl/utility/serializer.ipp
-    kth/infrastructure/impl/utility/subscriber.ipp
-    kth/infrastructure/impl/utility/string.ipp
-    kth/infrastructure/impl/utility/track.ipp
-
-    kth/infrastructure/message/message_tools.hpp
-
-    kth/infrastructure/unicode/console_streambuf.hpp
-    kth/infrastructure/unicode/file_lock.hpp
-    kth/infrastructure/unicode/ifstream.hpp
-    kth/infrastructure/unicode/ofstream.hpp
-    kth/infrastructure/unicode/unicode.hpp
-    kth/infrastructure/unicode/unicode_istream.hpp
-    kth/infrastructure/unicode/unicode_ostream.hpp
-    kth/infrastructure/unicode/unicode_streambuf.hpp
-
-    kth/infrastructure/utility/array_slice.hpp
-    kth/infrastructure/utility/asio.hpp
-    kth/infrastructure/utility/assert.hpp
-    kth/infrastructure/utility/atomic.hpp
-    kth/infrastructure/utility/binary.hpp
-    kth/infrastructure/utility/collection.hpp
-    kth/infrastructure/utility/color.hpp
-    kth/infrastructure/utility/conditional_lock.hpp
-    kth/infrastructure/utility/container_sink.hpp
-    kth/infrastructure/utility/container_source.hpp
-    kth/infrastructure/utility/data.hpp
-    kth/infrastructure/utility/deadline.hpp
-    kth/infrastructure/utility/decorator.hpp
-    kth/infrastructure/utility/delegates.hpp
-    kth/infrastructure/utility/deserializer.hpp
-    kth/infrastructure/utility/dispatcher.hpp
-    kth/infrastructure/utility/enable_shared_from_base.hpp
-    kth/infrastructure/utility/endian.hpp
-    kth/infrastructure/utility/exceptions.hpp
-    kth/infrastructure/utility/flush_lock.hpp
-    kth/infrastructure/utility/interprocess_lock.hpp
-    kth/infrastructure/utility/istream_reader.hpp
-    kth/infrastructure/utility/monitor.hpp
-    kth/infrastructure/utility/noncopyable.hpp
-    kth/infrastructure/utility/ostream_writer.hpp
-    kth/infrastructure/utility/pending.hpp
-    kth/infrastructure/utility/png.hpp
-    kth/infrastructure/utility/prioritized_mutex.hpp
-    kth/infrastructure/utility/pseudo_random.hpp
-    kth/infrastructure/utility/reader.hpp
-    kth/infrastructure/utility/resubscriber.hpp
-    kth/infrastructure/utility/scope_lock.hpp
-    kth/infrastructure/utility/sequencer.hpp
-    kth/infrastructure/utility/sequential_lock.hpp
-    kth/infrastructure/utility/serializer.hpp
-    kth/infrastructure/utility/socket.hpp
-    kth/infrastructure/utility/string.hpp
-    kth/infrastructure/utility/subscriber.hpp
-    kth/infrastructure/utility/synchronizer.hpp
-    kth/infrastructure/utility/thread.hpp
-    kth/infrastructure/utility/threadpool.hpp
-    kth/infrastructure/utility/timer.hpp
-    kth/infrastructure/utility/track.hpp
-    kth/infrastructure/utility/work.hpp
-    kth/infrastructure/utility/writer.hpp
-
-    kth/infrastructure/wallet/cashaddr.hpp
-    kth/infrastructure/wallet/dictionary.hpp
-    kth/infrastructure/wallet/hd_private.hpp
-    kth/infrastructure/wallet/hd_public.hpp
-    kth/infrastructure/wallet/mini_keys.hpp
-    kth/infrastructure/wallet/mnemonic.hpp
-    kth/infrastructure/wallet/qrcode.hpp
-    kth/infrastructure/wallet/uri.hpp
-
-    kth/infrastructure.hpp
-)
-
-if (${LOG_LIBRARY} STREQUAL "boost")
-  set(_kth_infrastructure_headers
-    ${_kth_infrastructure_headers}
-    kth/infrastructure/log/attributes.hpp
-    kth/infrastructure/log/file_char_traits.hpp
-    kth/infrastructure/log/file_collector.hpp
-    kth/infrastructure/log/file_collector_repository.hpp
-    kth/infrastructure/log/file_counter_formatter.hpp
-    kth/infrastructure/log/rotable_file.hpp
-    kth/infrastructure/log/severity.hpp
-    kth/infrastructure/log/sink.hpp
-    kth/infrastructure/log/source.hpp
-    kth/infrastructure/log/statsd_sink.hpp
-    kth/infrastructure/log/statsd_source.hpp
-    kth/infrastructure/log/udp_client_sink.hpp
-
-    kth/infrastructure/log/features/counter.hpp
-    kth/infrastructure/log/features/gauge.hpp
-    kth/infrastructure/log/features/metric.hpp
-    kth/infrastructure/log/features/rate.hpp
-    kth/infrastructure/log/features/timer.hpp
-
-    kth/infrastructure/impl/log/features/counter.ipp
-    kth/infrastructure/impl/log/features/gauge.ipp
-    kth/infrastructure/impl/log/features/metric.ipp
-    kth/infrastructure/impl/log/features/rate.ipp
-    kth/infrastructure/impl/log/features/timer.ipp
-  )
-endif()
 
 
-foreach (_header ${_kth_infrastructure_headers})
-  get_filename_component(_directory "${_header}" DIRECTORY)
-  install(FILES "include/${_header}" DESTINATION "include/${_directory}")
-endforeach()
+# install(TARGETS ${PROJECT_NAME}
+#     EXPORT ${PROJECT_NAME}
+#     LIBRARY DESTINATION lib
+#     ARCHIVE DESTINATION lib
+#     RUNTIME DESTINATION bin
+#     INCLUDES DESTINATION include
+# )
+
+
+# foreach (_header ${kth_infrastructure_headers})
+#   get_filename_component(_directory "${_header}" DIRECTORY)
+#   install(FILES "include/${_header}" DESTINATION "include/${_directory}")
+# endforeach()
 
 # Export
 # ------------------------------------------------------------------------------
-include(CMakePackageConfigHelpers)
+# include(CMakePackageConfigHelpers)
 
-export(EXPORT ${PROJECT_NAME}
-  FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Targets.cmake")
-export(PACKAGE ${PROJECT_NAME})
+# export(EXPORT ${PROJECT_NAME}
+#   FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Targets.cmake")
+# export(PACKAGE ${PROJECT_NAME})
 
-if (UNIX)
-  set(_config_package_location "lib/cmake")
-elseif (WIN32)
-  set(_config_package_location "cmake")
-endif()
+# if (UNIX)
+#   set(_config_package_location "lib/cmake")
+# elseif (WIN32)
+#   set(_config_package_location "cmake")
+# endif()
 
-install(EXPORT ${PROJECT_NAME}
-  FILE kth-infrastructureTargets.cmake
-  DESTINATION ${_config_package_location})
+# install(EXPORT ${PROJECT_NAME}
+#   FILE kth-infrastructureTargets.cmake
+#   DESTINATION ${_config_package_location})
 
-configure_file(kth-infrastructureConfig.cmake.in
-  "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
-  @ONLY)
+# configure_file(kth-infrastructureConfig.cmake.in
+#   "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+#   @ONLY)
 
-write_basic_package_version_file(
-  "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
-  VERSION ${PROJECT_VERSION}
-  COMPATIBILITY AnyNewerVersion)
+# write_basic_package_version_file(
+#   "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+#   VERSION ${PROJECT_VERSION}
+#   COMPATIBILITY AnyNewerVersion)
 
-install(
-  FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
-  DESTINATION ${_config_package_location})
+# install(
+#   FILES
+#     "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+#     "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+#   DESTINATION ${_config_package_location})

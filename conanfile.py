@@ -6,8 +6,7 @@ import os
 from conan.tools.build.cppstd import check_min_cppstd
 from conan.tools.cmake import CMake, CMakeDeps, cmake_layout
 from conan.tools.files import copy
-from kthbuild import option_on_off
-from kthbuild import KnuthConanFileV2
+from kthbuild import KnuthConanFileV2, option_on_off
 
 required_conan_version = ">=2.0"
 
@@ -55,7 +54,7 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
         "asio_standalone": False,
     }
 
-    exports_sources = "src/*", "CMakeLists.txt", "ci_utils/cmake/*", "cmake/*", "kth-infrastructureConfig.cmake.in", "include/*", "test/*", "examples/*", "test_new/*"
+    exports_sources = "src/*", "CMakeLists.txt", "ci_utils/cmake/*", "cmake/*", "include/*", "test/*", "examples/*", "test_new/*"
 
     def build_requirements(self):
         if self.options.tests:
@@ -92,16 +91,6 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
     def configure(self):
         # self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
         KnuthConanFileV2.configure(self)
-
-        self.output.info(f"self.options.march_id: {self.options.march_id}")
-        self.output.info(f"self.options.get_safe('march_id'): {self.options.get_safe('march_id')}")
-
-        self.options["*"].march_id = "ZLm9Pjh"
-        self.options["infrastructure"].march_id = "ZLm9Pjh"
-        # self.options.march_id = "ZLm9Pjh"
-
-        self.output.info(f"self.options.march_id: {self.options.march_id}")
-        self.output.info(f"self.options.get_safe('march_id'): {self.options.get_safe('march_id')}")
 
         self.options["fmt"].header_only = True
 
@@ -155,17 +144,17 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
 
     def package_info(self):
         self.cpp_info.includedirs = ['include']
-        self.cpp_info.libs = ["kth-infrastructure"]
+        self.cpp_info.libs = ["infrastructure"]
 
         if self.settings.os == "Linux" or self.settings.os == "FreeBSD":
-            self.cpp_info.libs.append("pthread")
+            self.cpp_info.system_libs.append("pthread")
 
         if self.settings.os == "Linux" and self.settings.compiler == "gcc" and float(str(self.settings.compiler.version)) <= 8:
-            self.cpp_info.libs.append("stdc++fs")
+            self.cpp_info.system_libs.append("stdc++fs")
 
         if self.settings.os == "Windows" and self.settings.compiler == "gcc": # MinGW
-            self.cpp_info.libs.append("ws2_32")
-            self.cpp_info.libs.append("wsock32")
+            self.cpp_info.system_libs.append("ws2_32")
+            self.cpp_info.system_libs.append("wsock32")
 
         if not self.is_shared:
             self.cpp_info.defines.append("KI_STATIC")
