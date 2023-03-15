@@ -33,9 +33,6 @@ if (WITH_QRENCODE)
   add_definitions(-DWITH_QRENCODE)
 endif()
 
-# if (LOG_LIBRARY)
-#   add_definitions(-DKTH_USE_BINLOG)
-# endif()
 
 set(LOG_LIBRARY "boost" CACHE STRING "Setting for the logging library (boost|spdlog|binlog).")
 
@@ -114,7 +111,7 @@ if (ENABLE_SHARED)
   set(MODE SHARED)
 endif()
 
-set(kth_infrastructure_sources_just_legacy
+set(kth_sources_just_legacy
         src/machine/number.cpp
 
         src/config/authority.cpp
@@ -216,8 +213,8 @@ set(kth_infrastructure_sources_just_legacy
     )
 
 if (${LOG_LIBRARY} STREQUAL "boost")
-  set(kth_infrastructure_sources_just_legacy
-    ${kth_infrastructure_sources_just_legacy}
+  set(kth_sources_just_legacy
+    ${kth_sources_just_legacy}
     src/log/file_collector.cpp
     src/log/file_collector_repository.cpp
     src/log/file_counter_formatter.cpp
@@ -228,41 +225,41 @@ if (${LOG_LIBRARY} STREQUAL "boost")
 endif()
 
 if (${LOG_LIBRARY} STREQUAL "spdlog")
-  set(kth_infrastructure_sources_just_legacy
-    ${kth_infrastructure_sources_just_legacy}
+  set(kth_sources_just_legacy
+    ${kth_sources_just_legacy}
     src/log/sink.cpp
   )
 endif()
 
 if (WITH_PNG)
-  set(kth_infrastructure_sources_just_legacy
-    ${kth_infrastructure_sources_just_legacy}
+  set(kth_sources_just_legacy
+    ${kth_sources_just_legacy}
     src/utility/png.cpp
   )
 endif()
 
 if (WITH_QRENCODE)
-  set(kth_infrastructure_sources_just_legacy
-    ${kth_infrastructure_sources_just_legacy}
+  set(kth_sources_just_legacy
+    ${kth_sources_just_legacy}
     src/wallet/qrcode.cpp
   )
 endif()
 
-set(kth_infrastructure_sources_just_knuth
+set(kth_sources_just_knuth
     # src/math/external/scrypt.cpp
     # src/math/external/scrypt-sse2.cpp
     src/wallet/cashaddr.cpp
 )
 
 if (NOT JUST_KTH_SOURCES)
-  set(kth_infrastructure_sources
-    ${kth_infrastructure_sources_just_legacy}
+  set(kth_sources
+    ${kth_sources_just_legacy}
   )
 endif()
 
-set(kth_infrastructure_sources ${kth_infrastructure_sources} ${kth_infrastructure_sources_just_knuth})
+set(kth_sources ${kth_sources} ${kth_sources_just_knuth})
 
-set(kth_infrastructure_headers
+set(kth_headers
     include/kth/infrastructure/compat.h
     include/kth/infrastructure/compat.hpp
     include/kth/infrastructure/constants.hpp
@@ -396,8 +393,8 @@ set(kth_infrastructure_headers
 )
 
 if (${LOG_LIBRARY} STREQUAL "boost")
-  set(kth_infrastructure_headers
-    ${kth_infrastructure_headers}
+  set(kth_headers
+    ${kth_headers}
     include/kth/infrastructure/log/attributes.hpp
     include/kth/infrastructure/log/file_char_traits.hpp
     include/kth/infrastructure/log/file_collector.hpp
@@ -426,9 +423,8 @@ if (${LOG_LIBRARY} STREQUAL "boost")
 endif()
 
 
-add_library(${PROJECT_NAME} ${MODE} ${kth_infrastructure_sources} ${kth_infrastructure_headers})
+add_library(${PROJECT_NAME} ${MODE} ${kth_sources} ${kth_headers})
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
-
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX CXX_STANDARD 20 CXX_STANDARD_REQUIRED TRUE)
 
 if (ENABLE_POSITION_INDEPENDENT_CODE)
@@ -469,7 +465,7 @@ if (WITH_TESTS)
   enable_testing()
   find_package(Catch2 3 REQUIRED)
 
-  set(kth_infrastructure_test_sources
+  set(kth_test_sources
     test/config/authority.cpp
     test/config/base58.cpp
     test/config/checkpoint.cpp
@@ -517,20 +513,20 @@ if (WITH_TESTS)
   )
 
   if (WITH_PNG)
-    set(kth_infrastructure_test_sources
-        ${kth_infrastructure_test_sources}
+    set(kth_test_sources
+        ${kth_test_sources}
         src/utility/png.cpp
     )
   endif()
 
   if (WITH_QRENCODE)
-    set(kth_infrastructure_test_sources
-        ${kth_infrastructure_test_sources}
+    set(kth_test_sources
+        ${kth_test_sources}
         src/wallet/qrcode.cpp
     )
   endif()
 
-  add_executable(kth_infrastructure_test ${kth_infrastructure_test_sources})
+  add_executable(kth_infrastructure_test ${kth_test_sources})
 
   target_include_directories(kth_infrastructure_test PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/test>)
 
@@ -543,7 +539,7 @@ if (WITH_TESTS)
 endif()
 
 # Examples
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 if (WITH_EXAMPLES)
   add_executable(kth_infrastructure_examples
     examples/main.cpp)
@@ -573,51 +569,3 @@ install(EXPORT ${PROJECT_NAME}-targets
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
 )
 
-
-
-# install(TARGETS ${PROJECT_NAME}
-#     EXPORT ${PROJECT_NAME}
-#     LIBRARY DESTINATION lib
-#     ARCHIVE DESTINATION lib
-#     RUNTIME DESTINATION bin
-#     INCLUDES DESTINATION include
-# )
-
-
-# foreach (_header ${kth_infrastructure_headers})
-#   get_filename_component(_directory "${_header}" DIRECTORY)
-#   install(FILES "include/${_header}" DESTINATION "include/${_directory}")
-# endforeach()
-
-# Export
-# ------------------------------------------------------------------------------
-# include(CMakePackageConfigHelpers)
-
-# export(EXPORT ${PROJECT_NAME}
-#   FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Targets.cmake")
-# export(PACKAGE ${PROJECT_NAME})
-
-# if (UNIX)
-#   set(_config_package_location "lib/cmake")
-# elseif (WIN32)
-#   set(_config_package_location "cmake")
-# endif()
-
-# install(EXPORT ${PROJECT_NAME}
-#   FILE kth-infrastructureTargets.cmake
-#   DESTINATION ${_config_package_location})
-
-# configure_file(kth-infrastructureConfig.cmake.in
-#   "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
-#   @ONLY)
-
-# write_basic_package_version_file(
-#   "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
-#   VERSION ${PROJECT_VERSION}
-#   COMPATIBILITY AnyNewerVersion)
-
-# install(
-#   FILES
-#     "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
-#     "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
-#   DESTINATION ${_config_package_location})
