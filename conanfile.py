@@ -3,11 +3,10 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 import os
-from conan import ConanFile
 from conan.tools.build.cppstd import check_min_cppstd
-from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain, cmake_layout
-from conan.tools.files import copy #, apply_conandata_patches, export_conandata_patches, get, rm, rmdir
-from kthbuild import option_on_off, march_conan_manip, pass_march_to_compiler
+from conan.tools.cmake import CMake, CMakeDeps, cmake_layout
+from conan.tools.files import copy
+from kthbuild import option_on_off
 from kthbuild import KnuthConanFileV2
 
 required_conan_version = ">=2.0"
@@ -56,10 +55,7 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
         "asio_standalone": False,
     }
 
-    # exports = "conan_*", "ci_utils/*"
-    exports = "kthconanfile.py"
     exports_sources = "src/*", "CMakeLists.txt", "ci_utils/cmake/*", "cmake/*", "kth-infrastructureConfig.cmake.in", "include/*", "test/*", "examples/*", "test_new/*"
-    # package_files = "build/lkth-infrastructure.a"
 
     def build_requirements(self):
         if self.options.tests:
@@ -150,16 +146,12 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
                 cmake.test()
                 # cmake.test(target="tests")
 
-    def imports(self):
-        self.copy("*.h", "", "include")
+    # def imports(self):
+    #     self.copy("*.h", "", "include")
 
     def package(self):
         cmake = CMake(self)
         cmake.install()
-        # rmdir(self, os.path.join(self.package_folder, "lib", "cmake"))
-        # rmdir(self, os.path.join(self.package_folder, "lib", "pkgconfig"))
-        # rmdir(self, os.path.join(self.package_folder, "res"))
-        # rmdir(self, os.path.join(self.package_folder, "share"))
 
     def package_info(self):
         self.cpp_info.includedirs = ['include']

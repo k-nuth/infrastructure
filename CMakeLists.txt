@@ -7,73 +7,32 @@ cmake_minimum_required(VERSION 3.15)
 project(kth-infrastructure VERSION 0 LANGUAGES CXX C)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
-# Check for baseline language coverage in the compiler for the C++20 standard.
-#------------------------------------------------------------------------------
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Process options.
-#==============================================================================
-
-# Implement --use-conan
-#------------------------------------------------------------------------------
-# option(USE_CONAN "Use Conan Build Tool." OFF)
-# option(NO_CONAN_AT_ALL "Conan totally disabled." OFF)
-
-# if (NO_CONAN_AT_ALL)
-#   set(USE_CONAN OFF)
-# endif()
-
-
-# Inherit --enable-shared and define BOOST_TEST_DYN_LINK.
-#------------------------------------------------------------------------------
 option(ENABLE_SHARED "" OFF)
-
-# Implement POSITION_INDEPENDENT_CODE
-#------------------------------------------------------------------------------
 option(ENABLE_POSITION_INDEPENDENT_CODE "Enable POSITION_INDEPENDENT_CODE property" ON)
-
-# Implement --with-tests and declare WITH_TESTS.
-#------------------------------------------------------------------------------
 option(WITH_TESTS "Compile with unit tests." ON)
-
-# Implement --with-examples and declare WITH_EXAMPLES.
-#------------------------------------------------------------------------------
 option(WITH_EXAMPLES "Compile with examples." OFF)
-
-
-# Implement --with-icu and define BOOST_HAS_ICU and output ${icu}.
-#------------------------------------------------------------------------------
 option(WITH_ICU "Compile with International Components for Unicode." OFF)
+option(WITH_PNG "Compile with Libpng support." OFF)
+option(WITH_QRENCODE "Compile with QREncode." OFF)
+# option(LOG_LIBRARY "Setting for the logging library." OFF)
+option(JUST_KTH_SOURCES "Just Knuth source code to be linted." OFF)
+
+
 if (WITH_ICU)
   add_definitions(-DWITH_ICU -DBOOST_HAS_ICU)
-  # if (NO_CONAN_AT_ALL)
-  #   message(FATAL_ERROR "WITH_ICU not yet implemented")
-  # endif (NO_CONAN_AT_ALL)
 endif()
 
-# Implement --with-png and output ${png}.
-#------------------------------------------------------------------------------
-option(WITH_PNG "Compile with Libpng support." OFF)
 if (WITH_PNG)
   add_definitions(-DWITH_PNG)
 endif()
 
-# Implement --with-qrencode and output ${qrencode}.
-#------------------------------------------------------------------------------
-option(WITH_QRENCODE "Compile with QREncode." OFF)
 if (WITH_QRENCODE)
   add_definitions(-DWITH_QRENCODE)
-
-  # if (NO_CONAN_AT_ALL)
-  #   message(FATAL_ERROR "WITH_QRENCODE not yet implemented")
-  # endif (NO_CONAN_AT_ALL)
 endif()
 
-# Implement --log_library.
-#------------------------------------------------------------------------------
-# option(LOG_LIBRARY "Setting for the logging library." OFF)
 # if (LOG_LIBRARY)
 #   add_definitions(-DKTH_USE_BINLOG)
 # endif()
@@ -92,18 +51,10 @@ endif()
 
 message(STATUS "Knuth: Logging Library: ${LOG_LIBRARY}")
 
-
-
-# Implement --JUST_KTH_SOURCES for linting.
-#------------------------------------------------------------------------------
-option(JUST_KTH_SOURCES "Just Knuth source code to be linted." OFF)
 if (JUST_KTH_SOURCES)
   message(STATUS "Knuth: Just Knuth source code to be linted: enabled")
 endif()
 
-# set(KTH_PROJECT_VERSION "-" CACHE STRING "Specify the Knuth Project Version.")
-# # message(${KTH_PROJECT_VERSION})
-# message( STATUS "Knuth: Compiling version ${KTH_PROJECT_VERSION}")
 
 set(MICROARCHITECTURE "x86_64" CACHE STRING "Specify the Microarchitecture (x86_64|...).")
 message( STATUS "Knuth: Compiling for ${MICROARCHITECTURE}")
@@ -116,84 +67,19 @@ message( STATUS "Knuth: CONAN_C_FLAGS ${CONAN_C_FLAGS}")
 
 set(Boost_DEBUG ON)
 
-# Check dependencies.
-#==============================================================================
-#------------------------------------------------------------------------------
-# if (NO_CONAN_AT_ALL)
-#   # Require Boost of at least version 1.56.0 and output ${boost_CPPFLAGS/LDFLAGS}.
-#   #------------------------------------------------------------------------------
-#   if (NOT ENABLE_SHARED)
-#     set(Boost_USE_STATIC_LIBS ON)
-#   endif()
 
-#   if (MSVC)
-#     find_package(
-#       Boost 1.66.0 REQUIRED
-#       COMPONENTS atomic chrono date_time filesystem iostreams locale log log_setup program_options system thread unit_test_framework
-#       # regex
-#     )
-#   else()
-#     find_package(
-#       Boost 1.66.0 REQUIRED
-#       COMPONENTS chrono date_time filesystem iostreams locale log program_options system thread unit_test_framework
-#       # regex
-#     )
-#   endif()
-# endif()
-
-
-# Require pthread and output ${pthread_CPPFLAGS/LIBS}.
-#------------------------------------------------------------------------------
 find_package(Threads REQUIRED)
-
-# Require png of at least version 1.6.25 and output ${png_CPPFLAGS/LIBS/PKG}.
-#------------------------------------------------------------------------------
-if (WITH_PNG)
-    # if (NO_CONAN_AT_ALL)
-    #     find_package(PNG 1.6.25 REQUIRED)
-
-    #     add_library(png INTERFACE IMPORTED)
-    #     set_target_properties(png PROPERTIES
-    #         INTERFACE_INCLUDE_DIRECTORIES "${PNG_INCLUDE_DIRS}"
-    #         INTERFACE_LINK_LIBRARIES "${PNG_LIBRARIES}"
-    #         INTERFACE_COMPILE_DEFINITIONS "${PNG_DEFINITIONS}")
-    # endif(NO_CONAN_AT_ALL)
-endif()
-
-
-
-# Require rt if on linux and output ${rt_LIBS}.
-#------------------------------------------------------------------------------
-
-# Require icu-i18n of at least version 51.2 and output ${icu_i18n_CPPFLAGS/LIBS/PKG}.
-#------------------------------------------------------------------------------
-
-# Require qrencode of at least version 3.4.4 and output ${qrencode_CPPFLAGS/LIBS/PKG}.
-
-
-
-# if (NOT USE_CONAN)
-# # Require secp256k1 of at least version 0 and output ${secp256k1_CPPFLAGS/LIBS/PKG}.
-# #------------------------------------------------------------------------------
-#   if (NOT TARGET secp256k1)
-#     find_package(secp256k1 0 REQUIRED)
-#   endif()
-# endif()
-
 find_package(secp256k1 REQUIRED)
+find_package(Boost 1.81.0 COMPONENTS program_options REQUIRED)
+find_package(Boost 1.81.0 COMPONENTS thread REQUIRED)
+find_package(fmt 9.1.0 REQUIRED)
+find_package(spdlog 1.10.0 REQUIRED)
 
-# Set flags.
-#==============================================================================
 include(CheckCXXCompilerFlag)
 
-# Including common functions
-#------------------------------------------------------------------------------
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/ci_utils/cmake)
 include(KnuthTools)
 
-
-# Warn on all stuff.
-#------------------------------------------------------------------------------
 if (NOT MSVC)
   _add_c_compile_flag(-Wall _has_all_warning_flag)
 else()
@@ -202,55 +88,26 @@ else()
   add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif()
 
-# Warn on extra stuff.
-#------------------------------------------------------------------------------
 if (NOT MSVC)
   _add_c_compile_flag(-Wextra _has_extra_warning_flag)
 endif()
 
-# Be really annoying.
-#------------------------------------------------------------------------------
 _add_c_compile_flag(-Wpedantic _has_pedantic_warning_flag)
 if (_has_pedantic_warning_flag)
   _add_c_compile_flag(-pedantic _has_pedantic_flag)
 endif()
 
-# Conform to style.
-#------------------------------------------------------------------------------
 _add_cxx_compile_flag(-Wno-missing-braces _has_no_missing_braces_warning_flag)
-
-# Conflict in stdlib under clang. Enabled in clang only.
-#------------------------------------------------------------------------------
 _add_cxx_compile_flag(-Wno-mismatched-tags _has_no_mismatched_tags_warning_flag)
-
-# Clean up boost 1.55 headers. Enabled in gcc only.
-#------------------------------------------------------------------------------
 _add_c_compile_flag(-Wno-deprecated-declarations _has_no_deprecated_declarations_warning_flag)
-
-# Protect stack.
-#------------------------------------------------------------------------------
 _add_link_flag(-fstack-protector _has_stack_protector_flag)
-
-# Protect stack comprehensively.
-#------------------------------------------------------------------------------
 _add_link_flag(-fstack-protector-all _has_stack_protector_all_flag)
-
-# Hide internal functions from external libs. Enabled in gcc only.
-#------------------------------------------------------------------------------
 _add_cxx_compile_flag(-fvisibility-hidden _has_visibility_hidden_flag)
-
-# Hide inlines from external libs. Enabled in gcc only.
-#------------------------------------------------------------------------------
 _add_cxx_compile_flag(-fvisibility-inlines-hidden _has_visibility_inlines_hidden_flag)
 
-# Target Windows Vista. Enabled in msvc only.
-#------------------------------------------------------------------------------
-if (MSVC) # OR MINGW)
+if (MSVC)
   add_definitions(-D_WIN32_WINNT=0x0600)
 endif()
-
-# Build
-#==============================================================================
 
 set(MODE STATIC)
 if (ENABLE_SHARED)
@@ -258,7 +115,7 @@ if (ENABLE_SHARED)
 endif()
 
 set(kth_infrastructure_sources_just_legacy
-        src/machine/number.cpp        #Fernando: commented for the moment...
+        src/machine/number.cpp
 
         src/config/authority.cpp
         src/config/base16.cpp
@@ -358,32 +215,24 @@ set(kth_infrastructure_sources_just_legacy
         src/wallet/uri.cpp
     )
 
-  if (${LOG_LIBRARY} STREQUAL "boost")
-    set(kth_infrastructure_sources_just_legacy
-      ${kth_infrastructure_sources_just_legacy}
-      src/log/file_collector.cpp
-      src/log/file_collector_repository.cpp
-      src/log/file_counter_formatter.cpp
-      src/log/sink.cpp
-      src/log/statsd_sink.cpp
-      src/log/udp_client_sink.cpp
-    )
-  endif()
+if (${LOG_LIBRARY} STREQUAL "boost")
+  set(kth_infrastructure_sources_just_legacy
+    ${kth_infrastructure_sources_just_legacy}
+    src/log/file_collector.cpp
+    src/log/file_collector_repository.cpp
+    src/log/file_counter_formatter.cpp
+    src/log/sink.cpp
+    src/log/statsd_sink.cpp
+    src/log/udp_client_sink.cpp
+  )
+endif()
 
-  if (${LOG_LIBRARY} STREQUAL "spdlog")
-    set(kth_infrastructure_sources_just_legacy
-      ${kth_infrastructure_sources_just_legacy}
-      src/log/sink.cpp
-    )
-  endif()
-
-
-# if (${CURRENCY} STREQUAL "LTC")
-#     set(knuth_domain_sources_just_knuth
-#     ${knuth_domain_sources_just_knuth}
-#     src/math/external/scrypt.cpp
-#     src/math/external/scrypt-sse2.cpp)
-# endif()
+if (${LOG_LIBRARY} STREQUAL "spdlog")
+  set(kth_infrastructure_sources_just_legacy
+    ${kth_infrastructure_sources_just_legacy}
+    src/log/sink.cpp
+  )
+endif()
 
 if (WITH_PNG)
   set(kth_infrastructure_sources_just_legacy
@@ -430,10 +279,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   $<INSTALL_INTERFACE:include>)
 
 if (NOT ENABLE_SHARED)
-    target_compile_definitions(${PROJECT_NAME} PUBLIC -DKI_STATIC) #TODO(fernando): manage with Conan????
+    target_compile_definitions(${PROJECT_NAME} PUBLIC -DKI_STATIC)
 endif()
-
-# target_compile_definitions(${PROJECT_NAME} PUBLIC -DKTH_PROJECT_VERSION="${KTH_PROJECT_VERSION}") #TODO(fernando): manage with Conan????
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
 
@@ -441,81 +288,31 @@ target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
 #   target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${OPENSSL_INCLUDE_DIR})
 # endif()
 
-
-find_package(Boost 1.81.0 COMPONENTS program_options REQUIRED)
-find_package(Boost 1.81.0 COMPONENTS thread REQUIRED)
 target_link_libraries(${PROJECT_NAME} PUBLIC Boost::program_options)
 target_link_libraries(${PROJECT_NAME} PUBLIC Boost::thread)
-
-
-find_package(fmt 9.1.0 REQUIRED)
-find_package(spdlog 1.10.0 REQUIRED)
 # target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
 # target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog_header_only)
 target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt)
 target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog)
 
-# if (NO_CONAN_AT_ALL)
-  # if (MSVC)
-  #   target_link_libraries(${PROJECT_NAME} PUBLIC
-  #     ${Boost_ATOMIC_LIBRARY}
-  #     ${Boost_LOG_SETUP_LIBRARY}
-  #   )
-  # endif()
+target_link_libraries(${PROJECT_NAME} PUBLIC ${CMAKE_THREAD_LIBS_INIT})
 
-  # target_link_libraries(${PROJECT_NAME} PUBLIC
-  #   # ${Boost_CHRONO_LIBRARY}
-  #   ${Boost_DATE_TIME_LIBRARY}
-  #   ${Boost_FILESYSTEM_LIBRARY}
-  #   ${Boost_IOSTREAMS_LIBRARY}
-  #   ${Boost_LOCALE_LIBRARY}
-  #   ${Boost_LOG_LIBRARY}
-  #   ${Boost_PROGRAM_OPTIONS_LIBRARY}
-  #   # ${Boost_REGEX_LIBRARY}
-  #   ${Boost_SYSTEM_LIBRARY}
-  #   # ${Boost_THREAD_LIBRARY}
-  # )
-# endif()
+if (MINGW)
+    target_link_libraries(${PROJECT_NAME} PUBLIC ws2_32 wsock32)
+endif()
 
-target_link_libraries(${PROJECT_NAME} PUBLIC ${CMAKE_THREAD_LIBS_INIT})  #TODO(fernando): manage with Conan????
 
-# if (NO_CONAN_AT_ALL)
-    if (MINGW) #(WIN32)
-        target_link_libraries(${PROJECT_NAME} PUBLIC ws2_32 wsock32)
-    endif()
-# endif()
-
-# if (WITH_PNG)
-#     if (NO_CONAN_AT_ALL)
-#         target_link_libraries(${PROJECT_NAME} PUBLIC png)
-#     endif (NO_CONAN_AT_ALL)
-# endif()
-
-# if (${CURRENCY} STREQUAL "LTC")
-#   target_link_libraries(${PROJECT_NAME} PUBLIC ${OPENSSL_CRYPTO_LIBRARY})  #TODO(fernando): manage with Conan
-
-#   # OPENSSL_CRYPTO_LIBRARY
-#   # OPENSSL_SSL_LIBRARY
-#   # OPENSSL_LIBRARIES
-# endif()
-
-# if (NOT USE_CONAN)
-  # target_link_libraries(${PROJECT_NAME} PUBLIC secp256k1)
-# endif()
-
-# target_link_libraries(${PROJECT_NAME} PUBLIC secp256k1)
 target_link_libraries(${PROJECT_NAME} PUBLIC secp256k1::secp256k1)
 
 _group_sources(${PROJECT_NAME} "${CMAKE_CURRENT_LIST_DIR}")
 
 # Tests
-#==============================================================================
+# ------------------------------------------------------------------------------
 if (WITH_TESTS)
   enable_testing()
   find_package(Catch2 3 REQUIRED)
 
   set(kth_infrastructure_test_sources
-
     test/config/authority.cpp
     test/config/base58.cpp
     test/config/checkpoint.cpp
@@ -560,7 +357,6 @@ if (WITH_TESTS)
     test/wallet/mnemonic.cpp
     test/wallet/uri.cpp
 
-    # test/main.cpp
   )
 
   if (WITH_PNG)
@@ -590,8 +386,6 @@ if (WITH_TESTS)
 endif()
 
 # Examples
-#==============================================================================
-# local: examples/kth_infrastructure_examples
 #------------------------------------------------------------------------------
 if (WITH_EXAMPLES)
   add_executable(kth_infrastructure_examples
@@ -603,17 +397,13 @@ if (WITH_EXAMPLES)
 endif()
 
 # Install
-#==============================================================================
+# ------------------------------------------------------------------------------
 install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
     INCLUDES DESTINATION include
 )
-
-#install(EXPORT kth-infrastructureTargets
-#
-#)
 
 set(_kth_infrastructure_headers
     kth/infrastructure/compat.h
@@ -746,7 +536,7 @@ set(_kth_infrastructure_headers
     kth/infrastructure/wallet/uri.hpp
 
     kth/infrastructure.hpp
-  )
+)
 
 if (${LOG_LIBRARY} STREQUAL "boost")
   set(_kth_infrastructure_headers
@@ -785,7 +575,7 @@ foreach (_header ${_kth_infrastructure_headers})
 endforeach()
 
 # Export
-#==============================================================================
+# ------------------------------------------------------------------------------
 include(CMakePackageConfigHelpers)
 
 export(EXPORT ${PROJECT_NAME}
