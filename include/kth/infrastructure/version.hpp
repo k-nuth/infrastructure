@@ -5,16 +5,10 @@
 #ifndef KTH_INFRASTRUCTURE_VERSION_HPP_
 #define KTH_INFRASTRUCTURE_VERSION_HPP_
 
-
-#define KTH_INFRASTRUCTURE_VERSION "0.25.0";
-
-// #define KTH_VERSION KTH_INFRASTRUCTURE_VERSION
+#define KTH_INFRASTRUCTURE_VERSION "0.0.0-dev.1";
 
 namespace kth::infrastructure {
-
 char const* version();
-
 } // namespace kth::infrastructure
-
 
 #endif // KTH_INFRASTRUCTURE_VERSION_HPP_
