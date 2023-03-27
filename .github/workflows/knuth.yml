@@ -143,7 +143,7 @@ jobs:
   #         echo "matrix=${MATRIX}" >> $GITHUB_OUTPUT
 
   calc-deps-with-container:
-    needs: [setup, calc-deps-with-container, generate-matrix]
+    needs: [setup, generate-matrix]
     strategy:
       matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
     name: ${{ matrix.config.name }}
