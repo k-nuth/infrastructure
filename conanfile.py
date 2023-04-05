@@ -61,7 +61,7 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
             self.test_requires("catch2/3.3.1")
 
     def requirements(self):
-        self.requires("secp256k1/0.15.0", transitive_headers=True, transitive_libs=True)
+        self.requires("secp256k1/0.16.0", transitive_headers=True, transitive_libs=True)
         self.requires("boost/1.81.0", transitive_headers=True, transitive_libs=True)
         self.requires("fmt/9.1.0", transitive_headers=True, transitive_libs=True)
 
