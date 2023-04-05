@@ -61,23 +61,23 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
             self.test_requires("catch2/3.3.1")
 
     def requirements(self):
-        self.requires("secp256k1/0.15.0")
-        self.requires("boost/1.81.0")
-        self.requires("fmt/9.1.0")
+        self.requires("secp256k1/0.15.0", transitive_headers=True, transitive_libs=True)
+        self.requires("boost/1.81.0", transitive_headers=True, transitive_libs=True)
+        self.requires("fmt/9.1.0", transitive_headers=True, transitive_libs=True)
 
         if self.options.log == "binlog":
-            self.requires("binlog/2020.02.29@kth/stable")
+            self.requires("binlog/2020.02.29@kth/stable", transitive_headers=True, transitive_libs=True)
         elif self.options.log == "spdlog":
-            self.requires("spdlog/1.11.0")
+            self.requires("spdlog/1.11.0", transitive_headers=True, transitive_libs=True)
 
         if self.options.with_png:
-            self.requires("libpng/1.6.34@kth/stable")
+            self.requires("libpng/1.6.34@kth/stable", transitive_headers=True, transitive_libs=True)
 
         if self.options.with_qrencode:
-            self.requires("libqrencode/4.0.0@kth/stable")
+            self.requires("libqrencode/4.0.0@kth/stable", transitive_headers=True, transitive_libs=True)
 
         if self.options.asio_standalone:
-            self.requires("asio/1.24.0")
+            self.requires("asio/1.24.0", transitive_headers=True, transitive_libs=True)
 
     def validate(self):
         KnuthConanFileV2.validate(self)

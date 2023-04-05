@@ -443,10 +443,10 @@ target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
 
 target_link_libraries(${PROJECT_NAME} PUBLIC Boost::program_options)
 target_link_libraries(${PROJECT_NAME} PUBLIC Boost::thread)
-# target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
-# target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog_header_only)
-target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt)
-target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog)
+target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
+target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog_header_only)
+# target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt)
+# target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC ${CMAKE_THREAD_LIBS_INIT})
 
