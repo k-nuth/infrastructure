@@ -91,10 +91,10 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
         # self.output.info("libcxx: %s" % (str(self.settings.compiler.libcxx),))
         KnuthConanFileV2.configure(self)
 
-        self.options["fmt"].header_only = True
+        self.options["fmt/*"].header_only = True
 
         if self.options.log == "spdlog":
-            self.options["spdlog"].header_only = True
+            self.options["spdlog/*"].header_only = True
 
         # if self.options.log != "boost":
         #     self.options["boost"].without_filesystem = True
