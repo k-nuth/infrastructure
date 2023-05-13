@@ -144,6 +144,14 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
     def package_info(self):
         self.cpp_info.includedirs = ['include']
         self.cpp_info.libs = ["infrastructure"]
+        ...
+        self.cpp_info.requires = ["boost::program_options",
+                                  "boost::thread",
+                                  "fmt::fmt-header-only",
+                                  "spdlog::spdlog_header_only",
+                                  "secp256k1::secp256k1"
+                                  ]
+        #TODO(fernando): add the rest of the conditional dependencies
 
         if self.settings.os == "Linux" or self.settings.os == "FreeBSD":
             self.cpp_info.system_libs.append("pthread")
