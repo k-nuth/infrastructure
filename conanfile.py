@@ -165,3 +165,4 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
 
         if not self.is_shared:
             self.cpp_info.defines.append("KI_STATIC")
+
