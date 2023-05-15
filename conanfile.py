@@ -147,10 +147,11 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
         ...
         self.cpp_info.requires = ["boost::program_options",
                                   "boost::thread",
-                                  "fmt::fmt-header-only",
-                                  "spdlog::spdlog_header_only",
-                                  "secp256k1::secp256k1"
-                                  ]
+                                  "secp256k1::secp256k1",
+                                  "spdlog::spdlog",
+                                  "fmt::fmt",
+                                 ]
+
         #TODO(fernando): add the rest of the conditional dependencies
 
         if self.settings.os == "Linux" or self.settings.os == "FreeBSD":
