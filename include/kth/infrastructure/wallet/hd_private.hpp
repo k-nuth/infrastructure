@@ -26,11 +26,6 @@ uint64_t to_prefixes(uint32_t private_prefix, uint32_t public_prefix) {
 /// An extended private key, as defined by BIP 32.
 class KI_API hd_private : public hd_public {
 public:
-    // static constexpr
-    // uint64_t to_prefixes(uint32_t private_prefix, uint32_t public_prefix) {
-    //     return uint64_t(private_prefix) << 32 | public_prefix;
-    // }
-
     static constexpr uint64_t mainnet = to_prefixes(76066276, hd_public::mainnet);
     static constexpr uint64_t testnet = to_prefixes(70615956, hd_public::testnet);
 
