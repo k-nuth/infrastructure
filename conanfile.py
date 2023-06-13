@@ -58,12 +58,12 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
 
     def build_requirements(self):
         if self.options.tests:
-            self.test_requires("catch2/3.3.1")
+            self.test_requires("catch2/3.3.2")
 
     def requirements(self):
         self.requires("secp256k1/0.17.0", transitive_headers=True, transitive_libs=True)
-        self.requires("boost/1.81.0", transitive_headers=True, transitive_libs=True)
-        self.requires("fmt/9.1.0", transitive_headers=True, transitive_libs=True)
+        self.requires("boost/1.82.0", transitive_headers=True, transitive_libs=True)
+        self.requires("fmt/10.0.0", transitive_headers=True, transitive_libs=True)
 
         if self.options.log == "binlog":
             self.requires("binlog/2020.02.29@kth/stable", transitive_headers=True, transitive_libs=True)
