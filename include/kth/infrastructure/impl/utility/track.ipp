@@ -17,7 +17,7 @@
 // These are defined in kth so that they can be used in network and blockchain.
 
 // Log name.
-#define LOG_SYSTEM "[system]"
+#define LOG_SYSTEM "[system] "
 
 template <typename Shared>
 std::atomic<size_t> track<Shared>::instances(0);
