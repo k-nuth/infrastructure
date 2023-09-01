@@ -69,6 +69,7 @@ public:
      */
     endpoint(std::string const& host, uint16_t port);
 
+#if ! defined(__EMSCRIPTEN__)
     /**
      * Initialization constructor.
      * @param[in]  endpoint  The endpoint addresss to initialize with.
@@ -82,6 +83,7 @@ public:
      * @param[in]  port  The port to initialize with.
      */
     endpoint(asio::address const& ip, uint16_t port);
+#endif
 
     /**
      * Getter.

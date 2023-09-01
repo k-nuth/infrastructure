@@ -42,6 +42,7 @@ endpoint::endpoint(std::string const& host, uint16_t port)
     : host_(host), port_(port)
 {}
 
+#if ! defined(__EMSCRIPTEN__)
 endpoint::endpoint(asio::endpoint const& host)
     : endpoint(host.address(), host.port())
 {}
@@ -49,6 +50,7 @@ endpoint::endpoint(asio::endpoint const& host)
 endpoint::endpoint(asio::address const& ip, uint16_t port)
     : host_(ip.to_string()), port_(port)
 {}
+#endif
 
 std::string const& endpoint::scheme() const {
     return scheme_;

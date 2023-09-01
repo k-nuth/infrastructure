@@ -9,7 +9,11 @@
 #include <cstdint>
 #include <memory>
 
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/thread.hpp>
+#else
+#include <shared_mutex>
+#endif
 
 #include <kth/infrastructure/define.hpp>
 
@@ -28,22 +32,31 @@ namespace kth {
 ////    #endif
 ////#endif
 
-enum class thread_priority
-{
+enum class thread_priority {
     high,
     normal,
     low,
     lowest
 };
 
+#if ! defined(__EMSCRIPTEN__)
+
 using shared_mutex = boost::shared_mutex;
 using upgrade_mutex = boost::upgrade_mutex;
 
 using unique_lock = boost::unique_lock<shared_mutex>;
 using shared_lock = boost::shared_lock<shared_mutex>;
-
-using shared_mutex_ptr = std::shared_ptr<boost::shared_mutex>;
 using upgrade_mutex_ptr = std::shared_ptr<boost::upgrade_mutex>;
+
+#else
+
+using shared_mutex = std::shared_mutex;
+using unique_lock = std::unique_lock<shared_mutex>;
+
+#endif //! defined(__EMSCRIPTEN__)
+
+using shared_mutex_ptr = std::shared_ptr<shared_mutex>;
+
 
 KI_API void set_priority(thread_priority priority);
 KI_API thread_priority priority(bool priority);

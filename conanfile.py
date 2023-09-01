@@ -33,7 +33,7 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
         "cxxflags": ["ANY"],
         "cflags": ["ANY"],
         "cmake_export_compile_commands": [True, False],
-        "log": ["boost", "spdlog", "binlog"],
+        "log": ["spdlog", "binlog"],
         "asio_standalone": [True, False],
     }
 
@@ -61,23 +61,25 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
             self.test_requires("catch2/3.3.2")
 
     def requirements(self):
-        self.requires("secp256k1/0.17.0", transitive_headers=True, transitive_libs=True)
-        self.requires("boost/1.82.0", transitive_headers=True, transitive_libs=True)
-        self.requires("fmt/10.0.0", transitive_headers=True, transitive_libs=True)
+        self.requires("secp256k1/0.18.0", transitive_headers=True, transitive_libs=True)
+        self.requires("boost/1.83.0", transitive_headers=True, transitive_libs=True)
+        self.requires("fmt/10.1.0", transitive_headers=True, transitive_libs=True)
+        self.requires("expected-lite/0.6.3", transitive_headers=True, transitive_libs=True)
+        self.requires("ctre/3.8", transitive_headers=True, transitive_libs=True)
 
         if self.options.log == "binlog":
             self.requires("binlog/2020.02.29@kth/stable", transitive_headers=True, transitive_libs=True)
         elif self.options.log == "spdlog":
-            self.requires("spdlog/1.11.0", transitive_headers=True, transitive_libs=True)
+            self.requires("spdlog/1.12.0", transitive_headers=True, transitive_libs=True)
 
         if self.options.with_png:
-            self.requires("libpng/1.6.34@kth/stable", transitive_headers=True, transitive_libs=True)
+            self.requires("libpng/1.6.40", transitive_headers=True, transitive_libs=True)
 
         if self.options.with_qrencode:
-            self.requires("libqrencode/4.0.0@kth/stable", transitive_headers=True, transitive_libs=True)
+            self.requires("libqrencode/4.1.1", transitive_headers=True, transitive_libs=True)
 
         if self.options.asio_standalone:
-            self.requires("asio/1.24.0", transitive_headers=True, transitive_libs=True)
+            self.requires("asio/1.28.1", transitive_headers=True, transitive_libs=True)
 
     def validate(self):
         KnuthConanFileV2.validate(self)
@@ -92,6 +94,7 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
         KnuthConanFileV2.configure(self)
 
         self.options["fmt/*"].header_only = True
+        self.options["boost/*"].header_only = True
 
         if self.options.log == "spdlog":
             self.options["spdlog/*"].header_only = True
@@ -150,6 +153,8 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
                                   "secp256k1::secp256k1",
                                   "spdlog::spdlog",
                                   "fmt::fmt",
+                                  "expected-lite::expected-lite",
+                                  "ctre::ctre"
                                  ]
 
         #TODO(fernando): add the rest of the conditional dependencies

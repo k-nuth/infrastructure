@@ -67,9 +67,12 @@ void binary::resize(size_type size) {
     if (offset > 0) {
         // This subtraction is guarded above.
         final_block_excess_ = static_cast<uint8_t>(bits_per_block - offset);
-        auto const last = safe_subtract(blocks_.size(), size_t(1));
+        auto const last_ex = safe_subtract(blocks_.size(), size_t(1));
+        if ( ! last_ex) {
+            return;
+        }
         uint8_t mask = 0xFF << final_block_excess_;
-        blocks_[last] &= mask;
+        blocks_[*last_ex] &= mask;
     }
 }
 
@@ -94,8 +97,11 @@ std::string binary::encoded() const {
 
 binary::size_type binary::size() const {
     size_type const base_bit_size = blocks_.size() * bits_per_block;
-    return safe_subtract(base_bit_size,
-        static_cast<size_type>(final_block_excess_));
+    auto const res = safe_subtract(base_bit_size, static_cast<size_type>(final_block_excess_));
+    if ( ! res) {
+        return 0;
+    }
+    return *res;
 }
 
 void binary::append(binary const& post) {

@@ -9,7 +9,11 @@
 #include <kth/infrastructure/error.hpp>
 #include <kth/infrastructure/utility/asio.hpp>
 #include <kth/infrastructure/utility/thread.hpp>
+
+#if ! defined(__EMSCRIPTEN__)
 #include <kth/infrastructure/utility/threadpool.hpp>
+#endif
+
 #include <utility>
 
 namespace kth {
@@ -19,6 +23,7 @@ using std::placeholders::_1;
 // The timer closure captures an instance of this class and the callback.
 // Deadline is guaranteed to call handler exactly once unless canceled/reset.
 
+#if ! defined(__EMSCRIPTEN__)
 deadline::deadline(threadpool& pool)
     : duration_(asio::seconds(0))
     , timer_(pool.service())
@@ -30,6 +35,7 @@ deadline::deadline(threadpool& pool, asio::duration duration)
     , timer_(pool.service())
     /*, CONSTRUCT_TRACK(deadline)*/
 {}
+#endif
 
 void deadline::start(handler handle) {
     start(std::move(handle), duration_);
