@@ -194,8 +194,7 @@ set(kth_sources_just_legacy
 
         src/utility/binary.cpp
         src/utility/conditional_lock.cpp
-
-
+        src/utility/dispatcher.cpp
         src/utility/flush_lock.cpp
         src/utility/interprocess_lock.cpp
         src/utility/istream_reader.cpp
@@ -221,7 +220,6 @@ if(NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
   set(kth_sources_just_legacy
     ${kth_sources_just_legacy}
     src/utility/deadline.cpp
-    src/utility/dispatcher.cpp
     src/utility/sequencer.cpp
     src/utility/socket.cpp
 
