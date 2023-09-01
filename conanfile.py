@@ -94,7 +94,9 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
         KnuthConanFileV2.configure(self)
 
         self.options["fmt/*"].header_only = True
-        self.options["boost/*"].header_only = True
+
+        if self.settings.os == "Emscripten":
+            self.options["boost/*"].header_only = True
 
         if self.options.log == "spdlog":
             self.options["spdlog/*"].header_only = True
@@ -148,14 +150,27 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
         self.cpp_info.includedirs = ['include']
         self.cpp_info.libs = ["infrastructure"]
         ...
-        self.cpp_info.requires = ["boost::program_options",
-                                  "boost::thread",
-                                  "secp256k1::secp256k1",
+        # self.cpp_info.requires = ["boost::program_options",
+        #                           "boost::thread",
+        #                           "secp256k1::secp256k1",
+        #                           "spdlog::spdlog",
+        #                           "fmt::fmt",
+        #                           "expected-lite::expected-lite",
+        #                           "ctre::ctre"
+        #                          ]
+
+        self.cpp_info.requires = ["secp256k1::secp256k1",
                                   "spdlog::spdlog",
                                   "fmt::fmt",
                                   "expected-lite::expected-lite",
                                   "ctre::ctre"
                                  ]
+
+        if self.settings.os != "Emscripten":
+            self.cpp_info.requires.append("boost::program_options")
+            self.cpp_info.requires.append("boost::thread")
+        else:
+            self.cpp_info.requires.append("boost::boost")
 
         #TODO(fernando): add the rest of the conditional dependencies
 

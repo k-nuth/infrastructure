@@ -52,6 +52,7 @@ using upgrade_mutex_ptr = std::shared_ptr<boost::upgrade_mutex>;
 
 using shared_mutex = std::shared_mutex;
 using unique_lock = std::unique_lock<shared_mutex>;
+using shared_lock = std::shared_lock<shared_mutex>;
 
 #endif //! defined(__EMSCRIPTEN__)
 

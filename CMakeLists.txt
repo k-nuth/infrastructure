@@ -67,8 +67,14 @@ set(Boost_DEBUG ON)
 
 find_package(Threads REQUIRED)
 find_package(secp256k1 REQUIRED)
-find_package(Boost COMPONENTS program_options REQUIRED)
-find_package(Boost COMPONENTS thread REQUIRED)
+
+if(NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+  find_package(Boost COMPONENTS program_options REQUIRED)
+  find_package(Boost COMPONENTS thread REQUIRED)
+else()
+  find_package(Boost REQUIRED)
+endif()
+
 find_package(fmt REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(expected-lite REQUIRED)
