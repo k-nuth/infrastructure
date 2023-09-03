@@ -244,6 +244,11 @@ public:
     void concurrent(Args&&... args) {
         std::invoke(std::forward<Args>(args)...);
     }
+
+    template <typename... Args>
+    void ordered(Args&&... args) {
+        std::invoke(std::forward<Args>(args)...);
+    }
 };
 
 #endif // ! defined(__EMSCRIPTEN__)

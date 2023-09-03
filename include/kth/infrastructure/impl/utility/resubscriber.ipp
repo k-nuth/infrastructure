@@ -33,8 +33,8 @@ resubscriber<Args...>::~resubscriber()
 }
 
 template <typename... Args>
-void resubscriber<Args...>::start()
-{
+void resubscriber<Args...>::start() {
+#if ! defined(__EMSCRIPTEN__)
     // Critical Section
     ///////////////////////////////////////////////////////////////////////////
     subscribe_mutex_.lock_upgrade();
@@ -50,11 +50,22 @@ void resubscriber<Args...>::start()
 
     subscribe_mutex_.unlock_upgrade();
     ///////////////////////////////////////////////////////////////////////////
+#else
+    {
+        std::shared_lock<std::shared_mutex> lock(subscribe_mutex_);
+        if ( ! stopped_) {
+            return;
+        }
+    }
+
+    std::unique_lock<std::shared_mutex> lock(subscribe_mutex_);
+    stopped_ = false;
+#endif
 }
 
 template <typename... Args>
-void resubscriber<Args...>::stop()
-{
+void resubscriber<Args...>::stop() {
+#if ! defined(__EMSCRIPTEN__)
     // Critical Section
     ///////////////////////////////////////////////////////////////////////////
     subscribe_mutex_.lock_upgrade();
@@ -70,11 +81,22 @@ void resubscriber<Args...>::stop()
 
     subscribe_mutex_.unlock_upgrade();
     ///////////////////////////////////////////////////////////////////////////
+#else
+    {
+        std::shared_lock<std::shared_mutex> lock(subscribe_mutex_);
+        if (stopped_) {
+            return;
+        }
+    }
+
+    std::unique_lock<std::shared_mutex> lock(subscribe_mutex_);
+    stopped_ = true;
+#endif
 }
 
 template <typename... Args>
-void resubscriber<Args...>::subscribe(handler&& notify, Args... stopped_args)
-{
+void resubscriber<Args...>::subscribe(handler&& notify, Args... stopped_args) {
+#if ! defined(__EMSCRIPTEN__)
     // Critical Section
     ///////////////////////////////////////////////////////////////////////////
     subscribe_mutex_.lock_upgrade();
@@ -90,28 +112,34 @@ void resubscriber<Args...>::subscribe(handler&& notify, Args... stopped_args)
 
     subscribe_mutex_.unlock_upgrade();
     ///////////////////////////////////////////////////////////////////////////
-
+#else
+    {
+        std::shared_lock<std::shared_mutex> lock(subscribe_mutex_);
+        if (stopped_) {
+            return;
+        }
+        std::unique_lock<std::shared_mutex> lock(subscribe_mutex_);
+        subscriptions_.push_back(std::forward<handler>(notify));
+    }
+#endif
     notify(stopped_args...);
 }
 
 template <typename... Args>
-void resubscriber<Args...>::invoke(Args... args)
-{
+void resubscriber<Args...>::invoke(Args... args) {
     do_invoke(args...);
 }
 
 template <typename... Args>
-void resubscriber<Args...>::relay(Args... args)
-{
+void resubscriber<Args...>::relay(Args... args) {
     // This enqueues work while maintaining order.
-    dispatch_.ordered(&resubscriber<Args...>::do_invoke,
-        this->shared_from_this(), args...);
+    dispatch_.ordered(&resubscriber<Args...>::do_invoke, this->shared_from_this(), args...);
 }
 
 // private
 template <typename... Args>
-void resubscriber<Args...>::do_invoke(Args... args)
-{
+void resubscriber<Args...>::do_invoke(Args... args) {
+#if ! defined(__EMSCRIPTEN__)
     // Critical Section (prevent concurrent handler execution)
     ///////////////////////////////////////////////////////////////////////////
     unique_lock lock(invoke_mutex_);
@@ -133,8 +161,7 @@ void resubscriber<Args...>::do_invoke(Args... args)
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // DEADLOCK RISK, handler must not return to invoke.
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        if (handler(args...))
-        {
+        if (handler(args...)) {
             // Critical Section
             ///////////////////////////////////////////////////////////////////
             subscribe_mutex_.lock_upgrade();
@@ -154,8 +181,27 @@ void resubscriber<Args...>::do_invoke(Args... args)
             ///////////////////////////////////////////////////////////////////
         }
     }
-
     ///////////////////////////////////////////////////////////////////////////
+#else
+    {
+        std::unique_lock lock(invoke_mutex_);
+        std::shared_lock<std::shared_mutex> s_lock(subscribe_mutex_);
+
+        // Move subscribers from the member list to a temporary list.
+        list subscriptions;
+        std::swap(subscriptions, subscriptions_);
+    }
+
+    for (auto const& handler: subscriptions) {
+        if (handler(args...)) {
+            std::unique_lock<std::shared_mutex> u_lock(subscribe_mutex_);
+
+            if (!stopped_) {
+                subscriptions_.push_back(handler);
+            }
+        }
+    }
+#endif
 }
 
 } // namespace kth

@@ -93,10 +93,20 @@ private:
     std::string name_;
     std::atomic<size_t> size_;
     std::vector<asio::thread> threads_;
+
+#if ! defined(__EMSCRIPTEN__)
     mutable upgrade_mutex threads_mutex_;
+#else
+    mutable shared_mutex threads_mutex_;
+#endif
 
     std::shared_ptr<asio::service::work> work_;
+
+#if ! defined(__EMSCRIPTEN__)
     mutable upgrade_mutex work_mutex_;
+#else
+    mutable shared_mutex work_mutex_;
+#endif
 };
 
 } // namespace kth
