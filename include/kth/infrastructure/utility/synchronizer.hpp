@@ -35,23 +35,24 @@ enum class synchronizer_terminate
 };
 
 template <typename Handler>
-class synchronizer
-{
+class synchronizer {
 public:
-    synchronizer(Handler&& handler, size_t clearance_count,
-        std::string const& name, synchronizer_terminate mode)
-      : handler_(std::forward<Handler>(handler)),
-        name_(name),
-        clearance_count_(clearance_count),
-        counter_(std::make_shared<size_t>(0)),
-        mutex_(std::make_shared<upgrade_mutex>()),
-        terminate_(mode) {
-    }
+    synchronizer(Handler&& handler, size_t clearance_count, std::string const& name, synchronizer_terminate mode)
+        : handler_(std::forward<Handler>(handler))
+        , name_(name)
+        , clearance_count_(clearance_count)
+        , counter_(std::make_shared<size_t>(0))
+#if ! defined(__EMSCRIPTEN__)
+        , mutex_(std::make_shared<upgrade_mutex>())
+#else
+        , mutex_(std::make_shared<shared_mutex>())
+#endif
+        , terminate_(mode)
+    {}
 
     // Determine if the code is cause for termination.
     bool complete(code const& ec) {
-        switch (terminate_)
-        {
+        switch (terminate_) {
             case synchronizer_terminate::on_error:
                 return !!ec;
             case synchronizer_terminate::on_success:
@@ -65,8 +66,7 @@ public:
 
     // Assuming we are terminating, generate the proper result code.
     code result(code const& ec) {
-        switch (terminate_)
-        {
+        switch (terminate_) {
             case synchronizer_terminate::on_error:
                 return ec ? ec : error::success;
             case synchronizer_terminate::on_success:
@@ -80,6 +80,7 @@ public:
 
     template <typename... Args>
     void operator()(code const& ec, Args&&... args) {
+#if ! defined(__EMSCRIPTEN__)
         // Critical Section
         ///////////////////////////////////////////////////////////////////////
         mutex_->lock_upgrade();
@@ -88,8 +89,7 @@ public:
         KTH_ASSERT(initial_count <= clearance_count_);
 
         // Another handler cleared this and shortcircuited the count, ignore.
-        if (initial_count == clearance_count_)
-        {
+        if (initial_count == clearance_count_) {
             mutex_->unlock_upgrade();
             //-----------------------------------------------------------------
             return;
@@ -104,10 +104,33 @@ public:
 
         mutex_->unlock();
         ///////////////////////////////////////////////////////////////////////
+    #else
+        size_t initial_count;
+        size_t count;
+        bool cleared;
+
+        {
+            std::shared_lock<std::shared_mutex> lock(*mutex_);
+            initial_count = *counter_;
+            KTH_ASSERT(initial_count <= clearance_count_);
+
+            if (initial_count == clearance_count_) {
+                return;
+            }
+
+            count = complete(ec) ? clearance_count_ : initial_count + 1;
+            cleared = count == clearance_count_;
+        }
+
+        {
+            std::unique_lock<std::shared_mutex> lock(*mutex_);
+            (*counter_) = count;
+        }
+    #endif
 
         if (cleared) {
             handler_(result(ec), std::forward<Args>(args)...);
-}
+        }
     }
 
 private:
@@ -120,16 +143,19 @@ private:
 
     // We use pointer to reference the same value/mutex across instance copies.
     std::shared_ptr<size_t> counter_;
+
+
+#if ! defined(__EMSCRIPTEN__)
     upgrade_mutex_ptr mutex_;
+#else
+    shared_mutex_ptr mutex_;
+#endif
 };
 
 template <typename Handler>
 synchronizer<Handler> synchronize(Handler&& handler, size_t clearance_count,
-    std::string const& name, synchronizer_terminate mode=
-    synchronizer_terminate::on_error)
-{
-    return synchronizer<Handler>(std::forward<Handler>(handler),
-        clearance_count, name, mode);
+    std::string const& name, synchronizer_terminate mode= synchronizer_terminate::on_error) {
+    return synchronizer<Handler>(std::forward<Handler>(handler), clearance_count, name, mode);
 }
 
 } // namespace kth
