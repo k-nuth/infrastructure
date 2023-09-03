@@ -118,9 +118,9 @@ void resubscriber<Args...>::subscribe(handler&& notify, Args... stopped_args) {
         if (stopped_) {
             return;
         }
-        std::unique_lock<std::shared_mutex> lock(subscribe_mutex_);
-        subscriptions_.push_back(std::forward<handler>(notify));
     }
+    std::unique_lock<std::shared_mutex> lock(subscribe_mutex_);
+    subscriptions_.push_back(std::forward<handler>(notify));
 #endif
     notify(stopped_args...);
 }
@@ -183,12 +183,12 @@ void resubscriber<Args...>::do_invoke(Args... args) {
     }
     ///////////////////////////////////////////////////////////////////////////
 #else
+    list subscriptions;
     {
         std::unique_lock lock(invoke_mutex_);
         std::shared_lock<std::shared_mutex> s_lock(subscribe_mutex_);
 
         // Move subscribers from the member list to a temporary list.
-        list subscriptions;
         std::swap(subscriptions, subscriptions_);
     }
 

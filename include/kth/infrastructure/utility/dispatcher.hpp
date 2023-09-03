@@ -12,6 +12,7 @@
 #include <vector>
 
 #include <kth/infrastructure/utility/noncopyable.hpp>
+#include <kth/infrastructure/utility/threadpool.hpp>
 
 #if ! defined(__EMSCRIPTEN__)
 
@@ -21,8 +22,8 @@
 #include <kth/infrastructure/utility/deadline.hpp>
 #include <kth/infrastructure/utility/delegates.hpp>
 #include <kth/infrastructure/utility/synchronizer.hpp>
-#include <kth/infrastructure/utility/threadpool.hpp>
 #include <kth/infrastructure/utility/work.hpp>
+
 #endif // ! defined(__EMSCRIPTEN__)
 
 
@@ -234,8 +235,6 @@ private:
 
 #else
 
-struct threadpool {};
-
 class KI_API dispatcher : noncopyable {
 public:
     dispatcher(threadpool& pool, std::string const& name);
@@ -248,6 +247,11 @@ public:
     template <typename... Args>
     void ordered(Args&&... args) {
         std::invoke(std::forward<Args>(args)...);
+    }
+
+    inline
+    size_t size() const {
+        return 1;
     }
 };
 

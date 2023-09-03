@@ -5,6 +5,7 @@
 #ifndef KTH_INFRASTRUCTURE_THREADPOOL_HPP
 #define KTH_INFRASTRUCTURE_THREADPOOL_HPP
 
+#if ! defined(__EMSCRIPTEN__)
 #include <atomic>
 #include <cstddef>
 #include <functional>
@@ -15,9 +16,11 @@
 #include <kth/infrastructure/utility/asio.hpp>
 #include <kth/infrastructure/utility/noncopyable.hpp>
 #include <kth/infrastructure/utility/thread.hpp>
+#endif
 
 namespace kth {
 
+#if ! defined(__EMSCRIPTEN__)
 /**
  * This class and the asio service it exposes are thread safe.
  * A collection of threads which can be passed operations through io_service.
@@ -93,21 +96,16 @@ private:
     std::string name_;
     std::atomic<size_t> size_;
     std::vector<asio::thread> threads_;
-
-#if ! defined(__EMSCRIPTEN__)
     mutable upgrade_mutex threads_mutex_;
-#else
-    mutable shared_mutex threads_mutex_;
-#endif
-
     std::shared_ptr<asio::service::work> work_;
-
-#if ! defined(__EMSCRIPTEN__)
     mutable upgrade_mutex work_mutex_;
-#else
-    mutable shared_mutex work_mutex_;
-#endif
 };
+
+#else
+
+struct threadpool {};
+
+#endif // ! defined(__EMSCRIPTEN__)
 
 } // namespace kth
 
