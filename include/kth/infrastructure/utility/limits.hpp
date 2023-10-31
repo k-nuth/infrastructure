@@ -256,8 +256,6 @@ To range_constrain(From value, To minimum, To maximum) {
     return static_cast<To>(value);
 }
 
-
-
 } // namespace kth
 
 #endif

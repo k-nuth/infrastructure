@@ -15,8 +15,10 @@
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/utility/asio.hpp>
 #include <kth/infrastructure/utility/noncopyable.hpp>
-#include <kth/infrastructure/utility/thread.hpp>
+
 #endif
+
+#include <kth/infrastructure/utility/thread.hpp>
 
 namespace kth {
 
@@ -103,7 +105,20 @@ private:
 
 #else
 
-struct threadpool {};
+struct threadpool {
+    explicit
+    threadpool(std::string const& name, size_t number_threads = 0, thread_priority priority = thread_priority::normal)
+    {}
+
+    void shutdown() {}
+    void join() {}
+    size_t size() const {
+        return 1;
+    }
+    bool empty() const {
+        return false;
+    }
+};
 
 #endif // ! defined(__EMSCRIPTEN__)
 
