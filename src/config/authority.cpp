@@ -5,11 +5,12 @@
 #include <kth/infrastructure/config/authority.hpp>
 
 #include <algorithm>
-#include <regex>
+#include <charconv>
 #include <sstream>
 
+#include <ctre.hpp>
+
 #include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/program_options.hpp>
 
 #define FMT_HEADER_ONLY 1
@@ -58,6 +59,7 @@ std::string to_ipv6(std::string const& ipv4_address) {
     return std::string("::ffff:") + ipv4_address;
 }
 
+#if ! defined(__EMSCRIPTEN__)
 static
 asio::ipv6 to_ipv6(asio::ipv4 const& ipv4_address) {
     // Create an IPv6 mapped IPv4 address via serialization.
@@ -75,33 +77,39 @@ asio::ipv6 to_ipv6(asio::address const& ip_address) {
     return to_ipv6(ip_address.to_v4());
 }
 
+#endif // ! defined(__EMSCRIPTEN__)
+
+
 static
 std::string to_ipv4_hostname(asio::address const& ip_address) {
-    // std::regex requires gcc 4.9, so we are using boost::regex for now.
-    // Knuth: we use std::regex, becase we drop support por GCC<5
-    static std::regex const regular("^::ffff:([0-9\\.]+)$");
+#if ! defined(__EMSCRIPTEN__)
+    constexpr auto pattern = ctll::fixed_string{"^::ffff:([0-9\\.]+)$"};
 
     auto const address = ip_address.to_string();
-    std::sregex_iterator it(address.begin(), address.end(), regular), end;
-    if (it == end) {
-        return "";
-    }
 
-    auto const& match = *it;
-    return match[1];
+    if (auto m = ctre::match<pattern>(address)) {
+        return std::string(m.get<1>());
+    }
+#endif // ! defined(__EMSCRIPTEN__)
+
+    return "";
 }
 
 static
 std::string to_ipv6_hostname(asio::address const& ip_address) {
+#if ! defined(__EMSCRIPTEN__)
     // IPv6 URLs use a bracketed IPv6 address, see rfc2732.
     // auto const hostname = boost::format("[%1%]") % to_ipv6(ip_address);
     // return hostname.str();
     return fmt::format("[{}]", to_ipv6(ip_address));
+#else
+    return "";
+#endif // ! defined(__EMSCRIPTEN__)
 }
 
-authority::authority(authority const& x)
-    : authority(x.ip_, x.port_)
-{}
+// authority::authority(authority const& x)
+//     : authority(x.ip_, x.port_)
+// {}
 
 // authority: [2001:db8::2]:port or 1.2.240.1:port
 authority::authority(std::string const& authority) {
@@ -113,6 +121,7 @@ authority::authority(message::network_address const& address)
     : authority(address.ip(), address.port())
 {}
 
+#if ! defined(__EMSCRIPTEN__)
 static
 asio::ipv6 to_boost_address(message::ip_address const& in) {
     asio::ipv6::bytes_type bytes;
@@ -131,6 +140,21 @@ message::ip_address to_bc_address(const asio::ipv6& in) {
     return out;
 }
 
+#else
+
+static
+asio::ipv6 to_boost_address(message::ip_address const& in) {
+    return 0;
+}
+
+static
+message::ip_address to_bc_address(const asio::ipv6& in) {
+    message::ip_address out;
+    return out;
+}
+
+#endif // ! defined(__EMSCRIPTEN__)
+
 authority::authority(message::ip_address const& ip, uint16_t port)
     : ip_(to_boost_address(ip)), port_(port)
 {}
@@ -140,6 +164,7 @@ authority::authority(std::string const& host, uint16_t port)
     : authority(to_authority(host, port))
 {}
 
+#if ! defined(__EMSCRIPTEN__)
 authority::authority(asio::address const& ip, uint16_t port)
     : ip_(to_ipv6(ip)), port_(port)
 {}
@@ -147,14 +172,17 @@ authority::authority(asio::address const& ip, uint16_t port)
 authority::authority(asio::endpoint const& endpoint)
     : authority(endpoint.address(), endpoint.port())
 {}
+#endif
 
 authority::operator bool const() const {
     return port_ != 0;
 }
 
+// #if ! defined(__EMSCRIPTEN__)
 asio::ipv6 authority::asio_ip() const {
     return ip_;
 }
+// #endif
 
 message::ip_address authority::ip() const {
     return to_bc_address(ip_);
@@ -194,33 +222,30 @@ bool authority::operator!=(authority const& x) const {
 }
 
 std::istream& operator>>(std::istream& input, authority& argument) {
-    using std::regex;
-    using std::sregex_iterator;
+    using namespace ctre::literals;
 
     std::string value;
     input >> value;
 
-    // std::regex requires gcc 4.9, so we are using boost::regex for now.
-    // Knuth: we use std::regex, becase we drop support por GCC<5
-    static
-    regex const regular(R"(^(([0-9\.]+)|\[([0-9a-f:\.]+)\])(:([0-9]{1,5}))?$)");
+    constexpr auto pattern = ctll::fixed_string{R"(^(([0-9\.]+)|\[([0-9a-f:\.]+)\])(:([0-9]{1,5}))?$)"};
 
-    sregex_iterator it(value.begin(), value.end(), regular), end;
-    if (it == end) {
-        BOOST_THROW_EXCEPTION(invalid_option_value(value));
-    }
+    if (auto [whole, _0, ipv4, ipv6, _1, port] = ctre::match<pattern>(value); whole) {
+        std::string ip_address = ipv6 ? ipv6.to_string() : to_ipv6(ipv4.to_string());
 
-    auto const& match = *it;
-    std::string port(match[5]);
-    std::string ip_address(match[3]);
-    if (ip_address.empty()) {
-        ip_address = to_ipv6(match[2]);
-    }
-
-    try {
+#if ! defined(__EMSCRIPTEN__)
         argument.ip_ = asio::ipv6::from_string(ip_address);
-        argument.port_ = port.empty() ? 0 : boost::lexical_cast<uint16_t>(port);
-    } catch (...) {
+#endif
+
+        if (port) {
+            auto const port_sv = port.to_view();
+            auto const result = std::from_chars(port_sv.data(), port_sv.data() + port_sv.size(), argument.port_);
+            if (result.ec == std::errc()) {
+                BOOST_THROW_EXCEPTION(invalid_option_value(value));
+            }
+        } else {
+            argument.port_ = 0;
+        }
+    } else {
         BOOST_THROW_EXCEPTION(invalid_option_value(value));
     }
 

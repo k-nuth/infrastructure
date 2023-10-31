@@ -55,8 +55,13 @@ private:
     bool stopped_;
     list subscriptions_;
     dispatcher dispatch_;
+#if ! defined(__EMSCRIPTEN__)
     mutable upgrade_mutex invoke_mutex_;
     mutable upgrade_mutex subscribe_mutex_;
+#else
+    mutable shared_mutex invoke_mutex_;
+    mutable shared_mutex subscribe_mutex_;
+#endif
 };
 
 } // namespace kth

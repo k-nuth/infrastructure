@@ -8,7 +8,9 @@
 #include <chrono>
 #include <memory>
 
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/thread.hpp>
+#endif
 
 #include <kth/infrastructure/compat.hpp>
 #include <kth/infrastructure/utility/asio_helper.hpp>
@@ -28,6 +30,8 @@ using microseconds = std::chrono::microseconds;
 using steady_clock = std::chrono::steady_clock;
 using duration = steady_clock::duration;
 using time_point = steady_clock::time_point;
+
+#if ! defined(__EMSCRIPTEN__)
 using timer = ::asio::basic_waitable_timer<steady_clock>;
 
 using service = ::asio::io_service;
@@ -43,19 +47,44 @@ using resolver = tcp::resolver;
 using query = tcp::resolver::query;
 using iterator = tcp::resolver::iterator;
 
+constexpr int max_connections = ::asio::socket_base::max_connections;
+
 // Boost thread is used because of thread_specific_ptr limitation:
 // stackoverflow.com/q/22448022/1172329
 using thread = boost::thread;
 
+#else
+
+// Note: dummy types
+
+using timer = int;
+using service = int;
+using address = int;
+using ipv4 = int;
+using ipv6 = int;
+using tcp = int;
+using endpoint = int;
+using socket = int;
+using acceptor = int;
+using resolver = int;
+using query = int;
+using iterator = int;
+
+constexpr int max_connections = 0;
+
+using thread = int;
+
+#endif // ! defined(__EMSCRIPTEN__)
+
 using socket_ptr = std::shared_ptr<socket>;
 
-constexpr int max_connections = ::asio::socket_base::max_connections;
 
 } // namespace kth::asio
 
 #define FMT_HEADER_ONLY 1
 #include <fmt/format.h>
 
+#if ! defined(__EMSCRIPTEN__)
 // template <>
 // struct fmt::formatter<kth::asio::ipv6> {
 //     constexpr auto parse(format_parse_context& ctx) { return ctx.begin(); }
@@ -73,4 +102,6 @@ struct fmt::formatter<kth::asio::ipv6> : formatter<std::string> {
         return formatter<std::string>::format(addr.to_string(), ctx);
     }
 };
-#endif
+#endif // ! defined(__EMSCRIPTEN__)
+
+#endif // KTH_INFRASTRUCTURE_ASIO_HPP

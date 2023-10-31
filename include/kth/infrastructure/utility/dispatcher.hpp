@@ -11,32 +11,34 @@
 #include <utility>
 #include <vector>
 
+#include <kth/infrastructure/utility/noncopyable.hpp>
+#include <kth/infrastructure/utility/threadpool.hpp>
+
+#if ! defined(__EMSCRIPTEN__)
+
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/error.hpp>
 #include <kth/infrastructure/utility/asio.hpp>
 #include <kth/infrastructure/utility/deadline.hpp>
 #include <kth/infrastructure/utility/delegates.hpp>
-#include <kth/infrastructure/utility/noncopyable.hpp>
 #include <kth/infrastructure/utility/synchronizer.hpp>
-#include <kth/infrastructure/utility/threadpool.hpp>
 #include <kth/infrastructure/utility/work.hpp>
+
+#endif // ! defined(__EMSCRIPTEN__)
+
 
 namespace kth {
 
-#define FORWARD_ARGS(args) \
-    std::forward<Args>(args)...
-#define FORWARD_HANDLER(handler) \
-    std::forward<Handler>(handler)
-#define BIND_HANDLER(handler, args) \
-    std::bind(FORWARD_HANDLER(handler), FORWARD_ARGS(args))
-#define BIND_ARGS(args) \
-    std::bind(FORWARD_ARGS(args))
+#if ! defined(__EMSCRIPTEN__)
+
+#define FORWARD_ARGS(args) std::forward<Args>(args)...
+#define FORWARD_HANDLER(handler) std::forward<Handler>(handler)
+#define BIND_HANDLER(handler, args) std::bind(FORWARD_HANDLER(handler), FORWARD_ARGS(args))
+#define BIND_ARGS(args) std::bind(FORWARD_ARGS(args))
 
 // Collection dispatch doesn't forward args as move args can only forward once.
-#define BIND_RACE(args, call) \
-    std::bind(args..., call)
-#define BIND_ELEMENT(args, element, call) \
-    std::bind(args..., element, call)
+#define BIND_RACE(args, call) std::bind(args..., call)
+#define BIND_ELEMENT(args, element, call) std::bind(args..., element, call)
 
 /// This  class is thread safe.
 /// If the ios service is stopped jobs will not be dispatched.
@@ -230,6 +232,30 @@ private:
 #undef BIND_ARGS
 #undef BIND_RACE
 #undef BIND_ELEMENT
+
+#else
+
+class KI_API dispatcher : noncopyable {
+public:
+    dispatcher(threadpool& pool, std::string const& name);
+
+    template <typename... Args>
+    void concurrent(Args&&... args) {
+        std::invoke(std::forward<Args>(args)...);
+    }
+
+    template <typename... Args>
+    void ordered(Args&&... args) {
+        std::invoke(std::forward<Args>(args)...);
+    }
+
+    inline
+    size_t size() const {
+        return 1;
+    }
+};
+
+#endif // ! defined(__EMSCRIPTEN__)
 
 } // namespace kth
 

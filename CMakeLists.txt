@@ -67,10 +67,19 @@ set(Boost_DEBUG ON)
 
 find_package(Threads REQUIRED)
 find_package(secp256k1 REQUIRED)
-find_package(Boost 1.82.0 COMPONENTS program_options REQUIRED)
-find_package(Boost 1.82.0 COMPONENTS thread REQUIRED)
-find_package(fmt 10.0.0 REQUIRED)
-find_package(spdlog 1.11.0 REQUIRED)
+
+if(NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+  find_package(Boost COMPONENTS program_options REQUIRED)
+  find_package(Boost COMPONENTS thread REQUIRED)
+else()
+  find_package(Boost REQUIRED)
+endif()
+
+find_package(fmt REQUIRED)
+find_package(spdlog REQUIRED)
+find_package(expected-lite REQUIRED)
+find_package(ctre REQUIRED)
+
 
 include(CheckCXXCompilerFlag)
 
@@ -185,7 +194,6 @@ set(kth_sources_just_legacy
 
         src/utility/binary.cpp
         src/utility/conditional_lock.cpp
-        src/utility/deadline.cpp
         src/utility/dispatcher.cpp
         src/utility/flush_lock.cpp
         src/utility/interprocess_lock.cpp
@@ -193,15 +201,11 @@ set(kth_sources_just_legacy
         src/utility/monitor.cpp
         src/utility/ostream_writer.cpp
         src/utility/prioritized_mutex.cpp
-        src/utility/pseudo_random.cpp
         src/utility/scope_lock.cpp
-        src/utility/sequencer.cpp
+
         src/utility/sequential_lock.cpp
-        src/utility/socket.cpp
         src/utility/string.cpp
         src/utility/thread.cpp
-        src/utility/threadpool.cpp
-        src/utility/work.cpp
 
         src/wallet/dictionary.cpp
         src/wallet/hd_private.cpp
@@ -211,6 +215,21 @@ set(kth_sources_just_legacy
 
         src/wallet/uri.cpp
     )
+
+if(NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+  set(kth_sources_just_legacy
+    ${kth_sources_just_legacy}
+    src/utility/deadline.cpp
+    src/utility/sequencer.cpp
+    src/utility/socket.cpp
+
+    src/utility/pseudo_random_broken_do_not_use.cpp
+    src/utility/threadpool.cpp
+
+    src/utility/work.cpp
+  )
+endif()
+
 
 if (${LOG_LIBRARY} STREQUAL "boost")
   set(kth_sources_just_legacy
@@ -362,7 +381,7 @@ set(kth_headers
     include/kth/infrastructure/utility/pending.hpp
     include/kth/infrastructure/utility/png.hpp
     include/kth/infrastructure/utility/prioritized_mutex.hpp
-    include/kth/infrastructure/utility/pseudo_random.hpp
+    include/kth/infrastructure/utility/pseudo_random_broken_do_not_use.hpp
     include/kth/infrastructure/utility/reader.hpp
     include/kth/infrastructure/utility/resubscriber.hpp
     include/kth/infrastructure/utility/scope_lock.hpp
@@ -441,13 +460,17 @@ endif()
 
 target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
 
-target_link_libraries(${PROJECT_NAME} PUBLIC Boost::program_options)
-target_link_libraries(${PROJECT_NAME} PUBLIC Boost::thread)
+if(NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+  target_link_libraries(${PROJECT_NAME} PUBLIC Boost::program_options)
+  target_link_libraries(${PROJECT_NAME} PUBLIC Boost::thread)
+endif()
+
 target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
 target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog_header_only)
-# target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt)
-# target_link_libraries(${PROJECT_NAME} PUBLIC spdlog::spdlog)
 target_link_libraries(${PROJECT_NAME} PUBLIC secp256k1::secp256k1)
+target_link_libraries(${PROJECT_NAME} PUBLIC nonstd::expected-lite)
+target_link_libraries(${PROJECT_NAME} PUBLIC ctre::ctre)
+
 
 target_link_libraries(${PROJECT_NAME} PUBLIC ${CMAKE_THREAD_LIBS_INIT})
 
@@ -500,7 +523,7 @@ if (WITH_TESTS)
     test/utility/data.cpp
     test/utility/endian.cpp
     test/utility/operators.cpp
-    test/utility/pseudo_random.cpp
+    test/utility/pseudo_random_broken_do_not_use.cpp
     test/utility/serializer.cpp
     test/utility/stream.cpp
     test/utility/thread.cpp

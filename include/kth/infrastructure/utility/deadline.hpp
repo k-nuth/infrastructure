@@ -14,7 +14,11 @@
 #include <kth/infrastructure/utility/enable_shared_from_base.hpp>
 #include <kth/infrastructure/utility/noncopyable.hpp>
 #include <kth/infrastructure/utility/thread.hpp>
+
+#if ! defined(__EMSCRIPTEN__)
 #include <kth/infrastructure/utility/threadpool.hpp>
+#endif
+
 ////#include <kth/infrastructure/utility/track.hpp>
 
 namespace kth {
@@ -33,19 +37,14 @@ public:
     using ptr = std::shared_ptr<deadline>;
     using handler = std::function<void (code const &)>;
 
-    /**
-     * Construct a deadline timer with a zero duration.
-     * @param[in]  pool      The thread pool used by the timer.
-     */
+
+#if ! defined(__EMSCRIPTEN__)
     explicit
     deadline(threadpool& pool);
 
-    /**
-     * Construct a deadline timer.
-     * @param[in]  pool      The thread pool used by the timer.
-     * @param[in]  duration  The default time period from start to expiration.
-     */
     deadline(threadpool& pool, asio::duration duration);
+#endif
+
 
     /**
      * Start or restart the timer.

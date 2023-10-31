@@ -74,11 +74,12 @@ bool recover_public(const secp256k1_context* context, byte_array<Size>& out, con
     secp256k1_pubkey pubkey;
     secp256k1_ecdsa_recoverable_signature sign;
     auto const recovery_id = safe_to_signed<int>(recoverable.recovery_id);
-    return
-        secp256k1_ecdsa_recoverable_signature_parse_compact(context,
-            &sign, recoverable.signature.data(), recovery_id) == 1 &&
-        secp256k1_ecdsa_recover(context, &pubkey, &sign, hash.data()) == 1 &&
-            serialize(context, out, pubkey);
+    if ( ! recovery_id) {
+        return false;
+    }
+    return secp256k1_ecdsa_recoverable_signature_parse_compact(context, &sign, recoverable.signature.data(), *recovery_id) == 1 &&
+           secp256k1_ecdsa_recover(context, &pubkey, &sign, hash.data()) == 1 &&
+           serialize(context, out, pubkey);
 }
 
 bool verify_signature(const secp256k1_context* context,
@@ -358,7 +359,11 @@ bool sign_recoverable(recoverable_signature& out, ec_secret const& secret, hash_
         secp256k1_ecdsa_recoverable_signature_serialize_compact(context, out.signature.data(), &recovery_id, &signature) == 1;
 
     KTH_ASSERT(recovery_id >= 0 && recovery_id <= 3);
-    out.recovery_id = safe_to_unsigned<uint8_t>(recovery_id);   //NOLINT
+    auto const recovery_id_unsigned = safe_to_unsigned<uint8_t>(recovery_id);
+    if ( ! recovery_id_unsigned) {
+        return false;
+    }
+    out.recovery_id = *recovery_id_unsigned;
     return result;
 }
 

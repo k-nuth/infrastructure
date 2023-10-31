@@ -15,20 +15,15 @@
 
 namespace kth {
 
-class KI_API pseudo_random
-{
-  public:
-    /**
-     * Fill a container with randomness using the default random engine.
-     */
+class KI_API pseudo_random_broken_do_not_use {
+public:
     template <typename Container>
     static void fill(Container& out) {
         // uniform_int_distribution is undefined for sizes < 16 bits.
         std::uniform_int_distribution<uint16_t> distribution(0, max_uint8);
-        auto& twister = pseudo_random::get_twister();
+        auto& twister = pseudo_random_broken_do_not_use::get_twister();
 
-        auto const fill = [&distribution, &twister](uint8_t byte)
-        {
+        auto const fill = [&distribution, &twister](uint8_t byte) {
             return distribution(twister);
         };
 
@@ -65,7 +60,7 @@ class KI_API pseudo_random
     static asio::duration duration(asio::duration const& expiration,
         uint8_t ratio=2);
 
-  private:
+private:
     static std::mt19937& get_twister();
 };
 
@@ -74,7 +69,7 @@ class KI_API pseudo_random
  * Generate a pseudo random number within the domain.
  * @return  The 64 bit number.
  */
-KI_API uint64_t pseudo_random();
+KI_API uint64_t pseudo_random_broken_do_not_use();
 
 /**
  * DEPRECATED
