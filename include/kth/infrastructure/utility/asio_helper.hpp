@@ -8,8 +8,13 @@
 #if defined(ASIO_STANDALONE)
 #include <asio.hpp>
 #else
-// #include <boost/asio.hpp>
+
+#if ! defined(__EMSCRIPTEN__)
+#include <boost/asio.hpp>
+#else
 #include <boost/asio/error.hpp>
+#endif
+
 namespace asio = boost::asio;
 #endif
 
