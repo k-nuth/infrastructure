@@ -21,7 +21,7 @@ public:
     static void fill(Container& out) {
         // uniform_int_distribution is undefined for sizes < 16 bits.
         std::uniform_int_distribution<uint16_t> distribution(0, max_uint8);
-        auto& twister = pseudo_random_broken_do_not_use::get_twister();
+        auto& twister = pseudo_random_broken_do_not_use::_get_twister_broken_do_not_use();
 
         auto const fill = [&distribution, &twister](uint8_t byte) {
             return distribution(twister);
@@ -35,7 +35,7 @@ public:
      */
     template <typename Container>
     static void shuffle(Container& out) {
-        std::shuffle(out.begin(), out.end(), get_twister());
+        std::shuffle(out.begin(), out.end(), _get_twister_broken_do_not_use());
     }
 
     /**
@@ -61,7 +61,7 @@ public:
         uint8_t ratio=2);
 
 private:
-    static std::mt19937& get_twister();
+    static std::mt19937& _get_twister_broken_do_not_use();
 };
 
 /**

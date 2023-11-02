@@ -46,101 +46,101 @@ I floor_subtract(I left, I right) {
 
 //TODO(fernando): Implement safe operations without exceptions
 
-#if ! defined(__EMSCRIPTEN__)
+// #if ! defined(__EMSCRIPTEN__)
 
-#define IF(T) std::enable_if<T>
-#define SIGN(T) std::is_signed<T>::value
-#define UNSIGN(T) std::is_unsigned<T>::value
+// #define IF(T) std::enable_if<T>
+// #define SIGN(T) std::is_signed<T>::value
+// #define UNSIGN(T) std::is_unsigned<T>::value
 
-#define SIGNED(A) IF(SIGN(A))
-#define UNSIGNED(A) IF(UNSIGN(A))
-#define SIGNED_SIGNED(A, B) IF(SIGN(A) && SIGN(B))
-#define SIGNED_UNSIGNED(A, B) IF(SIGN(A) && UNSIGN(B))
-#define UNSIGNED_SIGNED(A, B) IF(UNSIGN(A) && SIGN(B))
-#define UNSIGNED_UNSIGNED(A, B) IF(UNSIGN(A) && UNSIGN(B))
+// #define SIGNED(A) IF(SIGN(A))
+// #define UNSIGNED(A) IF(UNSIGN(A))
+// #define SIGNED_SIGNED(A, B) IF(SIGN(A) && SIGN(B))
+// #define SIGNED_UNSIGNED(A, B) IF(SIGN(A) && UNSIGN(B))
+// #define UNSIGNED_SIGNED(A, B) IF(UNSIGN(A) && SIGN(B))
+// #define UNSIGNED_UNSIGNED(A, B) IF(UNSIGN(A) && UNSIGN(B))
 
 
-template <typename I, typename = UNSIGNED(I)>
-I safe_add(I left, I right) {
-    static auto const maximum = (std::numeric_limits<I>::max)();
+// template <typename I, typename = UNSIGNED(I)>
+// I safe_add(I left, I right) {
+//     static auto const maximum = (std::numeric_limits<I>::max)();
 
-    if (left > maximum - right) {
-        throw std::overflow_error("addition overflow");
-    }
+//     if (left > maximum - right) {
+//         throw std::overflow_error("addition overflow");
+//     }
 
-    return left + right;
-}
+//     return left + right;
+// }
 
-template <typename I, typename = UNSIGNED(I)>
-I safe_subtract(I left, I right) {
-    static auto const minimum = (std::numeric_limits<I>::min)();
+// template <typename I, typename = UNSIGNED(I)>
+// I safe_subtract(I left, I right) {
+//     static auto const minimum = (std::numeric_limits<I>::min)();
 
-    if (left < minimum + right) {
-        throw std::underflow_error("subtraction underflow");
-    }
+//     if (left < minimum + right) {
+//         throw std::underflow_error("subtraction underflow");
+//     }
 
-    return left - right;
-}
+//     return left - right;
+// }
 
-template <typename To, typename From, typename = SIGNED_SIGNED(To, From)>
-To safe_signed(From signed_value) {
-    static auto const signed_minimum = (std::numeric_limits<To>::min)();
-    static auto const signed_maximum = (std::numeric_limits<To>::max)();
+// template <typename To, typename From, typename = SIGNED_SIGNED(To, From)>
+// To safe_signed(From signed_value) {
+//     static auto const signed_minimum = (std::numeric_limits<To>::min)();
+//     static auto const signed_maximum = (std::numeric_limits<To>::max)();
 
-    if (signed_value < signed_minimum || signed_value > signed_maximum) {
-        throw std::range_error("signed assignment out of range");
-    }
+//     if (signed_value < signed_minimum || signed_value > signed_maximum) {
+//         throw std::range_error("signed assignment out of range");
+//     }
 
-    return static_cast<To>(signed_value);
-}
+//     return static_cast<To>(signed_value);
+// }
 
-template <typename To, typename From, typename = UNSIGNED_UNSIGNED(To, From)>
-To safe_unsigned(From unsigned_value) {
-    static auto const unsigned_minimum = (std::numeric_limits<To>::min)();
-    static auto const unsigned_maximum = (std::numeric_limits<To>::max)();
+// template <typename To, typename From, typename = UNSIGNED_UNSIGNED(To, From)>
+// To safe_unsigned(From unsigned_value) {
+//     static auto const unsigned_minimum = (std::numeric_limits<To>::min)();
+//     static auto const unsigned_maximum = (std::numeric_limits<To>::max)();
 
-    if (unsigned_value < unsigned_minimum || unsigned_value > unsigned_maximum) {
-        throw std::range_error("unsigned assignment out of range");
-    }
+//     if (unsigned_value < unsigned_minimum || unsigned_value > unsigned_maximum) {
+//         throw std::range_error("unsigned assignment out of range");
+//     }
 
-    return static_cast<To>(unsigned_value);
-}
+//     return static_cast<To>(unsigned_value);
+// }
 
-template <typename To, typename From, typename = SIGNED_UNSIGNED(To, From)>
-To safe_to_signed(From unsigned_value) {
-    static_assert(sizeof(uint64_t) >= sizeof(To), "safe assign out of range");
-    static auto const signed_maximum = (std::numeric_limits<To>::max)();
+// template <typename To, typename From, typename = SIGNED_UNSIGNED(To, From)>
+// To safe_to_signed(From unsigned_value) {
+//     static_assert(sizeof(uint64_t) >= sizeof(To), "safe assign out of range");
+//     static auto const signed_maximum = (std::numeric_limits<To>::max)();
 
-    if (unsigned_value > static_cast<uint64_t>(signed_maximum)) {
-        throw std::range_error("to signed assignment out of range");
-    }
+//     if (unsigned_value > static_cast<uint64_t>(signed_maximum)) {
+//         throw std::range_error("to signed assignment out of range");
+//     }
 
-    return static_cast<To>(unsigned_value);
-}
+//     return static_cast<To>(unsigned_value);
+// }
 
-template <typename To, typename From, typename = UNSIGNED_SIGNED(To, From)>
-To safe_to_unsigned(From signed_value) {
-    static_assert(sizeof(uint64_t) >= sizeof(To), "safe assign out of range");
-    static auto const unsigned_maximum = (std::numeric_limits<To>::max)();
+// template <typename To, typename From, typename = UNSIGNED_SIGNED(To, From)>
+// To safe_to_unsigned(From signed_value) {
+//     static_assert(sizeof(uint64_t) >= sizeof(To), "safe assign out of range");
+//     static auto const unsigned_maximum = (std::numeric_limits<To>::max)();
 
-    if (signed_value < 0 || static_cast<uint64_t>(signed_value) > unsigned_maximum) {
-        throw std::range_error("to unsigned assignment out of range");
-    }
+//     if (signed_value < 0 || static_cast<uint64_t>(signed_value) > unsigned_maximum) {
+//         throw std::range_error("to unsigned assignment out of range");
+//     }
 
-    return static_cast<To>(signed_value);
-}
+//     return static_cast<To>(signed_value);
+// }
 
-#undef IF
-#undef SIGN
-#undef UNSIGN
-#undef SIGNED
-#undef UNSIGNED
-#undef SIGNED_SIGNED
-#undef SIGNED_UNSIGNED
-#undef UNSIGNED_SIGNED
-#undef UNSIGNED_UNSIGNED
+// #undef IF
+// #undef SIGN
+// #undef UNSIGN
+// #undef SIGNED
+// #undef UNSIGNED
+// #undef SIGNED_SIGNED
+// #undef SIGNED_UNSIGNED
+// #undef UNSIGNED_SIGNED
+// #undef UNSIGNED_UNSIGNED
 
-#else
+// #else
 
 template <std::unsigned_integral I>
 expected<I, std::string> safe_add(I left, I right) {
@@ -211,7 +211,7 @@ expected<To, std::string> safe_to_unsigned(From signed_value) {
     return static_cast<To>(signed_value);
 }
 
-#endif // ! defined(__EMSCRIPTEN__)
+// #endif // ! defined(__EMSCRIPTEN__)
 
 template <typename I>
 void safe_increment(I& value) {
