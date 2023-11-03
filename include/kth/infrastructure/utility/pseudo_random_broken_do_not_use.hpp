@@ -76,13 +76,13 @@ KI_API uint64_t pseudo_random_broken_do_not_use();
  * Generate a pseudo random number within [begin, end].
  * @return  The 64 bit number.
  */
-KI_API uint64_t pseudo_random(uint64_t begin, uint64_t end);
+KI_API uint64_t pseudo_random_broken_do_not_use(uint64_t begin, uint64_t end);
 
 /**
  * DEPRECATED
  * Fill a buffer with randomness using the default random engine.
  */
-KI_API void pseudo_random_fill(data_chunk& out);
+KI_API void pseudo_random_broken_do_not_use_fill(data_chunk& out);
 
 /**
  * DEPRECATED

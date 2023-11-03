@@ -30,7 +30,7 @@ uint64_t pseudo_random_broken_do_not_use(uint64_t begin, uint64_t end) {
     return pseudo_random_broken_do_not_use::next(begin, end);
 }
 
-void pseudo_random_fill(data_chunk& out) {
+void pseudo_random_broken_do_not_use_fill(data_chunk& out) {
     return pseudo_random_broken_do_not_use::fill<data_chunk>(out);
 }
 

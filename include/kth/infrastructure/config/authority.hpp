@@ -34,6 +34,9 @@ public:
     authority() = default;
     authority(authority const& x) = default;
     authority(authority&& x) = default;
+    authority& operator=(authority const& x) = default;
+    authority& operator=(authority&& x) = default;
+
 
     explicit
     authority(std::string const& authority);
