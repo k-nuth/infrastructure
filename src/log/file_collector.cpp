@@ -116,7 +116,7 @@ bool match_pattern(path_string_type const& file_name, path_string_type const& pa
 
     struct local {
         // Verifies that the string contains exactly n digits
-        static 
+        static
         bool scan_digits(path_string_type::const_iterator& it, path_string_type::const_iterator end, std::ptrdiff_t n) {
             for (; n > 0; --n) {
                 path_string_type::value_type c = *it++;
@@ -133,7 +133,7 @@ bool match_pattern(path_string_type const& file_name, path_string_type const& pa
         f_end = file_name.end(),
         p_it = pattern.begin(),
         p_end = pattern.end();
-        
+
     bool placeholder_expected = false;
 
     while (f_it != f_end && p_it != p_end) {
@@ -194,7 +194,7 @@ bool match_pattern(path_string_type const& file_name, path_string_type const& pa
                     path_string_type::const_iterator p = p_it;
                     unsigned int width = 0;
                     if ( ! parse_counter_placeholder(p, p_end, width)) {
-                        BOOST_THROW_EXCEPTION(std::invalid_argument("Unsupported placeholder used in pattern for file scanning"));
+                        throw std::invalid_argument("Unsupported placeholder used in pattern for file scanning"));
                     }
 
                     // Find where the file number ends
@@ -225,10 +225,10 @@ bool match_pattern(path_string_type const& file_name, path_string_type const& pa
             // The actual file name may end with an additional counter
             // that is added by the collector in case if file name clash
             return local::scan_digits(f_it, f_end, std::distance(f_it, f_end));
-        } 
+        }
         return true;
-        
-    } 
+
+    }
     return false;
 }
 

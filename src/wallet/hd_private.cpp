@@ -9,7 +9,9 @@
 #include <string>
 #include <utility>
 
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/program_options.hpp>
+#endif
 
 #include <kth/infrastructure/constants.hpp>
 #include <kth/infrastructure/define.hpp>
@@ -254,8 +256,12 @@ std::istream& operator>>(std::istream& in, hd_private& to) {
     to = hd_private(value, hd_public::mainnet);
 
     if ( ! to) {
+#if ! defined(__EMSCRIPTEN__)
         using namespace boost::program_options;
         BOOST_THROW_EXCEPTION(invalid_option_value(value));
+#else
+        throw std::invalid_argument(value);
+#endif
     }
 
     return in;

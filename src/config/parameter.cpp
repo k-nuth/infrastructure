@@ -7,7 +7,10 @@
 #include <iostream>
 
 #include <boost/algorithm/string.hpp>
+
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/program_options.hpp>
+#endif
 
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/utility/collection.hpp>

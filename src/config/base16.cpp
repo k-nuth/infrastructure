@@ -8,7 +8,9 @@
 #include <sstream>
 #include <string>
 
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/program_options.hpp>
+#endif
 
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/formats/base_16.hpp>
@@ -42,8 +44,12 @@ std::istream& operator>>(std::istream& input, base16& argument) {
     input >> hexcode;
 
     if ( ! decode_base16(argument.value_, hexcode)) {
+#if ! defined(__EMSCRIPTEN__)
         using namespace boost::program_options;
         BOOST_THROW_EXCEPTION(invalid_option_value(hexcode));
+#else
+        throw std::invalid_argument(hexcode);
+#endif
     }
 
     return input;

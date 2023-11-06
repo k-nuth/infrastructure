@@ -7,7 +7,9 @@
 
 #include <functional>
 
+#if ! defined(__EMSCRIPTEN__)
 #include <kth/infrastructure/utility/work.hpp>
+#endif
 
 namespace kth {
 namespace delegates {

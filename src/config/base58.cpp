@@ -8,7 +8,9 @@
 #include <sstream>
 #include <string>
 
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/program_options.hpp>
+#endif
 
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/formats/base_58.hpp>
@@ -45,8 +47,12 @@ std::istream& operator>>(std::istream& input, base58& argument) {
     input >> base58;
 
     if ( ! decode_base58(argument.value_, base58)) {
+#if ! defined(__EMSCRIPTEN__)
         using namespace boost::program_options;
         BOOST_THROW_EXCEPTION(invalid_option_value(base58));
+#else
+        throw std::invalid_argument(base58);
+#endif
     }
 
     return input;

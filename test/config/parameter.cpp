@@ -7,7 +7,10 @@
 #include <utility>
 #include <vector>
 
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/program_options.hpp>
+#endif
+
 #include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
@@ -29,7 +32,9 @@ enum opt {
 static
 void load_test_options(po::options_description& options) {
     using namespace std::filesystem;
-    using namespace boost::program_options;
+    #if ! defined(__EMSCRIPTEN__)
+using namespace boost::program_options;
+#endif
     options.add_options()
         ("short_long,s", "Long and short name.")
         (",m", "Short name only.")

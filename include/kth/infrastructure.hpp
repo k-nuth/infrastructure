@@ -31,9 +31,9 @@
 #include <kth/infrastructure/config/endpoint.hpp>
 #include <kth/infrastructure/config/hash160.hpp>
 #include <kth/infrastructure/config/hash256.hpp>
-#include <kth/infrastructure/config/parameter.hpp>
+
 // #include <kth/infrastructure/config/parser.hpp>
-#include <kth/infrastructure/config/printer.hpp>
+
 #include <kth/infrastructure/config/sodium.hpp>
 
 #include <kth/infrastructure/formats/base_10.hpp>
@@ -103,7 +103,7 @@
 #include <kth/infrastructure/utility/data.hpp>
 #include <kth/infrastructure/utility/deadline.hpp>
 #include <kth/infrastructure/utility/decorator.hpp>
-#include <kth/infrastructure/utility/delegates.hpp>
+
 #include <kth/infrastructure/utility/deserializer.hpp>
 #include <kth/infrastructure/utility/dispatcher.hpp>
 #include <kth/infrastructure/utility/enable_shared_from_base.hpp>
@@ -116,7 +116,7 @@
 #include <kth/infrastructure/utility/noncopyable.hpp>
 #include <kth/infrastructure/utility/operators.hpp>
 #include <kth/infrastructure/utility/ostream_writer.hpp>
-#include <kth/infrastructure/utility/pending.hpp>
+
 #include <kth/infrastructure/utility/png.hpp>
 #include <kth/infrastructure/utility/prioritized_mutex.hpp>
 #include <kth/infrastructure/utility/pseudo_random_broken_do_not_use.hpp>
@@ -128,13 +128,13 @@
 #include <kth/infrastructure/utility/serializer.hpp>
 #include <kth/infrastructure/utility/socket.hpp>
 #include <kth/infrastructure/utility/string.hpp>
-#include <kth/infrastructure/utility/subscriber.hpp>
+
 #include <kth/infrastructure/utility/synchronizer.hpp>
 #include <kth/infrastructure/utility/thread.hpp>
 #include <kth/infrastructure/utility/threadpool.hpp>
 #include <kth/infrastructure/utility/timer.hpp>
 #include <kth/infrastructure/utility/track.hpp>
-#include <kth/infrastructure/utility/work.hpp>
+
 #include <kth/infrastructure/utility/writer.hpp>
 
 #include <kth/infrastructure/wallet/dictionary.hpp>
@@ -145,5 +145,16 @@
 #include <kth/infrastructure/wallet/mnemonic.hpp>
 #include <kth/infrastructure/wallet/qrcode.hpp>
 #include <kth/infrastructure/wallet/uri.hpp>
+
+#if ! defined(__EMSCRIPTEN__)
+
+#include <kth/infrastructure/config/parameter.hpp>
+#include <kth/infrastructure/config/printer.hpp>
+
+#include <kth/infrastructure/utility/delegates.hpp>
+#include <kth/infrastructure/utility/pending.hpp>
+#include <kth/infrastructure/utility/subscriber.hpp>
+#include <kth/infrastructure/utility/work.hpp>
+#endif
 
 #endif /*KTH_INFRASTRUCTURE_INFRASTRUCTURE_HPP_*/

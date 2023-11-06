@@ -9,7 +9,9 @@
 #include <utility>
 #include <vector>
 
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/program_options.hpp>
+#endif
 
 #include <kth/infrastructure/define.hpp>
 
