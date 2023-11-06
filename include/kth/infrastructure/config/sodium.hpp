@@ -21,11 +21,6 @@ namespace kth::infrastructure::config {
 class KI_API sodium
 {
 public:
-    /**
-     * A list of base85 values.
-     * This must provide operator<< for ostream in order to be used as a
-     * boost::program_options default_value.
-     */
     using list = std::vector<sodium>;
 
 

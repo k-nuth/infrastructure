@@ -8,7 +8,9 @@
 #include <sstream>
 #include <string>
 
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/program_options.hpp>
+#endif
 
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/utility/binary.hpp>
@@ -36,8 +38,12 @@ std::istream& operator>>(std::istream& input, base2& argument) {
     input >> binary;
 
     if ( ! binary::is_base2(binary)) {
+#if ! defined(__EMSCRIPTEN__)
         using namespace boost::program_options;
         BOOST_THROW_EXCEPTION(invalid_option_value(binary));
+#else
+        throw std::invalid_argument(binary);
+#endif
     }
 
     std::stringstream(binary) >> argument.value_;

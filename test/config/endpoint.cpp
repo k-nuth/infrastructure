@@ -3,13 +3,19 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <sstream>
+
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/program_options.hpp>
+#endif
+
 #include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
 
 using namespace kth;
 using namespace kth::infrastructure::config;
+#if ! defined(__EMSCRIPTEN__)
 using namespace boost::program_options;
+#endif
 
 // Start Test Suite: endpoint tests
 

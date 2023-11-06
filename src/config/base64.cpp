@@ -8,7 +8,9 @@
 #include <sstream>
 #include <string>
 
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/program_options.hpp>
+#endif
 
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/formats/base_64.hpp>
@@ -42,8 +44,12 @@ std::istream& operator>>(std::istream& input, base64& argument) {
     input >> base64;
 
     if ( ! decode_base64(argument.value_, base64)) {
+#if ! defined(__EMSCRIPTEN__)
         using namespace boost::program_options;
         BOOST_THROW_EXCEPTION(invalid_option_value(base64));
+#else
+        throw std::invalid_argument(base64);
+#endif
     }
 
     return input;

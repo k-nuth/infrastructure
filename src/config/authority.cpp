@@ -27,7 +27,10 @@
 
 namespace kth::infrastructure::config {
 
+
+#if ! defined(__EMSCRIPTEN__)
 using namespace boost::program_options;
+#endif
 
 // host:    [2001:db8::2] or  2001:db8::2  or 1.2.240.1
 // returns: [2001:db8::2] or [2001:db8::2] or 1.2.240.1
@@ -240,13 +243,21 @@ std::istream& operator>>(std::istream& input, authority& argument) {
             auto const port_sv = port.to_view();
             auto const result = std::from_chars(port_sv.data(), port_sv.data() + port_sv.size(), argument.port_);
             if (result.ec == std::errc()) {
+#if ! defined(__EMSCRIPTEN__)
                 BOOST_THROW_EXCEPTION(invalid_option_value(value));
+#else
+                throw std::invalid_argument(value);
+#endif
             }
         } else {
             argument.port_ = 0;
         }
     } else {
+#if ! defined(__EMSCRIPTEN__)
         BOOST_THROW_EXCEPTION(invalid_option_value(value));
+#else
+        throw std::invalid_argument(value);
+#endif
     }
 
     return input;

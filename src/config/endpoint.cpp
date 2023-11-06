@@ -11,7 +11,10 @@
 #include <string>
 
 #include <boost/lexical_cast.hpp>
+
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/program_options.hpp>
+#endif
 
 #include <kth/infrastructure/config/endpoint.hpp>
 #include <kth/infrastructure/define.hpp>
@@ -20,7 +23,9 @@
 
 namespace kth::infrastructure::config {
 
+#if ! defined(__EMSCRIPTEN__)
 using namespace boost::program_options;
+#endif
 
 endpoint::endpoint()
     : endpoint("localhost")
@@ -91,7 +96,12 @@ std::istream& operator>>(std::istream& input, endpoint& argument) {
 
     std::sregex_iterator it(value.begin(), value.end(), regular), end;
     if (it == end) {
+#if ! defined(__EMSCRIPTEN__)
+        using namespace boost::program_options;
         BOOST_THROW_EXCEPTION(invalid_option_value(value));
+#else
+        throw std::invalid_argument(value);
+#endif
     }
 
     auto const& match = *it;
@@ -102,7 +112,12 @@ std::istream& operator>>(std::istream& input, endpoint& argument) {
     try {
         argument.port_ = port.empty() ? 0 : boost::lexical_cast<uint16_t>(port);
     } catch (...) {
+#if ! defined(__EMSCRIPTEN__)
+        using namespace boost::program_options;
         BOOST_THROW_EXCEPTION(invalid_option_value(value));
+#else
+        throw std::invalid_argument(value);
+#endif
     }
 
     return input;

@@ -133,8 +133,8 @@ set(kth_sources_just_legacy
         src/config/endpoint.cpp
         src/config/hash160.cpp
         src/config/hash256.cpp
-        src/config/parameter.cpp
-        src/config/printer.cpp
+
+
         src/config/sodium.cpp
 
         src/error.cpp
@@ -219,6 +219,10 @@ set(kth_sources_just_legacy
 if(NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
   set(kth_sources_just_legacy
     ${kth_sources_just_legacy}
+
+    src/config/parameter.cpp
+    src/config/printer.cpp
+
     src/utility/deadline.cpp
     src/utility/sequencer.cpp
     src/utility/socket.cpp
@@ -494,8 +498,7 @@ if (WITH_TESTS)
     test/config/checkpoint.cpp
     test/config/endpoint.cpp
     test/config/hash256.cpp
-    test/config/parameter.cpp
-    test/config/printer.cpp
+
 
     test/formats/base_10.cpp
     test/formats/base_16.cpp
@@ -523,7 +526,7 @@ if (WITH_TESTS)
     test/utility/data.cpp
     test/utility/endian.cpp
     test/utility/operators.cpp
-    test/utility/pseudo_random_broken_do_not_use.cpp
+
     test/utility/serializer.cpp
     test/utility/stream.cpp
     test/utility/thread.cpp
@@ -534,6 +537,15 @@ if (WITH_TESTS)
     test/wallet/uri.cpp
 
   )
+
+  if(NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
+    set(kth_test_sources
+      ${kth_test_sources}
+      test/config/parameter.cpp
+      test/config/printer.cpp
+      test/utility/pseudo_random_broken_do_not_use.cpp
+    )
+  endif()
 
   if (WITH_PNG)
     set(kth_test_sources

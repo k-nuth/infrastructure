@@ -6,7 +6,9 @@
 #include <iostream>
 #include <vector>
 
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/program_options.hpp>
+#endif
 
 #include <test_helpers.hpp>
 #include <kth/infrastructure.hpp>
@@ -267,7 +269,9 @@ TEST_CASE("printer  format usage parameters  unsorted two options one arg  sorte
 
 TEST_CASE("printer  format usage parameters  unsorted multiple parameters  sorted parameters", "[printer  format usage parameters]") {
     using namespace std::filesystem;
-    using namespace boost::program_options;
+    #if ! defined(__EMSCRIPTEN__)
+using namespace boost::program_options;
+#endif
     CONFIG_PRINTER_SETUP_ARGUMENTS(options.add_options()
         ("short_long,s", "Long and short name.")
         (",m", "Short name only.")

@@ -4,7 +4,10 @@
 
 #include <sstream>
 
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/program_options.hpp>
+#endif
+
 // #include <test_helpers.hpp>
 
 #include <catch2/catch_test_macros.hpp>
@@ -14,7 +17,9 @@
 using namespace kth;
 using namespace kth::infrastructure;
 using namespace kth::infrastructure::config;
+#if ! defined(__EMSCRIPTEN__)
 using namespace boost::program_options;
+#endif
 
 // Start Test Suite: authority tests
 
@@ -63,7 +68,7 @@ static bool net_equal(message::network_address const& a, message::network_addres
 // Start Test Suite: authority port
 
 TEST_CASE("authority port default zero", "[authority port]") {
-    const authority host;
+    authority const host {};
     REQUIRE(host.port() == 0u);
 }
 
@@ -112,6 +117,7 @@ TEST_CASE("authority  port  hostname  expected", "[authority  port]") {
     REQUIRE(host.port() == expected_port);
 }
 
+#if ! defined(__EMSCRIPTEN__)
 TEST_CASE("authority  port  boost address  expected", "[authority  port]") {
     const uint16_t expected_port = 42;
     auto const address = kth::asio::address::from_string(KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
@@ -126,6 +132,7 @@ TEST_CASE("authority  port  boost endpoint  expected", "[authority  port]") {
     const authority host(tcp_endpoint);
     REQUIRE(host.port() == expected_port);
 }
+#endif
 
 // End Test Suite
 
@@ -134,7 +141,7 @@ TEST_CASE("authority  port  boost endpoint  expected", "[authority  port]") {
 // Start Test Suite: authority  ip
 
 TEST_CASE("authority  bool  default  false", "[authority  ip]") {
-    const authority host;
+    authority const host {};
     REQUIRE( ! host);
 }
 
@@ -155,7 +162,7 @@ TEST_CASE("authority  bool  nonzero port  true", "[authority  ip]") {
 // Start Test Suite: authority  ip
 
 TEST_CASE("authority  ip  default  unspecified", "[authority  ip]") {
-    const authority host;
+    authority const host {};
     REQUIRE(ip_equal(host.ip(), test_unspecified_ip_address));
 }
 
@@ -219,6 +226,7 @@ TEST_CASE("authority  ip  ipv6 hostname  expected", "[authority  ip]") {
     REQUIRE(ip_equal(host.ip(), test_ipv6_address));
 }
 
+#if ! defined(__EMSCRIPTEN__)
 TEST_CASE("authority  ip  boost address  expected", "[authority  ip]") {
     auto const address = kth::asio::address::from_string(KI_AUTHORITY_IPV6_COMPRESSED_ADDRESS);
     const authority host(address, 42);
@@ -231,6 +239,7 @@ TEST_CASE("authority  ip  boost endpoint  expected", "[authority  ip]") {
     const authority host(tcp_endpoint);
     REQUIRE(ip_equal(host.ip(), test_mapped_ip_address));
 }
+#endif
 
 // End Test Suite
 
@@ -239,7 +248,7 @@ TEST_CASE("authority  ip  boost endpoint  expected", "[authority  ip]") {
 // Start Test Suite: authority  to hostname
 
 TEST_CASE("authority  to hostname  default  ipv6 unspecified", "[authority  to hostname]") {
-    const authority host;
+    authority const host {};
     REQUIRE(host.to_hostname() == "[" KI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS "]");
 }
 
@@ -272,7 +281,7 @@ TEST_CASE("authority  to network address  default  ipv6 unspecified", "[authorit
         0, 0, test_unspecified_ip_address, 0,
     };
 
-    const authority host;
+    authority const host {};
     REQUIRE(net_equal(host.to_network_address(), expected_address));
 }
 
@@ -310,7 +319,7 @@ TEST_CASE("authority  to network address  ipv6 address  ipv6 compressed", "[auth
 // Start Test Suite: authority  to string
 
 TEST_CASE("authority  to string  default  unspecified", "[authority  to string]") {
-    const authority host;
+    authority const host {};
     REQUIRE(host.to_string() == "[" KI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS "]");
 }
 
@@ -387,13 +396,13 @@ TEST_CASE("authority  to string  ipv6 compatible port  expected", "[authority  t
 // Start Test Suite: authority  equality
 
 TEST_CASE("authority  equality  default default  true", "[authority  equality]") {
-    const authority host1;
-    const authority host2;
+    authority const host1 {};
+    authority const host2 {};
     REQUIRE(host1 == host2);
 }
 
 TEST_CASE("authority  equality  default unspecified port  false", "[authority  equality]") {
-    const authority host1;
+    authority const host1 {};
     const authority host2(KI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS, 42);
     REQUIRE( ! (host1 == host2));
 }
@@ -442,13 +451,13 @@ TEST_CASE("authority  equality  compatible alternative  true", "[authority  equa
 // Start Test Suite: authority  inequality
 
 TEST_CASE("authority  inequality  default default  false", "[authority  inequality]") {
-    const authority host1;
-    const authority host2;
+    authority const host1 {};
+    authority const host2 {};
     REQUIRE( ! (host1 != host2));
 }
 
 TEST_CASE("authority  inequality  default unspecified port  true", "[authority  inequality]") {
-    const authority host1;
+    authority const host1 {};
     const authority host2(KI_AUTHORITY_IPV6_UNSPECIFIED_ADDRESS, 42);
     REQUIRE(host1 != host2);
 }
@@ -465,6 +474,7 @@ TEST_CASE("authority  inequality  ipv6 ipv6  false", "[authority  inequality]") 
 
 // Start Test Suite: authority  construct
 
+#if ! defined(__EMSCRIPTEN__)
 TEST_CASE("authority  construct  bogus ip  throws invalid option", "[authority  construct]") {
     REQUIRE_THROWS_AS([](){authority host("bogus");}(), invalid_option_value);
 }
@@ -480,6 +490,23 @@ TEST_CASE("authority  construct  invalid ipv6  throws invalid option", "[authori
 TEST_CASE("authority  construct  invalid port  throws invalid option", "[authority  construct]") {
     REQUIRE_THROWS_AS([](){authority host("[::]:12345678901");}(), invalid_option_value);
 }
+#else
+TEST_CASE("authority  construct  bogus ip  throws invalid option", "[authority  construct]") {
+    REQUIRE_THROWS_AS([](){authority host("bogus");}(), std::invalid_argument);
+}
+
+TEST_CASE("authority  construct  invalid ipv4  throws invalid option", "[authority  construct]") {
+    REQUIRE_THROWS_AS([](){authority host("999.999.999.999");}(), std::invalid_argument);
+}
+
+TEST_CASE("authority  construct  invalid ipv6  throws invalid option", "[authority  construct]") {
+    REQUIRE_THROWS_AS([](){authority host("[:::]");}(), std::invalid_argument);
+}
+
+TEST_CASE("authority  construct  invalid port  throws invalid option", "[authority  construct]") {
+    REQUIRE_THROWS_AS([](){authority host("[::]:12345678901");}(), std::invalid_argument);
+}
+#endif
 
 // End Test Suite
 

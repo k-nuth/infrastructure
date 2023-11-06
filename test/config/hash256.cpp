@@ -3,7 +3,11 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <test_helpers.hpp>
+
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/program_options.hpp>
+#endif
+
 #include <kth/infrastructure.hpp>
 
 using namespace kth;

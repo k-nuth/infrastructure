@@ -8,7 +8,9 @@
 #include <sstream>
 #include <string>
 
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/program_options.hpp>
+#endif
 
 #include <kth/infrastructure/define.hpp>
 #include <kth/infrastructure/formats/base_85.hpp>
@@ -56,8 +58,12 @@ std::istream& operator>>(std::istream& input, sodium& argument) {
 
     data_chunk out_value;
     if ( ! decode_base85(out_value, base85) || out_value.size() != hash_size) {
+#if ! defined(__EMSCRIPTEN__)
         using namespace boost::program_options;
         BOOST_THROW_EXCEPTION(invalid_option_value(base85));
+#else
+        throw std::invalid_argument(base85);
+#endif
     }
 
     std::copy_n(out_value.begin(), hash_size, argument.value_.begin());

@@ -9,7 +9,9 @@
 #include <string>
 #include <vector>
 
+#if ! defined(__EMSCRIPTEN__)
 #include <boost/program_options.hpp>
+#endif
 
 // #define FMT_HEADER_ONLY 1
 // #include <fmt/core.h>
