@@ -467,6 +467,12 @@ target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${Boost_INCLUDE_DIR})
 if(NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
   target_link_libraries(${PROJECT_NAME} PUBLIC Boost::program_options)
   target_link_libraries(${PROJECT_NAME} PUBLIC Boost::thread)
+else()
+  target_compile_options(${PROJECT_NAME} PUBLIC "-pthread")
+  target_link_options(${PROJECT_NAME} PUBLIC "-pthread")
+  set_target_properties(${PROJECT_NAME} PROPERTIES
+                          COMPILE_FLAGS "-pthread"
+                          LINK_FLAGS "-pthread")
 endif()
 
 target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
