@@ -174,7 +174,8 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
 
         #TODO(fernando): add the rest of the conditional dependencies
 
-        if self.settings.os == "Linux" or self.settings.os == "FreeBSD":
+
+        if self.settings.os == "Linux" or self.settings.os == "FreeBSD" or self.settings.os == "Emscripten":
             self.cpp_info.system_libs.append("pthread")
 
         if self.settings.os == "Linux" and self.settings.compiler == "gcc" and float(str(self.settings.compiler.version)) <= 8:
