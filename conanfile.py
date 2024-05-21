@@ -58,7 +58,7 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
 
     def build_requirements(self):
         if self.options.tests:
-            self.test_requires("catch2/3.5.2")
+            self.test_requires("catch2/3.6.0")
 
     def requirements(self):
         self.requires("secp256k1/0.18.0", transitive_headers=True, transitive_libs=True)
@@ -70,7 +70,7 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
         if self.options.log == "binlog":
             self.requires("binlog/2020.02.29@kth/stable", transitive_headers=True, transitive_libs=True)
         elif self.options.log == "spdlog":
-            self.requires("spdlog/1.13.0", transitive_headers=True, transitive_libs=True)
+            self.requires("spdlog/1.14.1", transitive_headers=True, transitive_libs=True)
 
         if self.options.with_png:
             self.requires("libpng/1.6.40", transitive_headers=True, transitive_libs=True)
