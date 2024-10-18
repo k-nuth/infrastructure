@@ -16,6 +16,7 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
     url = "https://github.com/knuth/infrastructure"
     description = "Multicrypto Cross-Platform C++ Development Toolkit"
     settings = "os", "compiler", "build_type", "arch"
+    package_type = "library"
 
     options = {
         "shared": [True, False],
