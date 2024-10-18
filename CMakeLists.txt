@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.15)
 project(infrastructure VERSION 0 LANGUAGES CXX C)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(ENABLE_SHARED "" OFF)
@@ -286,6 +286,7 @@ set(kth_headers
     include/kth/infrastructure/compat.h
     include/kth/infrastructure/compat.hpp
     include/kth/infrastructure/constants.hpp
+    include/kth/infrastructure/concepts.hpp
     include/kth/infrastructure/define.hpp
     include/kth/infrastructure/error.hpp
     include/kth/infrastructure/handlers.hpp
@@ -333,6 +334,7 @@ set(kth_headers
     include/kth/infrastructure/math/uint256.hpp
 
     include/kth/infrastructure/impl/utility/array_slice.ipp
+
     include/kth/infrastructure/impl/utility/collection.ipp
     include/kth/infrastructure/impl/utility/data.ipp
     include/kth/infrastructure/impl/utility/deserializer.ipp
@@ -362,6 +364,7 @@ set(kth_headers
     include/kth/infrastructure/utility/assert.hpp
     include/kth/infrastructure/utility/atomic.hpp
     include/kth/infrastructure/utility/binary.hpp
+    include/kth/infrastructure/utility/byte_reader.hpp
     include/kth/infrastructure/utility/collection.hpp
     include/kth/infrastructure/utility/color.hpp
     include/kth/infrastructure/utility/conditional_lock.hpp
