@@ -119,7 +119,7 @@ template <typename Source>
 bool starts_with(const typename Source::const_iterator& begin,
     const typename Source::const_iterator& end, const Source& value) {
     auto const length = std::distance(begin, end);
-    return length >= 0 && static_cast<size_t>(length) >= value.size() &&
+    return length >= 0 && size_t(length) >= value.size() &&
         std::equal(value.begin(), value.end(), begin);
 }
 
