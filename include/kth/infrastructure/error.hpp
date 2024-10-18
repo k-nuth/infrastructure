@@ -290,7 +290,43 @@ enum error_code_t {
     low_benefit_transaction,
     duplicate_transaction,
     double_spend_mempool,
-    double_spend_blockchain
+    double_spend_blockchain,
+
+
+    //TODO: check C-API error codes, add the new ones there
+    //TODO: see the error to string functions
+
+    // Cash Tokens
+    invalid_bitfield,
+
+    // Domain object serialization/deserialization
+    read_past_end_of_buffer,
+    skip_past_end_of_buffer,
+    invalid_size,
+    invalid_script_type,
+    script_not_push_only,
+    script_invalid_size,
+    invalid_address_count,
+    bad_inventory_count,
+    version_too_low,
+    version_too_new,
+    invalid_compact_block,
+    unsupported_version,
+    invalid_filter_add,
+    invalid_filter_load,
+    bad_merkle_block_count,
+    illegal_value,
+
+
+    // Database cache
+    height_not_found,
+    hash_not_found,
+    empty_cache,
+    utxo_not_found,
+
+
+    // Last error code.
+    last_error_code
 };
 
 enum error_condition_t {};
