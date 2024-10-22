@@ -10,7 +10,8 @@ namespace kth {
 template <typename Iterable>
 template <typename Container>
 array_slice<Iterable>::array_slice(const Container& container)
-    : begin_(container.data()), end_(container.data() + container.size())
+    : begin_(container.data())
+    , end_(container.data() + container.size())
 {}
 
 template <typename Iterable>
