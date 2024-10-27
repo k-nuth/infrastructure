@@ -38,14 +38,68 @@ void network_address::reset() {
     port_ = 0;
 }
 
-bool network_address::from_data(data_chunk const& data, uint32_t version, bool with_timestamp) {
-    data_source istream(data);
-    return from_data(istream, version, with_timestamp);
-}
+// bool network_address::from_data(data_chunk const& data, uint32_t version, bool with_timestamp) {
+//     data_source istream(data);
+//     return from_data(istream, version, with_timestamp);
+// }
 
-bool network_address::from_data(data_source& stream, uint32_t version, bool with_timestamp) {
-    istream_reader source(stream);
-    return from_data(source, version, with_timestamp);
+// bool network_address::from_data(data_source& stream, uint32_t version, bool with_timestamp) {
+//     istream_reader source(stream);
+//     return from_data(source, version, with_timestamp);
+// }
+
+
+
+// template <typename R>
+// bool from_data(R& source, uint32_t version, bool with_timestamp) {
+//     reset();
+
+//     if (with_timestamp) {
+//         timestamp_ = source.read_4_bytes_little_endian();
+//     }
+
+//     services_ = source.read_8_bytes_little_endian();
+//     auto ip = source.read_bytes(ip_.size());
+//     port_ = source.read_2_bytes_big_endian();
+
+//     if ( ! source) {
+//         reset();
+//     }
+
+//     // TODO(legacy): add array to reader interface (can't use template).
+//     std::move(ip.begin(), ip.end(), ip_.data());
+//     return source;
+// }
+
+// static
+expect<network_address> network_address::from_data(byte_reader& reader, uint32_t version, bool with_timestamp) {
+    uint32_t timestamp = 0;
+    if (with_timestamp) {
+        auto const timestamp_exp = reader.read_little_endian<uint32_t>();
+        if ( ! timestamp_exp) {
+            return make_unexpected(timestamp_exp.error());
+        }
+        timestamp = *timestamp_exp;
+    }
+
+    auto const services = reader.read_little_endian<uint64_t>();
+    if ( ! services) {
+        return make_unexpected(services.error());
+    }
+
+    auto const ip = reader.read_bytes(std::tuple_size<ip_address>::value);
+    if ( ! ip) {
+        return make_unexpected(ip.error());
+    }
+
+    auto const port = reader.read_big_endian<uint16_t>();
+    if ( ! port) {
+        return make_unexpected(port.error());
+    }
+
+    ip_address ip_addr;
+    std::memcpy(ip_addr.data(), ip->data(), ip->size());
+    return network_address(timestamp, *services, ip_addr, *port);
 }
 
 data_chunk network_address::to_data(uint32_t version, bool with_timestamp) const {
@@ -114,16 +168,16 @@ void network_address::set_port(uint16_t value) {
     port_ = value;
 }
 
-network_address network_address::factory_from_data(data_chunk const& data, uint32_t version, bool with_timestamp) {
-    network_address instance;
-    instance.from_data(data, version, with_timestamp);
-    return instance;
-}
+// network_address network_address::factory_from_data(data_chunk const& data, uint32_t version, bool with_timestamp) {
+//     network_address instance;
+//     instance.from_data(data, version, with_timestamp);
+//     return instance;
+// }
 
-network_address network_address::factory_from_data(data_source& stream, uint32_t version, bool with_timestamp) {
-    network_address instance;
-    instance.from_data(stream, version, with_timestamp);
-    return instance;
-}
+// network_address network_address::factory_from_data(data_source& stream, uint32_t version, bool with_timestamp) {
+//     network_address instance;
+//     instance.from_data(stream, version, with_timestamp);
+//     return instance;
+// }
 
 } // namespace kth::infrastructure::message
