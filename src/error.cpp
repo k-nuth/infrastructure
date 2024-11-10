@@ -267,6 +267,23 @@ std::string error_category_impl::message(int ev) const noexcept {
         { error::operation_failed_30, "operation failed 30" },
         // Added out of order (bip147).
         { error::op_check_multisig_verify8, "op_check_multisig_verify8" },
+
+        // TX creation
+        { error::invalid_output, "invalid output" },
+        { error::lock_time_conflict, "lock time conflict" },
+        { error::input_index_out_of_range, "input index out of range" },
+        { error::input_sign_failed, "input sign failed" },
+
+        // Mining
+        { error::low_benefit_transaction, "low benefit transaction" },
+        { error::duplicate_transaction, "duplicate transaction" },
+        { error::double_spend_mempool, "double spend mempool" },
+        { error::double_spend_blockchain, "double spend blockchain" },
+
+        // Numeric operations
+        { error::overflow, "overflow" },
+        { error::underflow, "underflow" },
+        { error::out_of_range, "out of range" }
     };
 
     auto const message = messages.find(ev);
