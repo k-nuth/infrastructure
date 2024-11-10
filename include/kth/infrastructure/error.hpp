@@ -279,7 +279,6 @@ enum error_code_t {
     // Added out of order (bip147).
     op_check_multisig_verify8,
 
-
     // TX creation
     invalid_output,
     lock_time_conflict,
@@ -290,7 +289,12 @@ enum error_code_t {
     low_benefit_transaction,
     duplicate_transaction,
     double_spend_mempool,
-    double_spend_blockchain
+    double_spend_blockchain,
+
+    // Numeric operations
+    overflow,
+    underflow,
+    out_of_range
 };
 
 enum error_condition_t {};

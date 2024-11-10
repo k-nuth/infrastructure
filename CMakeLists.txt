@@ -286,7 +286,7 @@ set(kth_headers
     include/kth/infrastructure/compat.h
     include/kth/infrastructure/compat.hpp
     include/kth/infrastructure/constants.hpp
-    include/kth/infrastructure/concepts.hpp
+    # include/kth/infrastructure/concepts.hpp
     include/kth/infrastructure/define.hpp
     include/kth/infrastructure/error.hpp
     include/kth/infrastructure/handlers.hpp
@@ -364,7 +364,7 @@ set(kth_headers
     include/kth/infrastructure/utility/assert.hpp
     include/kth/infrastructure/utility/atomic.hpp
     include/kth/infrastructure/utility/binary.hpp
-    include/kth/infrastructure/utility/byte_reader.hpp
+    # include/kth/infrastructure/utility/byte_reader.hpp
     include/kth/infrastructure/utility/collection.hpp
     include/kth/infrastructure/utility/color.hpp
     include/kth/infrastructure/utility/conditional_lock.hpp
