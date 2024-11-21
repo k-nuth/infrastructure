@@ -66,7 +66,10 @@ set(Boost_DEBUG ON)
 
 
 find_package(Threads REQUIRED)
-find_package(secp256k1 REQUIRED)
+
+if (NOT GLOBAL_BUILD)
+  find_package(secp256k1 REQUIRED)
+endif()
 
 if(NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
   find_package(Boost COMPONENTS program_options REQUIRED)
