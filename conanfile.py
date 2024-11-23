@@ -64,14 +64,14 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
     def requirements(self):
         self.requires("secp256k1/0.20.0", transitive_headers=True, transitive_libs=True)
         self.requires("boost/1.86.0", transitive_headers=True, transitive_libs=True)
-        self.requires("fmt/10.2.1", transitive_headers=True, transitive_libs=True)
+        self.requires("fmt/11.0.2", transitive_headers=True, transitive_libs=True)
         self.requires("expected-lite/0.8.0", transitive_headers=True, transitive_libs=True)
         self.requires("ctre/3.9.0", transitive_headers=True, transitive_libs=True)
 
         if self.options.log == "binlog":
             self.requires("binlog/2020.02.29@kth/stable", transitive_headers=True, transitive_libs=True)
         elif self.options.log == "spdlog":
-            self.requires("spdlog/1.14.1", transitive_headers=True, transitive_libs=True)
+            self.requires("spdlog/1.15.0", transitive_headers=True, transitive_libs=True)
 
         if self.options.with_png:
             self.requires("libpng/1.6.40", transitive_headers=True, transitive_libs=True)
