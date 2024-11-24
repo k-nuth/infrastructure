@@ -7,7 +7,7 @@
 
 #include <string>
 
-#include <fmt/ostream.h>
+// #include <fmt/ostream.h>
 #include <fmt/std.h>
 
 #if defined(KTH_LOG_LIBRARY_BINLOG)
