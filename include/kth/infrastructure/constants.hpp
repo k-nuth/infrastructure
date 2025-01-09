@@ -29,12 +29,6 @@ constexpr uint8_t max_uint8 = MAX_UINT8;
 constexpr uint64_t max_size_t = BC_MAX_SIZE;
 constexpr uint8_t byte_bits = 8;
 
-// Script/interpreter constants.
-//-----------------------------------------------------------------------------
-
-// Consensus
-constexpr size_t max_push_data_size = 520;
-
 // Network protocol constants.
 //-----------------------------------------------------------------------------
 

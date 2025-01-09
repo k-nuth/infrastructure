@@ -188,7 +188,23 @@ enum error_code_t {
     op_rot,
     op_swap,
     op_tuck,
+
+    op_cat,
+    op_split,
+    op_reverse_bytes,
+    op_num2bin,
+    op_num2bin_invalid_size,
+    op_num2bin_size_exceeded,
+    op_num2bin_impossible_encoding,
+    op_bin2num,
+    op_bin2num_invalid_number_range,
+
     op_size,
+
+    op_and,
+    op_or,
+    op_xor,
+
     op_equal,
     op_equal_verify1,
     op_equal_verify2,
@@ -198,8 +214,18 @@ enum error_code_t {
     op_abs,
     op_not,
     op_nonzero,
+
     op_add,
+    op_add_overflow,
     op_sub,
+    op_sub_underflow,
+    op_mul,
+    op_mul_overflow,
+    op_div,
+    op_div_by_zero,
+    op_mod,
+    op_mod_by_zero,
+
     op_bool_and,
     op_bool_or,
     op_num_equal,
@@ -219,8 +245,13 @@ enum error_code_t {
     op_hash160,
     op_hash256,
     op_code_seperator,
-    op_check_sig_verify1,
+
     op_check_sig,
+    op_check_sig_verify1,
+
+    op_check_data_sig,
+    op_check_data_sig_verify,
+
     op_check_multisig_verify1,
     op_check_multisig_verify2,
     op_check_multisig_verify3,
@@ -242,6 +273,28 @@ enum error_code_t {
     op_check_sequence_verify5,
     op_check_sequence_verify6,
     op_check_sequence_verify7,
+
+    // Native Introspection Opcodes
+    op_input_index,
+    op_active_bytecode,
+    op_tx_version,
+    op_tx_input_count,
+    op_tx_output_count,
+    op_tx_locktime,
+    op_utxo_value,
+    op_utxo_bytecode,
+    op_outpoint_tx_hash,
+    op_outpoint_index,
+    op_input_bytecode,
+    op_input_sequence_number,
+    op_output_value,
+    op_output_bytecode,
+    op_utxo_token_category,
+    op_utxo_token_commitment,
+    op_utxo_token_amount,
+    op_output_token_category,
+    op_output_token_commitment,
+    op_output_token_amount,
 
     operation_failed_0,
     operation_failed_1,
@@ -294,7 +347,11 @@ enum error_code_t {
     // Numeric operations
     overflow,
     underflow,
-    out_of_range
+    out_of_range,
+
+    // Chip VM limits
+    too_many_hash_iters,
+    conditional_stack_depth
 };
 
 enum error_condition_t {};
