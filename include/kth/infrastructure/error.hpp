@@ -351,7 +351,13 @@ enum error_code_t {
 
     // Chip VM limits
     too_many_hash_iters,
-    conditional_stack_depth
+    conditional_stack_depth,
+
+
+    // Create transaction template
+    insufficient_amount,
+    empty_utxo_list,
+    invalid_change
 };
 
 enum error_condition_t {};
