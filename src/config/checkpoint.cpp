@@ -4,6 +4,7 @@
 
 #include <kth/infrastructure/config/checkpoint.hpp>
 
+#include <charconv>
 #include <cstddef>
 #include <iostream>
 #include <regex>
