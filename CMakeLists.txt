@@ -83,6 +83,10 @@ find_package(spdlog REQUIRED)
 find_package(expected-lite REQUIRED)
 find_package(ctre REQUIRED)
 
+if (WITH_ICU)
+  find_package(ICU REQUIRED)
+endif()
+
 
 include(CheckCXXCompilerFlag)
 
@@ -224,6 +228,8 @@ set(kth_sources_just_legacy
         src/wallet/mnemonic.cpp
 
         src/wallet/uri.cpp
+
+        src/utility/pseudo_random.cpp
     )
 
 if(NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
@@ -238,6 +244,7 @@ if(NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")
     src/utility/socket.cpp
 
     src/utility/pseudo_random_broken_do_not_use.cpp
+
     src/utility/threadpool.cpp
 
     src/utility/work.cpp
@@ -398,7 +405,11 @@ set(kth_headers
     include/kth/infrastructure/utility/pending.hpp
     include/kth/infrastructure/utility/png.hpp
     include/kth/infrastructure/utility/prioritized_mutex.hpp
+
+    include/kth/infrastructure/utility/pseudo_random.hpp
     include/kth/infrastructure/utility/pseudo_random_broken_do_not_use.hpp
+
+
     include/kth/infrastructure/utility/reader.hpp
     include/kth/infrastructure/utility/resubscriber.hpp
     include/kth/infrastructure/utility/scope_lock.hpp
@@ -494,6 +505,9 @@ target_link_libraries(${PROJECT_NAME} PUBLIC secp256k1::secp256k1)
 target_link_libraries(${PROJECT_NAME} PUBLIC nonstd::expected-lite)
 target_link_libraries(${PROJECT_NAME} PUBLIC ctre::ctre)
 
+if (WITH_ICU)
+  target_link_libraries(${PROJECT_NAME} PUBLIC ICU::icuuc)
+endif()
 
 target_link_libraries(${PROJECT_NAME} PUBLIC ${CMAKE_THREAD_LIBS_INIT})
 
@@ -545,7 +559,7 @@ if (WITH_TESTS)
     test/utility/data.cpp
     test/utility/endian.cpp
     test/utility/operators.cpp
-
+    test/utility/pseudo_random.cpp
     test/utility/serializer.cpp
     test/utility/stream.cpp
     test/utility/thread.cpp
@@ -555,6 +569,7 @@ if (WITH_TESTS)
     test/wallet/mnemonic.cpp
     test/wallet/uri.cpp
 
+    # test/utility/pseudo_random.cpp
   )
 
   if(NOT CMAKE_SYSTEM_NAME STREQUAL "Emscripten")

@@ -7,6 +7,8 @@
 
 #include <cstdint>
 
+#if ! defined(KTH_CURRENCY_BCH)
+
 namespace kth::infrastructure::machine {
 
 /// Script versions (bip141).
@@ -23,4 +25,6 @@ enum class script_version {
 
 } // namespace kth::infrastructure::machine
 
-#endif
+#endif // ! KTH_CURRENCY_BCH
+
+#endif // KTH_INFRASTUCTURE_MACHINE_SCRIPT_VERSION_HPP

@@ -40,7 +40,7 @@ using word_list = string_list;
  * creation. Entropy byte count must be evenly divisible by 4.
  */
 KI_API word_list create_mnemonic(data_slice entropy,
-    const dictionary &lexicon=language::en);
+    dictionary const& lexicon=language::en);
 
 /**
  * Checks a mnemonic against a dictionary to determine if the
@@ -60,6 +60,13 @@ KI_API bool validate_mnemonic(const word_list& mnemonic,
  * Convert a mnemonic with no passphrase to a wallet-generation seed.
  */
 KI_API long_hash decode_mnemonic(const word_list& mnemonic);
+
+/**
+ * Convert a mnemonic and passphrase to a wallet-generation seed.
+ * Any passphrase can be used and will change the resulting seed.
+ * The passphrase has to be normalized using ICU.
+ */
+KI_API long_hash decode_mnemonic_normalized_passphrase(const word_list& mnemonic, std::string const& normalized_passphrase);
 
 #ifdef WITH_ICU
 
