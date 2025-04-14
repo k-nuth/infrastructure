@@ -41,6 +41,21 @@ KI_API void pseudo_random_broken_do_not_use_fill(data_chunk& chunk);
 KI_API asio::duration pseudo_randomize(asio::duration const& maximum,
     uint8_t ratio=2);
 
+
+/**
+ * Fill a buffer with randomness using the default random engine.
+ * @param[in]  chunk  The buffer to fill with randomness.
+ */
+KI_API void pseudo_random_fill(data_chunk& chunk);
+
+/**
+ * Fill a buffer with randomness using the default random engine.
+ * @param[in]  out  The buffer to fill with randomness.
+ * @param[in]  size  The size of the buffer to fill.
+*/
+KI_API void pseudo_random_fill(uint8_t* out, size_t size);
+
+
 } // namespace kth
 
 #endif

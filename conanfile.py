@@ -82,6 +82,9 @@ class KnuthInfrastructureConan(KnuthConanFileV2):
         if self.options.asio_standalone:
             self.requires("asio/1.28.1", transitive_headers=True, transitive_libs=True)
 
+        if self.options.with_icu:
+            self.requires("icu/76.1", transitive_headers=True, transitive_libs=True)
+
     def validate(self):
         KnuthConanFileV2.validate(self)
         if self.info.settings.compiler.cppstd:

@@ -122,6 +122,14 @@ long_hash decode_mnemonic(const word_list& mnemonic) {
     return pkcs5_pbkdf2_hmac_sha512(to_chunk(sentence), to_chunk(salt), hmac_iterations);
 }
 
+long_hash decode_mnemonic_normalized_passphrase(const word_list& mnemonic, std::string const& normalized_passphrase) {
+    auto const sentence = join(mnemonic);
+    std::string const prefix(passphrase_prefix);
+    auto const salt = prefix + normalized_passphrase;
+    return pkcs5_pbkdf2_hmac_sha512(to_chunk(sentence), to_chunk(salt), hmac_iterations);
+}
+
+
 #ifdef WITH_ICU
 
 long_hash decode_mnemonic(const word_list& mnemonic, std::string const& passphrase) {
