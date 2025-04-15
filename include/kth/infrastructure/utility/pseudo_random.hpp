@@ -16,10 +16,11 @@
 // Apple and Emscripten
 #if defined(__EMSCRIPTEN__) || defined(__APPLE__)
 #include <unistd.h>
-#else
-#include <sys/random.h>
 #endif
 
+#ifndef __EMSCRIPTEN__
+#include <sys/random.h>
+#endif
 namespace kth {
 
 class KI_API pseudo_random {
