@@ -31,15 +31,15 @@ KI_API uint64_t pseudo_random_broken_do_not_use(uint64_t begin, uint64_t end);
  */
 KI_API void pseudo_random_broken_do_not_use_fill(data_chunk& chunk);
 
-/**
- * Convert a time duration to a value in the range [max/ratio, max].
- * @param[in]  maximum  The maximum value to return.
- * @param[in]  ratio    The determinant of the minimum duration as the inverse
- *                      portion of the maximum duration.
- * @return              The randomized duration.
- */
-KI_API asio::duration pseudo_randomize(asio::duration const& maximum,
-    uint8_t ratio=2);
+// /**
+//  * Convert a time duration to a value in the range [max/ratio, max].
+//  * @param[in]  maximum  The maximum value to return.
+//  * @param[in]  ratio    The determinant of the minimum duration as the inverse
+//  *                      portion of the maximum duration.
+//  * @return              The randomized duration.
+//  */
+// KI_API asio::duration pseudo_randomize(asio::duration const& maximum,
+//     uint8_t ratio=2);
 
 
 /**
