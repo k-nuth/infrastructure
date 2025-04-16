@@ -53,7 +53,11 @@ public:
     template <typename Handler, typename... Args>
     void concurrent(Handler&& handler, Args&&... args) {
         // Service post ensures the job does not execute in the current thread.
-        service_.post(BIND_HANDLER(handler, args));
+        // service_.post(BIND_HANDLER(handler, args));
+        boost::asio::post(service_, BIND_HANDLER(handler, args));
+
+
+
         ////service_.post(inject(BIND_HANDLER(handler, args), CONCURRENT,
         ////    concurrent_));
     }
@@ -72,7 +76,12 @@ public:
     void unordered(Handler&& handler, Args&&... args) {
         // Use a strand wrapper to prevent concurrency and a service post
         // to deny ordering while ensuring execution on another thread.
-        service_.post(strand_.wrap(BIND_HANDLER(handler, args)));
+        // service_.post(strand_.wrap(BIND_HANDLER(handler, args)));
+
+        boost::asio::post(service_, boost::asio::bind_executor(strand_, BIND_HANDLER(handler, args)));
+
+
+
         ////service_.post(strand_.wrap(inject(BIND_HANDLER(handler, args),
         ////    UNORDERED, unordered_)));
     }

@@ -99,7 +99,8 @@ private:
     std::atomic<size_t> size_;
     std::vector<asio::thread> threads_;
     mutable upgrade_mutex threads_mutex_;
-    std::shared_ptr<asio::service::work> work_;
+    // std::shared_ptr<asio::service::work> work_;
+    boost::asio::executor_work_guard<boost::asio::io_context::executor_type> work_;
     mutable upgrade_mutex work_mutex_;
 };
 

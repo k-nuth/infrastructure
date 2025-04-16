@@ -59,8 +59,8 @@ void threadpool::spawn_once(thread_priority priority) {
     if ( ! work_) {
         work_mutex_.unlock_upgrade_and_lock();
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        work_ = std::make_shared<asio::service::work>(service_);
-
+        // work_ = std::make_shared<asio::service::work>(service_);
+        work_ = boost::asio::make_work_guard(service_);
         work_mutex_.unlock_and_lock_upgrade();
         //-----------------------------------------------------------------
     }
