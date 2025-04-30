@@ -23,7 +23,6 @@ namespace kth {
 template <size_t Size>
 using byte_array = std::array<uint8_t, Size>;
 
-// using byte_span = std::span<uint8_t const, std::dynamic_extent>;
 using byte_span = std::span<uint8_t const>;
 using byte_span_mut = std::span<uint8_t>;
 
