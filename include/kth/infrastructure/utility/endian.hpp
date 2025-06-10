@@ -5,6 +5,7 @@
 #ifndef KTH_INFRASTRUCTURE_ENDIAN_HPP
 #define KTH_INFRASTRUCTURE_ENDIAN_HPP
 
+#include <bit>
 #include <istream>
 
 #include <kth/infrastructure/define.hpp>
@@ -41,6 +42,15 @@ byte_array<sizeof(Integer)> to_big_endian(Integer value);
 
 template <typename Integer>
 byte_array<sizeof(Integer)> to_little_endian(Integer value);
+
+constexpr 
+uint32_t to_big_endian_int(uint32_t value) {
+    if constexpr (std::endian::native == std::endian::little) {
+        return std::byteswap(value);  // C++23
+    } else {
+        return value;
+    }
+}
 
 } // namespace kth
 
